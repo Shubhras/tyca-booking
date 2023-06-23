@@ -19777,7 +19777,7 @@ html ::-webkit-scrollbar-resizer:vertical, html ::-webkit-scrollbar-resizer:hori
 }
 
 .table > thead > tr > th {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: 400;
     background-color: #1D1F28;
     white-space: nowrap;

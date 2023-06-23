@@ -22,7 +22,7 @@ return [
     'cities' => 'Cities',
     'doctors' => 'Outlets',
     'service_categories' => 'Service Categories',
-    'specializations' => 'Specializations',
+    'specializations' => 'Amenities',
     'services' => 'Services',
     'roles' => 'Roles',
     'staffs' => 'Staffs',
@@ -407,10 +407,10 @@ return [
 
     'holiday' => [
         'holiday' => 'Holiday',
-        'add_holiday' => 'Add Holiday',
-        'doctor_holiday' => 'Outlet Holidays',
+        'add_holiday' => 'Add Blockout Dates',
+        'doctor_holiday' => 'Blockout Dates',
         'service_category' => 'Service Category',
-        'holiday_date' => 'Holiday Date',
+        'holiday_date' => 'Blockout Dates',
     ],
 
     'doctor' => [
@@ -572,7 +572,7 @@ return [
         'visit_date' => 'Visit Date',
         'visit_details' => 'Visit Details',
         'patient' => 'Customer',
-        'doctor' => 'Outlet',
+        'doctor' => 'Outlet NAME',
         'description' => 'Description',
         'title' => 'Title',
         'problems' => 'Problems',

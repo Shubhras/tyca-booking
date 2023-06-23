@@ -17,28 +17,28 @@ class DefaultPermissionSeeder extends Seeder
         $permissions = [
             [
                 'name' => 'manage_doctors',
-                'display_name' => 'Manage Doctors',
+                'display_name' => 'Manage Outlets',
             ],
             [
                 'name' => 'manage_patients',
-                'display_name' => 'Manage Patients',
+                'display_name' => 'Manage Customers',
             ],
             [
                 'name' => 'manage_appointments',
                 'display_name' => 'Manage Appointments',
             ],
-            [
-                'name' => 'manage_patient_visits',
-                'display_name' => 'Manage Patient Visits',
-            ],
+//            [
+//                'name' => 'manage_patient_visits',
+//                'display_name' => 'Manage Patient Visits',
+//            ],
             [
                 'name' => 'manage_staff',
                 'display_name' => 'Manage Staff',
             ],
-            [
-                'name' => 'manage_doctor_sessions',
-                'display_name' => 'Manage Doctor Sessions',
-            ],
+//            [
+//                'name' => 'manage_doctor_sessions',
+//                'display_name' => 'Manage Doctor Sessions',
+//            ],
             [
                 'name' => 'manage_settings',
                 'display_name' => 'Manage Settings',
@@ -49,35 +49,35 @@ class DefaultPermissionSeeder extends Seeder
             ],
             [
                 'name' => 'manage_specialities',
-                'display_name' => 'Manage Specialities',
+                'display_name' => 'Manage Amenities',
             ],
-            [
-                'name' => 'manage_countries',
-                'display_name' => 'Manage Countries',
-            ],
-            [
-                'name' => 'manage_states',
-                'display_name' => 'Manage States',
-            ],
-            [
-                'name' => 'manage_cities',
-                'display_name' => 'Manage Cities',
-            ],
+//            [
+//                'name' => 'manage_countries',
+//                'display_name' => 'Manage Countries',
+//            ],
+//            [
+//                'name' => 'manage_states',
+//                'display_name' => 'Manage States',
+//            ],
+//            [
+//                'name' => 'manage_cities',
+//                'display_name' => 'Manage Cities',
+//            ],
             [
                 'name' => 'manage_roles',
                 'display_name' => 'Manage Roles',
             ],
-            [
-                'name' => 'manage_currencies',
-                'display_name' => 'Manage Currencies',
-            ],
+//            [
+//                'name' => 'manage_currencies',
+//                'display_name' => 'Manage Currencies',
+//            ],
             [
                 'name' => 'manage_admin_dashboard',
-                'display_name' => 'Manage Admin Dashboard',
+                'display_name' => 'Manage Dashboard',
             ],
             [
                 'name' => 'manage_front_cms',
-                'display_name' => 'Manage Front CMS',
+                'display_name' => 'Manage CMS',
             ],
             [
                 'name' => 'manage_transactions',

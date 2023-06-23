@@ -146,7 +146,7 @@
     <li class="nav-item {{ Request::is('admin/doctors*','doctors/doctor-sessions*','admin/doctor-sessions*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-4" aria-current="page"
            href="{{ route('doctors.index') }}">
-            <span class="aside-menu-icon pe-3"><i class="fa-solid fa-shop"></i></span>
+            <span class="aside-menu-icon pe-3"><i class="fa-solid fa-store"></i></span>
             <span class="aside-menu-title">{{ __('messages.doctors') }}</span>
             <span class="d-none">{{ __('messages.doctors') }}</span>
 <!--            <span class="d-none">{{ __('messages.doctor_sessions') }}</span>-->
@@ -242,7 +242,7 @@
     </li>
 @endcan
 @can('manage_settings')
-    <li class="nav-item {{ Request::is('admin/settings*','admin/roles*','admin/currencies*','admin/clinic-schedules*','admin/countries*','admin/states*','admin/cities*','admin/holidays*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('admin/settings*','admin/roles*','admin/currencies*','admin/clinic-schedules*','admin/countries*','admin/states*','admin/cities*','admin/holidays*', 'admin/specializations*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-4" aria-current="page"
            href="{{ route('setting.index') }}">
             <span class="aside-menu-icon pe-3"><i class="fas fa-cogs"></i></span>

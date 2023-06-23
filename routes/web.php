@@ -65,6 +65,9 @@ Route::get('/login', function () {
     return (! Auth::check()) ? view('auth.login') : Redirect::to(getDashboardURL());
 })->name('login');
 
+Route::get('/booking-confirm-mail', [AppointmentController::class, 'bookingconfirmmail'])->name('bookingconfirmmail');
+Route::get('/booking-cancel-mail', [AppointmentController::class, 'bookingcancelmail'])->name('bookingcancelmail');
+
 Route::middleware('setLanguage')->group(function () {
     Route::get('/', [FrontController::class, 'medical'])->name('medical');
     Route::get('/medical-about-us', [FrontController::class, 'medicalAboutUs'])->name('medicalAboutUs');
