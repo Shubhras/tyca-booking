@@ -54,8 +54,8 @@ mix.scripts([
     'resources/theme/js/plugins.js',
     'public/messages.js',
     'node_modules/apexcharts/dist/apexcharts.js',
-    'node_modules/intl-tel-input/build/js/utils.js',
-    'node_modules/intl-tel-input/build/js/intlTelInput.js',
+    // 'node_modules/intl-tel-input/build/js/utils.js',
+    // 'node_modules/intl-tel-input/build/js/intlTelInput.js',
     'node_modules/quill/dist/quill.js',
 ], 'public/js/third-party.js')
 

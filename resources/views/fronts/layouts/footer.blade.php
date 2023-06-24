@@ -1,9 +1,9 @@
-<footer class="bg-primary">
+<footer style="background-color:#273432">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 order-1 order-lg-0">
-                <h5 class="text-white mb-4 pb-1">{{ __('messages.web.contact_us') }}</h5>
-                <div class="footer-info">
+            <div class="col-lg-3 col-md-6 order-1 order-lg-0">
+                <h5 class="text-white mb-4 pb-1"> © {{ date('Y') }} TYCA Pte Ltd</h5>
+             {{--    <div class="footer-info">
                     <div class="d-flex align-items-center footer-info__block mb-3 pb-1">
                         <div class="footer-info__footer-icon fs-5 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-phone text-primary "></i>
@@ -22,11 +22,11 @@
                             {{ getSettingValue('email') }}
                         </a>
                     </div>
-                </div>
+                </div>--}}
             </div>
-            <div class="col-lg-4 col-md-6 order-2 order-lg-2">
-                <h5 class="text-white mb-4 pb-1">{{ __('messages.web.quick_links') }}</h5>
-                <ul>
+            <div class="col-lg-3 col-md-6 order-2 order-lg-2">
+                <h5 class="text-white mb-4 pb-1">All Rights Reserved</h5>
+             {{--    <ul>
                     <li>
                         <a href="{{ route('medicalAboutUs') }}"
                            class="text-decoration-none  mb-2 d-block fw-light {{ Request::is('medical-about-us*') ? 'text-black' : 'text-white' }}">{{ __('messages.web.about_us') }}</a>
@@ -48,11 +48,11 @@
                         <a href="{{ route('privacy.policy') }}"
                            class="text-decoration-none mb-2 d-block fw-light {{ Request::is('privacy-policy*') ? 'text-black' : 'text-white' }}">{{ __('messages.privacy_policy') }}</a>
                     </li>
-                </ul>
+                </ul>--}}
             </div>
-            <div class="col-lg-4 col-12 order-0 order-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-white mb-4 pb-1">{{ __('messages.web.subscribe') }}</h5>
-                <div class="footer-subcribe">
+            <div class="col-lg-3 order-0 order-lg-3 mb-4 mb-lg-0">
+                <h5 class="text-white mb-4 pb-1">Terms and Conditions</h5>
+            {{--     <div class="footer-subcribe">
                     {{ Form::open(['id'=>'subscribeForm' , 'class' => 'subscribe-form subscription-form']) }}
                     <div class="subscribeForm-message"></div>
                         <div class="input-group mb-md-3">
@@ -62,11 +62,16 @@
                                 </button>
                         </div>
                     {{ Form::close() }}
-                </div>
+                </div>--}}
             </div>
-            <div class="col-12 order-4 border-top-primary text-center mt-lg-5 mt-4">
+            <div class="col-lg-3 order-0 order-lg-3 mb-4 mb-lg-0"> 
+                <h5 class="text-white mb-4 pb-1">
+                Privacy Policy
+                </h5>
+            </div>
+         {{--    <div class="col-12 order-4 border-top-primary text-center mt-lg-5 mt-4">
                 <p class="text-white fw-light py-4 mb-0">{{__('messages.web.all_rights_reserved')}} © {{ date('Y') }} {{ getAppName() }}</p>
-            </div>
+            </div>--}}
         </div>
     </div>
 </footer>

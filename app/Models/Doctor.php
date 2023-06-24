@@ -129,6 +129,14 @@ class Doctor extends Model
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class, 'service_doctor', 'doctor_id', 'service_id');
+    }
+
+    /**
      * @return HasMany
      */
     public function doctorSession()

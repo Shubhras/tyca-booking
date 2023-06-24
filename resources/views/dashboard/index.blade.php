@@ -12,7 +12,7 @@
                             <a href="{{ route('doctors.index') }}" class=" text-decoration-none">
                             <div class="bg-primary rounded-10 p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
                                 <div class="bg-cyan-300 widget-icon rounded-10 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-user-md display-4 card-icon text-white"></i>
+                                    <i class="fas fa-store display-4 card-icon text-white"></i>
                                 </div>
                                 <div class="text-end text-white">
                                     <h2 class="fs-1-xxl fw-bolder text-white">{{$data['totalDoctorCount']}}</h2>
@@ -27,7 +27,7 @@
                                     class="bg-success rounded-10 p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
                                     <div
                                         class="bg-green-300 widget-icon rounded-10 d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-hospital-user display-4 card-icon text-white hospital-user-dark-mode"></i>
+                                        <i class="fas fa-users display-4 card-icon text-white hospital-user-dark-mode"></i>
                                     </div>
                                     <div class="text-end text-white">
                                         <h2 class="fs-1-xxl fw-bolder text-white">{{$data['totalPatientCount']}}</h2>
@@ -55,7 +55,7 @@
                             <a href="{{ route('patients.index') }}" class="text-decoration-none">
                                 <div class="bg-info rounded-10 p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
                                     <div class="bg-blue-300 widget-icon rounded-10 d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-user-injured display-4 card-icon text-white"></i>
+                                        <i class="fas fa-user-plus display-4 card-icon text-white"></i>
                                     </div>
                                     <div class="text-end text-white">
                                         <h2 class="fs-1-xxl fw-bolder text-white">{{$data['totalRegisteredPatientCount']}}</h2>

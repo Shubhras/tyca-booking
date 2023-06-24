@@ -31,15 +31,8 @@
                     <div class="col-lg-8">
                         {{ Form::tel('contact_no','+'.$setting['region_code'].$setting['contact_no'] ?? null, ['class' => 'form-control', 'placeholder' => __('messages.patient.contact_no'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
                         {{ Form::hidden('region_code',$setting['region_code'] ?? null ,['id'=>'prefix_code']) }}
-                        <span id="valid-msg" class="text-success d-block fw-400 fs-small mt-2 hide">✓ {{ __('messages.valid_number') }}</span>
-                        <span id="error-msg" class="text-danger d-block fw-400 fs-small mt-2 hide"> {{ __('messages.invalid_number') }}</span>
-                    </div>
-                </div>
-                <div class="row mb-6">
-                    {{ Form::label('default_country_code', __('messages.setting.default_country_code').':', ['class' => 'col-lg-4 form-label required']) }}
-                    <div class="col-lg-8">
-                        {{ Form::text('default_country_data', null, ['class' => 'form-control','placeholder'=>__('messages.setting.default_country_code'), 'id'=>'defaultCountryData']) }}
-                        {{ Form::hidden('default_country_code',$setting['default_country_code'] ,['id'=>'defaultCountryCode',]) }}
+<!--                        <span id="valid-msg" class="text-success d-block fw-400 fs-small mt-2 hide">✓ {{ __('messages.valid_number') }}</span>-->
+<!--                        <span id="error-msg" class="text-danger d-block fw-400 fs-small mt-2 hide"> {{ __('messages.invalid_number') }}</span>-->
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -48,15 +41,7 @@
                         {{ Form::email('email', $setting['email'], ['class' => 'form-control ','placeholder'=>__('messages.user.email'),'required']) }}
                     </div>
                 </div>
-                <div class="row mb-6">
-                    {{ Form::label('specialities',__('messages.setting.specialities').':',
-                                     ['class'=>'col-lg-4 form-label required']) }}
-                    <div class="col-lg-8">
-                        {{ Form::select('specialities[]', $specialities, json_decode($setting['specialities']), ['multiple',
-                         'class' => 'form-select', 'aria-label'=>"Select a Country",
-                         'data-control'=>'select2','required']) }}
-                    </div>
-                </div>
+
                 <div class="row mb-6">
                         <label for="appLogoPreview" class="col-lg-4 required form-label">{{ __('messages.setting.logo').':'}}</label>
                     <div class="col-lg-8">
@@ -103,70 +88,76 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-6">
-                    <label class="col-lg-4 form-label required">
-                        <span>{{__('messages.setting.do_not_allow_to_login_without_email_verification')}}:</span>
-                        <span data-bs-toggle="tooltip"
-                              data-placement="top"
-                              data-bs-original-title="{{ __('messages.setting.when_checkbox_disable') }}">
-                                <i class="fas fa-question-circle ml-1 mt-1 general-question-mark"></i>
-                        </span>
-                    </label>
-                    <div class="col-lg-8">
-                        {{ Form::checkbox('email_verified', 1, $setting['email_verified'], ['class' => 'form-check-input m-0']) }}
-                    </div>
-                </div>
 
-                <div class="card-header px-0">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <h3 class="m-0">{{__('messages.setting.currency_settings')}}
-                        </h3>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="row mb-6">
-                        <label class="col-lg-4 form-label">
-                            {{ Form::label('currency',__('messages.setting.currency').':',['class'=>'col-lg-4 form-label']) }}
-                        </label>
-                        <div class="col-lg-8 fv-row">
-                            {{ Form::select('currency', $currencies, $setting['currency'], [
-                                    'class' => 'form-select', 'aria-label'=>"Select a Currency",
-                                    'data-control'=>'select2','placeholder' => __('messages.setting.currency')]) }}
-                        </div>
-                    </div>
+                <div class="card">
 
-                </div>
-                <div class="card-header px-0">
+
+                <div class="card-header px-0 py-0">
                     <div class="d-flex align-items-center justify-content-center">
                         <h3 class="m-0">{{__('messages.appointment.payment_method')}}
                         </h3>
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body px-1">
                     <div class="row mb-6">
                         <div class="table-responsive px-0">
-                            <table>
-                                <tbody class="d-flex flex-wrap">
+                            <table class="table table-borderless">
+                                <tbody >
                                 @foreach($paymentGateways as $key => $paymentGateway)
-                                    <tr class="w-100 d-flex justify-content-between">
-                                        <td class="p-2">
+                                    <tr class="w-100 d-flex justify-content-between mt-2">
+                                        <td class="p-2 pb-0 pt-0">
                                             <div class="form-check form-check-custom">
                                                 <input class="form-check-input" type="checkbox" value="{{$key}}"
                                                        name="payment_gateway[]"
                                                        id="{{$key}}" {{in_array($paymentGateway, $selectedPaymentGateways) ?'checked':''}} />
-                                                <label class="form-label" for="{{$key}}">
-                                                    {{$paymentGateway}}
-                                                </label>
+                                                    <label class="form-label" for="{{$key}}">
+                                                        {{$paymentGateway}}
+                                                    </label>
                                             </div>
                                         </td>
                                     </tr>
+                                    @if($key != 1)
+                                    <tr class="justify-content-between">
+                                        <td class="p-2">
+                                            <label>{{ Form::label('currency',__('messages.setting.payment_gateway_live_id').':',['class'=>' form-label']) }}</label>
+                                            <div class="col-lg-11">
+                                                {{
+                                                    Form::text(
+                                                    'payment_gateway_'.$key.'_client_id',
+                                                    isset($paymentGateWayKeys[$paymentGateway]['client_id'])?$paymentGateWayKeys[$paymentGateway]['client_id']:'',
+                                                    [
+                                                        'class' => 'form-control',
+                                                        'placeholder'=>__('messages.setting.payment_gateway_live_id'),
+                                                        'required'
+                                                    ])
+                                                }}
+                                            </div>
+                                        </td>
+                                        <td class="p-2">
+                                            <label>{{ Form::label('currency',__('messages.setting.payment_gateway_secret_key').':',['class'=>'form-label']) }}</label>
+                                            <div class="col-lg-11">
+                                                {{
+                                                    Form::text('payment_gateway_'.$key.'_secret_key',
+                                                    isset($paymentGateWayKeys[$paymentGateway]['client_secret'])?$paymentGateWayKeys[$paymentGateway]['client_secret']:'',
+                                                    [
+                                                        'class' => 'form-control',
+                                                        'placeholder'=>__('messages.setting.payment_gateway_secret_key'),
+                                                        'required'
+                                                    ])
+                                                }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+
                 </div>
                 <div class="row">
                     <!-- Submit Field -->

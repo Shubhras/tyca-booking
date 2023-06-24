@@ -22,7 +22,7 @@ return [
     'cities' => 'Cities',
     'doctors' => 'Outlets',
     'service_categories' => 'Service Categories',
-    'specializations' => 'Specializations',
+    'specializations' => 'Amenities',
     'services' => 'Services',
     'roles' => 'Roles',
     'staffs' => 'Staffs',
@@ -216,8 +216,8 @@ return [
         'icon' => 'Icon',
         'show' => 'Show',
         'delete' => 'Delete',
-        'forgot_your_password' => 'Forgot your password',
-        'remember_me' => 'Remember me',
+        'forgot_your_password' => 'Forget Password',
+        'remember_me' => 'Remember Me',
         'custom' => 'Custom',
         'apply' => 'Apply',
         'from' => 'From',
@@ -225,6 +225,7 @@ return [
         'select_service' => 'Select Service',
         'select_category' => 'Select category',
         'select_doctor' => 'Select Outlet',
+        'select_specializations' => 'Select Amenities',
         'search' => 'Search',
         'twitter_url' => 'Twitter URL',
         'linkedin_url' => 'Linkedin URL',
@@ -255,6 +256,18 @@ return [
         'note_we_are_taking_the_timezone_of_your_doctors_while_creating_appointment_in_calendar' => 'Note: We are taking the timezone of your Outlets while creating appointment in calendar. If Doctor have not set the timezone then it will take default UTC timezone.',
         'note_you_must_need_to_set_your_timezone_before_integrating_google_calendar' => 'Note: You must need to set your timezone
                                 before integrating Google Calendar',
+        'daily' => 'Daily',
+        'hourly' => 'Hourly',
+        'base_rate' => 'Base Rate',
+        'per_hour' => 'per hour',
+        'per_daily' => 'per dour',
+        'above' => 'Above',
+        'no_of' => 'No. of',
+        'hours' => 'Hours',
+        'days' => 'Days',
+        'discount_percent' => 'Discount %',
+        'discount_rate_hourly' => 'Discounted Rate (hourly)',
+        'discount_rate' => 'Discounted Rate',
     ],
 
     'user' => [
@@ -289,7 +302,7 @@ return [
         'contact_information' => 'Contact Information',
         'currency_settings' => 'Currency Settings',
         'general_details' => 'General Details',
-        'clinic_name' => 'Clinic Name',
+        'clinic_name' => 'Name',
         'specialities' => 'Specialities',
         'currency' => 'Currency',
         'prefix' => 'Prefix',
@@ -309,6 +322,9 @@ return [
         'when_checkbox_disable' => 'When checkbox is disable email verification is not working for new users.',
         'change_app_logo' => 'Change app logo',
         'change_favicon' => 'Change favicon',
+        'payment_gateway_live_id' => 'Client Live ID',
+        'payment_gateway_secret_key' => 'Secret Key',
+
     ],
 
     'patient' => [
@@ -404,10 +420,10 @@ return [
 
     'holiday' => [
         'holiday' => 'Holiday',
-        'add_holiday' => 'Add Holiday',
-        'doctor_holiday' => 'Outlet Holidays',
+        'add_holiday' => 'Add Blockout Dates',
+        'doctor_holiday' => 'Blockout Dates',
         'service_category' => 'Service Category',
-        'holiday_date' => 'Holiday Date',
+        'holiday_date' => 'Blockout Dates',
     ],
 
     'doctor' => [
@@ -461,8 +477,10 @@ return [
         'edit_service' => 'Edit Service',
         'category' => 'Category',
         'charges' => 'Charges',
+        'amount' => 'Amount',
         'status' => 'Status',
         'short_description' => 'Short Description',
+        'description' => 'Description',
     ],
 
     'role' => [
@@ -571,7 +589,7 @@ return [
         'visit_date' => 'Visit Date',
         'visit_details' => 'Visit Details',
         'patient' => 'Customer',
-        'doctor' => 'Outlet',
+        'doctor' => 'Outlet NAME',
         'description' => 'Description',
         'title' => 'Title',
         'problems' => 'Problems',
@@ -605,6 +623,7 @@ return [
         'title' => 'Title',
         'short_description' => 'Short Description',
         'icon' => 'Icon',
+        'photos' => 'Photos',
     ],
 
     'faq' => [

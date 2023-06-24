@@ -21,6 +21,11 @@ class ServiceTable extends LivewireTableComponent
             ->setQueryStringStatus(false);
 
         $this->setThAttributes(function (Column $column) {
+            if ($column->isField('category_id')) {
+                return [
+                    'class' => 'td-icon',
+                ];
+            }
             if ($column->isField('id')) {
                 return [
                     'class' => 'text-center',
@@ -34,6 +39,7 @@ class ServiceTable extends LivewireTableComponent
 
             return [];
         });
+
     }
 
     /**
@@ -46,11 +52,11 @@ class ServiceTable extends LivewireTableComponent
             Column::make(__('messages.common.name'), 'name')->view('services.components.name')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('messages.service.category'), 'serviceCategory.name')->view('services.components.category')
-                ->sortable()
-                ->searchable(),
-            Column::make(__('messages.appointment.service_charge'), 'charges')->view('services.components.service_charge')
-                ->sortable()->searchable(),
+//            Column::make(__('messages.service.category'), 'serviceCategory.name')->view('services.components.category')
+//                ->sortable()
+//                ->searchable(),
+//            Column::make(__('messages.appointment.service_charge'), 'charges')->view('services.components.service_charge')
+//                ->sortable()->searchable(),
             Column::make(__('messages.doctor.status'), 'status')->view('services.components.status')->sortable(),
             Column::make(__('messages.common.action'),'id')->view('services.components.action'),
         ];
@@ -59,15 +65,15 @@ class ServiceTable extends LivewireTableComponent
     /**
      * @return Builder
      */
-    public function builder(): Builder  
-    {       
+    public function builder(): Builder
+    {
         $query = Service::with(['serviceCategory', 'media'])->select('services.*');
 
         $query->when($this->statusFilter !== '' && $this->statusFilter != Service::ALL,
             function (Builder $query) {
                 $query->where('status', $this->statusFilter);
             });
-        
-        return $query;  
+
+        return $query;
     }
 }

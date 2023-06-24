@@ -17,9 +17,15 @@ class XSS
      */
     public function handle($request, Closure $next)
     {
-        if ($request->route()->getName() == 'cms.update') {
+        $alllowed = [
+            'services.store',
+            'services.update',
+            'cms.update',
+        ];
+        if (in_array($request->route()->getName(), $alllowed)) {
             return $next($request);
         }
+
 
         $input = $request->all();
         array_walk_recursive($input, function (&$input) {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\ServiceDiscountRate;
 use Database\Factories\ServicesFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -58,6 +60,7 @@ class Service extends Model implements HasMedia
         'category_id',
         'name',
         'charges',
+        'charges_daily',
         'status',
         'short_description',
     ];
@@ -75,6 +78,7 @@ class Service extends Model implements HasMedia
     ];
 
     const ICON = 'icon';
+    const GALLERY = 'gallery';
 
     protected $appends = ['icon'];
 
@@ -98,11 +102,24 @@ class Service extends Model implements HasMedia
      */
     public static $rules = [
         'name' => 'required|unique:services,name',
-        'category_id' => 'required',
+        //'category_id' => 'required',
         'charges' => 'required|min:0|not_in:0',
+        'charges_daily' => 'required|min:0|not_in:0',
         'doctors' => 'required',
         'short_description' => 'required|max:60',
         'icon' => 'required|mimes:svg,jpeg,png,jpg',
+
+        "above_count_hourly"    => "required|array|min:1",
+        "above_count_hourly.*"  => "required|string|distinct",
+
+        "rate_hourly"    => "required|array|min:1",
+        "rate_hourly.*"  => "required|string|distinct",
+
+        "above_count_daily"    => "required|array|min:1",
+        "above_count_daily.*"  => "required|string|distinct",
+
+        "rate_daily"    => "required|array|min:1",
+        "rate_daily.*"  => "required|string|distinct",
     ];
 
     /**
@@ -122,6 +139,22 @@ class Service extends Model implements HasMedia
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function serviceSpecializations(): BelongsToMany
+    {
+        return $this->belongsToMany(Specialization::class, 'service_specialization', 'service_id', 'specialization_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function serviceDiscountRates(): HasMany
+    {
+        return $this->hasMany(ServiceDiscountRates::class, 'service_id', 'id');
+    }
+
+    /**
      * @return string
      */
     public function getIconAttribute(): string
@@ -133,5 +166,21 @@ class Service extends Model implements HasMedia
         }
 
         return asset('web/media/avatars/male.png');
+    }
+
+    /**
+     * @return array
+     */
+    public function getGalleryAttribute(): array
+    {
+        /** @var Media $media */
+        $medias = $this->getMedia(self::GALLERY)->all();
+        $result = [];
+        if (! empty($medias)) {
+            foreach ($medias as $media) {
+                $result[] = $media->getFullUrl();
+            }
+        }
+        return $result;
     }
 }

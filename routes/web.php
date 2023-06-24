@@ -4,10 +4,14 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthorizePaymentController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\HotdeskController;
+use App\Http\Controllers\BookingdetailsController;
+
 use App\Http\Controllers\ClinicScheduleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DoctorSessionController;
 use App\Http\Controllers\Front\CMSController;
 use App\Http\Controllers\Front\EnquiryController;
@@ -62,6 +66,9 @@ Route::post('create-google-calendar-doctor',
 Route::get('/login', function () {
     return (! Auth::check()) ? view('auth.login') : Redirect::to(getDashboardURL());
 })->name('login');
+
+Route::get('/booking-confirm-mail', [AppointmentController::class, 'bookingconfirmmail'])->name('bookingconfirmmail');
+Route::get('/booking-cancel-mail', [AppointmentController::class, 'bookingcancelmail'])->name('bookingcancelmail');
 
 Route::middleware('setLanguage')->group(function () {
     Route::get('/', [FrontController::class, 'medical'])->name('medical');
@@ -156,6 +163,10 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
     Route::put('/email-notification', [UserController::class, 'emailNotification'])->name('emailNotification');
 });
 
+Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
+Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
+Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
+
 Route::get('cancel-appointment/{patient_id}/{appointment_unique_id}', [AppointmentController::class, 'cancelAppointment'])->name('cancelAppointment');
 
 Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImpersonateUser', 'permission:manage_admin_dashboard')->group(function () {
@@ -239,6 +250,7 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     // Specialization routes
     Route::middleware('permission:manage_specialities')->group(function () {
         Route::resource('specializations', SpecializationController::class);
+        Route::put('specializations-status', [SpecializationController::class, 'changeServiceStatus'])->name('specializations.status');
     });
 
     // Services and Service Category route

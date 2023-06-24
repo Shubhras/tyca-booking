@@ -22,15 +22,15 @@
             </span>
         </li>
         @endImpersonating
-        <li class="px-sm-3 px-2">
-            @if(Auth::user()->dark_mode)
-                <a href="javascript:void(0)" title="Switch to Light mode"><i
-                        class="fa-solid fa-moon text-primary fs-2 apply-dark-mode"></i></a>
-            @else
-                <a href="javascript:void(0)" title="Switch to Dark mode"><i
-                        class="fa-solid fa-sun text-primary fs-2 apply-dark-mode"></i></a>
-            @endif
-        </li>
+<!--        <li class="px-sm-3 px-2">-->
+<!--            @if(Auth::user()->dark_mode)-->
+<!--                <a href="javascript:void(0)" title="Switch to Light mode"><i-->
+<!--                        class="fa-solid fa-moon text-primary fs-2 apply-dark-mode"></i></a>-->
+<!--            @else-->
+<!--                <a href="javascript:void(0)" title="Switch to Dark mode"><i-->
+<!--                        class="fa-solid fa-sun text-primary fs-2 apply-dark-mode"></i></a>-->
+<!--            @endif-->
+<!--        </li>-->
         @php
                 $notifications = getNotification();
             @endphp
@@ -159,14 +159,14 @@
                             </a>
                         </li>
                         @endif
-                        <li>
-                            <a class="dropdown-item text-gray-900" id="changeLanguage" href="javascript:void(0)">
-                               <span class="dropdown-icon me-4 text-gray-600">
-                                   <i class="fa-solid fa-globe"></i>
-                               </span>
-                                {{ __('messages.user.change_language') }}
-                            </a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a class="dropdown-item text-gray-900" id="changeLanguage" href="javascript:void(0)">-->
+<!--                               <span class="dropdown-icon me-4 text-gray-600">-->
+<!--                                   <i class="fa-solid fa-globe"></i>-->
+<!--                               </span>-->
+<!--                                {{ __('messages.user.change_language') }}-->
+<!--                            </a>-->
+<!--                        </li>-->
                         <li>
                             <a class="dropdown-item text-gray-900 d-flex" href="javascript:void(0)">
                                 <span class="dropdown-icon me-4 text-gray-600">

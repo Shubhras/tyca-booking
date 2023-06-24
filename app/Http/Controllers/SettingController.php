@@ -58,9 +58,17 @@ class SettingController extends AppBaseController
         $currencies = Currency::toBase()->pluck('currency_name', 'id');
         $paymentGateways = Appointment::PAYMENT_METHOD;
         $selectedPaymentGateways = PaymentGateway::pluck('payment_gateway')->toArray();
+        $_selectedPaymentGateways = PaymentGateway::select('payment_gateway', 'client_id', 'client_secret')->get()->toBase()->toArray();
+        $paymentGateWayKeys = [];
+        foreach ($_selectedPaymentGateways as $val) {
+            $paymentGateWayKeys[$val['payment_gateway']] = [
+              'client_secret' => $val['client_secret'],
+              'client_id' => $val['client_id'],
+            ];
+        }
 
         return view("setting.$sectionName",
-            compact('sectionName', 'setting', 'countries', 'specialities', 'states', 'cities', 'currencies', 'paymentGateways', 'selectedPaymentGateways'));
+            compact('sectionName', 'setting', 'countries', 'specialities', 'states', 'cities', 'currencies', 'paymentGateways', 'selectedPaymentGateways', 'paymentGateWayKeys'));
     }
 
     /**
@@ -79,6 +87,8 @@ class SettingController extends AppBaseController
                 PaymentGateway::updateOrCreate(['payment_gateway_id' => $paymentGateway],
                     [
                         'payment_gateway' => Appointment::PAYMENT_METHOD[$paymentGateway],
+                        'client_id' => $request->get('payment_gateway_'.$paymentGateway.'_client_id', null),
+                        'client_secret' => $request->get('payment_gateway_'.$paymentGateway.'_secret_key', null),
                     ]);
             }
         }

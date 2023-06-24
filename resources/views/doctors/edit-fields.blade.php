@@ -440,7 +440,7 @@ $(document).ready(function(){
     //     displayErrorMessage('The Terms & Conditions is required.')
     //     return false
     // }
-console.log("editor_content_1",JSON.stringify(editor_content_1))
+
     $('#descriptionData').val($(".ql-editor").html());
 });
 });

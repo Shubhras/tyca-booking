@@ -728,4 +728,20 @@ class AppointmentController extends AppBaseController
 
         return redirect(route('appointments.index'));
     }
+
+    /**
+     * @param  Request  $request
+     */
+    public function bookingconfirmmail(Request $request)
+    {
+        return view('emails.booking_confirm_mail');
+    }
+
+    /**
+     * @param  Request  $request
+     */
+    public function bookingcancelmail(Request $request)
+    {
+        return view('emails.booking_cancel_mail');
+    }
 }
