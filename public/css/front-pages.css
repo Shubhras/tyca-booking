@@ -1413,7 +1413,6 @@ h6,
   z-index: 2 !important;
   background-color: #EEDFD0;
 }
-
 @media (max-width: 991px) {
   .header {
     padding-top: 5px !important;
