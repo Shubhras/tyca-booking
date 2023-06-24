@@ -257,6 +257,7 @@ let quill2 = new Quill('#doctorDescriptionId', {
 })
 quill2.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
+        $('#detail').val(quill2.container.firstChild.innerHTML);
         quill2.setContents([{ insert: '' }])
     }
 })
@@ -301,7 +302,7 @@ document.getElementById('photo-upload__preview').addEventListener('click', (e) =
 
 $(document).ready(function(){
 
-$("#doctorDescriptionId").keyup(function(){
+    $(window).click(function(e) {
     let element = document.createElement('textarea')
     let editor_content_1 = quill2.root.innerHTML
     element.innerHTML = editor_content_1

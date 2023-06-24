@@ -350,6 +350,18 @@ class UserController extends AppBaseController
     }
 
     /**
+     * @param  int  $id
+     *
+     */
+    public function deleteMedia($id)
+    {
+        if(isset($id))
+        {
+            DB::table('media')->where('id', $id)->delete();
+        }
+    }
+
+    /**
      * @return RedirectResponse
      */
     public function impersonateLeave()
