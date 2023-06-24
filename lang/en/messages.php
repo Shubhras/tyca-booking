@@ -261,6 +261,13 @@ return [
         'base_rate' => 'Base Rate',
         'per_hour' => 'per hour',
         'per_daily' => 'per dour',
+        'above' => 'Above',
+        'no_of' => 'No. of',
+        'hours' => 'Hours',
+        'days' => 'Days',
+        'discount_percent' => 'Discount %',
+        'discount_rate_hourly' => 'Discounted Rate (hourly)',
+        'discount_rate' => 'Discounted Rate',
     ],
 
     'user' => [

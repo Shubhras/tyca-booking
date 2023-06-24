@@ -101,7 +101,9 @@ class ServicesRepository extends AppBaseController
             if (isset($input['gallery']) && ! empty('gallery')) {
                 $service->clearMediaCollection(Service::GALLERY);
                 $service->media()->delete();
-                $service->addMedia($input['gallery'])->toMediaCollection(Service::GALLERY, config('app.media_disc'));
+                foreach ($input['gallery'] as $file) {
+                    $service->addMedia($file)->toMediaCollection(Service::GALLERY, config('app.media_disc'));
+                }
             }
 
 

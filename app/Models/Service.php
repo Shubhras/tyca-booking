@@ -144,4 +144,20 @@ class Service extends Model implements HasMedia
 
         return asset('web/media/avatars/male.png');
     }
+
+    /**
+     * @return array
+     */
+    public function getGalleryAttribute(): array
+    {
+        /** @var Media $media */
+        $medias = $this->getMedia(self::GALLERY)->all();
+        $result = [];
+        if (! empty($medias)) {
+            foreach ($medias as $media) {
+                $result[] = $media->getFullUrl();
+            }
+        }
+        return $result;
+    }
 }
