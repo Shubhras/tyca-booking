@@ -27,7 +27,7 @@
                                     class="bg-success rounded-10 p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
                                     <div
                                         class="bg-green-300 widget-icon rounded-10 d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-users display-4 card-icon text-white hospital-user-dark-mode"></i>
+                                        <i class="fas fa-user-group display-4 card-icon text-white hospital-user-dark-mode"></i>
                                     </div>
                                     <div class="text-end text-white">
                                         <h2 class="fs-1-xxl fw-bolder text-white">{{$data['totalPatientCount']}}</h2>

@@ -97,7 +97,7 @@
     </div>
 @endif
 <div class="d-flex">
-    {{ Form::button(__('messages.common.save'),['type' => 'submit','class' => 'btn btn-primary me-2 submitAppointmentBtn' ]) }}
+    {{ Form::button(__('messages.common.save'),['type' => 'submit','class' => 'btn btn-dark me-2 submitAppointmentBtn' ]) }}
     &nbsp;
     <a href="{{ url()->previous() }}" type="reset"
        class="btn btn-secondary">{{__('messages.common.discard')}}</a>

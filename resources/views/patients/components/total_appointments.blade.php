@@ -1,3 +1,3 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex text-dark">
     {{ $row->appointments_count }}
 </div>
