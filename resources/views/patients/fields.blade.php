@@ -24,8 +24,8 @@
     <div class="col-md-6 mb-5">
         <div class="mb-1">
             {{ Form::label('password',__('messages.patient.password').':' ,['class' => 'form-label required']) }}
-            <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">
-                <i class="fa fa-question-circle"></i></span>
+<!--            <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">-->
+<!--                <i class="fa fa-question-circle"></i></span>-->
             <div class="mb-3 position-relative">
                 {{Form::password('password',['class' => 'form-control','placeholder' =>
                 __('messages.patient.password'),'autocomplete' =>
@@ -40,9 +40,9 @@
         <div class="mb-1">
             {{ Form::label('confirmPassword',__('messages.patient.confirm_password').':' ,['class' => 'form-label
             required']) }}
-            <span data-bs-toggle="tooltip"
-                  title="{{ __('messages.flash.user_8_or') }}">
-                    <i class="fa fa-question-circle"></i></span>
+<!--            <span data-bs-toggle="tooltip"-->
+<!--                  title="{{ __('messages.flash.user_8_or') }}">-->
+<!--                    <i class="fa fa-question-circle"></i></span>-->
             <div class="mb-3 position-relative">
                 {{Form::password('password_confirmation',['class' => 'form-control','placeholder' =>
                 __('messages.user.confirm_password'),'autocomplete' =>

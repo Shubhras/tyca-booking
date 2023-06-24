@@ -275,6 +275,7 @@ return [
         'edit_profile' => 'Edit Profile',
         'avatar' => 'Avatar',
         'full_name' => 'Full Name',
+        'staff_name' => 'Staff Name',
         'email' => 'Email',
         'contact_number' => 'Contact Number',
         'save_changes' => 'Save Changes',
