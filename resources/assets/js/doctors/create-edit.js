@@ -186,6 +186,7 @@ listenClick('.edit-btn-qualification', function () {
 })
 
 listenSubmit('#editDoctorForm', function (e) {
+
     let twitterUrl = $('#twitterUrl').val()
     let linkedinUrl = $('#linkedinUrl').val()
     let instagramUrl = $('#instagramUrl').val()
@@ -225,6 +226,8 @@ listenSubmit('#editDoctorForm', function (e) {
     e.preventDefault()
     let doctorFormData = new FormData($(this)[0]);
     let editDoctorId = $('#editDoctorId').val();
+
+
 
     doctorFormData.append('qualifications', JSON.stringify(qualification))
     $.ajax({

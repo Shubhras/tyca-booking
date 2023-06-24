@@ -21,6 +21,8 @@
     </div>
     <div class="col-md-7">
     <div class="mb-5">
+    {{ Form::label('Specialization','Operating Hours:' ,['class' => 'form-label required']) }}
+
     <div class="row">
     <div class="col-xxl-6 mb-7 d-sm-flex align-items-center mb-3">
                 <div class="col-xl-4 col-lg-4 col-md-2 col-4">
@@ -257,6 +259,7 @@ let quill2 = new Quill('#doctorDescriptionId', {
 })
 quill2.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
+        $('#detail').val(quill2.container.firstChild.innerHTML);
         quill2.setContents([{ insert: '' }])
     }
 })
@@ -301,7 +304,7 @@ document.getElementById('photo-upload__preview').addEventListener('click', (e) =
 
 $(document).ready(function(){
 
-$("#doctorDescriptionId").keyup(function(){
+    $(window).click(function(e) {
     let element = document.createElement('textarea')
     let editor_content_1 = quill2.root.innerHTML
     element.innerHTML = editor_content_1

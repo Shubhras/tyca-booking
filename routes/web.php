@@ -168,6 +168,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
     Route::get('impersonate-leave', [UserController::class, 'impersonateLeave'])->name('impersonate.leave');
 
+    Route::post('deleteMedia/{id}', [UserController::class, 'deleteMedia'])->name('delete-media');
+
     //Email verified
     Route::post('email-verified', [UserController::class, 'emailVerified'])->name('emailVerified');
 
@@ -303,7 +305,7 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
 
     // Resend Email Verification Mail
     Route::post('/email/verification-notification/{userId}', [UserController::class, 'resendEmailVerification'])->name('resend.email.verification');
-    
+
 });
 
 require __DIR__.'/auth.php';

@@ -8,10 +8,10 @@
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profile_image" name="about_image_1" class="image-upload d-none about-image-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profile_image" name="about_image_1" class="image-upload d-none about-image-validation" accept="image/*" />
+                        </label>
                     </span>
                 </div>
             </div>
@@ -28,10 +28,10 @@
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profile_image" name="about_image_2" class="image-upload d-none about-image-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profile_image" name="about_image_2" class="image-upload d-none about-image-validation" accept="image/*" />
+                        </label>
                     </span>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profile_image" name="about_image_3" class="image-upload d-none about-image-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profile_image" name="about_image_3" class="image-upload d-none about-image-validation" accept="image/*" />
+                        </label>
                     </span>
                 </div>
             </div>
