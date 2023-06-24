@@ -7,7 +7,7 @@
         <div class="d-flex justify-content-between align-items-end mb-5">
             <h1>@yield('title')</h1>
                 <a href="{{ route('holidays.index') }}"
-                   class="btn btn-outline-primary float-end">{{ __('messages.common.back') }}</a>
+                   class="btn btn-outline-dark float-end">{{ __('messages.common.back') }}</a>
         </div>
         <div class="col-12">
             @include('layouts.errors')

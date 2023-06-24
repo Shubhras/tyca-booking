@@ -24,7 +24,7 @@ class UpdateServicesRequest extends FormRequest
     public function rules()
     {
         $rules['name'] = 'required|unique:services,name,'.$this->route('service')->id;
-        $rules['category_id'] = 'required';
+        //$rules['category_id'] = 'required';
         $rules['charges'] = 'required|min:0|not_in:0';
         $rules['doctors'] = 'required';
         $rules['short_description'] = 'required|max:60';

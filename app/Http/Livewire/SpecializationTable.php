@@ -12,6 +12,7 @@ class SpecializationTable extends LivewireTableComponent
     public bool $showButtonOnHeader = true;
     public string $buttonComponent = 'specializations.components.add_button';
     protected $listeners = ['refresh' => '$refresh','resetPage'];
+    public string $statusFilter = '';
 
     public function configure(): void
     {
@@ -22,7 +23,12 @@ class SpecializationTable extends LivewireTableComponent
         $this->setThAttributes(function (Column $column) {
             if ($column->isField('id')) {
                 return [
-                    'class' => 'text-center'
+                    'class' => 'text-center td-icon'
+                ];
+            }
+            if (in_array($column->getField(),['charges','status'],true)) {
+                return [
+                    'class' => 'text-end',
                 ];
             }
             return [];
@@ -35,9 +41,11 @@ class SpecializationTable extends LivewireTableComponent
     public function columns(): array
     {
         return [
+            Column::make(__('messages.front_service.icon'), 'id')->view('specializations.components.icon'),
             Column::make(__('messages.common.name'), 'name')->view('specializations.components.name')
                     ->sortable()
                     ->searchable(),
+            Column::make(__('messages.doctor.status'), 'status')->view('specializations.components.status')->sortable(),
             Column::make(__('messages.common.action') , 'id')->view('specializations.components.action'),
         ];
     }
@@ -47,6 +55,14 @@ class SpecializationTable extends LivewireTableComponent
      */
     public function builder(): Builder
     {
-        return Specialization::query();
+        //return Specialization::query();
+        $query = Specialization::with(['media'])->select('specializations.*');
+
+        $query->when($this->statusFilter !== '' && $this->statusFilter != Specialization::ALL,
+            function (Builder $query) {
+                $query->where('status', $this->statusFilter);
+            });
+
+        return $query;
     }
 }

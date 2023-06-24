@@ -1,12 +1,12 @@
 <header class="position-relative header">
-    <div class="container">
+    <!-- <div class="container"> -->
         <div class="row align-items-center">
-            <div class="col-lg-1 col-4">
+            <div class="col-lg-3 col-4">
                 <a href="#!" class="header-logo">
-                    <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" />
+                    <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" style="padding-left: 20px;"/>
                 </a>
             </div>
-            <div class="col-lg-11 col-8">
+            <div class="col-lg-9 col-8">
                 <nav class="navbar navbar-expand-lg navbar-light justify-content-end py-0">
                     <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -20,15 +20,15 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('medical-doctors*') ? 'active' : '' }}"
-                                   href="{{ route('medicalDoctors') }}">{{ __('messages.web.our_team') }}</a>
+                                   href="{{ route('medicalDoctors') }}">News</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('medical-services*') ? 'active' : '' }}"
-                                   href="{{ route('medicalServices') }}">{{ __('messages.web.services') }}</a>
+                                   href="{{ route('medicalServices') }}">Store</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('medical-about-us*') ? 'active' : '' }}"
-                                   href="{{ route('medicalAboutUs') }}">{{ __('messages.web.about_us') }}</a>
+                                   href="{{ route('medicalAboutUs') }}">Membership</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('medical-contact*') ? 'active' : '' }}"
@@ -36,7 +36,7 @@
                                    data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                             </li>
 
-                            <li class="nav-item dropdown">
+                        {{--     <li class="nav-item dropdown">
                                 <a href="javascript:void(0)" class="nav-link" id="dropdownMenuLink"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-language me-1"></i>{{getCurrentLanguageName()}}</a>
@@ -59,7 +59,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--}}
                         </ul>
                         <div class="text-lg-end header-btn-grp ms-xxl-5 ms-lg-3">
                                 @if(getLogInUser())
@@ -78,11 +78,11 @@
                                        class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.login') }}</a>
                                 @endif
 
-                                    <a href="{{ route('medicalAppointment') }}" class="btn btn-primary mb-3 mb-lg-0">{{ __('messages.web.book_an_appointment') }}</a>
+                                    <!-- <a href="{{ route('medicalAppointment') }}" class="btn btn-primary mb-3 mb-lg-0">{{ __('messages.web.book_an_appointment') }}</a> -->
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </header>

@@ -162,22 +162,22 @@ class Appointment extends Model
     const PAYTM = 7;
 
     const PAYMENT_METHOD = [
-        self::MANUALLY => 'Manually',
-        self::STRIPE => 'Stripe',
-        self::PAYSTACK => 'Paystack',
         self::PAYPAL => 'Paypal',
-        self::RAZORPAY => 'Razorpay',
-        self::AUTHORIZE => 'Authorize',
-        self::PAYTM => 'Paytm',
+        self::STRIPE => 'Stripe',
+        self::MANUALLY => 'Cash',
+        // self::PAYSTACK => 'Paystack',
+        // self::RAZORPAY => 'Razorpay',
+        // self::AUTHORIZE => 'Authorize',
+        // self::PAYTM => 'Paytm',
     ];
 
     const PAYMENT_GATEWAY = [
-        self::STRIPE => 'Stripe',
-        self::PAYSTACK => 'Paystack',
         self::PAYPAL => 'Paypal',
-        self::RAZORPAY => 'Razorpay',
-        self::AUTHORIZE => 'Authorize',
-        self::PAYTM => 'Paytm',
+        self::STRIPE => 'Stripe',
+        // self::PAYSTACK => 'Paystack',
+        // self::RAZORPAY => 'Razorpay',
+        // self::AUTHORIZE => 'Authorize',
+        // self::PAYTM => 'Paytm',
     ];
 
     /**

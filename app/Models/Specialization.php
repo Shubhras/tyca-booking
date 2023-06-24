@@ -6,6 +6,8 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Specialization
@@ -30,15 +32,30 @@ use Illuminate\Support\Carbon;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Doctor[] $doctors
  * @property-read int|null $doctors_count
  */
-class Specialization extends Model
+class Specialization extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $table = 'specializations';
 
     public $fillable = [
         'name',
     ];
+
+    const ALL = 2;
+
+    const ACTIVE = 1;
+
+    const DEACTIVE = 0;
+    const STATUS = [
+        self::ALL => 'All',
+        self::ACTIVE => 'Active',
+        self::DEACTIVE => 'Deactive',
+    ];
+
+    const ICON = 'icon';
+
+    protected $appends = ['icon'];
 
     /**
      * The attributes that should be casted to native types.
@@ -56,6 +73,7 @@ class Specialization extends Model
      */
     public static $rules = [
         'name' => 'required|unique:specializations,name',
+        'icon' => 'required|mimes:svg,jpeg,png,jpg',
     ];
 
     /**
@@ -64,5 +82,19 @@ class Specialization extends Model
     public function doctors()
     {
         return $this->belongsToMany(Doctor::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getIconAttribute(): string
+    {
+        /** @var Media $media */
+        $media = $this->getMedia(self::ICON)->first();
+        if (! empty($media)) {
+            return $media->getFullUrl();
+        }
+
+        return asset('web/media/avatars/male.png');
     }
 }

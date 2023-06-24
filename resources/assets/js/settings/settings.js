@@ -32,23 +32,23 @@ function loadSettingData() {
     phone = document.getElementById('phoneNumber').value
     prefixCode = document.getElementById('prefix_code').value
 
-    let input = document.querySelector('#defaultCountryData')
-    let intl = window.intlTelInput(input, {
-        initialCountry: defaultCountryCodeValue,
-        separateDialCode: true,
-        geoIpLookup: function (success, failure) {
-            $.get('https://ipinfo.io', function () {
-            }, 'jsonp').always(function (resp) {
-                var countryCode = (resp && resp.country)
-                    ? resp.country
-                    : ''
-                success(countryCode)
-            })
-        },
-        utilsScript: '../../public/assets/js/inttel/js/utils.min.js',
-    })
-    let getCode = intl.selectedCountryData['name'] + ' +' + intl.selectedCountryData['dialCode']
-    $('#defaultCountryData').val(getCode)
+    // let input = document.querySelector('#defaultCountryData')
+    // let intl = window.intlTelInput(input, {
+    //     initialCountry: defaultCountryCodeValue,
+    //     separateDialCode: true,
+    //     geoIpLookup: function (success, failure) {
+    //         $.get('https://ipinfo.io', function () {
+    //         }, 'jsonp').always(function (resp) {
+    //             var countryCode = (resp && resp.country)
+    //                 ? resp.country
+    //                 : ''
+    //             success(countryCode)
+    //         })
+    //     },
+    //     utilsScript: '../../public/assets/js/inttel/js/utils.min.js',
+    // })
+    // let getCode = intl.selectedCountryData['name'] + ' +' + intl.selectedCountryData['dialCode']
+    $('#defaultCountryData').val('')
 }
 
 listenKeyup('#defaultCountryData', function () {

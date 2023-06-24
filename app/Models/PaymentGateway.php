@@ -33,6 +33,8 @@ class PaymentGateway extends Model
     protected $fillable = [
         'payment_gateway_id',
         'payment_gateway',
+        'client_id',
+        'client_secret'
     ];
 
     protected $casts = [

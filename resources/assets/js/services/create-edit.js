@@ -17,6 +17,21 @@ function loadServiceData () {
         }
     }
 
+    if (!$('.charges_daily').length) {
+        return
+    }
+    let charges_daily = $('.charges_daily').val()
+    if (charges_daily === '') {
+        $('.charges_daily').val('')
+    } else {
+        if (/[0-9]+(,[0-9]+)*$/.test(charges_daily)) {
+            $('.charges_daily').val(getFormattedPrice(charges_daily))
+            return true
+        } else {
+            $('.charges_daily').val(charges_daily.replace(/[^0-9 \,]/, ''))
+        }
+    }
+
 }
 
 listenClick('#createServiceCategory', function () {

@@ -74,8 +74,9 @@ class ServiceController extends AppBaseController
     {
         $data = $this->servicesRepository->prepareData();
         $selectedDoctor = $service->serviceDoctors()->pluck('doctor_id')->toArray();
+        $selectedSpecializations = $service->serviceSpecializations()->pluck('specialization_id')->toArray();
 
-        return view('services.edit', compact('service', 'data', 'selectedDoctor'));
+        return view('services.edit', compact('service', 'data', 'selectedDoctor', 'selectedSpecializations'));
     }
 
     /**

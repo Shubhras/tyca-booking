@@ -1,93 +1,186 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="mb-5">
             {{ Form::label('name', __('messages.common.name').':', ['class' => 'form-label required']) }}
-            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('messages.common.name')  , 'required']) }}
+            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('messages.common.name') ,
+            'required']) }}
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-5">
-            {{ Form::label('category_id',__('messages.service.category').':', ['class' => 'form-label required']) }}
-            <div class="input-group flex-nowrap">
-                {{ Form::select('category_id',$data['serviceCategories'], null,['class' => 'form-select io-select2',
-            'placeholder' => __('messages.service.category'),'data-control'=>'select2','id'=>'serviceCategory']) }}
-                <div class="input-group-append" id="createServiceCategory">
-                <div class="input-group-text">
-                    <a href="javascript:void(0)" data-toggle="modal" id="createServiceCategoryButtonID"
-                       data-target="#createServiceCategoryModal"><i class="fa fa-plus"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-6">
-    <div class="mb-5">
-            {{ Form::label('charges', __('messages.service.charges').':', ['class' => 'form-label required']) }}
-            <div class="input-group">
-                {{ Form::text('charges', null, ['class' => 'form-control price-input', 'placeholder' => __('messages.service.charges'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }}
-                <div class="input-group-text">
-                    <a class="fw-bolder text-gray-500 text-decoration-none">{{ getCurrencyIcon() }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 mb-5">
-        {{ Form::label('doctors', __('messages.doctors').':', ['class' => 'form-label required']) }}
-        {{ Form::select('doctors[]',$data['doctors'],(isset($selectedDoctor)) ? $selectedDoctor : null,['class' => 'form-control io-select2', 'data-placeholder' => __('messages.doctor.select_doctors'), 'data-control'=>'select2','multiple']) }}
     </div>
     <div class="col-lg-12">
         <div class="mb-5">
-            {{ Form::label('short_description', __('messages.service.short_description').':', ['class' => 'form-label required']) }}
-            <span data-bs-toggle="tooltip"
-                  data-placement="top"
-                  data-bs-original-title="{{ __('messages.flash.maximum_char') }}">
-                                <i class="fas fa-question-circle ml-1 mt-1 general-question-mark"></i>
-                        </span>
-            {{ Form::textarea('short_description', null, ['class' => 'form-control', 'placeholder' => __('messages.service.short_description'), 'rows'=> 5,'maxlength'=> 60]) }}
+            {{ Form::label('short_description', __('messages.service.description').':', ['class' => 'form-label
+            required']) }}
+            {{ Form::textarea('short_description', null, ['class' => 'form-control', 'placeholder' =>
+            __('messages.service.description'), 'rows'=> 5,'maxlength'=> 60]) }}
+        </div>
+    </div>
+    <div class="col-lg-6 mb-5">
+        {{ Form::label('specializations', __('messages.specializations').':', ['class' => 'form-label required']) }}
+        {{ Form::select('specializations[]',$data['specializations'],(isset($selectedSpecializations)) ?
+        $selectedSpecializations : null,['class' =>
+        'form-control io-select2', 'data-placeholder' => __('messages.common.select_specializations'),
+        'data-control'=>'select2','multiple']) }}
+    </div>
+
+    <div class="col-lg-6 mb-5">
+        {{ Form::label('doctors', __('messages.doctors').':', ['class' => 'form-label required']) }}
+        {{ Form::select('doctors[]',$data['doctors'],(isset($selectedDoctor)) ? $selectedDoctor : null,['class' =>
+        'form-control io-select2', 'data-placeholder' => __('messages.doctor.select_doctors'),
+        'data-control'=>'select2','multiple']) }}
+    </div>
+
+    <div class="col-lg-12 mt-5">
+        <div class="card">
+            <div class="card-header p-0"><h4 class="required">Pricing</h4></div>
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-6 mb-5">
+                            {{ Form::label('charges',
+                            __('messages.common.base_rate').'('.__('messages.common.hourly').')', ['class' =>
+                            'form-label required']) }}
+                            <div class="input-group">
+                                {{ Form::text('charges', null, ['class' => 'form-control price-input', 'placeholder' =>
+                                __('messages.service.amount'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value))
+                                this.value =
+                                this.value.replace(/\D/g,"")']) }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white border-0 text-dark">{{__('messages.common.per_hour')}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-6 mb-5">
+                            {{ Form::label('charges_daily',
+                            __('messages.common.base_rate').'('.__('messages.common.daily').')', ['class' => 'form-label
+                            required']) }}
+                            <div class="input-group">
+                                {{ Form::text('charges_daily', null, ['class' => 'form-control charges_daily',
+                                'placeholder' =>
+                                __('messages.service.amount'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value))
+                                this.value =
+                                this.value.replace(/\D/g,"")']) }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white border-0 text-dark">{{__('messages.common.per_daily')}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-lg-6 mb-7">
-        <div class="mb-3" io-image-input="true"> 
-            <label for="exampleInputImage" class="form-label required">{{__('messages.front_service.icon')}}:</label> 
-            <div class="d-block"> 
-                <div class="image-picker"> 
-                    <div class="image previewImage" id="exampleInputImage" style="background-image: url({{ !empty($service->icon) ? $service->icon : asset('web/media/avatars/male.png') }})">
+    <div class="col-lg-12 mb-7">
+        <div class="col-12 text-dark">
+            <label class="form-label required">{{__('messages.common.discount_rate')}}
+                ({{__('messages.common.hourly')}})</label>
+
+            <div class="row hourly_records mb-5">
+                <div class="col-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.above')}}
+                    </span>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control "
+                            placeholder="{{__('messages.common.no_of')}}"
+                            name="above_count"
+                        />
+                        <div class="input-group-append">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.hours')}}
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vr bg-black opacity-100 p-1px"></div>
+                <div class="col-2">
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="{{__('messages.common.no_of')}}"
+                            name="rate"
+                        />
+                        <div class="input-group-append">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.per_hour')}}
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 single">
+                    <button type="button" class="btn btn-sm btn-dark extra-fields-hourly" id="addHourlyCharge">
+                        <span class=" fa fa-plus"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="hourly_records_dynamic"></div>
+        </div>
+
+
+    </div>
+    <div class="col-lg-12 mb-7">
+        <div class="mb-3" io-image-input="true">
+            <label for="exampleInputImage" class="form-label required">{{__('messages.front_service.icon')}}:</label>
+            <div class="d-block">
+                <div class="image-picker">
+                    <div class="image previewImage" id="exampleInputImage"
+                         style="background-image: url({{ !empty($service->icon) ? $service->icon : asset('web/media/avatars/male.png') }})">
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profile_image" name="icon" class="image-upload d-none icon-validation" accept="image/*" /> 
-                        </label> 
-                    </span> 
-                </div> 
-            </div> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profile_image" name="icon"
+                                   class="image-upload d-none icon-validation" accept="image/*"/>
+                        </label>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="mb-5 col-lg-6">
-        {{ Form::label('status', __('messages.doctor.status').':', ['class' => 'form-label']) }}
-        @if(!empty($service))
-            <div class="col-lg-8">
-                <div class="form-check form-switch">
-                    <input type="checkbox" name="status" value="1" class="form-check-input"
-                           id="allowmarketing" {{ $service->status == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="allowmarketing"></label>
+    <div class="col-lg-12 mb-7">
+        <div class="mb-3" io-image-input="true">
+            <label for="exampleInputImage" class="form-label required">{{__('messages.front_service.photos')}}:</label>
+            <div class="d-block">
+                <div class="image-picker">
+                    @foreach ($service->gallery as $image)
+                    <div class="image previewImage" id="exampleInputImage"
+                         style="background-image: url({{ !empty($image) ? $image : asset('web/media/avatars/male.png') }})">
+                    </div>
+                    @endforeach
+                    <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
+                          data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="gallery" name="gallery[]"
+                                   class="image-upload d-none icon-validation" accept="image/*" multiple/>
+                        </label>
+                    </span>
                 </div>
             </div>
-        @else
-            <div class="col-lg-8">
-                <div class="form-check form-switch">
-                    <input type="checkbox" name="status" value="1" class="form-check-input"
-                           id="allowmarketing" checked>
-                    <label class="form-check-label" for="allowmarketing"></label>
-                </div>
-            </div>
-        @endif
+        </div>
     </div>
+
     <div>
         {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
         <a href="{{route('services.index')}}" type="reset"
            class="btn btn-secondary">{{__('messages.common.discard')}}</a>
     </div>
 </div>
+<script type="text/javascript">
+    listenClick('#addHourlyCharge', function (event) {
+        //console.log(event, $('.hourly_records').clone())
+        $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
+        $('.hourly_records_dynamic .hourly_records').addClass('single remove');
+        $('.single .extra-fields-hourly').remove();
+        $('.single').append('<a href="#" class="remove-field btn-remove-customer">Remove Fields</a>');
+        $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
+    })
+</script>
