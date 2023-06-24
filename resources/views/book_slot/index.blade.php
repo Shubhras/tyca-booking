@@ -167,12 +167,15 @@
     font-size: 12px;
     margin-top: -15px;
 }
-.set-img1{
-    margin-left:-12px;
+
+.set-img1 {
+    margin-left: -12px;
 }
-.set-img2{
-    margin-top:20px;
+
+.set-img2 {
+    margin-top: 20px;
 }
+
 /* .heading-id{
     padding:0px 12px;
 }
@@ -183,33 +186,41 @@
     border: 1px solid #F5F5F5;
     padding: 0px;
 }
-.sec-set{
-    padding:30px 0px;
+
+.sec-set {
+    padding: 30px 0px;
 }
-.sec2{
-    padding:0px 20px; 
-    width:66%;
+
+.sec2 {
+    padding: 0px 20px;
+    width: 66%;
 }
-.amities{
-    margin-bottom:50px;
+
+.amities {
+    margin-bottom: 50px;
 }
-.icon-set{
-    padding:0px 10px;
+
+.icon-set {
+    padding: 0px 10px;
 }
-.set-padding{
-    padding:15px 0px;
+
+.set-padding {
+    padding: 15px 0px;
 }
-.hosts{
-    width:200px; 
-    margin-left:30px;
+
+.hosts {
+    width: 200px;
+    margin-left: 30px;
 }
-.host-desk{
-    padding: 10px 0px; 
-    margin-left:30px;
-    width:200px;
+
+.host-desk {
+    padding: 10px 0px;
+    margin-left: 30px;
+    width: 200px;
 }
-.amities1{
-    margin-bottom:30px;
+
+.amities1 {
+    margin-bottom: 30px;
 }
 </style>
 
@@ -561,7 +572,9 @@
             <div class="col-5 row" style="margin:30px;">
                 <div class="row col-12 set-border">
                     <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
+                        <a href="{{ URL::route('hot-desk'); }}">
+                            <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
+                        </a>
                     </div>
                     <div class="col-7">
                         <div class="column">
@@ -583,7 +596,7 @@
                         $35 / Day
                     </button>
                     <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
+                        <a href="{{ URL::route('hot-desk'); }}" style="text-decoration: none;"> View More </a>
                     </button>
                 </div>
             </div>
