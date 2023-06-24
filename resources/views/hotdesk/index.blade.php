@@ -188,7 +188,6 @@
     width: 100%;
     text-align: center;
     left: 0;
-    z-index: 15;
     -webkit-transform: translate(0%, -50%);
     -moz-transform: translate(0%, -50%);
     -ms-transform: translate(0%, -50%);
@@ -211,7 +210,6 @@
     margin-top: 20px;
 }
 section.title-hero-bg.parallax-effect img {
-    height: 462px;
     width: 100%;
 }
 
