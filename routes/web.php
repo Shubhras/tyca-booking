@@ -163,7 +163,7 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
     Route::put('/email-notification', [UserController::class, 'emailNotification'])->name('emailNotification');
 });
 
-Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
+Route::get('/book-slot/:{id}', [BookController::class, 'index'])->name('book-slot');
 Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
 Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
 Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');

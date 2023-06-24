@@ -522,373 +522,42 @@ figure.effect-chico11 {
     </div>
 </section>
 
-
 <section class="white-bg">
     <div class="container">
         <div class="row col-12">
+        @foreach($services as $service)
             <div class="col-5 row" style="margin:30px;">
                 <div class="row col-12 set-border">
                     <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
+                    <img src="{{ $service->icon }}" alt="Digital" class="width:200px">
                     </div>
                     <div class="col-7">
                         <div class="column">
                             <div class="col-3 host-desk">
-                                Hot Desk
+                            {{ $service->name }}
                             </div>
                             <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
+                            {{ $service->short_description }}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3" style="width:60%;margin-left:30px;">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <a href="{{ URL::route('hot-desk'); }}">
-                            <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                        </a>
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3" style="width:60% ; margin-left:30px;">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding image-left flex-sets">
+                <div class="text-xl-start header-btn-grp set-padding">
                     <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        Get Quote
+                    {{ $service->charges }} / Hour
+                    </button>
+                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                    {{ $service->charges_daily }} / Day
                     </button>
                     <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        <a href="{{ URL::route('hot-desk'); }}" style="text-decoration: none; color:#273432;"> View More
-                        </a>
+                        View More
                     </button>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
 
-<div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="max-width:1000px;">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="book-space">BOOK A SPACE</div>
-            <div class="modal-body">
-                <div class="alert alert-danger d-none hide"></div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('First Name', __('First Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('First Name', null, ['class' => 'form-control','required','placeholder' => __('First Name')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Last Name', __('Last Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('Last Name', null, ['class' => 'form-control','required','placeholder' => __('Last Name')]) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Email', __('Email Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('Email', null, ['class' => 'form-control','required','placeholder' => __('Email')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Outlet',__('Outlet').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Outlet', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Select Outlet')]) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Booking Space',__('Booking Space').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Booking Space', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Select Booking Space')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Plan Type',__('Plan Type').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Plan Type', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Plan Type')]) }}
-                    </div>
-                </div>
-
-                <div class="col icon-set" style="text-align:center;">
-                    <span class="heading-id"><img src="/assets/image/image 12.png" alt="#" style="width:900px;"></span>
-                </div>
-                <div class="row mt-3">
-                    <div class="form-group col-sm-12">
-                        {{ Form::label('Appointment Date', __('Appointment Date').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::date('Appointment Date', null, ['class' => 'form-control','required','placeholder' => __('Select Appointment Date'),'id' => 'appointment-date']) }}
-                    </div>
-                </div>
-                <div id="additional-info" style="display:none;">
-                    <div class="popular-tags mb-3" style="margin-left:10px;">
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            07:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            08:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            09:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            10:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            11:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            12:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            01:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            02:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            03:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            04:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            05:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            06:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            07:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            08:00pm
-                        </button>
-                    </div>
-                </div>
-                <div class="col-12 form-group">
-                    <label for="Available Slots" class="form-label required">Available Slots:</label>
-                    <div class="mb-0 d-inline-flex align-items-center set-box">
-                        <span class="badge bg-danger badge-circle slot-color-dot"></span>
-                        <span class="ms-2">Booked</span>
-                        <span class="badge bg-success set-box badge-circle slot-color-dot"></span>
-                        <span class="ms-2">Available</span>
-                    </div>
-                </div>
-                <div class="row set-back">
-                    <p style="text-align:center; margin-top:20px;">
-                        No Time Slots Found
-                    </p>
-                </div>
-                <div class="col-12 mt-3">
-                    <label for="Payment Method" class="form-label required">Payment Method:</label>
-                </div>
-                <div class="row col-md-12 mb-3">
-                    <div class="col-3">
-                        <div><input id="female" type="radio" name="gender" value="Female"><span
-                                class="radio-btn">PayPall</span></div>
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
-                            <li class="radio-btn1"><a><img src="/assets/image/paypall.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/pay1.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/disc.png" alt="#"></i></a>
-                            <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row col-md-12 mb-3">
-                    <div class="col-3">
-                        <div><input id="female" type="radio" name="gender" value="Female"><span class="radio-btn">Stripe
-                                Checkout</span></div>
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
-                            <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
-                            <li class="radio-btn1"><a><img src="/assets/image/apple-pay.png" alt="#"></i></a></li>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="button" class="btns btn-secondarys"
-                        data-bs-dismiss="modal">{{ __('Confirm Booking') }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
-<script>
-setTimeout(function() {
-    $('#hour_plan_modal').modal();
-}, 5000);
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var appointmentDateInput = document.getElementById('appointment-date');
-
-    appointmentDateInput.addEventListener('change', function() {
-        var selectedDate = appointmentDateInput.value;
-        var additionalInfoDiv = document.getElementById('additional-info');
-
-        if (selectedDate !== '') {
-            console.log('fffffffffffffffff');
-            additionalInfoDiv.style.display = 'block';
-        } else {
-            additionalInfoDiv.style.display = 'none';
-        }
-    });
-});
-</script>
