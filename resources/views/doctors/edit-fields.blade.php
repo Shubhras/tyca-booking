@@ -354,27 +354,32 @@ $slots = getSchedulesTimingSlot();
     border-radius: 100%
 }
 </style>
+<script>
+    var quill = new Quill('#doctorDescriptionId', {
+      theme: 'snow'
+    });
+  </script>
 <script type="text/javascript">
 
-let quill5 = new Quill('#doctorDescriptionId', {
-    modules: {
-        toolbar: [
-            [
-                {
-                    header: [1, 2, false],
-                }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block'],
-        ],
-    },
-    placeholder: 'Description',
-    theme: 'snow', // or 'bubble'
-})
-quill5.on('text-change', function (delta, oldDelta, source) {
-    if (quill5.getText().trim().length === 0) {
-        quill5.setContents([{ insert: '' }])
-    }
-})
+// let quill5 = new Quill('#doctorDescriptionId', {
+//     modules: {
+//         toolbar: [
+//             [
+//                 {
+//                     header: [1, 2, false],
+//                 }],
+//             ['bold', 'italic', 'underline'],
+//             [ 'code-block'],
+//         ],
+//     },
+//     placeholder: 'Description',
+//     theme: 'snow', // or 'bubble'
+// })
+// quill5.on('text-change', function (delta, oldDelta, source) {
+//     if (quill5.getText().trim().length === 0) {
+//         quill5.setContents([{ insert: '' }])
+//     }
+// })
 
 
 function previewImage(e, selectedFiles, imagesArray) {
@@ -397,11 +402,11 @@ function previewImage(e, selectedFiles, imagesArray) {
   }
   return elemContainer;
 }
-let item_images = [];
+var item_images_1 = [];
 document.getElementById('photo-upload').addEventListener('change', (e) => {
-  let selectedFiles = e.target.files;
+  var selectedFiles = e.target.files;
   const photoPreviewContainer = document.querySelector('#photo-upload__preview');
-  const elemContainer = previewImage(e, selectedFiles, item_images);
+  const elemContainer = previewImage(e, selectedFiles, item_images_1);
   photoPreviewContainer.appendChild(elemContainer);
 });
 
@@ -425,7 +430,7 @@ document.getElementById('photo-upload__preview').addEventListener('click', (e) =
 
     tgt.closest('div').remove();
     const fileName = tgt.dataset.filename
-    item_images = item_images.filter(img => img.name != fileName)
+    item_images_1 = item_images_1.filter(img => img.name != fileName)
   }
 })
 
@@ -433,16 +438,18 @@ $(document).ready(function(){
 
     $(window).click(function(e) {
         let element = document.createElement('textarea')
-    let editor_content_1 = quill5.root.innerHTML
+    let editor_content_1 = quill.root.innerHTML
     element.innerHTML = editor_content_1
 
     // if (quill1.getText().trim().length === 0) {
     //     displayErrorMessage('The Terms & Conditions is required.')
     //     return false
     // }
- 
+
     $('#descriptionData').val($(".ql-editor").html());
 });
 });
 
+
 </script>
+

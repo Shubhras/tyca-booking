@@ -160,6 +160,7 @@ class UserController extends AppBaseController
     public function update(UpdateUserRequest $request, Doctor $doctor)
     {
         $input = $request->all();
+
         $this->userRepo->update($input, $doctor);
 
         Flash::success(__('messages.flash.doctor_update'));

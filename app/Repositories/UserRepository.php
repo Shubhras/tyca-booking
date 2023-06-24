@@ -80,7 +80,7 @@ class UserRepository extends BaseRepository
             $doctorArr = array(
                 'experience' => '',
                 'days' =>  json_encode($days),
-                'description' => json_decode($input['description']),
+                'description' =>  $input['description'],
             );
 
             $input['email'] = setEmailLowerCase('abc@gmail.com'.rand(0, 99999));
@@ -164,7 +164,6 @@ class UserRepository extends BaseRepository
                     $doctor->user->addMedia($file)->toMediaCollection(User::GALLERY, config('app.media_disc'));
                 }
             }
-
 
             DB::commit();
 
