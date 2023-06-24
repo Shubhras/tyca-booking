@@ -1405,7 +1405,6 @@ h6,
   transition: all 0.5s ease-in-out;
   z-index: 2 !important;
 }
-
 @media (max-width: 991px) {
   .header {
     padding-top: 5px !important;
