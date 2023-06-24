@@ -17,47 +17,11 @@ use Illuminate\Support\Arr;
     </div>
 </div>
 
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Last Name',__('messages.doctor.last_name').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('last_name', $user->last_name,['class' => 'form-control','placeholder' => __('messages.doctor.last_name'),'required']) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Email',__('messages.user.email').':' ,['class' => 'form-label required']) }}
-        {{ Form::email('email', $user->email,['class' => 'form-control','placeholder' =>  __('messages.web.email')]) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Contact',__('messages.user.contact_number').':' ,['class' => 'form-label']) }}
-        {{ Form::tel('contact', '+'.$user->region_code.$user->contact,['class' => 'form-control','placeholder' =>  __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
-        {{ Form::hidden('region_code',!empty($user->user) ? $user->user->region_code : null,['id'=>'prefix_code']) }}
-        <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
-        <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2">{{ __('messages.invalid_number') }}</span>
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('DOB',__('messages.doctor.dob').':' ,['class' => 'form-label']) }}
-        {{ Form::text('dob', $user->dob,['class' => 'form-control doctor-dob','placeholder' => __('messages.doctor.dob'), 'id'=>'dob']) }}
-    </div>
-    <div class="col-md-6 mb-5">
+    <div class="col-md-5 mb-5">
         {{ Form::label('Specialization',__('messages.doctor.specialization').':' ,['class' => 'form-label required']) }}
         {{ Form::select('specializations[]',$data['specializations'], $data['doctorSpecializations'],['class' => 'io-select2 form-select', 'data-control'=>"select2", 'multiple']) }}
     </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Experience', __('messages.doctor.experience').':', ['class' => 'form-label']) }}
-        {{ Form::text('experience', $doctor->experience, ['class' => 'form-control', 'placeholder' => __('messages.doctor.experience'),'step'=>'any']) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        <label class="form-label required">
-            {{__('messages.doctor.select_gender')}}
-            :
-        </label>
-        <span class="is-valid">
-                <div class="mt-2">
-                    <input class="form-check-input" type="radio" name="gender" value="1" {{ !empty($user->gender) && $user->gender === 1 ? 'checked' : '' }}>
-                    <label class="form-label mr-3">{{__('messages.doctor.male')}}</label>
-                    <input class="form-check-input ms-2" type="radio" name="gender" value="2" {{ !empty($user->gender) && $user->gender === 2 ? 'checked' : ''}}>
-                    <label class="form-label mr-3">{{__('messages.doctor.female')}}</label>
-                </div>
-            </span>
-    </div>
+
     <div class="col-md-7">
     <div class="mb-5">
     <div class="row">

@@ -78,14 +78,14 @@ class UserRepository extends BaseRepository
                 }
             }
             $doctorArr = array(
-                'experience' => $input['experience'],
+                'experience' => '',
                 'days' =>  json_encode($days),
                 'description' => $input['description'],
             );
 
-            $input['email'] = setEmailLowerCase($input['email']);
+            $input['email'] = setEmailLowerCase('abc@gmail.com'.rand(0, 99999));
             $input['status'] = (isset($input['status'])) ? 1 : 0;
-            $input['password'] = Hash::make($input['password']);
+            $input['password'] = Hash::make('123456');
             $input['type'] = User::DOCTOR;
             $doctor = User::create($input);
             $doctor->assignRole('doctor');
@@ -136,7 +136,7 @@ class UserRepository extends BaseRepository
                 }
             }
             $doctorArr = array(
-                'experience' => $input['experience'],
+                'experience' => '',
                 'days' =>  json_encode($days),
                 'description' => $input['description'],
             );
