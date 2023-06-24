@@ -9,7 +9,7 @@
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
 
-        <img src="assets/images/Frame_3.png" alt="" class="">
+        <img src="/assets/images/Frame_3.png" alt="" class="">
 
         <div class="container">
             <div class="page-title text-center white-color">
@@ -52,7 +52,7 @@
                             <figure class="effect-chico">
                                 <img src="assets/images/image 12.png" alt="" class="">
                             </figure>
-                        </div>
+                        </div>HOU
                     </div>
                 </div>
                 <div class="row grid-space">
@@ -152,8 +152,7 @@
                             <div class="grid">
                                 <p class="hou-p">$4/Hour</p>
                                 <div class="hourplan-button">
-                                    <button class="hourplan-btn" data-bs-toggle="modal"
-                                        data-bs-target="#hour_plan_modal">Book Now</button>
+                                <button type="button" class="dayplan-btn" onclick="displayMessage();">Book Now</button>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +169,7 @@
                             <div class="grid">
                                 <p class="da-p">$35/Day</p>
                                 <div class="dayplan-button">
-                                    <button class="dayplan-btn">Book Now</button>
+                                <button type="button" class="dayplan-btn" onclick="displayMessage();">Book Now</button>
                                 </div>
                             </div>
                         </div>
@@ -379,6 +378,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+    function displayMessage(){
+        $.ajax({
+           type:'POST',
+           url:"{{ route('authorize-check') }}",
+           data:{"_token": "{{ csrf_token() }}", "name":"name"},
+           success:function(data){
+              if(data.success == true){
+                $("#hour_plan_modal").modal('show');
+              }else{
+                var url = "{{ route('login') }}";
+                location.href = url;
+              }
+           }
+        });
+
+    } 
 </script>
 
 <style>
