@@ -21466,3 +21466,6 @@ ul {
 .td-icon{
     width: 100px;
 }
+.p-1px{
+    padding: 1px !important;
+}
