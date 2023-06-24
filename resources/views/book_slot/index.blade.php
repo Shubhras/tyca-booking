@@ -420,188 +420,42 @@
     </div>
 </section>
 
-
 <section class="white-bg">
     <div class="container">
         <div class="row col-12">
+        @foreach($services as $service)
             <div class="col-5 row" style="margin:30px;">
                 <div class="row col-12 set-border">
                     <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
+                    <img src="{{ $service->icon }}" alt="Digital" class="width:200px">
                     </div>
                     <div class="col-7">
                         <div class="column">
                             <div class="col-3 host-desk">
-                                Hot Desk
+                            {{ $service->name }}
                             </div>
                             <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
+                            {{ $service->short_description }}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="text-xl-start header-btn-grp set-padding">
                     <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
+                    {{ $service->charges }} / Hour
                     </button>
                     <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
+                    {{ $service->charges_daily }} / Day
                     </button>
                     <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                         View More
                     </button>
                 </div>
             </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3" style="width:60%;margin-left:30px;">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3 hosts">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        View More
-                    </button>
-                </div>
-            </div>
-            <div class="col-5 row" style="margin:30px;">
-                <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
-                        <a href="{{ URL::route('hot-desk'); }}">
-                            <img src="/assets/image/image 11.png" alt="Digital" style="width:200px">
-                        </a>
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                Hot Desk
-                            </div>
-                            <div class="col-3" style="width:60% ; margin-left:30px;">
-                                Shared work desk within the
-                                co-working space.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-xl-start header-btn-grp set-padding">
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active">
-                        $4 / Hour
-                    </button>
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        $35 / Day
-                    </button>
-                    <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                        <a href="{{ URL::route('hot-desk'); }}" style="text-decoration: none;"> View More </a>
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
+
 
 @endsection
