@@ -72,115 +72,294 @@
         </div>
     </div>
 
-    <div class="col-lg-12 mb-7">
-        <div class="col-12 text-dark">
-            <label class="form-label required">{{__('messages.common.discount_rate')}}
-                ({{__('messages.common.hourly')}})</label>
+    <div class="col-lg-12 mb-7 mt-5">
+        <div class="row">
+            <div class="col-6 text-dark">
+                <label class="form-label required">{{__('messages.common.discount_rate')}}
+                    ({{__('messages.common.hourly')}})</label>
 
-            <div class="row hourly_records mb-5">
-                <div class="col-2">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
+                <div class="row hourly_records mb-5">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 text-dark">
                         {{__('messages.common.above')}}
                     </span>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control "
-                            placeholder="{{__('messages.common.no_of')}}"
-                            name="above_count"
-                        />
-                        <div class="input-group-append">
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control "
+                                placeholder="{{__('messages.common.no_of')}}"
+                                name="above_count_hourly[]"
+                                onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
+                            />
+                            <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
                         {{__('messages.common.hours')}}
                     </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="vr bg-black opacity-100 p-1px"></div>
-                <div class="col-2">
-                    <div class="input-group">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="{{__('messages.common.no_of')}}"
-                            name="rate"
-                        />
-                        <div class="input-group-append">
+                    <div class="vr bg-black opacity-100 p-1px"></div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="{{__('messages.common.discount_percent')}}"
+                                name="rate_hourly[]"
+                            />
+                            <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
                         {{__('messages.common.per_hour')}}
                     </span>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-1 action-btn">
+                        <button type="button" class="btn btn-sm btn-dark extra-fields-hourly" id="addHourlyCharge">
+                            <span class=" fa fa-plus"></span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-1 single">
-                    <button type="button" class="btn btn-sm btn-dark extra-fields-hourly" id="addHourlyCharge">
-                        <span class=" fa fa-plus"></span>
-                    </button>
+                <div class="hourly_records_dynamic">
+                    @if(isset($hourlyDiscounts) && !empty($hourlyDiscounts))
+                    @foreach($hourlyDiscounts as $discounts)
+                    <div class="remove row mb-5">
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                <span class="input-group-text bg-white border-0 text-dark">
+                    Above
+                </span>
+                                </div>
+                                <input
+                                    value="{{$discounts['above_count']}}"
+                                    type="text" class="form-control "
+                                    placeholder="No. of" name="above_count_hourly[]"
+                                       onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)">
+                                <div class="input-group-append">
+                <span class="input-group-text bg-white border-0 text-dark">
+                    Hours
+                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vr bg-black opacity-100 p-1px"></div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                <input
+                                    value="{{$discounts['rate']}}"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Discount %"
+                                    name="rate_hourly[]"
+                                >
+                                <div class="input-group-append">
+                <span class="input-group-text bg-white border-0 text-dark">
+                    per hour
+                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 action-btn">
+
+                            <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
+                                <span class=" fa fa-minus"></span>
+                        </div>
+                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
-            <div class="hourly_records_dynamic"></div>
-        </div>
+            <div class="col-6 text-dark">
+                <label class="form-label required">{{__('messages.common.discount_rate')}}
+                    ({{__('messages.common.daily')}})</label>
 
-
-    </div>
-    <div class="col-lg-12 mb-7">
-        <div class="mb-3" io-image-input="true">
-            <label for="exampleInputImage" class="form-label required">{{__('messages.front_service.icon')}}:</label>
-            <div class="d-block">
-                <div class="image-picker">
-                    <div class="image previewImage" id="exampleInputImage"
-                         style="background-image: url({{ !empty($service->icon) ? $service->icon : asset('web/media/avatars/male.png') }})">
+                <div class="row daily_records mb-5">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.above')}}
+                    </span>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control "
+                                placeholder="{{__('messages.common.no_of')}}"
+                                name="above_count_daily[]"
+                                onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
+                            />
+                            <div class="input-group-append">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.hours')}}
+                    </span>
+                            </div>
+                        </div>
                     </div>
-                    <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
-                          data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
+                    <div class="vr bg-black opacity-100 p-1px"></div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="{{__('messages.common.discount_percent')}}"
+                                name="rate_daily[]"
+                            />
+                            <div class="input-group-append">
+                    <span class="input-group-text bg-white border-0 text-dark">
+                        {{__('messages.common.per_hour')}}
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1 action-btn">
+                        <button type="button" class="btn btn-sm btn-dark extra-fields-daily" id="addDailyCharge">
+                            <span class=" fa fa-plus"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="daily_records_dynamic">
+                    @if(isset($dailyDiscounts) && !empty($dailyDiscounts))
+                    @foreach($dailyDiscounts as $discounts)
+
+                    <div class="d_remove row mb-5">
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+            <span class="input-group-text bg-white border-0 text-dark">
+            Above
+            </span>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control "
+                                    placeholder="No. of"
+                                    name="above_count_daily[]"
+                                    onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
+                                    value="{{$discounts['above_count']}}"
+                                />
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                    Hours
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vr bg-black opacity-100 p-1px"></div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Discount %"
+                                    name="rate_daily[]"
+                                    value="{{$discounts['rate']}}"
+                                    onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
+                                >
+                                <div class="input-group-append">
+            <span class="input-group-text bg-white border-0 text-dark">
+            per hour
+            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 action-btn">
+                            <button type="button" class="btn btn-sm btn-danger remove-field">
+                                <span class=" fa fa-minus"></span>
+                            </button>
+                        </div>
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mb-7">
+            <div class="mb-3" io-image-input="true">
+                <label for="exampleInputImage"
+                       class="form-label required">{{__('messages.front_service.icon')}}:</label>
+                <div class="d-block">
+                    <div class="image-picker">
+                        <div class="image previewImage" id="exampleInputImage"
+                             style="background-image: url({{ !empty($service->icon) ? $service->icon : asset('web/media/avatars/male.png') }})">
+                        </div>
+                        <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
+                              data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
                         <label>
                             <i class="fa-solid fa-pen" id="profileImageIcon"></i>
                             <input type="file" id="profile_image" name="icon"
                                    class="image-upload d-none icon-validation" accept="image/*"/>
                         </label>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-12 mb-7">
-        <div class="mb-3" io-image-input="true">
-            <label for="exampleInputImage" class="form-label required">{{__('messages.front_service.photos')}}:</label>
-            <div class="d-block">
-                <div class="image-picker">
-                    @foreach ($service->gallery as $image)
-                    <div class="image previewImage" id="exampleInputImage"
-                         style="background-image: url({{ !empty($image) ? $image : asset('web/media/avatars/male.png') }})">
-                    </div>
-                    @endforeach
-                    <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
-                          data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
+        <div class="col-lg-12 mb-7">
+            <div class="mb-3" io-image-input="true">
+                <label for="exampleInputImage"
+                       class="form-label required">{{__('messages.front_service.photos')}}:</label>
+                <div class="d-block">
+                    <div class="image-picker">
+                        @if(isset($service))
+                        @foreach ($service->gallery as $image)
+                        <div class="image previewImage" id="exampleInputImage"
+                             style="background-image: url({{ !empty($image) ? $image : asset('web/media/avatars/male.png') }})">
+                        </div>
+                        @endforeach
+                        @else
+                        <div class="image previewImage" id="exampleInputImage"
+                             style="background-image: url({{  asset('web/media/avatars/male.png') }})">
+                        </div>
+                        @endif
+                        <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
+                              data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
                         <label>
                             <i class="fa-solid fa-pen" id="profileImageIcon"></i>
                             <input type="file" id="gallery" name="gallery[]"
                                    class="image-upload d-none icon-validation" accept="image/*" multiple/>
                         </label>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div>
-        {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
-        <a href="{{route('services.index')}}" type="reset"
-           class="btn btn-secondary">{{__('messages.common.discard')}}</a>
+        <div>
+            {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
+            <a href="{{route('services.index')}}" type="reset"
+               class="btn btn-secondary">{{__('messages.common.discard')}}</a>
+        </div>
     </div>
-</div>
-<script type="text/javascript">
-    listenClick('#addHourlyCharge', function (event) {
-        //console.log(event, $('.hourly_records').clone())
-        $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
-        $('.hourly_records_dynamic .hourly_records').addClass('single remove');
-        $('.single .extra-fields-hourly').remove();
-        $('.single').append('<a href="#" class="remove-field btn-remove-customer">Remove Fields</a>');
-        $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
-    })
-</script>
+    <script type="text/javascript">
+        listenClick('#addHourlyCharge', function (event) {
+            //console.log(event, $('.hourly_records').clone())
+            $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
+            $('.hourly_records_dynamic .hourly_records').addClass('single remove');
+            $('.single > .action-btn > .extra-fields-hourly').remove();
+            $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
+            $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
+        });
+
+        listenClick('#addDailyCharge', function (event) {
+            //console.log(event, $('.hourly_records').clone())
+            $('.daily_records').clone().appendTo('.daily_records_dynamic');
+            $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
+            $('.d_single > .action-btn > .extra-fields-daily').remove();
+            $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
+            $('.daily_records_dynamic > .d_single').attr("class", "d_remove row mb-5");
+        });
+
+
+        listenClick('.remove-field', function (event) {
+            $(event.target).parents('div').parent('.d_remove').remove()
+            event.preventDefault();
+        });
+        listenClick('.remove-hourly-field', function (event) {
+            $(event.target).parents('div').parent('.remove').remove()
+            event.preventDefault();
+        });
+    </script>

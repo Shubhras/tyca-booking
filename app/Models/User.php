@@ -557,6 +557,11 @@ class User extends Authenticatable implements HasMedia
         // 'dob' => 'nullable|date',
         // 'experience' => 'nullable|numeric',
         'specializations' => 'required',
+        'address1' =>  'required',
+        'country_id'=>'required',
+        'state_id'=>'required',
+        'city_id'=>'required',
+        'postal_code'=>'required',
         // 'gender' => 'required',
         'status' => 'nullable',
         'postal_code' => 'nullable',
@@ -610,12 +615,14 @@ class User extends Authenticatable implements HasMedia
      */
     public function getGalleryAttribute(): array
     {
-        /** @var Media $media */
-        $media = $this->getMedia(self::GALLERY)->all();
-        if (! empty($media)) {
-            return $media->getFullUrl();
+        $medias = $this->getMedia(self::GALLERY)->all();
+        $result = [];
+        if (! empty($medias)) {
+            foreach ($medias as $media) {
+                $result[] = $media->getFullUrl();
+            }
         }
-        return [];
+        return $result;
     }
 
     public function getRoleNameAttribute()

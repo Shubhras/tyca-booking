@@ -45,7 +45,10 @@ class ServiceController extends AppBaseController
     {
         $data = $this->servicesRepository->prepareData();
 
-        return view('services.create', compact('data'));
+        $dailyDiscounts = [];
+        $hourlyDiscounts = [];
+
+        return view('services.create', compact('data', 'dailyDiscounts', 'hourlyDiscounts'));
     }
 
     /**
@@ -73,10 +76,12 @@ class ServiceController extends AppBaseController
     public function edit(Service $service)
     {
         $data = $this->servicesRepository->prepareData();
+        $dailyDiscounts = $this->servicesRepository->getDailyDiscountAttribute($service->id);
+        $hourlyDiscounts = $this->servicesRepository->getHourlyDiscountAttribute($service->id);
         $selectedDoctor = $service->serviceDoctors()->pluck('doctor_id')->toArray();
         $selectedSpecializations = $service->serviceSpecializations()->pluck('specialization_id')->toArray();
 
-        return view('services.edit', compact('service', 'data', 'selectedDoctor', 'selectedSpecializations'));
+        return view('services.edit', compact('service', 'data', 'selectedDoctor', 'selectedSpecializations', 'dailyDiscounts', 'hourlyDiscounts'));
     }
 
     /**

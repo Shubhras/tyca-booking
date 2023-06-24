@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthorizePaymentController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HotdeskController;
 use App\Http\Controllers\BookingdetailsController;
-
+use App\Http\Controllers\MemberPortalController;
 use App\Http\Controllers\ClinicScheduleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -163,9 +163,10 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
     Route::put('/email-notification', [UserController::class, 'emailNotification'])->name('emailNotification');
 });
 
-Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
+Route::get('/book-slot/{id}', [BookController::class, 'index'])->name('book-slot');
 Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
 Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
+Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');
 
 Route::get('cancel-appointment/{patient_id}/{appointment_unique_id}', [AppointmentController::class, 'cancelAppointment'])->name('cancelAppointment');
 
@@ -178,6 +179,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
 //    Route::impersonate();
     Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
     Route::get('impersonate-leave', [UserController::class, 'impersonateLeave'])->name('impersonate.leave');
+
+    Route::post('deleteMedia/{id}', [UserController::class, 'deleteMedia'])->name('delete-media');
 
     //Email verified
     Route::post('email-verified', [UserController::class, 'emailVerified'])->name('emailVerified');
@@ -235,6 +238,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     // Patient Routes
     Route::middleware('permission:manage_patients')->group(function () {
         Route::resource('patients', PatientController::class);
+        Route::put('patient-status', [PatientController::class, 'changeServiceStatus'])->name('patient.status');
+
         Route::get('patient-appointments',
             [PatientController::class, 'patientAppointment'])->name('patients.appointment');
     });

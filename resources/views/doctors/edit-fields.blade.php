@@ -8,58 +8,23 @@
     <div class="col-lg-12">
     <div class="mb-5">
         {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label']) }}
-        <div id="doctorDescriptionId" class="editor-height" style="height: 200px"> <?php
+        <div id="doctorDescriptionId" class="editor-height" style="height: 200px">
 
-use Illuminate\Support\Arr;
+        {!! $doctor->description !!}
 
- echo $doctor->description; ?></div>
+    </div>
         {{ Form::hidden('description', $doctor->description, ['id' => 'descriptionData']) }}
     </div>
 </div>
 
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Last Name',__('messages.doctor.last_name').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('last_name', $user->last_name,['class' => 'form-control','placeholder' => __('messages.doctor.last_name'),'required']) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Email',__('messages.user.email').':' ,['class' => 'form-label required']) }}
-        {{ Form::email('email', $user->email,['class' => 'form-control','placeholder' =>  __('messages.web.email')]) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Contact',__('messages.user.contact_number').':' ,['class' => 'form-label']) }}
-        {{ Form::tel('contact', '+'.$user->region_code.$user->contact,['class' => 'form-control','placeholder' =>  __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
-        {{ Form::hidden('region_code',!empty($user->user) ? $user->user->region_code : null,['id'=>'prefix_code']) }}
-        <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
-        <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2">{{ __('messages.invalid_number') }}</span>
-    </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('DOB',__('messages.doctor.dob').':' ,['class' => 'form-label']) }}
-        {{ Form::text('dob', $user->dob,['class' => 'form-control doctor-dob','placeholder' => __('messages.doctor.dob'), 'id'=>'dob']) }}
-    </div>
-    <div class="col-md-6 mb-5">
+    <div class="col-md-5 mb-5">
         {{ Form::label('Specialization',__('messages.doctor.specialization').':' ,['class' => 'form-label required']) }}
         {{ Form::select('specializations[]',$data['specializations'], $data['doctorSpecializations'],['class' => 'io-select2 form-select', 'data-control'=>"select2", 'multiple']) }}
     </div>
-    <div class="col-md-6 mb-5">
-        {{ Form::label('Experience', __('messages.doctor.experience').':', ['class' => 'form-label']) }}
-        {{ Form::text('experience', $doctor->experience, ['class' => 'form-control', 'placeholder' => __('messages.doctor.experience'),'step'=>'any']) }}
-    </div>
-    <div class="col-md-6 mb-5">
-        <label class="form-label required">
-            {{__('messages.doctor.select_gender')}}
-            :
-        </label>
-        <span class="is-valid">
-                <div class="mt-2">
-                    <input class="form-check-input" type="radio" name="gender" value="1" {{ !empty($user->gender) && $user->gender === 1 ? 'checked' : '' }}>
-                    <label class="form-label mr-3">{{__('messages.doctor.male')}}</label>
-                    <input class="form-check-input ms-2" type="radio" name="gender" value="2" {{ !empty($user->gender) && $user->gender === 2 ? 'checked' : ''}}>
-                    <label class="form-label mr-3">{{__('messages.doctor.female')}}</label>
-                </div>
-            </span>
-    </div>
+
     <div class="col-md-7">
     <div class="mb-5">
+    {{ Form::label('Specialization','Operating Hours:' ,['class' => 'form-label required']) }}
     <div class="row">
 
 <?php $days = json_decode($doctor->days);
@@ -73,13 +38,6 @@ foreach($days as $day)
         'end_time' => $day->end_time
     );
 }
-
-// echo '<pre>'; print_r();
-// echo '<pre>'; print_r($dayArray[4]['start_time']);
-// echo '<pre>'; print_r($dayArray[4]['end_time']);
-
-
-// die;
 
 $slots = getSchedulesTimingSlot();
 
@@ -287,20 +245,16 @@ $slots = getSchedulesTimingSlot();
     </div>
 </div>
 
-<?php
 
-//  echo '<pre>'; print_R($user->media);
-
-?>
     <div class="col-md-6 mb-5">
         <div class="mb-3" io-image-input="true">
-            <label for="exampleInputImage" class="form-label">{{__('messages.doctor.profile')}}:</label>
+            <label for="exampleInputImage" class="form-label">{{__('messages.doctor.icon')}}:</label>
             <div class="d-block">
                 <div class="image-picker">
                     <div class="image previewImage" id="exampleInputImage" style="background-image: url({{ !empty($user->profile_image) ? $user->profile_image : asset('web/media/avatars/male.png') }})">
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
-                          data-placement="top" data-bs-original-title="{{__('messages.user.edit_profile')}}">
+                          data-placement="top" data-bs-original-title="{{__('messages.user.icon')}}">
                         <label>
                             <i class="fa-solid fa-pen" id="profileImageIcon"></i>
                             <input type="file" id="profilePicture" name="profile" class="image-upload d-none profile-validation" accept="image/*" />
@@ -310,12 +264,29 @@ $slots = getSchedulesTimingSlot();
             </div>
         </div>
     </div>
-</div>
+
+
 <div class="col-md-6 mb-5">
     <div class="item-upload">
 
 <input id="photo-upload" type="file" accept="image/*"  name="gallery_image[]" multiple/>
-<div id="photo-upload__preview" class="upload-preview" ></div>
+<div id="photo-upload__preview" class="upload-preview" >
+<div class="item-images">
+    <?php foreach($user->gallery as $gallery){ ?>
+    <div>
+    <img src="<?php echo $gallery; ?>" class="item-photo__preview">
+    <?php
+    $filename = explode("/",$gallery);
+    ?>
+
+    <button type="button" class="delete" data-filename="<?php echo $filename[5]; ?>" data-id="<?php echo $filename[4]; ?>"><span>×</span>
+</button></div>
+<?php } ?>
+
+</div>
+
+
+</div>
 </div>
 
     </div>
@@ -331,29 +302,29 @@ $slots = getSchedulesTimingSlot();
 </div>
 <div class="row gx-10 mb-5">
     <div class="col-md-6 mb-5">
-        {{ Form::label('Address 1', __('messages.doctor.address1').':', ['class' => 'form-label']) }}
-        {{ Form::text('address1', isset($user->address->address1) ? $user->address->address1 : '', ['class' => 'form-control', 'placeholder' =>  __('messages.doctor.address1')]) }}
+        {{ Form::label('Address 1', __('messages.doctor.address1').':', ['class' => 'form-label required']) }}
+        {{ Form::text('address1', isset($user->address->address1) ? $user->address->address1 : '', ['class' => 'form-control', 'placeholder' =>  __('messages.doctor.address1'),'required']) }}
     </div>
     <div class="col-md-6 mb-5">
         {{ Form::label('Address 2', __('messages.doctor.address2').':', ['class' => 'form-label']) }}
         {{ Form::text('address2', isset($user->address->address2) ? $user->address->address2 : '', ['class' => 'form-control', 'placeholder' =>  __('messages.doctor.address2')]) }}
     </div>
     <div class="col-md-6 mb-5">
-        {{ Form::label('Country',__('messages.doctor.country').':' ,['class' => 'form-label']) }}
+        {{ Form::label('Country',__('messages.doctor.country').':' ,['class' => 'form-label required']) }}
         {{ Form::select('country_id', $countries, isset($user->address->country_id) ? $user->address->country_id:null,
-['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=>'editDoctorCountryId','placeholder' => __('messages.common.select_country')]) }}
+['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=>'editDoctorCountryId','placeholder' => __('messages.common.select_country'),'required']) }}
     </div>
     <div class="col-md-6 mb-5">
-        {{ Form::label('State',__('messages.doctor.state').':' ,['class' => 'form-label']) }}
-        {{ Form::select('state_id', (isset($state) && $state!=null) ? $state:[], isset($user->address->state_id) ? $user->address->state_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorStateId','placeholder' => __('messages.common.select_state')]) }}
+        {{ Form::label('State',__('messages.doctor.state').':' ,['class' => 'form-label required']) }}
+        {{ Form::select('state_id', (isset($state) && $state!=null) ? $state:[], isset($user->address->state_id) ? $user->address->state_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorStateId','placeholder' => __('messages.common.select_state'),'required']) }}
     </div>
     <div class="col-md-6 mb-5">
-        {{ Form::label('City',__('messages.doctor.city').':' ,['class' => 'form-label']) }}
-        {{ Form::select('city_id', (isset($cities) && $cities!=null) ? $cities:[], isset($user->address->city_id) ? $user->address->city_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorCityId','placeholder' => __('messages.common.select_city')]) }}
+        {{ Form::label('City',__('messages.doctor.city').':' ,['class' => 'form-label required']) }}
+        {{ Form::select('city_id', (isset($cities) && $cities!=null) ? $cities:[], isset($user->address->city_id) ? $user->address->city_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorCityId','placeholder' => __('messages.common.select_city'),'required']) }}
     </div>
     <div class="col-md-6">
-        {{ Form::label('Postal Code', __('messages.doctor.postal_code').':', ['class' => 'form-label']) }}
-        {{ Form::text('postal_code', isset($user->address->postal_code) ? $user->address->postal_code : '', ['class' => 'form-control', 'placeholder' => __('messages.doctor.postal_code')]) }}
+        {{ Form::label('Postal Code', __('messages.doctor.postal_code').':', ['class' => 'form-label required']) }}
+        {{ Form::text('postal_code', isset($user->address->postal_code) ? $user->address->postal_code : '', ['class' => 'form-control', 'placeholder' => __('messages.doctor.postal_code'),'required']) }}
     </div>
 </div>
 
@@ -383,30 +354,35 @@ $slots = getSchedulesTimingSlot();
     border-radius: 100%
 }
 </style>
+<script>
+    var quill = new Quill('#doctorDescriptionId', {
+      theme: 'snow'
+    });
+  </script>
 <script type="text/javascript">
 
-let quill2 = new Quill('#doctorDescriptionId', {
-    modules: {
-        toolbar: [
-            [
-                {
-                    header: [1, 2, false],
-                }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block'],
-        ],
-    },
-    placeholder: 'Description',
-    theme: 'snow', // or 'bubble'
-})
-quill2.on('text-change', function (delta, oldDelta, source) {
-    if (quill2.getText().trim().length === 0) {
-        quill2.setContents([{ insert: '' }])
-    }
-})
+// let quill5 = new Quill('#doctorDescriptionId', {
+//     modules: {
+//         toolbar: [
+//             [
+//                 {
+//                     header: [1, 2, false],
+//                 }],
+//             ['bold', 'italic', 'underline'],
+//             [ 'code-block'],
+//         ],
+//     },
+//     placeholder: 'Description',
+//     theme: 'snow', // or 'bubble'
+// })
+// quill5.on('text-change', function (delta, oldDelta, source) {
+//     if (quill5.getText().trim().length === 0) {
+//         quill5.setContents([{ insert: '' }])
+//     }
+// })
 
 
-    function previewImage(e, selectedFiles, imagesArray) {
+function previewImage(e, selectedFiles, imagesArray) {
   const elemContainer = document.createElement('div');
   elemContainer.setAttribute('class', 'item-images');
   for (let i = 0; i < selectedFiles.length; i++) {
@@ -426,28 +402,43 @@ quill2.on('text-change', function (delta, oldDelta, source) {
   }
   return elemContainer;
 }
-let item_images = [];
+var item_images_1 = [];
 document.getElementById('photo-upload').addEventListener('change', (e) => {
-  let selectedFiles = e.target.files;
+  var selectedFiles = e.target.files;
   const photoPreviewContainer = document.querySelector('#photo-upload__preview');
-  const elemContainer = previewImage(e, selectedFiles, item_images);
+  const elemContainer = previewImage(e, selectedFiles, item_images_1);
   photoPreviewContainer.appendChild(elemContainer);
 });
 
 document.getElementById('photo-upload__preview').addEventListener('click', (e) => {
   const tgt = e.target.closest('button');
   if (tgt.classList.contains('delete')) {
+     console.log("tgt.dataset",tgt.dataset.id);
+
+    let fileId = tgt.dataset.id;
+    $.ajax({
+        url: route('delete-media', fileId),
+        type: 'POST',
+        data: {
+            fileId: fileId,
+        },
+        success: function (result) {
+
+        },
+    });
+
+
     tgt.closest('div').remove();
     const fileName = tgt.dataset.filename
-    item_images = item_images.filter(img => img.name != fileName)
+    item_images_1 = item_images_1.filter(img => img.name != fileName)
   }
 })
 
 $(document).ready(function(){
 
-$("#doctorDescriptionId").keyup(function(){
-    let element = document.createElement('textarea')
-    let editor_content_1 = quill2.root.innerHTML
+    $(window).click(function(e) {
+        let element = document.createElement('textarea')
+    let editor_content_1 = quill.root.innerHTML
     element.innerHTML = editor_content_1
 
     // if (quill1.getText().trim().length === 0) {
@@ -455,8 +446,10 @@ $("#doctorDescriptionId").keyup(function(){
     //     return false
     // }
 
-    $('#descriptionData').val(editor_content_1);
+    $('#descriptionData').val($(".ql-editor").html());
 });
 });
 
+
 </script>
+

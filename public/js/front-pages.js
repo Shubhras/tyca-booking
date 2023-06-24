@@ -3758,33 +3758,11 @@ function loadFrontCMSData() {
   });
   $('#cmsShortDescription').attr('maxlength', 800);
 
-  if (!$('#cmsTermConditionId').length) {
-    return;
-  }
-
-  var quill1 = new Quill('#cmsTermConditionId', {
-    modules: {
-      toolbar: [[{
-        header: [1, 2, false]
-      }], ['bold', 'italic', 'underline'], ['image', 'code-block']]
-    },
-    placeholder: Lang.get('messages.cms.terms_conditions'),
-    theme: 'snow' // or 'bubble'
-
-  });
-  quill1.on('text-change', function (delta, oldDelta, source) {
-    if (quill1.getText().trim().length === 0) {
-      quill1.setContents([{
-        insert: ''
-      }]);
-    }
-  });
-
   if (!$('#cmsPrivacyPolicyId').length) {
     return;
   }
 
-  var quill2 = new Quill('#cmsPrivacyPolicyId', {
+  var quill3 = new Quill('#cmsPrivacyPolicyId', {
     modules: {
       toolbar: [[{
         header: [1, 2, false]
@@ -3794,7 +3772,7 @@ function loadFrontCMSData() {
     theme: 'snow' // or 'bubble'
 
   });
-  quill2.on('text-change', function (delta, oldDelta, source) {
+  quill3.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
       quill2.setContents([{
         insert: ''

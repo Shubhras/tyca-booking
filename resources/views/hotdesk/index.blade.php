@@ -89,17 +89,22 @@
                         <h2>AMENITIES</h2>
                         <div class="amenities-block">
                             <div class="amenities-right">
-                                <p>WI-Fi</p>
-                                <p>Toilet</p>
-                                <p>Chair</p>
-                                <p>Phone Booth</p>
-                                <p>Stationary</p>
+                                <p><img src="/assets/image/image 15.png" alt="#" style="padding-right:10px;"></i>wi-fi
+                                </p>
+                                <p><img src="/assets/image/image 33.png" alt="#" style="padding-right:10px;"></i>Toilet
+                                </p>
+                                <p><img src="/assets/image/image 34.png" alt="#" style="padding-right:10px;"></i>Chair
+                                <p><img src="/assets/image/image 36.png" alt="#" style="padding-right:10px;">Phone Booth</p>
+                                <p><img src="/assets/image/image 37.png" alt="#" style="padding-right:10px;">Stationary</p>
                             </div>
                             <div class="amenities-left">
-                                <p>Air Conditioning</p>
-                                <p>Desk</p>
-                                <p>Lounge Area</p>
-                                <p>Whiteboard</p>
+                                <p>
+                                    <img src="/assets/image/image 17.png" alt="#" style="padding-right:10px;">Air
+                                    Conditioning
+                                </p>
+                                <p> <img src="/assets/image/image 23.png" alt="#" style="padding-right:10px;">Desk</p>
+                                <p> <img src="/assets/image/image 35.png" alt="#" style="padding-right:10px;">Lounge Area</p>
+                                <p><img src="/assets/image/image 38.png" alt="#" style="padding-right:10px;">Whiteboard</p>
                             </div>
                         </div>
                     </div>
@@ -108,14 +113,14 @@
                     <div class="Operating">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
-                            <div class="operating-right">
-                                <p>Monday</p>
-                                <p>Tuesday</p>
-                                <p>Wednesday</p>
-                                <p>Thursday</p>
-                                <p>Friday</p>
-                                <p>Saturday</p>
-                                <p>Sunday</p>
+                            <div class="operating-right" style="display:grid;">
+                                <b>Monday</b>
+                                <b>Tuesday</b>
+                                <b>Wednesday</b>
+                                <b>Thursday</b>
+                                <b>Friday</b>
+                                <b>Saturday</b>
+                                <b>Sunday</b>
                             </div>
                             <div class="operating-left">
                                 <p>07.00 am - 09.30 pm</p>
@@ -180,7 +185,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="book-space">BOOK A SPACE</div>
@@ -247,8 +252,8 @@
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             11:00am
                         </button>
-                    <!-- </div> -->
-                    <!-- <div class="popular-tags" style="margin-left:10px;"> -->
+                        <!-- </div> -->
+                        <!-- <div class="popular-tags" style="margin-left:10px;"> -->
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             12:00pm
                         </button>
@@ -377,15 +382,17 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-    .modal-header {
-        border-bottom:none !important;
-    }
-    .book-space{
+.modal-header {
+    border-bottom: none !important;
+}
+
+.book-space {
     text-align: center;
     font-size: 30px;
     font-weight: 500;
-    margin-top:-15px;
-    }
+    margin-top: -15px;
+}
+
 .popular-tags button {
     display: inline-block;
     padding: 10px 0px;
@@ -512,11 +519,8 @@ figure.effect-chico {
 
 .grid figure {
     position: relative;
-    /* float: left; */
     overflow: hidden;
     min-width: 100%;
-    /* max-width: 100%;
-    width: 100%; */
     margin: -18px -8px 26px;
     text-align: center;
     cursor: pointer;

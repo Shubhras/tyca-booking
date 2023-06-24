@@ -663,13 +663,10 @@ header {
   }
 }
 header .navbar .navbar-nav .nav-item .nav-link {
-  /* color: #747B81;
-  font-weight: 500; */
-  color: #000000;
-  font-weight: 400;
+  color: #747B81;
+  font-weight: 500;
   padding-left: 20px;
   padding-right: 20px;
-  font-size: 18px;
 }
 @media (max-width: 1399px) and (min-width: 992px) {
   header .navbar .navbar-nav .nav-item .nav-link {
@@ -1040,9 +1037,9 @@ footer .footer-info__footer-icon {
 }
 
 .btn {
-  /* border-radius: 50px; */
-  padding: 0.7rem 2.25rem;
-  color: #273431;
+  border-radius: 50px;
+  padding: 0.75rem 2.25rem;
+  color: #18232d;
 }
 @media (max-width: 575px) {
   .btn {
@@ -1073,25 +1070,22 @@ footer .footer-info__footer-icon {
 }
 
 .btn-primary {
-  background: #273432;
+  background: linear-gradient(117.85deg, #fe8065 0%, #f74d6c 100%);
   border-color: transparent;
   color: #ffffff;
   transition: all 0.3s ease-in-out;
 }
 .btn-primary:hover {
   border: 1px solid transparent;
-  /* background: linear-gradient(#ffffff 0 0) padding-box, linear-gradient(to right, #fe8065, #f74d6c) border-box; */
-  background-color: #fe8065;
-  color: #fff;
+  background: linear-gradient(#ffffff 0 0) padding-box, linear-gradient(to right, #fe8065, #f74d6c) border-box;
+  color: #f74d6c;
   transition: all 0.3s ease-in-out;
 }
 
 .btn-outline-primary {
   border: 1px solid transparent;
-  /* background: linear-gradient(#ffffff 0 0) padding-box, linear-gradient(to right, #fe8065, #f74d6c) border-box; */
-  /* color: #f74d6c; */
-  background: #273431;
-  color: #fff;
+  background: linear-gradient(#ffffff 0 0) padding-box, linear-gradient(to right, #fe8065, #f74d6c) border-box;
+  color: #f74d6c;
   transition: all 0.3s ease-in-out;
 }
 .btn-outline-primary:hover {
@@ -1194,13 +1188,12 @@ h6,
 
 .form-control,
 .form-select {
-  height: 45px;
-  border-radius: 1px;
-  font-size: 15px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: 300;
-  padding: 0px 15px;
-  border-color: #000000;
-  border: 2px solid;
+  padding: 15px 30px;
+  border-color: #BABDC0;
 }
 @media (max-width: 767px) {
   .form-control,
@@ -1411,8 +1404,8 @@ h6,
   padding-bottom: 20px;
   transition: all 0.5s ease-in-out;
   z-index: 2 !important;
-  background-color: #EEDFD0;
 }
+
 @media (max-width: 991px) {
   .header {
     padding-top: 5px !important;
@@ -1420,8 +1413,7 @@ h6,
   }
 }
 .header.fixed {
-  /* background-color: #fff; */
-  background-color: #EEDFD0;
+  background-color: #fff;
   box-shadow: 0px 3px 10px 0px rgba(38, 107, 193, 0.08);
 }
 

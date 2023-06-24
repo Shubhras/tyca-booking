@@ -8510,33 +8510,11 @@ function loadFrontCMSData() {
   });
   $('#cmsShortDescription').attr('maxlength', 800);
 
-  if (!$('#cmsTermConditionId').length) {
-    return;
-  }
-
-  var quill1 = new Quill('#cmsTermConditionId', {
-    modules: {
-      toolbar: [[{
-        header: [1, 2, false]
-      }], ['bold', 'italic', 'underline'], ['image', 'code-block']]
-    },
-    placeholder: Lang.get('messages.cms.terms_conditions'),
-    theme: 'snow' // or 'bubble'
-
-  });
-  quill1.on('text-change', function (delta, oldDelta, source) {
-    if (quill1.getText().trim().length === 0) {
-      quill1.setContents([{
-        insert: ''
-      }]);
-    }
-  });
-
   if (!$('#cmsPrivacyPolicyId').length) {
     return;
   }
 
-  var quill2 = new Quill('#cmsPrivacyPolicyId', {
+  var quill3 = new Quill('#cmsPrivacyPolicyId', {
     modules: {
       toolbar: [[{
         header: [1, 2, false]
@@ -8546,7 +8524,7 @@ function loadFrontCMSData() {
     theme: 'snow' // or 'bubble'
 
   });
-  quill2.on('text-change', function (delta, oldDelta, source) {
+  quill3.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
       quill2.setContents([{
         insert: ''
@@ -9440,6 +9418,19 @@ listenClick('.patient-email-verification', function (event) {
     }
   });
 });
+listenClick('.patient-statusbar', function (event) {
+  var recordId = $(event.currentTarget).data('id');
+  $.ajax({
+    type: 'PUT',
+    url: route('patient.status'),
+    data: {
+      id: recordId
+    },
+    success: function success(result) {
+      displaySuccessMessage(result.message);
+    }
+  });
+});
 
 /***/ }),
 
@@ -9708,6 +9699,23 @@ function loadServiceData() {
       return true;
     } else {
       $('.price-input').val(price.replace(/[^0-9 \,]/, ''));
+    }
+  }
+
+  if (!$('.charges_daily').length) {
+    return;
+  }
+
+  var charges_daily = $('.charges_daily').val();
+
+  if (charges_daily === '') {
+    $('.charges_daily').val('');
+  } else {
+    if (/[0-9]+(,[0-9]+)*$/.test(charges_daily)) {
+      $('.charges_daily').val(getFormattedPrice(charges_daily));
+      return true;
+    } else {
+      $('.charges_daily').val(charges_daily.replace(/[^0-9 \,]/, ''));
     }
   }
 }

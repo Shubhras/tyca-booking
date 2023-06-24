@@ -36,6 +36,16 @@ class CreateServicesRequest extends FormRequest
             //'category_id.required' => 'The category field is required.',
             'doctors.required' => 'The doctor field is required.',
             'short_description.required' => 'The short description field is required.',
+
+            'above_count_hourly.*' => 'Hourly above number is required',
+            'above_count_daily.*' => 'Daily above number is required',
+            'rate_hourly.*' => 'Hourly discount is required',
+            'rate_daily.*' => 'Daily discount is required',
+
+            'above_count_hourly' => 'Hourly above number is required',
+            'above_count_daily' => 'Daily above number is required',
+            'rate_hourly' => 'Hourly discount is required',
+            'rate_daily' => 'Daily discount is required',
         ];
     }
 }
