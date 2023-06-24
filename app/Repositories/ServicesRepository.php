@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\ServiceDiscountRates;
 use App\Models\Doctor;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -106,10 +107,34 @@ class ServicesRepository extends AppBaseController
                 }
             }
 
+            if (isset($input['above_count_hourly']) && ! empty('above_count_hourly') && isset($input['rate_hourly']) && ! empty('rate_hourly')) {
+                $rates = [];
+                foreach ($input['above_count_hourly'] as $index => $value) {
+                    $rates[] = [
+                        'above_count' => $value,
+                        'rate' => $input['rate_hourly'][$index],
+                        'discount_type' => 'hourly',
+                        'service_id' => $service->id,
+                    ];
+                }
+                ServiceDiscountRates::where('service_id', $service->id)->where('discount_type', 'hourly')->delete();
+                ServiceDiscountRates::insert($rates);
+            }
 
-
+            if (isset($input['above_count_daily']) && ! empty('above_count_daily') && isset($input['rate_daily']) && ! empty('rate_daily')) {
+                $rates = [];
+                foreach ($input['above_count_daily'] as $index => $value) {
+                    $rates[] = [
+                        'above_count' => $value,
+                        'rate' => $input['rate_daily'][$index],
+                        'discount_type' => 'daily',
+                        'service_id' => $service->id,
+                    ];
+                }
+                ServiceDiscountRates::where('service_id', $service->id)->where('discount_type', 'daily')->delete();
+                ServiceDiscountRates::insert($rates);
+            }
             DB::commit();
-
             return true;
         } catch (Exception $e) {
             DB::rollBack();
