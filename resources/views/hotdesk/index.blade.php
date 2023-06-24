@@ -175,16 +175,15 @@
         </div>
     </div>
 </section>
-
-@endsection
-
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="max-width:1000px;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
+                
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="book-space">BOOK A SPACE</div>
             <div class="modal-body">
                 <div class="alert alert-danger d-none hide"></div>
                 <div class="row">
@@ -232,24 +231,66 @@
                     </div>
                 </div>
                 <div id="additional-info" style="display:none;">
-                    <div class="text-xl-start header-btn-grp set-padding">
-                        <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active"
-                            style="background:#B0DFCA; color:#025C34;">
+                    <div class="popular-tags mb-3" style="margin-left:10px;">
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             07:00am
                         </button>
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             08:00am
                         </button>
-                        <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             09:00am
                         </button>
-                        <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             10:00am
                         </button>
-                        <button class="btn2 btn2-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
                             11:00am
                         </button>
+                    <!-- </div> -->
+                    <!-- <div class="popular-tags" style="margin-left:10px;"> -->
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            12:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            01:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            02:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            03:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            04:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            05:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            06:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            07:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            08:00pm
+                        </button>
                     </div>
+                    <!-- <div class="popular-tags mb-3" style="margin-left:10px;">
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            05:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            06:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            07:00pm
+                        </button>
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
+                            08:00pm
+                        </button>
+                    </div> -->
                 </div>
                 <div class="col-12 form-group">
                     <label for="Available Slots" class="form-label required">Available Slots:</label>
@@ -310,20 +351,18 @@
         </div>
     </div>
 </div>
+@endsection
 
 <script>
 setTimeout(function() {
-    console.log('111111111111111111111111111111111111');
     $('#hour_plan_modal').modal();
 }, 5000);
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('333333333333333');
     var appointmentDateInput = document.getElementById('appointment-date');
 
     appointmentDateInput.addEventListener('change', function() {
-        console.log('change');
         var selectedDate = appointmentDateInput.value;
         var additionalInfoDiv = document.getElementById('additional-info');
 
@@ -338,6 +377,26 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+    .modal-header {
+        border-bottom:none !important;
+    }
+    .book-space{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top:-15px;
+    }
+.popular-tags button {
+    display: inline-block;
+    padding: 10px 0px;
+    margin: 5px 5px 10px -9px;
+    border: 1px solid #B0DFCA;
+    background: #B0DFCA;
+    color: #025C34;
+    font-size: 14px;
+    width: 180px;
+}
+
 .modal-footer {
     border-top: none !important;
 }
