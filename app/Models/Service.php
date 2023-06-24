@@ -76,6 +76,7 @@ class Service extends Model implements HasMedia
     ];
 
     const ICON = 'icon';
+    const GALLERY = 'gallery';
 
     protected $appends = ['icon'];
 

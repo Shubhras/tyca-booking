@@ -101,7 +101,7 @@
                           data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
                         <label>
                             <i class="fa-solid fa-pen" id="profileImageIcon"></i>
-                            <input type="file" id="profile_image" name="icon"
+                            <input type="file" id="gallery" name="gallery[]"
                                    class="image-upload d-none icon-validation" accept="image/*" multiple/>
                         </label>
                     </span>

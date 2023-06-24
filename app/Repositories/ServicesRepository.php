@@ -98,6 +98,14 @@ class ServicesRepository extends AppBaseController
                 $service->addMedia($input['icon'])->toMediaCollection(Service::ICON, config('app.media_disc'));
             }
 
+            if (isset($input['gallery']) && ! empty('gallery')) {
+                $service->clearMediaCollection(Service::GALLERY);
+                $service->media()->delete();
+                $service->addMedia($input['gallery'])->toMediaCollection(Service::GALLERY, config('app.media_disc'));
+            }
+
+
+
             DB::commit();
 
             return true;

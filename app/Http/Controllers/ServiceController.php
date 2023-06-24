@@ -88,7 +88,6 @@ class ServiceController extends AppBaseController
      */
     public function update(UpdateServicesRequest $request, Service $service)
     {
-        echo '<pre>';print_r($request->all());die;
         $this->servicesRepository->update($request->all(), $service);
 
         Flash::success(__('messages.flash.service_update'));
