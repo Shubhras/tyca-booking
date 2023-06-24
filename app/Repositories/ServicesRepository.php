@@ -182,4 +182,14 @@ class ServicesRepository extends AppBaseController
 
         return $data;
     }
+
+    public function getHourlyDiscountAttribute($id): array
+    {
+        return ServiceDiscountRates::where('service_id', $id)->where('discount_type', 'hourly')->get()->toArray();
+    }
+
+    public function getDailyDiscountAttribute($id): array
+    {
+        return ServiceDiscountRates::where('service_id', $id)->where('discount_type', 'daily')->get()->toArray();
+    }
 }

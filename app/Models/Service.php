@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\ServiceDiscountRate;
 use Database\Factories\ServicesFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use \App\Models\ServiceDiscountRates;
 
 /**
  * Class Services
@@ -109,17 +109,17 @@ class Service extends Model implements HasMedia
         'short_description' => 'required|max:60',
         'icon' => 'required|mimes:svg,jpeg,png,jpg',
 
-        "above_count_hourly"    => "required|array|min:1",
-        "above_count_hourly.*"  => "required|string|distinct",
+        "above_count_hourly" => "required|array|min:1",
+        "above_count_hourly.*" => "required|string|distinct",
 
-        "rate_hourly"    => "required|array|min:1",
-        "rate_hourly.*"  => "required|string|distinct",
+        "rate_hourly" => "required|array|min:1",
+        "rate_hourly.*" => "required|string|distinct",
 
-        "above_count_daily"    => "required|array|min:1",
-        "above_count_daily.*"  => "required|string|distinct",
+        "above_count_daily" => "required|array|min:1",
+        "above_count_daily.*" => "required|string|distinct",
 
-        "rate_daily"    => "required|array|min:1",
-        "rate_daily.*"  => "required|string|distinct",
+        "rate_daily" => "required|array|min:1",
+        "rate_daily.*" => "required|string|distinct",
     ];
 
     /**
@@ -135,7 +135,7 @@ class Service extends Model implements HasMedia
      */
     public function serviceCategory(): BelongsTo
     {
-        return $this->belongsTo(ServiceCategory::class, 'category_id','id');
+        return $this->belongsTo(ServiceCategory::class, 'category_id', 'id');
     }
 
     /**
@@ -153,7 +153,6 @@ class Service extends Model implements HasMedia
     {
         return $this->hasMany(ServiceDiscountRates::class, 'service_id', 'id');
     }
-
     /**
      * @return string
      */
@@ -161,7 +160,7 @@ class Service extends Model implements HasMedia
     {
         /** @var Media $media */
         $media = $this->getMedia(self::ICON)->first();
-        if (! empty($media)) {
+        if (!empty($media)) {
             return $media->getFullUrl();
         }
 
@@ -176,7 +175,7 @@ class Service extends Model implements HasMedia
         /** @var Media $media */
         $medias = $this->getMedia(self::GALLERY)->all();
         $result = [];
-        if (! empty($medias)) {
+        if (!empty($medias)) {
             foreach ($medias as $media) {
                 $result[] = $media->getFullUrl();
             }
