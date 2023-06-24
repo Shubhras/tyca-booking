@@ -24,27 +24,7 @@
         @php
             $styleCss = 'style';
         @endphp
-        <div class="col-12 form-group">
-            {{ Form::label('Available Slots',__('messages.appointment.available_slot').':' ,['class' => 'form-label required']) }}
-            <div class="mb-0 d-inline-flex align-items-center ms-2">
-                <span class="badge bg-danger badge-circle slot-color-dot"></span>
-            <span class="ms-2">{{__('messages.appointment.booked')}}</span>
-            <span class="badge bg-success ms-2 badge-circle slot-color-dot"></span>
-        <span class="ms-2">{{__('messages.appointment.available')}}</span>
-</div>
-<div class="fc-timegrid-slot ps-5 pe-5 form-control form-control-solid h-300px overflow-auto">
-    {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
-    {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
-    <div class="text-center d-flex flex-wrap justify-content-center px-3 appointment-slot-data" id="slotData">
-    </div>
-    <span class="justify-content-center d-flex p-20 text-primary no-time-slot">{{__('messages.appointment.no_slot_found')}}</span>
-    <span class="justify-content-center d-flex p-20 text-primary d-none doctor-time-over">{{__('messages.doctors_scheduled_time_ended_for_today__')}}</span>
-</div>
-</div>
-<div class="col-12 mb-5 mt-5">
-    {{ Form::label('Description',__('messages.appointment.description').':' ,['class' => 'form-label']) }}
-    {{  Form::textarea('description', null, ['class'=> 'form-control','rows'=> 10,'placeholder'=>__('messages.appointment.description') ])}}
-</div>
+
 @role('patient')
 <div class="col-lg-6 col-sm-12 mb-5">
     {{ Form::label('Service',__('messages.appointment.service').':' ,['class' => 'form-label required']) }}

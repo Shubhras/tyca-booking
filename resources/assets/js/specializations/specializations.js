@@ -76,13 +76,17 @@ listenClick('.specialization-delete-btn', function (event) {
 
 listenClick('.specialization-statusbar', function (event) {
     let recordId = $(event.currentTarget).data('id')
-
+    let status = $(event.currentTarget).data('status');
+    let msg = status == 1 ? 'Inactive' : 'Active';
+    let nextStatus = status == 1 ? 0 : 1;
     $.ajax({
         type: 'PUT',
         url: route('specializations.status'),
         data: { id: recordId },
         success: function (result) {
             displaySuccessMessage(result.message)
+            $(event.currentTarget).data('status', nextStatus);
+            $('#specialization-statusbar-text-'+recordId).text(msg);
         },
     })
 })

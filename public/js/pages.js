@@ -3577,9 +3577,9 @@ var initCalendarApp = function initCalendarApp() {
       month: Lang.get('messages.admin_dashboard.month')
     },
     headerToolbar: {
-      left: 'title',
-      center: 'prev,next today',
-      right: 'dayGridMonth'
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
     initialDate: new Date(),
     timeZone: 'UTC',
@@ -6366,7 +6366,7 @@ listenClick('#monthData', function (e) {
               'image': value.profile,
               'name': value.user.full_name,
               'email': value.user.email,
-              'patientId': value.patient_unique_id,
+              //'patientId': value.patient_unique_id,
               'registered': moment.parseZone(value.user.created_at).format('Do MMM Y hh:mm A'),
               'appointment_count': value.appointments_count,
               'route': route('patients.show', value.id)
@@ -9420,6 +9420,9 @@ listenClick('.patient-email-verification', function (event) {
 });
 listenClick('.patient-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('patient.status'),
@@ -9428,6 +9431,8 @@ listenClick('.patient-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#patient-statusbar-text-' + recordId).text(msg);
     }
   });
 });
@@ -9773,6 +9778,9 @@ listenClick('.service-delete-btn', function (event) {
 });
 listenClick('.service-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('service.status'),
@@ -9781,6 +9789,8 @@ listenClick('.service-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#service-statusbar-text-' + recordId).text(msg);
     }
   });
 });
@@ -9985,6 +9995,9 @@ listenClick('.specialization-delete-btn', function (event) {
 });
 listenClick('.specialization-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('specializations.status'),
@@ -9993,6 +10006,8 @@ listenClick('.specialization-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#specialization-statusbar-text-' + recordId).text(msg);
     }
   });
 });

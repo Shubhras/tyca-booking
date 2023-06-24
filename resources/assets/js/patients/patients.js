@@ -40,14 +40,18 @@ listenClick('.patient-email-verification', function (event) {
 
 
 listenClick('.patient-statusbar', function (event) {
-    let recordId = $(event.currentTarget).data('id')
-
+    let recordId = $(event.currentTarget).data('id');
+    let status = $(event.currentTarget).data('status');
+    let msg = status == 1 ? 'Inactive' : 'Active';
+    let nextStatus = status == 1 ? 0 : 1;
     $.ajax({
         type: 'PUT',
         url: route('patient.status'),
         data: { id: recordId },
         success: function (result) {
-            displaySuccessMessage(result.message)
+            displaySuccessMessage(result.message);
+            $(event.currentTarget).data('status', nextStatus);
+            $('#patient-statusbar-text-'+recordId).text(msg);
         },
     })
 })

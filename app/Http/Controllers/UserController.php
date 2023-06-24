@@ -146,6 +146,7 @@ class UserController extends AppBaseController
             $cities = getCities($data['stateId']->toArray());
         }
 
+
         return view('doctors.edit',
             compact('user', 'qualifications', 'data', 'doctor', 'countries', 'state', 'cities', 'years', 'bloodGroup'));
     }

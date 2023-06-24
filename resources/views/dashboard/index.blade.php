@@ -160,7 +160,6 @@
                                             <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th class="w-25px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.name')}}</th>
-                                                <th class="min-w-150px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.patient_id')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.doctor_dashboard.total_appointments')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.patient.registered_on')}}</th>
                                             </tr>
@@ -175,21 +174,18 @@
                                                             </div>
                                                             <div class="d-flex flex-column">
                                                                 <a href="{{ route('patients.show',$patient->id) }}"
-                                                                   class="text-primary-800 mb-1 fs-6 text-decoration-none
+                                                                   class="text-dark mb-1 fs-6 text-decoration-none
 ">{{$patient->user->fullname}}</a>
                                                                 <span
-                                                                        class="text-muted fw-bold d-block">{{$patient->user->email}}</span>
+                                                                        class="text-dark fw-bold d-block">{{$patient->user->email}}</span>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="text-start">
-                                                        <span class="badge bg-light-success">{{$patient->patient_unique_id}}</span>
-                                                    </td>
                                                     <td class="text-center">
-                                                        <span class="badge bg-light-danger">{{$patient->appointments_count}}</span>
+                                                        <span class="text-dark">{{$patient->appointments_count}}</span>
                                                     </td>
                                                     <td class="text-center text-muted fw-bold">
-                                                        <span class="badge bg-light-info">
+                                                        <span class="text-dark">
                                                         {{ \Carbon\Carbon::parse($patient->user->created_at)->isoFormat('DD MMM YYYY hh:mm A')}}
                                                         </span>
                                                     </td>
@@ -210,7 +206,6 @@
                                             <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th class="w-25px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.name')}}</th>
-                                                <th class="min-w-150px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.patient_id')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.doctor_dashboard.total_appointments')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.patient.registered_on')}}</th>
                                             </tr>
@@ -226,7 +221,6 @@
                                             <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                 <th class="w-25px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.name')}}</th>
-                                                <th class="min-w-150px text-muted mt-1 fw-bold fs-7">{{__('messages.admin_dashboard.patient_id')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.doctor_dashboard.total_appointments')}}</th>
                                                 <th class="min-w-150px text-muted mt-1 fw-bold fs-7 text-center">{{__('messages.patient.registered_on')}}</th>
                                             </tr>

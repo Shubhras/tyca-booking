@@ -28,6 +28,7 @@
     <div class="row">
 
 <?php $days = json_decode($doctor->days);
+if(empty($days)) {$days = [];}
 
 $dayArray = array();
 foreach($days as $day)
