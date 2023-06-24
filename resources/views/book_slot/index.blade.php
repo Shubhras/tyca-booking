@@ -527,7 +527,7 @@ figure.effect-chico11 {
             <div class="col-5 row" style="margin:30px;">
                 <div class="row col-12 set-border">
                     <div class="col-5" style="padding:0px;">
-                        <img src="{{ $service->icon }}" alt="Digital" class="width:200px">
+                        <img src="{{ $service->icon }}" alt="Digital" style="width:100%">
                     </div>
                     <div class="col-7">
                         <div class="column">
