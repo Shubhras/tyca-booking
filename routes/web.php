@@ -164,7 +164,7 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
 });
 
 Route::get('/book-slot/{id}', [BookController::class, 'index'])->name('book-slot');
-Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
+Route::get('/book-slot/hot-desk/{id}', [HotdeskController::class, 'index'])->name('hot-desk');
 Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
 Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');
 
