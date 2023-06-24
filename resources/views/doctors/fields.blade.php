@@ -5,84 +5,6 @@
             {{ Form::text('first_name', null,['class' => 'form-control','placeholder' => __('messages.doctor.first_name'),'required']) }}
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="mb-5">
-            {{ Form::label('Last Name',__('messages.doctor.last_name').':' ,['class' => 'form-label required']) }}
-            {{ Form::text('last_name', null,['class' => 'form-control','placeholder' => __('messages.doctor.last_name'),'required']) }}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-5">
-            {{ Form::label('Email',__('messages.user.email').':' ,['class' => 'form-label required']) }}
-            {{ Form::email('email', null,['class' => 'form-control','placeholder' => __('messages.user.email')]) }}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-5">
-            {{ Form::label('Contact',__('messages.user.contact_number').':' ,['class' => 'form-label']) }}
-            {{ Form::tel('contact', null,['class' => 'form-control','placeholder' => __('messages.user.contact_number'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
-            {{ Form::hidden('region_code',null,['id'=>'prefix_code']) }}
-            <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
-            <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2">{{ __('messages.invalid_number') }}</span>
-        </div>
-    </div>
-    <div class="col-md-6 mb-5">
-        <div class="mb-1">
-            {{ Form::label('password',__('messages.staff.password').':' ,['class' => 'form-label required']) }}
-            <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">
-                <i class="fa fa-question-circle"></i>
-            </span>
-            <div class="mb-3 position-relative">
-                {{Form::password('password',['class' => 'form-control','placeholder' => __('messages.staff.password'),'autocomplete' => 'off','required','aria-label'=>"Password",'data-toggle'=>"password"])}}
-                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 mb-5">
-        <div class="mb-1">
-            {{ Form::label('Confirm Password',__('messages.user.confirm_password').':' ,['class' => 'form-label required']) }}
-            <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">
-                <i class="fa fa-question-circle"></i>
-            </span>
-            <div class="mb-3 position-relative">
-                {{Form::password('password_confirmation',['class' => 'form-control','placeholder' => __('messages.user.confirm_password'),'autocomplete' => 'off','required','aria-label'=>"Password",'data-toggle'=>"password"])}}
-                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-5">
-            {{ Form::label('DOB',__('messages.doctor.dob').':' ,['class' => 'form-label']) }}
-            {{ Form::text('dob', null,['class' => 'form-control doctor-dob','placeholder' => __('messages.doctor.dob'), 'id'=>'dob']) }}
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="mb-5">
-            {{ Form::label('Experience',__('messages.doctor.experience').':' ,['class' => 'form-label']) }}
-            {{ Form::text('experience', null,['class' => 'form-control','onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','placeholder' => __('messages.doctor.experience'),'step'=>'any']) }}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-5">
-            <label class="form-label required">
-                {{__('messages.doctor.select_gender')}}
-                :
-            </label>
-            <span class="is-valid">
-                <div class="mt-2">
-                    <input class="form-check-input" type="radio" checked name="gender" value="1">
-                    <label class="form-label mr-3">{{__('messages.doctor.male')}}</label>
-                    <input class="form-check-input ms-2" type="radio" name="gender" value="2">
-                    <label class="form-label mr-3">{{__('messages.doctor.female')}}</label>
-                </div>
-            </span>
-        </div>
-    </div>
-    <div class="col-md-6 mb-5">
-        <label class="form-label">{{ __('messages.patient.blood_group').':' }}</label>
-        {{ Form::select('blood_group', $bloodGroup , null, ['class' => 'io-select2 form-select', 'data-control'=>"select2",'placeholder' => __('messages.patient.blood_group')]) }}
-    </div>
 
     <div class="col-lg-12">
     <div class="mb-5">
@@ -335,6 +257,7 @@ let quill2 = new Quill('#doctorDescriptionId', {
 })
 quill2.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
+        $('#detail').val(quill2.container.firstChild.innerHTML);
         quill2.setContents([{ insert: '' }])
     }
 })
@@ -379,7 +302,7 @@ document.getElementById('photo-upload__preview').addEventListener('click', (e) =
 
 $(document).ready(function(){
 
-$("#doctorDescriptionId").keyup(function(){
+    $(window).click(function(e) {
     let element = document.createElement('textarea')
     let editor_content_1 = quill2.root.innerHTML
     element.innerHTML = editor_content_1
