@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Visit;
 use App\Repositories\PatientRepository;
 use Carbon\Carbon;
@@ -202,5 +203,15 @@ class PatientController extends AppBaseController
         }
 
         return redirect(route('patients.index'));
+    }
+
+    /**
+     * @param  Request  $request
+     * @return mixed
+     */
+    public function changeServiceStatus(Request $request) {
+        $status = User::findOrFail($request->id);
+        $status->update(['status' => ! $status->status]);
+        return $this->sendResponse($status, __('messages.flash.status_update'));
     }
 }

@@ -238,6 +238,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     // Patient Routes
     Route::middleware('permission:manage_patients')->group(function () {
         Route::resource('patients', PatientController::class);
+        Route::put('patient-status', [PatientController::class, 'changeServiceStatus'])->name('patient.status');
+
         Route::get('patient-appointments',
             [PatientController::class, 'patientAppointment'])->name('patients.appointment');
     });

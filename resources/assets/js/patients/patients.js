@@ -38,3 +38,16 @@ listenClick('.patient-email-verification', function (event) {
     })
 })
 
+
+listenClick('.patient-statusbar', function (event) {
+    let recordId = $(event.currentTarget).data('id')
+
+    $.ajax({
+        type: 'PUT',
+        url: route('patient.status'),
+        data: { id: recordId },
+        success: function (result) {
+            displaySuccessMessage(result.message)
+        },
+    })
+})
