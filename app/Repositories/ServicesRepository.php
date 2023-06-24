@@ -69,8 +69,38 @@ class ServicesRepository extends AppBaseController
             if (isset($input['icon']) && ! empty('icon')) {
                 $services->addMedia($input['icon'])->toMediaCollection(Service::ICON, config('app.media_disc'));
             }
-            DB::commit();
+            if (isset($input['gallery']) && ! empty('gallery')) {
+                foreach ($input['gallery'] as $file) {
+                    $services->addMedia($file)->toMediaCollection(Service::GALLERY, config('app.media_disc'));
+                }
+            }
+            if (isset($input['above_count_hourly']) && ! empty('above_count_hourly') && isset($input['rate_hourly']) && ! empty('rate_hourly')) {
+                $rates = [];
+                foreach ($input['above_count_hourly'] as $index => $value) {
+                    $rates[] = [
+                        'above_count' => $value,
+                        'rate' => $input['rate_hourly'][$index],
+                        'discount_type' => 'hourly',
+                        'service_id' => $services->id,
+                    ];
+                }
+                ServiceDiscountRates::insert($rates);
+            }
 
+
+            if (isset($input['above_count_daily']) && ! empty('above_count_daily') && isset($input['rate_daily']) && ! empty('rate_daily')) {
+                $rates = [];
+                foreach ($input['above_count_daily'] as $index => $value) {
+                    $rates[] = [
+                        'above_count' => $value,
+                        'rate' => $input['rate_daily'][$index],
+                        'discount_type' => 'daily',
+                        'service_id' => $services->id,
+                    ];
+                }
+                ServiceDiscountRates::insert($rates);
+            }
+            DB::commit();
             return true;
         } catch (Exception $e) {
             DB::rollBack();
