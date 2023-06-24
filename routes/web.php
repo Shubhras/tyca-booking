@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthorizePaymentController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HotdeskController;
 use App\Http\Controllers\BookingdetailsController;
-
+use App\Http\Controllers\MemberPortalController;
 use App\Http\Controllers\ClinicScheduleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -166,6 +166,7 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
 Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
 Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
 Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
+Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');
 
 Route::get('cancel-appointment/{patient_id}/{appointment_unique_id}', [AppointmentController::class, 'cancelAppointment'])->name('cancelAppointment');
 
