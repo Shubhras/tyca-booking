@@ -21,6 +21,8 @@ class XSS
             'services.store',
             'services.update',
             'cms.update',
+            'doctors.store',
+            'doctors.update'
         ];
         if (in_array($request->route()->getName(), $alllowed)) {
             return $next($request);
