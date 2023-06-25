@@ -218,7 +218,7 @@
 }
 
 .sec-set {
-    padding: 30px 0px;
+    padding: 0px;
 }
 
 .sec2 {
@@ -236,6 +236,7 @@
 
 .set-padding {
     padding: 15px 0px;
+    display: flex;
 }
 
 .hosts {
@@ -290,50 +291,241 @@ figure.effect-chico11 {
 .flex-sets {
     display: flex;
 }
+
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+.book-space {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: -15px;
+}
+
+.popular-tags button {
+    display: inline-block;
+    padding: 10px 0px;
+    margin: 5px 5px 10px -9px;
+    border: 1px solid #B0DFCA;
+    background: #B0DFCA;
+    color: #025C34;
+    font-size: 14px;
+    width: 180px;
+}
+
+.modal-footer {
+    border-top: none !important;
+}
+
+.radio-btn1 {
+    padding: 0px 5px;
+}
+
+.radio-btn {
+    padding: 0px 15px;
+}
+
+.set-back {
+    background: #F5F5F5;
+}
+
+.set-box {
+    margin-left: 50px;
+}
+
+.new-icon {
+    border: 2px solid;
+    background: #F62947;
+    border-color: #F62947;
+    border-radius: 0px;
+    margin-top: 10px;
+    width: 20px !important;
+    height: 26px;
+}
+
+
+section.title-hero-bg.parallax-effect img {
+    width: 100%;
+}
+
+.main-block {
+    padding: 0px;
+}
+
+.container-fluid {
+    max-width: 1500px;
+}
+
+.grid {
+    position: relative;
+    margin: 0 auto;
+    max-width: 100%;
+    list-style: none;
+    text-align: center;
+}
+
+figure.effect-chico {
+    margin: 0;
+}
+
+.grid figure {
+    position: relative;
+    overflow: hidden;
+    min-width: 100%;
+    margin: -7px -8px 26px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.detailed-item-mr {
+    margin-bottom: 25px;
+}
+
+.name-slot {
+    margin-top: -125px;
+}
+
+@media (min-width:320px) and (max-width:1440px) {
+    .slot-margin {
+        margin: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 25px !important;
+    }
+}
+
+@media (min-width:320px) and (max-width:600px) {
+    .main-block {
+        padding: 0 !important;
+    }
+
+    .main-block1 {
+        padding: 100px 0 !important;
+    }
+
+    .sec2 {
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    .location {
+        font-size: 18px !important;
+        color: #000000 !important;
+    }
+
+    .top-set {
+        margin-top: -80px;
+    }
+
+    .name-slot {
+        margin-top: 0px !important;
+    }
+
+    .list-box {
+        width: 100% !important;
+    }
+
+    .host-desk {
+        padding: 10px 0px;
+        margin-left: 0px !important;
+        width: 100% !important;
+    }
+
+    .hosts {
+        width: 100%;
+        margin-left: 0px !important;
+    }
+
+    .btn1 {
+        font-size: 10px !important;
+    }
+}
+
+@media (min-width:768px) and (max-width:800px) {
+
+    h5,
+    .fs-5 {
+        font-size: 14px !important;
+    }
+
+    .list-box {
+        width: auto !important;
+    }
+
+    .set-amities {
+        width: 100% !important;
+    }
+}
+
+@media (min-width:900px) and (max-width:1024px) {
+
+    h5,
+    .fs-5 {
+        font-size: 14px !important;
+    }
+}
+
+.location {
+    font-size: 18px !important;
+    color: #000000 !important;
+}
+
+h1 {
+    font-size: 25px !important;
+}
+
+a:hover {
+    color: #fff !important;
+}
 </style>
 
 <section class="main-block1 gray">
     <div class="container">
-        <div class="row col-12">
+        <div class="row col-12 slot-margin">
             <div class="col-md-8">
                 <div class="grid">
                     @if(!empty($user1->gallery[0]))
                     <figure class="effect-chico">
-                        <img src="{{$user1->gallery[0]}}" alt="#" class="" style="width: 100%; height: 100%;">
+                        <img src="{{$user1->gallery[0]}}" alt="#">
                     </figure>
                     @else
                     <figure class="effect-chico">
-                        <img src="/assets/image/image 12.png" alt="#" style="width: 100%; height: 100%;">
+                        <img src="/assets/image/image 12.png" alt="#">
                     </figure>
                     @endif
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="row">
-                    <div class="col-md-12 set-img1">
+                    <div class="col-md-12">
                         <div class="grid">
                             @if(!empty($user1->gallery[1]))
-                            <div class="effect-chico">
-                                <img src="{{$user1->gallery[1]}}" alt="#" style="width: 100%; height: 100%;">
-                            </div>
+                            <figure class="effect-chico">
+                                <img src="{{$user1->gallery[1]}}" alt="#">
+                            </figure>
                             @else
-                            <div class="effect-chico">
-                                <img src="/assets/image/image 10.png" alt="#" style="width: 100%; height: 100%;">
-                            </div>
+                            <figure class="effect-chico">
+                                <img src="/assets/image/image 10.png" alt="#">
+                            </figure>
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12 set-imgs">
+                    <div class="col-md-12 ">
 
                         <div class="grid">
-                        @if(!empty($user1->gallery[2]))
-                            <div class="effect-chico">
-                                <img src="{{$user1->gallery[2]}}" alt="#" style="width: 100%; height: 100%;">
-                            </div>
+                            @if(!empty($user1->gallery[2]))
+                            <figure class="effect-chico">
+                                <img src="{{$user1->gallery[2]}}" alt="#">
+                            </figure>
                             @else
-                            <div class="effect-chico">
-                                <img src="/assets/image/image 11.png" alt="#" style="width: 100%; height: 100%;">
-                            </div>
+                            <figure class="effect-chico">
+                                <img src="/assets/image/image 11.png" alt="#">
+                            </figure>
                             @endif
                         </div>
                     </div>
@@ -345,24 +537,25 @@ figure.effect-chico11 {
 
 
 
-<section class="main-block sec-set">
+<section class="main-block sec-set name-slot">
     <div class="container">
         <div class="row" style="display:flex;">
-            <div class="col-md-8 responsive-wrap sec2">
+            <div class="col-md-8 responsive-wrap sec2 top-set">
                 <div class="full-blog">
                     <div class="blog-content">
                         <div class="blog-text">
-                            <h1 class="font-700 roboto-font">Thank You Come Again @ <h3>{{$user->first_name}}
+                            <h1 class="font-700 roboto-font">Thank You Come Again @ <h3 class="location">
+                                    {{$user->first_name}}
                                     {{$user->last_name}}<h3>
                             </h1>
-                            <h3 class="roboto-font font-300 font-20px">355 Balestier Road Singapore 329782</h3>
+                            <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3>
                             <p>{{$doctor->description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 responsive-wrap">
+            <div class="col-md-4 responsive-wrap set-amities">
                 <div class="sidebar">
                     <div class="widget-box mb-40 amities">
                         <h1 class="mb-20 amities1">Amenities</h1>
@@ -372,8 +565,7 @@ figure.effect-chico11 {
                                     @foreach($specialization as $specializationData)
                                     <div class="col-6 icon-set">
                                         <p class="heading-id">
-                                            <img src="{{$specializationData->icon}}" alt="#"
-                                                style="padding-right:10px; width: 30px; height: 30px;">
+                                            <img src="{{$specializationData->icon}}" alt="#" style="height: 30px;">
                                             {{$specializationData->name}}
                                         </p>
                                     </div>
@@ -521,9 +713,10 @@ figure.effect-chico11 {
 
 <section class="white-bg">
     <div class="container">
-        <div class="row col-12">
+        <div class="row col-12 list-box">
+            <h3 class="font-18" style="margin-left:15px;">Listings</h3>
             @foreach($services as $service)
-            <div class="col-5 row" style="margin:30px;">
+            <div class="col-5 row list-box" style="margin:30px;">
                 <div class="row col-12 set-border">
                     <div class="col-5" style="padding:0px;">
                         <img src="{{ $service->icon }}" alt="Digital" style="width:100%">
@@ -539,7 +732,7 @@ figure.effect-chico11 {
                         </div>
                     </div>
                 </div>
-                <div class="text-xl-start header-btn-grp set-padding">
+                <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
                     <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
                         data-bs-target="#hour_plan_modal">
                         {{ $service->charges }} / Hour

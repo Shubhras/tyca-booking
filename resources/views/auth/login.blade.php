@@ -43,7 +43,7 @@ h5, .fs-5 {
         width: 100% !important;
     }
 }
-@media(min-width:768px) and (max-width:1440px) {
+@media(min-width:800px) and (max-width:1440px) {
     h5, .fs-5 {
     font-size: 18px !important;
 }
