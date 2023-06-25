@@ -100,8 +100,9 @@
       <td>PayPal</td>
       <td>Paid</td>
       <td>Booked</td>
-      <td><i class="fa-solid fa-eye"></i>
-      <i class="fa-solid fa-xmark"></i>
+      
+      <td><a data-bs-toggle="modal"data-bs-target="#booked_info_modal"><i class="fa-solid fa-eye"></a></i>
+     <a data-bs-toggle="modal"data-bs-target="#cancel_booking_modal"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
   </tbody>
@@ -134,7 +135,7 @@
       <td>PayPal</td>
       <td>Paid</td>
       <td>Cancelled</td>
-      <td><i class="fa-solid fa-eye"></i>
+      <td><a data-bs-toggle="modal"data-bs-target="#booking_cancel_modal"><i class="fa-solid fa-eye"></a></i>
     </td>
     </tr>
   </tbody>
@@ -142,14 +143,125 @@
 
 </table>  
     </div>
-    
-</div>
     </div>
-
-    
- 
+ </div>
 </div>
   </section>
+
+
+
+  <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-1">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="books-spaces">BOOKING INFORMATION</div>
+            <div class="book-p">
+                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
+                <p>Booking Space: <b>Hot Desk</b></p>
+                <p>Plan Type: <b>Hour Plan</b></p>
+                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
+                <p>Payable Amount:<b> $4.00</b></p>
+                <p>Payment Method: <b>PayPal</b></p>
+               <p>Payment Status: <b> Paid</b></p>
+               <p>Booking Status: <b>Booked</b></p>
+           </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="booking_cancel_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-1">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="books-spaces">BOOKING INFORMATION</div>
+            <div class="book-p">
+                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
+                <p>Booking Space: <b>Hot Desk</b></p>
+                <p>Plan Type: <b>Hour Plan</b></p>
+                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
+                <p>Payable Amount:<b> $4.00</b></p>
+                <p>Payment Method: <b>PayPal</b></p>
+               <p>Payment Status: <b> Paid</b></p>
+               <p>Booking Status: <b>Cancelled</b></p>
+           </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-1">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="books-spaces">CANCEL BOOKING</div>
+            <p class="follow-booking">Do you want to cancel the following booking?</p>
+            <div class="book-p-cancel">
+                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
+                <p>Booking Space: <b>Hot Desk</b></p>
+                <p>Plan Type: <b>Hour Plan</b></p>
+                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
+                <p>Payable Amount:<b> $4.00</b></p>
+                <p>Payment Method: <b>PayPal</b></p>
+               <p>Payment Status: <b> Paid</b></p>
+               <p>Booking Status: <b>Booked</b></p>
+           </div>
+           <div class="btn-cancel-booking">
+<div class="cancel-yes-btn">
+<button class="yes-btn" data-bs-toggle="modal"data-bs-target="#cancel_confirm_modal">Yes</button>
+</div>
+<div class="cancel-no-btn">
+<button class="no-btn">No</button>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cancel_confirm_modal" class="modal fade" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="book-space">CANCEL BOOKING</div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger d-none hide"></div>
+                                <div class="row">
+                                    <div class="book1-space">
+                                    Booking has been cancelled.
+                                    </div>
+                                </div>
+                                <div class="modal-footer pt-0 mt-5" style="place-content:center;">
+                                    <button type="button" class="btns btn-secondarys"
+                                        data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 @endsection
 
@@ -330,6 +442,94 @@ th.col-portal {
 }
 .table>:not(:first-child) {
     border-top: none!important;
+}
+.books-spaces {
+    text-align: center;
+    font-size: 30px;
+    color: #000000;
+}
+.book-p {
+    align-self: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    color: 535353;
+}
+.modal-header-1 {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: end;
+    padding: 1rem 1rem;
+}
+
+p.follow-booking {
+    text-align: center;
+    margin-top: 30px;
+    color: #535353;
+}
+.book-p-cancel {
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    color: 535353;
+    text-align: left;
+}
+.btn-cancel-booking {
+    display: flex;
+    align-self: center;
+    margin-bottom: 40px;
+}
+button.yes-btn {
+    width: 200px;
+    background: #273432;
+    border: #273432;
+    padding: 10px;
+    color: #FFFFFF;
+}
+button.no-btn {
+    width: 200px;
+    background: #FF7272;
+    border: #FF7272;
+    padding: 10px;
+    color: #FFFFFF;
+}
+.cancel-yes-btn {
+    width: 220px;
+}
+.btns {
+    background: #273432;
+    border: #273432;
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 10px;
+    width: 170px;
+}
+
+.btn-secondarys {
+    color: #fff;
+    background-color: #273432;
+    border-color: #273432;
+}
+    .modal-footer {
+        border-top:none !important;
+    }
+.book-space {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: -15px;
+}
+.book1-space {
+    text-align: center;
+    font-size: 20px;
+    color:#535353;
+    margin-top: -15px;
+}
+.modal-header {
+    border-bottom: none !important;
+}
+.modal-backdrop.show {
+    opacity: 0 !important;
 }
 </style>
  
