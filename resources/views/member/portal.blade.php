@@ -19,7 +19,7 @@
             </div>
         </div>
       </section>
-  </div>
+  
 
   <section class="tab-section">
   <ul class="nav" style="justify-content: center;">
@@ -357,7 +357,7 @@
 }
     .page-title {
     position: absolute;
-    top: 50%;
+    top: 60%;
     width: 100%;
     text-align: center;
     left: 0;
@@ -651,12 +651,8 @@ div#customer-review_wrap {
 /* media */
 @media (min-width: 320px) and (max-width: 600px){
 
-    .tab-section {
-    padding: 10px;
-}
 .page-title h1 {
     font-size: 35px;
-    top: 60%;
 }
 .title-hero-bg {
     min-height: 335px;
@@ -664,15 +660,15 @@ div#customer-review_wrap {
 a#latest-tab.active {
     border-bottom: 3px solid #000000;
     color: #000000;
-    font-size: 10px;
+    font-size: 15px;
 }
 a#upcoming-tab {
     color: #535353;
-    font-size: 10px;
+    font-size: 15px;
 }
 a#latest-tab {
     color: #535353;
-    font-size: 10px;
+    font-size: 15px;
 }
 h2.h2-member {
     font-size: 15px;
@@ -703,13 +699,13 @@ div#customer-review_wrap {
 }
 a#latests-tab-1 {
     margin-top: 35px;
-    font-size: 10px;
+    font-size: 14px;
 }
 a#upcomings-tab-2 {
     background: #FFFFFF;
     color: #535353;
     margin-top: 35px;
-    font-size: 10px;
+    font-size: 14px;
 }
 h2.up-booking {
     font-size: 15px;
@@ -835,9 +831,9 @@ h5.text-white.mb-4.pb-1 {
 }
 }
 
-@media (min-width: 767px) and (max-width: 800px){
+@media (min-width: 768px) and (max-width: 800px){
 h5, .fs-5 {
-    font-size: 14px !important;
+    font-size: 14px!important;
 }
 }
 </style>
