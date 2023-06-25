@@ -32,7 +32,7 @@
                         <p>at Thank You Come Again @ Balestier</p>
                     </div>
                     <figure class="effect-chico">
-                        <img src="assets/images/image 9.png" alt="" class="">
+                        <img src="/assets/images/image 9.png" alt="" class="">
                     </figure>
                 </div>
             </div>
@@ -43,14 +43,14 @@
 
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="assets/images/image 10.png" alt="" class="">
+                                <img src="/assets/images/image 10.png" alt="" class="">
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="assets/images/image 12.png" alt="" class="">
+                                <img src="/assets/images/image 12.png" alt="" class="">
                             </figure>
                         </div>HOU
                     </div>
@@ -59,14 +59,14 @@
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="assets/images/image 11.png" alt="" class="">
+                                <img src="/assets/images/image 11.png" alt="" class="">
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="assets/images/image 13.png" alt="" class="">
+                                <img src="/assets/images/image 13.png" alt="" class="">
                             </figure>
                         </div>
                     </div>

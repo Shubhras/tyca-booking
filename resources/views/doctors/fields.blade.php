@@ -16,7 +16,7 @@
     <div class="col-md-5">
         <div class="mb-5">
             {{ Form::label('Specialization',__('messages.doctor.specialization').':' ,['class' => 'form-label required']) }}
-            {{ Form::select('specializations[]',$specializations, null,['class' => 'io-select2 form-select', 'data-control'=>"select2", 'multiple', 'data-placeholder' => __('messages.doctor.specialization')]) }}
+            {{ Form::select('specializations[]',$specializations, null,['class' => 'io-select2 form-select amenities-select', 'multiple', 'data-placeholder' => __('messages.doctor.specialization')]) }}
         </div>
     </div>
     <div class="col-md-7">

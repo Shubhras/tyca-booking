@@ -11,23 +11,29 @@ use App\Models\ServiceCategory;
 use App\Models\Setting;
 use App\Models\Patient;
 use App\Models\Specialization;
+use DB;
 class BookController extends Controller
 {
     //
     public function index($id)
     {
-        // $doctor = Doctor::where('user_id', $id)->first();
-        // $doctor_id = $doctor->id;
-        // $service = Service::with('serviceDoctors')->whereHas('serviceDoctors', function ($q) use ($doctor_id) {
-        //     $q->where('doctor_id', $doctor_id)->whereStatus(Service::ACTIVE);
-        // })->get()->toArray();
-        // $outletServices = array_chunk($service, 2);     
+        $user = User::where('id',$id)->first();
+        $doctor = Doctor::where('user_id', $id)->first();
+        $servicesID = DB::table('service_doctor')->where('doctor_id',$doctor->id)->get();
+        $aa = [];
+        foreach($servicesID as $getData){
+            array_push($aa,$getData->service_id); 
+        }  
+        $doctorSpecialization = DB::table('doctor_specialization')->where('doctor_id',$doctor->id)->get();
+        $bb = [];
+        foreach($doctorSpecialization as $getData){
+            array_push($bb,$getData->specialization_id); 
+        } 
+        $user1 = User::with('media')->where('id',$id)->first();
+        $specialization = Specialization::with('media')->whereIn('id', $bb)->get();
 
-        $data = [];
-        $serviceCategories = ServiceCategory::with('activatedServices')->withCount('services')->get();
-        $setting = Setting::pluck('value', 'key')->toArray();
-        $services = Service::with('media')->whereStatus(Service::ACTIVE)->latest()->get();
-        return view('book_slot.index', compact('serviceCategories', 'setting', 'services'));
+        $services = Service::with('media')->whereIn('id', $aa)->whereStatus(Service::ACTIVE)->latest()->get();
+        return view('book_slot.index', compact('services','user','user1','doctor','specialization'));
 
     }
 }
