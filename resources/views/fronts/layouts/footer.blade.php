@@ -1,10 +1,10 @@
 <footer style="background-color:#273432">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 order-1 order-lg-0">
-                <h5 class="text-white mb-4 pb-1"> © {{ date('Y') }} TYCA Pte Ltd</h5>
+            <div class="col-lg-3 col-md-3 order-1 order-lg-0">
+                <h5 class="text-white mb-1 pb-1 pb-xxl-4"> © {{ date('Y') }} TYCA Pte Ltd</h5>
              {{--    <div class="footer-info">
-                    <div class="d-flex align-items-center footer-info__block mb-3 pb-1">
+                    <div class="d-flex align-items-center footer-info__block mb-3 pb-1 pb-xxl-4">
                         <div class="footer-info__footer-icon fs-5 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-phone text-primary "></i>
                         </div>
@@ -13,7 +13,7 @@
                             +{{ getSettingValue('region_code') }} {{ getSettingValue('contact_no') }}
                         </a>
                     </div>
-                    <div class="d-flex align-items-center footer-info__block mb-3 pb-1">
+                    <div class="d-flex align-items-center footer-info__block mb-3 pb-1 pb-xxl-4">
                         <div class="footer-info__footer-icon fs-5 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-envelope text-primary "></i>
                         </div>
@@ -24,8 +24,8 @@
                     </div>
                 </div>--}}
             </div>
-            <div class="col-lg-3 col-md-6 order-2 order-lg-2">
-                <h5 class="text-white mb-4 pb-1">All Rights Reserved</h5>
+            <div class="col-lg-3 col-md-3 order-2 order-lg-2">
+                <h5 class="text-white mb-1 pb-1 pb-xxl-4">All Rights Reserved</h5>
              {{--    <ul>
                     <li>
                         <a href="{{ route('medicalAboutUs') }}"
@@ -50,8 +50,8 @@
                     </li>
                 </ul>--}}
             </div>
-            <div class="col-lg-3 order-0 order-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-white mb-4 pb-1">Terms and Conditions</h5>
+            <div class="col-lg-3 order-0 order-lg-3 mb-1 mb-lg-0 col-md-3">
+                <h5 class="text-white mb-1 pb-1 pb-xxl-4">Terms and Conditions</h5>
             {{--     <div class="footer-subcribe">
                     {{ Form::open(['id'=>'subscribeForm' , 'class' => 'subscribe-form subscription-form']) }}
                     <div class="subscribeForm-message"></div>
@@ -64,8 +64,8 @@
                     {{ Form::close() }}
                 </div>--}}
             </div>
-            <div class="col-lg-3 order-0 order-lg-3 mb-4 mb-lg-0"> 
-                <h5 class="text-white mb-4 pb-1">
+            <div class="col-lg-3 order-0 order-lg-3 mb-1 mb-lg-0 col-md-3"> 
+                <h5 class="text-white mb-1 pb-1 pb-xxl-4">
                 Privacy Policy
                 </h5>
             </div>
