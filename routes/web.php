@@ -71,7 +71,8 @@ Route::get('/login', function () {
 
 Route::get('/booking-confirm-mail', [AppointmentController::class, 'bookingconfirmmail'])->name('bookingconfirmmail');
 Route::get('/booking-cancel-mail', [AppointmentController::class, 'bookingcancelmail'])->name('bookingcancelmail');
-
+Route::post('updateMember', 'App\Http\Controllers\HomeController@UpdateMember')->name('updateMember');
+Route::post('cancelAppoint', 'App\Http\Controllers\HomeController@CancelAppoint')->name('cancelAppoint');
 Route::middleware('setLanguage')->group(function () {
     Route::get('/', [FrontController::class, 'medical'])->name('medical');
     Route::get('/medical-about-us', [FrontController::class, 'medicalAboutUs'])->name('medicalAboutUs');
