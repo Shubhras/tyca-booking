@@ -31,7 +31,7 @@
                                     <img src="{{ $patient->profile }}" alt="user">
                                 </div>
                                 <div class="ms-0 ms-md-10 mt-5 mt-sm-0  ">
-                                    <span class="text-success mb-2 d-block">{{ $patient->user->role_name }}</span>
+                                    <span class="text-dark mb-2 d-block">{{__('messages.customer') }}</span>
                                     <h2>{{ $patient->user->full_name }}</h2>
                                     <a href="mailto:{{ $patient->user->email }}"
                                        class="text-gray-600 text-decoration-none fs-4">
@@ -54,19 +54,19 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-4 col-sm-6 col-12 mb-6 mb-md-0">
                                     <div class="border rounded-10 p-5 h-100">
-                                        <h2 class="text-primary mb-3">{{$data['todayAppointmentCount']}}</h2>
+                                        <h2 class="text-dark mb-3">{{$data['todayAppointmentCount']}}</h2>
                                         <h3 class="fs-5 fw-light text-gray-600 mb-0">{{__('messages.patient_dashboard.today_appointments')}}</h3>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-12 mb-6 mb-md-0">
                                     <div class="border rounded-10 p-5 h-100">
-                                        <h2 class="text-primary mb-3">{{$data['upcomingAppointmentCount']}}</h2>
+                                        <h2 class="text-dark mb-3">{{$data['upcomingAppointmentCount']}}</h2>
                                         <h3 class="fs-5 fw-light text-gray-600 mb-0">{{__('messages.patient_dashboard.upcoming_appointments')}}</h3>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="border rounded-10 p-5 h-100">
-                                        <h2 class="text-primary mb-3">{{$data['completedAppointmentCount']}}</h2>
+                                        <h2 class="text-dark mb-3">{{$data['completedAppointmentCount']}}</h2>
                                         <h3 class="fs-5 fw-light text-gray-600 mb-0">{{__('messages.patient_dashboard.completed_appointments')}}</h3>
                                     </div>
                                 </div>
