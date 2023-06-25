@@ -180,19 +180,22 @@ class DoctorSessionController extends AppBaseController
         if (! $doctor_holiday->count() == 0) {
             return $this->sendError(__('messages.flash.doctor_not_available'));
         }
+
         // Convert minutes to seconds
         $timezone_name = timezone_name_from_abbr('', $timezone_offset_minutes * 60, false);
         $date = Carbon::createFromFormat('Y-m-d', $request->date);
         $doctorWeekDaySessions = WeekDay::whereDayOfWeek($date->dayOfWeek)->whereDoctorId($doctorId)->with('doctorSession')->get();
-        if ($doctorWeekDaySessions->count() == 0) {
-            if (! empty(getLogInUser()->language)) {
-                App::setLocale(getLogInUser()->language);
-            } else {
-                App::setLocale($request->session()->get('languageName'));
-            }
 
-            return $this->sendError(__('messages.flash.no_available_slots'));
-        }
+
+        // if ($doctorWeekDaySessions->count() == 0) {
+        //     if (! empty(getLogInUser()->language)) {
+        //         App::setLocale(getLogInUser()->language);
+        //     } else {
+        //         App::setLocale($request->session()->get('languageName'));
+        //     }
+
+        //     return $this->sendError(__('messages.flash.no_available_slots'));
+        // }
 
         $appointments = Appointment::whereDoctorId($doctorId)->whereIn('status',
             [Appointment::BOOKED, Appointment::CHECK_IN, Appointment::CHECK_OUT])->get();
@@ -211,7 +214,7 @@ class DoctorSessionController extends AppBaseController
             // convert 12 hours to 24 hours
             $startTime = date('H:i', strtotime($doctorWeekDaySession->full_start_time));
             $endTime = date('H:i', strtotime($doctorWeekDaySession->full_end_time));
-            $slots = $this->getTimeSlot($doctorSession->session_meeting_time, $startTime, $endTime);
+            $slots = $this->getTimeSlot($doctorSession->session_gap, $startTime, $endTime);
             $gap = $doctorSession->session_gap;
             $isSameWeekDay = (Carbon::now()->dayOfWeek == $date->dayOfWeek) && (Carbon::now()->isSameDay($date));
             foreach ($slots as $key => $slot) {

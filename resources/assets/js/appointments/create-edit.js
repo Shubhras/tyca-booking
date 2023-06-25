@@ -153,13 +153,41 @@ listenChange('#appointmentServiceId', function () {
                 $('#addFees').val('');
                 $('#payableAmount').val('');
                 if (result.data) {
-                    $('#chargeId').val(result.data.charges);
-                    $('#payableAmount').val(result.data.charges);
-                    charge = result.data.charges;
+                    $('#chargeId').val(result.data[0].charges);
+                    $('#payableAmount').val(result.data[0].charges);
+                    $("#price_total").empty().text(result.data[0].charges)
+                    charge = result.data[0].charges;
                 }
+
+                $('#plantype_id').empty();
+                $('#plantype_id').append($('<option value=""></option>').text('Select Plan Type'));
+                $.each(result.data[1], function (i, v) {
+                    $('#plantype_id').append($('<option></option>').attr('value', v.id).attr('data-amount', v.rate).text(v.discount_type));
+                });
             }
         },
     });
+});
+
+listenChange('#plantype_id', function () {
+ var amount   = $('option:selected', this).attr('data-amount');
+ var plantype = $('option:selected', this).text();
+    if(plantype =='hourly')
+    {
+        $('#slot_option').show();
+    }else{
+        $('#slot_option').hide();
+    }
+
+    $("#type_of_payment").empty().val(plantype);
+
+    if(amount)
+    {
+        $('#chargeId').val(amount);
+        $('#payableAmount').val(amount);
+        $("#price_total").empty().text(amount)
+        charge = amount;
+    }
 });
 
 listenKeyup('#addFees', function (e) {
@@ -192,6 +220,8 @@ listenSubmit('#addAppointmentForm', function (e) {
 
                 $('#addAppointmentForm')[0].reset();
                 $('#addAppointmentForm').val('').trigger('change');
+
+                return location.href = mainResult.data.url;
 
                 if (mainResult.data.payment_type == $('#paystackMethod').val()) {
 

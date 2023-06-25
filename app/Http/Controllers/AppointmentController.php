@@ -66,7 +66,7 @@ class AppointmentController extends AppBaseController
     {
         $data = $this->appointmentRepository->getData();
         $data['status'] = Appointment::BOOKED_STATUS_ARRAY;
-        $patient = Patient::where('user_id', getLogInUserId())->first();
+        $patient = Patient::where('user_id', getLogInUserId())->get();
 
         return view('appointments.create', compact('data', 'patient'));
     }
@@ -81,7 +81,20 @@ class AppointmentController extends AppBaseController
     {
         $input = $request->all();
 
-        $appointment = $this->appointmentRepository->store($input);
+        $appointment = $this->appointmentRepository->storeBackend($input);
+
+        $url = route('appointments.index');
+
+        $data = [
+            'url' => $url,
+            'payment_type' => $input['payment_type'] == '4' ? "Paypal" : "Stripe",
+            'appointmentId' => $appointment->id,
+        ];
+
+        return $this->sendResponse($data, __('messages.flash.appointment_create'));
+
+
+        // $appointment = $this->appointmentRepository->store($input);
 
         if ($input['payment_type'] == Appointment::STRIPE) {
             $result = $this->appointmentRepository->createSession($appointment);

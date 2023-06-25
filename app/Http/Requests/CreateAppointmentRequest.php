@@ -37,7 +37,6 @@ class CreateAppointmentRequest extends FormRequest
         return [
             'service_id.required' => 'Service field is required.',
             'patient_id.required' => 'Patient field is required.',
-            'from_time.required' => 'Please select appointment time slot.',
         ];
     }
 }

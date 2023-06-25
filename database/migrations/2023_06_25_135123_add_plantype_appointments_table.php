@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('doctors', function (Blueprint $table) {
-            $table->text('days')->nullable();
-            $table->text('description')->nullable();
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('plan_type')->nullable();
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('doctors', function (Blueprint $table) {
+        Schema::table('appointments', function (Blueprint $table) {
 
         });
     }

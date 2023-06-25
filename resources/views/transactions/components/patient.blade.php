@@ -1,3 +1,4 @@
+<?php if(isset($row->user->patient)){  ?>
 <div class="d-flex align-items-center">
     <a href="{{route('patients.show', $row->user->patient->id)}}">
         <div class="image image-circle image-mini me-3">
@@ -11,3 +12,4 @@
         <span class="fs-6">{{$row->user->email}}</span>
     </div>
 </div>
+<?php } ?>

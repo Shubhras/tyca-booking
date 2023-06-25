@@ -9,7 +9,12 @@
     <div class="col-lg-12">
         <div class="mb-5">
             {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label required']) }}
-            <div id="doctorDescriptionId" class="editor-height" style="height: 150px"> <?php if(isset($service->short_description)){  echo strip_tags($service->short_description);   ?>   <?php } ?>       </div>
+            <div id="doctorDescriptionId" class="editor-height" style="height: 150px">
+
+            @if(isset($service->short_description))
+                {!! $service->short_description !!}
+            @endif
+            </div>
             {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
         </div>
     </div>

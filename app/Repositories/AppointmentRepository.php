@@ -134,6 +134,90 @@ class AppointmentRepository extends BaseRepository
         }
     }
 
+     /**
+     * @param $input
+     * @return mixed
+     */
+    public function storeBackend($input)
+    {
+        try {
+            DB::beginTransaction();
+
+            $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
+
+            if($input['type_of_payment'] == 'hourly')
+            {
+                $fromTime = explode(' ', $input['from_time']);
+                $toTime = explode(' ', $input['to_time']);
+            }else
+            {
+                $blank = '12:00 AM';
+                $fromTime = explode(' ', date('H:i A'));
+                $toTime = explode(' ', $blank);
+            }
+
+            $input['from_time'] = $fromTime[0];
+            $input['from_time_type'] = $fromTime[1];
+            $input['to_time'] = $toTime[0];
+            $input['to_time_type'] = $toTime[1];
+            $input['plan_type'] = $input['type_of_payment'];
+            $input['payment_type'] = $input['payment_type'];
+            $input['payment_method'] = $input['payment_type'];
+
+            $appointment = Appointment::create($input);
+            $patient = Patient::whereId($input['patient_id'])->with('user')->first();
+            $input['patient_name'] = $patient->user->full_name;
+            $input['original_from_time'] = $fromTime[0].' '.$fromTime[1];
+            $input['original_to_time'] = $toTime[0].' '.$toTime[1];
+            $service = Service::whereId($input['service_id'])->first();
+            $input['service'] = $service->name;
+
+            $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.Carbon::parse($input['date'])->format('jS M, Y');
+            if (! getLogInUser()->hasRole('patient')) {
+                $patientNotification = Notification::create([
+                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG.' '.$input['full_time'],
+                    'type' => Notification::BOOKED,
+                    'user_id' => $patient->user->id,
+                ]);
+            }
+
+            $transaction = [
+                'user_id' => $input['patient_id'],
+                'transaction_id' =>  $input['appointment_unique_id']. '_'.rand(0,99999),
+                'appointment_id' => $input['appointment_unique_id'],
+                'amount' => $input['payable_amount'],
+                'type' => $input['payment_type'],
+                'meta' => json_encode($input),
+            ];
+
+            Transaction::create($transaction);
+
+
+            $doctor = Doctor::whereId($input['doctor_id'])->with('user')->first();
+            $input['doctor_name'] = $doctor->user->full_name;
+
+            $doctorNotification = Notification::create([
+                'title' => $patient->user->full_name.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
+                'type' => Notification::BOOKED,
+                'user_id' => $doctor->user->id,
+            ]);
+
+            DB::commit();
+
+            try {
+                CreateGoogleAppointment::dispatch(true, $appointment->id);
+                CreateGoogleAppointment::dispatch(false, $appointment->id);
+            } catch (Exception $exception) {
+                Log::error($exception->getMessage());
+            }
+
+            return $appointment;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new UnprocessableEntityHttpException($e->getMessage());
+        }
+    }
+
     /**
      * @param $input
      * @return mixed
