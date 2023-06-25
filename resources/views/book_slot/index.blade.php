@@ -386,7 +386,10 @@ figure.effect-chico {
 .name-slot {
     margin-top: -125px;
 }
-
+.pay-pall{
+        display:flex;
+        place-content:start;
+    }
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -397,9 +400,27 @@ figure.effect-chico {
     h1 {
         font-size: 25px !important;
     }
+.form-control, .form-select {
+    height: 50px;
+    font-size: 16px;
+    padding: 10px !important;
 }
-
+}
+@media (min-width:320px) and (max-width:375px){
+    .stripes{
+        width:100% !important;
+    }
+    .pay-pall{
+        display:grid !important;
+    }
+}
 @media (min-width:320px) and (max-width:600px) {
+    .stripes{
+        width:100% !important;
+    }
+    .set-box {
+    margin-left: 30px!important;
+}
     .main-block {
         padding: 0 !important;
     }
@@ -447,6 +468,9 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
+    .radio-btn{
+        font-size:14px !important;
+    }
 
     h5,
     .fs-5 {
@@ -745,7 +769,7 @@ a:hover {
                     $idGet =  Request::segment(2);
                     ?>
                     <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 30px;">
+                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 20px;">
                         View More
                     </a>
                 </div>
@@ -876,13 +900,13 @@ a:hover {
                     <label for="Payment Method" class="form-label required">Payment Method:</label>
                 </div>
                 <div class="row col-md-12 mb-3">
-                    <div class="col-3">
+                    <div class="col-3 stripes">
                         <div><input id="female" type="radio" name="gender" value="Female"><span
                                 class="radio-btn">PayPall</span></div>
                         <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
+                        <ul class="xl-icon mb-0 pay-pall">
                             <li class="radio-btn1"><a><img src="/assets/image/paypall.png" alt="#"></i></a></li>
                             <li class="radio-btn1"><a><img src="/assets/image/pay1.png" alt="#"></i></a></li>
                             <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
@@ -894,7 +918,7 @@ a:hover {
                     </div>
                 </div>
                 <div class="row col-md-12 mb-3">
-                    <div class="col-3">
+                    <div class="col-3 stripes">
                         <div><input id="female" type="radio" name="gender" value="Female"><span class="radio-btn">Stripe
                                 Checkout</span></div>
                         <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->

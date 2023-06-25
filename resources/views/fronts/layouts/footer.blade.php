@@ -1,3 +1,11 @@
+<style>
+    @media (min-width:768px) {
+    h5, .fs-5 {
+    font-size: 14px !important;
+}
+    }
+</style>
+
 <footer style="background-color:#273432">
     <div class="container">
         <div class="row">
