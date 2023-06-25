@@ -8,18 +8,18 @@
 
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
+        <section class="title-hero-bg parallax-effect" style="background-image: url(/assets/images/Frame_3.png);">
+            <!-- <img src="/assets/images/Frame_3.png" alt="" class=""> -->
 
-        <img src="/assets/images/Frame_3.png" alt="" class="">
-
-        <div class="container">
-            <div class="page-title text-center white-color">
-                <h1>BOOK A SPACE</h1>
-                <h4 class="workspace">Interested in our workspace?
-                    <br> Book a slot for our space now!
-                </h4>
+            <div class="container">
+                <div class="page-title text-center white-color">
+                    <h1 class="set-space">BOOK A SPACE</h1>
+                    <h4 class="workspace">Interested in our workspace?
+                        <br> Book a slot for our space now!
+                    </h4>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 </div>
 
 <section class="main-block gray">
@@ -52,7 +52,7 @@
                             <figure class="effect-chico">
                                 <img src="/assets/images/image 12.png" alt="" class="">
                             </figure>
-                        </div>HOU
+                        </div>
                     </div>
                 </div>
                 <div class="row grid-space">
@@ -425,6 +425,62 @@ function displayMessage() {
 </script>
 
 <style>
+@media (min-width:768px) and (max-width:1024px) {
+    .dayplan-btn {
+        padding: 10px;
+        width: auto !important;
+    }
+    .h2-hourplan {
+    font-size: 15px !important;
+    color: #000000;
+}
+h5, .fs-5 {
+    font-size: 15px !important;
+}
+}
+
+@media (min-width:768px) and (max-width:1440px) {
+    .grid figure {
+        margin: 2px -8px 3px !important;
+    }
+}
+
+@media (min-width:320px) and (max-width:600px) {
+    .set-space {
+        font-size: 35px !important;
+    }
+
+    .workspace {
+        font-size: 20px !important;
+    }
+
+    .main-block {
+        padding: 0px !important;
+    }
+
+    .hot-desk {
+        margin-top: 0px !important;
+    }
+
+    .h2-day {
+        text-align: start !important;
+    }
+
+    section.mains-blocks {
+        padding: 0px !important;
+        /* margin-top: -60px !important; */
+        margin-top: 30px !important;
+        background: #fbfbfb;
+    }
+
+    .grid figure {
+        position: relative;
+        overflow: hidden;
+        min-width: 100%;
+        margin: 0px 0px 5px !important;
+    }
+}
+
 .modal-header {
     border-bottom: none !important;
 }
@@ -511,7 +567,7 @@ function displayMessage() {
 
 .page-title {
     position: absolute;
-    top: 36%;
+    top: 60%;
     width: 100%;
     text-align: center;
     left: 0;
@@ -572,7 +628,7 @@ figure.effect-chico {
     position: relative;
     overflow: hidden;
     min-width: 100%;
-    margin: -18px -8px 26px;
+    margin: 3px 0px 5px;
     text-align: center;
     cursor: pointer;
 }
@@ -724,5 +780,25 @@ section.mains-blocks {
     padding: 100px;
     margin-top: -175px;
     background: #fbfbfb;
+}
+
+.grid figure {
+    position: relative;
+    overflow: hidden;
+    min-width: 100%;
+    margin: 3px 0px 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
 }
 </style>
