@@ -24,7 +24,7 @@
         </div>
     </div>
     <div>
-        {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
+        {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-dark me-2']) }}
         <a href="{{route('specializations.index')}}" type="reset"
            class="btn btn-secondary">{{__('messages.common.discard')}}</a>
     </div>

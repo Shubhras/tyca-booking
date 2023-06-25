@@ -2,23 +2,7 @@
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.appointment_unique_id') }}:</label>
         <span class="fs-4 text-gray-800">
-            <span class="badge bg-warning">{{$appointment['data']->appointment_unique_id}}</span>
-        </span>
-    </div>
-    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
-        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.appointment_at') }}:</label>
-        <span class="fs-4 text-gray-800">
-            <span class="badge bg-info">
-                                    {{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY')}} {{$appointment['data']->from_time}} {{$appointment['data']->from_time_type}} - {{$appointment['data']->to_time}} {{$appointment['data']->to_time_type}}
-                                </span>
-        </span>
-    </div>
-    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
-        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.doctor.status') }}:</label>
-        <span class="fs-4 text-gray-800">
-            <span class="badge bg-{{ getStatusBadgeColor($appointment['data']->status)}}">
-                {{__('messages.common.'.strtolower(\App\Models\Appointment::STATUS[$appointment['data']->status]))}}
-            </span>
+            <span class="">{{$appointment['data']->appointment_unique_id}}</span>
         </span>
     </div>
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
@@ -35,6 +19,7 @@
             @endif
         </span>
     </div>
+
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.doctor.doctor') }}:</label>
         <span class="fs-4 text-gray-800">
@@ -50,22 +35,60 @@
         </span>
     </div>
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
-        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.service') }}:</label>
+        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.booking_space') }}:</label>
         <span class="fs-4 text-gray-800">{{$appointment['data']->services->name}}</span>
     </div>
+
+    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
+        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.plantype') }}:</label>
+        <span class="fs-4 text-gray-800" style="text-transform: capitalize;">{{$appointment['data']->plan_type}}</span>
+    </div>
+
+
+    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
+        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.appointment_at') }}:</label>
+        <span class="fs-4 text-gray-800">
+            <span class="">
+                                    {{ \Carbon\Carbon::parse($appointment['data']->date)->isoFormat('DD MMM YYYY')}} {{$appointment['data']->from_time}} {{$appointment['data']->from_time_type}} - {{$appointment['data']->to_time}} {{$appointment['data']->to_time_type}}
+                                </span>
+        </span>
+    </div>
+
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.doctor_appointment.amount') }}:</label>
         <span class="fs-4 text-gray-800">  {{ getCurrencyFormat(getCurrencyCode(),$appointment['data']->payable_amount) }}  </span>
         </div>
-    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
-        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.status') }}:</label>
+
+        <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
+        <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.payment_method') }}:</label>
+        <span class="fs-4 text-gray-800">  <?php if($appointment['data']->payment_method == '2')
+        {
+            echo 'Stripe';
+        }else {
+            echo 'Paypal';
+        } ?> </span>
+        </div>
+        <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
+        <label for="name" class="pb-2 fs-4 text-gray-600">Payment {{ __('messages.appointment.status') }}:</label>
         <span class="fs-4 text-gray-800">
-            <span class="badge bg-{{($appointment['data']->payment_type === \App\Models\Appointment::PAID)?'success':'danger'}}">
+            <span class="">
                 {{($appointment['data']->payment_type === \App\Models\Appointment::PAID)?__('messages.transaction.paid'):__('messages.transaction.pending')}}
             </span>
 
         </span>
     </div>
+    <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
+        <label for="name" class="pb-2 fs-4 text-gray-600">Booking {{ __('messages.doctor.status') }}:</label>
+        <span class="fs-4 text-gray-800">
+            <span class="">
+                {{__('messages.common.'.strtolower(\App\Models\Appointment::STATUS[$appointment['data']->status]))}}
+            </span>
+        </span>
+    </div>
+
+
+
+
     @if($appointment['data']->payment_type === \App\Models\Appointment::PAID)
         <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
             <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.payment_method') }}:</label>

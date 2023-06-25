@@ -46,7 +46,7 @@ class StaffTable extends LivewireTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__('messages.user.full_name'), 'first_name')->view('staffs.components.staff_name')
+            Column::make(__('messages.user.staff_name'), 'first_name')->view('staffs.components.staff_name')
                 ->sortable()->searchable(
                     function (Builder $query, $direction) {
                         return $query->whereRaw("TRIM(CONCAT(first_name,' ',last_name,' ')) like '%{$direction}%'");
@@ -57,8 +57,8 @@ class StaffTable extends LivewireTableComponent
                 ->searchable(),
             Column::make(__('messages.common.email'), "email")->hideIf(1),
             Column::make(__('messages.staff.role'), 'email')->view('staffs.components.role'),
-            Column::make(__('messages.common.email_verified'),
-                'email_verified_at')->view('staffs.components.email_verified')->sortable(),
+//            Column::make(__('messages.common.email_verified'),
+//                'email_verified_at')->view('staffs.components.email_verified')->sortable(),
             Column::make(__('messages.common.action'), 'id')->view('staffs.components.action'),
         ];
     }

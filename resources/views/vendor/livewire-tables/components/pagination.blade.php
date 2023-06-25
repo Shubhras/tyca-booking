@@ -122,11 +122,11 @@
         @if ($component->paginationVisibilityIsEnabled())
             @if ($component->paginationIsEnabled() && $component->perPageVisibilityIsEnabled())
                 <div class="mb-xxl-0 d-flex align-items-center justify-content-sm-start justify-content-center">
-                    <span class="me-3 text-gray-600 fs-4 fs-xl-6">@lang('Show')</span>
+                    <span class="me-3 text-dark fs-4 fs-xl-6">@lang('Show')</span>
                     <select
                             wire:model="perPage"
                             id="perPage"
-                            class="form-select w-auto data-sorting pl-1 pr-5 py-2 border-0"
+                            class="form-select w-auto data-sorting pl-1 pr-5 py-5p"
                     >
                         @foreach ($component->getPerPageAccepted() as $item)
                             <option value="{{ $item }}"
@@ -153,7 +153,7 @@
                     </div>
                 @else
                     <div class="row">
-                        <div class="col-12 ms-3 text-gray-600 fs-4">
+                        <div class="col-12 ms-3 text-dark fs-4">
                             @lang('Showing')
                             <strong>{{ $rows->count() }}</strong>
                             @lang('results')

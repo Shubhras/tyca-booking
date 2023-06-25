@@ -9,7 +9,7 @@
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">@yield('title')</h1>
             </div>
             <div class="d-flex align-items-center py-1 ms-auto">
-                <a class="btn btn-outline-primary float-end"
+                <a class="btn btn-outline-dark float-end"
                    href="{{ route('roles.index') }}">{{ __('messages.common.back') }}</a>
             </div>
         </div>

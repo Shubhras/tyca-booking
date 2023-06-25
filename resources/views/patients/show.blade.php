@@ -9,11 +9,11 @@
             <div class="text-end mt-4 mt-md-0">
                 @if(!getLogInUser()->hasRole('doctor'))
                     <a href="{{route('patients.edit',$patient->id)}}">
-                        <button type="button" class="btn btn-primary me-4">{{ __('messages.common.edit') }}</button>
+                        <button type="button" class="btn btn-dark me-4">{{ __('messages.common.edit') }}</button>
                     </a>
                 @endif
                 <a href="{{ url()->previous() }}">
-                    <button type="button" class="btn btn-outline-primary float-end">{{ __('messages.common.back') }}</button>
+                    <button type="button" class="btn btn-outline-dark float-end">{{ __('messages.common.back') }}</button>
                 </a>
             </div>
         </div>

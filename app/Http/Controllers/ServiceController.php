@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use App\Models\ServiceDiscountRates;
 use Laracasts\Flash\Flash;
 
 class ServiceController extends AppBaseController
@@ -45,7 +46,10 @@ class ServiceController extends AppBaseController
     {
         $data = $this->servicesRepository->prepareData();
 
-        return view('services.create', compact('data'));
+        $dailyDiscounts = [];
+        $hourlyDiscounts = [];
+
+        return view('services.create', compact('data', 'dailyDiscounts', 'hourlyDiscounts'));
     }
 
     /**
@@ -73,10 +77,12 @@ class ServiceController extends AppBaseController
     public function edit(Service $service)
     {
         $data = $this->servicesRepository->prepareData();
+        $dailyDiscounts = $this->servicesRepository->getDailyDiscountAttribute($service->id);
+        $hourlyDiscounts = $this->servicesRepository->getHourlyDiscountAttribute($service->id);
         $selectedDoctor = $service->serviceDoctors()->pluck('doctor_id')->toArray();
         $selectedSpecializations = $service->serviceSpecializations()->pluck('specialization_id')->toArray();
 
-        return view('services.edit', compact('service', 'data', 'selectedDoctor', 'selectedSpecializations'));
+        return view('services.edit', compact('service', 'data', 'selectedDoctor', 'selectedSpecializations', 'dailyDiscounts', 'hourlyDiscounts'));
     }
 
     /**
@@ -116,6 +122,7 @@ class ServiceController extends AppBaseController
     public function getService(Request $request)
     {
         $doctor_id = $request->appointmentDoctorId;
+
         $service = Service::with('serviceDoctors')->whereHas('serviceDoctors', function ($q) use ($doctor_id) {
             $q->where('doctor_id', $doctor_id)->whereStatus(Service::ACTIVE);
         })->get();
@@ -130,9 +137,9 @@ class ServiceController extends AppBaseController
     public function getCharge(Request $request)
     {
         $chargeId = $request->chargeId;
+        $serviceRate = ServiceDiscountRates::where('service_id', $chargeId)->get();
         $charge = Service::find($chargeId);
-
-        return $this->sendResponse($charge, __('messages.flash.retrieve'));
+        return $this->sendResponse([$charge,$serviceRate], __('messages.flash.retrieve'));
     }
 
     /**

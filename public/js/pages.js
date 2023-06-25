@@ -3577,9 +3577,9 @@ var initCalendarApp = function initCalendarApp() {
       month: Lang.get('messages.admin_dashboard.month')
     },
     headerToolbar: {
-      left: 'title',
-      center: 'prev,next today',
-      right: 'dayGridMonth'
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
     initialDate: new Date(),
     timeZone: 'UTC',
@@ -3904,13 +3904,39 @@ listenChange('#appointmentServiceId', function () {
         $('#payableAmount').val('');
 
         if (result.data) {
-          $('#chargeId').val(result.data.charges);
-          $('#payableAmount').val(result.data.charges);
-          charge = result.data.charges;
+          $('#chargeId').val(result.data[0].charges);
+          $('#payableAmount').val(result.data[0].charges);
+          $("#price_total").empty().text(result.data[0].charges);
+          charge = result.data[0].charges;
         }
+
+        $('#plantype_id').empty();
+        $('#plantype_id').append($('<option value=""></option>').text('Select Plan Type'));
+        $.each(result.data[1], function (i, v) {
+          $('#plantype_id').append($('<option></option>').attr('value', v.id).attr('data-amount', v.rate).text(v.discount_type));
+        });
       }
     }
   });
+});
+listenChange('#plantype_id', function () {
+  var amount = $('option:selected', this).attr('data-amount');
+  var plantype = $('option:selected', this).text();
+
+  if (plantype == 'hourly') {
+    $('#slot_option').show();
+  } else {
+    $('#slot_option').hide();
+  }
+
+  $("#type_of_payment").empty().val(plantype);
+
+  if (amount) {
+    $('#chargeId').val(amount);
+    $('#payableAmount').val(amount);
+    $("#price_total").empty().text(amount);
+    charge = amount;
+  }
 });
 listenKeyup('#addFees', function (e) {
   if (e.which != 8 && isNaN(String.fromCharCode(e.which))) {
@@ -3939,6 +3965,7 @@ listenSubmit('#addAppointmentForm', function (e) {
         displaySuccessMessage(mainResult.message);
         $('#addAppointmentForm')[0].reset();
         $('#addAppointmentForm').val('').trigger('change');
+        return location.href = mainResult.data.url;
 
         if (mainResult.data.payment_type == $('#paystackMethod').val()) {
           return location.href = mainResult.data.redirect_url;
@@ -6366,7 +6393,7 @@ listenClick('#monthData', function (e) {
               'image': value.profile,
               'name': value.user.full_name,
               'email': value.user.email,
-              'patientId': value.patient_unique_id,
+              //'patientId': value.patient_unique_id,
               'registered': moment.parseZone(value.user.created_at).format('Do MMM Y hh:mm A'),
               'appointment_count': value.appointments_count,
               'route': route('patients.show', value.id)
@@ -7812,6 +7839,20 @@ listenClick('.removeAvatarIcon', function () {
   $('#bgImage').css('background-image', 'url(' + backgroundImg + ')');
   $('#removeAvatar').remove();
 });
+document.addEventListener('turbo:load', function () {
+  $('.amenities-select').select2({
+    escapeMarkup: function escapeMarkup(m) {
+      return m;
+    } // templateSelection: function (state) {
+    //     if(state.element && typeof specializationsWithImage[state.element.value].icon != "undefined"){
+    //         let img = '';
+    //         state = `<span class="select2-option-img"><img src="${specializationsWithImage[state.element.value].icon}"><span> ${state.text}`;
+    //     }
+    //     return state;
+    // }
+
+  });
+});
 
 /***/ }),
 
@@ -8510,33 +8551,11 @@ function loadFrontCMSData() {
   });
   $('#cmsShortDescription').attr('maxlength', 800);
 
-  if (!$('#cmsTermConditionId').length) {
-    return;
-  }
-
-  var quill1 = new Quill('#cmsTermConditionId', {
-    modules: {
-      toolbar: [[{
-        header: [1, 2, false]
-      }], ['bold', 'italic', 'underline'], ['image', 'code-block']]
-    },
-    placeholder: Lang.get('messages.cms.terms_conditions'),
-    theme: 'snow' // or 'bubble'
-
-  });
-  quill1.on('text-change', function (delta, oldDelta, source) {
-    if (quill1.getText().trim().length === 0) {
-      quill1.setContents([{
-        insert: ''
-      }]);
-    }
-  });
-
   if (!$('#cmsPrivacyPolicyId').length) {
     return;
   }
 
-  var quill2 = new Quill('#cmsPrivacyPolicyId', {
+  var quill3 = new Quill('#cmsPrivacyPolicyId', {
     modules: {
       toolbar: [[{
         header: [1, 2, false]
@@ -8546,7 +8565,7 @@ function loadFrontCMSData() {
     theme: 'snow' // or 'bubble'
 
   });
-  quill2.on('text-change', function (delta, oldDelta, source) {
+  quill3.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
       quill2.setContents([{
         insert: ''
@@ -9440,6 +9459,24 @@ listenClick('.patient-email-verification', function (event) {
     }
   });
 });
+listenClick('.patient-statusbar', function (event) {
+  var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
+  $.ajax({
+    type: 'PUT',
+    url: route('patient.status'),
+    data: {
+      id: recordId
+    },
+    success: function success(result) {
+      displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#patient-statusbar-text-' + recordId).text(msg);
+    }
+  });
+});
 
 /***/ }),
 
@@ -9710,6 +9747,23 @@ function loadServiceData() {
       $('.price-input').val(price.replace(/[^0-9 \,]/, ''));
     }
   }
+
+  if (!$('.charges_daily').length) {
+    return;
+  }
+
+  var charges_daily = $('.charges_daily').val();
+
+  if (charges_daily === '') {
+    $('.charges_daily').val('');
+  } else {
+    if (/[0-9]+(,[0-9]+)*$/.test(charges_daily)) {
+      $('.charges_daily').val(getFormattedPrice(charges_daily));
+      return true;
+    } else {
+      $('.charges_daily').val(charges_daily.replace(/[^0-9 \,]/, ''));
+    }
+  }
 }
 
 listenClick('#createServiceCategory', function () {
@@ -9765,6 +9819,9 @@ listenClick('.service-delete-btn', function (event) {
 });
 listenClick('.service-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('service.status'),
@@ -9773,6 +9830,8 @@ listenClick('.service-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#service-statusbar-text-' + recordId).text(msg);
     }
   });
 });
@@ -9977,6 +10036,9 @@ listenClick('.specialization-delete-btn', function (event) {
 });
 listenClick('.specialization-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('specializations.status'),
@@ -9985,6 +10047,8 @@ listenClick('.specialization-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#specialization-statusbar-text-' + recordId).text(msg);
     }
   });
 });

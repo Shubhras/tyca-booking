@@ -9,6 +9,8 @@ use App\Models\Service;
 class ServiceDiscountRates extends Model
 {
     use HasFactory;
+    protected $table = 'service_discount_rates';
+    protected $fillable = ['above_count', 'rate', 'discount_type', 'service_id'];
 
     public function services(): \Illuminate\Database\Eloquent\Relations\HasOne
     {

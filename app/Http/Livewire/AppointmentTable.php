@@ -150,16 +150,33 @@ class AppointmentTable extends LivewireTableComponent
                 ->view('appointments.components.patient_name')
                 ->sortable()
                 ->searchable(),
+            Column::make(__('messages.appointment.service'), 'services.name')
+
+                ->sortable()
+                ->searchable(),
             Column::make(__('messages.appointment.patient'), 'patient.patientUser.last_name')
                 ->hideIf('patient.patientUser.last_name')
                 ->searchable(),
             Column::make(__('messages.appointment.patient'), 'patient.patientUser.email')
                 ->hideIf('patient.patientUser.email')
                 ->searchable(),
-            Column::make(__('messages.appointment.appointment_at'),
+                Column::make(__('messages.appointment.plantype'),
+                'plan_type')
+                ->view('appointments.components.plan_type')
+                ->sortable()->searchable(),
+                Column::make(__('messages.appointment.appointment_at'),
                 'date')->view('appointments.components.appointment_at')
                 ->sortable()->searchable(),
-            Column::make(__('messages.appointment.payment'), 'id')
+                Column::make(__('messages.appointment.payable_amount'),
+                'payable_amount')
+                ->view('appointments.components.service_name')
+                ->sortable()->searchable(),
+                Column::make(__('messages.appointment.payment_method'),
+                'payment_method')
+                ->view('appointments.components.payment_method')
+                ->sortable()->searchable(),
+
+            Column::make(__('messages.appointment.payment_status'), 'id')
                 ->format(function ($value, $row) {
                     return view('appointments.components.payment')
                         ->with([
@@ -168,7 +185,7 @@ class AppointmentTable extends LivewireTableComponent
                             'pending' => Appointment::PENDING,
                         ]);
                 }),
-            Column::make(__('messages.appointment.status'), 'id')
+            Column::make(__('messages.appointment.booking_status'), 'id')
                 ->format(function ($value, $row) {
                     return view('appointments.components.status')
                         ->with([

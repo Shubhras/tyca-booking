@@ -16,40 +16,40 @@ class DefaultSpecializationSeeder extends Seeder
     {
         $input = [
             [
-                'name' => 'Marine Medicine',
+                'name' => 'Wi-Fi',
             ],
             [
-                'name' => 'Medical Genetics',
+                'name' => 'Desk',
             ],
             [
-                'name' => 'Microbiology',
+                'name' => 'Air Conditioning',
             ],
             [
-                'name' => 'Nuclear Medicine',
+                'name' => 'Refrigerator',
             ],
             [
-                'name' => 'Paediatrics',
+                'name' => 'Shower Facilities',
             ],
             [
-                'name' => 'Palliative Medicine',
+                'name' => 'Electric Kettle',
             ],
             [
-                'name' => 'Pathology',
+                'name' => 'Toilets',
             ],
             [
-                'name' => 'Pharmacology',
+                'name' => 'Sofa',
             ],
             [
-                'name' => 'Psychiatry',
+                'name' => 'Telephone',
             ],
             [
-                'name' => 'Physiology',
+                'name' => 'Toiltries',
             ],
             [
-                'name' => 'Physical Medicine',
+                'name' => 'Wardrobe',
             ],
             [
-                'name' => 'Radiotherapy',
+                'name' => 'Telivision',
             ],
         ];
 

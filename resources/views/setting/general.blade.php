@@ -162,7 +162,7 @@
                 <div class="row">
                     <!-- Submit Field -->
                     <div class="form-group col-sm-12">
-                        {{ Form::submit(__('messages.user.save_changes'),['class' => 'btn btn-primary','id'=>'settingSubmitBtn']) }}
+                        {{ Form::submit(__('messages.user.save_changes'),['class' => 'btn btn-dark','id'=>'settingSubmitBtn']) }}
                     </div>
                 </div>
             </div>

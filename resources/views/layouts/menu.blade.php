@@ -158,7 +158,7 @@
     <li class="nav-item {{ Request::is('admin/patients*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-4" aria-current="page"
            href="{{ route('patients.index') }}">
-            <span class="aside-menu-icon pe-3"><i class="fas fa-hospital-user"></i></span>
+            <span class="aside-menu-icon pe-3"><i class="fas fa-user-group"></i></span>
             <span class="aside-menu-title">{{ __('messages.patients') }}</span>
         </a>
     </li>

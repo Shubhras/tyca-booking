@@ -102,12 +102,20 @@ class PatientRepository extends BaseRepository
                 ['address1', 'address2', 'city_id', 'state_id', 'country_id', 'postal_code']);
             $input['type'] = User::PATIENT;
             $input['email'] = setEmailLowerCase($input['email']);
+
+            if(isset($input['password']) && !empty($input['password'])) {
+                $input['password'] = Hash::make($input['password']);
+            } else if (empty($input['password'])) {
+                unset($input['password']);
+            }
+
+
             /** @var Patient $patient */
             $patient->user()->update(Arr::except($input, [
                 'address1', 'address2', 'city_id', 'state_id', 'country_id', 'postal_code', 'patient_unique_id',
                 'avatar_remove',
                 'profile', 'is_edit', 'edit_patient_country_id', 'edit_patient_state_id', 'edit_patient_city_id',
-                'backgroundImg',
+                'backgroundImg', 'password_confirmation'
             ]));
             $patient->address()->update($addressInputArray);
 

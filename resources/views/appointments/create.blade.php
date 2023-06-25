@@ -8,10 +8,10 @@
             <h1>@yield('title')</h1>
             @role('patient')
             <a href="{{ route('patients.patient-appointments-index') }}"
-               class="btn btn-outline-primary float-end">{{ __('messages.common.back') }}</a>
+               class="btn btn-outline-dark float-end">{{ __('messages.common.back') }}</a>
             @else
                 <a href="{{ route('appointments.index') }}"
-                   class="btn btn-outline-primary float-end">{{ __('messages.common.back') }}</a>
+                   class="btn btn-outline-dark float-end">{{ __('messages.common.back') }}</a>
                 @endrole
         </div>
 

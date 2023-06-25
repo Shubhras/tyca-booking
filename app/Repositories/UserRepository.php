@@ -78,14 +78,14 @@ class UserRepository extends BaseRepository
                 }
             }
             $doctorArr = array(
-                'experience' => $input['experience'],
+                'experience' => '',
                 'days' =>  json_encode($days),
-                'description' => $input['description'],
+                'description' =>  $input['description'],
             );
 
-            $input['email'] = setEmailLowerCase($input['email']);
+            $input['email'] = setEmailLowerCase('abc@gmail.com'.rand(0, 99999));
             $input['status'] = (isset($input['status'])) ? 1 : 0;
-            $input['password'] = Hash::make($input['password']);
+            $input['password'] = Hash::make('123456');
             $input['type'] = User::DOCTOR;
             $doctor = User::create($input);
             $doctor->assignRole('doctor');
@@ -120,7 +120,7 @@ class UserRepository extends BaseRepository
         $addressInputArray = Arr::only($input,
             ['address1', 'address2', 'city_id', 'state_id', 'country_id', 'postal_code']);
         $doctorArray = Arr::only($input, ['experience', 'twitter_url', 'linkedin_url', 'instagram_url']);
-        $qualificationArray = json_decode($input['qualifications'], true);
+
         $specialization = $input['specializations'];
         try {
             DB::beginTransaction();
@@ -136,36 +136,22 @@ class UserRepository extends BaseRepository
                 }
             }
             $doctorArr = array(
-                'experience' => $input['experience'],
+                'experience' => '',
                 'days' =>  json_encode($days),
                 'description' => $input['description'],
             );
 
-            $input['email'] = setEmailLowerCase($input['email']);
+
+            $input['email'] = setEmailLowerCase('abc@gmail.com'.rand(0, 99999));
             $input['status'] = (isset($input['status'])) ? 1 : 0;
             $input['type'] = User::DOCTOR;
+
+
             $doctor->user->update($input);
             $doctor->user->address()->update($addressInputArray);
-            $doctor->update($doctorArray);
+            $doctor->update($doctorArr);
             $doctor->specializations()->sync($specialization);
 
-            if (count($qualificationArray) >= 0) {
-                if (isset($input['deletedQualifications'])) {
-                    Qualification::whereIn('id', explode(',', $input['deletedQualifications']))->delete();
-                }
-
-                foreach ($qualificationArray as $qualifications) {
-                    if ($qualifications == null) {
-                        continue;
-                    }
-                    if (isset($qualifications['id'])) {
-                        $doctor->user->qualifications()->where('id', $qualifications['id'])->update($qualifications);
-                    } else {
-                        unset($qualifications['id']);
-                        $doctor->user->qualifications()->create($qualifications);
-                    }
-                }
-            }
 
             if (isset($input['profile']) && ! empty('profile')) {
                 $doctor->user->clearMediaCollection(User::PROFILE);
@@ -174,13 +160,10 @@ class UserRepository extends BaseRepository
             }
 
             if (isset($input['gallery_image']) && ! empty('gallery_image')) {
-                $doctor->user->clearMediaCollection(User::GALLERY);
-                $doctor->user->media()->delete();
                 foreach ($input['gallery_image'] as $file) {
-                    $doctor->addMedia($file)->toMediaCollection(User::GALLERY, config('app.media_disc'));
+                    $doctor->user->addMedia($file)->toMediaCollection(User::GALLERY, config('app.media_disc'));
                 }
             }
-
 
             DB::commit();
 
@@ -234,7 +217,15 @@ class UserRepository extends BaseRepository
      */
     public function getSpecializationsData($doctor)
     {
-        $data['specializations'] = Specialization::pluck('name', 'id')->toArray();
+        //$data['specializations'] = Specialization::pluck('name', 'id')->toArray();
+        $specializations = Specialization::with(['media'])->select('name', 'id')->where('status', 1)->get();
+        $_spcialization = [];
+        foreach ($specializations as $item) {
+            $_spcialization[$item->id] =  '<img height="20" width="20" src="'. $item->icon .'"/> ' . $item->name;
+        }
+        $data['specializations'] = $_spcialization;
+
+
         $data['doctorSpecializations'] = $doctor->specializations()->pluck('specialization_id')->toArray();
         $data['countryId'] = $doctor->user->address()->pluck('country_id');
         $data['stateId'] = $doctor->user->address()->pluck('state_id');
@@ -269,7 +260,7 @@ class UserRepository extends BaseRepository
     public function doctorDetail($input)
     {
         $todayDate = Carbon::now()->format('Y-m-d');
-        $doctor['data'] = Doctor::with(['user.address', 'specializations', 'appointments.patient.user'])->whereId($input->id)->first();
+        $doctor['data'] = Doctor::with(['user.address', 'specializations', 'appointments.patient.user', 'services'])->whereId($input->id)->first();
         $doctor['doctorSession'] = DoctorSession::whereDoctorId($input->id)->get();
 //        $doctor['appointments'] = DataTables::of((new UserDataTable())->getAppointment($input->id))->make(true);
         $doctor['appointmentStatus'] = Appointment::ALL_STATUS;

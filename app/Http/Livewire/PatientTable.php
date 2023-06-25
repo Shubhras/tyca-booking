@@ -41,7 +41,7 @@ class PatientTable extends LivewireTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__('messages.patient.name'), 'user.first_name')->view('patients.components.name')
+            Column::make(__('messages.patient.customer_name'), 'user.first_name')->view('patients.components.name')
                 ->sortable()
                 ->searchable(
                     function (Builder $query, $direction) {
@@ -55,10 +55,12 @@ class PatientTable extends LivewireTableComponent
                 ->searchable(),
             Column::make(__('messages.doctor_dashboard.total_appointments'), 'id')
                 ->view('patients.components.total_appointments'),
-            Column::make(__('messages.common.email_verified'), 'user.id')->view('patients.components.email_verified'),
-            Column::make(__('messages.common.impersonate'),'user.first_name')->view('patients.components.impersonate'),
+            //Column::make(__('messages.common.status'), 'user.id')->view('patients.components.status'),
+            //Column::make(__('messages.common.impersonate'),'user.first_name')->view('patients.components.impersonate'),
             Column::make(__('messages.patient.registered_on'), 'created_at')->view('patients.components.registered_on')
                 ->sortable(),
+            Column::make(__('messages.common.status'), 'user.id')->view('patients.components.account_status'),
+
             Column::make(__('messages.common.action'), 'user.id')->view('patients.components.action'),
         ];
     }

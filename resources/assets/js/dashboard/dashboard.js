@@ -147,7 +147,7 @@ listenClick('#monthData', function (e) {
                                 'image': value.profile,
                                 'name': value.user.full_name,
                                 'email': value.user.email,
-                                'patientId': value.patient_unique_id,
+                                //'patientId': value.patient_unique_id,
                                 'registered': moment.parseZone(
                                     value.user.created_at).
                                     format('Do MMM Y hh:mm A'),

@@ -186,6 +186,7 @@ listenClick('.edit-btn-qualification', function () {
 })
 
 listenSubmit('#editDoctorForm', function (e) {
+
     let twitterUrl = $('#twitterUrl').val()
     let linkedinUrl = $('#linkedinUrl').val()
     let instagramUrl = $('#instagramUrl').val()
@@ -225,6 +226,8 @@ listenSubmit('#editDoctorForm', function (e) {
     e.preventDefault()
     let doctorFormData = new FormData($(this)[0]);
     let editDoctorId = $('#editDoctorId').val();
+
+
 
     doctorFormData.append('qualifications', JSON.stringify(qualification))
     $.ajax({
@@ -368,3 +371,15 @@ listenClick('.removeAvatarIcon', function () {
     $('#removeAvatar').remove()
 })
 
+document.addEventListener('turbo:load', function () {
+    $('.amenities-select').select2({
+        escapeMarkup: function(m) { return m; },
+        // templateSelection: function (state) {
+        //     if(state.element && typeof specializationsWithImage[state.element.value].icon != "undefined"){
+        //         let img = '';
+        //         state = `<span class="select2-option-img"><img src="${specializationsWithImage[state.element.value].icon}"><span> ${state.text}`;
+        //     }
+        //     return state;
+        // }
+    });
+});

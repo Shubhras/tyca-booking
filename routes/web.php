@@ -5,6 +5,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthorizePaymentController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HotdeskController;
+use App\Http\Controllers\BookinginfoController;
+use App\Http\Controllers\BookingdetailsController;
+use App\Http\Controllers\MemberPortalController;
 use App\Http\Controllers\ClinicScheduleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -36,6 +39,7 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +88,7 @@ Route::post('/change-language', [FrontController::class, 'changeLanguage'])->nam
 
 //Dark Mode
 Route::get('update-dark-mode', [UserController::class, 'updateDarkMode'])->name('update-dark-mode');
+Route::post('authorize-check', 'App\Http\Controllers\HomeController@authorizeCheck')->name('authorize-check');
 
 //Stripe route
 Route::get('/medical-payment-success',
@@ -161,9 +166,10 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
     Route::put('/email-notification', [UserController::class, 'emailNotification'])->name('emailNotification');
 });
 
-Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
-
-Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
+Route::get('/book-slot/{id}', [BookController::class, 'index'])->name('book-slot');
+Route::get('/book-slot/{slot}/hot-desk/{id}', [HotdeskController::class, 'index'])->name('hot-desk');
+Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
+Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');
 
 
 Route::get('cancel-appointment/{patient_id}/{appointment_unique_id}', [AppointmentController::class, 'cancelAppointment'])->name('cancelAppointment');
@@ -177,6 +183,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
 //    Route::impersonate();
     Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
     Route::get('impersonate-leave', [UserController::class, 'impersonateLeave'])->name('impersonate.leave');
+
+    Route::post('deleteMedia/{id}', [UserController::class, 'deleteMedia'])->name('delete-media');
 
     //Email verified
     Route::post('email-verified', [UserController::class, 'emailVerified'])->name('emailVerified');
@@ -234,6 +242,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     // Patient Routes
     Route::middleware('permission:manage_patients')->group(function () {
         Route::resource('patients', PatientController::class);
+        Route::put('patient-status', [PatientController::class, 'changeServiceStatus'])->name('patient.status');
+
         Route::get('patient-appointments',
             [PatientController::class, 'patientAppointment'])->name('patients.appointment');
     });
@@ -302,6 +312,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     Route::middleware('permission:manage_front_cms')->group(function () {
         Route::get('cms', [CMSController::class, 'index'])->name('cms.index');
         Route::post('cms', [CMSController::class, 'update'])->name('cms.update');
+        Route::get('cmsbody', [CMSController::class, 'cmsbody'])->name('cmsbody.index');
+        Route::post('cmsbody', [CMSController::class, 'cmsbodyupdate'])->name('cmsbody.update');
         Route::resource('sliders', SliderController::class)->except('create', 'store', 'destroy', 'show');
         Route::resource('faqs', FaqController::class);
         Route::resource('front-patient-testimonials', FrontPatientTestimonialController::class);

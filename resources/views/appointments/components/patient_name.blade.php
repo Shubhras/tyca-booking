@@ -1,3 +1,4 @@
+
 <div class="d-flex align-items-center">
     <a href="{{route('patients.show', $row->patient->id)}}">
         <div class="image image-circle image-mini me-3">
