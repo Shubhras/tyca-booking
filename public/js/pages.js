@@ -3577,9 +3577,9 @@ var initCalendarApp = function initCalendarApp() {
       month: Lang.get('messages.admin_dashboard.month')
     },
     headerToolbar: {
-      left: 'title',
-      center: 'prev,next today',
-      right: 'dayGridMonth'
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
     initialDate: new Date(),
     timeZone: 'UTC',
@@ -6366,7 +6366,7 @@ listenClick('#monthData', function (e) {
               'image': value.profile,
               'name': value.user.full_name,
               'email': value.user.email,
-              'patientId': value.patient_unique_id,
+              //'patientId': value.patient_unique_id,
               'registered': moment.parseZone(value.user.created_at).format('Do MMM Y hh:mm A'),
               'appointment_count': value.appointments_count,
               'route': route('patients.show', value.id)
@@ -8510,33 +8510,11 @@ function loadFrontCMSData() {
   });
   $('#cmsShortDescription').attr('maxlength', 800);
 
-  if (!$('#cmsTermConditionId').length) {
-    return;
-  }
-
-  var quill1 = new Quill('#cmsTermConditionId', {
-    modules: {
-      toolbar: [[{
-        header: [1, 2, false]
-      }], ['bold', 'italic', 'underline'], ['image', 'code-block']]
-    },
-    placeholder: Lang.get('messages.cms.terms_conditions'),
-    theme: 'snow' // or 'bubble'
-
-  });
-  quill1.on('text-change', function (delta, oldDelta, source) {
-    if (quill1.getText().trim().length === 0) {
-      quill1.setContents([{
-        insert: ''
-      }]);
-    }
-  });
-
   if (!$('#cmsPrivacyPolicyId').length) {
     return;
   }
 
-  var quill2 = new Quill('#cmsPrivacyPolicyId', {
+  var quill3 = new Quill('#cmsPrivacyPolicyId', {
     modules: {
       toolbar: [[{
         header: [1, 2, false]
@@ -8546,7 +8524,7 @@ function loadFrontCMSData() {
     theme: 'snow' // or 'bubble'
 
   });
-  quill2.on('text-change', function (delta, oldDelta, source) {
+  quill3.on('text-change', function (delta, oldDelta, source) {
     if (quill2.getText().trim().length === 0) {
       quill2.setContents([{
         insert: ''
@@ -9440,6 +9418,24 @@ listenClick('.patient-email-verification', function (event) {
     }
   });
 });
+listenClick('.patient-statusbar', function (event) {
+  var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
+  $.ajax({
+    type: 'PUT',
+    url: route('patient.status'),
+    data: {
+      id: recordId
+    },
+    success: function success(result) {
+      displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#patient-statusbar-text-' + recordId).text(msg);
+    }
+  });
+});
 
 /***/ }),
 
@@ -9710,6 +9706,23 @@ function loadServiceData() {
       $('.price-input').val(price.replace(/[^0-9 \,]/, ''));
     }
   }
+
+  if (!$('.charges_daily').length) {
+    return;
+  }
+
+  var charges_daily = $('.charges_daily').val();
+
+  if (charges_daily === '') {
+    $('.charges_daily').val('');
+  } else {
+    if (/[0-9]+(,[0-9]+)*$/.test(charges_daily)) {
+      $('.charges_daily').val(getFormattedPrice(charges_daily));
+      return true;
+    } else {
+      $('.charges_daily').val(charges_daily.replace(/[^0-9 \,]/, ''));
+    }
+  }
 }
 
 listenClick('#createServiceCategory', function () {
@@ -9765,6 +9778,9 @@ listenClick('.service-delete-btn', function (event) {
 });
 listenClick('.service-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('service.status'),
@@ -9773,6 +9789,8 @@ listenClick('.service-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#service-statusbar-text-' + recordId).text(msg);
     }
   });
 });
@@ -9977,6 +9995,9 @@ listenClick('.specialization-delete-btn', function (event) {
 });
 listenClick('.specialization-statusbar', function (event) {
   var recordId = $(event.currentTarget).data('id');
+  var status = $(event.currentTarget).data('status');
+  var msg = status == 1 ? 'Inactive' : 'Active';
+  var nextStatus = status == 1 ? 0 : 1;
   $.ajax({
     type: 'PUT',
     url: route('specializations.status'),
@@ -9985,6 +10006,8 @@ listenClick('.specialization-statusbar', function (event) {
     },
     success: function success(result) {
       displaySuccessMessage(result.message);
+      $(event.currentTarget).data('status', nextStatus);
+      $('#specialization-statusbar-text-' + recordId).text(msg);
     }
   });
 });

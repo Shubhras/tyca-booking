@@ -57,7 +57,7 @@ class TransactionTable extends LivewireTableComponent
             Column::make(__('messages.patient.name'), 'user.email')
                 ->hideIf('user.email')
                 ->searchable(),
-            Column::make(__('messages.appointment.date'), 'created_at')->view('transactions.components.date')
+            Column::make(__('messages.appointment.booking_date'), 'created_at')->view('transactions.components.date')
                 ->sortable(),
             Column::make(__('messages.appointment.payment_method'), 'type')->view('transactions.components.payment_method'),
             Column::make(__('messages.doctor_appointment.amount'), 'amount')->view('transactions.components.amount')

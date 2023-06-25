@@ -150,6 +150,10 @@ class AppointmentTable extends LivewireTableComponent
                 ->view('appointments.components.patient_name')
                 ->sortable()
                 ->searchable(),
+            Column::make(__('messages.appointment.service'), 'services.name')
+                ->view('appointments.components.patient_name')
+                ->sortable()
+                ->searchable(),
             Column::make(__('messages.appointment.patient'), 'patient.patientUser.last_name')
                 ->hideIf('patient.patientUser.last_name')
                 ->searchable(),
@@ -159,7 +163,14 @@ class AppointmentTable extends LivewireTableComponent
             Column::make(__('messages.appointment.appointment_at'),
                 'date')->view('appointments.components.appointment_at')
                 ->sortable()->searchable(),
-            Column::make(__('messages.appointment.payment'), 'id')
+            Column::make(__('messages.appointment.payable_amount'),
+                'payable_amount')->view('appointments.components.appointment_at')
+                ->sortable()->searchable(),
+            Column::make(__('messages.appointment.payment_method'),
+                'payment_method_name')->view('appointments.components.appointment_at')
+                ->sortable()->searchable(),
+
+            Column::make(__('messages.appointment.payment_status'), 'id')
                 ->format(function ($value, $row) {
                     return view('appointments.components.payment')
                         ->with([
@@ -168,7 +179,7 @@ class AppointmentTable extends LivewireTableComponent
                             'pending' => Appointment::PENDING,
                         ]);
                 }),
-            Column::make(__('messages.appointment.status'), 'id')
+            Column::make(__('messages.appointment.booking_status'), 'id')
                 ->format(function ($value, $row) {
                     return view('appointments.components.status')
                         ->with([

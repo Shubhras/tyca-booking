@@ -7,29 +7,6 @@ function loadFrontCMSData () {
     })
     $('#cmsShortDescription').attr('maxlength', 800)
 
-    if (!$('#cmsTermConditionId').length) {
-        return
-    }
-
-    let quill1 = new Quill('#cmsTermConditionId', {
-        modules: {
-            toolbar: [
-                [
-                    {
-                        header: [1, 2, false],
-                    }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block'],
-            ],
-        },
-        placeholder: Lang.get('messages.cms.terms_conditions'),
-        theme: 'snow', // or 'bubble'
-    })
-    quill1.on('text-change', function (delta, oldDelta, source) {
-        if (quill1.getText().trim().length === 0) {
-            quill1.setContents([{ insert: '' }])
-        }
-    })
 
     if (!$('#cmsPrivacyPolicyId').length) {
         return
@@ -105,6 +82,7 @@ function loadFrontCMSData () {
 
         $('#termData').val(JSON.stringify(editor_content_1))
         $('#privacyData').val(JSON.stringify(editor_content_2))
+
 
     })
 }

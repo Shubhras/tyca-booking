@@ -5,7 +5,7 @@
         </div>
     </a>
     <div class="d-flex flex-column">
-        <a href="{{route('patients.show', $row->id)}}" class="mb-1 text-decoration-none fs-6">
+        <a href="{{route('patients.show', $row->id)}}" class="mb-1 text-decoration-none fs-6 text-dark">
             {{$row->user->first_name.' '.$row->user->last_name}}
         </a>
         <span class="fs-6">{{$row->user->email}}</span>

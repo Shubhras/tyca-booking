@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthorizePaymentController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HotdeskController;
+use App\Http\Controllers\BookinginfoController;
 use App\Http\Controllers\BookingdetailsController;
 use App\Http\Controllers\MemberPortalController;
 use App\Http\Controllers\ClinicScheduleController;
@@ -163,10 +164,11 @@ Route::middleware('auth', 'xss', 'checkUserStatus')->group(function () {
     Route::put('/email-notification', [UserController::class, 'emailNotification'])->name('emailNotification');
 });
 
-Route::get('/book-slot', [BookController::class, 'index'])->name('book-slot');
-Route::get('/hot-desk', [HotdeskController::class, 'index'])->name('hot-desk');
+Route::get('/book-slot/{id}', [BookController::class, 'index'])->name('book-slot');
+Route::get('/book-slot/hot-desk/{id}', [HotdeskController::class, 'index'])->name('hot-desk');
 Route::get('/booking-detail', [BookingdetailsController::class, 'index'])->name('booking-detail');
 Route::get('/portal-info', [MemberPortalController::class, 'portal'])->name('portal-info');
+
 
 Route::get('cancel-appointment/{patient_id}/{appointment_unique_id}', [AppointmentController::class, 'cancelAppointment'])->name('cancelAppointment');
 
@@ -238,6 +240,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     // Patient Routes
     Route::middleware('permission:manage_patients')->group(function () {
         Route::resource('patients', PatientController::class);
+        Route::put('patient-status', [PatientController::class, 'changeServiceStatus'])->name('patient.status');
+
         Route::get('patient-appointments',
             [PatientController::class, 'patientAppointment'])->name('patients.appointment');
     });

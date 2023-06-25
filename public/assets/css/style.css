@@ -3197,11 +3197,11 @@ progress {
     color: #6C757D;
     background-color: #FFFFFF;
     background-clip: padding-box;
-    border: 1px solid #CED4DA;
+    border: 1px solid #000;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 0.313rem;
+    /*border-radius: 0.313rem;*/
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -3445,8 +3445,8 @@ textarea.form-control-lg {
     background-repeat: no-repeat;
     background-position: right 0.938rem center;
     background-size: 16px 12px;
-    border: 1px solid #CED4DA;
-    border-radius: 0.313rem;
+    border: 1px solid #000000;
+    /*border-radius: 0.313rem;*/
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -19684,7 +19684,8 @@ html ::-webkit-scrollbar-resizer:vertical, html ::-webkit-scrollbar-resizer:hori
 }
 
 .form-switch .form-check-input:checked {
-    background-color: #6571FF !important;
+    /*background-color: #6571FF !important;*/
+    background-color: #00A860 !important;
 }
 
 .form-check-label {
@@ -19777,8 +19778,8 @@ html ::-webkit-scrollbar-resizer:vertical, html ::-webkit-scrollbar-resizer:hori
 }
 
 .table > thead > tr > th {
-    text-transform: uppercase;
-    font-weight: 400;
+    /*text-transform: uppercase;*/
+    font-weight: 600;
     background-color: #F8F9FA;
     white-space: nowrap;
 }
@@ -21462,10 +21463,14 @@ ul {
     min-width: 120px;
 }
 
-/*** */
+
 .td-icon{
     width: 100px;
 }
 .p-1px{
     padding: 1px !important;
+}
+.py-5p{
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

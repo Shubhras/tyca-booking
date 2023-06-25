@@ -218,6 +218,10 @@ class Appointment extends Model
         return self::STATUS[$this->status];
     }
 
+    public function getPaymentMethodNameAttribute() {
+        return self::PAYMENT_METHOD[$this->payment_method];
+    }
+
     /**
      * @return BelongsTo
      */

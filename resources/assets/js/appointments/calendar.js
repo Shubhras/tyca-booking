@@ -53,9 +53,9 @@ const initCalendarApp = function () {
             month: Lang.get('messages.admin_dashboard.month'),
         },
         headerToolbar: {
-            left: 'title',
-            center: 'prev,next today',
-            right: 'dayGridMonth',
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
         },
 
         initialDate: new Date(),
@@ -216,7 +216,7 @@ const handleViewEvent = () => {
     let cancel = $('#cancelCalenderConst').val();
 
     eventNameMod = ''
-    
+
     startDateMod = moment(data.startDate).utc().format("DD MMM, YYYY - h:mm A")
     endDateMod = moment(data.endDate).utc().format('DD MMM, YYYY - h:mm A')
     viewEndDate.innerText = ': ' + endDateMod

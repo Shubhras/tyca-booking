@@ -28,6 +28,7 @@
 
     <link href="{{ mix('css/front-third-party.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ mix('css/front-pages.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/front-pages1.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datepicker/bootstrap-datepicker.css') }}">
 
     <!-- Document Title ===================== -->

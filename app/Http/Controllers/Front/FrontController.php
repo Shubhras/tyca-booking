@@ -38,11 +38,11 @@ class FrontController extends AppBaseController
         $frontPatientTestimonials = FrontPatientTestimonial::with('media')->latest()->take(6)->get();
         $appointmentDoctors = Doctor::with('user')->get()->where('user.status', User::ACTIVE)->pluck('user.full_name',
             'id');
+        $userData = User::where('type', '2')->get();
         $aboutExperience = Setting::where('key', 'about_experience')->first();
-
         return view('fronts.medicals.index',
             compact('doctors', 'sliders', 'frontMedicalServices', 'frontPatientTestimonials',
-                'appointmentDoctors', 'aboutExperience'));
+                'appointmentDoctors', 'aboutExperience','userData'));
     }
 
     /**

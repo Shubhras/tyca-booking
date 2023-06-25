@@ -12,7 +12,7 @@ class DoctorTable extends LivewireTableComponent
     protected $model = Doctor::class;
     public bool $showButtonOnHeader = true;
     public string $buttonComponent = 'doctors.components.add_button';
-    public bool $showFilterOnHeader = true;
+    public bool $showFilterOnHeader = false;
     public array $FilterComponent = ['doctors.components.status_filter', User::STATUS];
     protected $listeners = ['refresh' => '$refresh','resetPage','changeStatusFilter'];
     public string $statusFilter = '';

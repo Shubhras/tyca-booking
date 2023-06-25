@@ -8,7 +8,7 @@
         <div class="d-inline-block align-top">
             <div class="d-inline-block align-self-center d-flex">
                 <!-- <a href="{{route('doctors.show', $row->id)}}" class="mb-1 text-decoration-none fs-6"> -->
-                <a href="#" class="mb-1 text-decoration-none fs-6">
+                <a href="#" class="mb-1 text-decoration-none fs-6 text-dark">
                     {{$row->user->full_name}}
                 </a>
 

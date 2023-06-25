@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         @include('flash::message')
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column text-dark">
             <livewire:patient-table/>
         </div>
     </div>

@@ -21,6 +21,8 @@
     </div>
     <div class="col-md-7">
     <div class="mb-5">
+    {{ Form::label('Specialization','Operating Hours:' ,['class' => 'form-label required']) }}
+
     <div class="row">
     <div class="col-xxl-6 mb-7 d-sm-flex align-items-center mb-3">
                 <div class="col-xl-4 col-lg-4 col-md-2 col-4">
@@ -213,7 +215,7 @@
     </div>
 </div>
 <div class="d-flex">
-    {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
+    {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-dark me-2']) }}
     <a href="{{route('doctors.index')}}" type="reset"
        class="btn btn-secondary">{{__('messages.common.discard')}}</a>
 </div>
@@ -239,31 +241,38 @@
     border-radius: 100%
 }
 </style>
+
+<script>
+    var quill = new Quill('#doctorDescriptionId', {
+      theme: 'snow'
+    });
+  </script>
+
 <script type="text/javascript">
 
-let quill2 = new Quill('#doctorDescriptionId', {
-    modules: {
-        toolbar: [
-            [
-                {
-                    header: [1, 2, false],
-                }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block'],
-        ],
-    },
-    placeholder: 'Description',
-    theme: 'snow', // or 'bubble'
-})
-quill2.on('text-change', function (delta, oldDelta, source) {
-    if (quill2.getText().trim().length === 0) {
-        $('#detail').val(quill2.container.firstChild.innerHTML);
-        quill2.setContents([{ insert: '' }])
-    }
-})
+// let quill7 = new Quill('#doctorDescriptionId', {
+//     modules: {
+//         toolbar: [
+//             [
+//                 {
+//                     header: [1, 2, false],
+//                 }],
+//             ['bold', 'italic', 'underline'],
+//             [ 'code-block'],
+//         ],
+//     },
+//     placeholder: 'Description',
+//     theme: 'snow', // or 'bubble'
+// })
+// quill7.on('text-change', function (delta, oldDelta, source) {
+//     if (quill7.getText().trim().length === 0) {
+//         $('#detail').val(quill2.container.firstChild.innerHTML);
+//         quill7.setContents([{ insert: '' }])
+//     }
+// })
 
 
-    function previewImage(e, selectedFiles, imagesArray) {
+function previewImage(e, selectedFiles, imagesArray) {
   const elemContainer = document.createElement('div');
   elemContainer.setAttribute('class', 'item-images');
   for (let i = 0; i < selectedFiles.length; i++) {
@@ -283,9 +292,10 @@ quill2.on('text-change', function (delta, oldDelta, source) {
   }
   return elemContainer;
 }
-let item_images = [];
+var item_images = [];
 document.getElementById('photo-upload').addEventListener('change', (e) => {
-  let selectedFiles = e.target.files;
+  var selectedFiles = e.target.files;
+
   const photoPreviewContainer = document.querySelector('#photo-upload__preview');
   const elemContainer = previewImage(e, selectedFiles, item_images);
   photoPreviewContainer.appendChild(elemContainer);
@@ -304,7 +314,7 @@ $(document).ready(function(){
 
     $(window).click(function(e) {
     let element = document.createElement('textarea')
-    let editor_content_1 = quill2.root.innerHTML
+    let editor_content_1 = quill.root.innerHTML
     element.innerHTML = editor_content_1
 
     // if (quill1.getText().trim().length === 0) {
@@ -312,8 +322,10 @@ $(document).ready(function(){
     //     return false
     // }
 
-    $('#descriptionData').val(JSON.stringify(editor_content_1));
+    $('#descriptionData').val($(".ql-editor").html());
 });
 });
+
+
 
 </script>
