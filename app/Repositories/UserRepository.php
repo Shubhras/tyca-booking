@@ -251,6 +251,44 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param  array  $userInput
+     * @return bool
+     */
+    public function memberProfile($userInput)
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = Auth::user();
+
+            //$user->update($userInput);
+
+            if ((getLogInUser()->hasRole('patient'))) {
+                if (! empty($userInput['image'])) {
+                    $user->clearMediaCollection(User::PROFILE);
+                    $user->media()->delete();
+                    $user->addMedia($userInput['image'])->toMediaCollection(User::PROFILE,
+                        config('app.media_disc'));
+                }
+            } else {
+                if ((! empty($userInput['image']))) {
+                    $user->clearMediaCollection(User::PROFILE);
+                    $user->media()->delete();
+                    $user->addMedia($userInput['image'])->toMediaCollection(User::PROFILE, config('app.media_disc'));
+                }
+            }
+
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            throw new UnprocessableEntityHttpException($e->getMessage());
+        }
+    }
+
+    /**
      * @param $doctor
      * @return mixed
      */

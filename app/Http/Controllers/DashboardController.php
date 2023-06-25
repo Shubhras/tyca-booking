@@ -80,7 +80,10 @@ class DashboardController extends AppBaseController
     public function patientDashboard()
     {
         $data = $this->dashboardRepository->getPatientData();
-
-        return view('patient_dashboard.index', compact('data'));
+        //echo '<pre>';
+        //print_r($data['upcomingAppointment']);
+        //echo '<next>';
+        //die('dddd');
+        return view('member.portal', compact('data'));
     }
 }

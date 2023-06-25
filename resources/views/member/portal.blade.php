@@ -5,10 +5,11 @@
 
 
 @section('front-content')
-
+@include('flash::message')
+@include('layouts.errors')
 <div class="transition-none">
     
-      <section class="title-hero-bg parallax-effect" style="background-image: url(assets/images/Frame_3.png);">
+      <section class="title-hero-bg parallax-effect" style="background-image: url({{asset('assets/images/Frame_3.png')}})">
                
         <div class="container">
             <div class="page-title text-center white-color">
@@ -23,10 +24,10 @@
 
   <section class="tab-section">
   <ul class="nav" style="justify-content: center;">
-    <li class="nav-item">
+    <li class="nav-item1">
         <a class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest" type="button" role="tab" aria-controls="latest" aria-selected="true">Member’s Information</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item1">
         <a class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="true">Bookings</a>
     </li>
 </ul>
@@ -39,12 +40,12 @@
 
 <div class="row" id="customer-review_wrap">
 <div class="col-md-2" id="customer-img">
-<img src="assets/images/Group 4111.png" alt="" class="cust-img">
+<img src="{{ getLogInUser()->profile_image }}" alt="" class="cust-img">
 </div>
 <div class="col-md-4" id="customer-content-wrap">
 <div class="your-rating-wrap">
-<span>Hoe Wei</span>
-<p>weige420@gmail.com</p>
+<span>{{$data['user']->first_name}} {{$data['user']->last_name}}</span>
+<p>{{$data['user']->email}}</p>
 </div>
 
 <div class="row btn-portal">
@@ -52,7 +53,10 @@
 <button class="up-btn"data-bs-toggle="modal"data-bs-target="#update_info_modal">Update Information</button>
 </div>
 <div class=" col-md-4 logout-btn">
-<button class="log-btn">Log Out</button>
+<button class="log-btn" onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">Log Out</button>
+<form id="logout-form" action="{{ route('logout')}}" method="post">
+        @csrf
+</form>
 </div>
 </div>
 </div>
@@ -62,10 +66,10 @@
     <div class="tab-pane fade" id="upcoming" role="tabpanel">
         <!-- Content for Tab 2 -->
         <ul class="nav">
-             <li class="nav-item">
+             <li class="nav-item1">
                  <a class="nav-link active" id="latests-tab-1" data-bs-toggle="tab" data-bs-target="#latests" type="button" role="tab" aria-controls="latests" aria-selected="true">Upcoming</a>
              </li>
-             <li class="nav-item">
+             <li class="nav-item1">
                  <a class="nav-link" id="upcomings-tab-2" data-bs-toggle="tab" data-bs-target="#upcomings" type="button" role="tab" aria-controls="upcomings" aria-selected="true">Past</a>
              </li>
         </ul>
@@ -90,20 +94,22 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($data['todayAppointment'] as $appointment)
     <tr style="color: #111827;">
-      <td>Thank You Come Again @ Balestier</td>
-      <td>Hot Desk</td>
-      <td>Hour Plan</td>
-      <td>17 Mar 2023  3.00 pm</td>
-      <td>$4.00</td>
-      <td>PayPal</td>
+      <td>{{ $appointment->doctor->user->fullname}}</td>
+      <td>{{ $appointment->doctor->user->email}}</td>
+      <td>{{ $appointment->payment_type }}</td>
+      <td>{{ $appointment->date }}</td>
+      <td>${{ $appointment->payable_amount }}.00</td>
+      <td>{{ $appointment->payment_method }}</td>
       <td>Paid</td>
-      <td>Booked</td>
+      <td>{{ $appointment->status }}</td>
       
-      <td><a data-bs-toggle="modal"data-bs-target="#booked_info_modal"><i class="fa-solid fa-eye"></a></i>
-     <a data-bs-toggle="modal"data-bs-target="#cancel_booking_modal"> <i class="fa-solid fa-xmark"></i></a>
+      <td><a onclick="bookedInfo({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
+     <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
+    @endforeach
   </tbody>
 </table>  
 </div>
@@ -127,18 +133,22 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($data['upcomingAppointment'] as $appointment)
     <tr style="color: #111827;">
-      <td>Thank You Come Again @ Balestier</td>
-      <td>Hot Desk</td>
-      <td>Hour Plan</td>
-      <td>17 Mar 2023  3.00 pm</td>
-      <td>$4.00</td>
-      <td>PayPal</td>
+      <td>{{ $appointment->doctor->user->fullname}}</td>
+      <td>{{ $appointment->doctor->user->email}}</td>
+      <td>{{ $appointment->payment_type }}</td>
+      <td>{{ $appointment->date }}</td>
+      <td>${{ $appointment->payable_amount }}.00</td>
+      <td>{{ $appointment->payment_method }}</td>
       <td>Paid</td>
-      <td>Cancelled</td>
-      <td><a data-bs-toggle="modal"data-bs-target="#booking_cancel_modal"><i class="fa-solid fa-eye"></a></i>
+      <td>{{ $appointment->status }}</td>
+      
+      <td><a onclick="bookedInfo({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
+     <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
+    @endforeach
   </tbody>
 
 
@@ -162,14 +172,14 @@
             </div>
             <div class="books-spaces">BOOKING INFORMATION</div>
             <div class="book-p">
-                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
-                <p>Booking Space: <b>Hot Desk</b></p>
-                <p>Plan Type: <b>Hour Plan</b></p>
-                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
-                <p>Payable Amount:<b> $4.00</b></p>
-                <p>Payment Method: <b>PayPal</b></p>
-               <p>Payment Status: <b> Paid</b></p>
-               <p>Booking Status: <b>Booked</b></p>
+                <p>Outlet: <b id="outinfo"></b></p>
+                <p>Booking Space: <b id="bookSpaceInfo"></b></p>
+                <p>Plan Type: <b id="planTypeInfo"></b></p>
+                <p>Appointment At: <b id="appointAtIfo"></b></p>
+                <p>Payable Amount: <b id="payableInfo"></b></p>
+                <p>Payment Method: <b id="paymentMethod"></b></p>
+               <p>Payment Status: <b id="statusInfo"></b></p>
+               <p>Booking Status: <b id="bookedInfo"></b></p>
            </div>
             </div>
         </div>
@@ -177,32 +187,6 @@
 </div>
 
 
-
-
-
-<div id="booking_cancel_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header-1">
-                
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="books-spaces">BOOKING INFORMATION</div>
-            <div class="book-p">
-                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
-                <p>Booking Space: <b>Hot Desk</b></p>
-                <p>Plan Type: <b>Hour Plan</b></p>
-                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
-                <p>Payable Amount:<b> $4.00</b></p>
-                <p>Payment Method: <b>PayPal</b></p>
-               <p>Payment Status: <b> Paid</b></p>
-               <p>Booking Status: <b>Cancelled</b></p>
-           </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
@@ -216,18 +200,18 @@
             <div class="books-spaces">CANCEL BOOKING</div>
             <p class="follow-booking">Do you want to cancel the following booking?</p>
             <div class="book-p-cancel">
-                <p>Outlet: <b>Thank You Come Again @ Balestier</b></p>
-                <p>Booking Space: <b>Hot Desk</b></p>
-                <p>Plan Type: <b>Hour Plan</b></p>
-                <p>Appointment At: <b>17 Mar 2023  3.00 pm</b></p>
-                <p>Payable Amount:<b> $4.00</b></p>
-                <p>Payment Method: <b>PayPal</b></p>
-               <p>Payment Status: <b> Paid</b></p>
-               <p>Booking Status: <b>Booked</b></p>
+                <p>Outlet: <b id="coutinfo"></b></p>
+                <p>Booking Space: <b id="cbookSpaceInfo"></b></p>
+                <p>Plan Type: <b id="cplanTypeInfo"></b></p>
+                <p>Appointment At: <b id="cappointAtIfo"></b></p>
+                <p>Payable Amount: <b id="cpayableInfo"></b></p>
+                <p>Payment Method: <b id="cpaymentMethod"></b></p>
+               <p>Payment Status: <b id="cstatusInfo"></b></p>
+               <p>Booking Status: <b id="cbookedInfo"></b></p>
            </div>
            <div class="btn-cancel-booking">
 <div class="cancel-yes-btn">
-<button class="yes-btn" data-bs-toggle="modal"data-bs-target="#cancel_confirm_modal">Yes</button>
+<button class="yes-btn" onclick="cancelAppoint();" data-bs-toggle="modal"data-bs-target="#cancel_confirm_modal">Yes</button>
 </div>
 <div class="cancel-no-btn">
 <button class="no-btn">No</button>
@@ -276,55 +260,68 @@
             </div>
             <div class="book-space">UPDATE INFORMATION</div>
             <div class="modal-body">
+                <form method="POST" action="{{ route('updateMember') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="alert alert-danger d-none hide"></div>
                 <div class="row">
                     <div class="form-group col-sm-6">
                         {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label']) }}
                         <span class=""></span>
-                        {{ Form::text('First Name', null, ['class' => 'form-control','required','placeholder' => __('First Name')]) }}
+                        <input name="first_name" type="text" class="form-control" id="name" aria-describedby="firstName"
+                                placeholder="{{ __('messages.patient.first_name') }}" value="{{ $data['user']->first_name }}"
+                                required>
                     </div>
                     <div class="form-group col-sm-6">
                         {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label']) }}
                         <span class=""></span>
-                        {{ Form::text('Last Name', null, ['class' => 'form-control','required','placeholder' => __('Last Name')]) }}
+                        <input name="last_name" type="text" class="form-control" id="last_name"
+                                aria-describedby="lastName" placeholder="{{ __('messages.patient.last_name') }}" required
+                                value="{{ $data['user']->last_name }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-12">
                         {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label']) }}
                         <span class=""></span>
-                        {{ Form::text('Email', null, ['class' => 'form-control','required','placeholder' => __('Email')]) }}
+                        <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
+                                placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}" required disabled>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-6">
                         {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label']) }}
                         <span class=""></span>
-                        {{ Form::text('New Password', null, ['class' => 'form-control','required','placeholder' => __('New Password')]) }}
+                        <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="{{ __('messages.patient.password') }}" aria-describedby="password">
                     </div>
                     <div class="form-group col-sm-6">
                         {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label']) }}
                         <span class=""></span>
-                        {{ Form::text('Confirm New Password', null, ['class' => 'form-control','required','placeholder' => __('Confirm New Password')]) }}
+                        <input name="password_confirmation" type="password" class="form-control"
+                                    placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
+                                    aria-describedby="confirmPassword">
                     </div>
                 </div>
 
                 <div class="row">
                 <p>Icon</p>
                     <div class="form-group col-sm-6">
-                      <img src="assets/images/Group 4111.png" alt="" class="cust-img" style="width: 100px;">
+                      <img src="{{$data['user']->profile_image}}" alt="" class="cust-img" style="width: 100px;">
                     </div>
                     <div class="form-group col-sm-12"id="icon-pen">
+                    <label>
                     <i class="fa-solid fa-pen"></i>
+                    <input type="file" id="profilePicture" name="image" class="image-upload d-none profile-validation" accept="image/*" />
+                    </label>
                     </div>
                 </div>
 
             
                 <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="button" class="btns btn-secondarys"
-                        data-bs-dismiss="modal">{{ __('Update') }}</button>
+                    <button type="submit" class="btns btn-secondarys">{{ __('Update') }}</button>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -460,7 +457,7 @@ a#tab2 {
     font-weight: 500;
     font-size: 22px;
 }
-li.nav-item {
+li.nav-item1 {
     width: 50%;
     text-align: center;
 }
@@ -837,4 +834,49 @@ h5, .fs-5 {
 }
 }
 </style>
- 
+<script type="text/javascript">
+
+function bookedInfo(data){
+    document.getElementById('outinfo').innerHTML = data.doctor.user.full_name;
+    document.getElementById('bookSpaceInfo').innerHTML = data.doctor.user.email; 
+    document.getElementById('planTypeInfo').innerHTML = data.payment_type; 
+    document.getElementById('appointAtIfo').innerHTML = data.date; 
+    document.getElementById('payableInfo').innerHTML =  "$" + data.payable_amount + ".00";
+    document.getElementById('paymentMethod').innerHTML = data.payment_method; 
+    document.getElementById('statusInfo').innerHTML =  "Paid";
+    document.getElementById('bookedInfo').innerHTML =  data.status;
+    $("#booked_info_modal").modal('show');
+}
+
+function cancelConfirm(data){
+    document.getElementById('coutinfo').innerHTML = data.doctor.user.full_name;
+    document.getElementById('cbookSpaceInfo').innerHTML = data.doctor.user.email; 
+    document.getElementById('cplanTypeInfo').innerHTML = data.payment_type; 
+    document.getElementById('cappointAtIfo').innerHTML = data.date; 
+    document.getElementById('cpayableInfo').innerHTML =  "$" + data.payable_amount + ".00";
+    document.getElementById('cpaymentMethod').innerHTML = data.payment_method; 
+    document.getElementById('cstatusInfo').innerHTML =  "Paid";
+    document.getElementById('cbookedInfo').innerHTML =  data.status;
+    $("#cancel_booking_modal").modal('show');
+}
+
+function cancelAppoint() {
+    $.ajax({
+        type: 'POST',
+        url: "{{ route('cancelAppoint') }}",
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "name": "name"
+        },
+        success: function(data) {
+            if (data.success == true) {
+                $("#cancel_confirm_modal").modal('show');
+            } else {
+                //var url = "{{ route('login') }}";
+                //location.href = url;
+            }
+        }
+    });
+
+}
+</script>

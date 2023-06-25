@@ -158,7 +158,8 @@ class DashboardRepository
     {
         $todayDate = Carbon::now()->format('Y-m-d');
         $patientId = getLogInUser()->patient->id;
-
+        $userId = getLogInUser()->patient->user_id;
+        $data['user'] = User::with(['media'])->where("id",$userId)->first();
         $todayCompleted = Appointment::wherePatientId($patientId)->where('date', '=',
             $todayDate)->whereStatus(Appointment::CHECK_OUT)->count();
         $data['todayAppointmentCount'] = Appointment::wherePatientId($patientId)->where('date', '=',

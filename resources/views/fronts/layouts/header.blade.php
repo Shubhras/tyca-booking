@@ -35,6 +35,14 @@
                                    href="{{ route('medicalContact') }}"
                                    data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                             </li>
+                            <li class="nav-item">
+                                        @if(getLogInUser())
+                                        <a class="nav-link">{{ getLogInUser()->full_name }}</a>
+                                        @else
+                                        <a href="{{ route('login') }}"
+                                       class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.login') }}</a>
+                                        @endif
+                                    </li>
 
                         {{--     <li class="nav-item dropdown">
                                 <a href="javascript:void(0)" class="nav-link" id="dropdownMenuLink"
@@ -58,29 +66,10 @@
                                             @endforeach
                                         </ul>
                                     </li>
+                                    
                                 </ul>
                             </li>--}}
                         </ul>
-                        <div class="text-lg-end header-btn-grp ms-xxl-5 ms-lg-3">
-                                @if(getLogInUser())
-                                    @if(getLogInUser()->hasRole('doctor'))
-                                        <a href="{{ route('doctors.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.dashboard') }}</a>
-                                    @elseif(getLogInUser()->hasRole('patient'))
-                                        <a href="{{ route('patients.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.dashboard') }}</a>
-                                    @else
-                                        <a href="{{ route('admin.dashboard') }}"
-                                           class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.dashboard') }}</a>
-                                    @endif
-                                @else
-                                    <a href="{{ route('login') }}"
-                                       class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.login') }}</a>
-                                @endif
-
-                                    <!-- <a href="{{ route('medicalAppointment') }}" class="btn btn-primary mb-3 mb-lg-0">{{ __('messages.web.book_an_appointment') }}</a> -->
-                        </div>
-                    </div>
                 </nav>
             </div>
         </div>
