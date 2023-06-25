@@ -285,6 +285,7 @@ class AppointmentController extends AppBaseController
     {
         if ($request->ajax()) {
             $input = $request->all();
+
             $data = $this->appointmentRepository->getCalendar();
 
             return $this->sendResponse($data, __('messages.flash.appointment_retrieve'));

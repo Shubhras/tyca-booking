@@ -410,24 +410,29 @@ class AppointmentRepository extends BaseRepository
      */
     public function getCalendar()
     {
-        /** @var Appointment $appointment */
-        $appointments = Appointment::with(['doctor.user', 'user'])->get();
+
+        $appointments = Appointment::with(['user'])->get();
         $data = [];
         $count = 0;
+
         foreach ($appointments as $key => $appointment) {
             $startTime = $appointment->from_time.' '.$appointment->from_time_type;
             $endTime = $appointment->to_time.' '.$appointment->to_time_type;
             $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
             $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+
+
             $data[$key]['id'] = $appointment->id;
             $data[$key]['title'] = $startTime.'-'.$endTime;
             $data[$key]['doctorName'] = $appointment->doctor->user->full_name;
             $data[$key]['patient'] = $appointment->patient->user->full_name;
             $data[$key]['start'] = $start->toDateTimeString();
             $data[$key]['description'] = $appointment->description;
+
             $data[$key]['status'] = $appointment->status;
             $data[$key]['amount'] = $appointment->payable_amount;
             $data[$key]['uId'] = $appointment->appointment_unique_id;
+
             $data[$key]['service'] = $appointment->services->name;
             $data[$key]['end'] = $end->toDateTimeString();
             $data[$key]['color'] = '#FFF';

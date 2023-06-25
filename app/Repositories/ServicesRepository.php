@@ -58,7 +58,7 @@ class ServicesRepository extends AppBaseController
             DB::beginTransaction();
 
             $input['charges'] = str_replace(',', '', $input['charges']);
-            $input['status'] = (isset($input['status'])) ? 1 : 0;
+            $input['status'] = (isset($input['status'])) ? 1 : 1;
             $services = Service::create($input);
             if (isset($input['doctors']) && ! empty($input['doctors'])) {
                 $services->serviceDoctors()->sync($input['doctors']);
@@ -118,7 +118,7 @@ class ServicesRepository extends AppBaseController
         try {
             DB::beginTransaction();
             $input['charges'] = str_replace(',', '', $input['charges']);
-            $input['status'] = (isset($input['status'])) ? 1 : 0;
+            $input['status'] = (isset($input['status'])) ? 1 : 1;
             $service->update($input);
             $service->serviceDoctors()->sync($input['doctors']);
             $service->serviceSpecializations()->sync($input['specializations']);
@@ -137,29 +137,33 @@ class ServicesRepository extends AppBaseController
                 }
             }
 
-            if (isset($input['above_count_hourly']) && ! empty('above_count_hourly') && isset($input['rate_hourly']) && ! empty('rate_hourly')) {
+            if (isset($input['above_count_hourly']) && !empty('above_count_hourly') && isset($input['rate_hourly']) && !empty('rate_hourly')) {
                 $rates = [];
                 foreach ($input['above_count_hourly'] as $index => $value) {
-                    $rates[] = [
-                        'above_count' => $value,
-                        'rate' => $input['rate_hourly'][$index],
-                        'discount_type' => 'hourly',
-                        'service_id' => $service->id,
-                    ];
+                    if($value > 0) {
+                        $rates[] = [
+                            'above_count' => $value,
+                            'rate' => $input['rate_hourly'][$index],
+                            'discount_type' => 'hourly',
+                            'service_id' => $service->id,
+                        ];
+                    }
                 }
                 ServiceDiscountRates::where('service_id', $service->id)->where('discount_type', 'hourly')->delete();
                 ServiceDiscountRates::insert($rates);
             }
 
-            if (isset($input['above_count_daily']) && ! empty('above_count_daily') && isset($input['rate_daily']) && ! empty('rate_daily')) {
+            if (isset($input['above_count_daily']) && !empty('above_count_daily') && isset($input['rate_daily']) && !empty('rate_daily')) {
                 $rates = [];
                 foreach ($input['above_count_daily'] as $index => $value) {
+                if($value > 0) {
                     $rates[] = [
                         'above_count' => $value,
                         'rate' => $input['rate_daily'][$index],
                         'discount_type' => 'daily',
                         'service_id' => $service->id,
                     ];
+                }
                 }
                 ServiceDiscountRates::where('service_id', $service->id)->where('discount_type', 'daily')->delete();
                 ServiceDiscountRates::insert($rates);
