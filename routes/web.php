@@ -312,6 +312,8 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
     Route::middleware('permission:manage_front_cms')->group(function () {
         Route::get('cms', [CMSController::class, 'index'])->name('cms.index');
         Route::post('cms', [CMSController::class, 'update'])->name('cms.update');
+        Route::get('cmsbody', [CMSController::class, 'cmsbody'])->name('cmsbody.index');
+        Route::post('cmsbody', [CMSController::class, 'cmsbodyupdate'])->name('cmsbody.update');
         Route::resource('sliders', SliderController::class)->except('create', 'store', 'destroy', 'show');
         Route::resource('faqs', FaqController::class);
         Route::resource('front-patient-testimonials', FrontPatientTestimonialController::class);

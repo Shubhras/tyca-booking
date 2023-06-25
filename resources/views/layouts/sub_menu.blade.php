@@ -153,29 +153,13 @@
 @can('manage_front_cms')
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/front-services*','admin/faqs*','admin/front-patient-testimonials*','admin/cms*','admin/sliders*') ? 'd-none' : '' }}">
         <a class="nav-link p-0 {{ Request::is('admin/cms*') ? 'active' : '' }}"
-           href="{{ route('cms.index') }}">{{ __('messages.cms.cms') }}</a>
+           href="{{ route('cms.index') }}">Header</a>
     </li>
-    <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/front-services*','admin/faqs*','admin/front-patient-testimonials*','admin/cms*','admin/sliders*') ? 'd-none' : '' }}">
-        <a class="nav-link p-0 {{ Request::is('admin/sliders*') ? 'active' : '' }}"
-           href="{{ route('sliders.index') }}">{{ __('messages.sliders') }}</a>
-    </li>
-    <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/front-services*','admin/faqs*','admin/front-patient-testimonials*','admin/cms*','admin/sliders*') ? 'd-none' : '' }}">
-        <a class="nav-link p-0 {{ Request::is('admin/faqs*') ? 'active' : '' }}"
-           href="{{ route('faqs.index') }}">{{ __('messages.faqs') }}</a>
-    </li>
-    <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/front-services*','admin/faqs*','admin/front-patient-testimonials*','admin/cms*','admin/sliders*') ? 'd-none' : '' }}">
-        <a class="nav-link p-0 {{ Request::is('admin/front-patient-testimonials*') ? 'active' : '' }}"
-           href="{{ route('front-patient-testimonials.index') }}">{{ __('messages.front_patient_testimonials') }}</a>
-    </li>
-    <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/enquiries*') ? 'd-none' : '' }}">
-        <a class="nav-link p-0 {{ Request::is('admin/enquiries*') ? 'active' : '' }}"
-           href="{{ route('enquiries.index') }}">{{ __('messages.enquiries') }}</a>
+    <li class="nav-item position-relative mx-xl-3 ml-3 mb-3 mb-xl-0 {{ !Request::is('admin/front-services*','admin/faqs*','admin/front-patient-testimonials*','admin/cms*','admin/cmsbody*') ? 'd-none' : '' }}">
+        <a class="nav-link p-0 {{ Request::is('admin/cmsbody*') ? 'active' : '' }}"
+           href="{{ route('cmsbody.index') }}">{{ __('messages.cms.cmd_body') }}</a>
     </li>
 
-    <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/subscribers*') ? 'd-none' : '' }}">
-        <a class="nav-link p-0 {{ Request::is('admin/subscribers*') ? 'active' : '' }}"
-           href="{{ route('subscribers.index') }}">{{ __('messages.subscribers') }}</a>
-    </li>
 @endcan
 @can('manage_transactions')
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ !Request::is('admin/transactions*') ? 'd-none' : '' }}">

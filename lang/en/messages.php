@@ -143,9 +143,9 @@ return [
         'total_doctors' => 'Total Outlets',
         'total_registered_patient' => 'Total Registered Customers',
         'total_specializations' => 'Total Specializations',
-        'about_title' => 'About Title',
+        'about_title' => 'Title',
         'about_experience' => 'About Experience',
-        'about_short_description' => 'About Short Description',
+        'about_short_description' => 'Short Description',
         'patient_registration' => 'Customer Registration',
         'already_have_an_account' => 'Already have an account',
         'sign_in_here' => 'Sign in here',
@@ -667,7 +667,9 @@ return [
         'cms' => 'CMS',
         'terms_conditions' => 'Terms & Conditions',
         'privacy_policy' => 'Privacy Policy',
-        'about_image' => 'About Image',
+        'about_image' => 'Background Image',
+        'cmd_body' => 'Body',
+
     ],
 
     'how_we_cares' => [
@@ -895,6 +897,7 @@ return [
         'update_front_testimonial' => 'Testimonial updated successfully.',
         'setting_update' => 'Settings updated successfully.',
         'cms_update' => 'CMS updated successfully.',
+        'bodyimage_update' => 'Background Image updated successfully.',
         'enquire_sent' => 'Enquiry Sent Successfully',
         'messages_sent' => 'Message Send Successfully',
         'enquire_deleted' => 'Enquiry deleted successfully.',
