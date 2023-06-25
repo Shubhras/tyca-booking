@@ -76,7 +76,13 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        $specializations = Specialization::pluck('name', 'id')->toArray();
+        //$specializations = Specialization::pluck('name', 'id')->toArray();
+        $items = Specialization::with(['media'])->select('name', 'id')->where('status', 1)->get();
+        $specializations = [];
+        foreach ($items as $item) {
+            $specializations[$item->id] =  '<img height="20" width="20" src="'. $item->icon .'"/> ' . $item->name;
+        }
+
         $country = $this->userRepo->getCountries();
         $bloodGroup = Doctor::BLOOD_GROUP_ARRAY;
 
@@ -131,6 +137,8 @@ class UserController extends AppBaseController
         $user = $doctor->user()->first();
         $qualifications = $user->qualifications()->get();
         $data = $this->userRepo->getSpecializationsData($doctor);
+        //print_r($data['specializationsWithImage']);die;
+
         $bloodGroup = Doctor::BLOOD_GROUP_ARRAY;
         $countries = $this->userRepo->getCountries();
         $state = $cities = null;

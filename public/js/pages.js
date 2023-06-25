@@ -7812,6 +7812,20 @@ listenClick('.removeAvatarIcon', function () {
   $('#bgImage').css('background-image', 'url(' + backgroundImg + ')');
   $('#removeAvatar').remove();
 });
+document.addEventListener('turbo:load', function () {
+  $('.amenities-select').select2({
+    escapeMarkup: function escapeMarkup(m) {
+      return m;
+    } // templateSelection: function (state) {
+    //     if(state.element && typeof specializationsWithImage[state.element.value].icon != "undefined"){
+    //         let img = '';
+    //         state = `<span class="select2-option-img"><img src="${specializationsWithImage[state.element.value].icon}"><span> ${state.text}`;
+    //     }
+    //     return state;
+    // }
+
+  });
+});
 
 /***/ }),
 
