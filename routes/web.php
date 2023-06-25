@@ -39,6 +39,7 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,7 @@ Route::post('/change-language', [FrontController::class, 'changeLanguage'])->nam
 
 //Dark Mode
 Route::get('update-dark-mode', [UserController::class, 'updateDarkMode'])->name('update-dark-mode');
+Route::post('authorize-check', 'App\Http\Controllers\HomeController@authorizeCheck')->name('authorize-check');
 
 //Stripe route
 Route::get('/medical-payment-success',
