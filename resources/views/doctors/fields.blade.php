@@ -241,6 +241,7 @@
     border-radius: 100%
 }
 </style>
+<<<<<<< HEAD
 
 <script>
     var quill = new Quill('#doctorDescriptionId', {
@@ -249,28 +250,6 @@
   </script>
 
 <script type="text/javascript">
-
-// let quill7 = new Quill('#doctorDescriptionId', {
-//     modules: {
-//         toolbar: [
-//             [
-//                 {
-//                     header: [1, 2, false],
-//                 }],
-//             ['bold', 'italic', 'underline'],
-//             [ 'code-block'],
-//         ],
-//     },
-//     placeholder: 'Description',
-//     theme: 'snow', // or 'bubble'
-// })
-// quill7.on('text-change', function (delta, oldDelta, source) {
-//     if (quill7.getText().trim().length === 0) {
-//         $('#detail').val(quill2.container.firstChild.innerHTML);
-//         quill7.setContents([{ insert: '' }])
-//     }
-// })
-
 
 function previewImage(e, selectedFiles, imagesArray) {
   const elemContainer = document.createElement('div');

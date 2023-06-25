@@ -8,10 +8,9 @@
     </div>
     <div class="col-lg-12">
         <div class="mb-5">
-            {{ Form::label('short_description', __('messages.service.description').':', ['class' => 'form-label
-            required']) }}
-            {{ Form::textarea('short_description', null, ['class' => 'form-control', 'placeholder' =>
-            __('messages.service.description'), 'rows'=> 5,'maxlength'=> 60]) }}
+            {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label required']) }}
+            <div id="doctorDescriptionId" class="editor-height" style="height: 150px"> <?php if(isset($service->short_description)){  echo strip_tags($service->short_description);   ?>   <?php } ?>       </div>
+            {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
         </div>
     </div>
     <div class="col-lg-6 mb-5">
@@ -21,14 +20,12 @@
         'form-control io-select2', 'data-placeholder' => __('messages.common.select_specializations'),
         'data-control'=>'select2','multiple']) }}
     </div>
-
     <div class="col-lg-6 mb-5">
         {{ Form::label('doctors', __('messages.doctors').':', ['class' => 'form-label required']) }}
         {{ Form::select('doctors[]',$data['doctors'],(isset($selectedDoctor)) ? $selectedDoctor : null,['class' =>
         'form-control io-select2', 'data-placeholder' => __('messages.doctor.select_doctors'),
         'data-control'=>'select2','multiple']) }}
     </div>
-
     <div class="col-lg-12 mt-5">
         <div class="card">
             <div class="card-header p-0"><h4 class="required">Pricing</h4></div>
@@ -82,9 +79,9 @@
                     <div class="col-4">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.above')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.above')}}
+                                </span>
                             </div>
                             <input
                                 type="text"
@@ -94,9 +91,9 @@
                                 onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
                             />
                             <div class="input-group-append">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.hours')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.hours')}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -110,9 +107,9 @@
                                 name="rate_hourly[]"
                             />
                             <div class="input-group-append">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.per_hour')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.per_hour')}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -129,9 +126,9 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    Above
-                </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                        Above
+                                    </span>
                                 </div>
                                 <input
                                     value="{{$discounts['above_count']}}"
@@ -139,9 +136,9 @@
                                     placeholder="No. of" name="above_count_hourly[]"
                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)">
                                 <div class="input-group-append">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    Hours
-                </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                        Hours
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -155,15 +152,14 @@
                                     placeholder="Discount %"
                                     name="rate_hourly[]"
                                 >
-                                <div class="input-group-append">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    per hour
-                </span>
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    per hour
+                                </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-1 action-btn">
-
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
@@ -228,9 +224,9 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-            <span class="input-group-text bg-white border-0 text-dark">
-            Above
-            </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                    Above
+                                    </span>
                                 </div>
                                 <input
                                     type="text"
@@ -249,31 +245,34 @@
                             </div>
                         </div>
                         <div class="vr bg-black opacity-100 p-1px"></div>
-                        <div class="col-4">
-                            <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Discount %"
-                                    name="rate_daily[]"
-                                    value="{{$discounts['rate']}}"
-                                    onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
-                                >
-                                <div class="input-group-append">
-            <span class="input-group-text bg-white border-0 text-dark">
-            per hour
-            </span>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Discount %"
+                                        name="rate_daily[]"
+                                        value="{{$discounts['rate']}}"
+                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
+                                    >
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-white border-0 text-dark">
+                                        per hour
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-1 action-btn">
+                                <button type="button" class="btn btn-sm btn-danger remove-field">
+                                    <span class=" fa fa-minus"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-1 action-btn">
-                            <button type="button" class="btn btn-sm btn-danger remove-field">
-                                <span class=" fa fa-minus"></span>
-                            </button>
-                        </div>
+
+
                         @endforeach
                         @endif
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -298,42 +297,100 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12 mb-7">
             <div class="mb-3" io-image-input="true">
                 <label for="exampleInputImage"
                        class="form-label required">{{__('messages.front_service.photos')}}:</label>
-                <div class="d-block">
-                    <div class="image-picker">
-                        @if(isset($service))
-                        @foreach ($service->gallery as $image)
-                        <div class="image previewImage" id="exampleInputImage"
-                             style="background-image: url({{ !empty($image) ? $image : asset('web/media/avatars/male.png') }})">
-                        </div>
-                        @endforeach
-                        @else
-                        <div class="image previewImage" id="exampleInputImage"
-                             style="background-image: url({{  asset('web/media/avatars/male.png') }})">
-                        </div>
-                        @endif
-                        <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
-                              data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label>
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
-                            <input type="file" id="gallery" name="gallery[]"
-                                   class="image-upload d-none icon-validation" accept="image/*" multiple/>
-                        </label>
-                    </span>
-                    </div>
+
+                       <div class="item-upload">
+
+                <input  type="file" accept="image/*" id="gallery" name="gallery[]" multiple/>
+                <div id="photo-upload__preview" class="upload-preview" >
+
+                <?php if(isset($service)) { ?>
+                <div class="item-images">
+                    <?php foreach($service->gallery as $image) { ?>
+                    <div>
+                    <img src="<?php echo $image; ?>" class="item-photo__preview">
+                    <?php
+                    $filename = explode("/", $image);
+                        ?>
+                    <button type="button" class="delete" data-filename="<?php echo $filename[5]; ?>" data-id="<?php echo $filename[4]; ?>"><span>×</span>
+                </button></div>
+                <?php } ?>
+
+                </div>
+
+                <?php } ?>
+
+                </div>
                 </div>
             </div>
         </div>
 
-        <div>
+
+
+    </div>
+    <div class="col-lg-12 mb-7">
             {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
             <a href="{{route('services.index')}}" type="reset"
                class="btn btn-secondary">{{__('messages.common.discard')}}</a>
         </div>
-    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+    var quill = new Quill('#doctorDescriptionId', {
+      theme: 'snow'
+    });
+
+    $(document).ready(function(){
+
+$(window).click(function(e) {
+let element = document.createElement('textarea')
+let editor_content_1 = quill.root.innerHTML
+element.innerHTML = editor_content_1
+
+$('#short_description').val($(".ql-editor").html());
+});
+});
+
+
+  </script>
+<style>
+.item-photo__preview {
+  width: 100px;
+  height: 100px;
+}
+.item-images > div
+{
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.delete
+{
+    position: absolute;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 100%
+}
+</style>
+
     <script type="text/javascript">
         listenClick('#addHourlyCharge', function (event) {
             //console.log(event, $('.hourly_records').clone())
@@ -362,4 +419,59 @@
             $(event.target).parents('div').parent('.remove').remove()
             event.preventDefault();
         });
+
+function previewImage(e, selectedFiles, imagesArray) {
+  const elemContainer = document.createElement('div');
+  elemContainer.setAttribute('class', 'item-images');
+  for (let i = 0; i < selectedFiles.length; i++) {
+    imagesArray.push(selectedFiles[i]);
+    const imageContainer = document.createElement('div');
+    const elem = document.createElement('img');
+    elem.setAttribute('src', URL.createObjectURL(selectedFiles[i]));
+    elem.setAttribute('class', 'item-photo__preview')
+    const removeButton = document.createElement('button');
+    removeButton.setAttribute('type', 'button');
+    removeButton.classList.add('delete');
+    removeButton.dataset.filename = selectedFiles[i].name,
+    removeButton.innerHTML = '<span>&times;</span>'
+    imageContainer.appendChild(elem);
+    imageContainer.appendChild(removeButton);
+    elemContainer.appendChild(imageContainer);
+  }
+  return elemContainer;
+}
+var item_images = [];
+document.getElementById('gallery').addEventListener('change', (e) => {
+  var selectedFiles = e.target.files;
+
+  const photoPreviewContainer = document.querySelector('#photo-upload__preview');
+  const elemContainer = previewImage(e, selectedFiles, item_images);
+  photoPreviewContainer.appendChild(elemContainer);
+});
+
+document.getElementById('photo-upload__preview').addEventListener('click', (e) => {
+  const tgt = e.target.closest('button');
+  if (tgt.classList.contains('delete')) {
+
+       let fileId = tgt.dataset.id;
+    $.ajax({
+        url: route('delete-media', fileId),
+        type: 'POST',
+        data: {
+            fileId: fileId,
+        },
+        success: function (result) {
+
+        },
+    });
+    tgt.closest('div').remove();
+    const fileName = tgt.dataset.filename
+    item_images = item_images.filter(img => img.name != fileName)
+  }
+})
+
+
+
+
+
     </script>
