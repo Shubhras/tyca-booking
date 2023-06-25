@@ -7,7 +7,7 @@
 @section('front-content')
 
 <div class="transition-none">
-    <section class="title-hero-bg parallax-effect">
+    <section class="title-hero-bg parallax-effect" style="background-image: url(assets/images/Frame_3.png);">
 
         <img src="/assets/images/Frame_3.png" alt="" class="">
 
@@ -425,6 +425,7 @@ function displayMessage() {
 </script>
 
 <style>
+    
 .modal-header {
     border-bottom: none !important;
 }

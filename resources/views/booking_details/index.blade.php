@@ -242,9 +242,9 @@ h5.text-white.mb-4.pb-1 {
 }
 
 }
-@media (min-width: 767px) and (max-width: 800px){
+@media (min-width: 768px) and (max-width: 800px){
 h5, .fs-5 {
-    font-size: 14px !important;
+    font-size: 14px!important;
 }
 }
     </style>
