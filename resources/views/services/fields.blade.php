@@ -7,13 +7,13 @@
         </div>
     </div>
     <div class="col-lg-12">
-        <div class="mb-5">
-            {{ Form::label('short_description', __('messages.service.description').':', ['class' => 'form-label
-            required']) }}
-            {{ Form::textarea('short_description', null, ['class' => 'form-control', 'placeholder' =>
-            __('messages.service.description'), 'rows'=> 5,'maxlength'=> 60]) }}
-        </div>
+    <div class="mb-5">
+        {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label required']) }}
+        <div id="doctorDescriptionId" class="editor-height" style="height: 150px"> <?php if(isset($service->short_description)){ ?>   <?php } ?>       </div>
+        {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
     </div>
+</div>
+
     <div class="col-lg-6 mb-5">
         {{ Form::label('specializations', __('messages.specializations').':', ['class' => 'form-label required']) }}
         {{ Form::select('specializations[]',$data['specializations'],(isset($selectedSpecializations)) ?
@@ -298,42 +298,86 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12 mb-7">
             <div class="mb-3" io-image-input="true">
                 <label for="exampleInputImage"
                        class="form-label required">{{__('messages.front_service.photos')}}:</label>
-                <div class="d-block">
-                    <div class="image-picker">
-                        @if(isset($service))
-                        @foreach ($service->gallery as $image)
-                        <div class="image previewImage" id="exampleInputImage"
-                             style="background-image: url({{ !empty($image) ? $image : asset('web/media/avatars/male.png') }})">
-                        </div>
-                        @endforeach
-                        @else
-                        <div class="image previewImage" id="exampleInputImage"
-                             style="background-image: url({{  asset('web/media/avatars/male.png') }})">
-                        </div>
-                        @endif
-                        <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
-                              data-placement="top" data-bs-original-title="{{ __('messages.common.change_image') }}">
-                        <label>
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
-                            <input type="file" id="gallery" name="gallery[]"
-                                   class="image-upload d-none icon-validation" accept="image/*" multiple/>
-                        </label>
-                    </span>
-                    </div>
+
+                       <div class="item-upload">
+
+                <input  type="file" accept="image/*" id="gallery" name="gallery[]" multiple/>
+                <div id="photo-upload__preview" class="upload-preview" >
+
+                <?php if(isset($service)) { ?>
+                <div class="item-images">
+                    <?php foreach($service->gallery as $image) { ?>
+                    <div>
+                    <img src="<?php echo $image; ?>" class="item-photo__preview">
+                    <?php
+                    $filename = explode("/", $image);
+                        ?>
+                    <button type="button" class="delete" data-filename="<?php echo $filename[5]; ?>" data-id="<?php echo $filename[4]; ?>"><span>×</span>
+                </button></div>
+                <?php } ?>
+
+                </div>
+
+                <?php } ?>
+
+                </div>
                 </div>
             </div>
         </div>
 
-        <div>
+
+
+    </div>
+    <div class="col-lg-12 mb-7">
             {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}
             <a href="{{route('services.index')}}" type="reset"
                class="btn btn-secondary">{{__('messages.common.discard')}}</a>
         </div>
-    </div>
+
+<script>
+    var quill = new Quill('#doctorDescriptionId', {
+      theme: 'snow'
+    });
+
+    $(document).ready(function(){
+
+$(window).click(function(e) {
+let element = document.createElement('textarea')
+let editor_content_1 = quill.root.innerHTML
+element.innerHTML = editor_content_1
+
+$('#short_description').val($(".ql-editor").html());
+});
+});
+
+
+  </script>
+<style>
+.item-photo__preview {
+  width: 100px;
+  height: 100px;
+}
+.item-images > div
+{
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.delete
+{
+    position: absolute;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 100%
+}
+</style>
+
     <script type="text/javascript">
         listenClick('#addHourlyCharge', function (event) {
             //console.log(event, $('.hourly_records').clone())
@@ -362,4 +406,59 @@
             $(event.target).parents('div').parent('.remove').remove()
             event.preventDefault();
         });
+
+function previewImage(e, selectedFiles, imagesArray) {
+  const elemContainer = document.createElement('div');
+  elemContainer.setAttribute('class', 'item-images');
+  for (let i = 0; i < selectedFiles.length; i++) {
+    imagesArray.push(selectedFiles[i]);
+    const imageContainer = document.createElement('div');
+    const elem = document.createElement('img');
+    elem.setAttribute('src', URL.createObjectURL(selectedFiles[i]));
+    elem.setAttribute('class', 'item-photo__preview')
+    const removeButton = document.createElement('button');
+    removeButton.setAttribute('type', 'button');
+    removeButton.classList.add('delete');
+    removeButton.dataset.filename = selectedFiles[i].name,
+    removeButton.innerHTML = '<span>&times;</span>'
+    imageContainer.appendChild(elem);
+    imageContainer.appendChild(removeButton);
+    elemContainer.appendChild(imageContainer);
+  }
+  return elemContainer;
+}
+var item_images = [];
+document.getElementById('gallery').addEventListener('change', (e) => {
+  var selectedFiles = e.target.files;
+
+  const photoPreviewContainer = document.querySelector('#photo-upload__preview');
+  const elemContainer = previewImage(e, selectedFiles, item_images);
+  photoPreviewContainer.appendChild(elemContainer);
+});
+
+document.getElementById('photo-upload__preview').addEventListener('click', (e) => {
+  const tgt = e.target.closest('button');
+  if (tgt.classList.contains('delete')) {
+
+       let fileId = tgt.dataset.id;
+    $.ajax({
+        url: route('delete-media', fileId),
+        type: 'POST',
+        data: {
+            fileId: fileId,
+        },
+        success: function (result) {
+
+        },
+    });
+    tgt.closest('div').remove();
+    const fileName = tgt.dataset.filename
+    item_images = item_images.filter(img => img.name != fileName)
+  }
+})
+
+
+
+
+
     </script>
