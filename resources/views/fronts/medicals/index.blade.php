@@ -6,10 +6,49 @@
 
 @section('front-content')
 
-<div class="transition-none">
-    <section class="title-hero-bg parallax-effect">
+<style>
+@media (max-width: 500px){
+.come-set{
+    width:60% !important;
+}
+.come-set1{
+    width:30% !important;
+}
+    }
+@media (min-width: 768px) and (max-width: 992px)  {
+    h5, .fs-5 {
+    font-size: 14px !important;
+}
+    .again-heading {
+    font-size: 18px !important;
+}
+}
+@media (max-width: 767px){
+h1 {
+    font-size: 38px !important;
+}
+.workspace {
+    line-height: 40px;
+    font-size: 30px !important;
+}
 
-        <img src="assets/images/Frame_3.png" alt="" class="">
+}
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
+}
+</style>
+
+<div class="transition-none">
+    <section class="title-hero-bg parallax-effect" style="background-image: url(assets/images/Frame_3.png);">
+
+        <!-- <img src="assets/images/Frame_3.png" alt="" class=""> -->
 
         <div class="container">
             <div class="page-title text-center white-color">
@@ -36,12 +75,12 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12 centerize-col text-center">
-                            <div class="again-flex">
-                                <h5 class="again-heading">Thank You Come <br>
+                            <div class="again-flex col-lg-12 col-md-12 col-sm-10 col-xs-12">
+                                <h5 class="again-heading  col-lg-6 col-md-6 come-set">Thank You Come <br>
                                     Again @ {{$outletData->first_name}}</h5>
-                                <div class="from-flex">
+                                <div class="from-flex col-lg-6 col-md-6 come-set1">
                                     <p class="again-p">From</p>
-                                    <h5 style=" font-weight: 600; color: #000000;">$35/day</h5>
+                                    <h5 class="again-heading" style=" font-weight: 600; color: #000000;">$35/day</h5>
                                     <p class="again-hour">$4/hour</p>
                                 </div>
                             </div>
