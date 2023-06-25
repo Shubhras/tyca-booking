@@ -3194,10 +3194,10 @@ progress {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #6C757D;
+    color: #060917;
     background-color: #FFFFFF;
     background-clip: padding-box;
-    border: 1px solid #000;
+    border: 2px solid #000;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -3220,7 +3220,7 @@ progress {
 }
 
 .form-control:focus {
-    color: #6C757D;
+    color: #060917;
     background-color: #FFFFFF;
     border-color: none;
     outline: 0;
@@ -3512,16 +3512,21 @@ textarea.form-control-lg {
     height: 1.563em;
     margin-top: -0.0315em;
     vertical-align: top;
-    background-color: #CED4DA;
+    background-color: #ffffff;
+    border-color: #060917;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: none;
+    border: 2px solid;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
+}
+.input-switch{
+    background-color: #CED4DA;
+    border: none;
 }
 
 .form-check-input[type=checkbox] {
@@ -3543,8 +3548,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked {
-    background-color: #6571FF;
-    border-color: #6571FF;
+    background-color: #060917;
+    border-color: #060917;
 }
 
 .form-check-input:checked[type=checkbox] {
@@ -3556,8 +3561,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type=checkbox]:indeterminate {
-    background-color: #6571FF;
-    border-color: #6571FF;
+    background-color: #060917;
+    border-color: #060917;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 
@@ -5280,7 +5285,7 @@ textarea.form-control-lg {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #6571FF;
+    color: #060917;
     background-color: #FFFFFF;
     border-color: #DEE2E6 #DEE2E6 #FFFFFF;
 }
@@ -20041,11 +20046,11 @@ tbody tr:last-child td {
 }
 
 .nav-tabs .nav-item .nav-link.active:after {
-    border-bottom-color: #6571FF;
+    border-bottom-color: #060917;
 }
 
 .nav-tabs .nav-item:hover .nav-link:after {
-    border-bottom-color: #6571FF;
+    border-bottom-color: #060917;
 }
 
 @font-face {
@@ -21307,7 +21312,7 @@ ul {
 }
 
 .header .navbar-nav .nav-item:hover .nav-link:after {
-    border-bottom-color: #6571FF;
+    border-bottom-color: #060917;
 }
 
 .header .navbar-nav .nav-item .active.nav-link {
@@ -21315,7 +21320,7 @@ ul {
 }
 
 .header .navbar-nav .nav-item .active.nav-link:after {
-    border-bottom-color: #6571FF;
+    border-bottom-color: #060917;
 }
 
 .header .header-btn {
@@ -21473,4 +21478,12 @@ ul {
 .py-5p{
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+
+.ql-toolbar.ql-snow{
+    border: 2px solid #060917 !important;
+}
+.ql-editor{
+    border: 2px solid #060917 !important;
 }

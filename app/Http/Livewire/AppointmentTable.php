@@ -151,7 +151,7 @@ class AppointmentTable extends LivewireTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make(__('messages.appointment.service'), 'services.name')
-                ->view('appointments.components.patient_name')
+
                 ->sortable()
                 ->searchable(),
             Column::make(__('messages.appointment.patient'), 'patient.patientUser.last_name')
@@ -160,14 +160,20 @@ class AppointmentTable extends LivewireTableComponent
             Column::make(__('messages.appointment.patient'), 'patient.patientUser.email')
                 ->hideIf('patient.patientUser.email')
                 ->searchable(),
-            Column::make(__('messages.appointment.appointment_at'),
+                Column::make(__('messages.appointment.plantype'),
+                'plan_type')
+                ->view('appointments.components.plan_type')
+                ->sortable()->searchable(),
+                Column::make(__('messages.appointment.appointment_at'),
                 'date')->view('appointments.components.appointment_at')
                 ->sortable()->searchable(),
-            Column::make(__('messages.appointment.payable_amount'),
-                'payable_amount')->view('appointments.components.appointment_at')
+                Column::make(__('messages.appointment.payable_amount'),
+                'payable_amount')
+                ->view('appointments.components.service_name')
                 ->sortable()->searchable(),
-            Column::make(__('messages.appointment.payment_method'),
-                'payment_method_name')->view('appointments.components.appointment_at')
+                Column::make(__('messages.appointment.payment_method'),
+                'payment_method')
+                ->view('appointments.components.payment_method')
                 ->sortable()->searchable(),
 
             Column::make(__('messages.appointment.payment_status'), 'id')

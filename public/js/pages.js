@@ -3904,13 +3904,39 @@ listenChange('#appointmentServiceId', function () {
         $('#payableAmount').val('');
 
         if (result.data) {
-          $('#chargeId').val(result.data.charges);
-          $('#payableAmount').val(result.data.charges);
-          charge = result.data.charges;
+          $('#chargeId').val(result.data[0].charges);
+          $('#payableAmount').val(result.data[0].charges);
+          $("#price_total").empty().text(result.data[0].charges);
+          charge = result.data[0].charges;
         }
+
+        $('#plantype_id').empty();
+        $('#plantype_id').append($('<option value=""></option>').text('Select Plan Type'));
+        $.each(result.data[1], function (i, v) {
+          $('#plantype_id').append($('<option></option>').attr('value', v.id).attr('data-amount', v.rate).text(v.discount_type));
+        });
       }
     }
   });
+});
+listenChange('#plantype_id', function () {
+  var amount = $('option:selected', this).attr('data-amount');
+  var plantype = $('option:selected', this).text();
+
+  if (plantype == 'hourly') {
+    $('#slot_option').show();
+  } else {
+    $('#slot_option').hide();
+  }
+
+  $("#type_of_payment").empty().val(plantype);
+
+  if (amount) {
+    $('#chargeId').val(amount);
+    $('#payableAmount').val(amount);
+    $("#price_total").empty().text(amount);
+    charge = amount;
+  }
 });
 listenKeyup('#addFees', function (e) {
   if (e.which != 8 && isNaN(String.fromCharCode(e.which))) {
@@ -3939,6 +3965,7 @@ listenSubmit('#addAppointmentForm', function (e) {
         displaySuccessMessage(mainResult.message);
         $('#addAppointmentForm')[0].reset();
         $('#addAppointmentForm').val('').trigger('change');
+        return location.href = mainResult.data.url;
 
         if (mainResult.data.payment_type == $('#paystackMethod').val()) {
           return location.href = mainResult.data.redirect_url;
@@ -7811,6 +7838,20 @@ listenClick('.removeAvatarIcon', function () {
   $('#bgImage').css('background-image', '');
   $('#bgImage').css('background-image', 'url(' + backgroundImg + ')');
   $('#removeAvatar').remove();
+});
+document.addEventListener('turbo:load', function () {
+  $('.amenities-select').select2({
+    escapeMarkup: function escapeMarkup(m) {
+      return m;
+    } // templateSelection: function (state) {
+    //     if(state.element && typeof specializationsWithImage[state.element.value].icon != "undefined"){
+    //         let img = '';
+    //         state = `<span class="select2-option-img"><img src="${specializationsWithImage[state.element.value].icon}"><span> ${state.text}`;
+    //     }
+    //     return state;
+    // }
+
+  });
 });
 
 /***/ }),

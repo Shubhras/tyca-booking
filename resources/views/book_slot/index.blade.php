@@ -292,68 +292,49 @@ figure.effect-chico11 {
 }
 </style>
 
-{{--<section class="main-block11 gray11">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="grid11">
-                    <figure class="effect-chico11">
-                        <img src="assets/images/image 9.png" alt="" class="">
-                    </figure>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="grid11">
-                            <figure class="effect-chico11">
-                                <img src="assets/images/image 10.png" alt="" class="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="grid11">
-                            <figure class="effect-chico11">
-                                <img src="assets/images/image 12.png" alt="" class="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>--}}
-
-
 <section class="main-block1 gray">
     <div class="container">
         <div class="row col-12">
             <div class="col-md-8">
                 <div class="grid">
+                    @if(!empty($user1->gallery[0]))
                     <figure class="effect-chico">
-                        <img src="/assets/image/image 12.png" alt="#" class="">
+                        <img src="{{$user1->gallery[0]}}" alt="#" class="" style="width: 100%; height: 100%;">
                     </figure>
+                    @else
+                    <figure class="effect-chico">
+                        <img src="/assets/image/image 12.png" alt="#" style="width: 100%; height: 100%;">
+                    </figure>
+                    @endif
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="row">
                     <div class="col-md-12 set-img1">
-
                         <div class="grid">
+                            @if(!empty($user1->gallery[1]))
                             <div class="effect-chico">
-                                <img src="/assets/image/image 10.png" alt="#" class="">
-                                </figure>
+                                <img src="{{$user1->gallery[1]}}" alt="#" style="width: 100%; height: 100%;">
                             </div>
+                            @else
+                            <div class="effect-chico">
+                                <img src="/assets/image/image 10.png" alt="#" style="width: 100%; height: 100%;">
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-12 set-imgs">
 
                         <div class="grid">
+                        @if(!empty($user1->gallery[2]))
                             <div class="effect-chico">
-                                <img src="/assets/image/image 11.png" alt="#" class="">
-                                </figure>
+                                <img src="{{$user1->gallery[2]}}" alt="#" style="width: 100%; height: 100%;">
                             </div>
+                            @else
+                            <div class="effect-chico">
+                                <img src="/assets/image/image 11.png" alt="#" style="width: 100%; height: 100%;">
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -371,39 +352,34 @@ figure.effect-chico11 {
                 <div class="full-blog">
                     <div class="blog-content">
                         <div class="blog-text">
-                            <h1 class="font-700 roboto-font">Thank You Come Again @Balestier</h1>
+                            <h1 class="font-700 roboto-font">Thank You Come Again @ <h3>{{$user->first_name}}
+                                    {{$user->last_name}}<h3>
+                            </h1>
                             <h3 class="roboto-font font-300 font-20px">355 Balestier Road Singapore 329782</h3>
-                            <p>THANK YOU COME AGAIN / TYCA is a new social hub concept located in the city fringe of
-                                Balestier Road. It consists of a café restaurant and event spaces for the collective
-                                community.</p>
-                            <p>With remote working becoming more and more popular, TYCA provides the perfect location
-                                for those who want to take advantage of the trend.</p>
-                            <p>TYCA provides a variety of workspaces from hot desks, co-working pods and private rooms
-                                combined with hospitality services such as a concierge, gym, food and beverage.</p>
-                            <p>TYCA is fully equipped with Wifi, A/V equipment, car and bicycle parking, Grab & Go bar,
-                                and restaurant. Whether it's a corporate event, social get-together or meetings, TYCA is
-                                your go-to place for small to medium gatherings.</p>
+                            <p>{{$doctor->description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4 responsive-wrap">
                 <div class="sidebar">
                     <div class="widget-box mb-40 amities">
                         <h1 class="mb-20 amities1">Amenities</h1>
                         <div class="latest-blog">
                             <div class="col section-border">
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 15.png" alt="#"
-                                                style="padding-right:10px;">wi-fi</p>
+                                <div class="row mt-10 mb-1 col-12" style="display:flex;">
+                                    @foreach($specialization as $specializationData)
+                                    <div class="col-6 icon-set">
+                                        <p class="heading-id">
+                                            <img src="{{$specializationData->icon}}" alt="#"
+                                                style="padding-right:10px; width: 30px; height: 30px;">
+                                            {{$specializationData->name}}
+                                        </p>
                                     </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/image 23.png" alt="#"
-                                                style="padding-right:10px;">Desk</p>
-                                    </div>
+                                    @endforeach
                                 </div>
-                                <div class="row mt-10 mb-1" style="display:flex;">
+                                {{--   <div class="row mt-10 mb-1" style="display:flex;">
                                     <div class="col icon-set">
                                         <p class="heading-id"><img src="/assets/image/image 17.png" alt="#"
                                                 style="padding-right:10px;">air
@@ -454,67 +430,90 @@ figure.effect-chico11 {
                                                 style="padding-right:10px;">Telivision</p>
                                     </div>
                                 </div>
+                                --}}
                             </div>
                         </div>
                     </div>
+                    <?php
+                    $var_dump = json_decode($doctor->days);
+                    ?>
                     <div class="widget-box">
                         <h1 class="amities1">Operating Hours</h1>
+                        @if(!empty($var_dump))
+                        @foreach($var_dump as $day)
+                        @if($day->day_of_week == 1)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Monday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 2)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Tuesday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 3)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Wednesday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 4)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Thursday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 5)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Friday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 6)
                         <div class="row mt-10 mb-1" style="display:flex;">
                             <div class="col">
                                 <b class="heading-id1">Saturday</b>
                             </div>
                             <div class="col">
-                                <span class="sub-name">07:00 am - 09:00 am </span>
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col">
-                                        <b class="heading-id1">Sunday</b>
-                                    </div>
-                                    <div class="col">
-                                        <span class="sub-name">07:00 am - 09:00 am </span>
-                                    </div>
-                                </div>
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if($day->day_of_week == 7)
+                        <div class="row mt-10 mb-1" style="display:flex;">
+                            <div class="col">
+                                <b class="heading-id1">Sunday</b>
+                            </div>
+                            <div class="col">
+                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -549,8 +548,11 @@ figure.effect-chico11 {
                         data-bs-target="#hour_plan_modal">
                         {{ $service->charges_daily }} / Day
                     </button>
+                    <?php
+                    $idGet =  Request::segment(2);
+                    ?>
                     <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 30px;">
+                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 30px;">
                         View More
                     </a>
                 </div>

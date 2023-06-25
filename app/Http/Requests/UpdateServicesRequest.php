@@ -27,7 +27,7 @@ class UpdateServicesRequest extends FormRequest
         //$rules['category_id'] = 'required';
         $rules['charges'] = 'required|min:0|not_in:0';
         $rules['doctors'] = 'required';
-        $rules['short_description'] = 'required|max:60';
+        $rules['short_description'] = 'required';
         $rules['icon'] = 'nullable|mimes:svg,jpeg,png,jpg';
 
         return $rules;

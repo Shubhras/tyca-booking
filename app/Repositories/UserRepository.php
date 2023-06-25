@@ -217,7 +217,15 @@ class UserRepository extends BaseRepository
      */
     public function getSpecializationsData($doctor)
     {
-        $data['specializations'] = Specialization::pluck('name', 'id')->toArray();
+        //$data['specializations'] = Specialization::pluck('name', 'id')->toArray();
+        $specializations = Specialization::with(['media'])->select('name', 'id')->where('status', 1)->get();
+        $_spcialization = [];
+        foreach ($specializations as $item) {
+            $_spcialization[$item->id] =  '<img height="20" width="20" src="'. $item->icon .'"/> ' . $item->name;
+        }
+        $data['specializations'] = $_spcialization;
+
+
         $data['doctorSpecializations'] = $doctor->specializations()->pluck('specialization_id')->toArray();
         $data['countryId'] = $doctor->user->address()->pluck('country_id');
         $data['stateId'] = $doctor->user->address()->pluck('state_id');

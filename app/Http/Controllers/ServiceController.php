@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use App\Models\ServiceDiscountRates;
 use Laracasts\Flash\Flash;
 
 class ServiceController extends AppBaseController
@@ -121,6 +122,7 @@ class ServiceController extends AppBaseController
     public function getService(Request $request)
     {
         $doctor_id = $request->appointmentDoctorId;
+
         $service = Service::with('serviceDoctors')->whereHas('serviceDoctors', function ($q) use ($doctor_id) {
             $q->where('doctor_id', $doctor_id)->whereStatus(Service::ACTIVE);
         })->get();
@@ -135,9 +137,9 @@ class ServiceController extends AppBaseController
     public function getCharge(Request $request)
     {
         $chargeId = $request->chargeId;
+        $serviceRate = ServiceDiscountRates::where('service_id', $chargeId)->get();
         $charge = Service::find($chargeId);
-
-        return $this->sendResponse($charge, __('messages.flash.retrieve'));
+        return $this->sendResponse([$charge,$serviceRate], __('messages.flash.retrieve'));
     }
 
     /**

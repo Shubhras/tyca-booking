@@ -106,7 +106,7 @@ class Service extends Model implements HasMedia
         'charges' => 'required|min:0|not_in:0',
         'charges_daily' => 'required|min:0|not_in:0',
         'doctors' => 'required',
-        'short_description' => 'required|max:60',
+        'short_description' => 'required',
         'icon' => 'required|mimes:svg,jpeg,png,jpg',
 
         "above_count_hourly" => "required|array|min:1",

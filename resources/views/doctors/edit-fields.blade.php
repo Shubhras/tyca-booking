@@ -19,7 +19,7 @@
 
     <div class="col-md-5 mb-5">
         {{ Form::label('Specialization',__('messages.doctor.specialization').':' ,['class' => 'form-label required']) }}
-        {{ Form::select('specializations[]',$data['specializations'], $data['doctorSpecializations'],['class' => 'io-select2 form-select', 'data-control'=>"select2", 'multiple']) }}
+        {{ Form::select('specializations[]',$data['specializations'], $data['doctorSpecializations'],['class' => 'io-select2 form-select amenities-select', 'data-control'=>"", 'multiple']) }}
     </div>
 
     <div class="col-md-7">
@@ -362,27 +362,6 @@ $slots = getSchedulesTimingSlot();
   </script>
 <script type="text/javascript">
 
-// let quill5 = new Quill('#doctorDescriptionId', {
-//     modules: {
-//         toolbar: [
-//             [
-//                 {
-//                     header: [1, 2, false],
-//                 }],
-//             ['bold', 'italic', 'underline'],
-//             [ 'code-block'],
-//         ],
-//     },
-//     placeholder: 'Description',
-//     theme: 'snow', // or 'bubble'
-// })
-// quill5.on('text-change', function (delta, oldDelta, source) {
-//     if (quill5.getText().trim().length === 0) {
-//         quill5.setContents([{ insert: '' }])
-//     }
-// })
-
-
 function previewImage(e, selectedFiles, imagesArray) {
   const elemContainer = document.createElement('div');
   elemContainer.setAttribute('class', 'item-images');
@@ -414,7 +393,6 @@ document.getElementById('photo-upload').addEventListener('change', (e) => {
 document.getElementById('photo-upload__preview').addEventListener('click', (e) => {
   const tgt = e.target.closest('button');
   if (tgt.classList.contains('delete')) {
-     console.log("tgt.dataset",tgt.dataset.id);
 
     let fileId = tgt.dataset.id;
     $.ajax({

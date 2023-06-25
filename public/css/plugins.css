@@ -143,8 +143,8 @@ select + .select2-container--bootstrap-5 {
     line-height: 1.5;
     color: #6C757D;
     background-color: #FFFFFF;
-    border: 1px solid #CED4DA;
-    border-radius: 0.313rem;
+    border: 2px solid #060917;
+    /*border-radius: 0.313rem;*/
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;

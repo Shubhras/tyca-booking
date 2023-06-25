@@ -74,6 +74,7 @@ class Appointment extends Model
         'service_id',
         'payable_amount',
         'appointment_unique_id',
+        'plan_type',
         'from_time_type',
         'to_time_type',
         'payment_type',
@@ -86,6 +87,7 @@ class Appointment extends Model
         'date' => 'string',
         'from_time' => 'string',
         'description' => 'string',
+        'plan_type' => 'string',
         'status' => 'integer',
         'to_time' => 'string',
         'service_id' => 'integer',
@@ -191,8 +193,6 @@ class Appointment extends Model
         'date' => 'required',
         'service_id' => 'required',
         'payable_amount' => 'required',
-        'from_time' => 'required',
-        'to_time' => 'required',
         'payment_type' => 'required',
     ];
 

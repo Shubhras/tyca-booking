@@ -27,7 +27,7 @@
         @endforeach
     </div>
     <div>
-        {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2 my-1']) }}
+        {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-dark me-2 my-1']) }}
         <a href="{{route('roles.index')}}" type="reset"
            class="btn btn-light btn-active-light-primary my-1">{{__('messages.common.discard')}}</a>
     </div>
