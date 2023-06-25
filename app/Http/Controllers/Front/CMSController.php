@@ -37,11 +37,12 @@ class CMSController extends AppBaseController
     {
         $data = [];
         $input = $request->all();
-        $data['terms_conditions'] = json_decode($input['terms_conditions']);
-        $data['privacy_policy'] = json_decode($input['privacy_policy']);
+
+        $data['terms_conditions'] = '';
+        $data['privacy_policy'] = '';
         $data['about_title'] = $input['about_title'];
         $data['about_short_description'] = $input['about_short_description'];
-        $data['about_experience'] = $input['about_experience'];
+        $data['about_experience'] = '';
 
         if (isset($input['about_image_1'])) {
             $setting = Setting::where('key', 'about_image_1')->first();
@@ -79,4 +80,35 @@ class CMSController extends AppBaseController
 
         return redirect(route('cms.index'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Application|Factory|View
+     */
+    public function cmsbody()
+    {
+        $cmsData = Setting::pluck('value', 'key')->toArray();
+
+        return view('fronts.cms.cmsbody', compact('cmsData'));
+    }
+
+    public function cmsbodyupdate(Request $request)
+    {
+        $data = [];
+        $input = $request->all();
+
+        if (isset($input['about_image_1'])) {
+            $setting = Setting::where('key', 'body_image')->first();
+            $setting->clearMediaCollection(Setting::IMAGE);
+            $media = $setting->addMedia($input['about_image_1'])->toMediaCollection(Setting::IMAGE, config('app.media_disc'));
+            $setting->update(['value' => $media->getUrl()]);
+        }
+
+        Flash::success(__('messages.flash.bodyimage_update'));
+
+        return redirect(route('cmsbody.index'));
+    }
+
+
 }

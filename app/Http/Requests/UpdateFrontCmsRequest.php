@@ -26,13 +26,7 @@ class UpdateFrontCmsRequest extends FormRequest
     {
         return [
             'about_image_1'             => 'mimes:jpg,jpeg,png',
-            'about_image_2'             => 'mimes:jpg,jpeg,png',
-            'about_image_3'             => 'mimes:jpg,jpeg,png',
             'about_title'               => 'required',
-            'about_experience'          => 'required|numeric',
-            'about_short_description'   => 'required',
-            'terms_conditions'          => 'required',
-            'privacy_policy'            => 'required',
         ];
     }
 }
