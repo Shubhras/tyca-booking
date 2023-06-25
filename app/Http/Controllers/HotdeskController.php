@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class HotdeskController extends Controller
 {
 
-    public function index($id)
+    public function index($slot,$id)
     {
         return view('hotdesk.index');
     }

@@ -548,8 +548,11 @@ figure.effect-chico11 {
                         data-bs-target="#hour_plan_modal">
                         {{ $service->charges_daily }} / Day
                     </button>
+                    <?php
+                    $idGet =  Request::segment(2);
+                    ?>
                     <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 30px;">
+                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 30px;">
                         View More
                     </a>
                 </div>
