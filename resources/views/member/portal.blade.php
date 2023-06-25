@@ -7,9 +7,8 @@
 @section('front-content')
 
 <div class="transition-none">
-      <section class="title-hero-bg parallax-effect">
-      
-     <img src="assets/images/Frame_3.png" alt="" class="">
+    
+      <section class="title-hero-bg parallax-effect" style="background-image: url(assets/images/Frame_3.png);">
                
         <div class="container">
             <div class="page-title text-center white-color">
@@ -38,21 +37,21 @@
 
 <h2 class="h2-member">MEMBER'S INFORMATION</h2>
 
-<div class="customer-review_wrap">
-<div class="customer-img">
+<div class="row" id="customer-review_wrap">
+<div class="col-md-2" id="customer-img">
 <img src="assets/images/Group 4111.png" alt="" class="cust-img">
 </div>
-<div class="customer-content-wrap">
+<div class="col-md-4" id="customer-content-wrap">
 <div class="your-rating-wrap">
 <span>Hoe Wei</span>
 <p>weige420@gmail.com</p>
 </div>
 
-<div class="btn-portal">
-<div class="update-btn">
-<button class="up-btn">Update Information</button>
+<div class="row btn-portal">
+<div class="col-md-4 update-btn">
+<button class="up-btn"data-bs-toggle="modal"data-bs-target="#update_info_modal">Update Information</button>
 </div>
-<div class="logout-btn">
+<div class=" col-md-4 logout-btn">
 <button class="log-btn">Log Out</button>
 </div>
 </div>
@@ -75,7 +74,7 @@
         <div class="tab-content">
     <div id="latests" class="tab-pane fade show active">
        <h2 class="up-booking">UPCOMING BOOKINGS</h2>
-
+<div class="table-container">
        <table class="table">
   <thead class="thead-portal">
     <tr>
@@ -107,10 +106,12 @@
     </tr>
   </tbody>
 </table>  
+</div>
     </div>
 
     <div id="upcomings" class="tab-pane fade">
     <h2 class="past-booking">PAST BOOKINGS</h2>
+    <div class="table-container">
     <table class="table">
   <thead class="thead-portal">
     <tr>
@@ -142,6 +143,7 @@
 
 
 </table>  
+</div>
     </div>
     </div>
  </div>
@@ -151,7 +153,7 @@
 
 
   <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+    <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header-1">
@@ -179,7 +181,7 @@
 
 
 <div id="booking_cancel_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+    <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header-1">
@@ -204,7 +206,7 @@
 
 
 <div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+    <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header-1">
@@ -237,7 +239,7 @@
 </div>
 
 <div id="cancel_confirm_modal" class="modal fade" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+                    <div class="modal-dialog modal-lg">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -263,6 +265,73 @@
                 </div>
 
 
+
+                <div id="update_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="book-space">UPDATE INFORMATION</div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none hide"></div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label']) }}
+                        <span class=""></span>
+                        {{ Form::text('First Name', null, ['class' => 'form-control','required','placeholder' => __('First Name')]) }}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label']) }}
+                        <span class=""></span>
+                        {{ Form::text('Last Name', null, ['class' => 'form-control','required','placeholder' => __('Last Name')]) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label']) }}
+                        <span class=""></span>
+                        {{ Form::text('Email', null, ['class' => 'form-control','required','placeholder' => __('Email')]) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label']) }}
+                        <span class=""></span>
+                        {{ Form::text('New Password', null, ['class' => 'form-control','required','placeholder' => __('New Password')]) }}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label']) }}
+                        <span class=""></span>
+                        {{ Form::text('Confirm New Password', null, ['class' => 'form-control','required','placeholder' => __('Confirm New Password')]) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                <p>Icon</p>
+                    <div class="form-group col-sm-6">
+                      <img src="assets/images/Group 4111.png" alt="" class="cust-img" style="width: 100px;">
+                    </div>
+                    <div class="form-group col-sm-12"id="icon-pen">
+                    <i class="fa-solid fa-pen"></i>
+                    </div>
+                </div>
+
+            
+                <div class="modal-footer pt-0 mt-5" style="place-content:center;">
+                    <button type="button" class="btns btn-secondarys"
+                        data-bs-dismiss="modal">{{ __('Update') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 @endsection
 
 
@@ -271,9 +340,24 @@
 
 
  <style>
+.table-container {
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
+}
     .page-title {
     position: absolute;
-    top: 36%;
+    top: 50%;
     width: 100%;
     text-align: center;
     left: 0;
@@ -530,6 +614,231 @@ button.no-btn {
 }
 .modal-backdrop.show {
     opacity: 0 !important;
+}
+.form-control, .form-select {
+    height: unset!important;
+    border-radius: 0px!important;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 8px!important;
+    border: 2px solid#273432!important;
+}
+.form-label {
+    color: #000000!important;
+    font-size: 14px;
+    font-weight: 300;
+}
+div#icon-pen {
+    position: absolute;
+    margin-left: 85px;
+    margin-top: 35px;
+    background: #FFFFFF;
+    border-radius: 200px;
+    height: 40px;
+    padding: 12px;
+    width: 40px;
+}
+
+div#customer-review_wrap {
+    justify-content: center;
+}
+.row.btn-portal {
+    display: flex;
+    justify-content: space-around;
+    margin-left: -80px;
+}
+
+/* media */
+@media (min-width: 320px) and (max-width: 600px){
+
+    .tab-section {
+    padding: 10px;
+}
+.page-title h1 {
+    font-size: 35px;
+    top: 60%;
+}
+.title-hero-bg {
+    min-height: 335px;
+}
+a#latest-tab.active {
+    border-bottom: 3px solid #000000;
+    color: #000000;
+    font-size: 10px;
+}
+a#upcoming-tab {
+    color: #535353;
+    font-size: 10px;
+}
+a#latest-tab {
+    color: #535353;
+    font-size: 10px;
+}
+h2.h2-member {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 12px;
+    margin-top: 25px;
+    color: #000000;
+}
+.your-rating-wrap span {
+    color: #535353;
+    font-size: 15px;
+}
+.your-rating-wrap p {
+    color: #535353;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 10px;
+}
+img.cust-img {
+    width: 70px;
+}
+div#customer-review_wrap {
+    text-align: center;
+}
+.your-rating-wrap {
+    margin-left: 0;
+    margin-top: 15px;
+}
+a#latests-tab-1 {
+    margin-top: 35px;
+    font-size: 10px;
+}
+a#upcomings-tab-2 {
+    background: #FFFFFF;
+    color: #535353;
+    margin-top: 35px;
+    font-size: 10px;
+}
+h2.up-booking {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    color: #000000;
+}
+h2.past-booking {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    color: #000000;
+}
+th.col-portal {
+    padding: 10px!important;
+    font-size: 10px;
+    font-weight: 500;
+    color: #6B7280;
+}
+tr {
+    font-size: 10px;
+}
+.col-md-4.update-btn {
+    margin-bottom: 20px;
+}
+.col-md-4.logout-btn {
+    margin-right: -50px;
+}
+.book-p {
+    align-self: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    color: 535353;
+    font-size: 10px;
+}
+.books-spaces {
+    text-align: center;
+    font-size: 18px;
+    color: #000000;
+}
+.book-p-cancel {
+    font-size: 10px;
+}
+p.follow-booking {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+button.yes-btn {
+    width: 100px;
+    margin-right: 10px;
+}
+button.no-btn {
+    width: 100px;
+}
+.btn-cancel-booking {
+    margin-top: -25px;
+}
+.cancel-yes-btn {
+    width: unset;
+}
+.book-space {
+    font-size: 18px;
+}
+.book1-space {
+    font-size: 12px;
+}
+button.btns.btn-secondarys {
+    margin-top: -20px;
+}
+.row.btn-portal {
+    display: block;
+    width: 100px;
+}
+h5.text-white.mb-4.pb-1 {
+    font-size: 15px !important;
+}
+.col-lg-3.col-md-6.order-1.order-lg-0 {
+    margin-bottom: 0px!important;
+}
+.col-lg-3.order-0.order-lg-3.mb-4.mb-lg-0 {
+    margin-bottom: 0px!important;
+}
+}
+
+
+@media (max-width: 768px) {
+    div#customer-review_wrap {
+    justify-content: space-evenly;
+}
+.row.btn-portal {
+    display: block!important;
+}
+.col-md-4.update-btn {
+    margin-bottom: 30px;
+}
+button.log-btn {
+    margin-left: 75px;
+    margin-top: -12px;
+}
+h5.text-white.mb-4.pb-1 {
+    font-size: 18px !important;
+}
+}
+
+
+
+@media (max-width: 1024px){
+
+.col-md-2.logout-btn {
+    margin-left: 45px;
+}
+.row.btn-portal {
+    display: flex;
+    justify-content: space-between;
+    margin-right: -60px;
+}
+.col-md-4.update-btn {
+    margin-left: 75px;
+}
+h5.text-white.mb-4.pb-1 {
+    font-size: 18px!important;
+}
+}
+
+@media (min-width: 767px) and (max-width: 800px){
+h5, .fs-5 {
+    font-size: 14px !important;
+}
 }
 </style>
  
