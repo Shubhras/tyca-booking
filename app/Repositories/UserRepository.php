@@ -102,8 +102,28 @@ class UserRepository extends BaseRepository
                 }
             }
 
-            DB::commit();
+            //save doctor sessions
+            $doctorSession = DoctorSession::create([
+                'doctor_id' => $createDoctor->id,
+                'session_meeting_time' => 60,
+                'session_gap' => 1,
+            ]);
 
+            //save Session Weekdays
+            if (isset($input['days'])) {
+                foreach ($input['days'] as $day) {
+                    $doctorSession->sessionWeekDays()->create([
+                        'doctor_session_id' => $doctorSession->id,
+                        'doctor_id' => $createDoctor->id,
+                        'day_of_week' => $day,
+                        'start_time'  => date('h:i', strtotime($input['startTime'][$day])),
+                        'end_time'    => date('h:i', strtotime($input['endTime'][$day])),
+                        'start_time_type'  => date('a', strtotime($input['startTime'][$day])),
+                        'end_time_type'  => date('a', strtotime($input['endTime'][$day])),
+                    ]);
+                }
+            }
+            DB::commit();
             return $doctor;
         } catch (\Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
@@ -164,6 +184,25 @@ class UserRepository extends BaseRepository
                     $doctor->user->addMedia($file)->toMediaCollection(User::GALLERY, config('app.media_disc'));
                 }
             }
+            $doctorSession = $doctor->doctorSingleSession;
+            $doctorSession->sessionWeekDays()->delete();
+            if (isset($input['days'])) {
+
+                //print_r($doctor->doctorSingleSession);
+                foreach ($input['days'] as $day) {
+                    $doctorSession->sessionWeekDays()->create([
+                        'doctor_session_id' => $doctorSession->id,
+                        'doctor_id' => $doctor->id,
+                        'day_of_week' => $day,
+                        'start_time'  => date('h:i', strtotime($input['startTime'][$day])),
+                        'end_time'    => date('h:i', strtotime($input['endTime'][$day])),
+                        'start_time_type'  => date('a', strtotime($input['startTime'][$day])),
+                        'end_time_type'  => date('a', strtotime($input['endTime'][$day])),
+                    ]);
+                }
+            }
+//die('Aaj');
+            //doctorSingleSession
 
             DB::commit();
 
