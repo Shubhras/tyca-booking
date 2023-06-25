@@ -7,13 +7,12 @@
         </div>
     </div>
     <div class="col-lg-12">
-    <div class="mb-5">
-        {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label required']) }}
-        <div id="doctorDescriptionId" class="editor-height" style="height: 150px"> <?php if(isset($service->short_description)){ ?>   <?php } ?>       </div>
-        {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
+        <div class="mb-5">
+            {{ Form::label('description', __('messages.doctor.description').':', ['class' => 'form-label required']) }}
+            <div id="doctorDescriptionId" class="editor-height" style="height: 150px"> <?php if(isset($service->short_description)){  echo strip_tags($service->short_description);   ?>   <?php } ?>       </div>
+            {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
+        </div>
     </div>
-</div>
-
     <div class="col-lg-6 mb-5">
         {{ Form::label('specializations', __('messages.specializations').':', ['class' => 'form-label required']) }}
         {{ Form::select('specializations[]',$data['specializations'],(isset($selectedSpecializations)) ?
@@ -21,14 +20,12 @@
         'form-control io-select2', 'data-placeholder' => __('messages.common.select_specializations'),
         'data-control'=>'select2','multiple']) }}
     </div>
-
     <div class="col-lg-6 mb-5">
         {{ Form::label('doctors', __('messages.doctors').':', ['class' => 'form-label required']) }}
         {{ Form::select('doctors[]',$data['doctors'],(isset($selectedDoctor)) ? $selectedDoctor : null,['class' =>
         'form-control io-select2', 'data-placeholder' => __('messages.doctor.select_doctors'),
         'data-control'=>'select2','multiple']) }}
     </div>
-
     <div class="col-lg-12 mt-5">
         <div class="card">
             <div class="card-header p-0"><h4 class="required">Pricing</h4></div>
@@ -82,9 +79,9 @@
                     <div class="col-4">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.above')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.above')}}
+                                </span>
                             </div>
                             <input
                                 type="text"
@@ -94,9 +91,9 @@
                                 onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
                             />
                             <div class="input-group-append">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.hours')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.hours')}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -110,9 +107,9 @@
                                 name="rate_hourly[]"
                             />
                             <div class="input-group-append">
-                    <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.per_hour')}}
-                    </span>
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    {{__('messages.common.per_hour')}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -129,9 +126,9 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    Above
-                </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                        Above
+                                    </span>
                                 </div>
                                 <input
                                     value="{{$discounts['above_count']}}"
@@ -139,9 +136,9 @@
                                     placeholder="No. of" name="above_count_hourly[]"
                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)">
                                 <div class="input-group-append">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    Hours
-                </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                        Hours
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -155,15 +152,14 @@
                                     placeholder="Discount %"
                                     name="rate_hourly[]"
                                 >
-                                <div class="input-group-append">
-                <span class="input-group-text bg-white border-0 text-dark">
-                    per hour
-                </span>
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white border-0 text-dark">
+                                    per hour
+                                </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-1 action-btn">
-
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
@@ -228,9 +224,9 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-            <span class="input-group-text bg-white border-0 text-dark">
-            Above
-            </span>
+                                    <span class="input-group-text bg-white border-0 text-dark">
+                                    Above
+                                    </span>
                                 </div>
                                 <input
                                     type="text"
@@ -249,31 +245,34 @@
                             </div>
                         </div>
                         <div class="vr bg-black opacity-100 p-1px"></div>
-                        <div class="col-4">
-                            <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Discount %"
-                                    name="rate_daily[]"
-                                    value="{{$discounts['rate']}}"
-                                    onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
-                                >
-                                <div class="input-group-append">
-            <span class="input-group-text bg-white border-0 text-dark">
-            per hour
-            </span>
+                            <div class="col-4">
+                                <div class="input-group">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Discount %"
+                                        name="rate_daily[]"
+                                        value="{{$discounts['rate']}}"
+                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
+                                    >
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-white border-0 text-dark">
+                                        per hour
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-1 action-btn">
+                                <button type="button" class="btn btn-sm btn-danger remove-field">
+                                    <span class=" fa fa-minus"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-1 action-btn">
-                            <button type="button" class="btn btn-sm btn-danger remove-field">
-                                <span class=" fa fa-minus"></span>
-                            </button>
-                        </div>
+
+
                         @endforeach
                         @endif
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -338,6 +337,20 @@
             <a href="{{route('services.index')}}" type="reset"
                class="btn btn-secondary">{{__('messages.common.discard')}}</a>
         </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
 
 <script>
     var quill = new Quill('#doctorDescriptionId', {
