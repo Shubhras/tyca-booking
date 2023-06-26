@@ -391,6 +391,10 @@ figure.effect-chico {
         display:flex;
         place-content:start;
     }
+    .heading-id1{
+        font-size:13px;
+        font-weight:500;
+    }
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -598,7 +602,7 @@ a:hover {
                                 <div class="row mt-10 mb-1 col-12" style="display:flex;">
                                     @foreach($specialization as $specializationData)
                                     <div class="col-6 icon-set">
-                                        <p class="heading-id">
+                                        <p class="heading-id1">
                                             <img src="{{$specializationData->icon}}" alt="#" style="height: 30px;">
                                             {{$specializationData->name}}
                                         </p>
