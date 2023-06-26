@@ -8,18 +8,18 @@
 
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
+        <section class="title-hero-bg parallax-effect" style="background-image: url(/assets/images/Frame_3.png);">
+            <!-- <img src="/assets/images/Frame_3.png" alt="" class=""> -->
 
-        <img src="/assets/images/Frame_3.png" alt="" class="">
-
-        <div class="container">
-            <div class="page-title text-center white-color">
-                <h1>BOOK A SPACE</h1>
-                <h4 class="workspace">Interested in our workspace?
-                    <br> Book a slot for our space now!
-                </h4>
+            <div class="container">
+                <div class="page-title text-center white-color">
+                    <h1 class="set-space">BOOK A SPACE</h1>
+                    <h4 class="workspace">Interested in our workspace?
+                        <br> Book a slot for our space now!
+                    </h4>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 </div>
 
 <section class="main-block gray">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h2 class="h2-day">$35/Day</h2>
+                <h2 class="h2-day">${{$servicesData->charges_daily}}/Day</h2>
                 <div class="row">
                     <div class="col-md-6">
 
@@ -52,7 +52,7 @@
                             <figure class="effect-chico">
                                 <img src="/assets/images/image 12.png" alt="" class="">
                             </figure>
-                        </div>HOU
+                        </div>
                     </div>
                 </div>
                 <div class="row grid-space">
@@ -83,60 +83,82 @@
                 <div class="grid">
                     <div class="hot-desks">
                         <h2>DESCRIPTION</h2>
-                        <p>Shared work desk within the co-working space.</p>
+                        <p>{{$servicesData->short_description}}</p>
                     </div>
                     <div class="Amenities">
                         <h2>AMENITIES</h2>
                         <div class="amenities-block">
-                            <div class="amenities-right">
-                                <p><img src="/assets/image/image 15.png" alt="#" style="padding-right:10px;"></i>wi-fi
-                                </p>
-                                <p><img src="/assets/image/image 33.png" alt="#" style="padding-right:10px;"></i>Toilet
-                                </p>
-                                <p><img src="/assets/image/image 34.png" alt="#" style="padding-right:10px;"></i>Chair
-                                <p><img src="/assets/image/image 36.png" alt="#" style="padding-right:10px;">Phone Booth</p>
-                                <p><img src="/assets/image/image 37.png" alt="#" style="padding-right:10px;">Stationary</p>
-                            </div>
-                            <div class="amenities-left">
-                                <p>
-                                    <img src="/assets/image/image 17.png" alt="#" style="padding-right:10px;">Air
-                                    Conditioning
-                                </p>
-                                <p> <img src="/assets/image/image 23.png" alt="#" style="padding-right:10px;">Desk</p>
-                                <p> <img src="/assets/image/image 35.png" alt="#" style="padding-right:10px;">Lounge Area</p>
-                                <p><img src="/assets/image/image 38.png" alt="#" style="padding-right:10px;">Whiteboard</p>
+                            <div class="row mt-10 mb-1 col-12" style="display:flex;">
+                                @foreach($specialization as $specializationData)
+                                <div class="col-6 icon-set">
+                                    <p class="heading-id">
+                                        <img src="{{$specializationData->icon}}" alt="#"
+                                            style="padding-right:10px; width: 30px; height: 30px;">
+                                        {{$specializationData->name}}
+                                    </p>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-
 
                     <div class="Operating">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
+                            <?php
+                             $var_dump = json_decode($doctor->days);
+                             ?>
+                            @if(!empty($var_dump))
+                            @foreach($var_dump as $day)
                             <div class="operating-right" style="display:grid;">
-                                <b>Monday</b>
-                                <b>Tuesday</b>
-                                <b>Wednesday</b>
-                                <b>Thursday</b>
-                                <b>Friday</b>
-                                <b>Saturday</b>
-                                <b>Sunday</b>
+                                @if($day->day_of_week == 1)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Monday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+
+                                @if($day->day_of_week == 2)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Tuesday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+                                @if($day->day_of_week == 3)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Wednesday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+                                @if($day->day_of_week == 4)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Thursday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+                                @if($day->day_of_week == 5)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Friday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+                                @if($day->day_of_week == 6)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Saturday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
+                                @if($day->day_of_week == 7)
+                                <div class="one-line-set">
+                                    <b class="ser-gap-time">Sunday</b>
+                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                </div>
+                                @endif
                             </div>
-                            <div class="operating-left">
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>07.00 am - 09.30 pm</p>
-                                <p>Closed</p>
-                            </div>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
-
-
-
-
                 </div>
             </div>
             <div class="col-md-4">
@@ -150,9 +172,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
-                                <p class="hou-p">$4/Hour</p>
+                                <p class="hou-p">$ {{$servicesData->charges}}/Hour</p>
                                 <div class="hourplan-button">
-                                <button type="button" class="dayplan-btn" onclick="displayMessage();">Book Now</button>
+                                    <button type="button" class="dayplan-btn" onclick="displayMessage();">Book
+                                        Now</button>
                                 </div>
                             </div>
                         </div>
@@ -167,9 +190,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
-                                <p class="da-p">$35/Day</p>
+                                <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
                                 <div class="dayplan-button">
-                                <button type="button" class="dayplan-btn" onclick="displayMessage();">Book Now</button>
+                                    <button type="button" class="dayplan-btn" onclick="displayMessage();">Book
+                                        Now</button>
                                 </div>
                             </div>
                         </div>
@@ -378,25 +402,85 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-    function displayMessage(){
-        $.ajax({
-           type:'POST',
-           url:"{{ route('authorize-check') }}",
-           data:{"_token": "{{ csrf_token() }}", "name":"name"},
-           success:function(data){
-              if(data.success == true){
+
+function displayMessage() {
+    $.ajax({
+        type: 'POST',
+        url: "{{ route('authorize-check') }}",
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "name": "name"
+        },
+        success: function(data) {
+            if (data.success == true) {
                 $("#hour_plan_modal").modal('show');
-              }else{
+            } else {
                 var url = "{{ route('login') }}";
                 location.href = url;
-              }
-           }
-        });
+            }
+        }
+    });
 
-    } 
+}
 </script>
 
 <style>
+@media (min-width:768px) and (max-width:1024px) {
+    .dayplan-btn {
+        padding: 10px;
+        width: auto !important;
+    }
+    .h2-hourplan {
+    font-size: 15px !important;
+    color: #000000;
+}
+h5, .fs-5 {
+    font-size: 15px !important;
+}
+}
+
+@media (min-width:768px) and (max-width:1440px) {
+    .grid figure {
+        margin: 2px -8px 3px !important;
+    }
+}
+
+@media (min-width:320px) and (max-width:600px) {
+    .set-space {
+        font-size: 35px !important;
+    }
+
+    .workspace {
+        font-size: 20px !important;
+    }
+
+    .main-block {
+        padding: 0px !important;
+    }
+
+    .hot-desk {
+        margin-top: 0px !important;
+    }
+
+    .h2-day {
+        text-align: start !important;
+    }
+
+    section.mains-blocks {
+        padding: 0px !important;
+        /* margin-top: -60px !important; */
+        margin-top: 30px !important;
+        background: #fbfbfb;
+    }
+
+    .grid figure {
+        position: relative;
+        overflow: hidden;
+        min-width: 100%;
+        margin: 0px 0px 5px !important;
+    }
+}
+
 .modal-header {
     border-bottom: none !important;
 }
@@ -435,8 +519,16 @@ document.addEventListener('DOMContentLoaded', function() {
     background: #F5F5F5;
 }
 
+.ser-gap-time {
+    margin-right: 20px;
+}
+
 .set-box {
     margin-left: 50px;
+}
+
+.one-line-set {
+    display: flex;
 }
 
 .badge:empty {
@@ -475,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .page-title {
     position: absolute;
-    top: 36%;
+    top: 60%;
     width: 100%;
     text-align: center;
     left: 0;
@@ -536,7 +628,7 @@ figure.effect-chico {
     position: relative;
     overflow: hidden;
     min-width: 100%;
-    margin: -18px -8px 26px;
+    margin: 3px 0px 5px;
     text-align: center;
     cursor: pointer;
 }
@@ -600,7 +692,7 @@ figure.effect-chico {
 }
 
 .operating-block {
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     text-align: start;
     width: 50%;
@@ -688,5 +780,25 @@ section.mains-blocks {
     padding: 100px;
     margin-top: -175px;
     background: #fbfbfb;
+}
+
+.grid figure {
+    position: relative;
+    overflow: hidden;
+    min-width: 100%;
+    margin: 3px 0px 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
 }
 </style>

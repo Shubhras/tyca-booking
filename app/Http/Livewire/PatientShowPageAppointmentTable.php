@@ -11,7 +11,8 @@ class PatientShowPageAppointmentTable extends LivewireTableComponent
 {
     public $patientId;
     protected $model = Appointment::class;
-    public bool $showFilterOnHeader = true;
+    public bool $showFilterOnHeader = false;
+    public bool $showButtonOnHeader = false;
     public array $FilterComponent = ['patients.appointment_filter', Appointment::STATUS];
     protected $listeners = ['refresh' => '$refresh', 'resetPage', 'changeStatusFilter', 'changeDateFilter'];
     public int $statusFilter = Appointment::BOOKED;
@@ -32,6 +33,8 @@ class PatientShowPageAppointmentTable extends LivewireTableComponent
 
             return [];
         });
+
+        $this->setSearchDisabled();
     }
 
     /**
@@ -42,7 +45,7 @@ class PatientShowPageAppointmentTable extends LivewireTableComponent
         $query = Appointment::with('doctor')->where('patient_id', '=', $this->patientId)->select('appointments.*');
 
         if (getLogInUser()->hasRole('doctor')) {
-            $query = Appointment::with(['doctor.user', 'doctor.reviews'])->where('patient_id', '=', $this->patientId)->whereDoctorId(getLogInUser()->doctor->id)->select('appointments.*');   
+            $query = Appointment::with(['doctor.user', 'doctor.reviews'])->where('patient_id', '=', $this->patientId)->whereDoctorId(getLogInUser()->doctor->id)->select('appointments.*');
         }
 
         $query->when($this->statusFilter != '' && $this->statusFilter != Appointment::ALL_STATUS,
@@ -91,7 +94,7 @@ class PatientShowPageAppointmentTable extends LivewireTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__('messages.doctor.doctor'), 'doctor.user.first_name')->view('patients.components.doctor')
+            Column::make(__('messages.visit.doctor'), 'doctor.user.first_name')->view('patients.components.doctor')
                 ->sortable()
                 ->searchable(
                     function (Builder $query, $direction) {
@@ -100,9 +103,13 @@ class PatientShowPageAppointmentTable extends LivewireTableComponent
                         });
                     }
                 ),
+            Column::make(__('messages.appointment.service'), 'services.name')
+                ->sortable(),
+            Column::make(__('messages.appointment.plantype'), 'plan_type')
+                ->sortable(),
             Column::make(__('messages.appointment.appointment_at'), 'date')->view('patients.components.appointment_at')
                 ->sortable()->searchable(),
-            Column::make(__('messages.appointment.status'),'id' )
+            Column::make(__('messages.appointment.appointment_date'),'id' )
                 ->format(function ($value, $row) {
                     return view('patients.components.status')
                         ->with([

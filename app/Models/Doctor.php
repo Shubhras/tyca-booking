@@ -141,7 +141,17 @@ class Doctor extends Model
      */
     public function doctorSession()
     {
+        //return $this->hasMany(DoctorSession::class);
         return $this->hasMany(DoctorSession::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function doctorSingleSession()
+    {
+        //return $this->hasMany(DoctorSession::class);
+        return $this->hasOne(DoctorSession::class);
     }
 
     /**

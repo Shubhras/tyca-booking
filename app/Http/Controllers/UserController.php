@@ -174,7 +174,8 @@ class UserController extends AppBaseController
 
         Flash::success(__('messages.flash.doctor_update'));
 
-        return $this->sendSuccess(__('messages.flash.doctor_update'));
+        //return $this->sendSuccess(__('messages.flash.doctor_update'));
+        return redirect(route('doctors.index'));
     }
 
     /**

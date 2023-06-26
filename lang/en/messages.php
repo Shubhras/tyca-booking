@@ -9,7 +9,7 @@ return [
     |
     */
     //menu.blade keys
-
+    'customer' => 'Customer',
     'dashboard' => 'Dashboard',
     'users' => 'Users',
     'patients' => 'Customers',
