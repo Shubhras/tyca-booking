@@ -248,6 +248,7 @@
     padding: 10px 0px;
     margin-left: 30px;
     width: 200px;
+    font-weight:600;
 }
 
 .amities1 {
@@ -415,6 +416,9 @@ figure.effect-chico {
     }
 }
 @media (min-width:320px) and (max-width:600px) {
+    .img-book{
+        padding-right:0px !important;
+    }
     .stripes{
         width:100% !important;
     }
@@ -468,6 +472,9 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
+    .img-book{
+        padding-right:0px !important;
+    }
     .radio-btn{
         font-size:14px !important;
     }
@@ -487,6 +494,9 @@ figure.effect-chico {
 }
 
 @media (min-width:900px) and (max-width:1024px) {
+    .img-book{
+        padding-right:0px !important;
+    }
 
     h5,
     .fs-5 {
@@ -511,7 +521,7 @@ a:hover {
 <section class="main-block1 gray">
     <div class="container">
         <div class="row col-12 slot-margin">
-            <div class="col-md-8">
+            <div class="col-md-8 img-book">
                 <div class="grid">
                     @if(!empty($user1->gallery[0]))
                     <figure class="effect-chico">
@@ -524,7 +534,7 @@ a:hover {
                     @endif
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 img-book">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="grid">
@@ -769,7 +779,7 @@ a:hover {
                     $idGet =  Request::segment(2);
                     ?>
                     <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 20px;">
+                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 18px;">
                         View More
                     </a>
                 </div>
@@ -902,7 +912,7 @@ a:hover {
                 <div class="row col-md-12 mb-3">
                     <div class="col-3 stripes">
                         <div><input id="female" type="radio" name="gender" value="Female"><span
-                                class="radio-btn">PayPall</span></div>
+                                class="radio-btn">PayPal</span></div>
                         <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
