@@ -412,7 +412,7 @@ h2.h2-member {
     display: flex;
 }
 .update-btn {
-    margin-left: 30px;
+    /* margin-left: 30px; */
     margin-right: 30px;
 }
 button.up-btn {
@@ -642,7 +642,7 @@ div#customer-review_wrap {
 .row.btn-portal {
     display: flex;
     justify-content: space-around;
-    margin-left: -80px;
+    /* margin-left: -80px; */
 }
 
 /* media */
@@ -775,7 +775,6 @@ button.btns.btn-secondarys {
 }
 .row.btn-portal {
     display: block;
-    width: 100px;
 }
 h5.text-white.mb-4.pb-1 {
     font-size: 15px !important;
@@ -793,36 +792,43 @@ h5.text-white.mb-4.pb-1 {
     div#customer-review_wrap {
     justify-content: space-evenly;
 }
-.row.btn-portal {
-    display: block!important;
-}
-.col-md-4.update-btn {
+/* .col-md-4.update-btn {
     margin-bottom: 30px;
-}
-button.log-btn {
-    margin-left: 75px;
-    margin-top: -12px;
-}
+} */
+
 h5.text-white.mb-4.pb-1 {
     font-size: 18px !important;
 }
 }
 
+@media (min-width: 600px) and ((max-width: 768px)){
+    .btn-portal {
+    display: block !important;
+}
+.update-btn{
+    margin-bottom: 10px !important;
+}
+}
 
-
+@media (min-width: 320px) and ((max-width: 1023px)){
+button.log-btn {
+    margin-left:0px !important;
+}
+}
 @media (max-width: 1024px){
 
 .col-md-2.logout-btn {
     margin-left: 45px;
 }
-.row.btn-portal {
+/* .row.btn-portal {
     display: flex;
-    justify-content: space-between;
-    margin-right: -60px;
+} */
+button.log-btn {
+    margin-left: 40px;
 }
-.col-md-4.update-btn {
+/* .col-md-4.update-btn {
     margin-left: 75px;
-}
+} */
 h5.text-white.mb-4.pb-1 {
     font-size: 18px!important;
 }

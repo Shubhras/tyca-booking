@@ -249,7 +249,7 @@
                 </div>
 
                 <div class="col icon-set" style="text-align:center;">
-                    <span class="heading-id"><img src="/assets/image/image 12.png" alt="#" style="width:900px;"></span>
+                    <span class="heading-id"><img src="/assets/image/image 12.png" alt="#" style="width:100%"></span>
                 </div>
                 <div class="row mt-3">
                     <div class="form-group col-sm-12">
@@ -338,13 +338,13 @@
                     <label for="Payment Method" class="form-label required">Payment Method:</label>
                 </div>
                 <div class="row col-md-12 mb-3">
-                    <div class="col-3">
+                    <div class="col-3 stripes">
                         <div><input id="female" type="radio" name="gender" value="Female"><span
                                 class="radio-btn">PayPall</span></div>
                         <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
+                        <ul class="xl-icon mb-0 pay-pal">
                             <li class="radio-btn1"><a><img src="/assets/image/paypall.png" alt="#"></i></a></li>
                             <li class="radio-btn1"><a><img src="/assets/image/pay1.png" alt="#"></i></a></li>
                             <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
@@ -356,7 +356,7 @@
                     </div>
                 </div>
                 <div class="row col-md-12 mb-3">
-                    <div class="col-3">
+                    <div class="col-3 stripes">
                         <div><input id="female" type="radio" name="gender" value="Female"><span class="radio-btn">Stripe
                                 Checkout</span></div>
                         <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
@@ -425,6 +425,26 @@ function displayMessage() {
 </script>
 
 <style>
+    @media (max-width: 767px) {
+.form-control, .form-select {
+    height: 50px;
+    font-size: 16px;
+    padding: 10px !important;
+}
+}
+    @media (min-width:768px) and (max-width:800px) {
+    .radio-btn{
+        font-size:14px !important;
+    }
+}
+@media (min-width:320px) and (max-width:375px){
+    .stripes{
+        width:100% !important;
+    }
+    .pay-pal{
+        display:grid !important;
+    }
+}
 @media (min-width:768px) and (max-width:1024px) {
     .dayplan-btn {
         padding: 10px;
@@ -437,6 +457,12 @@ function displayMessage() {
 h5, .fs-5 {
     font-size: 15px !important;
 }
+.row.hours-plan {
+    width: 240px;
+}
+.row.grid-space.days-plan {
+    width: 240px;
+}
 }
 
 @media (min-width:768px) and (max-width:1440px) {
@@ -446,6 +472,12 @@ h5, .fs-5 {
 }
 
 @media (min-width:320px) and (max-width:600px) {
+    .stripes{
+        width:100% !important;
+    }
+    .set-box{
+        margin-left:30px !important;
+    }
     .set-space {
         font-size: 35px !important;
     }
@@ -465,6 +497,28 @@ h5, .fs-5 {
     .h2-day {
         text-align: start !important;
     }
+
+    .day-plan {
+    display: flex;
+    border: 1px solid #D9D9D9;
+    margin-bottom: 20px;
+}
+.hot-desk {
+    text-align: start;
+    margin-bottom: 20px!important;
+}
+.h2-day {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 10px!important;
+}
+.title-hero-bg {
+ min-height: 430px!important;
+}
+
+section.main-block.gray {
+    margin-top: 20px;
+}
 
     section.mains-blocks {
         padding: 0px !important;
@@ -562,7 +616,7 @@ h5, .fs-5 {
 .btn-secondarys {
     color: #fff;
     background-color: #273432;
-    border-color: #273432;
+    border: 1px solid #273432;
 }
 
 .page-title {
@@ -663,7 +717,7 @@ figure.effect-chico {
 
 .hot-desks {
     text-align: start;
-    margin-top: -20px;
+    /* margin-top: -20px; */
     /* margin-bottom: 50px; */
 }
 
@@ -801,4 +855,8 @@ section.mains-blocks {
     position: relative;
     min-height: 550px;
 }
+.pay-pal{
+        display:flex;
+        place-content:start;
+    }
 </style>

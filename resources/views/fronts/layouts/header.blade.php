@@ -37,7 +37,9 @@
                             </li>
                             <li class="nav-item">
                                         @if(getLogInUser())
-                                        <a class="nav-link">{{ getLogInUser()->full_name }}</a>
+                                        <a class="nav-link" id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
+                                     src="{{ getLogInUser()->profile_image }}"/>   
+                                     <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3> </a>
                                         @else
                                         <a href="{{ route('login') }}"
                                        class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.login') }}</a>
@@ -75,3 +77,19 @@
         </div>
     <!-- </div> -->
 </header>
+
+
+<style>
+
+a#nav-flex {
+    display: flex;
+}
+    h3#logos-h {
+    font-size: 18px;
+    margin-top: 10px;
+}
+img.img-fluid-logos {
+    width: 40px;
+    margin-right: 5px;
+}
+    </style>
