@@ -545,6 +545,26 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
+    @media (max-width: 767px) {
+.form-control, .form-select {
+    height: 50px;
+    font-size: 16px;
+    padding: 10px !important;
+}
+}
+    @media (min-width:768px) and (max-width:800px) {
+    .radio-btn{
+        font-size:14px !important;
+    }
+}
+@media (min-width:320px) and (max-width:375px){
+    .stripes{
+        width:100% !important;
+    }
+    .pay-pal{
+        display:grid !important;
+    }
+}
 @media (min-width:768px) and (max-width:1024px) {
     .dayplan-btn {
         padding: 10px;
@@ -557,6 +577,12 @@ $('input[type="date"]').change(function() {
 h5, .fs-5 {
     font-size: 15px !important;
 }
+.row.hours-plan {
+    width: 240px;
+}
+.row.grid-space.days-plan {
+    width: 240px;
+}
 }
 
 @media (min-width:768px) and (max-width:1440px) {
@@ -566,6 +592,12 @@ h5, .fs-5 {
 }
 
 @media (min-width:320px) and (max-width:600px) {
+    .stripes{
+        width:100% !important;
+    }
+    .set-box{
+        margin-left:30px !important;
+    }
     .set-space {
         font-size: 35px !important;
     }
@@ -585,6 +617,28 @@ h5, .fs-5 {
     .h2-day {
         text-align: start !important;
     }
+
+    .day-plan {
+    display: flex;
+    border: 1px solid #D9D9D9;
+    margin-bottom: 20px;
+}
+.hot-desk {
+    text-align: start;
+    margin-bottom: 20px!important;
+}
+.h2-day {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 10px!important;
+}
+.title-hero-bg {
+ min-height: 430px!important;
+}
+
+section.main-block.gray {
+    margin-top: 20px;
+}
 
     section.mains-blocks {
         padding: 0px !important;
@@ -682,7 +736,7 @@ h5, .fs-5 {
 .btn-secondarys {
     color: #fff;
     background-color: #273432;
-    border-color: #273432;
+    border: 1px solid #273432;
 }
 
 .page-title {
@@ -783,7 +837,7 @@ figure.effect-chico {
 
 .hot-desks {
     text-align: start;
-    margin-top: -20px;
+    /* margin-top: -20px; */
     /* margin-bottom: 50px; */
 }
 
@@ -924,4 +978,8 @@ section.mains-blocks {
 #slot_option {
     display: none;
 }
+.pay-pal{
+        display:flex;
+        place-content:start;
+    }
 </style>
