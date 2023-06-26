@@ -414,7 +414,9 @@ class AppointmentController extends AppBaseController
     public function frontAppointmentBook(CreateFrontAppointmentRequest $request)
     {
         $input = $request->all();
+    
         $appointment = $this->appointmentRepository->frontSideStore($input);
+    
         if ($input['payment_type'] == Appointment::STRIPE) {
             $result = $this->appointmentRepository->createSession($appointment);
 
@@ -543,19 +545,19 @@ class AppointmentController extends AppBaseController
             'user_id' => $patient->user_id,
         ]);
 
-        if (parse_url(url()->previous(), PHP_URL_PATH) == '/medical-appointment') {
-            return redirect(route('medicalAppointment'));
-        }
+        // if (parse_url(url()->previous(), PHP_URL_PATH) == '/medical-appointment') {
+        //     return redirect(route('medicalAppointment'));
+        // }
 
-        if (! getLogInUser()) {
-            return redirect(route('medical'));
-        }
+        // if (! getLogInUser()) {
+        //     return redirect(route('medical'));
+        // }
 
-        if (getLogInUser()->hasRole('patient')) {
-            return redirect(route('patients.patient-appointments-index'));
-        }
+        // if (getLogInUser()->hasRole('patient')) {
+        //     return redirect(route('patients.patient-appointments-index'));
+        // }
 
-        return redirect(route('appointments.index'));
+        return redirect('http://localhost:8000/patients/dashboard');
     }
 
     /**

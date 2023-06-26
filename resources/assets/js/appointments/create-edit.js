@@ -202,7 +202,7 @@ listenKeyup('#addFees', function (e) {
 
 listenSubmit('#addAppointmentForm', function (e) {
     e.preventDefault();
-
+alert('wwwwwwwwwwwwwww');
     let data = new FormData($(this)[0]);
     $('.submitAppointmentBtn').prop(Lang.get('messages.common.discard'), true);
     $('.submitAppointmentBtn').text(Lang.get('messages.common.please_wait'));

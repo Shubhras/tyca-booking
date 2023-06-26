@@ -4078,13 +4078,13 @@ listenChange('#FrontAppointmentServiceId', function () {
 });
 listenSubmit('#frontAppointmentBook', function (e) {
   e.preventDefault();
-  var firstName = $('#template-medical-first_name').val().trim();
-  var lastName = $('#template-medical-last_name').val().trim();
-  var email = $('#template-medical-email').val().trim();
-  var doctor = $('#appointmentDoctorId').val().trim();
-  var services = $('#FrontAppointmentServiceId').val().trim();
-  var appointmentDate = $('#templateAppointmentDate').val().trim();
-  var paymentType = $('#paymentMethod').val().trim();
+  var firstName = $('#template-medical-first_name').val();
+  var lastName = $('#template-medical-last_name').val();
+  var email = $('#template-medical-email').val();
+  var doctor = $('#appointmentDoctorId').val();
+  var services = $('#FrontAppointmentServiceId').val();
+  var appointmentDate = $('#templateAppointmentDate').val();
+  var paymentType = $('#paymentMethod').val();
   $('.book-appointment-message').css('display', 'block');
 
   if (!$('#isPatientAccount').is(':checked')) {
@@ -4140,8 +4140,8 @@ listenSubmit('#frontAppointmentBook', function (e) {
 
   var btnSaveEle = $(this).find('#saveBtn');
   setFrontBtnLoader(btnSaveEle);
-  var frontAppointmentFormData = new FormData($(this)[0]);
-  frontAppointmentFormData.append('payable_amount', frontPayableAmount);
+  var frontAppointmentFormData = new FormData($(this)[0]); // frontAppointmentFormData.append('payable_amount', frontPayableAmount)
+
   var response = '<div class="alert alert-warning alert-dismissable"> Processing.. </div>';
   jQuery(this).find('.book-appointment-message').html(response).show('slow');
   $.ajax({
@@ -4153,9 +4153,10 @@ listenSubmit('#frontAppointmentBook', function (e) {
     success: function success(result) {
       if (result.success) {
         var appointmentID = result.data.appointmentId;
+        console.log("result.data.payment_type", result.data.payment_type);
         response = '<div class="gen alert alert-success">' + result.message + '</div>';
-        $('.book-appointment-message').html(response).delay(5000).hide('slow');
-        $(window).scrollTop($('.appointment-form').offset().top);
+        $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
         $('#frontAppointmentBook')[0].reset();
 
         if (result.data.payment_type == manually) {

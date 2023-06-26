@@ -33,7 +33,10 @@ class BookController extends Controller
         $specialization = Specialization::with('media')->whereIn('id', $bb)->get();
 
         $services = Service::with('media')->whereIn('id', $aa)->whereStatus(Service::ACTIVE)->latest()->get();
-        return view('book_slot.index', compact('services','user','user1','doctor','specialization'));
+        $appointmentDoctors = Doctor::with('user')->whereIn('id',
+            DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',
+            User::ACTIVE)->pluck('user.full_name', 'id');
+        return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization'));
 
     }
 }
