@@ -379,7 +379,7 @@ function getCurrencyIcon()
 
 function setStripeApiKey()
 {
-    Stripe::setApiKey(config('services.stripe.secret_key'));
+    Stripe::setApiKey('sk_test_51HUtVaBcMJXLBqj7ixb7Z9enyLTWGGwmp4paujhAR6NYoQwbSs4HOkeicbVLj0jVrV1px7Zzlirjs90jQHLdE7Fs007zbsFt4t');
 }
 
 /**

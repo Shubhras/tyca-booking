@@ -58,7 +58,7 @@ class ServicesRepository extends AppBaseController
             DB::beginTransaction();
 
             $input['charges'] = str_replace(',', '', $input['charges']);
-            $input['status'] = (isset($input['status'])) ? 1 : 1;
+            $input['status'] = (isset($input['status'])) ? 1 : 0;
             $services = Service::create($input);
             if (isset($input['doctors']) && ! empty($input['doctors'])) {
                 $services->serviceDoctors()->sync($input['doctors']);
@@ -118,7 +118,7 @@ class ServicesRepository extends AppBaseController
         try {
             DB::beginTransaction();
             $input['charges'] = str_replace(',', '', $input['charges']);
-            $input['status'] = (isset($input['status'])) ? 1 : 1;
+            $input['status'] = (isset($input['status'])) ? 1 : 0;
             $service->update($input);
             $service->serviceDoctors()->sync($input['doctors']);
             $service->serviceSpecializations()->sync($input['specializations']);

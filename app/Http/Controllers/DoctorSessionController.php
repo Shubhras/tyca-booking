@@ -214,7 +214,7 @@ class DoctorSessionController extends AppBaseController
             // convert 12 hours to 24 hours
             $startTime = date('H:i', strtotime($doctorWeekDaySession->full_start_time));
             $endTime = date('H:i', strtotime($doctorWeekDaySession->full_end_time));
-            $slots = $this->getTimeSlot($doctorSession->session_gap, $startTime, $endTime);
+            $slots = $this->getTimeSlot($doctorSession->session_meeting_time, $startTime, $endTime);
             $gap = $doctorSession->session_gap;
             $isSameWeekDay = (Carbon::now()->dayOfWeek == $date->dayOfWeek) && (Carbon::now()->isSameDay($date));
             foreach ($slots as $key => $slot) {

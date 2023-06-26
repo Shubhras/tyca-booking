@@ -18,6 +18,8 @@
             {{ Form::hidden('short_description', null, ['id' => 'short_description']) }}
         </div>
     </div>
+
+    <input type="hidden" name="status" value="<?php if(isset($service->status)){ echo $service->status; };  ?>">
     <div class="col-lg-6 mb-5">
         {{ Form::label('specializations', __('messages.specializations').':', ['class' => 'form-label required']) }}
         {{ Form::select('specializations[]',$data['specializations'],(isset($selectedSpecializations)) ?

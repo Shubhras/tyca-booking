@@ -307,7 +307,7 @@
     border-radius: 100%
 }
 </style>
-<<<<<<< HEAD
+
 
 <script>
     var quill = new Quill('#doctorDescriptionId', {

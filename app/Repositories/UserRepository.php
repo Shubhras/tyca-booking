@@ -124,6 +124,7 @@ class UserRepository extends BaseRepository
                 }
             }
             DB::commit();
+
             return $doctor;
         } catch (\Exception $e) {
             throw new UnprocessableEntityHttpException($e->getMessage());
