@@ -219,7 +219,7 @@ $styleCss = 'style';
                 <div class="alert alert-danger d-none hide"></div>
 
                 <?php $emptyData = array(); ?>
-                <form class="book-appointment-form bg-white" id="addAppointmentForm"
+                <form class="book-appointment-form bg-white" id="frontAppointmentBook"
                     action="{{ route('front.appointment.book') }}" method="post">
                     @csrf
 
@@ -278,9 +278,9 @@ $styleCss = 'style';
                             <span class="required"></span>
                             {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type')]) }}
                         </div>
-                        <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId"> plantype_id
-                        <input type="hidden" name="payable_amount" id="payable_amount" value="payable_amount">
-                        <input type="hidden" name="charge" id="payable_amount" value="payable_amount">
+                        <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId">
+                        <input type="hidden" name="payable_amount" id="payable_amount" value="10">
+                        <input type="hidden" name="charge" value="10">
 
 
                     </div>
@@ -293,10 +293,10 @@ $styleCss = 'style';
                         </div>
                     </div>
 
-                    <!-- <div class="col icon-set" style="text-align:center;">
+                    <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
                                 style="width:900px;"></span>
-                    </div> -->
+                    </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -378,9 +378,10 @@ $styleCss = 'style';
                     </div>
                     <div class="row col-md-12 mb-3">
                         <div class="col-3">
-                            <div><input id="payment_type" type="radio" name="payment_type" value="2"><span
-                                    class="radio-btn">Stripe
-                                    Checkout</span></div>
+                            <div>
+                                <input id="payment_type" type="radio" name="payment_type" value="2">
+                                <span class="radio-btn">Stripe </span>
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
                             <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
@@ -391,7 +392,7 @@ $styleCss = 'style';
                                 </li>
                             </ul>
                         </div>
-                        Checkout</span>
+                      
                     </div>
                     <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
 
@@ -434,7 +435,7 @@ function displayMessage(id, price) {
         var abc = 'hourly';
         $('#slot_option').show();
     } else {
-        var abc = 'Day Plan';
+        var abc = 'daily';
         $('#slot_option').hide();
     }
 
@@ -570,6 +571,7 @@ $('input[type="date"]').change(function() {
         padding: 10px;
         width: auto !important;
     }
+
     .h2-hourplan {
     font-size: 15px !important;
     color: #000000;
@@ -975,6 +977,7 @@ section.mains-blocks {
     position: relative;
     min-height: 550px;
 }
+
 #slot_option {
     display: none;
 }

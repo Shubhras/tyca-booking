@@ -87,14 +87,6 @@ class RazorpayController extends AppBaseController
                     'user_id' => $patient->user->id,
                 ]);
 
-                if (! getLogInUser()) {
-                    return redirect(route('medicalAppointment'));
-                }
-
-                if (getLogInUser()->hasRole('patient')) {
-                    return redirect(route('patients.patient-appointments-index'));
-                }
-
                 return redirect(route('appointments.index'));
             } catch (Exception $e) {
                 return false;

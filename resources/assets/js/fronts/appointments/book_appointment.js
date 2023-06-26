@@ -283,13 +283,13 @@ listenChange('#FrontAppointmentServiceId', function () {
 listenSubmit('#frontAppointmentBook', function (e) {
     e.preventDefault()
 
-    let firstName = $('#template-medical-first_name').val().trim()
-    let lastName = $('#template-medical-last_name').val().trim()
-    let email = $('#template-medical-email').val().trim()
-    let doctor = $('#appointmentDoctorId').val().trim()
-    let services = $('#FrontAppointmentServiceId').val().trim()
-    let appointmentDate = $('#templateAppointmentDate').val().trim()
-    let paymentType = $('#paymentMethod').val().trim()
+    let firstName = $('#template-medical-first_name').val()
+    let lastName = $('#template-medical-last_name').val()
+        let email = $('#template-medical-email').val()
+    let doctor = $('#appointmentDoctorId').val()
+    let services = $('#FrontAppointmentServiceId').val()
+    let appointmentDate = $('#templateAppointmentDate').val()
+    let paymentType = $('#paymentMethod').val()
     $('.book-appointment-message').css('display', 'block')
     if (!$('#isPatientAccount').is(':checked')) {
         if (firstName == '') {
@@ -353,7 +353,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
     setFrontBtnLoader(btnSaveEle)
 
     let frontAppointmentFormData = new FormData($(this)[0])
-    frontAppointmentFormData.append('payable_amount', frontPayableAmount)
+    // frontAppointmentFormData.append('payable_amount', frontPayableAmount)
     let response = '<div class="alert alert-warning alert-dismissable"> Processing.. </div>'
     jQuery(this).
         find('.book-appointment-message').
@@ -368,12 +368,13 @@ listenSubmit('#frontAppointmentBook', function (e) {
         success: function (result) {
             if (result.success) {
                 let appointmentID = result.data.appointmentId
+                console.log("result.data.payment_type",result.data.payment_type);
 
                 response = '<div class="gen alert alert-success">' +
                     result.message + '</div>'
 
                 $('.book-appointment-message').html(response).delay(5000).hide('slow')
-                $(window).scrollTop($('.appointment-form').offset().top)
+                // $(window).scrollTop($('.appointment-form').offset().top)
                 $('#frontAppointmentBook')[0].reset()
 
                 if (result.data.payment_type == manually) {
@@ -458,6 +459,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
                         },
                     })
                 }
+               
 
                 if (result.data.payment_type == stripeMethod) {
                     let sessionId = result.data[0].sessionId

@@ -74,10 +74,22 @@ class AppointmentRepository extends BaseRepository
     {
         try {
             DB::beginTransaction();
+            
+            if($input['plan_type'] == 'hourly')
+            {
+                $fromTime = explode(' ', $input['from_time']);
+                $toTime = explode(' ', $input['to_time']);
+            }else
+            {
+                $blank = '12:00 AM';
+                $fromTime = explode(' ', date('H:i A'));
+                $toTime = explode(' ', $blank);
+            }
+            
 
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
-            $fromTime = explode(' ', $input['from_time']);
-            $toTime = explode(' ', $input['to_time']);
+            // $fromTime = explode(' ', $input['from_time']);
+            // $toTime = explode(' ', $input['to_time']);
             $input['from_time'] = $fromTime[0];
             $input['from_time_type'] = $fromTime[1];
             $input['to_time'] = $toTime[0];
@@ -249,11 +261,25 @@ class AppointmentRepository extends BaseRepository
                 $user->assignRole('patient');
                 $input['patient_id'] = $patient->id;
             }
+
+            if($input['plan_type'] == 'hourly')
+            {
+                $fromTime = explode(' ', $input['from_time']);
+                $toTime = explode(' ', $input['to_time']);
+            }else
+            {
+                $blank = '12:00 AM';
+                $fromTime = explode(' ', date('H:i A'));
+                $toTime = explode(' ', $blank);
+                $input['from_time'] = date('H:i A');
+                $input['to_time'] = $blank;
+            }
+
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
             $input['original_from_time'] = $input['from_time'];
             $input['original_to_time'] = $input['to_time'];
-            $fromTime = explode(' ', $input['from_time']);
-            $toTime = explode(' ', $input['to_time']);
+            // $fromTime = explode(' ', $input['from_time']);
+            // $toTime = explode(' ', $input['to_time']);
             $input['from_time'] = $fromTime[0];
             $input['from_time_type'] = $fromTime[1];
             $input['to_time'] = $toTime[0];
