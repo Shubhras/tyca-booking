@@ -169,13 +169,13 @@ class DashboardRepository
         $data['pastCompletedAppointmentCount'] = Appointment::wherePatientId($patientId)->where('date', '<',
             $todayDate)->count();
         $data['completedAppointmentCount'] = $data['pastCompletedAppointmentCount'] + $todayCompleted;
-        $data['todayAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services'])
+        $data['todayAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
             ->wherePatientId($patientId)
             ->whereStatus(Appointment::BOOKED)
             ->where('date', '=', $todayDate)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-        $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services'])
+        $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
             ->wherePatientId($patientId)
             ->whereStatus(Appointment::BOOKED)
             ->where('date', '>', $todayDate)

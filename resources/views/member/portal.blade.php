@@ -96,16 +96,44 @@
   <tbody>
     @foreach($data['todayAppointment'] as $appointment)
     <tr style="color: #111827;">
-      <td>{{ $appointment->doctor->user->fullname}}</td>
-      <td>{{ $appointment->doctor->user->email}}</td>
-      <td>{{ $appointment->payment_type }}</td>
-      <td>{{ $appointment->date }}</td>
-      <td>${{ $appointment->payable_amount }}.00</td>
-      <td>{{ $appointment->payment_method }}</td>
-      <td>Paid</td>
-      <td>{{ $appointment->status }}</td>
+  <td>{{ $appointment->doctor->user->first_name}}</td>
+        <td>{{ $appointment->services->name}}</td>
+        <td>{{ $appointment->plan_type }}</td>
+        <td>{{ $appointment->date }}</td>
+        <td>${{ $appointment->payable_amount }}.00</td>
+        @if($appointment->payment_method == 2)
+        <td> 
+            Stripe
+        </td>
+        @else
+            <td>Paypal</td>        
+        @endif
+
+        @if($appointment->transaction->status == 0)
+        <td>All</td>
+        @elseif($appointment->transaction->status == 1)
+        <td> Panding</td>
+        @else
+        <td> Paid</td>
+        @endif
+
+        @if($appointment->status == 1)
+        <td> 
+            Booked
+        </td>
+        @elseif($appointment->status == 2)
+        <td> 
+            Checking
+        </td>
+        @elseif($appointment->status == 3)
+        <td> 
+            Checkout
+        </td>
+        @else
+            <td>Cancelled</td>        
+        @endif
       
-      <td><a onclick="bookedInfo({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
+      <td><a onclick="bookedInfoData({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
      <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
@@ -135,16 +163,44 @@
   <tbody>
     @foreach($data['upcomingAppointment'] as $appointment)
     <tr style="color: #111827;">
-      <td>{{ $appointment->doctor->user->fullname}}</td>
-      <td>{{ $appointment->doctor->user->email}}</td>
-      <td>{{ $appointment->payment_type }}</td>
-      <td>{{ $appointment->date }}</td>
-      <td>${{ $appointment->payable_amount }}.00</td>
-      <td>{{ $appointment->payment_method }}</td>
-      <td>Paid</td>
-      <td>{{ $appointment->status }}</td>
+     <td>{{ $appointment->doctor->user->first_name}}</td>
+        <td>{{ $appointment->services->name}}</td>
+        <td>{{ $appointment->plan_type }}</td>
+        <td>{{ $appointment->date }}</td>
+        <td>${{ $appointment->payable_amount }}.00</td>
+        @if($appointment->payment_method == 2)
+        <td> 
+            Stripe
+        </td>
+        @else
+            <td>Paypal</td>        
+        @endif
+
+        @if($appointment->transaction->status == 0)
+        <td>All</td>
+        @elseif($appointment->transaction->status == 1)
+        <td> Panding</td>
+        @else
+        <td> Paid</td>
+        @endif
+
+        @if($appointment->status == 1)
+        <td> 
+            Booked
+        </td>
+        @elseif($appointment->status == 2)
+        <td> 
+            Checking
+        </td>
+        @elseif($appointment->status == 3)
+        <td> 
+            Checkout
+        </td>
+        @else
+            <td>Cancelled</td>        
+        @endif
       
-      <td><a onclick="bookedInfo({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
+      <td><a onclick="bookedInfoData({{$appointment}});"><i class="fa-solid fa-eye"></a></i>
      <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
@@ -179,7 +235,7 @@
                 <p>Payable Amount: <b id="payableInfo"></b></p>
                 <p>Payment Method: <b id="paymentMethod"></b></p>
                <p>Payment Status: <b id="statusInfo"></b></p>
-               <p>Booking Status: <b id="bookedInfo"></b></p>
+               <p>Booking Status: <b id="bookedInfoses"></b></p>
            </div>
             </div>
         </div>
@@ -842,27 +898,94 @@ h5, .fs-5 {
 </style>
 <script type="text/javascript">
 
-function bookedInfo(data){
-    document.getElementById('outinfo').innerHTML = data.doctor.user.full_name;
-    document.getElementById('bookSpaceInfo').innerHTML = data.doctor.user.email; 
-    document.getElementById('planTypeInfo').innerHTML = data.payment_type; 
+function bookedInfoData(data){
+ document.getElementById('outinfo').innerHTML = data.doctor.user.first_name;
+    document.getElementById('bookSpaceInfo').innerHTML = data.services.name; 
+    document.getElementById('planTypeInfo').innerHTML = data.plan_type; 
     document.getElementById('appointAtIfo').innerHTML = data.date; 
     document.getElementById('payableInfo').innerHTML =  "$" + data.payable_amount + ".00";
-    document.getElementById('paymentMethod').innerHTML = data.payment_method; 
-    document.getElementById('statusInfo').innerHTML =  "Paid";
-    document.getElementById('bookedInfo').innerHTML =  data.status;
+    var payment_method = '';
+    if(data.payment_method == 2){
+        payment_method = 'Stripe';
+    }else{
+        payment_method = 'Paypal';
+    }
+    document.getElementById('paymentMethod').innerHTML =  payment_method;
+    var transaction = '';
+    if(data.transaction.status == 0){ 
+        transaction  =  "All";
+    }
+    else if(data.transaction.status == 1)
+    {
+        transaction = "Panding";
+    }else{
+        transaction = "Paid"; 
+    }
+    document.getElementById('statusInfo').innerHTML =  transaction;
+    var bookedInfos = '';
+
+    if(data.status == 1){ 
+
+        bookedInfos =  "All";
+    }
+    else if(data.status == 2)
+    {
+        bookedInfos =  "Checking";
+    }
+    else if(data.status == 3)
+    {
+        bookedInfos =  "Checkout";
+
+    }else{
+
+        bookedInfos =  "Cancelled"; 
+    }
+    document.getElementById('bookedInfoses').innerHTML =  bookedInfos;
+
     $("#booked_info_modal").modal('show');
 }
 
 function cancelConfirm(data){
-    document.getElementById('coutinfo').innerHTML = data.doctor.user.full_name;
-    document.getElementById('cbookSpaceInfo').innerHTML = data.doctor.user.email; 
-    document.getElementById('cplanTypeInfo').innerHTML = data.payment_type; 
+    document.getElementById('coutinfo').innerHTML = data.doctor.user.first_name;
+    document.getElementById('cbookSpaceInfo').innerHTML = data.services.name; 
+    document.getElementById('cplanTypeInfo').innerHTML = data.plan_type; 
     document.getElementById('cappointAtIfo').innerHTML = data.date; 
     document.getElementById('cpayableInfo').innerHTML =  "$" + data.payable_amount + ".00";
-    document.getElementById('cpaymentMethod').innerHTML = data.payment_method; 
-    document.getElementById('cstatusInfo').innerHTML =  "Paid";
-    document.getElementById('cbookedInfo').innerHTML =  data.status;
+    var cpaymentMethod = '';
+    if(data.payment_method == 2){
+        cpaymentMethod = 'Stripe';
+    }else{
+        cpaymentMethod = 'Paypal';
+    }
+     document.getElementById('cpaymentMethod').innerHTML = cpaymentMethod;
+    var cstatusInfo = ''; 
+    if(data.transaction.status == 0){ 
+        cstatusInfo =  "All";
+    }
+    else if(data.transaction.status == 1)
+    {
+        cstatusInfo =  "Panding";
+    }else{
+        cstatusInfo =  "Paid"; 
+    }
+    document.getElementById('cstatusInfo').innerHTML = cstatusInfo;
+    var cbookedInfo = '';
+    if(data.status == 1){ 
+        cbookedInfo =  "All";
+    }
+    else if(data.status == 2)
+    {
+        cbookedInfo =  "Checking";
+    }
+    else if(data.status == 3)
+    {
+        cbookedInfo =  "Checkout";
+    }else{
+        cbookedInfo =  "Cancelled"; 
+    }
+
+    document.getElementById('cbookedInfo').innerHTML = cbookedInfo;
+
     $("#cancel_booking_modal").modal('show');
 }
 
