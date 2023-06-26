@@ -52,6 +52,7 @@
 </div>
 </div>
     </div>
+    <input type="hidden" name="typeof" value="backend">
 
 @role('patient')
 <div class="col-lg-6 col-sm-12 mb-5">

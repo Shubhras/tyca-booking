@@ -81,18 +81,23 @@ class AppointmentController extends AppBaseController
     {
         $input = $request->all();
 
-        $appointment = $this->appointmentRepository->storeBackend($input);
+        if($input['typeof'] == 'backend')
+        {
+            $appointment = $this->appointmentRepository->storeBackend($input);
 
-        $url = route('appointments.index');
+            $url = route('appointments.index');
 
-        $data = [
-            'url' => $url,
-            'payment_type' => $input['payment_type'] == '4' ? "Paypal" : "Stripe",
-            'appointmentId' => $appointment->id,
-        ];
+            $data = [
+                'url' => $url,
+                'payment_type' => $input['payment_type'] == '4' ? "Paypal" : "Stripe",
+                'appointmentId' => $appointment->id,
+            ];
 
-        return $this->sendResponse($data, __('messages.flash.appointment_create'));
-
+            return $this->sendResponse($data, __('messages.flash.appointment_create'));
+        }else
+        {
+            $appointment = $this->appointmentRepository->store($input);
+        }
 
         // $appointment = $this->appointmentRepository->store($input);
 
