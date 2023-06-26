@@ -25,13 +25,21 @@
 }
 @media (max-width: 767px){
 h1 {
-    font-size: 38px !important;
+    font-size: 35px !important;
 }
 .workspace {
     line-height: 40px;
-    font-size: 30px !important;
+    font-size: 20px !important;
 }
 
+}
+@media (min-width: 768px) and (max-width: 1024px)  {
+    h1 {
+    font-size: 30px !important;
+}
+.workspace {
+    font-size: 40px !important;
+}
 }
 .title-hero-bg {
     background-size: cover;
@@ -103,7 +111,7 @@ h1 {
 <style>
 .page-title {
     position: absolute;
-    top: 40%;
+    top: 60%;
     width: 100%;
     text-align: center;
     left: 0;
