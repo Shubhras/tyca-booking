@@ -2,9 +2,10 @@
 @section('front-title')
 {{ __('hotdesk') }}
 @endsection
-
-
 @section('front-content')
+@php
+$styleCss = 'style';
+@endphp
 
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
@@ -172,9 +173,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
-                                <p class="hou-p">$ {{$servicesData->charges}}/Hour</p>
+                                <p class="hou-p" id="price">$ {{$servicesData->charges}}/Hour</p>
                                 <div class="hourplan-button">
-                                    <button type="button" class="dayplan-btn" onclick="displayMessage();">Book
+                                    <button type="button" class="dayplan-btn"
+                                        onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
                                         Now</button>
                                 </div>
                             </div>
@@ -192,7 +194,8 @@
                             <div class="grid">
                                 <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
                                 <div class="dayplan-button">
-                                    <button type="button" class="dayplan-btn" onclick="displayMessage();">Book
+                                    <button type="button" class="dayplan-btn"
+                                        onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
                                         Now</button>
                                 </div>
                             </div>
@@ -214,170 +217,193 @@
             <div class="book-space">BOOK A SPACE</div>
             <div class="modal-body">
                 <div class="alert alert-danger d-none hide"></div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('First Name', __('First Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('First Name', null, ['class' => 'form-control','required','placeholder' => __('First Name')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Last Name', __('Last Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('Last Name', null, ['class' => 'form-control','required','placeholder' => __('Last Name')]) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Email', __('Email Name').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::text('Email', null, ['class' => 'form-control','required','placeholder' => __('Email')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Outlet',__('Outlet').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Outlet', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Select Outlet')]) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Booking Space',__('Booking Space').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Booking Space', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Select Booking Space')]) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ Form::label('Plan Type',__('Plan Type').':' ,['class' => 'form-label required']) }}
-                        {{ Form::select('Plan Type', [], null,['class' => 'io-select2 form-select', 'id' => 'adminAppointmentDoctorId', 'data-control'=>"select2", 'required','placeholder' => __('Plan Type')]) }}
-                    </div>
-                </div>
 
-                <div class="col icon-set" style="text-align:center;">
-                    <span class="heading-id"><img src="/assets/image/image 12.png" alt="#" style="width:900px;"></span>
-                </div>
-                <div class="row mt-3">
-                    <div class="form-group col-sm-12">
-                        {{ Form::label('Appointment Date', __('Appointment Date').(':'), ['class' => 'form-label']) }}
-                        <span class="required"></span>
-                        {{ Form::date('Appointment Date', null, ['class' => 'form-control','required','placeholder' => __('Select Appointment Date'),'id' => 'appointment-date']) }}
+                <?php $emptyData = array(); ?>
+                <form class="book-appointment-form bg-white" id="addAppointmentForm"
+                    action="{{ route('front.appointment.book') }}" method="post">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-lg-6 name-details">
+                            <div class="form-group">
+                                <label class="form-label"
+                                    for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span
+                                        class="required"></span></label>
+                                <input type="text" class="form-control" id="template-medical-first_name"
+                                    placeholder="{{ __('messages.doctor.first_name') }}" name="first_name"
+                                    value="{{ isset(session()->get('data')['first_name']) ? session()->get('data')['first_name'] : '' }}">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 name-details">
+                            <div class="form-group">
+                                <label class="form-label"
+                                    for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span
+                                        class="required"></span></label>
+                                <input type="text" id="template-medical-last_name" name="last_name" class="form-control"
+                                    value="{{ isset(session()->get('data')['last_name']) ? session()->get('data')['last_name'] : '' }}"
+                                    placeholder="{{ __('messages.doctor.last_name') }}">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="additional-info" style="display:none;">
-                    <div class="popular-tags mb-3" style="margin-left:10px;">
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            07:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            08:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            09:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            10:00am
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            11:00am
-                        </button>
-                        <!-- </div> -->
-                        <!-- <div class="popular-tags" style="margin-left:10px;"> -->
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            12:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            01:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            02:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            03:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            04:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            05:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            06:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            07:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            08:00pm
-                        </button>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label"
+                                    for="template-medical-email">{{ __('messages.patient.email') }}:<span
+                                        class="required"></span></label>
+                                <input type="email" id="template-medical-email" name="email" class="form-control"
+                                    value="{{ isset(session()->get('data')['email']) ? session()->get('data')['email'] : '' }}"
+                                    placeholder="{{ __('messages.web.email') }}">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
+                                        class="required"></span></label>
+                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
+                            </div>
+                        </div>
                     </div>
-                    <!-- <div class="popular-tags mb-3" style="margin-left:10px;">
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            05:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            06:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            07:00pm
-                        </button>
-                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0">
-                            08:00pm
-                        </button>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="Service">Booking Space: <span
+                                        class="required"></span></label>
+                                {{ Form::select('service_id', isset(session()->get('data')['service']) ? session()->get('data')['service'] : [] , isset(session()->get('data')['service_id']) ? session()->get('data')['service_id'] : '',['class' => 'form-select', 'data-control'=>"select2", 'id'=> 'FrontAppointmentServiceId','placeholder' => __('messages.common.select_service') ]) }}
+                            </div>
+
+                        </div>
+                        <div class="form-group col-sm-6">
+                            {{ Form::label('Plan Type', __('Plan Type').(':'), ['class' => 'form-label']) }}
+                            <span class="required"></span>
+                            {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type')]) }}
+                        </div>
+                        <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId"> plantype_id
+                        <input type="hidden" name="payable_amount" id="payable_amount" value="payable_amount">
+                        <input type="hidden" name="charge" id="payable_amount" value="payable_amount">
+
+
+                    </div>
+                    <div class="col-lg-6 d-none registered-patient">
+                        <div class="form-group">
+                            <label class="form-label"
+                                for="template-medical-first_name">{{ __('messages.web.patient_name') }}:</label>
+                            <input type="text" id="patientName" readonly class="form-control" value=""
+                                placeholder="{{ __('messages.web.patient_name') }}">
+                        </div>
+                    </div>
+
+                    <!-- <div class="col icon-set" style="text-align:center;">
+                        <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
+                                style="width:900px;"></span>
                     </div> -->
-                </div>
-                <div class="col-12 form-group">
-                    <label for="Available Slots" class="form-label required">Available Slots:</label>
-                    <div class="mb-0 d-inline-flex align-items-center set-box">
-                        <span class="badge bg-danger badge-circle slot-color-dot"></span>
-                        <span class="ms-2">Booked</span>
-                        <span class="badge bg-success set-box badge-circle slot-color-dot"></span>
-                        <span class="ms-2">Available</span>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-label"
+                                for="templateAppointmentDate">{{ __('messages.appointment.appointment_date')}}: <span
+                                    class="required"></span></label>
+                            <div class="position-relative">
+                                <input type="text" id="templateAppointmentDate" name="date"
+                                    class="form-control bg-white" data-uk-datepicker-locale="fr"
+                                    value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
+                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
+                                    readonly>
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4">
+                                    <i class="fa-solid fa-calendar-days text-gray-200"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row set-back">
-                    <p style="text-align:center; margin-top:20px;">
-                        No Time Slots Found
-                    </p>
-                </div>
-                <div class="col-12 mt-3">
-                    <label for="Payment Method" class="form-label required">Payment Method:</label>
-                </div>
-                <div class="row col-md-12 mb-3">
-                    <div class="col-3">
-                        <div><input id="female" type="radio" name="gender" value="Female"><span
-                                class="radio-btn">PayPall</span></div>
-                        <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
+                    @php
+                    $styleCss = 'style';
+                    @endphp
+                    <div class="col-12" id="slot_option">
+                        <div class="form-group">
+                            <div class="d-flex align-items-center">
+                                {{ Form::label('Available Slots',__('messages.appointment.available_slot').':' ,['class' => 'form-label me-3 required']) }}
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check d-flex align-items-center mb-2">
+                                        <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox"
+                                            value="" id="defaultCheck1">
+                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                            {{__('messages.appointment.booked')}}
+                                        </label>
+                                    </div>
+                                    <div class="form-check d-flex align-items-center mb-2 ms-3">
+                                        <input class="form-check-input form-check-success me-2 mt-0" type="checkbox"
+                                            value="" id="defaultCheck1">
+                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                            {{__('messages.appointment.available')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slots-box">
+                                {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
+                                {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
+                                <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data"
+                                    id="slotData">
+                                    <p class="mb-0 text-center  no-time-slot">
+                                        {{__('messages.appointment.no_slot_found')}}
+                                    </p>
+                                </div>
+                                <p class="mb-0 text-center d-none no-time-slot">
+                                    {{__('messages.appointment.no_slot_found')}}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
-                            <li class="radio-btn1"><a><img src="/assets/image/paypall.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/pay1.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/disc.png" alt="#"></i></a>
-                            <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
-                            </li>
-                        </ul>
+
+                    <div class="col-12 mt-3">
+                        <label for="Payment Method" class="form-label required">Payment Method:</label>
                     </div>
-                </div>
-                <div class="row col-md-12 mb-3">
-                    <div class="col-3">
-                        <div><input id="female" type="radio" name="gender" value="Female"><span class="radio-btn">Stripe
-                                Checkout</span></div>
-                        <!-- <div><input id="male" type="radio" class="form-control" name="gender" value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }} >Male</div> -->
+                    <div class="row col-md-12 mb-3">
+                        <div class="col-3">
+                            <div><input id="payment_type" type="radio" name="payment_type" value="1"><span
+                                    class="radio-btn">PayPall</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
+                            <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
+                                <li class="radio-btn1"><a><img src="/assets/image/paypall.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/pay1.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/disc.png" alt="#"></i></a>
+                                <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
-                        <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
-                            <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
-                            <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
-                            <li class="radio-btn1"><a><img src="/assets/image/apple-pay.png" alt="#"></i></a></li>
-                            </li>
-                        </ul>
+                    <div class="row col-md-12 mb-3">
+                        <div class="col-3">
+                            <div><input id="payment_type" type="radio" name="payment_type" value="2"><span
+                                    class="radio-btn">Stripe
+                                    Checkout</span></div>
+                        </div>
+                        <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
+                            <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
+                                <li class="radio-btn1"><a><img src="/assets/image/visa.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/Group.png" alt="#"></i></a></li>
+                                <li class="radio-btn1"><a><img src="/assets/image/amex.png" alt="#"></i></a>
+                                <li class="radio-btn1"><a><img src="/assets/image/apple-pay.png" alt="#"></i></a></li>
+                                </li>
+                            </ul>
+                        </div>
+                        Checkout</span>
                     </div>
-                </div>
-                <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="button" class="btns btn-secondarys"
-                        data-bs-dismiss="modal">{{ __('Confirm Booking') }}</button>
-                </div>
+                    <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
+
             </div>
         </div>
+        <div class="modal-footer pt-0 mt-5" style="place-content:center;">
+        </div>
+        </form>
     </div>
+</div>
+
+</div>
 </div>
 @endsection
 
@@ -403,7 +429,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage() {
+function displayMessage(id, price) {
+    if (id == 1) {
+        var abc = 'hourly';
+        $('#slot_option').show();
+    } else {
+        var abc = 'Day Plan';
+        $('#slot_option').hide();
+    }
+
+    $('#adminAppointmentPlanId').val(abc);
+    $('#payable_amount').val(price);
+
     $.ajax({
         type: 'POST',
         url: "{{ route('authorize-check') }}",
@@ -422,6 +459,89 @@ function displayMessage() {
     });
 
 }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#appointmentDate1').change(function() {
+
+        selectedDate = $(this).val();
+        let userRole = $('#patientRole').val();
+        var timezoneOffsetMinutes = 330;
+        let appointmentIsEdit = $('#appointmentIsEdit').val();
+        $('.appointment-slot-data').html('');
+        let url = route('doctor-session-time');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: {
+                'adminAppointmentDoctorId': $('#adminAppointmentDoctorId').val(),
+                'date': selectedDate,
+                'timezone_offset_minutes': timezoneOffsetMinutes,
+            },
+            success: function(result) {
+                if (result.success) {
+                    if (result.data['bookedSlot'] != null && result.data['bookedSlot']
+                        .length > 0) {
+                        if (result.data['slots'].length == 0) {
+                            $('.no-time-slot').addClass('d-none');
+                            $('.doctor-time-over').removeClass('d-none');
+                        }
+                    }
+                    $.each(result.data['slots'], function(index, value) {
+                        if (appointmentIsEdit && fromTime == value) {
+                            $('.no-time-slot').addClass('d-none');
+                            $('.doctor-time-over').addClass('d-none');
+                            $('.appointment-slot-data').append(
+                                '<span class="time-slot col-2  activeSlot" data-id="' +
+                                value + '">' + value + '</span>');
+                        } else {
+                            $('.no-time-slot').addClass('d-none');
+                            $('.doctor-time-over').addClass('d-none');
+                            if (result.data['bookedSlot'] == null) {
+                                $('.appointment-slot-data').append(
+                                    '<span class="time-slot col-2" data-id="' +
+                                    value + '">' + value + '</span>');
+                            } else {
+                                if ($.inArray(value,
+                                        result.data['bookedSlot']) !== -1) {
+                                    $('.appointment-slot-data').Morin
+                                    append(
+                                        '<span class="time-slot col-2 bookedSlot " data-id="' +
+                                        value + '">' + value + '</span>');
+                                } else {
+                                    $('.appointment-slot-data').
+                                    append(
+                                        '<span class="time-slot col-2" data-id="' +
+                                        value + '">' + value + '</span>');
+                                }
+
+                            }
+                        }
+                    });
+                }
+            },
+            error: function(result) {
+                $('.no-time-slot').removeClass('d-none');
+                $('.doctor-time-over').addClass('d-none');
+                displayErrorMessage(result.responseJSON.message);
+            },
+        });
+
+
+
+
+    });
+});
+
+$('input[type="date"]').change(function() {
+    // $('#appointmentDate1').change(function() {
+
+    alert('sss');
+
+});
 </script>
 
 <style>
@@ -800,5 +920,8 @@ section.mains-blocks {
     background-position: center center;
     position: relative;
     min-height: 550px;
+}
+#slot_option {
+    display: none;
 }
 </style>

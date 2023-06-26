@@ -8,8 +8,21 @@ use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Service;
 use App\Models\Specialization;
+use App\Models\Appointment;
+use Illuminate\Support\Arr;
+use App\Repositories\AppointmentRepository;
+use App\Models\Patient;
+use App\Models\Faq;
+use App\Models\DoctorSession;
 class HotdeskController extends Controller
 {
+     /** @var AppointmentRepository */
+     private $appointmentRepository;
+
+     public function __construct(AppointmentRepository $appointmentRepo)
+     {
+         $this->appointmentRepository = $appointmentRepo;
+     }
 
     public function index($slot,$id)
     {
@@ -22,6 +35,17 @@ class HotdeskController extends Controller
             array_push($aa,$getData->specialization_id); 
         }  
         $specialization = Specialization::with('media')->whereIn('id', $aa)->get();
-        return view('hotdesk.index', compact('user','doctor','servicesData','specialization'));
+        $allPaymentStatus = getAllPaymentStatus();
+        $paymentStatus = Arr::except($allPaymentStatus, [Appointment::MANUALLY]);
+        $paymentGateway = getPaymentGateway();
+        $data = $this->appointmentRepository->getData();
+        $data['status'] = Appointment::BOOKED_STATUS_ARRAY;
+        // $patient = Patient::where('user_id', getLogInUserId())->get();
+        $faqs = Faq::latest()->get();
+
+        $appointmentDoctors = Doctor::with('user')->whereIn('id',
+            DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',
+            User::ACTIVE)->pluck('user.full_name', 'id');
+        return view('hotdesk.index', compact('data','user','doctor','faqs','appointmentDoctors','servicesData','specialization','allPaymentStatus', 'paymentGateway', 'paymentStatus'));
     }
 }
