@@ -5,6 +5,28 @@
 @section('front-content')
 
 <style>
+    .btn-primary1:hover {
+    border: 1px solid #212529;
+    background: black;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+.btn1 {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0;
+}
 body {
     background-color: #F4F3EE;
 }
@@ -125,7 +147,7 @@ header {
                             class="btn btn-secondary my-0 ms-5 me-0">{{__('messages.common.cancel')}}</a> -->
                 <!-- </div> -->
                 <div class="d-grid col-8 btn-forgot" style="margin: auto; width:100%">
-                    <button type="submit" class="btn btn-primary btn-size">
+                    <button type="submit" class="btn1 btn-primary1 btn-size">
                         <span class="indicator-label"> {{ __('messages.email_password_reset_link') }}</span>
                     </button>
                 </div>

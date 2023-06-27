@@ -5,6 +5,9 @@
 
 @section('front-content')
 <style>
+.sub-name {
+    font-size: 13px;
+}
 .badge.badge-circle {
     border-radius: 2px;
     min-width: 20px;
@@ -803,7 +806,7 @@ a:hover {
 </section>
 
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="max-width:1000px;">
+    <div class="modal-dialog modal-lg" style="width:100%;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">

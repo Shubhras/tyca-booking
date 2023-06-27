@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="col-lg-9 col-8">
-                <nav class="navbar navbar-expand-lg navbar-light justify-content-end py-0">
+                <nav class="navbar navbar-expand-xl navbar-expand-lg navbar-light justify-content-end py-0">
                     <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
                                    href="{{ route('medicalAboutUs') }}">Membership</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('medical-contact*') ? 'active' : '' }}"
+                                <a class="nav-link  {{ Request::is('medical-contact*') ? 'active' : '' }}"
                                    href="{{ route('medicalContact') }}"
                                    data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                             </li>
@@ -42,7 +42,7 @@
                                      <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3> </a>
                                         @else
                                         <a href="{{ route('login') }}"
-                                       class="btn btn-outline-primary me-xxl-3 me-2 mb-3 mb-lg-0" data-turbo="false">{{ __('messages.login') }}</a>
+                                       class="btn1 btn-outline-primary1 me-xxl-3 me-2 mb-3 mb-lg-0 login-head" data-turbo="false">{{ __('messages.login') }}</a>
                                         @endif
                                     </li>
 
@@ -92,5 +92,38 @@ img.img-fluid-logos {
     width: 40px;
     margin-right: 5px;
     border-radius: 50px;
+}
+.btn-outline-primary1:hover {
+    border: 1px solid #212529;
+    background: black;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+.btn1 {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 10px 40px;
+    font-size: 14px;
+    border-radius: 0;
+}
+
+@media(max-width:768px){
+.login-head{
+    margin:0px 0px 0px 20px !important;
+}
+}
+@media (min-width: 320px) and (max-width: 600px){
+.btn1 {
+    font-size: 14px !important;
+}
 }
     </style>
