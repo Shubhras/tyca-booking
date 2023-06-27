@@ -4089,15 +4089,15 @@ listenSubmit('#frontAppointmentBook', function (e) {
 
   if (!$('#isPatientAccount').is(':checked')) {
     if (firstName == '') {
-      response = '<div class="gen alert alert-danger">First name field is required. </div>';
-      $(window).scrollTop($('.appointment-form').offset().top);
+      response = '<div class="gen alert alert-danger">First name field is required. </div>'; // $(window).scrollTop($('.appointment-form').offset().top)
+
       $('.book-appointment-message').html(response).delay(5000).hide('slow');
       return false;
     }
 
     if (lastName == '') {
-      response = '<div class="gen alert alert-danger">Last name field is required. </div>';
-      $(window).scrollTop($('.appointment-form').offset().top);
+      response = '<div class="gen alert alert-danger">Last name field is required. </div>'; // $(window).scrollTop($('.appointment-form').offset().top)
+
       $('.book-appointment-message').html(response).delay(5000).hide('slow');
       return false;
     }
@@ -4105,36 +4105,36 @@ listenSubmit('#frontAppointmentBook', function (e) {
 
   if (email == '') {
     response = '<div class="gen alert alert-danger">Email field is required. </div>';
-    $('.book-appointment-message').html(response).delay(5000).hide('slow');
-    $(window).scrollTop($('.appointment-form').offset().top);
+    $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
     return false;
   }
 
   if (doctor == '') {
     response = '<div class="gen alert alert-danger">Doctor field is required. </div>';
-    $('.book-appointment-message').html(response).delay(5000).hide('slow');
-    $(window).scrollTop($('.appointment-form').offset().top);
+    $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
     return false;
   }
 
   if (services == '') {
     response = '<div class="gen alert alert-danger">Services field is required. </div>';
-    $('.book-appointment-message').html(response).delay(5000).hide('slow');
-    $(window).scrollTop($('.appointment-form').offset().top);
+    $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
     return false;
   }
 
   if (appointmentDate == '') {
     response = '<div class="gen alert alert-danger">Appointment date field is required. </div>';
-    $('.book-appointment-message').html(response).delay(5000).hide('slow');
-    $(window).scrollTop($('.appointment-form').offset().top);
+    $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
     return false;
   }
 
   if (paymentType == '') {
     response = '<div class="gen alert alert-danger">Payment Method field is required. </div>';
-    $('.book-appointment-message').html(response).delay(5000).hide('slow');
-    $(window).scrollTop($('.appointment-form').offset().top);
+    $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
     return false;
   }
 
@@ -4153,7 +4153,6 @@ listenSubmit('#frontAppointmentBook', function (e) {
     success: function success(result) {
       if (result.success) {
         var appointmentID = result.data.appointmentId;
-        console.log("result.data.payment_type", result.data.payment_type);
         response = '<div class="gen alert alert-success">' + result.message + '</div>';
         $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
 

@@ -224,6 +224,7 @@ $styleCss = 'style';
                     @csrf
 
                     <div class="row">
+                        @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label"
@@ -231,31 +232,36 @@ $styleCss = 'style';
                                         class="required"></span></label>
                                 <input type="text" class="form-control" id="template-medical-first_name"
                                     placeholder="{{ __('messages.doctor.first_name') }}" name="first_name"
-                                    value="{{ isset(session()->get('data')['first_name']) ? session()->get('data')['first_name'] : '' }}">
+                                    value="{{ getLogInUser()->first_name }}" readonly>
                             </div>
                         </div>
+                        @endif
+                        @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label"
                                     for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span
                                         class="required"></span></label>
                                 <input type="text" id="template-medical-last_name" name="last_name" class="form-control"
-                                    value="{{ isset(session()->get('data')['last_name']) ? session()->get('data')['last_name'] : '' }}"
-                                    placeholder="{{ __('messages.doctor.last_name') }}">
+                                    value="{{ getLogInUser()->last_name }}"
+                                    placeholder="{{ __('messages.doctor.last_name') }}" readonly>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="row">
+                    @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label"
                                     for="template-medical-email">{{ __('messages.patient.email') }}:<span
                                         class="required"></span></label>
                                 <input type="email" id="template-medical-email" name="email" class="form-control"
-                                    value="{{ isset(session()->get('data')['email']) ? session()->get('data')['email'] : '' }}"
-                                    placeholder="{{ __('messages.web.email') }}">
+                                    value="{{ getLogInUser()->email }}"
+                                    placeholder="{{ __('messages.web.email') }}" readonly>
                             </div>
                         </div>
+                        @endif
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
@@ -276,7 +282,7 @@ $styleCss = 'style';
                         <div class="form-group col-sm-6">
                             {{ Form::label('Plan Type', __('Plan Type').(':'), ['class' => 'form-label']) }}
                             <span class="required"></span>
-                            {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type')]) }}
+                            {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type'),'readonly']) }}
                         </div>
                         <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId">
                         <input type="hidden" name="payable_amount" id="payable_amount" value="10">
