@@ -22,6 +22,62 @@ header {
     height: 40px;
     padding: 0px 15px;
 }
+@media (min-width:1200px) and (max-width:1440px){
+    .btn-down{
+        flex-direction:column !important;
+        font-size:15px;
+    }
+}
+@media (min-width:320px) and (max-width:767px) {
+.set-forget{
+    width:100% !important;
+}
+.btn-forgot{
+    width:100% !important;
+}
+.btn-size{
+    font-size:12px !important;
+}
+.btn-down{
+        flex-direction:column !important;
+        font-size:15px;
+    }
+}
+@media (min-width:768px) and (max-width:992px) {
+    .set-forget{
+    width:50% !important;
+    justify-content:center !important;
+}
+.btn-forgot{
+    width:100% !important;
+    justify-content:center !important;
+}
+.btn-size{
+    font-size:12px !important;
+}
+.btn-down{
+        flex-direction:column !important;
+        font-size:15px;
+    }
+}
+@media (min-width:992px) and (max-width:1024px) {
+/* .set-forget{
+    width:100% !important;
+} */
+.btn-forgot{
+    width:100% !important;
+}
+.btn-size{
+    font-size:12px !important;
+}
+}
+@media (min-width: 992px) and (max-width: 1100px){
+    .btn-down{
+        flex-direction:column !important;
+        font-size:15px;
+    }
+
+}
 </style>
 <div class="d-flex flex-column flex-column-fluid align-items-center mt-12">
 
@@ -32,10 +88,10 @@ header {
         @endif
     </div>
     <div class="row col-12">
-        <div class="col-7"  style="padding: 0;">
+        <div class="col-7  set-forget"  style="padding: 0;">
             <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
         </div>
-        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 py-10 mx-auto mx-auto col-4"
+        <div class=" set-forget bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 py-10 mx-auto mx-auto col-4"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
                 <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10 ">
@@ -68,14 +124,14 @@ header {
                 <!-- <a href="{{ route('login') }}"
                             class="btn btn-secondary my-0 ms-5 me-0">{{__('messages.common.cancel')}}</a> -->
                 <!-- </div> -->
-                <div class="d-grid col-8" style="margin: auto;">
-                    <button type="submit" class="btn btn-primary">
+                <div class="d-grid col-8 btn-forgot" style="margin: auto; width:100%">
+                    <button type="submit" class="btn btn-primary btn-size">
                         <span class="indicator-label"> {{ __('messages.email_password_reset_link') }}</span>
                     </button>
                 </div>
                 <!-- </div> -->
-                <div class="d-flex align-items-center mt-4" style="padding: 20px;">
-                    <span class="text-gray-700 me-2">{{__('messages.web.already_have_an_account').'?'}}</span>
+                <div class="d-flex align-items-center mt-4 btn-down" style="padding: 20px;">
+                    <span class="text-gray-700 me-2 down-sign">{{__('messages.web.already_have_an_account').'?'}}</span>
                     <a href="{{ route('login') }}" class="form-check-label fs-7" style="color: #000000;">
                          Redirect to Sign Up page
                     </a>
