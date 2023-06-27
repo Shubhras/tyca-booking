@@ -2,8 +2,8 @@
     <!-- <div class="container"> -->
         <div class="row align-items-center">
             <div class="col-lg-3 col-4">
-                <a href="#!" class="header-logo">
-                    <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" style="padding-left: 20px;"/>
+                <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo">
+                    <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" />
                 </a>
             </div>
             <div class="col-lg-9 col-8">
@@ -37,7 +37,7 @@
                             </li>
                             <li class="nav-item">
                                         @if(getLogInUser())
-                                        <a class="nav-link" id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
+                                        <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link" id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
                                      src="{{ getLogInUser()->profile_image }}"/>   
                                      <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3> </a>
                                         @else
@@ -91,5 +91,6 @@ a#nav-flex {
 img.img-fluid-logos {
     width: 40px;
     margin-right: 5px;
+    border-radius: 50px;
 }
     </style>

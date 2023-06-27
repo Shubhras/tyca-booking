@@ -15,7 +15,7 @@
             <div class="page-title text-center white-color">
                 <h1>Member’s Portal</h1>
                    <div class="por-tal">
-                   <button class="portal-btn">Book Appointment</button>
+                   <a style="padding: 10px; text-decoration: none;" href="https://tyca-book.sftechnologiesstage.co" class="portal-btn">Book Appointment</a>
                  </div>
             </div>
         </div>
@@ -267,10 +267,10 @@
            </div>
            <div class="btn-cancel-booking">
 <div class="cancel-yes-btn">
-<button class="yes-btn" onclick="cancelAppoint();" data-bs-toggle="modal"data-bs-target="#cancel_confirm_modal">Yes</button>
+<button class="yes-btn" id="cancelledId" onclick="cancelAppoint();">Yes</button>
 </div>
 <div class="cancel-no-btn">
-<button class="no-btn">No</button>
+<button class="no-btn" data-bs-dismiss="modal" aria-label="Close">No</button>
 </div>
 </div>
             </div>
@@ -944,8 +944,9 @@ function bookedInfoData(data){
 
     $("#booked_info_modal").modal('show');
 }
-
+var id = 0;
 function cancelConfirm(data){
+    id = data.id;
     document.getElementById('coutinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('cbookSpaceInfo').innerHTML = data.services.name; 
     document.getElementById('cplanTypeInfo').innerHTML = data.plan_type; 
@@ -995,10 +996,11 @@ function cancelAppoint() {
         url: "{{ route('cancelAppoint') }}",
         data: {
             "_token": "{{ csrf_token() }}",
-            "name": "name"
+            "id": id
         },
         success: function(data) {
             if (data.success == true) {
+                $("#cancel_booking_modal").modal('hide');
                 $("#cancel_confirm_modal").modal('show');
             } else {
                 //var url = "{{ route('login') }}";

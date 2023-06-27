@@ -111,23 +111,17 @@ class HomeController extends Controller
      */
     public function CancelAppoint(Request $request)
     {
-        /*$this->userRepo->memberProfile($request->all());
-        $id = Auth::id();
-        
-        if(!empty($request->password)){
-            DB::table('users')
-            ->where('id', $id)
-            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'password' => Hash::make($request->password)]);
-        }else{
-            DB::table('users')
-            ->where('id', $id)
-            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name]);
-        }
 
-        Flash::success(__('messages.flash.your_reg_success'));
+       /* Flash::success(__('messages.flash.your_reg_success'));
         return Redirect::back();*/
 
         if(auth()->check()){
+            $patientId = Auth::id();
+            $id = $request->id;
+            DB::table('appointments')
+            ->where('id', $id)
+            //->where('patient_id', $patientId)
+            ->update(['status' => 4]);
             return response()->json(['success'=> true]);
         }else{
             return response()->json(['success'=> false]);
