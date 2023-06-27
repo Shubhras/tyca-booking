@@ -965,8 +965,8 @@ a:hover {
                     </div>
                     <div class="row col-md-12 mb-3">
                         <div class="col-3">
-                            <div><input id="payment_type" type="radio" name="payment_type" value="1"><span
-                                    class="radio-btn">PayPall</span>
+                            <div><input id="payment_type" type="radio" name="payment_type" value="4"><span
+                                    class="radio-btn">PayPal</span>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
@@ -998,7 +998,9 @@ a:hover {
                         </div>
                       
                     </div>
+                    <div class="modal-footer pt-0 mt-5" style="place-content:center;">
                     <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
+                    </div>
 
             </div>
         </div>
