@@ -138,7 +138,7 @@
     padding: 10px;
     width: 200px;
     height: 40px;
-    background: #273432;
+    background: #273432;95%
     border: #273432;
     color: #FFFFFF;
 }
@@ -476,6 +476,9 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
+    .list-set{
+        width:20% !important;
+    }
     .img-book{
         padding-right:0px !important;
     }

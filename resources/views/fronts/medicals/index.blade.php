@@ -5,54 +5,6 @@
 
 
 @section('front-content')
-
-<style>
-@media (max-width: 500px){
-.come-set{
-    width:60% !important;
-}
-.come-set1{
-    width:30% !important;
-}
-    }
-@media (min-width: 768px) and (max-width: 992px)  {
-    h5, .fs-5 {
-    font-size: 14px !important;
-}
-    .again-heading {
-    font-size: 18px !important;
-}
-}
-@media (max-width: 767px){
-h1 {
-    font-size: 35px !important;
-}
-.workspace {
-    line-height: 40px;
-    font-size: 20px !important;
-}
-
-}
-@media (min-width: 768px) and (max-width: 1024px)  {
-    h1 {
-    font-size: 30px !important;
-}
-.workspace {
-    font-size: 40px !important;
-}
-}
-.title-hero-bg {
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    min-height: 550px;
-}
-</style>
-
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect" style="background-image: url(assets/images/Frame_3.png);">
 
@@ -109,6 +61,54 @@ h1 {
 
 
 <style>
+
+@media (max-width: 500px){
+.come-set{
+    width:60% !important;
+}
+.come-set1{
+    width:30% !important;
+}
+    }
+@media (min-width: 768px) and (max-width: 992px)  {
+    h5, .fs-5 {
+    font-size: 14px !important;
+}
+    .again-heading {
+    font-size: 18px !important;
+}
+}
+@media (max-width: 767px){
+h1 {
+    font-size: 35px !important;
+}
+
+}
+@media (min-width: 320px) and (max-width: 600px)  {
+.title-hero-bg {
+        min-height: 400px !important;
+    }
+    .page-title {
+        font-size:35px !important;
+    }
+    .workspace {
+        font-size:20px !important
+    }
+  .page-title h1 {
+    font-size: 35px !important;
+  }
+}
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
+}
+
 .page-title {
     position: absolute;
     top: 60%;
@@ -171,14 +171,10 @@ section.title-hero-bg.parallax-effect img {
 
 .again-flex {
     display: flex;
-    /* justify-conitent: space-around; */
     font-size: 30px;
-    /* justify-content: end; */
 }
 
 .again-heading {
-    /* margin-right: 115px;
-    margin-top: 0px; */
     font-weight: 600;
     color: #000000;
 }
@@ -199,7 +195,6 @@ section.title-hero-bg.parallax-effect img {
 
 .from-flex {
     line-height: 50px;
-    /* margin-top: 20px; */
 }
 
 .onloads-button {
