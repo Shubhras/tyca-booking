@@ -813,7 +813,10 @@ a:hover {
             <div class="book-space">BOOK A SPACE</div>
             <div class="modal-body">
                 <div class="alert alert-danger d-none hide"></div>
-
+                <div class="book-appointment-message"></div>
+                <div class="container">
+                    @include('flash::message')
+                </div>
                 <?php $emptyData = array(); ?>
                 <form class="book-appointment-form bg-white" id="frontAppointmentBook"
                     action="{{ route('front.appointment.book') }}" method="post">

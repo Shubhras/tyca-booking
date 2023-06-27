@@ -8347,14 +8347,14 @@ listenSubmit('#frontAppointmentBook', function (e) {
   }
 
   if (doctor == '') {
-    response = '<div class="gen alert alert-danger">Doctor field is required. </div>';
+    response = '<div class="gen alert alert-danger">Outlet field is required. </div>';
     $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
 
     return false;
   }
 
   if (services == '') {
-    response = '<div class="gen alert alert-danger">Services field is required. </div>';
+    response = '<div class="gen alert alert-danger">Booking Space field is required. </div>';
     $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
 
     return false;
