@@ -33,7 +33,7 @@ $styleCss = 'style';
                         <p>at Thank You Come Again @ Balestier</p>
                     </div>
                     <figure class="effect-chico">
-                        <img src="/assets/images/image 9.png" alt="" class="">
+                        <img src="/assets/images/image 9.png" alt="">
                     </figure>
                 </div>
             </div>
@@ -44,14 +44,14 @@ $styleCss = 'style';
 
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="/assets/images/image 10.png" alt="" class="">
+                                <img src="/assets/images/image 10.png" alt="">
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="/assets/images/image 12.png" alt="" class="">
+                                <img src="/assets/images/image 12.png" alt="">
                             </figure>
                         </div>
                     </div>
@@ -60,14 +60,14 @@ $styleCss = 'style';
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="/assets/images/image 11.png" alt="" class="">
+                                <img src="/assets/images/image 11.png" alt="">
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
-                                <img src="/assets/images/image 13.png" alt="" class="">
+                                <img src="/assets/images/image 13.png" alt="">
                             </figure>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ $styleCss = 'style';
                                 <div class="col-6 icon-set">
                                     <p class="heading-id amies-font">
                                         <img src="{{$specializationData->icon}}" alt="#"
-                                            style="padding-right:10px; width: 30px; height: 30px;">
+                                            style="width: 30px;">
                                         {{$specializationData->name}}
                                     </p>
                                 </div>
@@ -224,7 +224,6 @@ $styleCss = 'style';
                     @csrf
 
                     <div class="row">
-                        @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label"
@@ -232,36 +231,31 @@ $styleCss = 'style';
                                         class="required"></span></label>
                                 <input type="text" class="form-control" id="template-medical-first_name"
                                     placeholder="{{ __('messages.doctor.first_name') }}" name="first_name"
-                                    value="{{ getLogInUser()->first_name }}" readonly>
+                                    value="{{ isset(session()->get('data')['first_name']) ? session()->get('data')['first_name'] : '' }}">
                             </div>
                         </div>
-                        @endif
-                        @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label"
                                     for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span
                                         class="required"></span></label>
                                 <input type="text" id="template-medical-last_name" name="last_name" class="form-control"
-                                    value="{{ getLogInUser()->last_name }}"
-                                    placeholder="{{ __('messages.doctor.last_name') }}" readonly>
+                                    value="{{ isset(session()->get('data')['last_name']) ? session()->get('data')['last_name'] : '' }}"
+                                    placeholder="{{ __('messages.doctor.last_name') }}">
                             </div>
                         </div>
-                        @endif
                     </div>
                     <div class="row">
-                    @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label"
                                     for="template-medical-email">{{ __('messages.patient.email') }}:<span
                                         class="required"></span></label>
                                 <input type="email" id="template-medical-email" name="email" class="form-control"
-                                    value="{{ getLogInUser()->email }}"
-                                    placeholder="{{ __('messages.web.email') }}" readonly>
+                                    value="{{ isset(session()->get('data')['email']) ? session()->get('data')['email'] : '' }}"
+                                    placeholder="{{ __('messages.web.email') }}">
                             </div>
                         </div>
-                        @endif
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
@@ -282,7 +276,7 @@ $styleCss = 'style';
                         <div class="form-group col-sm-6">
                             {{ Form::label('Plan Type', __('Plan Type').(':'), ['class' => 'form-label']) }}
                             <span class="required"></span>
-                            {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type'),'readonly']) }}
+                            {{ Form::text('plan_type', null, ['class' => 'form-control','required', 'id' => 'adminAppointmentPlanId','placeholder' => __('Plan Type')]) }}
                         </div>
                         <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId">
                         <input type="hidden" name="payable_amount" id="payable_amount" value="10">
@@ -301,7 +295,7 @@ $styleCss = 'style';
 
                     <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
-                                style="width:900px;"></span>
+                                style="width:100%;"></span>
                     </div>
 
                     <div class="col-lg-12">
@@ -552,9 +546,9 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
-    .amies-font{
-        font-size:14px;
-    }
+.amies-font{
+    font-size:14px;
+}
     @media (max-width: 767px) {
 .form-control, .form-select {
     height: 50px;
@@ -576,7 +570,7 @@ $('input[type="date"]').change(function() {
     }
 }
 @media (min-width:768px) and (max-width:1024px) {
-    .icon-set{
+        .icon-set{
         width:100% !important;
     }
     .dayplan-btn {
@@ -606,6 +600,12 @@ h5, .fs-5 {
 }
 
 @media (min-width:320px) and (max-width:600px) {
+    .amenities-block {
+        width:inherit !important;
+    }
+.amies-font{
+    font-size:13px !important;
+}
     .stripes{
         width:100% !important;
     }
@@ -883,6 +883,7 @@ figure.effect-chico {
     /* display: flex; */
     justify-content: space-around;
     text-align: start;
+    /* width: 50%; */
 }
 
 .Operating h2 {

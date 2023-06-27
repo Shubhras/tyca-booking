@@ -138,7 +138,7 @@
     padding: 10px;
     width: 200px;
     height: 40px;
-    background: #273432;95%
+    background: #273432;
     border: #273432;
     color: #FFFFFF;
 }
@@ -423,6 +423,9 @@ figure.effect-chico {
     }
 }
 @media (min-width:320px) and (max-width:600px) {
+    .book-set{
+        height:95% !important;
+    }
     .img-book{
         padding-right:0px !important;
     }
@@ -479,7 +482,7 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
-    .list-set{
+        .list-set{
         width:20% !important;
     }
     .img-book{
@@ -535,11 +538,11 @@ a:hover {
                 <div class="grid">
                     @if(!empty($user1->gallery[0]))
                     <figure class="effect-chico">
-                        <img src="{{$user1->gallery[0]}}" alt="#">
+                        <img src="{{$user1->gallery[0]}}" alt="#" style="width:100%;height:100%" class="book-set">
                     </figure>
                     @else
                     <figure class="effect-chico">
-                        <img src="/assets/image/image 12.png" alt="#">
+                        <img src="/assets/image/image 12.png" alt="#" style="width:100%;height:100%" class="book-set">
                     </figure>
                     @endif
                 </div>
@@ -550,11 +553,11 @@ a:hover {
                         <div class="grid">
                             @if(!empty($user1->gallery[1]))
                             <figure class="effect-chico">
-                                <img src="{{$user1->gallery[1]}}" alt="#">
+                                <img src="{{$user1->gallery[1]}}" alt="#" style="width:100%; height:95%;">
                             </figure>
                             @else
                             <figure class="effect-chico">
-                                <img src="/assets/image/image 10.png" alt="#">
+                                <img src="/assets/image/image 10.png" alt="#" style="width:100%;height:95%;">
                             </figure>
                             @endif
                         </div>
@@ -564,11 +567,11 @@ a:hover {
                         <div class="grid">
                             @if(!empty($user1->gallery[2]))
                             <figure class="effect-chico">
-                                <img src="{{$user1->gallery[2]}}" alt="#">
+                                <img src="{{$user1->gallery[2]}}" alt="#" style="width:100%;height:95%">
                             </figure>
                             @else
                             <figure class="effect-chico">
-                                <img src="/assets/image/image 11.png" alt="#">
+                                <img src="/assets/image/image 11.png" alt="#" style="width:100%;height:100%">
                             </figure>
                             @endif
                         </div>
@@ -587,7 +590,7 @@ a:hover {
             <div class="col-md-8 responsive-wrap sec2 top-set">
                 <div class="full-blog">
                     <div class="blog-content">
-                         <div class="blog-text">
+                        <div class="blog-text">
                             <h1 class="font-700 roboto-font"> <h1 class="location">
                                     {{$user->first_name}}
                                     {{$user->last_name}}<h1>
@@ -762,7 +765,7 @@ a:hover {
             @foreach($services as $service)
             <div class="col-5 row list-box" style="margin:30px;">
                 <div class="row col-12 set-border">
-                    <div class="col-5" style="padding:0px;">
+                    <div class="col-5 list-set" style="padding:0px;">
                         <img src="{{ $service->icon }}" alt="Digital" style="width:100%">
                     </div>
                     <div class="col-7">
@@ -815,6 +818,7 @@ a:hover {
                 <form class="book-appointment-form bg-white" id="frontAppointmentBook"
                     action="{{ route('front.appointment.book') }}" method="post">
                     @csrf
+
                     <div class="row">
                         @if(getLogInUser())
                         <div class="col-lg-6 name-details">
@@ -842,7 +846,7 @@ a:hover {
                         @endif
                     </div>
                     <div class="row">
-                    @if(getLogInUser())
+                        @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label"
