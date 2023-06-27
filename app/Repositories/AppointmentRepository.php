@@ -239,27 +239,29 @@ class AppointmentRepository extends BaseRepository
         try {
             DB::beginTransaction();
             $oldUser = User::whereEmail($input['email'])->first();
+            $patientId = getLogInUser()->patient->id;
+            // echo "<pre>"; print_r($patientId);
             if (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) {
-                if (! $oldUser) {
-                    throw new UnprocessableEntityHttpException('Email is not registered');
-                }
-                $input['patient_id'] = $oldUser->patient->id;
+                // if (! $oldUser) {
+                //     throw new UnprocessableEntityHttpException('Email is not registered');
+                // }
+                $input['patient_id'] = $patientId;
             } else {
-                if ($oldUser) {
-                    throw new UnprocessableEntityHttpException('Email already taken');
-                }
+                // if ($oldUser) {
+                //     throw new UnprocessableEntityHttpException('Email already taken');
+                // }
                 $input['original_password'] = Str::random(8);
                 $input['type'] = User::PATIENT;
                 $userFields = ['first_name', 'last_name', 'email', 'password', 'type'];
                 $input['password'] = Hash::make($input['original_password']);
                 /** @var User $user */
-                $user = User::create(Arr::only($input, $userFields));
+                // $user = User::create(Arr::only($input, $userFields));
                 $patientArray['patient_unique_id'] = strtoupper(Patient::generatePatientUniqueId());
 
                 /** @var Patient $patient */
-                $patient = $user->patient()->create($patientArray);
-                $user->assignRole('patient');
-                $input['patient_id'] = $patient->id;
+                // $patient = $user->patient()->create($patientArray);
+                // $user->assignRole('patient');
+                $input['patient_id'] = $patientId;
             }
 
             if($input['plan_type'] == 'hourly')
@@ -289,8 +291,8 @@ class AppointmentRepository extends BaseRepository
             $appointment = Appointment::create($input);
 
             Mail::to($input['email'])->send(new AppointmentBookedMail($input));
-            $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $user->full_name;
-            $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->id : $user->id;
+            $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
+            $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $patientId : $patientId;
             $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.\Carbon\Carbon::parse($input['date'])->format('jS M, Y');
             if (getLogInUser() && ! getLogInUser()->hasRole('patient')) {
                 $patientNotification = Notification::create([
