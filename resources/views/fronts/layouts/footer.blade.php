@@ -13,11 +13,9 @@
         font-size: 14px !important;
     }
 }
-</style>
-<style>
 @media (min-width:768px) {
     .footer-fonts {
-        margin-top: -15px !important;
+        margin-top: -10px !important;
     }
 }
 </style>

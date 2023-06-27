@@ -92,7 +92,7 @@ $styleCss = 'style';
                             <div class="row mt-10 mb-1 col-12" style="display:flex;">
                                 @foreach($specialization as $specializationData)
                                 <div class="col-6 icon-set">
-                                    <p class="heading-id">
+                                    <p class="heading-id amies-font">
                                         <img src="{{$specializationData->icon}}" alt="#"
                                             style="padding-right:10px; width: 30px; height: 30px;">
                                         {{$specializationData->name}}
@@ -546,6 +546,9 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
+    .amies-font{
+        font-size:14px;
+    }
     @media (max-width: 767px) {
 .form-control, .form-select {
     height: 50px;
@@ -567,6 +570,9 @@ $('input[type="date"]').change(function() {
     }
 }
 @media (min-width:768px) and (max-width:1024px) {
+    .icon-set{
+        width:100% !important;
+    }
     .dayplan-btn {
         padding: 10px;
         width: auto !important;
@@ -871,7 +877,6 @@ figure.effect-chico {
     /* display: flex; */
     justify-content: space-around;
     text-align: start;
-    width: 50%;
 }
 
 .Operating h2 {
@@ -884,7 +889,6 @@ figure.effect-chico {
     font-size: 22px;
     text-align: start;
     color: #000000;
-    margin-bottom: 40px;
 }
 
 .h2-hourplan {
