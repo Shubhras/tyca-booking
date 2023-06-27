@@ -146,7 +146,7 @@ return [
         'about_title' => 'Title',
         'about_experience' => 'About Experience',
         'about_short_description' => 'Short Description',
-        'patient_registration' => 'Customer Registration',
+        'patient_registration' => 'Registration',
         'already_have_an_account' => 'Already have an account',
         'sign_in_here' => 'Sign in here',
         'i_agree' => 'I Agree',

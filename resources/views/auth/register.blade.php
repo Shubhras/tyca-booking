@@ -5,6 +5,28 @@
 @section('front-content')
 
 <style>
+.btn-primary1:hover {
+    border: 1px solid #212529;
+    background: black;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+.btn1 {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0;
+}
 body {
     background-color: #F4F3EE;
 }
@@ -150,7 +172,7 @@ h5, .fs-5 {
                     </div>
 
                     <div class="d-grid col-6" style="margin: auto;">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn1 btn-primary1">Submit</button>
                     </div>
                     <div class="d-flex align-items-center mt-4 down-sign">
                         <span class="text-gray-700 me-2">{{__('messages.web.already_have_an_account').'?'}}</span>

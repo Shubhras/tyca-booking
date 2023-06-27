@@ -492,7 +492,7 @@ button.log-btn {
 }
 .your-rating-wrap span {
     color: #535353;
-    font-size: 30px;
+    font-size: 22px;
 }
 .your-rating-wrap p {
     color: #535353;
@@ -501,6 +501,8 @@ button.log-btn {
 }
 img.cust-img {
     width: 150px;
+    border-radius: 100px;
+    height: 150px;
 }
 a#tab1 {
     color: #000000!important;
@@ -741,7 +743,8 @@ h2.h2-member {
     font-size: 10px;
 }
 img.cust-img {
-    width: 70px;
+    width: 100px;
+    height: 100px;
 }
 div#customer-review_wrap {
     text-align: center;
@@ -858,6 +861,9 @@ h5.text-white.mb-4.pb-1 {
 }
 
 @media (min-width: 600px) and ((max-width: 768px)){
+    .your-rating-wrap {
+    margin-left: 0px !important;
+}
     .btn-portal {
     display: block !important;
 }
@@ -876,15 +882,10 @@ button.log-btn {
 .col-md-2.logout-btn {
     margin-left: 45px;
 }
-/* .row.btn-portal {
-    display: flex;
-} */
+
 button.log-btn {
     margin-left: 40px;
 }
-/* .col-md-4.update-btn {
-    margin-left: 75px;
-} */
 h5.text-white.mb-4.pb-1 {
     font-size: 18px!important;
 }
