@@ -75,22 +75,22 @@
 <section class="white-bg">
     <div class="container">
         <div class="row justify-content-center">
-            @foreach($userData as $outletData)
+            @foreach($outletUser as $outletData)
             <div class="col-xl-4 col-md-6 our-team-block d-flex align-items-stretch">
-                <a href="book-slot/{{$outletData->id}}" style="text-decoration: none;">
+                <a href="book-slot/{{$outletData['id']}}" style="text-decoration: none;">
                     <div class="row">
                         <div class="col-sm-12 section-heading">
-                            <img src="{{$outletData->profile_image}}" alt="" style="width: 200px; height: 200px;">
+                            <img src="{{$outletData['profile_image']}}" alt="" style="width: 200px; height: 200px;">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12 centerize-col text-center">
                             <div class="again-flex col-lg-12 col-md-12 col-sm-10 col-xs-12">
-                                <h4 class="again-heading  col-lg-6 col-md-6 come-set">{{$outletData->first_name}}</h4>
+                                <h4 class="again-heading  col-lg-6 col-md-6 come-set">{{$outletData['first_name']}} {{$outletData['last_name']}}</h4>
                                 <div class="from-flex col-lg-6 col-md-6 come-set1">
                                     <p class="again-p">From</p>
-                                    <h5 class="again-heading" style=" font-weight: 600; color: #000000;">$35/day</h5>
-                                    <p class="again-hour">$4/hour</p>
+                                    <h5 class="again-heading" style=" font-weight: 600; color: #000000;">$ {{$outletData['charges_daily']}}/day</h5>
+                                    <p class="again-hour">${{$outletData['charges']}} /hour</p>
                                 </div>
                             </div>
                         </div>

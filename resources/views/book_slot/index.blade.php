@@ -62,6 +62,7 @@
     color: #fff;
     background-color: #273432;
     border-color: #273432;
+    border: 1px solid #273432;
 }
 
 .container-fluid1 {
@@ -529,9 +530,6 @@ h1 {
     font-size: 25px !important;
 }
 
-a:hover {
-    color: #fff !important;
-}
 </style>
 
 <section class="main-block1 gray">
@@ -777,7 +775,7 @@ a:hover {
                                 {{ $service->name }}
                             </div>
                             <div class="col-3 hosts">
-                                {{ $service->short_description }}
+                                {!! $service->short_description !!}
                             </div>
                         </div>
                     </div>
@@ -795,7 +793,8 @@ a:hover {
                     $idGet =  Request::segment(2);
                     ?>
                     <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 18px;">
+                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 18px; background: white;
+                     color: #000000; border: 1px solid; text-align: center;">
                         View More
                     </a>
                 </div>
@@ -806,7 +805,7 @@ a:hover {
 </section>
 
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width:100%;">
+    <div class="modal-dialog modal-lg" style="max-width:1000px;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -903,7 +902,7 @@ a:hover {
 
                     <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
-                                style="width:900px;"></span>
+                                style="width:100%;"></span>
                     </div>
 
                     <div class="col-lg-12">

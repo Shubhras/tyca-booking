@@ -21,6 +21,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use DB;
+use stdClass;
 
 class FrontController extends AppBaseController
 {
@@ -38,11 +40,35 @@ class FrontController extends AppBaseController
         $frontPatientTestimonials = FrontPatientTestimonial::with('media')->latest()->take(6)->get();
         $appointmentDoctors = Doctor::with('user')->get()->where('user.status', User::ACTIVE)->pluck('user.full_name',
             'id');
-        $userData = User::where('type', '2')->get();
+        
+        $dataoutlet = DB::table('users')
+        ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
+        ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
+        ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
+        ->select('users.id','users.first_name', 'users.last_name', 'services.charges', 'services.charges_daily')
+        ->where('users.type', '2')
+        ->groupBy('users.id')
+        ->get();
+        $outletUser = array();
+        foreach($dataoutlet as $datainformation){
+            $userData = User::where('id', $datainformation->id)->first();
+            //$dataObj = new \stdClass();
+            $outletUse = array (
+            "id" => $datainformation->id,
+            "first_name" => $datainformation->first_name,
+            "last_name" => $datainformation->last_name,
+            "charges" => $datainformation->charges,
+            "charges_daily" => $datainformation->charges_daily,
+            "profile_image" => $userData->profile_image
+        );
+        array_push($outletUser, $outletUse);
+        // echo "<pre>"; print_r($outletUser); die;
+
+        }
         $aboutExperience = Setting::where('key', 'about_experience')->first();
         return view('fronts.medicals.index',
             compact('doctors', 'sliders', 'frontMedicalServices', 'frontPatientTestimonials',
-                'appointmentDoctors', 'aboutExperience','userData'));
+                'appointmentDoctors', 'aboutExperience','userData','outletUser'));
     }
 
     /**

@@ -5,13 +5,13 @@
 @section('front-content')
 
 <style>
-.btn-primary1:hover {
+.btn-primary2:hover {
     border: 1px solid #212529;
     background: black;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
-.btn1 {
+.btn2 {
     display: inline-block;
     font-weight: 400;
     color: #fff;
@@ -172,7 +172,7 @@ h5, .fs-5 {
                     </div>
 
                     <div class="d-grid col-6" style="margin: auto;">
-                        <button type="submit" class="btn1 btn-primary1">Submit</button>
+                        <button type="submit" class="btn2 btn-primary2">Submit</button>
                     </div>
                     <div class="d-flex align-items-center mt-4 down-sign">
                         <span class="text-gray-700 me-2">{{__('messages.web.already_have_an_account').'?'}}</span>

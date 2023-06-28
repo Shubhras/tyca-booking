@@ -96,7 +96,8 @@
   <tbody>
     @foreach($data['todayAppointment'] as $appointment)
     <tr style="color: #111827;">
-  <td>{{ $appointment->doctor->user->first_name}}</td>
+    <?php if(isset($appointment->transaction)){ ?>
+    <td>{{ $appointment->doctor->user->first_name}}</td>
         <td>{{ $appointment->services->name}}</td>
         <td>{{ $appointment->plan_type }}</td>
         <td>{{ $appointment->date }}</td>
@@ -137,6 +138,7 @@
      <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
+    <?php } ?>
     @endforeach
   </tbody>
 </table>  
@@ -162,6 +164,7 @@
   </thead>
   <tbody>
     @foreach($data['upcomingAppointment'] as $appointment)
+    <?php if(isset($appointment->transaction)){ ?>
     <tr style="color: #111827;">
      <td>{{ $appointment->doctor->user->first_name}}</td>
         <td>{{ $appointment->services->name}}</td>
@@ -176,9 +179,9 @@
             <td>Paypal</td>        
         @endif
 
-        @if($appointment->transaction->status == 0)
+        @if($appointment->transaction->status == false)
         <td>All</td>
-        @elseif($appointment->transaction->status == 1)
+        @elseif($appointment->transaction->status == true)
         <td> Panding</td>
         @else
         <td> Paid</td>
@@ -204,6 +207,7 @@
      <a onclick="cancelConfirm({{$appointment}})"> <i class="fa-solid fa-xmark"></i></a>
     </td>
     </tr>
+    <?php }?>
     @endforeach
   </tbody>
 
@@ -362,7 +366,7 @@
                 <div class="row">
                 <p>Icon</p>
                     <div class="form-group col-sm-6">
-                      <img src="{{$data['user']->profile_image}}" alt="" class="cust-img" style="width: 100px;">
+                      <img src="{{$data['user']->profile_image}}" alt="" class="cust-img">
                     </div>
                     <div class="form-group col-sm-12"id="icon-pen">
                     <label>
@@ -702,7 +706,11 @@ div#customer-review_wrap {
     justify-content: space-around;
     /* margin-left: -80px; */
 }
-
+.portal-btn:hover {
+    background: #273432;
+    border: #273432;
+    color: #FFFFFF;
+}
 /* media */
 @media (min-width: 320px) and (max-width: 600px){
 

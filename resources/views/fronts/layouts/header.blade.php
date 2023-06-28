@@ -1,16 +1,45 @@
+<script type="text/javascript">
+    let _isMenuOpened = false;
+    function toggleMenu (){
+        const navbarToggler = document.getElementById('navbar-toggler');
+    const navbarNav = document.querySelector('#navbarNav');
+        if(_isMenuOpened == false) {
+            navbarNav.classList.toggle('hide');
+            
+        } else {
+   
+            navbarNav.classList.toggle('show');
+        }
+        // isMenuOpened = !isMenuOpened;
+
+    }
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbarToggler = document.getElementById('navbar-toggler');
+    const navbarNav = document.querySelector('#navbarNav');
+
+    navbarToggler.addEventListener('click', function() {  
+      navbarNav.classList.toggle('show');
+      navbarNav.classList.toggle('hide');
+    });
+  });
+</script>
 <header class="position-relative header">
     <!-- <div class="container"> -->
         <div class="row align-items-center">
             <div class="col-lg-3 col-4">
-                <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo">
+                <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
                     <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" />
                 </a>
             </div>
             <div class="col-lg-9 col-8">
                 <nav class="navbar navbar-expand-xl navbar-expand-lg navbar-light justify-content-end py-0">
-                    <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
+                    {{--<button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>--}}
+                    <button class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler"
+                             onClick="toggleMenu()">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -42,7 +71,7 @@
                                      <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3> </a>
                                         @else
                                         <a href="{{ route('login') }}"
-                                       class="btn1 btn-outline-primary1 me-xxl-3 me-2 mb-3 mb-lg-0 login-head" data-turbo="false">{{ __('messages.login') }}</a>
+                                       class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head" data-turbo="false">{{ __('messages.login') }}</a>
                                         @endif
                                     </li>
 
@@ -93,13 +122,13 @@ img.img-fluid-logos {
     margin-right: 5px;
     border-radius: 50px;
 }
-.btn-outline-primary1:hover {
+.btn-outline-primary3:hover {
     border: 1px solid #212529;
     background: black;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
-.btn1 {
+.btn3 {
     display: inline-block;
     font-weight: 400;
     color: #fff;

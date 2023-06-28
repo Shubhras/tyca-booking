@@ -5,13 +5,13 @@
 @section('front-content')
 
 <style>
-    .btn-primary1:hover {
+    .btn-primary2:hover {
     border: 1px solid #212529;
     background: black;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
-.btn1 {
+.btn2 {
     display: inline-block;
     font-weight: 400;
     color: #fff;
@@ -133,7 +133,7 @@ h5, .fs-5 {
                             for="remember_me">{{ __('messages.common.remember_me') }}</label>
                     </div>
                     <div class="d-grid col-6" style="margin: auto;">
-                        <button type="submit" class="btn1 btn-primary1">{{ __('messages.login') }}</button>
+                        <button type="submit" class="btn2 btn-primary2">{{ __('messages.login') }}</button>
                     </div>
 
                     <div class="d-flex align-items-center mb-10 mt-4 down-log down-log1"
