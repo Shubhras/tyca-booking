@@ -66,7 +66,7 @@
                             </li>
                             <li class="nav-item">
                                         @if(getLogInUser())
-                                        <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link" id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
+                                        <a href="http://localhost:8000/patients/dashboard" class="nav-link" id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
                                      src="{{ getLogInUser()->profile_image }}"/>   
                                      <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3> </a>
                                         @else

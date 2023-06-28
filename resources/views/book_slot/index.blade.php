@@ -8,6 +8,7 @@
 .sub-name {
     font-size: 13px;
 }
+
 .badge.badge-circle {
     border-radius: 2px;
     min-width: 20px;
@@ -237,9 +238,11 @@
 .icon-set {
     padding: 0px 10px;
 }
+
 #slot_option {
     display: none;
 }
+
 .set-padding {
     padding: 15px 0px;
     display: flex;
@@ -254,7 +257,7 @@
     padding: 10px 0px;
     margin-left: 30px;
     width: 200px;
-    font-weight:600;
+    font-weight: 600;
 }
 
 .amities1 {
@@ -394,14 +397,16 @@ figure.effect-chico {
     margin-top: -125px;
 }
 
-.pay-pall{
-        display:flex;
-        place-content:start;
-    }
-    .heading-id1{
-        font-size:13px;
-        font-weight:500;
-    }
+.pay-pall {
+    display: flex;
+    place-content: start;
+}
+
+.heading-id1 {
+    font-size: 13px;
+    font-weight: 500;
+}
+
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -412,33 +417,42 @@ figure.effect-chico {
     h1 {
         font-size: 25px !important;
     }
-.form-control, .form-select {
-    height: 50px;
-    font-size: 16px;
-    padding: 10px !important;
-}
-}
-@media (min-width:320px) and (max-width:375px){
-    .stripes{
-        width:100% !important;
-    }
-    .pay-pall{
-        display:grid !important;
+
+    .form-control,
+    .form-select {
+        height: 50px;
+        font-size: 16px;
+        padding: 10px !important;
     }
 }
+
+@media (min-width:320px) and (max-width:375px) {
+    .stripes {
+        width: 100% !important;
+    }
+
+    .pay-pall {
+        display: grid !important;
+    }
+}
+
 @media (min-width:320px) and (max-width:600px) {
-    .book-set{
-        height:95% !important;
+    .book-set {
+        height: 95% !important;
     }
-    .img-book{
-        padding-right:0px !important;
+
+    .img-book {
+        padding-right: 0px !important;
     }
-    .stripes{
-        width:100% !important;
+
+    .stripes {
+        width: 100% !important;
     }
+
     .set-box {
-    margin-left: 30px!important;
-}
+        margin-left: 30px !important;
+    }
+
     .main-block {
         padding: 0 !important;
     }
@@ -486,14 +500,16 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
-        .list-set{
-        width:20% !important;
+    .list-set {
+        width: 20% !important;
     }
-    .img-book{
-        padding-right:0px !important;
+
+    .img-book {
+        padding-right: 0px !important;
     }
-    .radio-btn{
-        font-size:14px !important;
+
+    .radio-btn {
+        font-size: 14px !important;
     }
 
     h5,
@@ -511,8 +527,8 @@ figure.effect-chico {
 }
 
 @media (min-width:900px) and (max-width:1024px) {
-    .img-book{
-        padding-right:0px !important;
+    .img-book {
+        padding-right: 0px !important;
     }
 
     h5,
@@ -529,7 +545,10 @@ figure.effect-chico {
 h1 {
     font-size: 25px !important;
 }
-
+a:hover{
+    color: #fff;
+    background: #273432;
+}
 </style>
 
 <section class="main-block1 gray">
@@ -592,12 +611,13 @@ h1 {
                 <div class="full-blog">
                     <div class="blog-content">
                         <div class="blog-text">
-                            <h1 class="font-700 roboto-font"> <h1 class="location">
+                            <h1 class="font-700 roboto-font">
+                                <h1 class="location">
                                     {{$user->first_name}}
                                     {{$user->last_name}}<h1>
-                            </h1>
-                            <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3>
-                            <p>{!! $doctor->description !!}</p>
+                                    </h1>
+                                    <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3>
+                                    <p>{!! $doctor->description !!}</p>
                         </div>
                     </div>
                 </div>
@@ -781,14 +801,22 @@ h1 {
                     </div>
                 </div>
                 <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
+                    @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
                         data-bs-target="#hour_plan_modal" onclick="displayMessage(1,'{{ $service->charges }}');">
                         {{ $service->charges }} / Hour
                     </button>
+                    @else
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">{{ $service->charges }} / Hour</a>
+                    @endif
+                    @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
                         data-bs-target="#hour_plan_modal" onclick="displayMessage(2,'{{ $service->charges_daily }}');">
                         {{ $service->charges_daily }} / Day
                     </button>
+                    @else
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">{{ $service->charges_daily }} / Day</a>
+                    @endif
                     <?php
                     $idGet =  Request::segment(2);
                     ?>
@@ -858,8 +886,8 @@ h1 {
                                     for="template-medical-email">{{ __('messages.patient.email') }}:<span
                                         class="required"></span></label>
                                 <input type="email" id="template-medical-email" name="email" class="form-control"
-                                    value="{{ getLogInUser()->email }}"
-                                    placeholder="{{ __('messages.web.email') }}" readonly>
+                                    value="{{ getLogInUser()->email }}" placeholder="{{ __('messages.web.email') }}"
+                                    readonly>
                             </div>
                         </div>
                         @endif
@@ -987,7 +1015,8 @@ h1 {
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
-                                <span class="radio-btn">Stripe   </span></div>
+                                <span class="radio-btn">Stripe </span>
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
                             <ul class="xl-icon mb-0" style="display:flex; place-content:start;">
@@ -998,10 +1027,10 @@ h1 {
                                 </li>
                             </ul>
                         </div>
-                      
+
                     </div>
                     <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
+                        <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
                     </div>
 
             </div>
@@ -1066,8 +1095,6 @@ function displayMessage(id, price) {
     });
 
 }
-
-
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

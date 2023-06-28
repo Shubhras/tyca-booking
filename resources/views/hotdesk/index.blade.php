@@ -175,9 +175,15 @@ $styleCss = 'style';
                             <div class="grid">
                                 <p class="hou-p" id="price">$ {{$servicesData->charges}}/Hour</p>
                                 <div class="hourplan-button">
+                                @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
                                         Now</button>
+                                @else
+                                 <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
+                                 Book Now
+                                 </a>
+                                 @endif
                                 </div>
                             </div>
                         </div>
@@ -194,9 +200,15 @@ $styleCss = 'style';
                             <div class="grid">
                                 <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
                                 <div class="dayplan-button">
+                                @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
                                         Now</button>
+                                        @else
+                                 <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
+                                 Book Now
+                                 </a>
+                                 @endif
                                 </div>
                             </div>
                         </div>
@@ -556,6 +568,10 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
+a:hover{
+    color: #fff !important;
+    background: #273432;
+}
 .amies-font{
     font-size:14px;
 }
