@@ -15,9 +15,12 @@
 
         <div class="container">
             <div class="page-title text-center white-color">
-                <h1>{{$aboutTitle->value}}</h1>
+                <h1 class="ellipsis1">{{$aboutTitle->value}}</h1>
                 <h4 class="workspace">
-                {{$aboutShortDescription->value}}
+                    <div class="ellipsis">
+                    {!! $aboutShortDescription->value !!}
+                    </div>
+                    
                     <!-- Interested in our workspace?
                     <br> Book a slot for our space now! -->
                 </h4>
@@ -85,10 +88,10 @@
 }
 
 .page-title h1 {
-    font-size: 60px;
+    font-size: 45px;
     line-height: 1.5em;
     font-weight: 700;
-    margin: 0;
+    margin: auto;
 }
 
 .workspace {
@@ -216,7 +219,20 @@ section.title-hero-bg.parallax-effect img {
     position: relative;
     min-height: 550px;
 }
-
+.ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ellipsis1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media (min-width: 320px) and (max-width: 600px) {
     .title-hero-bg {
         min-height: 400px !important;

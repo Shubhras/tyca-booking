@@ -45,29 +45,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center py-2 py-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
+                            <a class="nav-link nav-color {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
                                 href="{{ url('/') }}">{{ __('messages.web.home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('medical-doctors*') ? 'active' : '' }}"
+                            <a class="nav-link nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
                                 href="{{ route('medicalDoctors') }}">News</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('medical-services*') ? 'active' : '' }}"
+                            <a class="nav-link nav-color {{ Request::is('medical-services*') ? 'active' : '' }}"
                                 href="{{ route('medicalServices') }}">Store</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('medical-about-us*') ? 'active' : '' }}"
+                            <a class="nav-link nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
                                 href="{{ route('medicalAboutUs') }}">Membership</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  {{ Request::is('medical-contact*') ? 'active' : '' }}"
+                            <a class="nav-link nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
                                 href="{{ route('medicalContact') }}"
                                 data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="http://localhost:8000/patients/dashboard" class="nav-link" id="nav-flex"><img
+                            <a href="http://localhost:8000/patients/dashboard" class="nav-link nav-color" id="nav-flex"><img
                                     class="img-fluid-logos" alt="img-fluid" src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
@@ -112,6 +112,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <style>
+header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
+    background: -webkit-linear-gradient(#000000, #000000) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: #00000000 !important
+}
+header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link.active {
+    background: -webkit-linear-gradient(#000000, #000000) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: #00000000 !important
+}
 .header-logo:hover {
     color: none !important;
 }
