@@ -6,8 +6,8 @@
 
 <style>
     .btn-primary2:hover {
-    border: 1px solid #212529;
-    background: black;
+    border: 1px solid #273432;
+    background: #273432;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
@@ -21,8 +21,8 @@
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
-    background-color: #212529;
-    border: 1px solid #212529;
+    background-color: #273432;
+    border: 1px solid #273432;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     border-radius: 0;

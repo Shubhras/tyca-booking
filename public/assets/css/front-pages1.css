@@ -634,7 +634,7 @@ ul {
 }
 
 a:hover {
-  color: #464F57;
+  color: none!important;
 }
 
 .top-heading {
