@@ -573,10 +573,10 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
-a:hover {
+/* a:hover {
     color: #fff !important;
     background: #273432;
-}
+} */
 
 .amies-font {
     font-size: 14px;
@@ -1059,5 +1059,8 @@ section.mains-blocks {
     margin: 5px 5px 0px 0px;
     cursor: pointer;
     width: 235px;
+}
+a:hover {
+    color: none !important;
 }
 </style>

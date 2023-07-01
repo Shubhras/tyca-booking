@@ -5,7 +5,9 @@
 
 @section('front-content')
 <style>
-
+a:hover {
+    color: none !important;
+}
 .badge-lg {
     padding: 10px;
     font-size: 16px;
@@ -557,10 +559,10 @@ figure.effect-chico {
 h1 {
     font-size: 25px !important;
 }
-a:hover{
+/* a:hover{
     color: #fff;
     background: #273432;
-}
+} */
 </style>
 
 <section class="main-block1 gray">
