@@ -21,6 +21,7 @@ $styleCss = 'style';
                 </div>
             </div>
         </section>
+    </section>
 </div>
 
 <section class="main-block gray">
@@ -573,10 +574,9 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
-/* a:hover {
-    color: #fff !important;
-    background: #273432;
-} */
+a:hover {
+    color: #273432 !important;
+}
 
 .amies-font {
     font-size: 14px;
@@ -1060,7 +1060,14 @@ section.mains-blocks {
     cursor: pointer;
     width: 235px;
 }
-a:hover {
-    color: none !important;
+
+.btn1:hover {
+    background: #273432 !important;
+    border: #273432 !important;
+    color: #FFFFFF !important;
 }
+
+/* a:hover {
+    color: none !important;
+} */
 </style>

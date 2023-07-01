@@ -5,8 +5,22 @@
 
 @section('front-content')
 <style>
-a:hover {
+/* a:hover {
     color: none !important;
+} */
+.view-set{
+    text-decoration: none;
+    padding: 10px 18px; 
+    background: #fff !important;
+    color: #273432 !important;
+    border: 1px solid #273432 !important;
+    text-align: center;
+}
+
+.btn1:hover {
+    background: #273432!important;
+    border: #273432!important;
+    color: #FFFFFF!important;
 }
 .badge-lg {
     padding: 10px;
@@ -145,7 +159,13 @@ a:hover {
     border: #273432;
     color: #FFFFFF;
 }
-
+.btn11 {
+    width: 136px;
+    height: 40px;
+    background: #273432;
+    border: #273432;
+    color: #FFFFFF;
+}
 .btn2 {
     width: 163px;
     height: 40px;
@@ -447,6 +467,10 @@ figure.effect-chico {
 
     .pay-pall {
         display: grid !important;
+    }
+    .view-set{
+    text-decoration: none;
+    padding: 10px 0px!important; 
     }
 }
 
@@ -834,9 +858,8 @@ h1 {
                     <?php
                     $idGet =  Request::segment(2);
                     ?>
-                    <a class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0"
-                        href="{{$idGet}}/hot-desk/{{$service->id}}" style="text-decoration: none;padding: 10px 18px; background: white;
-                     color: #000000; border: 1px solid; text-align: center;">
+                    <a class="btn11 btn1-primary11 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0 view-set"
+                        href="{{$idGet}}/hot-desk/{{$service->id}}">
                         View More
                     </a>
                 </div>
