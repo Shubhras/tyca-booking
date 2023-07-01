@@ -665,7 +665,7 @@ header {
 header .navbar .navbar-nav .nav-item .nav-link {
   /* color: #747B81;
   font-weight: 500; */
-  color: #000000;
+  color: #273432;
   font-weight: 400;
   padding-left: 20px;
   padding-right: 20px;
@@ -683,7 +683,7 @@ header .navbar .navbar-nav .nav-item .nav-link {
   }
 }
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link.active {
-  background: -webkit-linear-gradient(#FE8065, #F74D6C);
+  background: -webkit-linear-gradient(#273432, #273432);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

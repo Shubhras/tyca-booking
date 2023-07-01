@@ -93,8 +93,7 @@ $styleCss = 'style';
                                 @foreach($specialization as $specializationData)
                                 <div class="col-6 icon-set">
                                     <p class="heading-id amies-font">
-                                        <img src="{{$specializationData->icon}}" alt="#"
-                                            style="width: 30px;">
+                                        <img src="{{$specializationData->icon}}" alt="#" style="width: 30px;">
                                         {{$specializationData->name}}
                                     </p>
                                 </div>
@@ -175,15 +174,18 @@ $styleCss = 'style';
                             <div class="grid">
                                 <p class="hou-p" id="price">$ {{$servicesData->charges}}/Hour</p>
                                 <div class="hourplan-button">
-                                @if(getLogInUser())
+                                    @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
                                         Now</button>
-                                @else
-                                 <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
-                                 Book Now
-                                 </a>
-                                 @endif
+                                    @else
+                                    <a href="{{ route('login') }}" type="button"
+                                        class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2"
+                                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                                        data-turbo="false">
+                                        Book Now
+                                    </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -200,15 +202,18 @@ $styleCss = 'style';
                             <div class="grid">
                                 <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
                                 <div class="dayplan-button">
-                                @if(getLogInUser())
+                                    @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
                                         Now</button>
-                                        @else
-                                 <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
-                                 Book Now
-                                 </a>
-                                 @endif
+                                    @else
+                                    <a href="{{ route('login') }}" type="button"
+                                        class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2"
+                                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                                        data-turbo="false">
+                                        Book Now
+                                    </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -265,15 +270,15 @@ $styleCss = 'style';
                         @endif
                     </div>
                     <div class="row">
-                    @if(getLogInUser())
+                        @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label"
                                     for="template-medical-email">{{ __('messages.patient.email') }}:<span
                                         class="required"></span></label>
                                 <input type="email" id="template-medical-email" name="email" class="form-control"
-                                    value="{{ getLogInUser()->email }}"
-                                    placeholder="{{ __('messages.web.email') }}" readonly>
+                                    value="{{ getLogInUser()->email }}" placeholder="{{ __('messages.web.email') }}"
+                                    readonly>
                             </div>
                         </div>
                         @endif
@@ -413,15 +418,15 @@ $styleCss = 'style';
                                 </li>
                             </ul>
                         </div>
-                      
+
                     </div>
                     <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
+                        <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
                     </div>
             </div>
         </div>
-       
-      
+
+
         </form>
     </div>
 </div>
@@ -568,55 +573,68 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
-a:hover{
+a:hover {
     color: #fff !important;
     background: #273432;
 }
-.amies-font{
-    font-size:14px;
+
+.amies-font {
+    font-size: 14px;
 }
-    @media (max-width: 767px) {
-.form-control, .form-select {
-    height: 50px;
-    font-size: 16px;
-    padding: 10px !important;
-}
-}
-    @media (min-width:768px) and (max-width:800px) {
-    .radio-btn{
-        font-size:14px !important;
+
+@media (max-width: 767px) {
+
+    .form-control,
+    .form-select {
+        height: 50px;
+        font-size: 16px;
+        padding: 10px !important;
     }
 }
-@media (min-width:320px) and (max-width:375px){
-    .stripes{
-        width:100% !important;
-    }
-    .pay-pal{
-        display:grid !important;
+
+@media (min-width:768px) and (max-width:800px) {
+    .radio-btn {
+        font-size: 14px !important;
     }
 }
+
+@media (min-width:320px) and (max-width:375px) {
+    .stripes {
+        width: 100% !important;
+    }
+
+    .pay-pal {
+        display: grid !important;
+    }
+}
+
 @media (min-width:768px) and (max-width:1024px) {
-        .icon-set{
-        width:100% !important;
+    .icon-set {
+        width: 100% !important;
     }
+
     .dayplan-btn {
         padding: 10px;
         width: auto !important;
     }
 
     .h2-hourplan {
-    font-size: 15px !important;
-    color: #000000;
-}
-h5, .fs-5 {
-    font-size: 15px !important;
-}
-.row.hours-plan {
-    width: 240px;
-}
-.row.grid-space.days-plan {
-    width: 240px;
-}
+        font-size: 15px !important;
+        color: #000000;
+    }
+
+    h5,
+    .fs-5 {
+        font-size: 15px !important;
+    }
+
+    .row.hours-plan {
+        width: 240px;
+    }
+
+    .row.grid-space.days-plan {
+        width: 240px;
+    }
 }
 
 @media (min-width:768px) and (max-width:1440px) {
@@ -627,17 +645,21 @@ h5, .fs-5 {
 
 @media (min-width:320px) and (max-width:600px) {
     .amenities-block {
-        width:inherit !important;
+        width: inherit !important;
     }
-.amies-font{
-    font-size:13px !important;
-}
-    .stripes{
-        width:100% !important;
+
+    .amies-font {
+        font-size: 13px !important;
     }
-    .set-box{
-        margin-left:30px !important;
+
+    .stripes {
+        width: 100% !important;
     }
+
+    .set-box {
+        margin-left: 30px !important;
+    }
+
     .set-space {
         font-size: 35px !important;
     }
@@ -659,26 +681,29 @@ h5, .fs-5 {
     }
 
     .day-plan {
-    display: flex;
-    border: 1px solid #D9D9D9;
-    margin-bottom: 20px;
-}
-.hot-desk {
-    text-align: start;
-    margin-bottom: 20px!important;
-}
-.h2-day {
-    font-size: 20px;
-    color: #000000;
-    margin-bottom: 10px!important;
-}
-.title-hero-bg {
- min-height: 430px!important;
-}
+        display: flex;
+        border: 1px solid #D9D9D9;
+        margin-bottom: 20px;
+    }
 
-section.main-block.gray {
-    margin-top: 20px;
-}
+    .hot-desk {
+        text-align: start;
+        margin-bottom: 20px !important;
+    }
+
+    .h2-day {
+        font-size: 20px;
+        color: #000000;
+        margin-bottom: 10px !important;
+    }
+
+    .title-hero-bg {
+        min-height: 430px !important;
+    }
+
+    section.main-block.gray {
+        margin-top: 20px;
+    }
 
     section.mains-blocks {
         padding: 0px !important;
@@ -1018,8 +1043,21 @@ section.mains-blocks {
 #slot_option {
     display: none;
 }
-.pay-pal{
-        display:flex;
-        place-content:start;
-    }
+
+.pay-pal {
+    display: flex;
+    place-content: start;
+}
+
+.badge-lg {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 44px;
+    line-height: 26px;
+    margin: 5px 5px 0px 0px;
+    cursor: pointer;
+    width: 235px;
+}
 </style>

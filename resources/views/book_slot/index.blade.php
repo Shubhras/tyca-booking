@@ -5,6 +5,18 @@
 
 @section('front-content')
 <style>
+
+.badge-lg {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 44px;
+    line-height: 26px;
+    margin: 5px 5px 0px 0px;
+    cursor: pointer;
+    width: 235px;
+}
 .sub-name {
     font-size: 13px;
 }

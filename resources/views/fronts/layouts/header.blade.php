@@ -109,7 +109,9 @@
 
 
 <style>
-
+a:hover {
+    color: none !important;
+}
 a#nav-flex {
     display: flex;
 }
