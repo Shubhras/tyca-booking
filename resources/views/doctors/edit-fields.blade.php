@@ -325,7 +325,7 @@ $slots = getSchedulesTimingSlot();
     </div>
     <div class="col-md-6">
         {{ Form::label('Postal Code', __('messages.doctor.postal_code').':', ['class' => 'form-label required']) }}
-        {{ Form::text('postal_code', isset($user->address->postal_code) ? $user->address->postal_code : '', ['class' => 'form-control', 'placeholder' => __('messages.doctor.postal_code'),'required']) }}
+        {{ Form::text('postal_code', isset($user->address->postal_code) ? $user->address->postal_code : '', ['class' => 'form-control', 'placeholder' => __('messages.doctor.postal_code'),'required','type'=>'number','pattern' => '\d+','title' => __('messages.valid_number')]) }}
     </div>
 </div>
 

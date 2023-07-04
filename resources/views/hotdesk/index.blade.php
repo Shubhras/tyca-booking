@@ -9,14 +9,16 @@ $styleCss = 'style';
 
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
-        <section class="title-hero-bg parallax-effect" style="background-image: url(/assets/images/Frame_3.png);">
+        <section class="title-hero-bg parallax-effect" style="background-image: url('{{$abouTimage1->value}}');">
             <!-- <img src="/assets/images/Frame_3.png" alt="" class=""> -->
 
             <div class="container">
                 <div class="page-title text-center white-color">
-                    <h1 class="set-space">BOOK A SPACE</h1>
-                    <h4 class="workspace">Interested in our workspace?
-                        <br> Book a slot for our space now!
+                    <h1 class="set-space ellipsis1">{{$aboutTitle->value}}</h1>
+                    <h4 class="workspace">
+                    <div class="ellipsis">
+                        {!! $aboutShortDescription->value !!}
+                    </div>
                     </h4>
                 </div>
             </div>
@@ -574,6 +576,20 @@ $('input[type="date"]').change(function() {
 </script>
 
 <style>
+    .ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ellipsis1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 a:hover {
     color: #273432 !important;
 }
@@ -830,7 +846,7 @@ a:hover {
 
 .workspace {
     line-height: 40px;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 300;
     margin-top: 20px;
 }

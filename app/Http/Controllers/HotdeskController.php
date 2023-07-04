@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 use App\Repositories\AppointmentRepository;
 use App\Models\Patient;
 use App\Models\Faq;
+use App\Models\Setting;
 use App\Models\DoctorSession;
 class HotdeskController extends Controller
 {
@@ -46,6 +47,9 @@ class HotdeskController extends Controller
         $appointmentDoctors = Doctor::with('user')->whereIn('id',
             DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',
             User::ACTIVE)->pluck('user.full_name', 'id');
-        return view('hotdesk.index', compact('data','user','doctor','faqs','appointmentDoctors','servicesData','specialization','allPaymentStatus', 'paymentGateway', 'paymentStatus'));
+        $aboutTitle = Setting::where('key', 'about_title')->first();
+        $aboutShortDescription = Setting::where('key', 'about_short_description')->first();
+        $abouTimage1 = Setting::where('key', 'about_image_1')->first();
+        return view('hotdesk.index', compact('data','user','doctor','faqs','appointmentDoctors','servicesData','specialization','allPaymentStatus', 'paymentGateway', 'paymentStatus','aboutTitle','aboutShortDescription','abouTimage1'));
     }
 }

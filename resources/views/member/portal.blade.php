@@ -325,23 +325,23 @@
                 <div class="alert alert-danger d-none hide"></div>
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label']) }}
+                        {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label  required']) }}
                         <span class=""></span>
                         <input name="first_name" type="text" class="form-control" id="name" aria-describedby="firstName"
                                 placeholder="{{ __('messages.patient.first_name') }}" value="{{ $data['user']->first_name }}"
-                                required>
+                                required pattern="[A-Za-z]+" title="Please enter alphabetic characters only" >
                     </div>
                     <div class="form-group col-sm-6">
-                        {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label']) }}
+                        {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label  required']) }}
                         <span class=""></span>
                         <input name="last_name" type="text" class="form-control" id="last_name"
                                 aria-describedby="lastName" placeholder="{{ __('messages.patient.last_name') }}" required
-                                value="{{ $data['user']->last_name }}">
+                                value="{{ $data['user']->last_name }}" required pattern="[A-Za-z]+" title="Please enter alphabetic characters only">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label']) }}
+                        {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label  required']) }}
                         <span class=""></span>
                         <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
                                 placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}" required disabled>
@@ -349,17 +349,17 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label']) }}
+                        {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label  required']) }}
                         <span class=""></span>
                         <input type="password" name="password" class="form-control" id="password"
-                                    placeholder="{{ __('messages.patient.password') }}" aria-describedby="password">
+                                    placeholder="{{ __('messages.patient.password') }}" aria-describedby="password" required>
                     </div>
                     <div class="form-group col-sm-6">
-                        {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label']) }}
+                        {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label  required']) }}
                         <span class=""></span>
                         <input name="password_confirmation" type="password" class="form-control"
-                                    placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
-                                    aria-describedby="confirmPassword">
+                                placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
+                                aria-describedby="confirmPassword" required>
                     </div>
                 </div>
 

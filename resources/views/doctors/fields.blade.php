@@ -375,7 +375,7 @@
         </div>
         <div class="col-md-6 mb-5">
             <label class="form-label required">{{__('messages.doctor.postal_code')}}:</label>
-            {{ Form::text('postal_code',null,['class' => 'form-control','placeholder' => __('messages.doctor.postal_code'),'required']) }}
+            {{ Form::text('postal_code',null,['class' => 'form-control','placeholder' => __('messages.doctor.postal_code'),'required','pattern' => '\d+','title' => __('messages.valid_number')]) }}
         </div>
     </div>
     <div class="d-flex">
