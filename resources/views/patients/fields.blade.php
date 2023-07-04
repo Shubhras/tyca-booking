@@ -2,12 +2,12 @@
     <div class="col-md-6 mb-5">
         {{ Form::label('firstName',__('messages.patient.first_name').':' ,['class' => 'form-label required']) }}
         {{ Form::text('first_name',!empty($patient->user) ? $patient->user->first_name : null,['class' =>
-        'form-control','placeholder' => __('messages.patient.first_name'),'required']) }}
+        'form-control','placeholder' => __('messages.patient.first_name'),'required','pattern' => '[A-Za-z]+', 'title' => 'Please enter alphabetic characters only']) }}
     </div>
     <div class="col-md-6 mb-5">
         {{ Form::label('lastName',__('messages.patient.last_name').':' ,['class' => 'form-label required']) }}
         {{ Form::text('last_name',!empty($patient->user) ? $patient->user->last_name : null,['class' =>
-        'form-control','placeholder' => __('messages.patient.last_name'),'required']) }}
+        'form-control','placeholder' => __('messages.patient.last_name'),'required','pattern' => '[A-Za-z]+', 'title' => 'Please enter alphabetic characters only']) }}
     </div>
     <div class="col-md-6 mb-5 d-none">
         {{ Form::label('patientUniqueId',__('messages.patient.patient_unique_id').':' ,['class' => 'form-label
