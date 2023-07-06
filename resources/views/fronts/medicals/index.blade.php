@@ -96,7 +96,7 @@
 
 .workspace {
     line-height: 40px;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 300;
     margin-top: 20px;
 }
