@@ -542,7 +542,7 @@ return [
         'appointment_details' => 'Booking Details',
         'appointment_at' => 'Booking At',
         'appointment_unique_id' => 'Booking ID',
-        'appointment_date' => 'Appointment Date',
+        'appointment_date' => 'Booking Status',
         'switch_to_calendar' => 'Switch to Calendar',
         'starts' => 'Starts',
         'ends' => 'Ends',
