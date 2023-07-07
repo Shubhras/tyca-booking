@@ -365,7 +365,7 @@ $styleCss = 'style';
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-label"
-                                for="templateAppointmentDate">{{ __('messages.appointment.appointment_date')}}: <span
+                                for="templateAppointmentDate">Appointment Date:<span
                                     class="required"></span></label>
                             <div class="position-relative">
                                 <input type="text" id="templateAppointmentDate" name="date"

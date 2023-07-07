@@ -398,6 +398,11 @@
             <div class="form-check form-check-solid form-switch">
                 <input name="status" class="form-check-input checkBoxClass" type="checkbox"
                     {{$user->status == 1 ? 'checked' : ''}}>
+                    @if($user->status == 1)
+                    <span>Active</span>
+                    @else
+                    <span>Inactive</span>
+                    @endif
                 <label class="form-check-label" for="allowmarketing"></label>
             </div>
         </div>

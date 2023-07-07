@@ -154,8 +154,8 @@
                                                 }} -->
                                                     {{ Form::input('password', 'payment_gateway_'.$key.'_secret_key',
                                                         isset($paymentGateWayKeys[$paymentGateway]['client_secret']) ? $paymentGateWayKeys[$paymentGateway]['client_secret'] : '', 
-                                                        ['class' => 'form-control', 'placeholder' => __('messages.setting.payment_gateway_secret_key'), 'required','id' => 'logpassword']) }}
-                                                    <i style="font-size:25px; cursor:pointer;margin-left: -35px;" class="bi bi-eye-fill" onclick="togglePasswordVisibility()"></i>
+                                                        ['class' => 'form-control', 'placeholder' => __('messages.setting.payment_gateway_secret_key'), 'required','id' => 'logpassword'.$key]) }}
+                                                    <i style="font-size:25px; cursor:pointer;margin-left: -35px;" class="bi bi-eye-fill" onclick="togglePasswordVisibility(<?php echo $key; ?>)"></i>
 
 
                                                 </div>
@@ -183,13 +183,14 @@
 </div>
 @endsection
 <script>
-  function togglePasswordVisibility() {
-    var passwordInput = document.getElementById("logpassword");
+  function togglePasswordVisibility(id) {
+    var passwordInput = document.getElementById("logpassword"+id);
     
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
     } else {
         passwordInput.type = "password";
     }
+    
   }
 </script>
