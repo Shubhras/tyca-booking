@@ -23,7 +23,7 @@
     user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 0.375rem 0.75rem;
+    padding: 10px;
     font-size: 1rem;
     border-radius: 0;
 }
@@ -107,7 +107,7 @@ h5, .fs-5 {
                     <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid p-4">
                 </a>
             </div>
-            <h3 class="text-center mb-7">{{__('messages.web.patient_registration')}}</h3>
+            <h3 class="text-center mb-7 pt-3 pb-3">{{__('messages.web.patient_registration')}}</h3>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="row">
@@ -140,7 +140,7 @@ h5, .fs-5 {
                             placeholder="{{ __('messages.patient.email') }}" value="{{ old('email') }}" required>
                     </div>
                 </div>
-                <div class="mb-5 fv-row">
+                <div class="mb-4 fv-row">
                     <div class="row">
                         <div class="col-md-12 mb-sm-7 mb-4">
                             {{-- <label for="password" class="form-label">
@@ -163,18 +163,18 @@ h5, .fs-5 {
                         </div>
                     </div>
 
-                    <div class="mb-sm-7 mb-4 form-check terms">
+                    <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms">
                         <input type="checkbox" class="form-check-input " name="toc" value="1" required />
-                        <span class="text-gray-700 me-2 ml-1 ">{{__('messages.web.i_agree')}}
+                        <span class="text-gray-700 me-2 ml-1" style="font-size:20px; color:#535353">{{__('messages.web.i_agree')}}
                             <a href="{{ route('terms.conditions') }}" class="ms-1 link-primary "
-                                style="color: #000000b3;">{{__('messages.web.terms_and_conditions')}}</a>.
+                                style="color: #535353; font-size:20px; text-transform: capitalize;">{{__('messages.web.terms_and_conditions')}}</a>.
                         </span>
                     </div>
 
                     <div class="d-grid col-6" style="margin: auto;">
-                        <button type="submit" class="btn2 btn-primary2">Submit</button>
+                        <button type="submit" class="btn2 btn-primary2">Register</button>
                     </div>
-                    <div class="d-flex align-items-center mt-4 down-sign">
+                    <div class="d-flex align-items-center mt-4 pb-2 down-sign" style="justify-content:center;">
                         <span class="text-gray-700 me-2">{{__('messages.web.already_have_an_account').'?'}}</span>
                         <a href="{{ route('login') }}" class="form-check-label fs-7" style="color: #000000;">
                             {{__('messages.web.sign_in_here')}}

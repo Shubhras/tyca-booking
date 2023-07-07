@@ -23,7 +23,7 @@
     user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 0.375rem 0.75rem;
+    padding: 10px;
     font-size: 1rem;
     border-radius: 0;
 }
@@ -97,10 +97,10 @@ h5, .fs-5 {
                 style="height: 50%;margin: auto;">
                 <div class="col-12 text-center">
                     <a href="{{ route('medical') }}" class="image py-10">
-                        <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid" style="padding: 20px;">
+                        <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid pt-4" style="padding: 20px;">
                     </a>
                 </div>
-                <h3 class="text-center mb-7">{{__('auth.sign_in')}}</h3>
+                <h3 class="text-center mb-7 pt-3 pb-3">{{__('auth.sign_in')}}</h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-sm-7 mb-4">
@@ -120,14 +120,14 @@ h5, .fs-5 {
                         <input name="password" type="password" class="form-control" id="password" required
                             placeholder="Password">
                     </div>
-                    <div class="d-flex justify-content-between" style="padding-bottom: 10px;">
+                    <div class="d-flex justify-content-between pt-4 pb-4">
                         @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="form-check-label" style="color: #000000;">
                             {{ __('messages.common.forgot_your_password').'?' }}
                         </a>
                         @endif
                     </div>
-                    <div class="mb-sm-7 mb-4 form-check">
+                    <div class="mb-sm-7 mb-4 pb-4 form-check">
                         <input type="checkbox" class="form-check-input" id="remember_me">
                         <label class="form-check-label"
                             for="remember_me">{{ __('messages.common.remember_me') }}</label>

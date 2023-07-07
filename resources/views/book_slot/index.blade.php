@@ -8,6 +8,16 @@
 /* a:hover {
     color: none !important;
 } */
+.no-slot-color{
+    background: #F5F5F5;
+    padding: 30px;
+}
+.location1 {
+    font-size: 30px !important;
+    color: #000000 !important;
+    font-weight: 600;
+    text-transform: capitalize;
+}
 .view-set{
     text-decoration: none;
     padding: 10px 18px; 
@@ -34,7 +44,9 @@
     width: 235px;
 }
 .sub-name {
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: lowercase;
 }
 
 .badge.badge-circle {
@@ -158,6 +170,8 @@
     background: #273432;
     border: #273432;
     color: #FFFFFF;
+    border-radius: 0 !important;
+
 }
 .btn11 {
     width: 136px;
@@ -165,12 +179,16 @@
     background: #273432;
     border: #273432;
     color: #FFFFFF;
+    border-radius: 0 !important;
+
 }
 .btn2 {
     width: 163px;
     height: 40px;
     background: #fff;
     color: #273432;
+    border-radius: 0 !important;
+
 }
 
 .book-btn {
@@ -180,6 +198,7 @@
     background: #273432;
     border: #273432;
     color: #FFFFFF;
+    border-radius: 0 !important;
 }
 
 .row-gap {
@@ -368,7 +387,7 @@ figure.effect-chico11 {
 }
 
 .radio-btn {
-    padding: 0px 15px;
+    padding: 0px 10px;
 }
 
 .set-back {
@@ -437,10 +456,13 @@ figure.effect-chico {
 }
 
 .heading-id1 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
 }
-
+.heading-id2 {
+    font-size: 16px;
+    font-weight: 700;
+}
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -475,6 +497,12 @@ figure.effect-chico {
 }
 
 @media (min-width:320px) and (max-width:600px) {
+    .sub-name{
+    font-size: 13px !important;
+}
+    .heading-id1 {
+    font-size: 13px !important;
+}
     .book-set {
         height: 95% !important;
     }
@@ -505,10 +533,14 @@ figure.effect-chico {
     }
 
     .location {
-        font-size: 18px !important;
+        font-size: 16px !important;
         color: #000000 !important;
     }
-
+    .location1 {
+    font-size: 18px !important;
+    color: #000000 !important;
+    font-weight: 600;
+}
     .top-set {
         margin-top: -80px;
     }
@@ -576,10 +608,9 @@ figure.effect-chico {
 }
 
 .location {
-    font-size: 18px !important;
+    font-size: 16px !important;
     color: #000000 !important;
 }
-
 h1 {
     font-size: 25px !important;
 }
@@ -650,7 +681,7 @@ h1 {
                     <div class="blog-content">
                         <div class="blog-text">
                             <h1 class="font-700 roboto-font">
-                                <h1 class="location">
+                                <h1 class="location1">
                                     {{$user->first_name}}
                                     {{$user->last_name}}<h1>
                                     </h1>
@@ -664,14 +695,14 @@ h1 {
             <div class="col-md-4 responsive-wrap set-amities">
                 <div class="sidebar">
                     <div class="widget-box mb-40 amities">
-                        <h1 class="mb-20 amities1">Amenities</h1>
+                        <h1 class="mb-20 amities1">AMENITIES</h1>
                         <div class="latest-blog">
                             <div class="col section-border">
                                 <div class="row mt-10 mb-1 col-12" style="display:flex;">
                                     @foreach($specialization as $specializationData)
                                     <div class="col-6 icon-set">
                                         <p class="heading-id1">
-                                            <img src="{{$specializationData->icon}}" alt="#" style="height: 30px;">
+                                            <img src="{{$specializationData->icon}}" alt="#" style="height: 30px; padding-right:10px;">
                                             {{$specializationData->name}}
                                         </p>
                                     </div>
@@ -740,9 +771,9 @@ h1 {
                         @if(!empty($var_dump))
                         @foreach($var_dump as $day)
                         @if($day->day_of_week == 1)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Monday</b>
+                                <b class="heading-id2">Monday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -750,9 +781,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 2)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Tuesday</b>
+                                <b class="heading-id2">Tuesday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -760,9 +791,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 3)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Wednesday</b>
+                                <b class="heading-id2">Wednesday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -770,9 +801,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 4)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Thursday</b>
+                                <b class="heading-id2">Thursday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -780,9 +811,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 5)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Friday</b>
+                                <b class="heading-id2">Friday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -790,9 +821,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 6)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Saturday</b>
+                                <b class="heading-id2">Saturday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -800,9 +831,9 @@ h1 {
                         </div>
                         @endif
                         @if($day->day_of_week == 7)
-                        <div class="row mt-10 mb-1" style="display:flex;">
+                        <div class="row mt-10 mb-2" style="display:flex;">
                             <div class="col">
-                                <b class="heading-id1">Sunday</b>
+                                <b class="heading-id2">Sunday</b>
                             </div>
                             <div class="col">
                                 <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
@@ -967,7 +998,7 @@ h1 {
 
                     <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
-                                style="width:100%;"></span>
+                                style="width:100%; margin-bottom: 20px;"></span>
                     </div>
 
                     <div class="col-lg-12">
@@ -1016,11 +1047,11 @@ h1 {
                                 {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
                                 <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data"
                                     id="slotData">
-                                    <p class="mb-0 text-center  no-time-slot">
+                                    <p class="mb-0 text-center  no-time-slot no-slot-color">
                                         {{__('messages.appointment.no_slot_found')}}
                                     </p>
                                 </div>
-                                <p class="mb-0 text-center d-none no-time-slot">
+                                <p class="mb-0 text-center d-none no-time-slot no-slot-color">
                                     {{__('messages.appointment.no_slot_found')}}
                                 </p>
                             </div>
@@ -1052,7 +1083,7 @@ h1 {
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
-                                <span class="radio-btn">Stripe </span>
+                                <span class="radio-btn1">Stripe </span>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
@@ -1104,10 +1135,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayMessage(id, price) {
     if (id == 1) {
-        var abc = 'hourly';
+        var abc = 'Hour Plan';
         $('#slot_option').show();
     } else {
-        var abc = 'daily';
+        var abc = 'Day Plan';
         $('#slot_option').hide();
     }
 

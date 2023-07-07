@@ -324,7 +324,7 @@ $styleCss = 'style';
 
                     <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
-                                style="width:100%;"></span>
+                                style="width:100%;  margin-bottom: 20px;"></span>
                     </div>
 
                     <div class="col-lg-12">
@@ -373,11 +373,11 @@ $styleCss = 'style';
                                 {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
                                 <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data"
                                     id="slotData">
-                                    <p class="mb-0 text-center  no-time-slot">
+                                    <p class="mb-0 text-center  no-time-slot  no-slot-color">
                                         {{__('messages.appointment.no_slot_found')}}
                                     </p>
                                 </div>
-                                <p class="mb-0 text-center d-none no-time-slot">
+                                <p class="mb-0 text-center d-none no-time-slot  no-slot-color">
                                     {{__('messages.appointment.no_slot_found')}}
                                 </p>
                             </div>
@@ -409,7 +409,7 @@ $styleCss = 'style';
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
-                                <span class="radio-btn">Stripe </span>
+                                <span class="radio-btn1">Stripe </span>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
@@ -462,10 +462,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayMessage(id, price) {
     if (id == 1) {
-        var abc = 'hourly';
+        var abc = 'Hour Plan';
         $('#slot_option').show();
     } else {
-        var abc = 'daily';
+        var abc = 'Day Plan';
         $('#slot_option').hide();
     }
 
@@ -767,7 +767,7 @@ a:hover {
 }
 
 .radio-btn {
-    padding: 0px 15px;
+    padding: 0px 10px;
 }
 
 .set-back {
@@ -1082,7 +1082,10 @@ section.mains-blocks {
     border: #273432 !important;
     color: #FFFFFF !important;
 }
-
+.no-slot-color{
+    background: #F5F5F5;
+    padding: 30px;
+}
 /* a:hover {
     color: none !important;
 } */

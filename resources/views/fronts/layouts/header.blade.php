@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="row align-items-center">
         <div class="col-lg-3 col-4">
             <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
-                <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid" />
+                <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid nav-logos" />
             </a>
         </div>
         <div class="col-lg-9 col-8">
@@ -112,6 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <style>
+.nav-logos{
+    width:290px;
+    height:22px;
+}
+
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
     -webkit-background-clip: text !important;
@@ -174,7 +179,9 @@ img.img-fluid-logos {
     color: #fff !important;
     border: 1px solid #273432 !important;
 }
-
+footer {
+    padding-top: 40px !important;
+}
 @media(max-width:768px) {
     .login-head {
         margin: 0px 0px 0px 20px !important;
