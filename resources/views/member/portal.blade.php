@@ -448,7 +448,7 @@
 }
 
 .page-title h1 {
-    font-size: 60px;
+    font-size: 45px;
     line-height: 1.5em;
     font-weight: 700;
     margin: 0;

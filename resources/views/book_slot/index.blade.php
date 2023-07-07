@@ -8,19 +8,21 @@
 /* a:hover {
     color: none !important;
 } */
-.no-slot-color{
+.no-slot-color {
     background: #F5F5F5;
     padding: 30px;
 }
+
 .location1 {
     font-size: 30px !important;
     color: #000000 !important;
     font-weight: 600;
     text-transform: capitalize;
 }
-.view-set{
+
+.view-set {
     text-decoration: none;
-    padding: 10px 18px; 
+    padding: 10px 18px;
     background: #fff !important;
     color: #273432 !important;
     border: 1px solid #273432 !important;
@@ -28,10 +30,11 @@
 }
 
 .btn1:hover {
-    background: #273432!important;
-    border: #273432!important;
-    color: #FFFFFF!important;
+    background: #273432 !important;
+    border: #273432 !important;
+    color: #FFFFFF !important;
 }
+
 .badge-lg {
     padding: 10px;
     font-size: 16px;
@@ -43,6 +46,7 @@
     cursor: pointer;
     width: 235px;
 }
+
 .sub-name {
     font-size: 15px;
     font-weight: 500;
@@ -173,6 +177,7 @@
     border-radius: 0 !important;
 
 }
+
 .btn11 {
     width: 136px;
     height: 40px;
@@ -182,6 +187,7 @@
     border-radius: 0 !important;
 
 }
+
 .btn2 {
     width: 163px;
     height: 40px;
@@ -307,7 +313,7 @@
 }
 
 .host-desk {
-    padding: 10px 0px;
+    padding: 10px 0px 0px 0px;
     margin-left: 30px;
     width: 200px;
     font-weight: 600;
@@ -459,10 +465,12 @@ figure.effect-chico {
     font-size: 16px;
     font-weight: 500;
 }
+
 .heading-id2 {
     font-size: 16px;
     font-weight: 700;
 }
+
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -490,19 +498,22 @@ figure.effect-chico {
     .pay-pall {
         display: grid !important;
     }
-    .view-set{
-    text-decoration: none;
-    padding: 10px 0px!important; 
+
+    .view-set {
+        text-decoration: none;
+        padding: 10px 0px !important;
     }
 }
 
 @media (min-width:320px) and (max-width:600px) {
-    .sub-name{
-    font-size: 13px !important;
-}
+    .sub-name {
+        font-size: 13px !important;
+    }
+
     .heading-id1 {
-    font-size: 13px !important;
-}
+        font-size: 13px !important;
+    }
+
     .book-set {
         height: 95% !important;
     }
@@ -536,11 +547,13 @@ figure.effect-chico {
         font-size: 16px !important;
         color: #000000 !important;
     }
+
     .location1 {
-    font-size: 18px !important;
-    color: #000000 !important;
-    font-weight: 600;
-}
+        font-size: 18px !important;
+        color: #000000 !important;
+        font-weight: 600;
+    }
+
     .top-set {
         margin-top: -80px;
     }
@@ -611,9 +624,11 @@ figure.effect-chico {
     font-size: 16px !important;
     color: #000000 !important;
 }
+
 h1 {
     font-size: 25px !important;
 }
+
 /* a:hover{
     color: #fff;
     background: #273432;
@@ -685,7 +700,13 @@ h1 {
                                     {{$user->first_name}}
                                     {{$user->last_name}}<h1>
                                     </h1>
-                                    <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3>
+                                    <div>
+                                        <p class="location">
+                                            <img src="/assets/image/material-symbols_location-on.png" alt="#" style="height: 25px; margin-left:-5px;">
+                                            355 Balestier Road Singapore 329782
+                                        </p>
+                                    </div>
+                                    <!-- <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3> -->
                                     <p>{!! $doctor->description !!}</p>
                         </div>
                     </div>
@@ -695,14 +716,15 @@ h1 {
             <div class="col-md-4 responsive-wrap set-amities">
                 <div class="sidebar">
                     <div class="widget-box mb-40 amities">
-                        <h1 class="mb-20 amities1">AMENITIES</h1>
+                        <h1 class="mb-20 amities1">Amenities</h1>
                         <div class="latest-blog">
                             <div class="col section-border">
                                 <div class="row mt-10 mb-1 col-12" style="display:flex;">
                                     @foreach($specialization as $specializationData)
                                     <div class="col-6 icon-set">
                                         <p class="heading-id1">
-                                            <img src="{{$specializationData->icon}}" alt="#" style="height: 30px; padding-right:10px;">
+                                            <img src="{{$specializationData->icon}}" alt="#"
+                                                style="height: 30px; padding-right:10px;">
                                             {{$specializationData->name}}
                                         </p>
                                     </div>
@@ -851,7 +873,7 @@ h1 {
 <section class="white-bg">
     <div class="container">
         <div class="row col-12 list-box">
-            <h3 class="font-18" style="margin-left:15px;">Listings</h3>
+            <h3 class="font-18 pb-3 location1" style="margin-left:15px;">Listings</h3>
             @foreach($services as $service)
             <div class="col-5 row list-box" style="margin:30px;">
                 <div class="row col-12 set-border">
@@ -876,7 +898,9 @@ h1 {
                         {{ $service->charges }} / Hour
                     </button>
                     @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">{{ $service->charges }} / Hour</a>
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2"
+                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                        data-turbo="false">{{ $service->charges }} / Hour</a>
                     @endif
                     @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
@@ -884,7 +908,9 @@ h1 {
                         {{ $service->charges_daily }} / Day
                     </button>
                     @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">{{ $service->charges_daily }} / Day</a>
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2"
+                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                        data-turbo="false">{{ $service->charges_daily }} / Day</a>
                     @endif
                     <?php
                     $idGet =  Request::segment(2);

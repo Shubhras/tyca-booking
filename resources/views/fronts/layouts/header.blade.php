@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>--}}
-                <button class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler" onClick="toggleMenu()">
+                <button style="color:#273431" class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler" onClick="toggleMenu()">
                     <span class="navbar-toggler-icon"></span>
+                    <span style="padding: 0px 10px;">Menu</span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center py-2 py-lg-0">
@@ -119,11 +120,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
+    border-bottom: 1px solid #273432 !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
+    border-bottom: 1px solid #273432 !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
@@ -169,7 +172,7 @@ img.img-fluid-logos {
     user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 10px 40px;
+    padding: 10px 50px;
     font-size: 14px;
     border-radius: 0;
 }
@@ -192,5 +195,11 @@ footer {
     .btn1 {
         font-size: 14px !important;
     }
+}
+@media (min-width:320px) and (max-width:992px) {
+    .nav-logos {
+    width: auto !important;
+    height: auto !important;
+}
 }
 </style>

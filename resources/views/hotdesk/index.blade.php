@@ -27,7 +27,7 @@ $styleCss = 'style';
 </div>
 
 <section class="main-block gray">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class="grid">
@@ -81,7 +81,7 @@ $styleCss = 'style';
 </section>
 
 <section class="mains-blocks">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="grid">
@@ -96,7 +96,7 @@ $styleCss = 'style';
                                 @foreach($specialization as $specializationData)
                                 <div class="col-6 icon-set">
                                     <p class="heading-id amies-font">
-                                        <img src="{{$specializationData->icon}}" alt="#" style="width: 30px;">
+                                        <img src="{{$specializationData->icon}}" alt="#" style="height: 30px; padding-right:10px;">
                                         {{$specializationData->name}}
                                     </p>
                                 </div>
@@ -115,46 +115,81 @@ $styleCss = 'style';
                             @foreach($var_dump as $day)
                             <div class="operating-right" style="display:grid;">
                                 @if($day->day_of_week == 1)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Monday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Monday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
 
                                 @if($day->day_of_week == 2)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Tuesday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Tuesday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 3)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Wednesday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Wednesday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 4)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Thursday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Thursday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 5)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Friday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Friday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 6)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Saturday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Saturday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 7)
-                                <div class="one-line-set">
-                                    <b class="ser-gap-time">Sunday</b>
-                                    <p>{{$day->start_time}} - {{$day->end_time}}</p>
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                            <span class="heading-id2">Sunday</span>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                            <span
+                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        </div>
                                 </div>
                                 @endif
                             </div>
@@ -595,7 +630,8 @@ a:hover {
 }
 
 .amies-font {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 @media (max-width: 767px) {
@@ -608,6 +644,11 @@ a:hover {
     }
 }
 
+@media (min-width:1024px) and (max-width:1200px) {
+.set-day{
+    width:25% !important;
+}
+}
 @media (min-width:768px) and (max-width:800px) {
     .radio-btn {
         font-size: 14px !important;
@@ -734,6 +775,15 @@ a:hover {
         min-width: 100%;
         margin: 0px 0px 5px !important;
     }
+    .icon-set{
+        width:auto !important;
+    }
+    .day-small{
+        width:30% !important;
+    }
+    .day-small1{
+        width:50% !important;
+    }
 }
 
 .modal-header {
@@ -838,7 +888,7 @@ a:hover {
 }
 
 .page-title h1 {
-    font-size: 60px;
+    font-size: 45px;
     line-height: 1.5em;
     font-weight: 700;
     margin: 0;
@@ -1085,6 +1135,15 @@ section.mains-blocks {
 .no-slot-color{
     background: #F5F5F5;
     padding: 30px;
+}
+.heading-id2 {
+    font-size: 16px;
+    font-weight: 700;
+}
+.sub-name {
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: lowercase;
 }
 /* a:hover {
     color: none !important;
