@@ -86,7 +86,8 @@
 
         <li class="px-sm-3 px-2">
             <div class="dropdown d-flex align-items-center py-4">
-                <div class="image image-circle image-mini">
+                <div class="image image-circle image-mini" id="menuDropDown"
+                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                     @if(getLogInUser()->hasRole('patient'))
                         <img class="img-fluid" alt="img-fluid"
                              src="{{ getLogInUser()->patient->profile }}"/>
@@ -183,11 +184,11 @@
                 </div>
             </div>
         </li>
-        <li>
+        {{--<li>
             <button type="button" class="btn px-0 d-block d-xl-none header-btn pb-2">
                 <i class="fa-solid fa-bars fs-1"></i>
             </button>
-        </li>
+        </li> --}}
     </ul>
 </header>
 <div class="bg-overlay" id="nav-overly"></div>

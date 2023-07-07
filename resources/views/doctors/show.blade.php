@@ -31,7 +31,7 @@
                                     <img src="{{ $doctorDetailData['data']->user->profile_image }}" alt="user">
                                 </div>
                                 <div class="ms-0 ms-md-10 mt-5 mt-sm-0  ">
-                                    <span class="text-success mb-2 d-block">{{ $doctorDetailData['data']->user->role_name }}</span>
+                                 {{--    <span class="text-success mb-2 d-block">{{ $doctorDetailData['data']->user->role_name }}</span>--}}
                                     <h2>{{ $doctorDetailData['data']->user->full_name }}</h2>
                                     <a href="mailto:{{ $doctorDetailData['data']->user->email }}"
                                        class="text-gray-600 text-decoration-none fs-4">
@@ -53,12 +53,12 @@
                                             <h3 class="fs-5 fw-light text-gray-600 mb-0">{{ __('messages.doctor_dashboard.total_appointments') }}</h3>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-6 col-12 mb-6 mb-md-0">
+                                   {{--  <div class="col-md-4 col-sm-6 col-12 mb-6 mb-md-0">
                                         <div class="border rounded-10 p-5 h-100">
                                             <h2 class="text-primary mb-3">{{$doctorDetailData['todayAppointmentCount']}}</h2>
                                             <h3 class="fs-5 fw-light text-gray-600 mb-0">{{ __('messages.doctor_dashboard.total_appointments') }}</h3>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     <div class="col-md-4 col-sm-6 col-12">
                                         <div class="border rounded-10 p-5 h-100">
                                             <h2 class="text-primary mb-3">{{$doctorDetailData['upcomingAppointmentCount']}}</h2>

@@ -45,7 +45,7 @@ class FrontController extends AppBaseController
         ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
         ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
         ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
-        ->select('users.id','users.first_name', 'users.last_name', 'services.charges', 'services.charges_daily')
+        ->select('users.id','users.first_name', 'users.last_name','users.status', 'services.charges', 'services.charges_daily')
         ->where('users.type', '2')
         ->groupBy('users.id')
         ->get();
@@ -58,6 +58,7 @@ class FrontController extends AppBaseController
             "first_name" => $datainformation->first_name,
             "last_name" => $datainformation->last_name,
             "charges" => $datainformation->charges,
+            "status" => $datainformation->status,
             "charges_daily" => $datainformation->charges_daily,
             "profile_image" => $userData->profile_image
         );

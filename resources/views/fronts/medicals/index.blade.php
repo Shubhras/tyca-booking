@@ -34,6 +34,7 @@
     <div class="container">
         <div class="row justify-content-center">
             @foreach($outletUser as $outletData)
+            @if($outletData['status'] == 1)
             <div class="col-xl-4 col-md-6 our-team-block d-flex align-items-stretch">
                 <a href="book-slot/{{$outletData['id']}}" style="text-decoration: none;">
                     <div class="row">
@@ -60,6 +61,7 @@
                     </div>
                 </a>
             </div>
+            @endif
             @endforeach
         </div>
     </div>

@@ -69,8 +69,8 @@
 
             <div class="row">
                 <?php
-        $slots = getSchedulesTimingSlot();
-    ?>
+                  $slots = getSchedulesTimingSlot();
+                    ?>
 
 
                 <div class="col-xxl-6 mb-7 d-sm-flex align-items-center mb-3">
@@ -335,8 +335,8 @@
         </div>
     </div>
     <div class="col-md-6 mb-5">
+        <label for="exampleInputImage" class="form-label">Photo</label>
         <div class="item-upload">
-
             <input id="photo-upload" type="file" accept="image/*" name="gallery_image[]" multiple />
             <div id="photo-upload__preview" class="upload-preview"></div>
         </div>
