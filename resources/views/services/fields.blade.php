@@ -66,7 +66,7 @@
                                 this.value =
                                 this.value.replace(/\D/g,"")']) }}
                                 <div class="input-group-append">
-                                    <span class="input-group-text bg-white border-0 text-dark">{{__('messages.common.per_daily')}}</span>
+                                    <span class="input-group-text bg-white border-0 text-dark">Per Days</span>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                             />
                             <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.hours')}}
+                    Days
                     </span>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                             />
                             <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
-                        {{__('messages.common.per_hour')}}
+                       per Days
                     </span>
                             </div>
                         </div>
@@ -344,20 +344,7 @@
             <a href="{{route('services.index')}}" type="reset"
                class="btn btn-secondary">{{__('messages.common.discard')}}</a>
         </div>
-
-
-
-
-
-
-
-
-
 </div>
-
-
-
-
 
 <script>
     var quill = new Quill('#doctorDescriptionId', {
