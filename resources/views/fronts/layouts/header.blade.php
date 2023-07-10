@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>--}}
-                <button style="color:#273431" class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler" onClick="toggleMenu()">
+                <button style="color:#273431; font-size: 15px;" class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler" onClick="toggleMenu()">
                     <span class="navbar-toggler-icon"></span>
                     <span style="padding: 0px 10px;">Menu</span>
                 </button>

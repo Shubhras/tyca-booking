@@ -42,22 +42,20 @@
 
                 <h2 class="h2-member">MEMBER'S INFORMATION</h2>
 
-                <div class="row" id="customer-review_wrap">
-                    <div class="col-md-2" id="customer-img">
+                <div class="row col-md-12" id="customer-review_wrap">
+                    <div class="col-md-5 member-imgs" id="customer-img">
                         <img src="{{ getLogInUser()->profile_image }}" alt="" class="cust-img">
                     </div>
-                    <div class="col-md-4" id="customer-content-wrap">
+                    <div class="col-md-6" id="customer-content-wrap" style="margin-left:30px;">
                         <div class="your-rating-wrap">
                             <span>{{$data['user']->first_name}} {{$data['user']->last_name}}</span>
                             <p>{{$data['user']->email}}</p>
                         </div>
 
-                        <div class="row btn-portal">
-                            <div class="col-md-4 update-btn">
-                                <button class="up-btn" data-bs-toggle="modal" data-bs-target="#update_info_modal">Update
+                        <div class="row btn-portal col-lg-12">
+                            <div class="col-lg-12 col-sm-4 col-xs-4 update-btn btn-member update-member">
+                                <button class="up-btn right-btn update-member" data-bs-toggle="modal" data-bs-target="#update_info_modal">Update
                                     Information</button>
-                            </div>
-                            <div class=" col-md-4 logout-btn">
                                 <button class="log-btn"
                                     onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">Log
                                     Out</button>
@@ -65,6 +63,7 @@
                                     @csrf
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -413,6 +412,10 @@
 
 
 <style>
+.member-imgs {
+    text-align: end;
+}
+
 .table-container {
     max-height: 300px;
     /* Adjust the height as needed */
@@ -500,7 +503,6 @@ h2.h2-member {
 }
 
 .update-btn {
-    /* margin-left: 30px; */
     margin-right: 30px;
 }
 
@@ -522,9 +524,9 @@ button.log-btn {
     width: 200px;
 }
 
-.your-rating-wrap {
+/* .your-rating-wrap {
     margin-left: 30px;
-}
+} */
 
 .your-rating-wrap span {
     color: #535353;
@@ -772,8 +774,6 @@ div#customer-review_wrap {
 
 .row.btn-portal {
     display: flex;
-    justify-content: space-around;
-    /* margin-left: -80px; */
 }
 
 .portal-btn:hover {
@@ -781,9 +781,21 @@ div#customer-review_wrap {
     border: #273432;
     color: #FFFFFF;
 }
-
+.right-btn{
+    margin-right:20px;
+}
 /* media */
 @media (min-width: 320px) and (max-width: 600px) {
+    .right-btn {
+    margin-right: 0px !important;
+}
+    .update-member {
+        margin-bottom: 10px;
+    }
+
+    .member-imgs {
+        text-align: center !important;
+    }
 
     .page-title h1 {
         font-size: 35px;
@@ -991,6 +1003,9 @@ div#customer-review_wrap {
     button.log-btn {
         margin-left: 0px !important;
     }
+    .update-member{
+        margin-bottom:10px !important;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -1000,9 +1015,11 @@ div#customer-review_wrap {
     }
 
     button.log-btn {
-        margin-left: 40px;
+        margin-left: 0px;
     }
-
+    .update-member{
+        margin-bottom:10px !important;
+    }
     h5.text-white.mb-4.pb-1 {
         font-size: 18px !important;
     }

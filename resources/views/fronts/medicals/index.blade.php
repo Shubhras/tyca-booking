@@ -39,13 +39,13 @@
                 <a href="book-slot/{{$outletData['id']}}" style="text-decoration: none;">
                     <div class="row">
                         <div class="col-sm-12 section-heading">
-                            <img src="{{$outletData['profile_image']}}" alt="" style="width: 200px; height: 200px;">
+                            <img src="{{$outletData['profile_image']}}" alt="" style="width: 250px; height: 240px;">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12 centerize-col text-center">
                             <div class="again-flex col-lg-12 col-md-12 col-sm-10 col-xs-12">
-                                <h4 class="again-heading  col-lg-6 col-md-6 come-set">{{$outletData['first_name']}}
+                                <h4 class="again-heading  col-lg-6 col-md-6 come-set" style="text-align:end;">{{$outletData['first_name']}}
                                     {{$outletData['last_name']}}</h4>
                                 <div class="from-flex col-lg-6 col-md-6 come-set1">
                                     <p class="again-p">From</p>
