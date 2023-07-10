@@ -8,6 +8,12 @@
 /* a:hover {
     color: none !important;
 } */
+.hour-view {
+    text-decoration: none;
+    text-align: center;
+    padding-top: 10px;
+}
+
 .no-slot-color {
     background: #F5F5F5;
     padding: 30px;
@@ -169,8 +175,8 @@
 }
 
 .btn1 {
-    width: 136px;
-    height: 40px;
+    width: 150px;
+    min-height: 40px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
@@ -179,8 +185,8 @@
 }
 
 .btn11 {
-    width: 136px;
-    height: 40px;
+    width: 155px;
+    min-height: 40px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
@@ -190,7 +196,7 @@
 
 .btn2 {
     width: 163px;
-    height: 40px;
+    min-height: 40px;
     background: #fff;
     color: #273432;
     border-radius: 0 !important;
@@ -277,7 +283,7 @@
 }
 
 .set-border {
-    border: 1px solid #F5F5F5;
+    border: 2px solid #D9D9D9;
     padding: 0px;
 }
 
@@ -506,6 +512,10 @@ figure.effect-chico {
 }
 
 @media (min-width:320px) and (max-width:600px) {
+    .hour-view {
+        padding-top: 15px !important;
+    }
+
     .sub-name {
         font-size: 13px !important;
     }
@@ -620,6 +630,16 @@ figure.effect-chico {
     }
 }
 
+@media (min-width:1300px) and (max-width:1440px) {
+    .btn11 {
+        width: 155px !important;
+    }
+
+    .btn1 {
+        width: 150px !important;
+    }
+}
+
 .location {
     font-size: 16px !important;
     color: #000000 !important;
@@ -702,7 +722,8 @@ h1 {
                                     </h1>
                                     <div>
                                         <p class="location">
-                                            <img src="/assets/image/material-symbols_location-on.png" alt="#" style="height: 25px; margin-left:-5px;">
+                                            <img src="/assets/image/material-symbols_location-on.png" alt="#"
+                                                style="height: 25px; margin-left:-5px;">
                                             355 Balestier Road Singapore 329782
                                         </p>
                                     </div>
@@ -893,29 +914,29 @@ h1 {
                 </div>
                 <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
                     @if(getLogInUser())
-                    <button class="btn1 btn1-primary1 btn-sm me-2 rounded-2 active" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal" onclick="displayMessage(1,'{{ $service->charges }}');">
+                    <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
+                        data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
+                        onclick="displayMessage(1,'{{ $service->charges }}');">
                         {{ $service->charges }} / Hour
                     </button>
                     @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2"
-                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
                         data-turbo="false">{{ $service->charges }} / Hour</a>
                     @endif
                     @if(getLogInUser())
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0" data-bs-toggle="modal"
-                        data-bs-target="#hour_plan_modal" onclick="displayMessage(2,'{{ $service->charges_daily }}');">
+                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
+                        data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
+                        onclick="displayMessage(2,'{{ $service->charges_daily }}');">
                         {{ $service->charges_daily }} / Day
                     </button>
                     @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-2 rounded-2"
-                        style="text-decoration: none; text-align: center; padding-top: 9px;"
+                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
                         data-turbo="false">{{ $service->charges_daily }} / Day</a>
                     @endif
                     <?php
                     $idGet =  Request::segment(2);
                     ?>
-                    <a class="btn11 btn1-primary11 btn-sm me-xxl-3 me-2 rounded-2 mb-xl-0 view-set"
+                    <a class="btn11 btn1-primary11 btn-sm me-xxl-0 me-0 rounded-2 mb-xl-0 view-set"
                         href="{{$idGet}}/hot-desk/{{$service->id}}">
                         View More
                     </a>
@@ -985,6 +1006,7 @@ h1 {
                             </div>
                         </div>
                         @endif
+                        @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
@@ -992,6 +1014,7 @@ h1 {
                                 {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -1129,6 +1152,14 @@ h1 {
 
             </div>
         </div>
+        <!-- @if(session('reload'))
+        <script>
+        window.onload = function() {
+            console.log($ss);
+            location.reload(true);
+        }
+        </script>
+        @endif -->
         <div class="modal-footer pt-0 mt-5" style="place-content:center;">
         </div>
         </form>
@@ -1264,5 +1295,19 @@ $(document).ready(function() {
 
 
     });
+});
+</script>
+<script>
+// Reset form on modal close button click
+$('#hour_plan_modal').on('hidden.bs.modal', function() {
+    $('#frontAppointmentBook')[0].reset();
+});
+
+// Reset form on click outside modal content
+$(document).on('mousedown', function(event) {
+    var target = $(event.target);
+    if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
+        $('#frontAppointmentBook')[0].reset();
+    }
 });
 </script>

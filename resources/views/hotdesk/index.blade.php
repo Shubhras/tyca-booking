@@ -205,20 +205,20 @@ $styleCss = 'style';
                     <div class="hour-plan">
                         <div class="col-md-6">
                             <div class="grid">
-                                <h2 class="h2-hourplan">Hour Plan</h2>
+                                <h2 class="h2-hourplan" style="text-align:start;">Hour Plan</h2>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
-                                <p class="hou-p" id="price">$ {{$servicesData->charges}}/Hour</p>
-                                <div class="hourplan-button">
+                                <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour</p>
+                                <div class="hourplan-button" style="text-align:end;">
                                     @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
                                         Now</button>
                                     @else
                                     <a href="{{ route('login') }}" type="button"
-                                        class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2"
+                                        class="btn1 btn1-primary1 dayplan-btn"
                                         style="text-decoration: none; text-align: center; padding-top: 9px;"
                                         data-turbo="false">
                                         Book Now
@@ -233,20 +233,20 @@ $styleCss = 'style';
                     <div class="day-plan">
                         <div class="col-md-6">
                             <div class="grid">
-                                <h2 class="h2-dayplan">Day Plan</h2>
+                                <h2 class="h2-dayplan" style="text-align:start;">Day Plan</h2>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="grid">
+                            <div class="grid" style="text-align:end;">
                                 <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
-                                <div class="dayplan-button">
+                                <div class="dayplan-button" style="text-align:end;">
                                     @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
                                         Now</button>
                                     @else
                                     <a href="{{ route('login') }}" type="button"
-                                        class="btn1 btn1-primary1 btn-sm me-2 dayplan-btn rounded-2"
+                                        class="btn1 btn1-primary1 dayplan-btn"
                                         style="text-decoration: none; text-align: center; padding-top: 9px;"
                                         data-turbo="false">
                                         Book Now
@@ -608,6 +608,20 @@ $('input[type="date"]').change(function() {
     alert('sss');
 
 });
+</script>
+<script>
+    // Reset form on modal close button click
+    $('#hour_plan_modal').on('hidden.bs.modal', function () {
+        $('#frontAppointmentBook')[0].reset();
+    });
+
+    // Reset form on click outside modal content
+    $(document).on('mousedown', function(event) {
+        var target = $(event.target);
+        if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
+            $('#frontAppointmentBook')[0].reset();
+        }
+    });
 </script>
 
 <style>
@@ -1033,7 +1047,7 @@ figure.effect-chico {
 
 .hourplan-btn {
     padding: 10px;
-    width: 150px;
+    width: 170px;
     height: 40px;
     font-size: 15px;
     background: #273432;
@@ -1049,7 +1063,7 @@ figure.effect-chico {
 
 .dayplan-btn {
     padding: 10px;
-    width: 150px;
+    width: 170px;
     height: 40px;
     font-size: 15px;
     background: #273432;
