@@ -87,7 +87,7 @@ $styleCss = 'style';
                 <div class="grid">
                     <div class="hot-desks">
                         <h2>DESCRIPTION</h2>
-                        <p>{{$servicesData->short_description}}</p>
+                        <p>{!! $servicesData->short_description !!}</p>
                     </div>
                     <div class="Amenities">
                         <h2>AMENITIES</h2>

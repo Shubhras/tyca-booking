@@ -141,6 +141,8 @@ class UserController extends AppBaseController
 
         $bloodGroup = Doctor::BLOOD_GROUP_ARRAY;
         $countries = $this->userRepo->getCountries();
+        $states = $this->userRepo->getStates();
+        // $citys = $this->userRepo->getCitys();
         $state = $cities = null;
         $years = [];
         $currentYear = Carbon::now()->format('Y');
@@ -153,10 +155,11 @@ class UserController extends AppBaseController
         if (isset($stateId)) {
             $cities = getCities($data['stateId']->toArray());
         }
+        $citys =  getCities($data['stateId']->toArray());
 
 
         return view('doctors.edit',
-            compact('user', 'qualifications', 'data', 'doctor', 'countries', 'state', 'cities', 'years', 'bloodGroup'));
+            compact('user', 'qualifications', 'data', 'doctor', 'countries', 'state', 'cities', 'years', 'bloodGroup','states','citys'));
     }
 
     /**

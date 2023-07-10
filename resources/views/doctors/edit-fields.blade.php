@@ -421,13 +421,14 @@
             {{ Form::select('country_id', $countries, isset($user->address->country_id) ? $user->address->country_id:null,
 ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=>'editDoctorCountryId','placeholder' => __('messages.common.select_country'),'required']) }}
         </div>
+
         <div class="col-md-6 mb-5">
             {{ Form::label('State',__('messages.doctor.state').':' ,['class' => 'form-label required']) }}
-            {{ Form::select('state_id', (isset($state) && $state!=null) ? $state:[], isset($user->address->state_id) ? $user->address->state_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorStateId','placeholder' => __('messages.common.select_state'),'required']) }}
+            {{ Form::select('state_id', (isset($state) && $state!=null) ? $state:$states, isset($user->address->state_id) ? $user->address->state_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorStateId','placeholder' => __('messages.common.select_state'),'required']) }}
         </div>
         <div class="col-md-6 mb-5">
             {{ Form::label('City',__('messages.doctor.city').':' ,['class' => 'form-label required']) }}
-            {{ Form::select('city_id', (isset($cities) && $cities!=null) ? $cities:[], isset($user->address->city_id) ? $user->address->city_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorCityId','placeholder' => __('messages.common.select_city'),'required']) }}
+            {{ Form::select('city_id', (isset($cities) && $cities!=null) ? $cities:$citys, isset($user->address->city_id) ? $user->address->city_id:null, ['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'editDoctorCityId','placeholder' => __('messages.common.select_city'),'required']) }}
         </div>
         <div class="col-md-6">
             {{ Form::label('Postal Code', __('messages.doctor.postal_code').':', ['class' => 'form-label required']) }}

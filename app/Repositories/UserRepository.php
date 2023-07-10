@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Yajra\DataTables\DataTables;
+use App\Models\State;
+use App\Models\City;
 
 /**
  * Class UserRepository
@@ -319,6 +321,24 @@ class UserRepository extends BaseRepository
         $countries = Country::pluck('name', 'id');
 
         return $countries;
+    }
+    /**
+     * @return mixed
+     */
+    public function getStates()
+    {
+        $states = State::pluck('name', 'id');
+
+        return $states;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCitys()
+    {
+        $citys = City::take(1000)->pluck('name', 'id');
+
+        return $citys;
     }
 
     public function addQualification($input)

@@ -186,7 +186,7 @@ function getDoctorSessionTime($doctor_id)
 
 function getSlotByGap($startTime, $endTime)
 {
-    $period = new CarbonPeriod($startTime, '15 minutes',
+    $period = new CarbonPeriod($startTime, '60 minutes',
         $endTime); // for create use 24 hours format later change format
     $slots = [];
     foreach ($period as $item) {
@@ -198,7 +198,7 @@ function getSlotByGap($startTime, $endTime)
 
 function getSchedulesTimingSlot()
 {
-    $period = new CarbonPeriod('00:00', '15 minutes', '24:00'); // for create use 24 hours format later change format
+    $period = new CarbonPeriod('00:00', '60 minutes', '24:00'); // for create use 24 hours format later change format
     $slots = [];
     foreach ($period as $item) {
         $slots[$item->format('h:i A')] = $item->format('h:i A');

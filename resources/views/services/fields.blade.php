@@ -98,7 +98,7 @@
                                 onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
                             />
                             <div class="input-group-append">
-                                <span class="input-group-text bg-white border-0 text-dark">
+                                <span class="input-group-text bg-white border-0 text-dark hourAdd">
                                     {{__('messages.common.hours')}}
                                 </span>
                             </div>
@@ -125,6 +125,8 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
+                    <div class="diss" style="margin-top: 10px;">Discounted Rate(pre Hour) : </div>
+
                 </div>
                 <div class="hourly_records_dynamic">
                     @if(isset($hourlyDiscounts) && !empty($hourlyDiscounts))
@@ -141,7 +143,7 @@
                                     value="{{$discounts['above_count']}}"
                                     type="text" class="form-control "
                                     placeholder="No. of" name="above_count_hourly[]"
-                                       onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)">
+                                       onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)" class="hourAdd">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white border-0 text-dark">
                                         Hours
@@ -158,6 +160,7 @@
                                     class="form-control"
                                     placeholder="Discount %"
                                     name="rate_hourly[]"
+                                    class="hourAdd"
                                 >
                             <div class="input-group-append">
                                 <span class="input-group-text bg-white border-0 text-dark">
@@ -166,14 +169,18 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-1 action-btn">
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
+                        <div class="">Discounted Rate(pre Hour) : </div>
+
                     </div>
                     @endforeach
                     @endif
                 </div>
+
             </div>
             <div class="col-6 text-dark">
                 <label class="form-label required">{{__('messages.common.discount_rate')}}
@@ -391,6 +398,7 @@ $('#short_description').val($(".ql-editor").html());
             $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
             $('.hourly_records_dynamic .hourly_records').addClass('single remove');
             $('.single > .action-btn > .extra-fields-hourly').remove();
+            $('.single > .action-btn > .diss').remove();
             $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
             $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
         });

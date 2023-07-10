@@ -194,7 +194,7 @@ class AppointmentRepository extends BaseRepository
             }
 
             $transaction = [
-                'user_id' => $input['patient_id'],
+                'user_id' => $patient->user->id,
                 'transaction_id' =>  $input['appointment_unique_id']. '_'.rand(0,99999),
                 'appointment_id' => $input['appointment_unique_id'],
                 'amount' => $input['payable_amount'],
