@@ -557,7 +557,7 @@ class AppointmentController extends AppBaseController
         //     return redirect(route('patients.patient-appointments-index'));
         // }
 
-        return redirect('https://tyca-book.sftechnologiesstage.co/patients/dashboard');
+        return redirect('https://tyca-book.sftechnologiesstage.co/booking-detail');
     }
 
     /**

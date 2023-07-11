@@ -72,6 +72,9 @@
 
 
 <style>
+    body {
+    font-family: "Noto Serif" !important;
+     }
 .page-title {
     position: absolute;
     top: 60%;

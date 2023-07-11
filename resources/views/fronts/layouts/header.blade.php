@@ -113,6 +113,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <style>
+        body {
+    font-family: "Noto Serif" !important;
+}
+header .navbar .navbar-nav .nav-item .nav-link {
+    color: #000000;
+    font-weight: 400;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+}
 .nav-logos{
     width:290px;
     height:22px;

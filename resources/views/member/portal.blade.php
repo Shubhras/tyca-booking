@@ -412,6 +412,9 @@
 
 
 <style>
+    body {
+    font-family: "Noto Serif" !important;
+}
 .member-imgs {
     text-align: end;
 }
@@ -566,21 +569,25 @@ li.nav-item1 {
 a#latest-tab {
     color: #535353;
     font-size: 22px;
+    font-weight:600;
 }
 
 a#upcoming-tab {
     color: #535353;
     font-size: 22px;
+    font-weight:600;
 }
 
 a#latest-tab.active {
     border-bottom: 3px solid #000000;
     color: #000000;
+    font-weight:600;
 }
 
 a#upcoming-tab.active {
     border-bottom: 3px solid #000000;
     color: #000000;
+    font-weight:600;
 }
 
 h2.up-booking {
@@ -600,23 +607,27 @@ h2.past-booking {
 a#latests-tab-1.active {
     background: #273432;
     color: #FFFFFF;
+    font-weight:600;
 }
 
 a#latests-tab-1 {
     background: #FFFFFF;
     color: #535353;
     margin-top: 60px;
+    font-weight:600;
 }
 
 a#upcomings-tab-2.active {
     background: #273432;
     color: #FFFFFF;
+    font-weight:600;
 }
 
 a#upcomings-tab-2 {
     background: #FFFFFF;
     color: #535353;
     margin-top: 60px;
+    font-weight:600;
 }
 
 .thead-portal {

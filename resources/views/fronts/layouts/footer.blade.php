@@ -1,4 +1,7 @@
 <style>
+        body {
+    font-family: "Noto Serif" !important;
+}
 @media (max-width:1024px) {
 
 .max-font {

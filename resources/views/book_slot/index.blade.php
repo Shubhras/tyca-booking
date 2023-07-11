@@ -5,9 +5,9 @@
 
 @section('front-content')
 <style>
-/* a:hover {
-    color: none !important;
-} */
+    body {
+    font-family: "Noto Serif" !important;
+     }
 .hour-view {
     text-decoration: none;
     text-align: center;
@@ -54,8 +54,8 @@
 }
 
 .sub-name {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    color:#000000;
     text-transform: lowercase;
 }
 
@@ -469,7 +469,7 @@ figure.effect-chico {
 
 .heading-id1 {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .heading-id2 {
@@ -1152,14 +1152,6 @@ h1 {
 
             </div>
         </div>
-        <!-- @if(session('reload'))
-        <script>
-        window.onload = function() {
-            console.log($ss);
-            location.reload(true);
-        }
-        </script>
-        @endif -->
         <div class="modal-footer pt-0 mt-5" style="place-content:center;">
         </div>
         </form>
@@ -1298,7 +1290,7 @@ $(document).ready(function() {
 });
 </script>
 <script>
-// Reset form on modal close button click
+Reset form on modal close button click
 $('#hour_plan_modal').on('hidden.bs.modal', function() {
     $('#frontAppointmentBook')[0].reset();
 });

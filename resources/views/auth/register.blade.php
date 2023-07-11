@@ -29,6 +29,7 @@
 }
 body {
     background-color: #F4F3EE;
+    font-family: "Noto Serif";
 }
 
 header {

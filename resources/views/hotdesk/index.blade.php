@@ -16,9 +16,9 @@ $styleCss = 'style';
                 <div class="page-title text-center white-color">
                     <h1 class="set-space ellipsis1">{{$aboutTitle->value}}</h1>
                     <h4 class="workspace">
-                    <div class="ellipsis">
-                        {!! $aboutShortDescription->value !!}
-                    </div>
+                        <div class="ellipsis">
+                            {!! $aboutShortDescription->value !!}
+                        </div>
                     </h4>
                 </div>
             </div>
@@ -96,7 +96,8 @@ $styleCss = 'style';
                                 @foreach($specialization as $specializationData)
                                 <div class="col-6 icon-set">
                                     <p class="heading-id amies-font">
-                                        <img src="{{$specializationData->icon}}" alt="#" style="height: 30px; padding-right:10px;">
+                                        <img src="{{$specializationData->icon}}" alt="#"
+                                            style="height: 30px; padding-right:10px;">
                                         {{$specializationData->name}}
                                     </p>
                                 </div>
@@ -116,80 +117,73 @@ $styleCss = 'style';
                             <div class="operating-right" style="display:grid;">
                                 @if($day->day_of_week == 1)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Monday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Monday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
 
                                 @if($day->day_of_week == 2)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Tuesday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Tuesday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 3)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Wednesday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Wednesday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 4)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Thursday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Thursday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 5)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Friday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Friday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 6)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Saturday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Saturday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                                 @if($day->day_of_week == 7)
                                 <div class="row mt-10 mb-2 col-lg-12">
-                                        <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                            <span class="heading-id2">Sunday</span>
-                                        </div>
-                                        <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                            <span
-                                                class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                        </div>
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">Sunday</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                    </div>
                                 </div>
                                 @endif
                             </div>
@@ -210,15 +204,15 @@ $styleCss = 'style';
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
-                                <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour</p>
+                                <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour
+                                </p>
                                 <div class="hourplan-button" style="text-align:end;">
                                     @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
                                         onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
                                         Now</button>
                                     @else
-                                    <a href="{{ route('login') }}" type="button"
-                                        class="btn1 btn1-primary1 dayplan-btn"
+                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
                                         style="text-decoration: none; text-align: center; padding-top: 9px;"
                                         data-turbo="false">
                                         Book Now
@@ -245,8 +239,7 @@ $styleCss = 'style';
                                         onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
                                         Now</button>
                                     @else
-                                    <a href="{{ route('login') }}" type="button"
-                                        class="btn1 btn1-primary1 dayplan-btn"
+                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
                                         style="text-decoration: none; text-align: center; padding-top: 9px;"
                                         data-turbo="false">
                                         Book Now
@@ -364,8 +357,7 @@ $styleCss = 'style';
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-label"
-                                for="templateAppointmentDate">Appointment Date:<span
+                            <label class="form-label" for="templateAppointmentDate">Appointment Date:<span
                                     class="required"></span></label>
                             <div class="position-relative">
                                 <input type="text" id="templateAppointmentDate" name="date"
@@ -609,43 +601,38 @@ $('input[type="date"]').change(function() {
 
 });
 </script>
-<script>
-    // Reset form on modal close button click
-    $('#hour_plan_modal').on('hidden.bs.modal', function () {
-        $('#frontAppointmentBook')[0].reset();
-    });
 
-    // Reset form on click outside modal content
-    $(document).on('mousedown', function(event) {
-        var target = $(event.target);
-        if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
-            $('#frontAppointmentBook')[0].reset();
-        }
-    });
-</script>
 
 <style>
-    .ellipsis {
+body {
+    font-family: "Noto Serif" !important;
+}
+
+.ellipsis {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .ellipsis1 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 a:hover {
     color: #273432 !important;
 }
 
 .amies-font {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 @media (max-width: 767px) {
@@ -659,10 +646,11 @@ a:hover {
 }
 
 @media (min-width:1024px) and (max-width:1200px) {
-.set-day{
-    width:25% !important;
+    .set-day {
+        width: 25% !important;
+    }
 }
-}
+
 @media (min-width:768px) and (max-width:800px) {
     .radio-btn {
         font-size: 14px !important;
@@ -789,14 +777,17 @@ a:hover {
         min-width: 100%;
         margin: 0px 0px 5px !important;
     }
-    .icon-set{
-        width:auto !important;
+
+    .icon-set {
+        width: auto !important;
     }
-    .day-small{
-        width:30% !important;
+
+    .day-small {
+        width: 30% !important;
     }
-    .day-small1{
-        width:50% !important;
+
+    .day-small1 {
+        width: 50% !important;
     }
 }
 
@@ -976,7 +967,7 @@ figure.effect-chico {
 
 .hot-desk p {
     color: #000000;
-    font-size: 12px;
+    font-size: 16px;
     margin-top: -15px;
 }
 
@@ -993,7 +984,7 @@ figure.effect-chico {
 }
 
 .hot-desks p {
-    font-size: 12px;
+    font-size: 16px;
     color: #000000;
 }
 
@@ -1086,12 +1077,14 @@ p.hou-p {
     font-size: 15px;
     color: #000000;
     margin-top: 20px;
+    font-weight:600;
 }
 
 p.da-p {
     font-size: 15px;
     color: #000000;
     margin-top: 20px;
+    font-weight:600;
 }
 
 section.mains-blocks {
@@ -1146,19 +1139,23 @@ section.mains-blocks {
     border: #273432 !important;
     color: #FFFFFF !important;
 }
-.no-slot-color{
+
+.no-slot-color {
     background: #F5F5F5;
     padding: 30px;
 }
+
 .heading-id2 {
     font-size: 16px;
     font-weight: 700;
 }
+
 .sub-name {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    color:#000000;
     text-transform: lowercase;
 }
+
 /* a:hover {
     color: none !important;
 } */
