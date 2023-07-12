@@ -729,6 +729,7 @@ h1 {
                                     </div>
                                     <!-- <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3> -->
                                     <p>{!! $doctor->description !!}</p>
+                                
                         </div>
                     </div>
                 </div>
@@ -916,17 +917,18 @@ h1 {
                     @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
                         data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(1,'{{ $service->charges }}');">
+                        onclick="displayMessage(1,'{{ $service->charges }}','{{$service->id}}');">
                         {{ $service->charges }} / Hour
                     </button>
                     @else
                     <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
                         data-turbo="false">{{ $service->charges }} / Hour</a>
                     @endif
+                   
                     @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
                         data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(2,'{{ $service->charges_daily }}');">
+                        onclick="displayMessage(2,'{{ $service->charges_daily }}','{{$service->id}}');">
                         {{ $service->charges_daily }} / Day
                     </button>
                     @else
@@ -1011,7 +1013,7 @@ h1 {
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
                                         class="required"></span></label>
-                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
+                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : $doctor->id,['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
                         @endif
@@ -1149,6 +1151,7 @@ h1 {
                     <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
+        
                     </div>
                     <div class="modal-footer pt-0 mt-4" style="place-content:center;">
                         <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
@@ -1186,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage(id, price) {
+function displayMessage(id, price,service_id) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -1194,10 +1197,10 @@ function displayMessage(id, price) {
         var abc = 'Day Plan';
         $('#slot_option').hide();
     }
-
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
+    $('#FrontAppointmentServiceId').val(service_id);
 
     $.ajax({
         type: 'POST',

@@ -40,6 +40,7 @@ $styleCss = 'style';
                     </figure>
                 </div>
             </div>
+      
             <div class="col-md-6">
                 <h2 class="h2-day">${{$servicesData->charges_daily}}/Day</h2>
                 <div class="row">
@@ -204,12 +205,13 @@ $styleCss = 'style';
                         </div>
                         <div class="col-md-6">
                             <div class="grid">
+
                                 <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour
                                 </p>
                                 <div class="hourplan-button" style="text-align:end;">
                                     @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
-                                        onclick="displayMessage(1,'{{ $servicesData->charges }}');">Book
+                                        onclick="displayMessage(1,'{{ $servicesData->charges }}','{{$servicesData->id}}');">Book
                                         Now</button>
                                     @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
@@ -236,7 +238,7 @@ $styleCss = 'style';
                                 <div class="dayplan-button" style="text-align:end;">
                                     @if(getLogInUser())
                                     <button type="button" class="dayplan-btn"
-                                        onclick="displayMessage(2, '{{$servicesData->charges_daily}}');">Book
+                                        onclick="displayMessage(2, '{{$servicesData->charges_daily}}','{{$servicesData->id}}');">Book
                                         Now</button>
                                     @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
@@ -317,7 +319,7 @@ $styleCss = 'style';
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
                                         class="required"></span></label>
-                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
+                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : $doctor->id,['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
                     </div>
@@ -491,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage(id, price) {
+function displayMessage(id, price,service_id) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -503,6 +505,8 @@ function displayMessage(id, price) {
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
+    $('#FrontAppointmentServiceId').val(service_id);
+
 
     $.ajax({
         type: 'POST',
