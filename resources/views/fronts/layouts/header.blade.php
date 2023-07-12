@@ -51,19 +51,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
-                                href="{{ route('medicalDoctors') }}">News</a>
+                                href="{{ url('/') }}">News</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-color {{ Request::is('medical-services*') ? 'active' : '' }}"
-                                href="{{ route('medicalServices') }}">Store</a>
+                                href="{{ url('/') }}">Store</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
-                                href="{{ route('medicalAboutUs') }}">Membership</a>
+                                href="{{ url('/') }}">Membership</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
-                                href="{{ route('medicalContact') }}"
+                                href="{{ url('/') }}"
                                 data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                         </li>
                         <li class="nav-item">

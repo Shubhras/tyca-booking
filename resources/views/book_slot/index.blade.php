@@ -1295,7 +1295,7 @@ $(document).ready(function() {
 });
 </script>
 <script>
-Reset form on modal close button click
+
 $('#hour_plan_modal').on('hidden.bs.modal', function() {
     $('#frontAppointmentBook')[0].reset();
 });

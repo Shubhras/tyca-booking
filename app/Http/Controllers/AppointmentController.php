@@ -84,7 +84,15 @@ class AppointmentController extends AppBaseController
         if($input['typeof'] == 'backend')
         {
             $appointment = $this->appointmentRepository->storeBackend($input);
-
+            if($appointment == false){
+                $url = route('appointments.create');
+                $data = [
+                    'url' => $url,
+                    'payment_type' => '',
+                    'appointmentId' => '',
+                ];
+                return $this->sendResponse($data, "Booking already exists");
+            }
             $url = route('appointments.index');
 
             $data = [
@@ -416,7 +424,15 @@ class AppointmentController extends AppBaseController
         $input = $request->all();
     
         $appointment = $this->appointmentRepository->frontSideStore($input);
-    
+        if($appointment == false){
+            $url = route('appointments.create');
+            $data = [
+                'url' => $url,
+                'payment_type' => '',
+                'appointmentId' => '',
+            ];
+            return $this->sendResponse($data, "Booking already exists");
+        }
         if ($input['payment_type'] == Appointment::STRIPE) {
             $result = $this->appointmentRepository->createSession($appointment);
 
