@@ -897,9 +897,9 @@ h1 {
             <h3 class="font-18 pb-3 location1" style="margin-left:15px;">Listings</h3>
             @foreach($services as $service)
             <div class="col-5 row list-box" style="margin:30px;">
-                <div class="row col-12 set-border">
+                <div class="row col-12 set-border" style="height: 200px;">
                     <div class="col-5 list-set" style="padding:0px;">
-                        <img src="{{ $service->icon }}" alt="Digital" style="width:100%">
+                        <img src="{{ $service->icon }}" alt="Digital" style="width:100%; height:100%;">
                     </div>
                     <div class="col-7">
                         <div class="column">
@@ -1128,7 +1128,7 @@ h1 {
                             </ul>
                         </div>
                     </div>
-                    <div class="row col-md-12 mb-3">
+                    <div class="row col-md-12 mb-4">
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
@@ -1146,7 +1146,11 @@ h1 {
                         </div>
 
                     </div>
-                    <div class="modal-footer pt-0 mt-5" style="place-content:center;">
+                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
+                        <div>Payable Amount : $</div>
+                        <div id="payable_amount_Show"></div>
+                    </div>
+                    <div class="modal-footer pt-0 mt-4" style="place-content:center;">
                         <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
                     </div>
 
@@ -1201,6 +1205,7 @@ function displayMessage(id, price) {
 
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
+    $('#payable_amount_Show').text(price);
 
     $.ajax({
         type: 'POST',
