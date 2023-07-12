@@ -1,7 +1,8 @@
 <style>
-        body {
-    font-family: "Noto Serif" !important;
+body {
+    font-family: 'Noto Sans'!important;
 }
+
 @media (max-width:1024px) {
 
 .max-font {
