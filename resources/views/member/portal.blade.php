@@ -378,18 +378,27 @@
                     </div>
 
                     <div class="row">
-                        <p>Icon</p>
-                        <div class="form-group col-sm-6">
-                            <img src="{{$data['user']->profile_image}}" alt="" class="cust-img">
-                        </div>
-                        <div class="form-group col-sm-12" id="icon-pen">
-                            <label>
-                                <i class="fa-solid fa-pen"></i>
-                                <input type="file" id="profilePicture" name="image"
-                                    class="image-upload d-none profile-validation" accept="image/*" />
-                            </label>
+                    @php $styleCss = 'style' @endphp
+                    <p>Icon</p>
+                    <div class="mb-3" io-image-input="true">
+                        <div class="d-block">
+                            <div class="image-picker">
+                                <div class="image previewImage" id="exampleInputImage" {{ $styleCss }}="background-image: url('{{$data['user']->profile_image }}')
+                                ">
+                            </div>
+                            <span class="picker-edit rounded-circle text-gray-500 fs-small"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-original-title="{{ __('messages.user.edit_profile') }}">
+                                    <label> 
+                                        <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
+                                        <input type="file" id="profilePicture" name="image"
+                                               class="image-upload d-none profile-validation" accept="image/*"/> 
+                                    </label> 
+                                </span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
 
                     <div class="modal-footer pt-0 mt-5" style="place-content:center;">
@@ -412,6 +421,50 @@
 
 
 <style>
+    .image {
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+    .image-picker {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0.475rem;
+    display: inline-block;
+    position: relative;
+}
+
+.image-picker .previewImage {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    box-shadow: 0 5px 20px rgba(173, 181, 189, 0.2);
+    border-radius: 0.313rem;
+    border: 0.063rem solid #E9ECEF;
+    background-position: center;
+}
+
+.image-picker .picker-edit {
+    width: 25px;
+    height: 25px;
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 20px rgba(173, 181, 189, 0.2);
+    border: 0.063rem solid #E9ECEF;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+.image-picker .picker-edit label {
+    cursor: pointer;
+}
     body {
     font-family: "Noto Serif" !important;
 }

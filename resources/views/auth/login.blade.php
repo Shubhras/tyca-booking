@@ -27,10 +27,24 @@
     font-size: 1rem;
     border-radius: 0;
 }
-body {
-    background-color: #F4F3EE;
+
+img.css-class{
+    width:70%;
+    height:869px;
 }
 
+body {
+    background-color: #F4F3EE;
+    overflow:hidden;
+}
+footer
+{
+    padding-top: 40px !important;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+}
 header {
     display: none;
 }
@@ -61,14 +75,32 @@ h5, .fs-5 {
 }
 }
 @media(min-width:320px) and (max-width:768px) {
+    footer
+{
+    padding-top: 40px !important;
+    position: relative !important;
+    bottom: 0px;
+    width: 100%;
+    height: auto !important;
+}
+    img.css-class{
+    height:373px;
+            }
     .login-response {
         width: 100% !important;
     }
+    body {
+    background-color: #F4F3EE;
+    overflow:auto !important;
+}
 }
 @media(min-width:800px) and (max-width:1440px) {
     h5, .fs-5 {
     font-size: 18px !important;
 }
+img.css-class{
+    height:700px;
+            }
 }
 @media(min-width:320px) and (max-width:1440px) {
 .log-padding{
@@ -89,12 +121,12 @@ h5, .fs-5 {
             @include('layouts.errors')
         </div>
         <div class="row col-12 log-margin">
-            <div class="col-7 login-response log-padding">
+            <div class="col-6 login-response log-padding">
                 <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
             </div>
 
             <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 mx-auto col-4 login-response"
-                style="height: 50%;margin: auto;">
+                style="height: 50%;margin: auto; margin-bottom:10%;">
                 <div class="col-12 text-center">
                     <a href="{{ route('medical') }}" class="image py-10">
                         <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid pt-4" style="padding: 20px;">

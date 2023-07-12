@@ -50,6 +50,7 @@ class HotdeskController extends Controller
         $aboutTitle = Setting::where('key', 'about_title')->first();
         $aboutShortDescription = Setting::where('key', 'about_short_description')->first();
         $abouTimage1 = Setting::where('key', 'about_image_1')->first();
-        return view('hotdesk.index', compact('data','user','doctor','faqs','appointmentDoctors','servicesData','specialization','allPaymentStatus', 'paymentGateway', 'paymentStatus','aboutTitle','aboutShortDescription','abouTimage1'));
+        $bodyimage1 = Setting::where('key', 'body_image')->first();
+        return view('hotdesk.index', compact('data','user','doctor','faqs','appointmentDoctors','servicesData','specialization','allPaymentStatus', 'paymentGateway', 'paymentStatus','aboutTitle','aboutShortDescription','abouTimage1','bodyimage1'));
     }
 }

@@ -30,8 +30,23 @@
 body {
     background-color: #F4F3EE;
     font-family: "Noto Serif";
+    overflow:hidden;
 }
 
+img.css-class
+
+{
+    width:100%;
+    height:855px;
+}
+footer
+{
+    padding-top: 40px !important;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+}
 header {
     display: none;
 }
@@ -69,16 +84,42 @@ h5, .fs-5 {
 }
 }
 @media(min-width:320px) and (max-width:768px) {
+    footer
+{
+    padding-top: 40px !important;
+    position: relative !important;
+    bottom: 0px;
+    width: 100%;
+    height: auto !important;
+}
+body{
+    overflow:auto !important;
+}
     .login-response {
         width: 100% !important;
     }
     h5, .fs-5 {
     font-size: 14px !important;
 }
+
+.col-3 {
+width:40%;
+}
 }
 @media(min-width:769px) and (max-width:1440px) {
     h5, .fs-5 {
     font-size: 18px !important;
+}
+img.css-class{
+    height:92vh !important;
+}
+.col-3{
+    width:40% !important;
+}
+}
+@media(min-width:320px) and (max-width:1023px) {
+    img.css-class{
+    height:370px !important;
 }
 }
 @media(min-width:320px) and (max-width:1440px) {
@@ -98,10 +139,10 @@ h5, .fs-5 {
         @include('layouts.errors')
     </div>
     <div class="row col-12">
-        <div class="col-7 login-response" style="padding: 0;">
+        <div class="col-6 login-response" style="padding: 0;">
             <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
         </div>
-        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-4 login-response"
+        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-3 login-response"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
                 <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10 ">

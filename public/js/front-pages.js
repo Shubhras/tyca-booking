@@ -45,7 +45,12 @@ Copyright © 2021 Basecamp, LLC
     HTMLElement.prototype.constructor = HTMLElement;
     Object.setPrototypeOf(HTMLElement, BuiltInHTMLElement);
 })();
+document.addEventListener('turbo:load', initAllComponents);
 
+function initAllComponents() {
+
+  IOInitImageComponent();
+}
 /**
  * The MIT License (MIT)
  * 

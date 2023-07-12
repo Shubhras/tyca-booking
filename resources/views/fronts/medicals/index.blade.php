@@ -28,9 +28,9 @@
         </div>
     </section>
 </div>
+<!-- style="background-image: url('{{$bodyimage1->value}}');" -->
 
-
-<section class="white-bg">
+<section class="white-bg" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container">
         <div class="row justify-content-center">
             @foreach($outletUser as $outletData)
@@ -43,11 +43,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12 centerize-col text-center">
-                            <div class="again-flex col-lg-12 col-md-12 col-sm-10 col-xs-12">
-                                <h4 class="again-heading  col-lg-6 col-md-6 come-set" style="text-align:end;">{{$outletData['first_name']}}
+                        <div class="centerize-col text-center">
+                            <div class="again-flex col-12">
+                                <h4 class="again-heading come-set col-lg-6" style="text-align:end; width:192px;">{{$outletData['first_name']}}
                                     {{$outletData['last_name']}}</h4>
-                                <div class="from-flex col-lg-6 col-md-6 come-set1">
+                                <div class="from-flex come-set1 col-lg-5">
                                     <p class="again-p">From</p>
                                     <h5 class="again-heading" style=" font-weight: 600; color: #000000;">$
                                         {{$outletData['charges_daily']}}/day</h5>

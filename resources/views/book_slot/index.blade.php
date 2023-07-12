@@ -11,7 +11,7 @@
 .hour-view {
     text-decoration: none;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 12px;
 }
 
 .no-slot-color {
@@ -707,7 +707,7 @@ h1 {
 </section>
 
 
-
+<section style="background-image: url('{{$bodyimage1->value}}');">
 <section class="main-block sec-set name-slot">
     <div class="container">
         <div class="row" style="display:flex;">
@@ -891,7 +891,7 @@ h1 {
             </div>
 </section>
 
-<section class="white-bg">
+<section>
     <div class="container">
         <div class="row col-12 list-box">
             <h3 class="font-18 pb-3 location1" style="margin-left:15px;">Listings</h3>
@@ -946,7 +946,7 @@ h1 {
         </div>
     </div>
 </section>
-
+</section>
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="max-width:1000px;">
         <!-- Modal content-->
@@ -1294,17 +1294,40 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
-Reset form on modal close button click
-$('#hour_plan_modal').on('hidden.bs.modal', function() {
-    $('#frontAppointmentBook')[0].reset();
-});
 
-// Reset form on click outside modal content
-$(document).on('mousedown', function(event) {
-    var target = $(event.target);
-    if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
-        $('#frontAppointmentBook')[0].reset();
-    }
-});
+
+<script>
+
+// $('#hour_plan_modal').on('click',function(e){
+//     alert('hello');
+//     console.log('sddddddddddddddddddd');
+// });
+
+//   $(document).on('click', function(e) {
+//     alert('hello');
+//   });
+//     $('body').click(function () {
+//         console.log(alert);
+//     // $('#invisible').fadeOut();
+//   });
+</script>
+
+<!--   function resetForm() {
+  $('#hour_plan_modal').on('hidden.bs.modal', function() {
+    $('#frontAppointmentBook')[0].reset();
+  });
+} -->
+<script>
+// Reset form on modal close button click
+// $('#hour_plan_modal').on('hidden.bs.modal', function() {
+//     $('#frontAppointmentBook')[0].reset();
+// });
+
+// // Reset form on click outside modal content
+// $(document).on('mousedown', function(event) {
+//     var target = $(event.target);
+//     if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
+//         $('#frontAppointmentBook')[0].reset();
+//     }
+// });
 </script>

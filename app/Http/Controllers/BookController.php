@@ -30,13 +30,14 @@ class BookController extends Controller
             array_push($bb,$getData->specialization_id); 
         } 
         $user1 = User::with('media')->where('id',$id)->first();
+        $bodyimage1 = Setting::where('key', 'body_image')->first();
         $specialization = Specialization::with('media')->whereIn('id', $bb)->get();
 
         $services = Service::with('media')->whereIn('id', $aa)->whereStatus(Service::ACTIVE)->latest()->get();
         $appointmentDoctors = Doctor::with('user')->whereIn('id',
             DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',
             User::ACTIVE)->pluck('user.full_name', 'id');
-        return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization'));
+        return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization','bodyimage1'));
 
     }
 }

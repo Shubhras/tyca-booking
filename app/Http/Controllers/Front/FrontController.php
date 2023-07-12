@@ -70,9 +70,10 @@ class FrontController extends AppBaseController
         $aboutTitle = Setting::where('key', 'about_title')->first();
         $aboutShortDescription = Setting::where('key', 'about_short_description')->first();
         $abouTimage1 = Setting::where('key', 'about_image_1')->first();
+        $bodyimage1 = Setting::where('key', 'body_image')->first();
         return view('fronts.medicals.index',
             compact('doctors', 'sliders', 'frontMedicalServices', 'frontPatientTestimonials',
-                'appointmentDoctors', 'aboutExperience','userData','outletUser','aboutTitle','aboutShortDescription','abouTimage1'));
+                'appointmentDoctors', 'aboutExperience','userData','outletUser','aboutTitle','aboutShortDescription','abouTimage1','bodyimage1'));
     }
 
     /**

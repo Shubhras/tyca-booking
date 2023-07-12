@@ -80,7 +80,7 @@ $styleCss = 'style';
     </div>
 </section>
 
-<section class="mains-blocks">
+<section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -1094,7 +1094,7 @@ p.da-p {
 
 section.mains-blocks {
     padding: 100px;
-    margin-top: -175px;
+    margin-top: -75px;
     background: #fbfbfb;
 }
 
