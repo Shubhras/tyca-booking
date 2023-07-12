@@ -367,14 +367,27 @@ listenSubmit('#frontAppointmentBook', function (e) {
         contentType: false,
         success: function (result) {
             if (result.success) {
+                console.log('wwwwwwwwwwwwwwww',result);
                 let appointmentID = result.data.appointmentId
-
-                response = '<div class="gen alert alert-success">' +
+                if(result.message ==  "Booking already exists"){
+                    $('.book-appointment-message').
+                    html('<div class="gen alert alert-danger">'+result.message +' </div>').
+                    delay(5000).
+                    hide('slow')
+                    // setTimeout(() => {
+                    //     // return location.href = mainResult.data.url;
+                    // }, 5000)
+                }
+                else{
+                    response = '<div class="gen alert alert-success">' +
                     result.message + '</div>'
 
                 $('.book-appointment-message').html(response).delay(5000).hide('slow')
                 // $(window).scrollTop($('.appointment-form').offset().top)
                 $('#frontAppointmentBook')[0].reset()
+                }
+                
+              
 
                 if (result.data.payment_type == manually) {
                     Turbo.visit(route('manually-payment', {'appointmentId': appointmentID}));

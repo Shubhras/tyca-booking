@@ -3770,6 +3770,8 @@ listenChange('#changeAppointmentStatus', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr_dist_l10n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr/dist/l10n */ "./node_modules/flatpickr/dist/l10n/index.js");
 /* harmony import */ var flatpickr_dist_l10n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 
 document.addEventListener('turbo:load', loadAppointmentCreateEditData);
 var appointmentDate = $('#appointmentDate');
@@ -3793,7 +3795,19 @@ function loadAppointmentCreateEditData() {
 }
 
 listenChange('#appointmentDate', function () {
-  selectedDate = $(this).val();
+  var selectedText = $("#plantype_id").find("option:selected").text(); // alert(selectedText)
+
+  if (selectedText == 'hourly') {
+    selectedDate = $(this).val();
+  } else {
+    selectedDate = $(this).val();
+    var aa = selectedDate.split(" - ");
+    var selectedDate2 = aa[0].split("/");
+    var selectedDate1 = selectedDate2[2] + '-' + selectedDate2[1] + '-' + selectedDate2[0];
+    selectedDate = selectedDate1;
+    alert(_typeof(selectedDate));
+  }
+
   var userRole = $('#patientRole').val();
   var appointmentIsEdit = $('#appointmentIsEdit').val();
   $('.appointment-slot-data').html('');
@@ -3948,8 +3962,8 @@ listenKeyup('#addFees', function (e) {
   $('#payableAmount').val(totalFees.toFixed(2));
 });
 listenSubmit('#addAppointmentForm', function (e) {
-  e.preventDefault();
-  alert('wwwwwwwwwwwwwww');
+  e.preventDefault(); // alert('wwwwwwwwwwwwwww');
+
   var data = new FormData($(this)[0]);
   $('.submitAppointmentBtn').prop(Lang.get('messages.common.discard'), true);
   $('.submitAppointmentBtn').text(Lang.get('messages.common.please_wait'));
@@ -3960,13 +3974,21 @@ listenSubmit('#addAppointmentForm', function (e) {
     processData: false,
     contentType: false,
     success: function success(mainResult) {
+      // alert('sssssssss');
       if (mainResult.success) {
         var appID = mainResult.data.appointmentId; // return false
 
-        displaySuccessMessage(mainResult.message);
+        if (mainResult.message == "Booking already exists") {
+          displayErrorMessage(mainResult.message);
+        } else {
+          displaySuccessMessage(mainResult.message);
+        }
+
         $('#addAppointmentForm')[0].reset();
         $('#addAppointmentForm').val('').trigger('change');
-        return location.href = mainResult.data.url;
+        setTimeout(function () {
+          return location.href = mainResult.data.url;
+        }, 5000);
 
         if (mainResult.data.payment_type == $('#paystackMethod').val()) {
           return location.href = mainResult.data.redirect_url;
@@ -4055,6 +4077,7 @@ listenSubmit('#addAppointmentForm', function (e) {
       }
     },
     error: function error(result) {
+      console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', result.responseJSON);
       displayErrorMessage(result.responseJSON.message);
       $('.submitAppointmentBtn').prop(Lang.get('messages.common.discard'), false);
       $('.submitAppointmentBtn').text(Lang.get('messages.common.save'));
@@ -8388,11 +8411,19 @@ listenSubmit('#frontAppointmentBook', function (e) {
     contentType: false,
     success: function success(result) {
       if (result.success) {
+        console.log('wwwwwwwwwwwwwwww', result);
         var appointmentID = result.data.appointmentId;
-        response = '<div class="gen alert alert-success">' + result.message + '</div>';
-        $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
 
-        $('#frontAppointmentBook')[0].reset();
+        if (result.message == "Booking already exists") {
+          $('.book-appointment-message').html('<div class="gen alert alert-danger">' + result.message + ' </div>').delay(5000).hide('slow'); // setTimeout(() => {
+          //     // return location.href = mainResult.data.url;
+          // }, 5000)
+        } else {
+          response = '<div class="gen alert alert-success">' + result.message + '</div>';
+          $('.book-appointment-message').html(response).delay(5000).hide('slow'); // $(window).scrollTop($('.appointment-form').offset().top)
+
+          $('#frontAppointmentBook')[0].reset();
+        }
 
         if (result.data.payment_type == manually) {
           Turbo.visit(route('manually-payment', {

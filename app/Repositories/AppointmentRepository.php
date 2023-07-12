@@ -16,6 +16,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Google\Service\Vault\Export;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ use Illuminate\Support\Str;
 use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-
+use DateTime;
 /**
  * Class AppointmentRepository
  *
@@ -161,11 +162,28 @@ class AppointmentRepository extends BaseRepository
             {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
+                $input['payable_amount'] =  $input['payable_amount'];
             }else
             {
                 $blank = '12:00 AM';
                 $fromTime = explode(' ', date('H:i A'));
                 $toTime = explode(' ', $blank);
+
+                $asd =  explode(" - ",$input['date1']);
+                $input['from_date'] = $asd[0];
+                $input['to_date'] = $asd[1];
+                $earlier = new DateTime($input['from_date']);
+                $later = new DateTime($input['to_date']);
+                $abs_diff = $later->diff($earlier)->format("%a");
+                $input['date'] = $asd[0];
+                if($abs_diff == 0){
+                    $input['total_counts'] = $input['charge'] * 1;
+                }
+                else{
+                $input['total_counts'] = $input['charge'] * $abs_diff;
+                }
+                $input['payable_amount'] = $input['total_counts'];
+
             }
 
             $input['from_time'] = $fromTime[0];
@@ -176,6 +194,12 @@ class AppointmentRepository extends BaseRepository
             $input['payment_type'] = $input['payment_type'];
             $input['payment_method'] = $input['payment_type'];
 
+            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
+                return false;        
+            }
+            else if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'hourly')->exists()){
+                return false;  
+            }
             $appointment = Appointment::create($input);
             $patient = Patient::whereId($input['patient_id'])->with('user')->first();
             $input['patient_name'] = $patient->user->full_name;
@@ -288,6 +312,14 @@ class AppointmentRepository extends BaseRepository
             $input['to_time_type'] = $toTime[1];
             $input['status'] = Appointment::BOOKED;
             $input['payment_type'] = Appointment::MANUALLY;
+
+
+            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
+                return false;        
+            }
+            else if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'hourly')->exists()){
+                return false;  
+            }
             $appointment = Appointment::create($input);
 
             Mail::to($input['email'])->send(new AppointmentBookedMail($input));

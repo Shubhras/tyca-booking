@@ -25,7 +25,19 @@ function loadAppointmentCreateEditData () {
 }
 
 listenChange('#appointmentDate', function () {
-    selectedDate = $(this).val();
+    var selectedText = $("#plantype_id").find("option:selected").text();
+    // alert(selectedText)
+    if(selectedText == 'hourly'){
+        selectedDate = $(this).val();
+    }
+    else{
+        selectedDate = $(this).val();
+        var aa = selectedDate.split(" - ");
+        var selectedDate2 = aa[0].split("/");
+        var selectedDate1 = selectedDate2[2] +'-'+selectedDate2[1]+'-'+selectedDate2[0];
+        selectedDate = selectedDate1;
+        alert(typeof(selectedDate));
+    }
     let userRole = $('#patientRole').val();
     let appointmentIsEdit = $('#appointmentIsEdit').val();
     $('.appointment-slot-data').html('');
@@ -202,7 +214,7 @@ listenKeyup('#addFees', function (e) {
 
 listenSubmit('#addAppointmentForm', function (e) {
     e.preventDefault();
-alert('wwwwwwwwwwwwwww');
+// alert('wwwwwwwwwwwwwww');
     let data = new FormData($(this)[0]);
     $('.submitAppointmentBtn').prop(Lang.get('messages.common.discard'), true);
     $('.submitAppointmentBtn').text(Lang.get('messages.common.please_wait'));
@@ -213,16 +225,23 @@ alert('wwwwwwwwwwwwwww');
         processData: false,
         contentType: false,
         success: function (mainResult) {
+            // alert('sssssssss');
             if (mainResult.success) {
                 let appID = mainResult.data.appointmentId;
                 // return false
-                displaySuccessMessage(mainResult.message);
+                if(mainResult.message ==  "Booking already exists"){
+                    displayErrorMessage(mainResult.message);
+                    
+                }
+                else{
+                    displaySuccessMessage(mainResult.message);
+                }
 
                 $('#addAppointmentForm')[0].reset();
                 $('#addAppointmentForm').val('').trigger('change');
-
+            setTimeout(() => {
                 return location.href = mainResult.data.url;
-
+            }, 5000);
                 if (mainResult.data.payment_type == $('#paystackMethod').val()) {
 
                     return location.href = mainResult.data.redirect_url;
@@ -303,6 +322,7 @@ alert('wwwwwwwwwwwwwww');
             }
         },
         error: function (result) {
+            console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',result.responseJSON);
             displayErrorMessage(result.responseJSON.message);
             $('.submitAppointmentBtn').prop(Lang.get('messages.common.discard'), false);
             $('.submitAppointmentBtn').text(Lang.get('messages.common.save'));
