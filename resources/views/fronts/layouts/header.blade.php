@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <header class="position-relative header">
     <!-- <div class="container"> -->
-    <div class="row align-items-center">
+    <div class="row align-items-center header-height">
         <div class="col-lg-3 col-4">
             <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
                 <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid nav-logos" />
@@ -210,6 +210,9 @@ footer {
     .nav-logos {
     width: auto !important;
     height: auto !important;
+}
+.header-height{
+    height:50px;
 }
 }
 </style>

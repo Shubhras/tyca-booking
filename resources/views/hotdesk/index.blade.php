@@ -432,7 +432,7 @@ $styleCss = 'style';
                             </ul>
                         </div>
                     </div>
-                    <div class="row col-md-12 mb-3">
+                    <div class="row col-md-12 mb-4">
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
@@ -450,7 +450,11 @@ $styleCss = 'style';
                         </div>
 
                     </div>
-                    <div class="modal-footer pt-0 mt-5" style="place-content:center;">
+                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
+                        <div>Payable Amount : $</div>
+                        <div id="payable_amount_Show"></div>
+                    </div>
+                    <div class="modal-footer pt-0 mt-4" style="place-content:center;">
                         <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
                     </div>
             </div>
@@ -498,6 +502,7 @@ function displayMessage(id, price) {
 
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
+    $('#payable_amount_Show').text(price);
 
     $.ajax({
         type: 'POST',
