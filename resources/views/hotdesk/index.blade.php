@@ -368,7 +368,7 @@ $styleCss = 'style';
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4">
-                                    <i class="fa-solid fa-calendar-days text-gray-200"></i>
+                                    <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
                         </div>
@@ -611,6 +611,21 @@ $('input[type="date"]').change(function() {
 });
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="path/to/datepicker-library.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#templateAppointmentDate').datepicker({
+      // Add any additional datepicker options you need
+    });
+
+    // Event handler for date icon click
+    $('.date-icon').on('click', function() {
+      $('#templateAppointmentDate').datepicker('show');
+    });
+  });
+</script>
 
 <style>
 body {

@@ -49,9 +49,9 @@
                                     {{$outletData['last_name']}}</h4>
                                 <div class="from-flex come-set1 col-lg-5">
                                     <p class="again-p">From</p>
-                                    <h5 class="again-heading" style=" font-weight: 600; color: #000000;">$
+                                    <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
                                         {{$outletData['charges_daily']}}/day</h5>
-                                    <p class="again-hour">${{$outletData['charges']}} /hour</p>
+                                    <p class="again-p">${{$outletData['charges']}} /hour</p>
                                 </div>
                             </div>
                         </div>

@@ -30,14 +30,6 @@
 body {
     background-color: #F4F3EE;
     font-family: "Noto Serif";
-    overflow:hidden;
-}
-
-img.css-class
-
-{
-    width:100%;
-    height:855px;
 }
 footer
 {
@@ -45,7 +37,6 @@ footer
     position: fixed;
     bottom: 0px;
     width: 100%;
-    height: 100px;
 }
 header {
     display: none;
@@ -111,13 +102,13 @@ width:40%;
     font-size: 18px !important;
 }
 img.css-class{
-    height:92vh !important;
+    height:100% !important;
 }
 .col-3{
-    width:40% !important;
+    width:30% !important;
 }
 }
-@media(min-width:320px) and (max-width:1023px) {
+@media(min-width:320px) and (max-width:768px) {
     img.css-class{
     height:370px !important;
 }
@@ -149,7 +140,7 @@ img.css-class{
                     <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid p-4">
                 </a>
             </div>
-            <h3 class="text-center mb-7 pt-3 pb-3">{{__('messages.web.patient_registration')}}</h3>
+            <h3 class="text-center mb-7 pt-3 pb-3" style="font-weight:bold;">{{__('messages.web.patient_registration')}}</h3>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="row">
@@ -205,11 +196,11 @@ img.css-class{
                         </div>
                     </div>
 
-                    <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms">
+                    <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms" style="font-size:19px; color:#535353">
                         <input type="checkbox" class="form-check-input " name="toc" value="1" required />
-                        <span class="text-gray-700 me-2 ml-1" style="font-size:20px; color:#535353">{{__('messages.web.i_agree')}}
-                            <a href="{{ route('terms.conditions') }}" class="ms-1 link-primary "
-                                style="color: #535353; font-size:20px; text-transform: capitalize;">{{__('messages.web.terms_and_conditions')}}</a>.
+                        <span class="text-gray-700 me-2 ml-1">I agree to the 
+                            <span  class="ms-1 link-primary "
+                                style="color: #535353; font-size:19px; text-transform: capitalize; text-decoration:none;">Terms & Conditions</span>.
                         </span>
                     </div>
 
@@ -217,8 +208,8 @@ img.css-class{
                         <button type="submit" class="btn2 btn-primary2">Register</button>
                     </div>
                     <div class="d-flex align-items-center mt-4 pb-2 down-sign" style="justify-content:center;">
-                        <span class="text-gray-700 me-2">{{__('messages.web.already_have_an_account').'?'}}</span>
-                        <a href="{{ route('login') }}" class="form-check-label fs-7" style="color: #000000;">
+                    <span class="text-gray-700 me-2" style="color:#535353; font-size:19px;">{{__('messages.web.already_have_an_account').'?'}}</span>
+                        <a style="color:#535353; font-size:19px;" href="{{ route('login') }}" class="form-check-label fs-7" style="color: #000000;">
                             {{__('messages.web.sign_in_here')}}
                         </a>
                     </div>

@@ -729,7 +729,6 @@ h1 {
                                     </div>
                                     <!-- <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3> -->
                                     <p>{!! $doctor->description !!}</p>
-                                
                         </div>
                     </div>
                 </div>
@@ -917,18 +916,17 @@ h1 {
                     @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
                         data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(1,'{{ $service->charges }}','{{$service->id}}');">
+                        onclick="displayMessage(1,'{{ $service->charges }}');">
                         {{ $service->charges }} / Hour
                     </button>
                     @else
                     <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
                         data-turbo="false">{{ $service->charges }} / Hour</a>
                     @endif
-                   
                     @if(getLogInUser())
                     <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
                         data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(2,'{{ $service->charges_daily }}','{{$service->id}}');">
+                        onclick="displayMessage(2,'{{ $service->charges_daily }}');">
                         {{ $service->charges_daily }} / Day
                     </button>
                     @else
@@ -1013,7 +1011,7 @@ h1 {
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
                                         class="required"></span></label>
-                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : $doctor->id,['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
+                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
                         @endif
@@ -1064,7 +1062,7 @@ h1 {
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4">
-                                    <i class="fa-solid fa-calendar-days text-gray-200"></i>
+                                    <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
                         </div>
@@ -1151,7 +1149,6 @@ h1 {
                     <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
-        
                     </div>
                     <div class="modal-footer pt-0 mt-4" style="place-content:center;">
                         <button type="submit" class="btns btn-secondarys">{{ __('Confirm Booking') }}</button>
@@ -1189,7 +1186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage(id, price,service_id) {
+function displayMessage(id, price) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -1197,10 +1194,10 @@ function displayMessage(id, price,service_id) {
         var abc = 'Day Plan';
         $('#slot_option').hide();
     }
+
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
-    $('#FrontAppointmentServiceId').val(service_id);
 
     $.ajax({
         type: 'POST',
@@ -1298,39 +1295,23 @@ $(document).ready(function() {
 });
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="path/to/datepicker-library.js"></script>
 
 <script>
+  $(document).ready(function() {
+    $('#templateAppointmentDate').datepicker({
+      // Add any additional datepicker options you need
+    });
 
-// $('#hour_plan_modal').on('click',function(e){
-//     alert('hello');
-//     console.log('sddddddddddddddddddd');
-// });
+    // Event handler for input click
+    $('#templateAppointmentDate').on('click', function() {
+      $(this).datepicker('show');
+    });
 
-//   $(document).on('click', function(e) {
-//     alert('hello');
-//   });
-//     $('body').click(function () {
-//         console.log(alert);
-//     // $('#invisible').fadeOut();
-//   });
-</script>
-
-<!--   function resetForm() {
-  $('#hour_plan_modal').on('hidden.bs.modal', function() {
-    $('#frontAppointmentBook')[0].reset();
+    // Event handler for date icon click
+    $('.date-icon').on('click', function() {
+      $('#templateAppointmentDate').datepicker('show');
+    });
   });
-} -->
-<script>
-// Reset form on modal close button click
-// $('#hour_plan_modal').on('hidden.bs.modal', function() {
-//     $('#frontAppointmentBook')[0].reset();
-// });
-
-// // Reset form on click outside modal content
-// $(document).on('mousedown', function(event) {
-//     var target = $(event.target);
-//     if (!$('#hour_plan_modal').is(target) && $('#hour_plan_modal').has(target).length === 0) {
-//         $('#frontAppointmentBook')[0].reset();
-//     }
-// });
 </script>

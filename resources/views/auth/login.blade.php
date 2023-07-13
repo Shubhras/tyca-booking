@@ -12,10 +12,7 @@
     transition: all 0.3s ease-in-out;
 }
 .btn2 {
-    display: inline-block;
-    font-weight: 400;
     color: #fff;
-    line-height: 1.5;
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
@@ -23,19 +20,17 @@
     user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 10px;
-    font-size: 1rem;
+    font-size: 16px;
+    gap: 10px;
+    height: 42px;
+    width: 200px;
+    padding: 10px 5px 10px 5px;
     border-radius: 0;
-}
-
-img.css-class{
-    width:70%;
-    height:869px;
 }
 
 body {
     background-color: #F4F3EE;
-    overflow:hidden;
+    font-family: "Noto Serif";
 }
 footer
 {
@@ -43,7 +38,6 @@ footer
     position: fixed;
     bottom: 0px;
     width: 100%;
-    height: 100px;
 }
 header {
     display: none;
@@ -60,7 +54,6 @@ h5, .fs-5 {
 @media (min-width: 360px) and (max-width: 375px){
 .down-log1{
     width: 295px !important;
-    /* margin-left: -20px !important; */
 }
 }
 @media (min-width: 992px) and (max-width: 1100px){
@@ -110,6 +103,31 @@ img.css-class{
     margin:0;
 }
 }
+@media(min-width:769px) and (max-width:1440px){
+    .col-3{
+        width:30% !important;
+    }
+}
+.sign-set{
+font-Weight:700;
+font-size:25px;
+Line-height:34.05px;
+color:#000000;
+}
+.forgot-password{
+font-Weight:400;
+font-size:15px;
+Line-height:20.43px;
+color:#535353;
+width:174px;
+height:36px;
+}
+.forgot-password1{
+font-Weight:400;
+font-size:15px;
+Line-height:20.43px;
+color:#535353
+}
 </style>
 
 <div>
@@ -125,14 +143,14 @@ img.css-class{
                 <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
             </div>
 
-            <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 mx-auto col-4 login-response"
+            <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 mx-auto col-3 login-response"
                 style="height: 50%;margin: auto; margin-bottom:10%;">
                 <div class="col-12 text-center">
                     <a href="{{ route('medical') }}" class="image py-10">
                         <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid pt-4" style="padding: 20px;">
                     </a>
                 </div>
-                <h3 class="text-center mb-7 pt-3 pb-3">{{__('auth.sign_in')}}</h3>
+                <h3 class="text-center mb-7 pt-3 pb-3 sign-set">{{__('auth.sign_in')}}</h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-sm-7 mb-4">
@@ -154,24 +172,24 @@ img.css-class{
                     </div>
                     <div class="d-flex justify-content-between pt-4 pb-4">
                         @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="form-check-label" style="color: #000000;">
+                        <a  href="{{ route('password.request') }}" class="form-check-label forgot-password">
                             {{ __('messages.common.forgot_your_password').'?' }}
                         </a>
                         @endif
                     </div>
                     <div class="mb-sm-7 mb-4 pb-4 form-check">
-                        <input type="checkbox" class="form-check-input" id="remember_me">
-                        <label class="form-check-label"
+                        <input type="checkbox" class="form-check-input " id="remember_me" style="width:20px; height:20px;">
+                        <label class="form-check-label forgot-password1"
                             for="remember_me">{{ __('messages.common.remember_me') }}</label>
                     </div>
                     <div class="d-grid col-6" style="margin: auto;">
                         <button type="submit" class="btn2 btn-primary2">{{ __('messages.login') }}</button>
                     </div>
 
-                    <div class="d-flex align-items-center mb-10 mt-4 down-log down-log1"
+                    <div class="d-flex align-items-center mb-10 mt-3 down-log down-log1"
                         style="justify-content: center;margin-bottom: 1.5rem;">
-                        <span class="text-gray-700 me-2">New Customer?</span>
-                        <a href="{{ route('register') }}" class="form-check-label fs-7" style="color: #000000;">
+                        <span class="me-2 forgot-password1">New Customer?</span>
+                        <a href="{{ route('register') }}" class="form-check-label fs-7 forgot-password1">
                             {{__('messages.web.create_an_account')}}
                         </a>
                     </div>

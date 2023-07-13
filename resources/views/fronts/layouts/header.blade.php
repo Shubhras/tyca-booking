@@ -121,7 +121,7 @@ header .navbar .navbar-nav .nav-item .nav-link {
     font-weight: 400;
     padding-left: 20px;
     padding-right: 20px;
-    font-size: 18px;
+    font-size: 25px;
 }
 .nav-logos{
     width:290px;
