@@ -5,12 +5,13 @@
 @section('front-content')
 
 <style>
-    .btn-primary2:hover {
+.btn-primary2:hover {
     border: 1px solid #273432;
     background: #273432;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
+
 .btn2 {
     color: #fff;
     text-align: center;
@@ -32,13 +33,14 @@ body {
     background-color: #F4F3EE;
     font-family: "Noto Serif";
 }
-footer
-{
+
+footer {
     padding-top: 40px !important;
     position: fixed;
     bottom: 0px;
     width: 100%;
 }
+
 header {
     display: none;
 }
@@ -46,87 +48,108 @@ header {
 .mb-4 {
     margin-bottom: 0.6rem !important;
 }
-@media (min-width: 767px) and (max-width: 800px){
-h5, .fs-5 {
-    font-size: 14px !important;
+
+@media (min-width: 767px) and (max-width: 800px) {
+
+    h5,
+    .fs-5 {
+        font-size: 14px !important;
+    }
 }
+
+@media (min-width: 360px) and (max-width: 375px) {
+    .down-log1 {
+        width: 295px !important;
+    }
 }
-@media (min-width: 360px) and (max-width: 375px){
-.down-log1{
-    width: 295px !important;
+
+@media (min-width: 992px) and (max-width: 1100px) {
+    .down-log {
+        width: 286px !important;
+        margin-left: -20px !important;
+    }
 }
+
+@media (max-width: 575px) {
+
+    h5,
+    .fs-5 {
+        font-size: 15px !important;
+    }
 }
-@media (min-width: 992px) and (max-width: 1100px){
-.down-log{
-    width: 286px !important;
-    margin-left: -20px !important;
-}
-}
-@media (max-width: 575px){
-h5, .fs-5 {
-    font-size: 15px !important;
-}
-}
+
 @media(min-width:320px) and (max-width:768px) {
-    footer
-{
-    padding-top: 40px !important;
-    position: relative !important;
-    bottom: 0px;
-    width: 100%;
-    height: auto !important;
-}
-    img.css-class{
-    height:373px;
-            }
+    footer {
+        padding-top: 40px !important;
+        position: relative !important;
+        bottom: 0px;
+        width: 100%;
+        height: auto !important;
+    }
+
+    img.css-class {
+        height: 373px;
+    }
+
     .login-response {
         width: 100% !important;
     }
+
     body {
-    background-color: #F4F3EE;
-    overflow:auto !important;
-}
-}
-@media(min-width:800px) and (max-width:1440px) {
-    h5, .fs-5 {
-    font-size: 18px !important;
-}
-img.css-class{
-    height:700px;
-            }
-}
-@media(min-width:320px) and (max-width:1440px) {
-.log-padding{
-    padding:0px !important;
-}
-.log-margin{
-    margin:0;
-}
-}
-@media(min-width:769px) and (max-width:1440px){
-    .col-3{
-        width:30% !important;
+        background-color: #F4F3EE;
+        overflow: auto !important;
     }
 }
-.sign-set{
-font-Weight:700;
-font-size:25px;
-Line-height:34.05px;
-color:#000000;
+
+@media(min-width:800px) and (max-width:1440px) {
+
+    h5,
+    .fs-5 {
+        font-size: 18px !important;
+    }
+
+    img.css-class {
+        height: 700px;
+    }
 }
-.forgot-password{
-font-Weight:400;
-font-size:15px;
-Line-height:20.43px;
-color:#535353;
-width:174px;
-height:36px;
+
+@media(min-width:320px) and (max-width:1440px) {
+    .log-padding {
+        padding: 0px !important;
+    }
+
+    .log-margin {
+        margin: 0;
+    }
 }
-.forgot-password1{
-font-Weight:400;
-font-size:15px;
-Line-height:20.43px;
-color:#535353
+
+@media(min-width:769px) and (max-width:1440px) {
+    .col-3 {
+        width: 30% !important;
+    }
+}
+
+.sign-set {
+    font-Weight: 700;
+    font-size: 25px;
+    Line-height: 34.05px;
+    color: #000000;
+}
+
+.forgot-password {
+    font-Weight: 400;
+    font-size: 15px;
+    Line-height: 20.43px;
+    color: #535353;
+    width: 174px;
+    height: 36px;
+}
+
+.forgot-password1 {
+    font-Weight: 400;
+    font-size: 15px;
+    Line-height: 20.43px;
+    color: #535353
 }
 </style>
 
@@ -172,14 +195,15 @@ color:#535353
                     </div>
                     <div class="d-flex justify-content-between pt-4 pb-4">
                         @if (Route::has('password.request'))
-                        <a  href="{{ route('password.request') }}" class="form-check-label forgot-password">
+                        <a href="{{ route('password.request') }}" class="form-check-label forgot-password">
                             {{ __('messages.common.forgot_your_password').'?' }}
                         </a>
                         @endif
                     </div>
                     <div class="mb-sm-7 mb-4 pb-4 form-check">
-                        <input type="checkbox" class="form-check-input " id="remember_me" style="width:20px; height:20px;">
-                        <label class="form-check-label forgot-password1"
+                        <input type="checkbox" class="form-check-input " id="remember_me"
+                            style="width:20px; height:20px;">
+                        <label class="form-check-label forgot-password1" style="margin-left:10px; margin-top:5px;"
                             for="remember_me">{{ __('messages.common.remember_me') }}</label>
                     </div>
                     <div class="d-grid col-6" style="margin: auto;">

@@ -17,12 +17,9 @@
             <div class="page-title text-center white-color">
                 <h1 class="ellipsis1">{{$aboutTitle->value}}</h1>
                 <h4 class="workspace">
-                    <div class="ellipsis">
+                    <div class="ellipsis new-p">
                     {!! $aboutShortDescription->value !!}
                     </div>
-                    
-                    <!-- Interested in our workspace?
-                    <br> Book a slot for our space now! -->
                 </h4>
             </div>
         </div>
@@ -45,13 +42,13 @@
                     <div class="row">
                         <div class="centerize-col text-center">
                             <div class="again-flex col-12">
-                                <h4 class="again-heading come-set col-lg-6" style="text-align:end; width:192px;">{{$outletData['first_name']}}
+                                <h4 class="again-heading come-set col-lg-6 thank-name">{{$outletData['first_name']}}
                                     {{$outletData['last_name']}}</h4>
                                 <div class="from-flex come-set1 col-lg-5">
                                     <p class="again-p">From</p>
                                     <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
                                         {{$outletData['charges_daily']}}/day</h5>
-                                    <p class="again-p">${{$outletData['charges']}} /hour</p>
+                                    <p class="again-ps">${{$outletData['charges']}} /hour</p>
                                 </div>
                             </div>
                         </div>
@@ -91,12 +88,17 @@
 .white-color {
     color: #fff;
 }
-
+.new-p{
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 54.48px;
+    text-align: center;
+}
 .page-title h1 {
-    font-size: 45px;
-    line-height: 1.5em;
+    font-size: 70px;
+    line-height: 95.34px;
     font-weight: 700;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .workspace {
@@ -137,23 +139,35 @@ section.title-hero-bg.parallax-effect img {
 
 .again-flex {
     display: flex;
-    /* justify-conitent: space-around; */
     font-size: 30px;
-    /* justify-content: end; */
 }
-
+.again-headings{
+    font-weight: 700;
+    color: #000000;
+    font-size: 30px !important;
+    line-height: 40.86px;
+    margin-top:-15px;
+}
 .again-heading {
-    /* margin-right: 115px;
-    margin-top: 0px; */
-    font-weight: 600;
+    text-align: end;
+    width: 192px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40.86px;
     color: #000000;
 }
-
-.again-p {
-    font-size: 16px;
-    margin-bottom: -10px;
-    margin-top: -15px;
+.again-ps{
+    font-size: 12px;
     color: #000000;
+    font-weight: 500;
+    line-height: 16.34px;
+    margin-top: -5px;
+}
+.again-p {
+    font-size: 15px;
+    color: #000000;
+    line-height: 20.43px;
+    font-weight: 500;
 }
 
 .again-hour {
@@ -175,13 +189,15 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .onloads-btn {
-    padding: 10px;
-    width: 230px;
-    height: 50px;
-    font-size: 20px;
+    padding: 10px 5px 10px 5px;
+    width: 260px;
+    height: 60px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 34.05px;
 }
 
 @media (max-width: 500px) {

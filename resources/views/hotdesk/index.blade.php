@@ -636,9 +636,11 @@ body {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    /* Number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 54.48px;
 }
 
 .ellipsis1 {
@@ -655,8 +657,10 @@ a:hover {
 }
 
 .amies-font {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #000000;
 }
 
 @media (max-width: 767px) {
@@ -917,8 +921,8 @@ a:hover {
 }
 
 .page-title h1 {
-    font-size: 45px;
-    line-height: 1.5em;
+    font-size: 70px;
+    line-height: 95.34px;
     font-weight: 700;
     margin: 0;
 }
@@ -986,13 +990,17 @@ figure.effect-chico {
 
 .hot-desk h2 {
     color: #000000;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 68.1px;
 }
 
 .hot-desk p {
     color: #000000;
-    font-size: 16px;
+    line-height: 30px;
+    font-size: 20px;
     margin-top: -15px;
+    font-weight: 400;
 }
 
 .hot-desks {
@@ -1002,9 +1010,11 @@ figure.effect-chico {
 }
 
 .hot-desks h2 {
-    font-size: 22px;
+    font-size: 35px;
     margin-bottom: -10px;
     color: #000000;
+    font-weight: 700;
+    line-height: 47.67px;
 }
 
 .hot-desks p {
@@ -1020,8 +1030,11 @@ figure.effect-chico {
 }
 
 .Amenities h2 {
-    font-size: 22px;
+    font-size: 35px;
+    margin-bottom: 10px;
     color: #000000;
+    font-weight: 700;
+    line-height: 47.67px;
     text-align: start;
 }
 
@@ -1033,25 +1046,35 @@ figure.effect-chico {
 }
 
 .Operating h2 {
-    font-size: 22px;
+    font-size: 35px;
+    margin-bottom: 10px;
     color: #000000;
+    font-weight: 700;
+    line-height: 47.67px;
     text-align: start;
 }
 
 .h2-plans {
-    font-size: 22px;
-    text-align: start;
+    font-size: 35px;
+    margin-bottom: 10px;
     color: #000000;
+    font-weight: 700;
+    line-height: 47.67px;
+    text-align: start;
 }
 
 .h2-hourplan {
-    font-size: 20px;
+    font-size: 25px;
     color: #000000;
+    font-weight: 700;
+    line-height: 34.05px;
 }
 
 .h2-dayplan {
-    font-size: 20px;
+    font-size: 25px;
     color: #000000;
+    font-weight: 700;
+    line-height: 34.05px;
 }
 
 .hourplan-button {
@@ -1077,10 +1100,12 @@ figure.effect-chico {
 }
 
 .dayplan-btn {
-    padding: 10px;
-    width: 170px;
-    height: 40px;
-    font-size: 15px;
+    padding: 10px 5px 10px 5px;
+    width: 200px;
+    height: 42px;
+    font-size: 16px;
+    line-height: 21.79px;
+    font-weight: 600;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
@@ -1098,17 +1123,19 @@ figure.effect-chico {
 }
 
 p.hou-p {
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
     margin-top: 20px;
-    font-weight:600;
+    font-weight: 600;
+    line-height: 27.24px;
 }
 
 p.da-p {
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
     margin-top: 20px;
-    font-weight:600;
+    font-weight: 600;
+    line-height: 27.24px;
 }
 
 section.mains-blocks {
@@ -1170,13 +1197,16 @@ section.mains-blocks {
 }
 
 .heading-id2 {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
 }
 
 .sub-name {
-    font-size: 16px;
-    color:#000000;
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+    line-height: 30px;
     text-transform: lowercase;
 }
 

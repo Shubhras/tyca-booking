@@ -122,6 +122,7 @@ header .navbar .navbar-nav .nav-item .nav-link {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 25px;
+    line-height:34.05px;
 }
 .nav-logos{
     width:290px;
@@ -171,19 +172,19 @@ img.img-fluid-logos {
 }
 
 .btn3 {
-    display: inline-block;
     font-weight: 400;
     color: #fff;
-    line-height: 1.5;
+    width: 172px;
+    line-height: 34.05px;
+    height: 56px;
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
     cursor: pointer;
-    user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
     padding: 10px 50px;
-    font-size: 14px;
+    font-size: 25px;
     border-radius: 0;
 }
 

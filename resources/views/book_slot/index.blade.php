@@ -5,13 +5,21 @@
 
 @section('front-content')
 <style>
-    body {
+body {
     font-family: "Noto Serif" !important;
-     }
+}
+
+.desc-sort {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
+    color: #000000;
+}
+
 .hour-view {
     text-decoration: none;
     text-align: center;
-    padding-top: 12px;
+    padding-top: 16px;
 }
 
 .no-slot-color {
@@ -20,19 +28,26 @@
 }
 
 .location1 {
-    font-size: 30px !important;
+    font-size: 48px !important;
     color: #000000 !important;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 65.38px;
     text-transform: capitalize;
 }
 
 .view-set {
     text-decoration: none;
-    padding: 10px 18px;
-    background: #fff !important;
+    padding: 14px 18px;
+    background: #ffffff !important;
     color: #273432 !important;
-    border: 1px solid #273432 !important;
+    border: 2px solid #273432 !important;
     text-align: center;
+    width: 224.31px;
+    height: 57.92px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27.24px;
 }
 
 .btn1:hover {
@@ -54,8 +69,10 @@
 }
 
 .sub-name {
-    font-size: 16px;
-    color:#000000;
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+    line-height: 30px;
     text-transform: lowercase;
 }
 
@@ -144,11 +161,6 @@
     padding: 0;
 }
 
-.blog-text p {
-    line-height: 1.8;
-    color: #505050;
-}
-
 .lead {
     font-size: 1.25rem;
     font-weight: 300;
@@ -175,44 +187,30 @@
 }
 
 .btn1 {
-    width: 150px;
-    min-height: 40px;
+    width: 224.31px;
+    height: 57.92px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
     border-radius: 0 !important;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27.24px;
 
 }
 
 .btn11 {
-    width: 155px;
-    min-height: 40px;
+    width: 224.31px;
+    height: 57.92px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
     border-radius: 0 !important;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27.24px;
 
 }
-
-.btn2 {
-    width: 163px;
-    min-height: 40px;
-    background: #fff;
-    color: #273432;
-    border-radius: 0 !important;
-
-}
-
-.book-btn {
-    padding: 10px;
-    width: 200px;
-    height: 40px;
-    background: #273432;
-    border: #273432;
-    color: #FFFFFF;
-    border-radius: 0 !important;
-}
-
 .row-gap {
     margin-bottom: 10px;
 }
@@ -316,17 +314,28 @@
 .hosts {
     width: 200px;
     margin-left: 30px;
+    font-size:20px;
+    line-height:30px;
+    font-weight:400;
+    color:#000000
 }
 
 .host-desk {
     padding: 10px 0px 0px 0px;
     margin-left: 30px;
     width: 200px;
-    font-weight: 600;
+    line-height:38.14px;
+    font-size:28px;
+    font-weight:700;
+    color:#000000
 }
 
 .amities1 {
     margin-bottom: 30px;
+    font-size: 36px !important;
+    font-weight: 700;
+    line-height: 49.03px;
+    color: #000000;
 }
 
 .image-left {
@@ -468,13 +477,16 @@ figure.effect-chico {
 }
 
 .heading-id1 {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+    font-weight: 400;
 }
 
 .heading-id2 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
+    line-height: 30px;
 }
 
 @media (min-width:320px) and (max-width:1440px) {
@@ -641,8 +653,10 @@ figure.effect-chico {
 }
 
 .location {
-    font-size: 16px !important;
+    font-size: 24px !important;
     color: #000000 !important;
+    font-weight: 400;
+    line-height: 36px;
 }
 
 h1 {
@@ -708,50 +722,49 @@ h1 {
 
 
 <section style="background-image: url('{{$bodyimage1->value}}');">
-<section class="main-block sec-set name-slot">
-    <div class="container">
-        <div class="row" style="display:flex;">
-            <div class="col-md-8 responsive-wrap sec2 top-set">
-                <div class="full-blog">
-                    <div class="blog-content">
-                        <div class="blog-text">
-                            <h1 class="font-700 roboto-font">
-                                <h1 class="location1">
-                                    {{$user->first_name}}
-                                    {{$user->last_name}}<h1>
-                                    </h1>
-                                    <div>
-                                        <p class="location">
-                                            <img src="/assets/image/material-symbols_location-on.png" alt="#"
-                                                style="height: 25px; margin-left:-5px;">
-                                            355 Balestier Road Singapore 329782
-                                        </p>
-                                    </div>
-                                    <!-- <h3 class="roboto-font location">355 Balestier Road Singapore 329782</h3> -->
-                                    <p>{!! $doctor->description !!}</p>
+    <section class="main-block sec-set name-slot">
+        <div class="container">
+            <div class="row" style="display:flex;">
+                <div class="col-md-8 responsive-wrap sec2 top-set">
+                    <div class="full-blog">
+                        <div class="blog-content">
+                            <div class="blog-text">
+                                <h1 class="font-700 roboto-font">
+                                    <h1 class="location1">
+                                        {{$user->first_name}}
+                                        {{$user->last_name}}<h1>
+                                        </h1>
+                                        <div>
+                                            <p class="location">
+                                                <img src="/assets/image/material-symbols_location-on.png" alt="#"
+                                                    style="height: 34px; width:34px; margin-left:-5px;">
+                                                355 Balestier Road Singapore 329782
+                                            </p>
+                                        </div>
+                                        <p class="desc-sort">{!! $doctor->description !!}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 responsive-wrap set-amities">
-                <div class="sidebar">
-                    <div class="widget-box mb-40 amities">
-                        <h1 class="mb-20 amities1">Amenities</h1>
-                        <div class="latest-blog">
-                            <div class="col section-border">
-                                <div class="row mt-10 mb-1 col-12" style="display:flex;">
-                                    @foreach($specialization as $specializationData)
-                                    <div class="col-6 icon-set">
-                                        <p class="heading-id1">
-                                            <img src="{{$specializationData->icon}}" alt="#"
-                                                style="height: 30px; padding-right:10px;">
-                                            {{$specializationData->name}}
-                                        </p>
+                <div class="col-md-4 responsive-wrap set-amities">
+                    <div class="sidebar">
+                        <div class="widget-box mb-40 amities">
+                            <h1 class="mb-20 amities1">Amenities</h1>
+                            <div class="latest-blog">
+                                <div class="col section-border">
+                                    <div class="row mt-10 mb-1 col-12" style="display:flex;">
+                                        @foreach($specialization as $specializationData)
+                                        <div class="col-6 icon-set">
+                                            <p class="heading-id1">
+                                                <img src="{{$specializationData->icon}}" alt="#"
+                                                    style="height: 30px; padding-right:10px;">
+                                                {{$specializationData->name}}
+                                            </p>
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    @endforeach
-                                </div>
-                                {{--   <div class="row mt-10 mb-1" style="display:flex;">
+                                    {{--   <div class="row mt-10 mb-1" style="display:flex;">
                                     <div class="col icon-set">
                                         <p class="heading-id"><img src="/assets/image/image 17.png" alt="#"
                                                 style="padding-right:10px;">air
@@ -803,149 +816,151 @@ h1 {
                                     </div>
                                 </div>
                                 --}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
                     $var_dump = json_decode($doctor->days);
                     ?>
-                    <div class="widget-box">
-                        <h1 class="amities1">Operating Hours</h1>
-                        @if(!empty($var_dump))
-                        @foreach($var_dump as $day)
-                        @if($day->day_of_week == 1)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Monday</b>
+                        <div class="widget-box">
+                            <h1 class="amities1">Operating Hours</h1>
+                            @if(!empty($var_dump))
+                            @foreach($var_dump as $day)
+                            @if($day->day_of_week == 1)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Monday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                            @endif
+                            @if($day->day_of_week == 2)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Tuesday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 2)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Tuesday</b>
+                            @endif
+                            @if($day->day_of_week == 3)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Wednesday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                            @endif
+                            @if($day->day_of_week == 4)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Thursday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 3)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Wednesday</b>
+                            @endif
+                            @if($day->day_of_week == 5)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Friday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                            @endif
+                            @if($day->day_of_week == 6)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Saturday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 4)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Thursday</b>
+                            @endif
+                            @if($day->day_of_week == 7)
+                            <div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2">Sunday</b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                </div>
                             </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                            </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 5)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Friday</b>
-                            </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                            </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 6)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Saturday</b>
-                            </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                            </div>
-                        </div>
-                        @endif
-                        @if($day->day_of_week == 7)
-                        <div class="row mt-10 mb-2" style="display:flex;">
-                            <div class="col">
-                                <b class="heading-id2">Sunday</b>
-                            </div>
-                            <div class="col">
-                                <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                            </div>
-                        </div>
-                        @endif
-                        @endforeach
-                        @endif
+                            @endif
+                            @endforeach
+                            @endif
 
-                    </div>
-                </div>
-            </div>
-</section>
-
-<section>
-    <div class="container">
-        <div class="row col-12 list-box">
-            <h3 class="font-18 pb-3 location1" style="margin-left:15px;">Listings</h3>
-            @foreach($services as $service)
-            <div class="col-5 row list-box" style="margin:30px;">
-                <div class="row col-12 set-border" style="height: 200px;">
-                    <div class="col-5 list-set" style="padding:0px;">
-                        <img src="{{ $service->icon }}" alt="Digital" style="width:100%; height:100%;">
-                    </div>
-                    <div class="col-7">
-                        <div class="column">
-                            <div class="col-3 host-desk">
-                                {{ $service->name }}
-                            </div>
-                            <div class="col-3 hosts">
-                                {!! $service->short_description !!}
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
-                    @if(getLogInUser())
-                    <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
-                        data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(1,'{{ $service->charges }}');">
-                        {{ $service->charges }} / Hour
-                    </button>
-                    @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
-                        data-turbo="false">{{ $service->charges }} / Hour</a>
-                    @endif
-                    @if(getLogInUser())
-                    <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
-                        data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                        onclick="displayMessage(2,'{{ $service->charges_daily }}');">
-                        {{ $service->charges_daily }} / Day
-                    </button>
-                    @else
-                    <a href="{{ route('login') }}" class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
-                        data-turbo="false">{{ $service->charges_daily }} / Day</a>
-                    @endif
-                    <?php
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row col-12 list-box">
+                <h3 class="amities1" style="margin-left:15px;">Listings</h3>
+                @foreach($services as $service)
+                <div class="col-5 row list-box" style="margin:30px;">
+                    <div class="row col-12 set-border" style="height: 200px;">
+                        <div class="col-5 list-set" style="padding:0px;">
+                            <img src="{{ $service->icon }}" alt="Digital" style="width:100%; height:100%;">
+                        </div>
+                        <div class="col-7">
+                            <div class="column">
+                                <div class="col-3 host-desk">
+                                    {{ $service->name }}
+                                </div>
+                                <div class="col-3 hosts">
+                                    {!! $service->short_description !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
+                        @if(getLogInUser())
+                        <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
+                            data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
+                            onclick="displayMessage(1,'{{ $service->charges }}');">
+                            {{ $service->charges }} / Hour
+                        </button>
+                        @else
+                        <a href="{{ route('login') }}"
+                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
+                            data-turbo="false">{{ $service->charges }} / Hour</a>
+                        @endif
+                        @if(getLogInUser())
+                        <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
+                            data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
+                            onclick="displayMessage(2,'{{ $service->charges_daily }}');">
+                            {{ $service->charges_daily }} / Day
+                        </button>
+                        @else
+                        <a href="{{ route('login') }}"
+                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
+                            data-turbo="false">{{ $service->charges_daily }} / Day</a>
+                        @endif
+                        <?php
                     $idGet =  Request::segment(2);
                     ?>
-                    <a class="btn11 btn1-primary11 btn-sm me-xxl-0 me-0 rounded-2 mb-xl-0 view-set"
-                        href="{{$idGet}}/hot-desk/{{$service->id}}">
-                        View More
-                    </a>
+                        <a class="btn11 btn1-primary11 btn-sm me-xxl-0 me-0 rounded-2 mb-xl-0 view-set"
+                            href="{{$idGet}}/hot-desk/{{$service->id}}">
+                            View More
+                        </a>
+                    </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
-</section>
+    </section>
 </section>
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="max-width:1000px;">
@@ -1052,8 +1067,7 @@ h1 {
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-label"
-                                for="templateAppointmentDate">Appointment Date: <span
+                            <label class="form-label" for="templateAppointmentDate">Appointment Date: <span
                                     class="required"></span></label>
                             <div class="position-relative">
                                 <input type="text" id="templateAppointmentDate" name="date"
@@ -1146,7 +1160,7 @@ h1 {
                         </div>
 
                     </div>
-                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
+                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;">
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
                     </div>
@@ -1299,19 +1313,19 @@ $(document).ready(function() {
 <script src="path/to/datepicker-library.js"></script>
 
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
     $('#templateAppointmentDate').datepicker({
-      // Add any additional datepicker options you need
+        // Add any additional datepicker options you need
     });
 
     // Event handler for input click
     $('#templateAppointmentDate').on('click', function() {
-      $(this).datepicker('show');
+        $(this).datepicker('show');
     });
 
     // Event handler for date icon click
     $('.date-icon').on('click', function() {
-      $('#templateAppointmentDate').datepicker('show');
+        $('#templateAppointmentDate').datepicker('show');
     });
-  });
+});
 </script>

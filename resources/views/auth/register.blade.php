@@ -11,33 +11,35 @@
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
+
 .btn2 {
-    display: inline-block;
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.5;
+    font-weight: 600;
+    color: #ffffff;
+    width:200px;
+    height: 42px;
     text-align: center;
     text-decoration: none;
-    vertical-align: middle;
     cursor: pointer;
     user-select: none;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 10px;
-    font-size: 1rem;
+    padding: 10px 5px 10px 5px;
+    font-size: 16;
     border-radius: 0;
 }
+
 body {
     background-color: #F4F3EE;
     font-family: "Noto Serif";
 }
-footer
-{
+
+footer {
     padding-top: 40px !important;
     position: fixed;
     bottom: 0px;
     width: 100%;
 }
+
 header {
     display: none;
 }
@@ -52,74 +54,121 @@ header {
     padding: 0px 15px;
 }
 
-@media (min-width: 360px) and (max-width: 375px){
-.down-sign{
-    width: 275px !important;
-    font-size:14px;
+@media (min-width: 360px) and (max-width: 375px) {
+    .down-sign {
+        width: 275px !important;
+        font-size: 14px;
 
+    }
 }
+
+@media (min-width: 992px) and (max-width: 1100px) {
+    .down-sign {
+        width: 275px !important;
+        margin-left: -15px !important;
+        font-size: 14px;
+    }
+
+    .terms {
+        width: 300px;
+    }
 }
-@media (min-width: 992px) and (max-width: 1100px){
-.down-sign{
-    width: 275px !important;
-    margin-left: -15px !important;
-    font-size:14px;
+
+@media (max-width: 575px) {
+
+    h5,
+    .fs-5 {
+        font-size: 15px !important;
+    }
 }
-.terms{
-    width:300px;
-}
-}
-@media (max-width: 575px){
-h5, .fs-5 {
-    font-size: 15px !important;
-}
-}
+
 @media(min-width:320px) and (max-width:768px) {
-    footer
-{
-    padding-top: 40px !important;
-    position: relative !important;
-    bottom: 0px;
-    width: 100%;
-    height: auto !important;
-}
-body{
-    overflow:auto !important;
-}
+    footer {
+        padding-top: 40px !important;
+        position: relative !important;
+        bottom: 0px;
+        width: 100%;
+        height: auto !important;
+    }
+
+    body {
+        overflow: auto !important;
+    }
+
     .login-response {
         width: 100% !important;
     }
-    h5, .fs-5 {
-    font-size: 14px !important;
+
+    h5,
+    .fs-5 {
+        font-size: 14px !important;
+    }
+
+    .col-3 {
+        width: 40%;
+    }
 }
 
-.col-3 {
-width:40%;
-}
-}
 @media(min-width:769px) and (max-width:1440px) {
-    h5, .fs-5 {
-    font-size: 18px !important;
+
+    h5,
+    .fs-5 {
+        font-size: 18px !important;
+    }
+
+    img.css-class {
+        height: 100% !important;
+    }
+
+    .col-3 {
+        width: 30% !important;
+    }
 }
-img.css-class{
-    height:100% !important;
-}
-.col-3{
-    width:30% !important;
-}
-}
+
 @media(min-width:320px) and (max-width:768px) {
-    img.css-class{
-    height:370px !important;
+    img.css-class {
+        height: 370px !important;
+    }
 }
-}
+
 @media(min-width:320px) and (max-width:1440px) {
-.log-padding{
-    padding:0px !important;
+    .log-padding {
+        padding: 0px !important;
+    }
+
+    .log-margin {
+        margin: 0;
+    }
 }
-.log-margin{
-    margin:0;
+
+.register-font {
+    width:347px;
+      top: 20px; 
+      left:29px;
 }
+.register-heading{
+    font-Weight: 700;
+    font-size: 25px;
+    Line-height: 34.05px;
+    color: #000000;
+    text-align:center;
+}
+.label-box{
+    width:20px;
+    height:20px;
+    color:#323232;
+}
+.register-forgot{
+    font-Weight: 400;
+    font-size: 18px;
+    Line-height: 24.52px;
+    color: #535353;
+}
+.already-has{
+    font-Weight: 400;
+    font-size: 16px;
+    Line-height: 21.79px;
+    color: #535353;
 }
 </style>
 
@@ -136,16 +185,16 @@ img.css-class{
         <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-3 login-response"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
-                <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10 ">
-                    <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid p-4">
+                <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10">
+                    <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid p-4 register-font">
                 </a>
             </div>
-            <h3 class="text-center mb-7 pt-3 pb-3" style="font-weight:bold;">{{__('messages.web.patient_registration')}}</h3>
+            <h3 class="text-center mb-7 pt-3 pb-3 register-heading">{{__('messages.web.patient_registration')}}</h3>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-12 mb-sm-7 mb-4">
-                       {{--  <label for="formInputFirstName" class="form-label">
+                        {{--  <label for="formInputFirstName" class="form-label">
                             {{ __('messages.patient.first_name').':' }}<span class="required"></span>
                         </label>--}}
                         <input name="first_name" type="text" class="form-control" id="name" aria-describedby="firstName"
@@ -156,7 +205,7 @@ img.css-class{
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-sm-7 mb-4">
-                      {{--   <label for="last_name" class="form-label">
+                        {{--   <label for="last_name" class="form-label">
                             {{ __('messages.patient.last_name') .':' }}<span class="required"></span>
                         </label>--}}
                         <input name="last_name" type="text" class="form-control" id="last_name"
@@ -166,7 +215,7 @@ img.css-class{
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-sm-7 mb-4">
-                      {{--   <label for="email" class="form-label">
+                        {{--   <label for="email" class="form-label">
                             {{ __('messages.patient.email').':' }}<span class="required"></span>
                         </label>--}}
                         <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
@@ -187,7 +236,7 @@ img.css-class{
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-sm-7 mb-4">
-                           {{--  <label for="password_confirmation" class="form-label">
+                            {{--  <label for="password_confirmation" class="form-label">
                                 {{ __('messages.patient.confirm_password') .':' }}<span class="required"></span>
                             </label>--}}
                             <input name="password_confirmation" type="password" class="form-control"
@@ -197,19 +246,21 @@ img.css-class{
                     </div>
 
                     <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms" style="font-size:19px; color:#535353">
-                        <input type="checkbox" class="form-check-input " name="toc" value="1" required />
-                        <span class="text-gray-700 me-2 ml-1">I agree to the 
-                            <span  class="ms-1 link-primary "
-                                style="color: #535353; font-size:19px; text-transform: capitalize; text-decoration:none;">Terms & Conditions</span>.
+                        <input type="checkbox" class="form-check-input label-box" name="toc" value="1" required />
+                        <span class="me-2 ml-1 register-forgot">I agree to the
+                            <span class="ms-1 link-primary register-forgot"
+                                style="text-transform: capitalize; text-decoration:none;">Terms
+                                & Conditions</span>.
                         </span>
                     </div>
 
                     <div class="d-grid col-6" style="margin: auto;">
                         <button type="submit" class="btn2 btn-primary2">Register</button>
                     </div>
-                    <div class="d-flex align-items-center mt-4 pb-2 down-sign" style="justify-content:center;">
-                    <span class="text-gray-700 me-2" style="color:#535353; font-size:19px;">{{__('messages.web.already_have_an_account').'?'}}</span>
-                        <a style="color:#535353; font-size:19px;" href="{{ route('login') }}" class="form-check-label fs-7" style="color: #000000;">
+                    <div class="d-flex align-items-center mt-4 mb-3 pb-2 down-sign" style="justify-content:center;">
+                        <span class="text-gray-700 me-2 already-has">{{__('messages.web.already_have_an_account').'?'}}</span>
+                        <a href="{{ route('login') }}"
+                            class="form-check-label already-has">
                             {{__('messages.web.sign_in_here')}}
                         </a>
                     </div>
