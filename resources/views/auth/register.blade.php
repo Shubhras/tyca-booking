@@ -179,10 +179,10 @@ header {
         @include('layouts.errors')
     </div>
     <div class="row col-12">
-        <div class="col-6 login-response" style="padding: 0;">
+        <div class="col-lg-6 login-response" style="padding: 0;">
             <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
         </div>
-        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-3 login-response"
+        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-xl-3 col-sm-5 login-response"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
                 <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10">
@@ -254,7 +254,7 @@ header {
                         </span>
                     </div>
 
-                    <div class="d-grid col-6" style="margin: auto;">
+                    <div class="d-grid" style="justify-content:center;">
                         <button type="submit" class="btn2 btn-primary2">Register</button>
                     </div>
                     <div class="d-flex align-items-center mt-4 mb-3 pb-2 down-sign" style="justify-content:center;">

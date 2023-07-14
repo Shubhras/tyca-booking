@@ -109,7 +109,7 @@ header {
     }
 
     img.css-class {
-        height: 700px;
+        height: 100% !important;
     }
 }
 
@@ -142,7 +142,7 @@ header {
     Line-height: 20.43px;
     color: #535353;
     width: 174px;
-    height: 36px;
+    /* height: 36px; */
 }
 
 .forgot-password1 {
@@ -161,8 +161,8 @@ header {
             @include('flash::message')
             @include('layouts.errors')
         </div>
-        <div class="row col-12 log-margin">
-            <div class="col-6 login-response log-padding">
+        <div class="row col-12 log-margin" style="margin:0;">
+            <div class="col-6 login-response log-padding" style="margin:0; padding:0;">
                 <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
             </div>
 
@@ -206,7 +206,7 @@ header {
                         <label class="form-check-label forgot-password1" style="margin-left:10px; margin-top:5px;"
                             for="remember_me">{{ __('messages.common.remember_me') }}</label>
                     </div>
-                    <div class="d-grid col-6" style="margin: auto;">
+                    <div class="d-grid align-items-center" style="justify-content: center;">
                         <button type="submit" class="btn2 btn-primary2">{{ __('messages.login') }}</button>
                     </div>
 

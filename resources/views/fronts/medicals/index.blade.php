@@ -149,7 +149,8 @@ section.title-hero-bg.parallax-effect img {
     margin-top:-15px;
 }
 .again-heading {
-    text-align: end;
+    text-align: right;
+    padding:20px;
     width: 192px;
     font-weight: 700;
     font-size: 30px;
@@ -179,7 +180,8 @@ section.title-hero-bg.parallax-effect img {
 
 .from-flex {
     line-height: 50px;
-    /* margin-top: 20px; */
+    text-align:left;
+    padding:20px;
 }
 
 .onloads-button {

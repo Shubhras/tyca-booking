@@ -26,7 +26,73 @@ $styleCss = 'style';
     </section>
 </div>
 
+
 <section class="main-block gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="grid">
+                    <div class="hot-desk">
+                        <h2>HOT DESK</h2>
+                        <p>at Thank You Come Again @ Balestier</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="h2-day">$40/Day</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="grid">
+                    <figure class="effect-chico">
+                        <img src="/assets/images/image 9.png" alt="">
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- <h2 class="h2-day">$40/Day</h2> -->
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="grid">
+                            <figure class="effect-chico">
+                                <img src="/assets/images/image 10.png" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="grid">
+                            <figure class="effect-chico">
+                                <img src="/assets/images/image 12.png" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="row grid-space">
+                    <div class="col-md-6">
+                        <div class="grid">
+                            <figure class="effect-chico">
+                                <img src="/assets/images/image 11.png" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="grid">
+                            <figure class="effect-chico">
+                                <img src="/assets/images/image 13.png" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+
+
+{{--<section class="main-block gray">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -79,7 +145,7 @@ $styleCss = 'style';
             </div>
         </div>
     </div>
-</section>
+</section>--}}
 
 <section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container">
@@ -95,7 +161,7 @@ $styleCss = 'style';
                         <div class="amenities-block">
                             <div class="row mt-10 mb-1 col-12" style="display:flex;">
                                 @foreach($specialization as $specializationData)
-                                <div class="col-6 icon-set">
+                                <div class="col-6 icon-set" style="padding-left:0;">
                                     <p class="heading-id amies-font">
                                         <img src="{{$specializationData->icon}}" alt="#"
                                             style="height: 30px; padding-right:10px;">
@@ -195,16 +261,16 @@ $styleCss = 'style';
                 </div>
             </div>
             <div class="col-md-4">
-                <h2 class="h2-plans">PLANS</h2>
-                <div class="row hours-plan">
-                    <div class="hour-plan">
-                        <div class="col-md-6">
+                <h2 class="h2-plans left-plan">PLANS</h2>
+                <div class="hours-plan">
+                    <div class="hour-plan ">
+                        <div class="col-md-6 row" style="margin-left:0;">
                             <div class="grid">
-                                <h2 class="h2-hourplan" style="text-align:start;">Hour Plan</h2>
+                                <h2 class="h2-hourplan" style="text-align:start;margin-top: 10px;">Hour Plan</h2>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="grid">
+                            <div class="grid grid-hours">
 
                                 <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour
                                 </p>
@@ -225,11 +291,11 @@ $styleCss = 'style';
                         </div>
                     </div>
                 </div>
-                <div class="row grid-space days-plan">
+                <div class="grid-space days-plan">
                     <div class="day-plan">
-                        <div class="col-md-6">
+                        <div class="col-md-6 row" style="margin-left:0px;">
                             <div class="grid">
-                                <h2 class="h2-dayplan" style="text-align:start;">Day Plan</h2>
+                                <h2 class="h2-dayplan" style="text-align:start; margin-top: 10px;">Day Plan</h2>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -345,7 +411,7 @@ $styleCss = 'style';
                     </div>
                     <div class="col-lg-6 d-none registered-patient">
                         <div class="form-group">
-                            <label class="form-label"
+                            <label class="form-label "
                                 for="template-medical-first_name">{{ __('messages.web.patient_name') }}:</label>
                             <input type="text" id="patientName" readonly class="form-control" value=""
                                 placeholder="{{ __('messages.web.patient_name') }}">
@@ -384,14 +450,14 @@ $styleCss = 'style';
                                     <div class="form-check d-flex align-items-center mb-2">
                                         <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
                                             {{__('messages.appointment.booked')}}
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center mb-2 ms-3">
                                         <input class="form-check-input form-check-success me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
                                             {{__('messages.appointment.available')}}
                                         </label>
                                     </div>
@@ -452,7 +518,7 @@ $styleCss = 'style';
                         </div>
 
                     </div>
-                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;"> 
+                    <div class="pay-amnt mb-4"> 
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
                     </div>
@@ -631,7 +697,9 @@ $('input[type="date"]').change(function() {
 body {
     font-family: "Noto Serif" !important;
 }
-
+.left-plan{
+    margin-left:-5px;
+}
 .ellipsis {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -662,7 +730,14 @@ a:hover {
     line-height: 30px;
     color: #000000;
 }
-
+.pay-amnt {
+    display: flex;
+    justify-content: center;
+    font-size: 24.96px;
+    font-weight: 700;
+    line-height: 34px;
+    margin-top: 10px;
+}
 @media (max-width: 767px) {
 
     .form-control,
@@ -679,6 +754,11 @@ a:hover {
     }
 }
 
+@media (min-width:320px) and (max-width:767px) {
+.grid-hours{
+    margin-left:-15px !important;
+}
+}
 @media (min-width:768px) and (max-width:800px) {
     .radio-btn {
         font-size: 14px !important;
@@ -709,7 +789,9 @@ a:hover {
         font-size: 15px !important;
         color: #000000;
     }
-
+    p.hou-p {
+    font-size: 15px !important;
+    }
     h5,
     .fs-5 {
         font-size: 15px !important;
@@ -822,12 +904,23 @@ a:hover {
 .modal-header {
     border-bottom: none !important;
 }
-
+.label-font {
+    font-size: 15.85px;
+    font-weight: 400;
+    line-height: 23.78px;
+}
+.btn-close {
+    width: 22.66px;
+    height: 22.66px;
+    color: #000000;
+    opacity: .5;
+}
 .book-space {
     text-align: center;
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 39.64px;
+    font-weight: 700;
     margin-top: -15px;
+    line-height: 53.98px;
 }
 
 .popular-tags button {
@@ -851,6 +944,10 @@ a:hover {
 
 .radio-btn {
     padding: 0px 10px;
+    font-size: 14.27px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 21.41px;
 }
 
 .set-back {
@@ -892,9 +989,12 @@ a:hover {
 }
 
 .btns {
-    /* border-radius: 50px; */
-    padding: 0.7rem 2.25rem;
-    color: #273432;
+    width: 158.55px;
+    height: 32.85px;
+    line-height: 17.28px;
+    font-weight: 600;
+    font-size: 12.68px;
+    padding: 8px 4px 8px 4px;
 }
 
 .btn-secondarys {
@@ -1101,7 +1201,7 @@ figure.effect-chico {
 
 .dayplan-btn {
     padding: 10px 5px 10px 5px;
-    width: 200px;
+    width: 175px;
     height: 42px;
     font-size: 16px;
     line-height: 21.79px;

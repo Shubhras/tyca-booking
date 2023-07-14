@@ -68,16 +68,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="http://localhost:8000/patients/dashboard" class="nav-link nav-color" id="nav-flex"><img
+                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link nav-color" id="nav-flex"><img
                                     class="img-fluid-logos" alt="img-fluid" src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
                             @else
+                            <div class="heart">
                             <a href="{{ route('login') }}"
-                                class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head"
-                                data-turbo="false">{{ __('messages.login') }}</a>
+                                class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head "
+                                data-turbo="false">{{ __('messages.login') }}</a></div>
                             @endif
                         </li>
+                        <li class="nav-item hide-hamer">
+                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard"
+                                class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger"
+                                data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:34px;height:29px;"></span>
+                            </a>
+                            </li>
+
 
                         {{--     <li class="nav-item dropdown">
                                 <a href="javascript:void(0)" class="nav-link" id="dropdownMenuLink"
@@ -116,8 +124,19 @@ document.addEventListener('DOMContentLoaded', function() {
         body {
     font-family: "Noto Serif" !important;
 }
+.navbar-toggler-icon1 {
+    background-image: url(/assets/images/rrrr.png);
+}
+.hamburger{
+    background: none;
+    width: 34px;
+    height: 5px;
+    color: #273451;
+    margin: 0px 0px 0px 15px;
+    padding: 0 15px 0px 5px;
+}
 header .navbar .navbar-nav .nav-item .nav-link {
-    color: #000000;
+    color: #000000 !important;
     font-weight: 400;
     padding-left: 20px;
     padding-right: 20px;
@@ -125,19 +144,19 @@ header .navbar .navbar-nav .nav-item .nav-link {
     line-height:34.05px;
 }
 .nav-logos{
-    width:290px;
-    height:22px;
+    width: 288.56px;
+    height: 20.93px;
 }
 
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
-    border-bottom: 1px solid #273432 !important;
+    /* border-bottom: 1px solid #273432 !important; */
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
-    border-bottom: 1px solid #273432 !important;
+    /* border-bottom: 1px solid #273432 !important; */
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
@@ -201,19 +220,61 @@ footer {
         margin: 0px 0px 0px 20px !important;
     }
 }
-
-@media (min-width: 320px) and (max-width: 600px) {
+@media (min-width:1024px) and (max-width:1200px) {
+    header .navbar .navbar-nav .nav-item .nav-link {
+    font-size: 17px !important;
+}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
     .btn1 {
-        font-size: 14px !important;
+        font-size: 15px !important;
+    }
+    .btn11 {
+        font-size: 15px !important;
+    }
+    .host-desk {
+        font-size: 20px !important;
     }
 }
-@media (min-width:320px) and (max-width:992px) {
+@media (min-width:320px) and (max-width:991px) {
+    .btn1 {
+        font-size: 15px !important;
+    }
+    .btn11 {
+        font-size: 15px !important;
+    }
     .nav-logos {
     width: auto !important;
     height: auto !important;
+}
+.hide-hamer{
+    display:none !important;
 }
 .header-height{
     height:50px;
 }
 }
+
+
+.nav-link { color: #323232!important;display:inline-block; margin:0; }
+.nav-link:after {
+  display:block;
+  content: '';
+  border-bottom: solid 3px #323232;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+}
+.nav-link:hover:after { transform: scaleX(1); }
+.nav-link:after{  transform-origin:  0% 50%; }
+
+.heart:hover {
+  animation: beat .3s 4 alternate !important;
+}
+
+@keyframes beat{
+	to { transform: scale(1.06); }
+}
+
+
+
 </style>

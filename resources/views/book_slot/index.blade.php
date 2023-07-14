@@ -8,7 +8,34 @@
 body {
     font-family: "Noto Serif" !important;
 }
-
+.list-mobile{
+    width:211px;
+    height:211px;
+}
+.btn-close:hover {
+    color: #323232 !important;
+    text-decoration: none !important;
+    opacity: .75 !important; 
+}
+.label-font{
+    font-size: 15.85px;
+    font-weight: 400;
+    line-height: 23.78px;
+}
+.pay-amnt{
+    display: flex;
+    justify-content: center;
+    font-size: 24.96px;
+    font-weight: 700;
+    line-height: 34px;
+    margin-top: 10px;
+}
+.btn-close{
+    width: 22.66px;
+    height: 22.66px;
+    color: #323232;
+    opacity: .5;
+}
 .desc-sort {
     font-size: 20px;
     line-height: 30px;
@@ -19,7 +46,7 @@ body {
 .hour-view {
     text-decoration: none;
     text-align: center;
-    padding-top: 16px;
+    padding-top: 14px;
 }
 
 .no-slot-color {
@@ -116,18 +143,23 @@ body {
 
 .book-space {
     text-align: center;
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 39.64px;
+    font-weight: 700;
     margin-top: -15px;
+    line-height: 53.98px;
 }
 
 .btns {
-    padding: 0.7rem 2.25rem;
-    color: #273432;
+    width: 158.55px;
+    height: 32.85px;
+    line-height: 17.28px;
+    font-weight: 600;
+    font-size: 12.68px;
+    padding: 8px 4px 8px 4px;
 }
 
 .btn-secondarys {
-    color: #fff;
+    color: #ffffff;
     background-color: #273432;
     border-color: #273432;
     border: 1px solid #273432;
@@ -381,13 +413,6 @@ figure.effect-chico11 {
     border-bottom: none !important;
 }
 
-.book-space {
-    text-align: center;
-    font-size: 30px;
-    font-weight: 500;
-    margin-top: -15px;
-}
-
 .popular-tags button {
     display: inline-block;
     padding: 10px 0px;
@@ -405,10 +430,18 @@ figure.effect-chico11 {
 
 .radio-btn1 {
     padding: 0px 5px;
+    font-size: 14.27px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 21.41px;
 }
 
 .radio-btn {
     padding: 0px 10px;
+    font-size: 14.27px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 21.41px;
 }
 
 .set-back {
@@ -489,6 +522,12 @@ figure.effect-chico {
     line-height: 30px;
 }
 
+@media (min-width:1024px) and (max-width:1200px) {
+    .list-mobile {
+    width: 185px !important;
+    height: 185px !important;
+}
+}
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -523,6 +562,30 @@ figure.effect-chico {
     }
 }
 
+@media(min-width:801px) and (max-width:992px){
+.list-box{
+    width:inherit !important;
+}
+}
+@media(min-width:320px) and (max-width:595px){
+    .list-mobile{
+    height:211px !important;
+}
+.hosts {
+    text-align:center;
+}
+.host-desk {
+    text-align:center;
+}
+}
+@media(min-width:600px) and (max-width:767px){
+    .list-box{
+        width:inherit !important;
+    }
+    .list-mobile{
+    height:211px !important;
+}
+}
 @media (min-width:320px) and (max-width:600px) {
     .hour-view {
         padding-top: 15px !important;
@@ -605,9 +668,9 @@ figure.effect-chico {
 }
 
 @media (min-width:768px) and (max-width:800px) {
-    .list-set {
+    /* .list-set {
         width: 20% !important;
-    }
+    } */
 
     .img-book {
         padding-right: 0px !important;
@@ -910,11 +973,11 @@ h1 {
                 <h3 class="amities1" style="margin-left:15px;">Listings</h3>
                 @foreach($services as $service)
                 <div class="col-5 row list-box" style="margin:30px;">
-                    <div class="row col-12 set-border" style="height: 200px;">
-                        <div class="col-5 list-set" style="padding:0px;">
-                            <img src="{{ $service->icon }}" alt="Digital" style="width:100%; height:100%;">
+                    <div class="row col-12 set-border" style="">
+                        <div class="col-md-5 col-sm-5 col-xs-12 list-set" style="padding:0px;">
+                            <img src="{{ $service->icon }}" alt="Digital" class="list-mobile">
                         </div>
-                        <div class="col-7">
+                        <div class="col-md-7 text-left col-sm-7 col-xs-12 xs-text-center">
                             <div class="column">
                                 <div class="col-3 host-desk">
                                     {{ $service->name }}
@@ -929,7 +992,7 @@ h1 {
                         @if(getLogInUser())
                         <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
                             data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                            onclick="displayMessage(1,'{{ $service->charges }}');">
+                            onclick="displayMessage(1,'{{ $service->charges }}','{{$service->id}}');">
                             {{ $service->charges }} / Hour
                         </button>
                         @else
@@ -940,7 +1003,7 @@ h1 {
                         @if(getLogInUser())
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
                             data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
-                            onclick="displayMessage(2,'{{ $service->charges_daily }}');">
+                            onclick="displayMessage(2,'{{ $service->charges_daily }}','{{$service->id}}');">
                             {{ $service->charges_daily }} / Day
                         </button>
                         @else
@@ -1026,7 +1089,7 @@ h1 {
                             <div class="form-group">
                                 <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
                                         class="required"></span></label>
-                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : '',['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
+                                {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : $doctor->id,['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
                         @endif
@@ -1092,14 +1155,14 @@ h1 {
                                     <div class="form-check d-flex align-items-center mb-2">
                                         <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font" for="defaultCheck1">
                                             {{__('messages.appointment.booked')}}
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center mb-2 ms-3">
                                         <input class="form-check-input form-check-success me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font" for="defaultCheck1">
                                             {{__('messages.appointment.available')}}
                                         </label>
                                     </div>
@@ -1142,7 +1205,7 @@ h1 {
                             </ul>
                         </div>
                     </div>
-                    <div class="row col-md-12 mb-4">
+                    <div class="row col-md-12 mb-5">
                         <div class="col-3">
                             <div>
                                 <input id="payment_type" type="radio" name="payment_type" value="2">
@@ -1160,7 +1223,7 @@ h1 {
                         </div>
 
                     </div>
-                    <div style="display: flex; justify-content: center;font-size: 20px;font-weight: 600;">
+                    <div class="pay-amnt mb-4">
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
                     </div>
@@ -1200,7 +1263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage(id, price) {
+function displayMessage(id, price,service_id) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -1212,6 +1275,7 @@ function displayMessage(id, price) {
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
+    $('#FrontAppointmentServiceId').val(service_id);
 
     $.ajax({
         type: 'POST',
