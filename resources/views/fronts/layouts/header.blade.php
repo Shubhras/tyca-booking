@@ -46,29 +46,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center py-2 py-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link nav-color {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
+                            <a class="nav-link nav-hov nav-color {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
                                 href="{{ url('/') }}">{{ __('messages.web.home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
+                            <a class="nav-link nav-hov nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
                                 href="{{ url('/') }}">News</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-color {{ Request::is('medical-services*') ? 'active' : '' }}"
+                            <a class="nav-link nav-hov nav-color {{ Request::is('medical-services*') ? 'active' : '' }}"
                                 href="{{ url('/') }}">Store</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
+                            <a class="nav-link nav-hov  nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
                                 href="{{ url('/') }}">Membership</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
+                            <a class="nav-link nav-hov nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
                                 href="{{ url('/') }}"
                                 data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link nav-color" id="nav-flex"><img
+                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link nav-hov nav-color" id="nav-flex"><img
                                     class="img-fluid-logos" alt="img-fluid" src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
@@ -220,6 +220,11 @@ footer {
         margin: 0px 0px 0px 20px !important;
     }
 }
+@media (min-width:992px) and (max-width:1023px) {
+    header .navbar .navbar-nav .nav-item .nav-link {
+    font-size: 18px !important;
+}
+}
 @media (min-width:1024px) and (max-width:1200px) {
     header .navbar .navbar-nav .nav-item .nav-link {
     font-size: 17px !important;
@@ -256,16 +261,16 @@ footer {
 }
 
 
-.nav-link { color: #323232!important;display:inline-block; margin:0; }
-.nav-link:after {
+.nav-hov { color: #323232!important;display:inline-block; margin:0; }
+.nav-hov:after {
   display:block;
   content: '';
   border-bottom: solid 3px #323232;  
   transform: scaleX(0);  
   transition: transform 250ms ease-in-out;
 }
-.nav-link:hover:after { transform: scaleX(1); }
-.nav-link:after{  transform-origin:  0% 50%; }
+.nav-hov:hover:after { transform: scaleX(1); }
+.nav-hov:after{  transform-origin:  0% 50%; }
 
 .heart:hover {
   animation: beat .3s 4 alternate !important;

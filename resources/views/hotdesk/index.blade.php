@@ -14,9 +14,9 @@ $styleCss = 'style';
 
             <div class="container">
                 <div class="page-title text-center white-color">
-                    <h1 class="set-space ellipsis1">{{$aboutTitle->value}}</h1>
+                    <h1 class="set-space ellipsis1 padding-elips">{{$aboutTitle->value}}</h1>
                     <h4 class="workspace">
-                        <div class="ellipsis">
+                        <div class="ellipsis padding-elips">
                             {!! $aboutShortDescription->value !!}
                         </div>
                     </h4>
@@ -774,7 +774,22 @@ a:hover {
         display: grid !important;
     }
 }
-
+@media(min-width:768px){
+    .padding-elips{
+        padding-left:150px;
+        padding-right:150px;
+    }
+}
+@media (min-width:320px) and (max-width:767px) {
+    .padding-elips{
+        padding-left:30px;
+        padding-right:30px;
+    }    
+    .page-title h1 {
+    font-size: 70px;
+    line-height: 40.34px !important;
+    }
+}
 @media (min-width:768px) and (max-width:1024px) {
     .icon-set {
         width: 100% !important;
@@ -811,7 +826,11 @@ a:hover {
         margin: 2px -8px 3px !important;
     }
 }
-
+@media (min-width:1025px) and (max-width:1290px) {
+.dayplan-btn {
+    width: 130px !important;
+}
+}
 @media (min-width:320px) and (max-width:600px) {
     .amenities-block {
         width: inherit !important;
@@ -876,7 +895,6 @@ a:hover {
 
     section.mains-blocks {
         padding: 0px !important;
-        /* margin-top: -60px !important; */
         margin-top: 30px !important;
         background: #fbfbfb;
     }
@@ -998,7 +1016,7 @@ a:hover {
 }
 
 .btn-secondarys {
-    color: #fff;
+    color: #ffffff !important;
     background-color: #273432;
     border: 1px solid #273432;
 }
@@ -1105,8 +1123,6 @@ figure.effect-chico {
 
 .hot-desks {
     text-align: start;
-    /* margin-top: -20px; */
-    /* margin-bottom: 50px; */
 }
 
 .hot-desks h2 {

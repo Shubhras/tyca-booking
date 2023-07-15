@@ -43,7 +43,7 @@
                 <h2 class="h2-member">MEMBER'S INFORMATION</h2>
 
                 <div class="row col-md-12" id="customer-review_wrap">
-                    <div class="col-md-5 member-imgs" id="customer-img">
+                    <div class="col-md-3 member-imgs" id="customer-img">
                         <img src="{{ getLogInUser()->profile_image }}" alt="" class="cust-img">
                     </div>
                     <div class="col-md-6" id="customer-content-wrap" style="margin-left:30px;">
@@ -54,7 +54,8 @@
 
                         <div class="row btn-portal col-lg-12">
                             <div class="col-lg-12 col-sm-4 col-xs-4 update-btn btn-member update-member">
-                                <button class="up-btn right-btn update-member" data-bs-toggle="modal" data-bs-target="#update_info_modal">Update
+                                <button class="up-btn right-btn update-member" data-bs-toggle="modal"
+                                    data-bs-target="#update_info_modal">Update
                                     Information</button>
                                 <button class="log-btn"
                                     onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">Log
@@ -103,7 +104,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data['todayAppointment'] as $appointment)
-                                    <tr style="color: #111827;">
+                                    <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;">
                                         <?php if(isset($appointment->transaction)){ ?>
                                         <td>{{ $appointment->doctor->user->first_name}}</td>
                                         <td>{{ $appointment->services->name}}</td>
@@ -175,7 +176,7 @@
                                 <tbody>
                                     @foreach($data['upcomingAppointment'] as $appointment)
                                     <?php if(isset($appointment->transaction)){ ?>
-                                    <tr style="color: #111827;">
+                                    <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400;">
                                         <td>{{ $appointment->doctor->user->first_name}}</td>
                                         <td>{{ $appointment->services->name}}</td>
                                         <td>{{ $appointment->plan_type }}</td>
@@ -244,14 +245,39 @@
                 </div>
                 <div class="books-spaces">BOOKING INFORMATION</div>
                 <div class="book-p">
-                    <p>Outlet: <b id="outinfo"></b></p>
-                    <p>Booking Space: <b id="bookSpaceInfo"></b></p>
-                    <p>Plan Type: <b id="planTypeInfo"></b></p>
-                    <p>Appointment At: <b id="appointAtIfo"></b></p>
-                    <p>Payable Amount: <b id="payableInfo"></b></p>
-                    <p>Payment Method: <b id="paymentMethod"></b></p>
-                    <p>Payment Status: <b id="statusInfo"></b></p>
-                    <p>Booking Status: <b id="bookedInfoses"></b></p>
+                    <div class="book-infos">
+                        <p class="book-val">Outlet:
+                        <p>&nbsp;
+                        <p id="outinfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Booking Space:</p>&nbsp;
+                        <p id="bookSpaceInfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Plan Type:</p>&nbsp;
+                        <p id="planTypeInfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Appointment At:</p>&nbsp;
+                        <p id="appointAtIfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Payable Amount:</p>&nbsp;
+                        <p id="payableInfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Payment Method:</p>&nbsp;
+                        <p id="paymentMethod" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Payment Status:</p>&nbsp;
+                        <p id="statusInfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Booking Status:</p>&nbsp;
+                        <p id="bookedInfoses" class="book-ps"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -272,14 +298,54 @@
             <div class="books-spaces">CANCEL BOOKING</div>
             <p class="follow-booking">Do you want to cancel the following booking?</p>
             <div class="book-p-cancel">
-                <p>Outlet: <b id="coutinfo"></b></p>
-                <p>Booking Space: <b id="cbookSpaceInfo"></b></p>
-                <p>Plan Type: <b id="cplanTypeInfo"></b></p>
-                <p>Appointment At: <b id="cappointAtIfo"></b></p>
-                <p>Payable Amount: <b id="cpayableInfo"></b></p>
-                <p>Payment Method: <b id="cpaymentMethod"></b></p>
-                <p>Payment Status: <b id="cstatusInfo"></b></p>
-                <p>Booking Status: <b id="cbookedInfo"></b></p>
+                <!-- <p>Outlet: <b id="coutinfo"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Outlet:
+                        <p>&nbsp;
+                        <p id="coutinfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Booking Space:
+                        <p>&nbsp;
+                        <p id="cbookSpaceInfo" class="book-ps"></p>
+                    </div>
+                <!-- <p>Booking Space: <b id="cbookSpaceInfo"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Plan Type:
+                        <p>&nbsp;
+                        <p id="cplanTypeInfo" class="book-ps"></p>
+                    </div>
+                <!-- <p>Plan Type: <b id="cplanTypeInfo"></b></p> -->
+                <!-- <p>Appointment At: <b id="cappointAtIfo"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Appointment At:
+                        <p>&nbsp;
+                        <p id="cappointAtIfo" class="book-ps"></p>
+                    </div>
+                    <div class="book-infos">
+                        <p class="book-val">Payable Amount:
+                        <p>&nbsp;
+                        <p id="cpayableInfo" class="book-ps"></p>
+                    </div>
+                <!-- <p>Payable Amount: <b id="cpayableInfo"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Payment Method:
+                        <p>&nbsp;
+                        <p id="cpaymentMethod" class="book-ps"></p>
+                    </div>
+                <!-- <p>Payment Method: <b id="cpaymentMethod"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Payment Status:
+                        <p>&nbsp;
+                        <p id="cstatusInfo" class="book-ps"></p>
+                    </div>
+                <!-- <p>Payment Status: <b id="cstatusInfo"></b></p> -->
+                <div class="book-infos">
+                        <p class="book-val">Booking Status:
+                        <p>&nbsp;
+                        <p id="cbookedInfo" class="book-ps"></p>
+                    </div>
+                <!-- <p>Booking Status: <b id="cbookedInfo"></b></p> -->
             </div>
             <div class="btn-cancel-booking">
                 <div class="cancel-yes-btn">
@@ -335,70 +401,70 @@
                     <div class="alert alert-danger d-none hide"></div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label  required']) }}
+                            {{ Form::label('First Name', __('First Name').(''), ['class' => 'form-label ']) }}
                             <span class=""></span>
                             <input name="first_name" type="text" class="form-control" id="name"
                                 aria-describedby="firstName" placeholder="{{ __('messages.patient.first_name') }}"
-                                value="{{ $data['user']->first_name }}" required pattern="[A-Za-z]+"
+                                 value="{{ $data['user']->first_name }}"  pattern="[A-Za-z]+"
                                 title="Please enter alphabetic characters only">
                         </div>
                         <div class="form-group col-sm-6">
-                            {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label  required']) }}
+                            {{ Form::label('Last Name', __('Last Name').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="last_name" type="text" class="form-control" id="last_name"
                                 aria-describedby="lastName" placeholder="{{ __('messages.patient.last_name') }}"
-                                required value="{{ $data['user']->last_name }}" required pattern="[A-Za-z]+"
+                                 value="{{ $data['user']->last_name }}"  pattern="[A-Za-z]+"
                                 title="Please enter alphabetic characters only">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label  required']) }}
+                            {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
                                 placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}"
-                                required disabled>
+                                 disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label  required']) }}
+                            {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input type="password" name="password" class="form-control" id="password"
                                 placeholder="{{ __('messages.patient.password') }}" aria-describedby="password"
-                                required>
+                                >
                         </div>
                         <div class="form-group col-sm-6">
-                            {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label  required']) }}
+                            {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="password_confirmation" type="password" class="form-control"
                                 placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
-                                aria-describedby="confirmPassword" required>
+                                aria-describedby="confirmPassword" >
                         </div>
                     </div>
 
                     <div class="row">
-                    @php $styleCss = 'style' @endphp
-                    <p>Icon</p>
-                    <div class="mb-3" io-image-input="true">
-                        <div class="d-block">
-                            <div class="image-picker">
-                                <div class="image previewImage" id="exampleInputImage" {{ $styleCss }}="background-image: url('{{$data['user']->profile_image }}')
+                        @php $styleCss = 'style' @endphp
+                        <p>Icon</p>
+                        <div class="mb-3" io-image-input="true">
+                            <div class="d-block">
+                                <div class="image-picker">
+                                    <div class="image previewImage" id="exampleInputImage" {{ $styleCss }}="background-image: url('{{$data['user']->profile_image }}')
                                 ">
-                            </div>
-                            <span class="picker-edit rounded-circle text-gray-500 fs-small"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-original-title="{{ __('messages.user.edit_profile') }}">
-                                    <label> 
-                                        <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                                        <input type="file" id="profilePicture" name="image"
-                                               class="image-upload d-none profile-validation" accept="image/*"/> 
-                                    </label> 
-                                </span>
+                                    </div>
+                                    <span class="picker-edit rounded-circle text-gray-500 fs-small"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-original-title="{{ __('messages.user.edit_profile') }}">
+                                        <label>
+                                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                                            <input type="file" id="profilePicture" name="image"
+                                                class="image-upload d-none profile-validation" accept="image/*" />
+                                        </label>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
                     <div class="modal-footer pt-0 mt-5" style="place-content:center;">
@@ -421,14 +487,15 @@
 
 
 <style>
-    .image {
+.image {
     display: inline-block;
     flex-shrink: 0;
     position: relative;
     -o-object-fit: cover;
     object-fit: cover;
 }
-    .image-picker {
+
+.image-picker {
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0.475rem;
@@ -465,9 +532,11 @@
 .image-picker .picker-edit label {
     cursor: pointer;
 }
-    body {
+
+body {
     font-family: "Noto Serif" !important;
 }
+
 .member-imgs {
     text-align: end;
 }
@@ -507,8 +576,8 @@
 }
 
 .page-title h1 {
-    font-size: 45px;
-    line-height: 1.5em;
+    font-size: 70px;
+    line-height: 95.34px;
     font-weight: 700;
     margin: 0;
 }
@@ -519,7 +588,21 @@
     font-weight: 300;
     margin-top: 20px;
 }
-
+.book-infos{
+    display:flex;
+}
+.book-ps{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #535353;
+}
+.book-val{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #535353;
+}
 section.title-hero-bg.parallax-effect img {
     width: 100%;
 }
@@ -529,11 +612,11 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .portal-btn {
-    width: 200px;
-    height: 40px;
-    font-size: 15px;
+    font-size: 25px;
     background: #273432;
     border: #273432;
+    font-weight: 600;
+    line-height: 34.05px;
     color: #FFFFFF;
 }
 
@@ -542,11 +625,13 @@ section.title-hero-bg.parallax-effect img {
 }
 
 h2.h2-member {
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 50px;
+    font-weight: 700;
     color: #000000;
+    line-height: 68.1px;
 }
 
 .customer-review_wrap {
@@ -566,18 +651,22 @@ button.up-btn {
     background: #273432;
     border: #273432;
     color: #FFFFFF;
-    font-size: 15px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 10px 5px 10px 5px;
     width: 200px;
+    line-height: 21.79px;
+    font-weight: 600;
 }
 
 button.log-btn {
     background: #FF7272;
     border: #273432;
     color: #FFFFFF;
-    font-size: 15px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 10px 5px 10px 5px;
     width: 200px;
+    line-height: 21.79px;
+    font-weight: 600;
 }
 
 /* .your-rating-wrap {
@@ -586,12 +675,17 @@ button.log-btn {
 
 .your-rating-wrap span {
     color: #535353;
-    font-size: 22px;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 40.86px;
 }
 
 .your-rating-wrap p {
     color: #535353;
     margin-top: 10px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
     margin-bottom: 30px;
 }
 
@@ -620,77 +714,95 @@ li.nav-item1 {
 }
 
 a#latest-tab {
-    color: #535353;
-    font-size: 22px;
-    font-weight:600;
+    color: #535353 !important;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40.86px;
 }
 
 a#upcoming-tab {
     color: #535353;
-    font-size: 22px;
-    font-weight:600;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40.86px;
 }
 
 a#latest-tab.active {
-    border-bottom: 3px solid #000000;
+    border-bottom: 6px solid #000000;
     color: #000000;
-    font-weight:600;
+    font-weight: 700;
 }
 
 a#upcoming-tab.active {
-    border-bottom: 3px solid #000000;
+    border-bottom: 6px solid #000000;
     color: #000000;
-    font-weight:600;
+    font-weight: 700;
 }
 
 h2.up-booking {
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 700;
     text-align: center;
     margin-top: 30px;
+    line-height: 68.1px;
     color: #000000;
+    margin-bottom: 30px;
 }
 
 h2.past-booking {
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 700;
     text-align: center;
     margin-top: 30px;
+    line-height: 68.1px;
     color: #000000;
+    margin-bottom: 30px;
 }
 
 a#latests-tab-1.active {
     background: #273432;
     color: #FFFFFF;
-    font-weight:600;
+    font-weight: 700;
+    /* width: 707.5px; */
+    /* height: 70px; */
+    font-size: 20px;
+    line-height: 27.24px;
 }
 
 a#latests-tab-1 {
     background: #FFFFFF;
     color: #535353;
     margin-top: 60px;
-    font-weight:600;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
 }
 
 a#upcomings-tab-2.active {
     background: #273432;
     color: #FFFFFF;
-    font-weight:600;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
 }
 
 a#upcomings-tab-2 {
     background: #FFFFFF;
     color: #535353;
     margin-top: 60px;
-    font-weight:600;
+    font-weight: 700;
+    line-height: 27.24px;
+    font-size: 20px;
 }
 
 .thead-portal {
     background: #F7F7F7;
-    color: #323232;
+    color: #6B7280;
 }
 
 th.col-portal {
     padding: 20px !important;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 500;
     color: #6B7280;
 }
@@ -705,7 +817,9 @@ th.col-portal {
 
 .books-spaces {
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 68.1px;
     color: #000000;
 }
 
@@ -728,6 +842,9 @@ p.follow-booking {
     text-align: center;
     margin-top: 30px;
     color: #535353;
+    font-size: 20px;
+    line-height: 27.24px;
+    font-weight: 400;
 }
 
 .book-p-cancel {
@@ -748,16 +865,22 @@ button.yes-btn {
     width: 200px;
     background: #273432;
     border: #273432;
-    padding: 10px;
+    padding: 10px 5px 10px 5px;
     color: #FFFFFF;
+    line-height: 21.79px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 button.no-btn {
     width: 200px;
     background: #FF7272;
     border: #FF7272;
-    padding: 10px;
+    padding: 10px 5px 10px 5px;
     color: #FFFFFF;
+    line-height: 21.79px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .cancel-yes-btn {
@@ -767,10 +890,12 @@ button.no-btn {
 .btns {
     background: #273432;
     border: #273432;
-    color: #FFFFFF;
-    font-size: 15px;
-    padding: 10px;
-    width: 170px;
+    color: #FFFFFF !important;
+    font-size: 16px;
+    padding: 10px 5px 10px 5px;
+    font-weight: 600;
+    width: 200px;
+    line-height: 21.79px;
 }
 
 .btn-secondarys {
@@ -785,9 +910,10 @@ button.no-btn {
 
 .book-space {
     text-align: center;
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 50px;
+    font-weight: 700;
     margin-top: -15px;
+    line-height: 68.1px;
 }
 
 .book1-space {
@@ -795,6 +921,8 @@ button.no-btn {
     font-size: 20px;
     color: #535353;
     margin-top: -15px;
+    font-weight: 400;
+    line-height: 27.24px;
 }
 
 .modal-header {
@@ -845,14 +973,17 @@ div#customer-review_wrap {
     border: #273432;
     color: #FFFFFF;
 }
-.right-btn{
-    margin-right:20px;
+
+.right-btn {
+    margin-right: 20px;
 }
+
 /* media */
 @media (min-width: 320px) and (max-width: 600px) {
     .right-btn {
-    margin-right: 0px !important;
-}
+        margin-right: 0px !important;
+    }
+
     .update-member {
         margin-bottom: 10px;
     }
@@ -862,9 +993,11 @@ div#customer-review_wrap {
     }
 
     .page-title h1 {
-        font-size: 35px;
+        font-size: 25px;
     }
-
+    .portal-btn {
+    font-size: 20px !important;
+    }
     .title-hero-bg {
         min-height: 335px;
     }
@@ -872,17 +1005,17 @@ div#customer-review_wrap {
     a#latest-tab.active {
         border-bottom: 3px solid #000000;
         color: #000000;
-        font-size: 15px;
+        font-size: 10px;
     }
 
     a#upcoming-tab {
         color: #535353;
-        font-size: 15px;
+        font-size: 10px;
     }
 
     a#latest-tab {
         color: #535353;
-        font-size: 15px;
+        font-size: 10px;
     }
 
     h2.h2-member {
@@ -1067,8 +1200,9 @@ div#customer-review_wrap {
     button.log-btn {
         margin-left: 0px !important;
     }
-    .update-member{
-        margin-bottom:10px !important;
+
+    .update-member {
+        margin-bottom: 10px !important;
     }
 }
 
@@ -1081,9 +1215,11 @@ div#customer-review_wrap {
     button.log-btn {
         margin-left: 0px;
     }
-    .update-member{
-        margin-bottom:10px !important;
+
+    .update-member {
+        margin-bottom: 10px !important;
     }
+
     h5.text-white.mb-4.pb-1 {
         font-size: 18px !important;
     }

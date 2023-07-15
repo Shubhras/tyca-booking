@@ -12,6 +12,9 @@ use App\Models\Setting;
 use App\Models\Patient;
 use App\Models\Specialization;
 use DB;
+use Illuminate\Support\Facades\Session;
+
+
 class BookController extends Controller
 {
     //
@@ -32,7 +35,7 @@ class BookController extends Controller
         $user1 = User::with('media')->where('id',$id)->first();
         $bodyimage1 = Setting::where('key', 'body_image')->first();
         $specialization = Specialization::with('media')->whereIn('id', $bb)->get();
-
+        Session::flash('message', 'This is a message'); 
         $services = Service::with('media')->whereIn('id', $aa)->whereStatus(Service::ACTIVE)->latest()->get();
         $appointmentDoctors = Doctor::with('user')->whereIn('id',
             DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',

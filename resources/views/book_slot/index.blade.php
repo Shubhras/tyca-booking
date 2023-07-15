@@ -4,6 +4,7 @@
 @endsection
 
 @section('front-content')
+
 <style>
 body {
     font-family: "Noto Serif" !important;
@@ -46,7 +47,7 @@ body {
 .hour-view {
     text-decoration: none;
     text-align: center;
-    padding-top: 14px;
+    padding: 14px;
 }
 
 .no-slot-color {
@@ -64,7 +65,7 @@ body {
 
 .view-set {
     text-decoration: none;
-    padding: 14px 18px;
+    padding: 14px;
     background: #ffffff !important;
     color: #273432 !important;
     border: 2px solid #273432 !important;
@@ -220,7 +221,7 @@ body {
 
 .btn1 {
     width: 224.31px;
-    height: 57.92px;
+    /* height: 57.92px; */
     background: #273432;
     border: #273432;
     color: #FFFFFF;
@@ -233,7 +234,7 @@ body {
 
 .btn11 {
     width: 224.31px;
-    height: 57.92px;
+    /* height: 57.92px; */
     background: #273432;
     border: #273432;
     color: #FFFFFF;
@@ -558,7 +559,7 @@ figure.effect-chico {
 
     .view-set {
         text-decoration: none;
-        padding: 10px 0px !important;
+        padding: 14px 0px !important;
     }
 }
 
@@ -586,11 +587,18 @@ figure.effect-chico {
     height:211px !important;
 }
 }
+@media (min-width: 992px) and (max-width: 1200px){
+.btn1 {
+    font-size: 14px !important;
+}
+}
 @media (min-width:320px) and (max-width:600px) {
     .hour-view {
         padding-top: 15px !important;
     }
-
+    .btn11 {
+    font-size: 10px !important;
+}
     .sub-name {
         font-size: 13px !important;
     }
@@ -731,7 +739,9 @@ h1 {
     background: #273432;
 } */
 </style>
-
+@if(Session::has('message') == 'This is a message')
+<p onload="myFunction()">{{ Session::get('message') }}</p>
+@endif
 <section class="main-block1 gray">
     <div class="container">
         <div class="row col-12 slot-margin">
@@ -797,6 +807,7 @@ h1 {
                                         {{$user->first_name}}
                                         {{$user->last_name}}<h1>
                                         </h1>
+                                        
                                         <div>
                                             <p class="location">
                                                 <img src="/assets/image/material-symbols_location-on.png" alt="#"
@@ -809,6 +820,7 @@ h1 {
                         </div>
                     </div>
                 </div>
+                <p onload="myFunction()">{{ Session::get('message') }}</p>
 
                 <div class="col-md-4 responsive-wrap set-amities">
                     <div class="sidebar">
@@ -1027,10 +1039,8 @@ h1 {
 </section>
 <div id="hour_plan_modal" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="max-width:1000px;">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="book-space">BOOK A SPACE</div>
@@ -1111,8 +1121,6 @@ h1 {
                         <input type="hidden" id="adminAppointmentPlanId" value="adminAppointmentPlanId">
                         <input type="hidden" name="payable_amount" id="payable_amount" value="10">
                         <input type="hidden" name="charge" value="10">
-
-
                     </div>
                     <div class="col-lg-6 d-none registered-patient">
                         <div class="form-group">
@@ -1122,12 +1130,10 @@ h1 {
                                 placeholder="{{ __('messages.web.patient_name') }}">
                         </div>
                     </div>
-
                     <div class="col icon-set" style="text-align:center;">
                         <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
                                 style="width:100%; margin-bottom: 20px;"></span>
                     </div>
-
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-label" for="templateAppointmentDate">Appointment Date: <span
@@ -1377,6 +1383,10 @@ $(document).ready(function() {
 <script src="path/to/datepicker-library.js"></script>
 
 <script>
+    function myFunction() {
+  alert("Page is loaded");
+  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
+}
 $(document).ready(function() {
     $('#templateAppointmentDate').datepicker({
         // Add any additional datepicker options you need

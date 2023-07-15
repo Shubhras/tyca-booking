@@ -15,10 +15,10 @@
 
         <div class="container">
             <div class="page-title text-center white-color">
-                <h1 class="ellipsis1">{{$aboutTitle->value}}</h1>
+                <h1 class="ellipsis1 padding-elips">{{$aboutTitle->value}}</h1>
                 <h4 class="workspace">
-                    <div class="ellipsis new-p">
-                    {!! $aboutShortDescription->value !!}
+                    <div class="ellipsis padding-elips new-p">
+                        {!! $aboutShortDescription->value !!}
                     </div>
                 </h4>
             </div>
@@ -29,6 +29,9 @@
 
 <section class="white-bg" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container">
+        <div class="top-outlets">
+            OUTLETS
+        </div>
         <div class="row justify-content-center">
             @foreach($outletUser as $outletData)
             @if($outletData['status'] == 1)
@@ -36,7 +39,7 @@
                 <a href="book-slot/{{$outletData['id']}}" style="text-decoration: none;">
                     <div class="row">
                         <div class="col-sm-12 section-heading">
-                            <img src="{{$outletData['profile_image']}}" alt="" style="width: 250px; height: 240px;">
+                            <img src="{{$outletData['profile_image']}}" alt="" class="medical-img">
                         </div>
                     </div>
                     <div class="row">
@@ -69,9 +72,24 @@
 
 
 <style>
-    body {
+body {
     font-family: "Noto Serif" !important;
-     }
+}
+
+.medical-img {
+    width: 400px;
+    height:400px;
+    /* height: 240px; */
+}
+.top-outlets{
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 68.1px;
+    color: #000000;
+    text-align: center;
+    padding: 30px;
+    margin-bottom: 40px;
+}
 .page-title {
     position: absolute;
     top: 60%;
@@ -88,12 +106,14 @@
 .white-color {
     color: #fff;
 }
-.new-p{
+
+.new-p {
     font-size: 40px;
     font-weight: 400;
     line-height: 54.48px;
     text-align: center;
 }
+
 .page-title h1 {
     font-size: 70px;
     line-height: 95.34px;
@@ -113,7 +133,7 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .white-bg {
-    padding-top: 60px;
+    padding-top: 100px;
     background: #f5f5f5;
     overflow: hidden;
 }
@@ -140,30 +160,40 @@ section.title-hero-bg.parallax-effect img {
 .again-flex {
     display: flex;
     font-size: 30px;
+    height:115px;
 }
-.again-headings{
+
+.again-headings {
     font-weight: 700;
     color: #000000;
     font-size: 30px !important;
     line-height: 40.86px;
-    margin-top:-15px;
+    margin-top: -15px;
 }
+
 .again-heading {
-    text-align: right;
-    padding:20px;
+    text-align: left;
+    padding: 20px;
     width: 192px;
     font-weight: 700;
     font-size: 30px;
     line-height: 40.86px;
     color: #000000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
-.again-ps{
+
+.again-ps {
     font-size: 12px;
     color: #000000;
     font-weight: 500;
     line-height: 16.34px;
     margin-top: -5px;
 }
+
 .again-p {
     font-size: 15px;
     color: #000000;
@@ -180,8 +210,9 @@ section.title-hero-bg.parallax-effect img {
 
 .from-flex {
     line-height: 50px;
-    text-align:left;
-    padding:20px;
+    text-align: left;
+    padding: 20px;
+    margin-left: 20px;
 }
 
 .onloads-button {
@@ -212,6 +243,46 @@ section.title-hero-bg.parallax-effect img {
     }
 }
 
+@media (min-width: 320px) and (max-width: 767px) {
+    .medical-img {
+        width: 270px !important;
+        height: 270px !important;
+
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .medical-img {
+        width: 350px !important;
+        height: 350px !important;
+
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+    .medical-img {
+        width: 300px !important;
+    }
+}
+
+@media (min-width: 1301px) and (max-width: 1400px) {
+    .medical-img {
+        width: 300px !important;
+        height:300px !important;
+    }
+}
+
+@media(min-width:768px){
+    .padding-elips{
+        padding-left:150px;
+        padding-right:150px;
+    }
+}
+@media(min-width:320px) and (max-width:767px){
+    .padding-elips{
+        padding-left:30px;
+        padding-right:30px;
+    }
+}
 @media (min-width: 768px) and (max-width: 992px) {
 
     h5,
@@ -242,21 +313,31 @@ section.title-hero-bg.parallax-effect img {
     position: relative;
     min-height: 550px;
 }
+
 .ellipsis {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .ellipsis1 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 @media (min-width: 320px) and (max-width: 600px) {
+    .page-title h1 {
+        font-size: 70px;
+        line-height: 54.48px !important;
+    }
+
     .title-hero-bg {
         min-height: 400px !important;
     }

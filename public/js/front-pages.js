@@ -45,12 +45,7 @@ Copyright © 2021 Basecamp, LLC
     HTMLElement.prototype.constructor = HTMLElement;
     Object.setPrototypeOf(HTMLElement, BuiltInHTMLElement);
 })();
-document.addEventListener('turbo:load', initAllComponents);
 
-function initAllComponents() {
-
-  IOInitImageComponent();
-}
 /**
  * The MIT License (MIT)
  * 
@@ -3982,7 +3977,11 @@ listenChange(dateEle, function () {
     },
     success: function success(result) {
       if (result.success) {
-        $('.appointment-slot-data').html('');
+        //$('.appointment-slot-data').html('')
+        if (result.data['slots'] != null && result.data['slots'].length > 0) {
+          $('.appointment-slot-data').html('');
+        }
+
         $.each(result.data['slots'], function (index, value) {
           $('.no-time-slot').addClass('d-none');
 
