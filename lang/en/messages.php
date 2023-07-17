@@ -532,7 +532,7 @@ return [
         'extra_fees' => 'Extra Fees',
         'total_payable_amount' => 'Total Payable Amount',
         'payable_amount' => 'Amount',
-        'no_slot_found' => 'No time slots found.',
+        'no_slot_found' => 'No Time Slots Found.',
         'service' => 'Service',
         'service_charge' => 'Service Charge',
         'time' => 'Time',

@@ -247,10 +247,10 @@ header {
 
                     <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms" style="font-size:19px; color:#535353">
                         <input type="checkbox" class="form-check-input label-box" name="toc" value="1" required />
-                        <span class="me-2 ml-1 register-forgot">I agree to the
-                            <span class="ms-1 link-primary register-forgot"
+                        <span class="me-2 ml-1 register-forgot">I agree to the Terms & Conditions
+                            {{--<span class="ms-1 register-forgot"
                                 style="text-transform: capitalize; text-decoration:none;">Terms
-                                & Conditions</span>.
+                                & Conditions</span>.--}}
                         </span>
                     </div>
 

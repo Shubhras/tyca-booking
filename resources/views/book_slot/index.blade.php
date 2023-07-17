@@ -739,9 +739,9 @@ h1 {
     background: #273432;
 } */
 </style>
-@if(Session::has('message') == 'This is a message')
+{{--@if(Session::has('message') == 'This is a message')
 <p onload="myFunction()">{{ Session::get('message') }}</p>
-@endif
+@endif--}}
 <section class="main-block1 gray">
     <div class="container">
         <div class="row col-12 slot-margin">
@@ -820,7 +820,7 @@ h1 {
                         </div>
                     </div>
                 </div>
-                <p onload="myFunction()">{{ Session::get('message') }}</p>
+               {{--<p onload="myFunction()">{{ Session::get('message') }}</p>--}}
 
                 <div class="col-md-4 responsive-wrap set-amities">
                     <div class="sidebar">
@@ -1005,23 +1005,23 @@ h1 {
                         <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
                             data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
                             onclick="displayMessage(1,'{{ $service->charges }}','{{$service->id}}');">
-                            {{ $service->charges }} / Hour
+                            $ {{ $service->charges }} / Hour
                         </button>
                         @else
                         <a href="{{ route('login') }}"
                             class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
-                            data-turbo="false">{{ $service->charges }} / Hour</a>
+                            data-turbo="false"> $ {{ $service->charges }} / Hour</a>
                         @endif
                         @if(getLogInUser())
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
                             data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
                             onclick="displayMessage(2,'{{ $service->charges_daily }}','{{$service->id}}');">
-                            {{ $service->charges_daily }} / Day
+                            $ {{ $service->charges_daily }} / Day
                         </button>
                         @else
                         <a href="{{ route('login') }}"
                             class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
-                            data-turbo="false">{{ $service->charges_daily }} / Day</a>
+                            data-turbo="false">$ {{ $service->charges_daily }} / Day</a>
                         @endif
                         <?php
                     $idGet =  Request::segment(2);

@@ -4,25 +4,12 @@ let _isMenuOpened = false;
 function toggleMenu() {
     const navbarToggler = document.getElementById('navbar-toggler');
     const navbarNav = document.querySelector('#navbarNav');
-    if (_isMenuOpened == false) {
-        navbarNav.classList.toggle('hide');
+    navbarNav.classList.toggle('show', !_isMenuOpened);
+    navbarNav.classList.toggle('hide', _isMenuOpened);
 
-    } else {
-
-        navbarNav.classList.toggle('show');
-    }
-    // isMenuOpened = !isMenuOpened;
+    _isMenuOpened = !_isMenuOpened;
 
 }
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.getElementById('navbar-toggler');
-    const navbarNav = document.querySelector('#navbarNav');
-
-    navbarToggler.addEventListener('click', function() {
-        navbarNav.classList.toggle('show');
-        navbarNav.classList.toggle('hide');
-    });
-});
 </script>
 <header class="position-relative header">
     <!-- <div class="container"> -->
@@ -73,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
                             @else
-                            <div class="heart">
+                            <div class="" id="menu-item-43">
                             <a href="{{ route('login') }}"
                                 class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head "
                                 data-turbo="false">{{ __('messages.login') }}</a></div>
@@ -273,13 +260,19 @@ footer {
 .nav-hov:after{  transform-origin:  0% 50%; }
 
 .heart:hover {
-  animation: beat .3s 4 alternate !important;
+  animation: beat .3s 2 alternate !important;
 }
 
 @keyframes beat{
 	to { transform: scale(1.06); }
 }
 
+#menu-item-43:hover {
+    transform: perspective(1px) translate3d(0,0,0) scale3d(1.08,1.08, 1);
+}
 
+#menu-item-43 {
+    transition: .2s ease-in-out 0s;
+}
 
 </style>

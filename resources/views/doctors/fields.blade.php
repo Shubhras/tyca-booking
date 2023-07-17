@@ -1,4 +1,7 @@
 <style>
+    .select2-container--bootstrap-5 .select2-selection--single {
+        width:160px;
+    }
 @media(max-width:600px) {
     .monday-form {
         display: grid !important;
