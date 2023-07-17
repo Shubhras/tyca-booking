@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex">
     @if(empty($row->user->email_verified_at))
         <a href="javascript:void(0)" data-id="{{ $row->user->id }}"
            class="btn px-2 text-primary fs-2 patient-email-verification"  data-bs-toggle="tooltip"

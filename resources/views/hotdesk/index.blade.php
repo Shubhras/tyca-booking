@@ -433,7 +433,7 @@ $styleCss = 'style';
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
-                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"  id="templateAppointmentDate">
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
@@ -595,7 +595,8 @@ function displayMessage(id, price,service_id) {
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+<script src="/jquery-3.3.1.min.js"></script>
+<script src="/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#appointmentDate1').change(function() {
