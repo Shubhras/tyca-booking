@@ -7,6 +7,9 @@
 @section('front-content')
 @include('flash::message')
 @include('layouts.errors')
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
 <div class="transition-none">
 
     <section class="title-hero-bg parallax-effect"
@@ -23,219 +26,276 @@
         </div>
     </section>
 
-<div class="container">
-    <section class="tab-section">
-        <ul class="nav" style="justify-content: center;">
-            <li class="nav-item1">
-                <a class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest" type="button"
-                    role="tab" aria-controls="latest" aria-selected="true">Member’s Information</a>
-            </li>
-            <li class="nav-item1">
-                <a class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button"
-                    role="tab" aria-controls="upcoming" aria-selected="true">Bookings</a>
-            </li>
-        </ul>
+    <div class="container">
+        <section class="tab-section">
+            <ul class="nav" style="justify-content: center;">
+                <li class="nav-item1">
+                    <a class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest"
+                        type="button" role="tab" aria-controls="latest" aria-selected="true">Member’s Information</a>
+                </li>
+                <li class="nav-item1">
+                    <a class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button"
+                        role="tab" aria-controls="upcoming" aria-selected="true">Bookings</a>
+                </li>
+            </ul>
 
-        <div class="tab-content">
-            <div id="latest" class="tab-pane fade show active">
-                <!-- Content for Tab 1 -->
+            <div class="tab-content">
+                <div id="latest" class="tab-pane fade show active">
+                    <!-- Content for Tab 1 -->
 
-                <h2 class="h2-member">MEMBER'S INFORMATION</h2>
+                    <h2 class="h2-member">MEMBER'S INFORMATION</h2>
 
-                <div class="row col-md-12" id="customer-review_wrap">
-                    <div class="col-md-3 member-imgs" id="customer-img">
-                        <img src="{{ getLogInUser()->profile_image }}" alt="" class="cust-img">
-                    </div>
-                    <div class="col-md-6" id="customer-content-wrap" style="margin-left:30px;">
-                        <div class="your-rating-wrap">
-                            <span>{{$data['user']->first_name}} {{$data['user']->last_name}}</span>
-                            <p>{{$data['user']->email}}</p>
+                    <div class="row col-md-12" id="customer-review_wrap">
+                        <div class="col-md-3 member-imgs" id="customer-img">
+                            <img src="{{ getLogInUser()->profile_image }}" alt="" class="cust-img">
                         </div>
-
-                        <div class="row btn-portal col-lg-12">
-                            <div class="col-lg-12 col-sm-4 col-xs-4 update-btn btn-member update-member">
-                                <button class="up-btn right-btn update-member" data-bs-toggle="modal"
-                                    data-bs-target="#update_info_modal">Update
-                                    Information</button>
-                                <button class="log-btn"
-                                    onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">Log
-                                    Out</button>
-                                <form id="logout-form" action="{{ route('logout')}}" method="post">
-                                    @csrf
-                                </form>
+                        <div class="col-md-6" id="customer-content-wrap" style="margin-left:30px;">
+                            <div class="your-rating-wrap">
+                                <span>{{$data['user']->first_name}} {{$data['user']->last_name}}</span>
+                                <p>{{$data['user']->email}}</p>
                             </div>
 
+                            <div class="row btn-portal col-lg-12">
+                                <div class="col-lg-12 col-sm-4 col-xs-4 update-btn btn-member update-member">
+                                    <button class="up-btn right-btn update-member" data-bs-toggle="modal"
+                                        data-bs-target="#update_info_modal">Update
+                                        Information</button>
+                                    <button class="log-btn"
+                                        onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">Log
+                                        Out</button>
+                                    <form id="logout-form" action="{{ route('logout')}}" method="post">
+                                        @csrf
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="content2" class="tab-pane fade"> -->
+                <div class="tab-pane fade" id="upcoming" role="tabpanel">
+                    <!-- Content for Tab 2 -->
+                    <ul class="nav">
+                        <li class="nav-item1">
+                            <a class="nav-link active" id="latests-tab-1" data-bs-toggle="tab" data-bs-target="#latests"
+                                type="button" role="tab" aria-controls="latests" aria-selected="true">Upcoming</a>
+                        </li>
+                        <li class="nav-item1">
+                            <a class="nav-link" id="upcomings-tab-2" data-bs-toggle="tab" data-bs-target="#upcomings"
+                                type="button" role="tab" aria-controls="upcomings" aria-selected="true">Past</a>
+                        </li>
+                    </ul>
+
+
+                    <div class="tab-content">
+                        <div id="latests" class="tab-pane fade show active">
+
+                            <h2 class="up-booking">UPCOMING BOOKINGS</h2>
+                            <div class="table-container">
+                                <table id="example" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr style="background: #F7F7F7;">
+                                            <th class="col-portal">Outlet</th>
+                                            <th class="col-portal">Booking Space</th>
+                                            <th class="col-portal">Plan Type </th>
+                                            <th class="col-portal">Appointment At </th>
+                                            <th class="col-portal">Payable Amount </th>
+                                            <th class="col-portal">Payable Method </th>
+                                            <th class="col-portal">Payment Status </th>
+                                            <th class="col-portal">Booking Status </th>
+                                            <th class="col-portal">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach($data['todayAppointment'] as $appointment)
+                                        <?php if(isset($appointment->transaction)){ ?>
+                                        <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;">
+                                            <td>{{ $appointment->doctor->user->first_name}}</td>
+                                            <td>{{ $appointment->services->name}}</td>
+                                            <td>{{ $appointment->plan_type }}</td>
+                                            <td>{{ $appointment->date }}</td>
+                                            <td>${{ $appointment->payable_amount }}.00</td>
+
+
+                                            @if($appointment->payment_method == 2)
+                                            <td>
+                                                Stripe
+                                            </td>
+                                            @else
+                                            <td>Paypal</td>
+                                            @endif
+
+                                            @if($appointment->transaction->status == 0)
+                                            <td>All</td>
+                                            @elseif($appointment->transaction->status == 1)
+                                            <td> Panding</td>
+                                            @else
+                                            <td> Paid</td>
+                                            @endif
+
+                                            @if($appointment->status == 1)
+                                            <td>
+                                                Booked
+                                            </td>
+                                            @elseif($appointment->status == 2)
+                                            <td>
+                                                Checking
+                                            </td>
+                                            @elseif($appointment->status == 3)
+                                            <td>
+                                                Checkout
+                                            </td>
+                                            @else
+                                            <td>Cancelled</td>
+                                            @endif
+                                            <td><a onclick="bookedInfoData({{$appointment}});"><i
+                                                        class="fa-solid fa-eye"></i></a>
+                                                <a onclick="cancelConfirm({{$appointment}})"> <i
+                                                        class="fa-solid fa-xmark"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                        @endforeach
+
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                        <div id="upcomings" class="tab-pane fade">
+                            <h2 class="past-booking">PAST BOOKINGS</h2>
+                            <div class="table-container">
+                                <table class="table table table-striped" id="example1" style="width:100%">
+                                    <thead class="thead-portal">
+                                        <tr style="background: #F7F7F7;">
+                                            <th class="col-portal">Outlet </th>
+                                            <th class="col-portal">Booking Space </i></th>
+                                            <th class="col-portal">Plan Type </th>
+                                            <th class="col-portal">Appointment At </th>
+                                            <th class="col-portal">Payable Amount </th>
+                                            <th class="col-portal">Payable Method </th>
+                                            <th class="col-portal">Payment Status </th>
+                                            <th class="col-portal">Booking Status </th>
+                                            <th class="col-portal">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($data['upcomingAppointment'] as $appointment)
+                                        <?php if(isset($appointment->transaction)){ ?>
+                                        <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400;">
+                                            <td>{{ $appointment->doctor->user->first_name}}</td>
+                                            <td>{{ $appointment->services->name}}</td>
+                                            <td>{{ $appointment->plan_type }}</td>
+                                            <td>{{ $appointment->date }}</td>
+                                            <td>${{ $appointment->payable_amount }}.00</td>
+                                            @if($appointment->payment_method == 2)
+                                            <td>
+                                                Stripe
+                                            </td>
+                                            @else
+                                            <td>Paypal</td>
+                                            @endif
+
+                                            @if($appointment->transaction->status == false)
+                                            <td>All</td>
+                                            @elseif($appointment->transaction->status == true)
+                                            <td> Panding</td>
+                                            @else
+                                            <td> Paid</td>
+                                            @endif
+
+                                            @if($appointment->status == 1)
+                                            <td>
+                                                Booked
+                                            </td>
+                                            @elseif($appointment->status == 2)
+                                            <td>
+                                                Checking
+                                            </td>
+                                            @elseif($appointment->status == 3)
+                                            <td>
+                                                Checkout
+                                            </td>
+                                            @else
+                                            <td>Cancelled</td>
+                                            @endif
+
+                                            <td><a onclick="bookedInfoData({{$appointment}});"><i
+                                                        class="fa-solid fa-eye"></a></i>
+                                                <a onclick="cancelConfirm({{$appointment}})"> <i
+                                                        class="fa-solid fa-xmark"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php }?>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div id="content2" class="tab-pane fade"> -->
-            <div class="tab-pane fade" id="upcoming" role="tabpanel">
-                <!-- Content for Tab 2 -->
-                <ul class="nav">
-                    <li class="nav-item1">
-                        <a class="nav-link active" id="latests-tab-1" data-bs-toggle="tab" data-bs-target="#latests"
-                            type="button" role="tab" aria-controls="latests" aria-selected="true">Upcoming</a>
-                    </li>
-                    <li class="nav-item1">
-                        <a class="nav-link" id="upcomings-tab-2" data-bs-toggle="tab" data-bs-target="#upcomings"
-                            type="button" role="tab" aria-controls="upcomings" aria-selected="true">Past</a>
-                    </li>
-                </ul>
+        </section>
 
 
-                <div class="tab-content">
-                    <div id="latests" class="tab-pane fade show active">
-                        <h2 class="up-booking">UPCOMING BOOKINGS</h2>
-                        <div class="table-container">
-                            <table class="table">
-                                <thead class="thead-portal">
-                                    <tr>
-                                        <th class="col-portal">Outlet</th>
-                                        <th class="col-portal">Booking Space</th>
-                                        <th class="col-portal">Plan Type </th>
-                                        <th class="col-portal">Appointment At </th>
-                                        <th class="col-portal">Payable Amount </th>
-                                        <th class="col-portal">Payable Method </th>
-                                        <th class="col-portal">Payment Status </th>
-                                        <th class="col-portal">Booking Status </th>
-                                        <th class="col-portal">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($data['todayAppointment'] as $appointment)
-                                    <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;">
-                                        <?php if(isset($appointment->transaction)){ ?>
-                                        <td>{{ $appointment->doctor->user->first_name}}</td>
-                                        <td>{{ $appointment->services->name}}</td>
-                                        <td>{{ $appointment->plan_type }}</td>
-                                        <td>{{ $appointment->date }}</td>
-                                        <td>${{ $appointment->payable_amount }}.00</td>
-                                        @if($appointment->payment_method == 2)
-                                        <td>
-                                            Stripe
-                                        </td>
-                                        @else
-                                        <td>Paypal</td>
-                                        @endif
 
-                                        @if($appointment->transaction->status == 0)
-                                        <td>All</td>
-                                        @elseif($appointment->transaction->status == 1)
-                                        <td> Panding</td>
-                                        @else
-                                        <td> Paid</td>
-                                        @endif
+        <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header-1">
 
-                                        @if($appointment->status == 1)
-                                        <td>
-                                            Booked
-                                        </td>
-                                        @elseif($appointment->status == 2)
-                                        <td>
-                                            Checking
-                                        </td>
-                                        @elseif($appointment->status == 3)
-                                        <td>
-                                            Checkout
-                                        </td>
-                                        @else
-                                        <td>Cancelled</td>
-                                        @endif
-
-                                        <td><a onclick="bookedInfoData({{$appointment}});"><i
-                                                    class="fa-solid fa-eye"></a></i>
-                                            <a onclick="cancelConfirm({{$appointment}})"> <i
-                                                    class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <div id="upcomings" class="tab-pane fade">
-                        <h2 class="past-booking">PAST BOOKINGS</h2>
-                        <div class="table-container">
-                            <table class="table">
-                                <thead class="thead-portal">
-                                    <tr>
-                                        <th class="col-portal">Outlet </th>
-                                        <th class="col-portal">Booking Space </i></th>
-                                        <th class="col-portal">Plan Type </th>
-                                        <th class="col-portal">Appointment At </th>
-                                        <th class="col-portal">Payable Amount </th>
-                                        <th class="col-portal">Payable Method </th>
-                                        <th class="col-portal">Payment Status </th>
-                                        <th class="col-portal">Booking Status </th>
-                                        <th class="col-portal">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($data['upcomingAppointment'] as $appointment)
-                                    <?php if(isset($appointment->transaction)){ ?>
-                                    <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400;">
-                                        <td>{{ $appointment->doctor->user->first_name}}</td>
-                                        <td>{{ $appointment->services->name}}</td>
-                                        <td>{{ $appointment->plan_type }}</td>
-                                        <td>{{ $appointment->date }}</td>
-                                        <td>${{ $appointment->payable_amount }}.00</td>
-                                        @if($appointment->payment_method == 2)
-                                        <td>
-                                            Stripe
-                                        </td>
-                                        @else
-                                        <td>Paypal</td>
-                                        @endif
-
-                                        @if($appointment->transaction->status == false)
-                                        <td>All</td>
-                                        @elseif($appointment->transaction->status == true)
-                                        <td> Panding</td>
-                                        @else
-                                        <td> Paid</td>
-                                        @endif
-
-                                        @if($appointment->status == 1)
-                                        <td>
-                                            Booked
-                                        </td>
-                                        @elseif($appointment->status == 2)
-                                        <td>
-                                            Checking
-                                        </td>
-                                        @elseif($appointment->status == 3)
-                                        <td>
-                                            Checkout
-                                        </td>
-                                        @else
-                                        <td>Cancelled</td>
-                                        @endif
-
-                                        <td><a onclick="bookedInfoData({{$appointment}});"><i
-                                                    class="fa-solid fa-eye"></a></i>
-                                            <a onclick="cancelConfirm({{$appointment}})"> <i
-                                                    class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php }?>
-                                    @endforeach
-                                </tbody>
-
-
-                            </table>
+                    <div class="books-spaces">BOOKING INFORMATION</div>
+                    <div class="book-p">
+                        <div class="book-infos">
+                            <p class="book-val">Outlet:
+                            <p>&nbsp;
+                            <p id="outinfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Booking Space:</p>&nbsp;
+                            <p id="bookSpaceInfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Plan Type:</p>&nbsp;
+                            <p id="planTypeInfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Appointment At:</p>&nbsp;
+                            <p id="appointAtIfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Payable Amount:</p>&nbsp;
+                            <p id="payableInfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Payment Method:</p>&nbsp;
+                            <p id="paymentMethod" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Payment Status:</p>&nbsp;
+                            <p id="statusInfo" class="book-ps"></p>
+                        </div>
+                        <div class="book-infos">
+                            <p class="book-val">Booking Status:</p>&nbsp;
+                            <p id="bookedInfoses" class="book-ps"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
 
 
-    <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+
+    <div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
@@ -243,63 +303,11 @@
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="books-spaces">BOOKING INFORMATION</div>
-                <div class="book-p">
+                <div class="books-spaces">CANCEL BOOKING</div>
+                <p class="follow-booking">Do you want to cancel the following booking?</p>
+                <div class="book-p-cancel">
+                    <!-- <p>Outlet: <b id="coutinfo"></b></p> -->
                     <div class="book-infos">
-                        <p class="book-val">Outlet:
-                        <p>&nbsp;
-                        <p id="outinfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Booking Space:</p>&nbsp;
-                        <p id="bookSpaceInfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Plan Type:</p>&nbsp;
-                        <p id="planTypeInfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Appointment At:</p>&nbsp;
-                        <p id="appointAtIfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Payable Amount:</p>&nbsp;
-                        <p id="payableInfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Payment Method:</p>&nbsp;
-                        <p id="paymentMethod" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Payment Status:</p>&nbsp;
-                        <p id="statusInfo" class="book-ps"></p>
-                    </div>
-                    <div class="book-infos">
-                        <p class="book-val">Booking Status:</p>&nbsp;
-                        <p id="bookedInfoses" class="book-ps"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header-1">
-
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="books-spaces">CANCEL BOOKING</div>
-            <p class="follow-booking">Do you want to cancel the following booking?</p>
-            <div class="book-p-cancel">
-                <!-- <p>Outlet: <b id="coutinfo"></b></p> -->
-                <div class="book-infos">
                         <p class="book-val">Outlet:
                         <p>&nbsp;
                         <p id="coutinfo" class="book-ps"></p>
@@ -309,15 +317,15 @@
                         <p>&nbsp;
                         <p id="cbookSpaceInfo" class="book-ps"></p>
                     </div>
-                <!-- <p>Booking Space: <b id="cbookSpaceInfo"></b></p> -->
-                <div class="book-infos">
+                    <!-- <p>Booking Space: <b id="cbookSpaceInfo"></b></p> -->
+                    <div class="book-infos">
                         <p class="book-val">Plan Type:
                         <p>&nbsp;
                         <p id="cplanTypeInfo" class="book-ps"></p>
                     </div>
-                <!-- <p>Plan Type: <b id="cplanTypeInfo"></b></p> -->
-                <!-- <p>Appointment At: <b id="cappointAtIfo"></b></p> -->
-                <div class="book-infos">
+                    <!-- <p>Plan Type: <b id="cplanTypeInfo"></b></p> -->
+                    <!-- <p>Appointment At: <b id="cappointAtIfo"></b></p> -->
+                    <div class="book-infos">
                         <p class="book-val">Appointment At:
                         <p>&nbsp;
                         <p id="cappointAtIfo" class="book-ps"></p>
@@ -327,37 +335,37 @@
                         <p>&nbsp;
                         <p id="cpayableInfo" class="book-ps"></p>
                     </div>
-                <!-- <p>Payable Amount: <b id="cpayableInfo"></b></p> -->
-                <div class="book-infos">
+                    <!-- <p>Payable Amount: <b id="cpayableInfo"></b></p> -->
+                    <div class="book-infos">
                         <p class="book-val">Payment Method:
                         <p>&nbsp;
                         <p id="cpaymentMethod" class="book-ps"></p>
                     </div>
-                <!-- <p>Payment Method: <b id="cpaymentMethod"></b></p> -->
-                <div class="book-infos">
+                    <!-- <p>Payment Method: <b id="cpaymentMethod"></b></p> -->
+                    <div class="book-infos">
                         <p class="book-val">Payment Status:
                         <p>&nbsp;
                         <p id="cstatusInfo" class="book-ps"></p>
                     </div>
-                <!-- <p>Payment Status: <b id="cstatusInfo"></b></p> -->
-                <div class="book-infos">
+                    <!-- <p>Payment Status: <b id="cstatusInfo"></b></p> -->
+                    <div class="book-infos">
                         <p class="book-val">Booking Status:
                         <p>&nbsp;
                         <p id="cbookedInfo" class="book-ps"></p>
                     </div>
-                <!-- <p>Booking Status: <b id="cbookedInfo"></b></p> -->
-            </div>
-            <div class="btn-cancel-booking">
-                <div class="cancel-yes-btn">
-                    <button class="yes-btn" id="cancelledId" onclick="cancelAppoint();">Yes</button>
+                    <!-- <p>Booking Status: <b id="cbookedInfo"></b></p> -->
                 </div>
-                <div class="cancel-no-btn">
-                    <button class="no-btn" data-bs-dismiss="modal" aria-label="Close">No</button>
+                <div class="btn-cancel-booking">
+                    <div class="cancel-yes-btn">
+                        <button class="yes-btn" id="cancelledId" onclick="cancelAppoint();">Yes</button>
+                    </div>
+                    <div class="cancel-no-btn">
+                        <button class="no-btn" data-bs-dismiss="modal" aria-label="Close">No</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <div id="cancel_confirm_modal" class="modal fade" role="dialog" aria-hidden="true">
@@ -405,7 +413,7 @@
                             <span class=""></span>
                             <input name="first_name" type="text" class="form-control" id="name"
                                 aria-describedby="firstName" placeholder="{{ __('messages.patient.first_name') }}"
-                                 value="{{ $data['user']->first_name }}"  pattern="[A-Za-z]+"
+                                value="{{ $data['user']->first_name }}" pattern="[A-Za-z]+"
                                 title="Please enter alphabetic characters only">
                         </div>
                         <div class="form-group col-sm-6">
@@ -413,7 +421,7 @@
                             <span class=""></span>
                             <input name="last_name" type="text" class="form-control" id="last_name"
                                 aria-describedby="lastName" placeholder="{{ __('messages.patient.last_name') }}"
-                                 value="{{ $data['user']->last_name }}"  pattern="[A-Za-z]+"
+                                value="{{ $data['user']->last_name }}" pattern="[A-Za-z]+"
                                 title="Please enter alphabetic characters only">
                         </div>
                     </div>
@@ -423,7 +431,7 @@
                             <span class=""></span>
                             <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
                                 placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}"
-                                 disabled>
+                                disabled>
                         </div>
                     </div>
                     <div class="row">
@@ -431,15 +439,14 @@
                             {{ Form::label('New Password', __('New Password').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input type="password" name="password" class="form-control" id="password"
-                                placeholder="{{ __('messages.patient.password') }}" aria-describedby="password"
-                                >
+                                placeholder="{{ __('messages.patient.password') }}" aria-describedby="password">
                         </div>
                         <div class="form-group col-sm-6">
                             {{ Form::label('Confirm New Password', __('Confirm New Password').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="password_confirmation" type="password" class="form-control"
                                 placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
-                                aria-describedby="confirmPassword" >
+                                aria-describedby="confirmPassword">
                         </div>
                     </div>
 
@@ -486,6 +493,40 @@
 
 
 <style>
+    table.dataTable.no-footer {
+    border-bottom: 0px !important;
+}
+    .table-striped>tbody>tr:nth-of-type(odd)>* {
+    color: #111827 !important;
+    --bs-table-accent-bg: #ffffff;
+}
+    .dataTables_wrapper .dataTables_length select {
+    border: none !important;
+    border-radius: 0px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: inherit;
+    padding: 4px;
+}
+div.dataTables_wrapper div.dataTables_filter {
+    text-align: right;
+    display: none;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+    display: none;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: right !important;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 .image {
     display: inline-block;
     flex-shrink: 0;
@@ -587,21 +628,25 @@ body {
     font-weight: 300;
     margin-top: 20px;
 }
-.book-infos{
-    display:flex;
+
+.book-infos {
+    display: flex;
 }
-.book-ps{
+
+.book-ps {
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
     color: #535353;
 }
-.book-val{
+
+.book-val {
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
     color: #535353;
 }
+
 section.title-hero-bg.parallax-effect img {
     width: 100%;
 }
@@ -802,7 +847,7 @@ a#upcomings-tab-2 {
 th.col-portal {
     padding: 20px !important;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 500 !important; 
     color: #6B7280;
 }
 
@@ -994,9 +1039,11 @@ div#customer-review_wrap {
     .page-title h1 {
         font-size: 25px;
     }
+
     .portal-btn {
-    font-size: 20px !important;
+        font-size: 20px !important;
     }
+
     .title-hero-bg {
         min-height: 335px;
     }
@@ -1235,7 +1282,8 @@ div#customer-review_wrap {
         font-size: 14px !important;
     }
 }
-.back-imgs{
+
+.back-imgs {
     background-image: url("/assets/image/Frame 1907.png");
 }
 </style>
@@ -1343,6 +1391,18 @@ function cancelAppoint() {
 }
 var d = document.getElementById("booked_info_modal");
 d.className += " back-imgs";
+var e = document.getElementById("cancel_booking_modal");
+e.className += " back-imgs";
+</script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script>
+$('#example').DataTable({
+
+});
+$('#example1').DataTable({
+
+});
 </script>
 
 @endsection
