@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(getDashboardURL());
+        return redirect()->intended(getDashboardURL())->with('flash_reload', true);
     }
 
     /**

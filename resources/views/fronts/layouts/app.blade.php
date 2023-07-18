@@ -31,6 +31,12 @@
     <link href="{{ asset('assets/css/front-pages1.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datepicker/bootstrap-datepicker.css') }}">
 
+
+    <!-- @if(Session::has('flash_reload'))
+        <script>window.location.reload(true);
+    </script>
+    @endif -->
+
     <!-- Document Title ===================== -->
     <title>@yield('front-title') | {{ getAppName() }}</title>
     <script src="{{ asset('assets/front/vendor/bootstrap.bundle.min.js') }}"></script>
@@ -95,7 +101,21 @@
                 },
             },
         }
+
+        let _isMenuOpenedCustom = false;
+
+function toggleMenu() {
+    const navbarToggler = document.getElementById('navbar-toggler');
+    const navbarNav = document.querySelector('#navbarNav');
+    navbarNav.classList.toggle('show', !_isMenuOpenedCustom);
+    navbarNav.classList.toggle('hide', _isMenuOpenedCustom);
+
+    _isMenuOpenedCustom = !_isMenuOpenedCustom;
+
+}
     </script>
+    
+
 </head>
 <body>
 @include('fronts.layouts.header')

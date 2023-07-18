@@ -535,7 +535,6 @@ $styleCss = 'style';
 
 </div>
 </div>
-@endsection
 
 <script>
 setTimeout(function() {
@@ -593,10 +592,6 @@ function displayMessage(id, price,service_id) {
 
 }
 </script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="/jquery-3.3.1.min.js"></script>
-<script src="/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#appointmentDate1').change(function() {
@@ -677,23 +672,6 @@ $('input[type="date"]').change(function() {
 
 });
 </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/datepicker-library.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $('#templateAppointmentDate').datepicker({
-      // Add any additional datepicker options you need
-    });
-
-    // Event handler for date icon click
-    $('.date-icon').on('click', function() {
-      $('#templateAppointmentDate').datepicker('show');
-    });
-  });
-</script>
-
 <style>
 body {
     font-family: "Noto Serif" !important;
@@ -1335,8 +1313,6 @@ section.mains-blocks {
     line-height: 30px;
     text-transform: lowercase;
 }
-
-/* a:hover {
-    color: none !important;
-} */
 </style>
+
+@endsection

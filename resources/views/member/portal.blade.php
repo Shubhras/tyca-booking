@@ -479,7 +479,6 @@
 
 </div>
 
-@endsection
 
 
 
@@ -1236,6 +1235,9 @@ div#customer-review_wrap {
         font-size: 14px !important;
     }
 }
+.back-imgs{
+    background-image: url("/assets/image/Frame 1907.png");
+}
 </style>
 <script type="text/javascript">
 function bookedInfoData(data) {
@@ -1339,4 +1341,8 @@ function cancelAppoint() {
     });
 
 }
+var d = document.getElementById("booked_info_modal");
+d.className += " back-imgs";
 </script>
+
+@endsection

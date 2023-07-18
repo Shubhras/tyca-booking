@@ -10,6 +10,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\Setting;
 use App\Models\Patient;
+use App\Models\Address;
 use App\Models\Specialization;
 use DB;
 use Illuminate\Support\Facades\Session;
@@ -22,6 +23,14 @@ class BookController extends Controller
     {
         $user = User::where('id',$id)->first();
         $doctor = Doctor::where('user_id', $id)->first();
+
+        $addressData = DB::table('addresses')->where('owner_id',$id)
+        ->leftjoin('countries', 'countries.id', '=', 'addresses.country_id')
+        ->leftjoin('states', 'states.id', '=', 'addresses.state_id')
+        ->leftjoin('cities', 'cities.id', '=', 'addresses.city_id')
+        ->select('addresses.*','countries.name AS country_name','states.name AS state_name','cities.name AS cities_name')
+        ->first();
+
         $servicesID = DB::table('service_doctor')->where('doctor_id',$doctor->id)->get();
         $aa = [];
         foreach($servicesID as $getData){
@@ -40,7 +49,7 @@ class BookController extends Controller
         $appointmentDoctors = Doctor::with('user')->whereIn('id',
             DoctorSession::pluck('doctor_id')->toArray())->get()->where('user.status',
             User::ACTIVE)->pluck('user.full_name', 'id');
-        return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization','bodyimage1'));
+        return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization','bodyimage1','addressData'));
 
     }
 }
