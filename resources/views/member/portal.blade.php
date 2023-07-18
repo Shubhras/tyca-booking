@@ -225,7 +225,7 @@
                                             @endif
 
                                             <td><a onclick="bookedInfoData({{$appointment}});"><i
-                                                        class="fa-solid fa-eye"></a></i>
+                                                        class="fa-solid fa-eye"></i></a>
                                                 <a onclick="cancelConfirm({{$appointment}})"> <i
                                                         class="fa-solid fa-xmark"></i></a>
                                             </td>
@@ -385,7 +385,7 @@
                     </div>
                 </div>
                 <div class="modal-footer pt-0 mt-5" style="place-content:center;">
-                    <button type="button" class="btns btn-secondarys" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btns btn-secondarys" onclick="cancelAppoint1();"  data-bs-dismiss="modal">{{ __('Close') }}</button>
                 </div>
             </div>
         </div>
@@ -1381,6 +1381,7 @@ function cancelAppoint() {
             if (data.success == true) {
                 $("#cancel_booking_modal").modal('hide');
                 $("#cancel_confirm_modal").modal('show');
+                // window.location.reload();
             } else {
                 //var url = "{{ route('login') }}";
                 //location.href = url;
@@ -1389,6 +1390,13 @@ function cancelAppoint() {
     });
 
 }
+function cancelAppoint1() {
+           
+    $("#cancel_confirm_modal").modal('show');
+    $("#cancel_booking_modal").modal('hide');
+    window.location.reload();
+}
+
 var d = document.getElementById("booked_info_modal");
 d.className += " back-imgs";
 var e = document.getElementById("cancel_booking_modal");
