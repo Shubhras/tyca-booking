@@ -33,8 +33,8 @@ $styleCss = 'style';
             <div class="col-md-6">
                 <div class="grid">
                     <div class="hot-desk">
-                        <h2>HOT DESK</h2>
-                        <p>at Thank You Come Again @ Balestier</p>
+                        <h2>{{$servicesData->name}}</h2>
+                        <p>{!! $servicesData->short_description !!}</p>
                     </div>
                 </div>
             </div>
@@ -150,13 +150,13 @@ $styleCss = 'style';
 <section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+        <div class="col-md-8">
                 <div class="grid">
-                    <div class="hot-desks">
+                    <div class="hot-desks padding-b">
                         <h2>DESCRIPTION</h2>
                         <p>{!! $servicesData->short_description !!}</p>
                     </div>
-                    <div class="Amenities">
+                    <div class="Amenities padding-tb">
                         <h2>AMENITIES</h2>
                         <div class="amenities-block">
                             <div class="row mt-10 mb-1 col-12" style="display:flex;">
@@ -173,7 +173,7 @@ $styleCss = 'style';
                         </div>
                     </div>
 
-                    <div class="Operating">
+                    <div class="Operating padding-tb">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
                             <?php
@@ -433,7 +433,7 @@ $styleCss = 'style';
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
-                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4">
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
@@ -595,7 +595,8 @@ function displayMessage(id, price,service_id) {
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+<script src="/jquery-3.3.1.min.js"></script>
+<script src="/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#appointmentDate1').change(function() {
@@ -699,6 +700,15 @@ body {
 }
 .left-plan{
     margin-left:-5px;
+}
+.padding-tb
+{
+    padding-bottom: 7.5px;
+    padding-top: 7.5px;
+}
+.padding-b
+{
+    padding-bottom: 7.5px;
 }
 .ellipsis {
     display: -webkit-box;

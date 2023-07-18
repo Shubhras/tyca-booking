@@ -39,34 +39,56 @@ body {
         <div class=" col-md-4 booking-details-left">
             <h2>Booking Details</h2>
             <div class="mb-1">
-                <span class="heading">Name:</span> <span class="sub-head">Hoe Jun Jun</span>
+                <span class="heading">Name:</span> <span class="sub-head">{{$UserData->full_name}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Email:</span> <span class="sub-head">weige123@gmail.com</span>
+                <span class="heading">Email:</span> <span class="sub-head">{{$UserData->email}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Outlet:</span> <span class="sub-head">Thank You Come Again @ Balestier</span>
+                <span class="heading">Outlet:</span> <span class="sub-head">{{$outletName->full_name}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Booking Space:</span> <span class="sub-head">Hot Desk</span>
+                <span class="heading">Booking Space:</span> <span class="sub-head">{{$ServiceData->name}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Plan Type:</span> <span class="sub-head">Hour Plan</span>
+                <span class="heading">Plan Type:</span> <span class="sub-head">{{$AppointData->plan_type}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Appointment Date:</span> <span class="sub-head">17 Mar 2023</span>
+                <span class="heading">Appointment Date:</span> <span class="sub-head">{{$AppointData->date}}</span>
             </div>
             <div class="mb-1">
                 <span class="heading">Time Slot:</span> <span class="sub-head">3.00 pm</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Payable Amount:</span> <span class="sub-head">$4.00</span>
+                <span class="heading">Payable Amount:</span> <span
+                    class="sub-head">$ {{$AppointData->payable_amount}}</span>
             </div>
+
+
+            @if($AppointData->payment_method == 1)
             <div class="mb-1">
-                <span class="heading">Payment Method:</span> <span class="sub-head">PayPal</span>
+                <span class="heading">Payment Method:</span> <span
+                    class="sub-head">Mannual</span>
             </div>
+            @elseif($AppointData->payment_method == 2)
+            <div class="mb-1">
+                <span class="heading">Payment Method:</span> <span
+                    class="sub-head">Stripe</span>
+            </div>
+            @elseif($AppointData->payment_method == 4)
+            <div class="mb-1">
+                <span class="heading">Payment Method:</span> <span
+                    class="sub-head">Paypal</span>
+            </div>
+            @else
+            <div class="mb-1">
+                <span class="heading">Payment Method:</span> <span
+                    class="sub-head">NA</span>
+            </div>
+            @endif
             <div class="books-now">
-                <button class="books-btn">Back</button>
+            <a href="http://127.0.0.1:8000/patients/dashboard">
+                <button  class="books-btn">Back</button></a>
             </div>
         </div>
 
@@ -83,15 +105,20 @@ body {
 
 
 <style>
-    .heading{
-    font-size: 18px;
+.heading {
+    font-size: 24px;
     color: #000000;
-    }
-    .sub-head{
-    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.sub-head {
+    font-size: 24px;
     color: #000000;
-    font-weight: 600;
-    }
+    font-weight: 700;
+    line-height: 36px;
+}
+
 .title-hero-bg {
     background-size: cover;
     -webkit-background-size: cover;
@@ -121,17 +148,20 @@ body {
 }
 
 .page-title h1 {
-    font-size: 60px;
-    line-height: 1.5em;
+    font-size: 70px;
+    line-height: 95.34px;
     font-weight: 700;
     margin: 0;
+    color:#ffffff;
 }
 
 .workspace {
     line-height: 40px;
-    font-size: 35px;
-    font-weight: 300;
+    font-size: 40px;
+    font-weight: 400;
     margin-top: 20px;
+    line-height:54.48px;
+    color:#ffffff;
 }
 
 section.title-hero-bg.parallax-effect img {
@@ -143,12 +173,15 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .book-btn {
-    width: 150px;
+    width: 250px;
     height: 40px;
-    font-size: 15px;
+    font-size: 25px;
+    font-weight: 600;
     background: #273432;
     border: #273432;
+    line-height: 34.05px;
     color: #FFFFFF;
+    text-align: center;
 }
 
 .books-now {
@@ -175,7 +208,9 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .booking-details-left h2 {
-    font-size: 30px;
+    font-size: 40px;
+    line-height: 54.48px;
+    font-weight: 700;
     color: #000000;
     border-bottom: 1px solid#969696;
 }
@@ -190,9 +225,10 @@ img.w-img {
 }
 
 span.extra-light {
-    font-size: 40px;
+    font-size: 60px;
     color: #000000;
     font-weight: 200;
+    line-height: 81.72px;
 }
 
 .row.booking-details {
@@ -207,9 +243,10 @@ span.extra-light {
 @media (min-width: 320px) and (max-width: 600px) {
 
     span.extra-light {
-        font-size: 18px !important;
-        color: #000000;
-        font-weight: 200;
+    font-size: 16px !important;
+    color: #000000;
+    font-weight: 200;
+    line-height: 40px !important;
     }
 
     img.w-img {
@@ -277,9 +314,10 @@ span.extra-light {
 /* // */
 @media (min-width: 768px) and (max-width: 992px) {
     span.extra-light {
-        font-size: 35px !important;
-        color: #000000;
-        font-weight: 200;
+    font-size: 25px !important;
+    color: #000000;
+    font-weight: 200;
+    line-height: 40px;
     }
 
     .col-md-4.booking-details-left {

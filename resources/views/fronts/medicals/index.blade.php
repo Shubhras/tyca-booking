@@ -42,12 +42,12 @@
                             <img src="{{$outletData['profile_image']}}" alt="" class="medical-img">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row outlets-des">
                         <div class="centerize-col text-center">
                             <div class="again-flex col-12">
                                 <h4 class="again-heading come-set col-lg-6 thank-name">{{$outletData['first_name']}}
                                     {{$outletData['last_name']}}</h4>
-                                <div class="from-flex come-set1 col-lg-5">
+                                <div class="from-flex come-set1 col-lg-6">
                                     <p class="again-p">From</p>
                                     <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
                                         {{$outletData['charges_daily']}}/day</h5>
@@ -75,10 +75,14 @@
 body {
     font-family: "Noto Serif" !important;
 }
-
+.outlets-des{
+    padding-left: 30px;
+    padding-right: 30px;
+}
 .medical-img {
     width: 400px;
     height:400px;
+    padding:30px;
     /* height: 240px; */
 }
 .top-outlets{

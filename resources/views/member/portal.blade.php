@@ -23,7 +23,7 @@
         </div>
     </section>
 
-
+<div class="container">
     <section class="tab-section">
         <ul class="nav" style="justify-content: center;">
             <li class="nav-item1">
@@ -477,7 +477,7 @@
 </div>
 
 
-
+</div>
 
 @endsection
 

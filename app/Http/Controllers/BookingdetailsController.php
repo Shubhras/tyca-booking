@@ -3,12 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Appointment;
+use App\Models\Patient;
+use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Service;
+use Auth;
 class BookingdetailsController extends Controller
 {
     public function index()
     {
-        return view('booking_details.index');
+        $id = Auth::user()->id;
+        $UserData = user::where('id', $id)->first();
+        // print_r($UserData);die;
+        $patientID = getLogInUser()->patient->id;
+        $AppointData = Appointment::where('patient_id', $patientID)->orderBy('id','desc')->first();
+        $ServiceData = Service::where('id', $AppointData->service_id)->first();
+        $doctorData = Doctor::where('id', $AppointData->doctor_id)->first();
+        $outletName = User::where('id',$doctorData->user_id)->first();
+        return view('booking_details.index',compact('UserData','AppointData','ServiceData','outletName'));
     }
-    //
+
 }
