@@ -812,7 +812,7 @@ h1 {
                                             <p class="location">
                                                 <img src="/assets/image/material-symbols_location-on.png" alt="#"
                                                     style="height: 34px; width:34px; margin-left:-5px;">
-                                                355 Balestier Road Singapore 329782
+                                                {{$addressData->address1}}
                                             </p>
                                         </div>
                                         <p class="desc-sort">{!! $doctor->description !!}</p>
@@ -1246,8 +1246,6 @@ h1 {
 </div>
 
 
-@endsection
-
 <script>
 setTimeout(function() {
     $('#hour_plan_modal').modal();
@@ -1256,17 +1254,19 @@ setTimeout(function() {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var appointmentDateInput = document.getElementById('appointment-date');
+    console.log('appointmentDateInput', appointmentDateInput)
+    if(appointmentDateInput) {
+        appointmentDateInput.addEventListener('change', function() {
+            var selectedDate = appointmentDateInput.value;
+            var additionalInfoDiv = document.getElementById('additional-info');
 
-    appointmentDateInput.addEventListener('change', function() {
-        var selectedDate = appointmentDateInput.value;
-        var additionalInfoDiv = document.getElementById('additional-info');
-
-        if (selectedDate !== '') {
-            additionalInfoDiv.style.display = 'block';
-        } else {
-            additionalInfoDiv.style.display = 'none';
-        }
-    });
+            if (selectedDate !== '') {
+                additionalInfoDiv.style.display = 'block';
+            } else {
+                additionalInfoDiv.style.display = 'none';
+            }
+        });
+    }
 });
 
 function displayMessage(id, price,service_id) {
@@ -1303,9 +1303,6 @@ function displayMessage(id, price,service_id) {
 }
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="/jquery-3.3.1.min.js"></script>
-<script src="/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#appointmentDate1').change(function() {
@@ -1380,9 +1377,6 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/datepicker-library.js"></script>
-
 <script>
     function myFunction() {
   alert("Page is loaded");
@@ -1404,3 +1398,6 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
+@endsection

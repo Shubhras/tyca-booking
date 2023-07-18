@@ -1,16 +1,3 @@
-<script type="text/javascript">
-let _isMenuOpened = false;
-
-function toggleMenu() {
-    const navbarToggler = document.getElementById('navbar-toggler');
-    const navbarNav = document.querySelector('#navbarNav');
-    navbarNav.classList.toggle('show', !_isMenuOpened);
-    navbarNav.classList.toggle('hide', _isMenuOpened);
-
-    _isMenuOpened = !_isMenuOpened;
-
-}
-</script>
 <header class="position-relative header">
     <!-- <div class="container"> -->
     <div class="row align-items-center header-height">
@@ -55,7 +42,7 @@ function toggleMenu() {
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard" class="nav-link nav-hov nav-color" id="nav-flex"><img
+                            <a href="http://127.0.0.1:8000/patients/dashboard" class="nav-link nav-hov nav-color" id="nav-flex"><img
                                     class="img-fluid-logos" alt="img-fluid" src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
@@ -67,7 +54,7 @@ function toggleMenu() {
                             @endif
                         </li>
                         <li class="nav-item hide-hamer">
-                            <a href="https://tyca-book.sftechnologiesstage.co/patients/dashboard"
+                            <a href="http://127.0.0.1:8000/patients/dashboard"
                                 class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger"
                                 data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:34px;height:29px;"></span>
                             </a>
