@@ -396,12 +396,12 @@
         <label class="form-label">{{__('messages.doctor.status')}}:</label>
         <div class="col-lg-8">
             <div class="form-check form-check-solid form-switch">
-                <input name="status" class="form-check-input checkBoxClass" type="checkbox"
+                <input name="status" class="form-check-input checkBoxClass" id="allowmarketing" type="checkbox"
                     {{$user->status == 1 ? 'checked' : ''}}>
                     @if($user->status == 1)
-                    <span>Active</span>
+                    <span id="lbl_change">Active</span>
                     @else
-                    <span>Inactive</span>
+                    <span id="lbl_change">Inactive</span>
                     @endif
                 <label class="form-check-label" for="allowmarketing"></label>
             </div>
@@ -441,7 +441,7 @@
         <button type="submit" class="btn btn-primary">{{__('messages.common.save')}}</button>&nbsp;&nbsp;&nbsp;
 
     </div>
-
+    In
     <style>
     .item-photo__preview {
         width: 100px;
@@ -534,4 +534,16 @@
             $('#descriptionData').val($(".ql-editor").html());
         });
     });
+
+    $('#allowmarketing').change(function () {
+
+if (!$(this).is(':checked')) {
+ $("#lbl_change").empty().text("In Active");
+}else{
+$("#lbl_change").empty().text("Active");
+}
+
+});
+
+
     </script>

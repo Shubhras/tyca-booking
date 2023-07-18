@@ -137,8 +137,9 @@ class ServiceController extends AppBaseController
     public function getCharge(Request $request)
     {
         $chargeId = $request->chargeId;
-        $serviceRate = ServiceDiscountRates::where('service_id', $chargeId)->get();
+        $serviceRate = ServiceDiscountRates::where('service_id', $chargeId)->get()->unique('discount_type');
         $charge = Service::find($chargeId);
+ 
         return $this->sendResponse([$charge,$serviceRate], __('messages.flash.retrieve'));
     }
 

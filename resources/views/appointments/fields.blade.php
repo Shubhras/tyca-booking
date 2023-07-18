@@ -150,7 +150,7 @@
     <div class="col-lg-6 col-sm-12 mb-5">
         {{ Form::label('Charge',__('messages.appointment.charge_amount').':' ,['class' => 'form-label']) }}
         <div class="input-group">
-            <strong><span id="price_total">0</span></strong>
+            <strong><span id="price_total1">0</span></strong>
         </div>
     </div>
 

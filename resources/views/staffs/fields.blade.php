@@ -24,7 +24,7 @@
         <div class="mb-5">
             {{ Form::label('contact', __('messages.staff.contact_no').':', ['class' => 'form-label required']) }}
             <br>
-            {{ Form::tel('contact', isset($staff) && $staff->contact ? '+'.$staff->region_code.$staff->contact : null, ['class' => 'form-control', 'placeholder' => __('messages.patient.contact_no'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
+            {{ Form::tel('contact', isset($staff) && $staff->contact ? $staff->region_code.$staff->contact : null, ['class' => 'form-control', 'placeholder' => __('messages.patient.contact_no'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
             {{ Form::hidden('region_code',isset($staff) ? $staff->region_code : null,['id'=>'prefix_code']) }}
             <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
             <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2"></span>

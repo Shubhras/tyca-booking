@@ -168,6 +168,7 @@ listenChange('#appointmentServiceId', function () {
                     $('#chargeId').val(result.data[0].charges);
                     $('#payableAmount').val(result.data[0].charges);
                     $("#price_total").empty().text(result.data[0].charges)
+                    $("#price_total1").empty().text(result.data[0].charges)
                     charge = result.data[0].charges;
                 }
 
