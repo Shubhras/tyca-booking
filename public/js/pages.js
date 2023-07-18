@@ -1,5 +1,1173 @@
-/*! For license information please see pages.js.LICENSE.txt */
-(()=>{var __webpack_modules__={5518:()=>{listenClick(".languageSelection",(function(){var e=$(this).data("prefix-value");$.ajax({type:"POST",url:route("front.change.language"),data:{_token:csrfToken,languageName:e},success:function(){location.reload()}})}))},2880:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}document.addEventListener("turbo:load",(function(){var t;if(!$("#appointmentDateFilter").length)return;var a=moment().startOf("week"),n=moment().endOf("week");function i(e,t){$("#appointmentDateFilter").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#appointmentDateFilter").daterangepicker({startDate:a,endDate:n,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},i),i(a,n)}));$("#appointmentDateFilter");listenClick("#appointmentResetFilter",(function(){$("#paymentStatus").val(0).trigger("change"),$("#appointmentStatus").val(1).trigger("change"),$("#appointmentDateFilter").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#appointmentDateFilter").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#apptmentFilterBtn"),$(".dropdown-menu"))})),listenClick("#doctorApptResetFilter",(function(){$("#doctorApptPaymentStatus").val(1).trigger("change"),$("#appointmentDateFilter").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#appointmentDateFilter").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#doctorAptFilterBtn"),$(".dropdown-menu"))})),listenClick(".appointment-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("appointments.destroy",t),Lang.get("messages.web.appointment"))})),listenChange(".appointment-status-change",(function(){var e=$(this).val(),t=$(this).data("id"),a=$(this);$.ajax({url:route("change-status",t),type:"POST",data:{appointmentId:t,appointmentStatus:e},success:function(e){$(a).children("option.booked").addClass("hide"),Turbo.visit(window.location.href),displaySuccessMessage(e.message)}})})),listenChange(".appointment-change-payment-status",(function(){var e=$(this).val(),t=$(this).data("id");$("#paymentStatusModal").modal("show").appendTo("body"),$("#paymentStatus").val(e),$("#appointmentId").val(t)})),listenChange("#appointmentDateFilter",(function(){window.livewire.emit("changeDateFilter",$(this).val()),window.livewire.emit("changeStatusFilter",$("#appointmentStatus").val()),window.livewire.emit("changePaymentTypeFilter",$("#paymentStatus").val())})),listenChange("#paymentStatus",(function(){window.livewire.emit("changeDateFilter",$("#appointmentDateFilter").val()),window.livewire.emit("changeStatusFilter",$("#appointmentStatus").val()),window.livewire.emit("changePaymentTypeFilter",$(this).val())})),listenChange("#doctorApptPaymentStatus",(function(){window.livewire.emit("changeDateFilter",$("#appointmentDateFilter").val()),window.livewire.emit("changeStatusFilter",$(this).val())})),listenChange("#appointmentStatus",(function(){window.livewire.emit("changeDateFilter",$("#appointmentDateFilter").val()),window.livewire.emit("changeStatusFilter",$(this).val()),window.livewire.emit("changePaymentTypeFilter",$("#paymentStatus").val())})),listenSubmit("#appointmentPaymentStatusForm",(function(e){e.preventDefault();var t=$("#paymentStatus").val(),a=$("#appointmentId").val(),n=$("#paymentType").val();$.ajax({url:route("change-payment-status",a),type:"POST",data:{appointmentId:a,paymentStatus:t,paymentMethod:n,loginUserId:currentLoginUserId},success:function(e){e.success&&(displaySuccessMessage(e.message),$("#paymentStatusModal").modal("hide"),location.reload())},error:function(e){displayErrorMessage(e.responseJSON.message)}})}))},2984:()=>{document.addEventListener("turbo:load",(function(){p(),h()}));var e,t,a,n,i,r,s,o,d,l,c=!1,u=null,m={id:"",uId:"",eventName:"",patientName:"",eventDescription:"",eventStatus:"",startDate:"",endDate:"",amount:0,service:"",doctorName:""};var p=function(){if($("#adminAppointmentCalendar").length&&"patient"!=usersRole){var t=document.getElementById("adminAppointmentCalendar"),a=$(".currentLanguage").val();(e=new FullCalendar.Calendar(t,{locale:a,themeSystem:"bootstrap5",height:750,buttonText:{today:Lang.get("messages.datepicker.today"),month:Lang.get("messages.admin_dashboard.month")},headerToolbar:{left:"prev,next today",center:"title",right:"dayGridMonth,dayGridWeek,dayGridDay"},initialDate:new Date,timeZone:"UTC",dayMaxEvents:!0,events:function(e,t,a){$.ajax({url:route("appointments.calendar"),type:"GET",data:e,success:function(e){e.success&&t(e.data)},error:function(e){displayErrorMessage(e.responseJSON.message),a()}})},eventMouseEnter:function(e){g({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,patient:e.event.extendedProps.patient,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,doctorName:e.event.extendedProps.doctorName}),f(e.el)},eventMouseLeave:function(){v()},eventClick:function(e){v(),u=e.event.id,g({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,patient:e.event.extendedProps.patient,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,doctorName:e.event.extendedProps.doctorName}),w()}})).render()}},h=function(){if($("#eventModal").length){var e=document.getElementById("eventModal");s=new bootstrap.Modal(e),t=e.querySelector('[data-calendar="event_name"]'),i=e.querySelector('[data-calendar="event_patient_name"]'),e.querySelector('[data-calendar="event_description"]'),a=e.querySelector('[data-calendar="event_status"]'),l=e.querySelector('[data-calendar="event_amount"]'),d=e.querySelector('[data-calendar="event_uId"]'),o=e.querySelector('[data-calendar="event_service"]'),n=e.querySelector('[data-calendar="event_start_date"]'),r=e.querySelector('[data-calendar="event_end_date"]')}},g=function(e){m.id=e.id,m.eventName=e.title,m.patientName=e.patient,m.eventDescription=e.description,m.eventStatus=e.status,m.startDate=e.startStr,m.endDate=e.endStr,m.amount=e.amount,m.uId=e.uId,m.service=e.service,m.doctorName=e.doctorName},f=function(e){v();var t=m.allDay?moment(m.startDate).format("Do MMM, YYYY"):moment(m.startDate).format("Do MMM, YYYY - h:mm a"),a=m.allDay?moment(m.endDate).format("Do MMM, YYYY"):moment(m.endDate).format("Do MMM, YYYY - h:mm a");m.doctorName,m.patientName},v=function(){c&&(undefined.dispose(),c=!1)},w=function(){var e,c;$(".fc-popover").addClass("hide"),s.show();var u=$("#bookCalenderConst").val(),p=$("#checkInCalenderConst").val(),h=$("#checkOutCalenderConst").val(),g=$("#cancelCalenderConst").val();e=moment(m.startDate).utc().format("DD MMM, YYYY - h:mm A"),c=moment(m.endDate).utc().format("DD MMM, YYYY - h:mm A"),r.innerText=": "+c,n.innerText=": "+e,t.innerText="Doctor: "+m.doctorName,i.innerText="Patient: "+m.patientName,$(a).empty(),$(a).append('\n<option class="booked" disabled value="'.concat(u,'" ').concat(m.eventStatus==u?"selected":"",">").concat(Lang.get("messages.appointment.booked"),'</option>\n<option value="').concat(p,'" ').concat(m.eventStatus==p?"selected":""," ").concat(m.eventStatus==p?"selected":"","\n    ").concat(m.eventStatus==g||m.eventStatus==h?"disabled":"",">").concat(Lang.get("messages.appointment.check_in"),'</option>\n<option value="').concat(h,'" ').concat(m.eventStatus==h?"selected":"","\n    ").concat(m.eventStatus==g||m.eventStatus==u?"disabled":"",">").concat(Lang.get("messages.appointment.check_out"),'</option>\n<option value="').concat(g,'" ').concat(m.eventStatus==g?"selected":""," ").concat(m.eventStatus==p?"disabled":"","\n   ").concat(m.eventStatus==h?"disabled":"",">").concat(Lang.get("messages.appointment.cancelled"),"</option>\n")),$(a).val(m.eventStatus).trigger("change"),l.innerText=addCommas(m.amount),d.innerText=m.uId,o.innerText=m.service};listenChange("#changeAppointmentStatus",(function(){if(!$(this).val())return!1;var t=$(this).val(),a=u;if(parseInt(t)===m.eventStatus)return!1;$.ajax({url:route("change-status",a),type:"POST",data:{appointmentId:a,appointmentStatus:t},success:function(t){displaySuccessMessage(t.message),$("#eventModal").modal("hide"),e.refetchEvents()}})}))},3879:(e,t,a)=>{"use strict";a(7908);function n(e){return(n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}document.addEventListener("turbo:load",(function(){if(!$("#appointmentDate").length)return;var e=$(".currentLanguage").val();$("#appointmentDate").flatpickr({locale:e,minDate:new Date,disableMobile:!0}),$(".no-time-slot").removeClass("d-none")}));var i,r,s=$("#appointmentDate"),o=(new Date).getTimezoneOffset();o=0===o?0:-o,listenChange("#appointmentDate",(function(){if("hourly"==$("#plantype_id").find("option:selected").text())i=$(this).val();else{var e=(i=$(this).val()).split(" - ")[0].split("/"),t=e[2]+"-"+e[1]+"-"+e[0];i=t,alert(n(i))}var a=$("#patientRole").val(),r=$("#appointmentIsEdit").val();$(".appointment-slot-data").html("");var s=isEmpty(a)?route("doctor-session-time"):route("patients.doctor-session-time");$.ajax({url:s,type:"GET",data:{adminAppointmentDoctorId:$("#adminAppointmentDoctorId").val(),date:i,timezone_offset_minutes:o},success:function(e){e.success&&(null!=e.data.bookedSlot&&e.data.bookedSlot.length>0&&0==e.data.slots.length&&($(".no-time-slot").addClass("d-none"),$(".doctor-time-over").removeClass("d-none")),$.each(e.data.slots,(function(t,a){r&&fromTime==a?($(".no-time-slot").addClass("d-none"),$(".doctor-time-over").addClass("d-none"),$(".appointment-slot-data").append('<span class="time-slot col-2  activeSlot" data-id="'+a+'">'+a+"</span>")):($(".no-time-slot").addClass("d-none"),$(".doctor-time-over").addClass("d-none"),null==e.data.bookedSlot?$(".appointment-slot-data").append('<span class="time-slot col-2" data-id="'+a+'">'+a+"</span>"):-1!==$.inArray(a,e.data.bookedSlot)?$(".appointment-slot-data").append('<span class="time-slot col-2 bookedSlot " data-id="'+a+'">'+a+"</span>"):$(".appointment-slot-data").append('<span class="time-slot col-2" data-id="'+a+'">'+a+"</span>"))})))},error:function(e){$(".no-time-slot").removeClass("d-none"),$(".doctor-time-over").addClass("d-none"),displayErrorMessage(e.responseJSON.message)}})})),listenClick(".time-slot",(function(){$(".time-slot").hasClass("activeSlot")?($(".time-slot").removeClass("activeSlot"),$(this).addClass("activeSlot")):$(this).addClass("activeSlot");var e=$(this).attr("data-id").split("-"),t=e[0],a=e[1];$("#timeSlot").val(""),$("#toTime").val(""),$("#timeSlot").val(t),$("#toTime").val(a)}));var d;parseInt($("#addFees").val());function l(e){$.ajax({type:"POST",url:route("razorpay.failed"),data:{data:e},success:function(e){e.success&&displaySuccessMessage(e.message)},error:function(){}})}listenChange("#adminAppointmentDoctorId",(function(){$("#chargeId").val(""),$("#payableAmount").val(""),s.val(""),$("#addFees").val(""),$(".appointment-slot-data").html(""),$(".no-time-slot").removeClass("d-none");var e=isEmpty(userRole)?route("get-service"):route("patients.get-service");$.ajax({url:e,type:"GET",data:{appointmentDoctorId:$(this).val()},success:function(e){e.success&&($("#appointmentDate").removeAttr("disabled"),$("#appointmentServiceId").empty(),$("#appointmentServiceId").append($('<option value=""></option>').text(Lang.get("messages.common.select_service"))),$.each(e.data,(function(e,t){$("#appointmentServiceId").append($("<option></option>").attr("value",t.id).text(t.name))})))}})})),listenChange("#appointmentServiceId",(function(){var e=isEmpty(userRole)?route("get-charge"):route("patients.get-charge");$.ajax({url:e,type:"GET",data:{chargeId:$(this).val()},success:function(e){e.success&&($("#chargeId").val(""),$("#addFees").val(""),$("#payableAmount").val(""),e.data&&($("#chargeId").val(e.data[0].charges),$("#payableAmount").val(e.data[0].charges),$("#price_total").empty().text(e.data[0].charges),r=e.data[0].charges),$("#plantype_id").empty(),$("#plantype_id").append($('<option value=""></option>').text("Select Plan Type")),$.each(e.data[1],(function(e,t){$("#plantype_id").append($("<option></option>").attr("value",t.id).attr("data-amount",t.rate).text(t.discount_type))})))}})})),listenChange("#plantype_id",(function(){var e=$("option:selected",this).attr("data-amount"),t=$("option:selected",this).text();"hourly"==t?$("#slot_option").show():$("#slot_option").hide(),$("#type_of_payment").empty().val(t),e&&($("#chargeId").val(e),$("#payableAmount").val(e),$("#price_total").empty().text(e),r=e)})),listenKeyup("#addFees",(function(e){8!=e.which&&isNaN(String.fromCharCode(e.which))&&e.preventDefault(),d="",d=parseFloat(r)+parseFloat($(this).val()?$(this).val():0),$("#payableAmount").val(d.toFixed(2))})),listenSubmit("#addAppointmentForm",(function(e){e.preventDefault();var t=new FormData($(this)[0]);$(".submitAppointmentBtn").prop(Lang.get("messages.common.discard"),!0),$(".submitAppointmentBtn").text(Lang.get("messages.common.please_wait")),$.ajax({url:$(this).attr("action"),type:"POST",data:t,processData:!1,contentType:!1,success:function(e){if(e.success){var t=e.data.appointmentId;if("Booking already exists"==e.message?displayErrorMessage(e.message):displaySuccessMessage(e.message),$("#addAppointmentForm")[0].reset(),$("#addAppointmentForm").val("").trigger("change"),setTimeout((function(){return location.href=e.data.url}),5e3),e.data.payment_type==$("#paystackMethod").val())return location.href=e.data.redirect_url;if(e.data.payment_type==$("#paytmMethod").val()&&window.location.replace(route("paytm.init",{appointmentId:t})),e.data.payment_type==$("#authorizeMethod").val()&&Turbo.visit(route("authorize.init",{appointmentId:t})),e.data.payment_type==$("#paypalMethod").val()&&$.ajax({type:"GET",url:route("paypal.init"),data:{appointmentId:t},success:function(e){200==e.status&&(location.href=e.link)},error:function(e){}}),e.data.payment_type==$("#manuallyMethod").val()&&window.location.replace(route("manually-payment",{appointmentId:t})),e.data.payment_type==$("#stripeMethod").val()){var a=e.data[0].sessionId;stripe.redirectToCheckout({sessionId:a}).then((function(e){manageAjaxErrors(e)}))}e.data.payment_type==$("#razorpayMethodMethod").val()&&$.ajax({type:"POST",url:route("razorpay.init"),data:{appointmentId:t},success:function(e){if(e.success){var a=e.data,n=a.id,i=a.amount,r=a.name,s=a.email,o=a.contact;options.amount=i,options.order_id=n,options.prefill.name=r,options.prefill.email=s,options.prefill.contact=o,options.prefill.appointmentID=t;var d=new Razorpay(options);d.open(),d.on("payment.failed",l)}},error:function(e){},complete:function(){}})}},error:function(e){console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",e.responseJSON),displayErrorMessage(e.responseJSON.message),$(".submitAppointmentBtn").prop(Lang.get("messages.common.discard"),!1),$(".submitAppointmentBtn").text(Lang.get("messages.common.save"))},complete:function(){}})}))},1648:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}function t(e){$.ajax({type:"POST",url:route("razorpay.failed"),data:{data:e},success:function(e){e.success&&displaySuccessMessage(e.message)},error:function(){}})}document.addEventListener("turbo:load",(function(){var t;if(!$("#patientAppointmentDate").length)return;var a=moment().startOf("week"),n=moment().endOf("week");function i(e,t){$("#patientAppointmentDate").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#patientAppointmentDate").daterangepicker({startDate:a,endDate:n,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},i),i(a,n)})),listenClick("#patientPanelApptmentResetFilter",(function(){livewire.emit("refresh"),$("#patientPaymentStatus").val(0).trigger("change"),$("#patientAppointmentStatus").val(1).trigger("change"),$("#patientAppointmentDate").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#patientAppointmentDate").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#patientPanelApptFilterBtn"),$(".dropdown-menu"))})),listenChange("#patientAppointmentDate",(function(){window.livewire.emit("changeDateFilter",$(this).val())})),listenChange("#patientPaymentStatus",(function(){window.livewire.emit("changeDateFilter",$("#patientAppointmentDate").val()),window.livewire.emit("changePaymentTypeFilter",$(this).val())})),listenChange("#patientAppointmentStatus",(function(){window.livewire.emit("changeDateFilter",$("#patientAppointmentDate").val()),window.livewire.emit("changeStatusFilter",$(this).val())})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$("#patientPaymentStatus").length&&$("#patientPaymentStatus").select2(),$("#patientAppointmentStatus").length&&$("#patientAppointmentStatus").select2()}))})),listenClick(".patient-panel-apptment-delete-btn",(function(e){var t=$("#userRole").val(),a=$(e.currentTarget).data("id"),n=isEmpty(t)?route("appointments.destroy",a):route("patients.appointments.destroy",a);deleteItem(n,"Appointment")})),listenClick(".patient-cancel-appointment",(function(e){var t=$(e.currentTarget).data("id");cancelAppointment(route("patients.cancel-status"),Lang.get("messages.web.appointment"),t)})),window.cancelAppointment=function(e,t,a){swal({title:Lang.get("messages.common.cancelled_appointment"),text:Lang.get("messages.common.are_you_sure_cancel")+t+" ?",type:"warning",icon:"warning",showCancelButton:!0,closeOnConfirm:!1,confirmButtonColor:"#266CB0",showLoaderOnConfirm:!0,buttons:{confirm:Lang.get("messages.common.yes"),cancel:Lang.get("messages.common.no")}}).then((function(e){e&&function(e,t,a){$.ajax({url:route("patients.cancel-status"),type:"POST",data:{appointmentId:a},success:function(e){e.success&&livewire.emit("refresh"),swal({title:Lang.get("messages.common.cancelled_appointment"),text:t+Lang.get("messages.common.has_cancel"),icon:"success",confirmButtonColor:"#266CB0",timer:2e3})},error:function(e){swal({title:"Error",icon:"error",text:e.responseJSON.message,type:"error",confirmButtonColor:"#266CB0",timer:5e3})}})}(0,t,a)}))},listenClick("#submitBtn",(function(e){e.preventDefault();var a=$("#paymentGatewayType").val();if(isEmpty(a))return displayErrorMessage(Lang.get("messages.flash.select_payment")),!1;var n=$("#patientAppointmentId").val(),i=$("#patientPaymentForm").find("#submitBtn");return setAdminBtnLoader(i),2==a&&$.ajax({url:route("patients.appointment-payment"),type:"POST",data:{appointmentId:n},success:function(e){var t=e.data.sessionId;stripe.redirectToCheckout({sessionId:t}).then((function(e){manageAjaxErrors(e)}))}}),7==a&&window.location.replace(route("paytm.init",{appointmentId:n})),3==a&&window.location.replace(route("paystack.init",{appointmentData:n})),6==a&&window.location.replace(route("authorize.init",{appointmentId:n})),4==a&&$.ajax({type:"GET",url:route("paypal.init"),data:{appointmentId:n},success:function(e){if(200==e.status){location.href=e.link}},error:function(e){},complete:function(){}}),5==a&&$.ajax({type:"POST",url:route("razorpay.init"),data:{appointmentId:n},success:function(e){if(e.success){var a=e.data,i=a.id,r=a.amount,s=a.name,o=a.email,d=a.contact;options.amount=r,options.order_id=i,options.prefill.name=s,options.prefill.email=o,options.prefill.contact=d,options.prefill.appointmentID=n;var l=new Razorpay(options);l.open(),l.on("payment.failed",t)}},error:function(e){},complete:function(){}}),!1})),listenClick(".payment-btn",(function(e){var t=$(this).data("id");$("#paymentGatewayModal").modal("show").appendTo("body"),$("#patientAppointmentId").val(t)})),listen("hidden.bs.modal","#paymentGatewayModal",(function(e){$("#patientPaymentForm")[0].reset(),$("#paymentGatewayType").val(null).trigger("change")}))},7254:()=>{document.addEventListener("turbo:load",(function(){if(!$("#appointmentCalendar").length)return;c(),u()}));var e,t,a,n,i,r,s,o,d=!1,l={id:"",uId:"",eventName:"",eventDescription:"",eventStatus:"",startDate:"",endDate:"",amount:0,service:"",doctorName:""};var c=function(){if("patient"==usersRole){var e=$(".currentLanguage").val(),t=document.getElementById("appointmentCalendar");new FullCalendar.Calendar(t,{locale:e,themeSystem:"bootstrap5",height:750,buttonText:{today:Lang.get("messages.datepicker.today"),month:Lang.get("messages.admin_dashboard.month")},headerToolbar:{left:"title",center:"prev,next today",right:"dayGridMonth"},initialDate:new Date,timeZone:"UTC",dayMaxEvents:!0,events:function(e,t,a){$.ajax({url:route("patients.appointments.calendar"),type:"GET",data:e,success:function(e){e.success&&t(e.data)},error:function(e){displayErrorMessage(e.responseJSON.message),a()}})},eventMouseEnter:function(e){m({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,description:e.event.extendedProps.description,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,doctorName:e.event.extendedProps.doctorName}),p(e.el)},eventMouseLeave:function(){h()},eventClick:function(e){h(),m({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,description:e.event.extendedProps.description,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,doctorName:e.event.extendedProps.doctorName}),g()}}).render()}},u=function(){if($("#patientEventModal").length){var d=document.getElementById("patientEventModal");i=new bootstrap.Modal(d),e=d.querySelector('[data-calendar="event_name"]'),d.querySelector('[data-calendar="event_description"]'),t=d.querySelector('[data-calendar="event_status"]'),o=d.querySelector('[data-calendar="event_amount"]'),s=d.querySelector('[data-calendar="event_uId"]'),r=d.querySelector('[data-calendar="event_service"]'),a=d.querySelector('[data-calendar="event_start_date"]'),n=d.querySelector('[data-calendar="event_end_date"]')}},m=function(e){l.id=e.id,l.eventName=e.title,l.eventDescription=e.description,l.eventStatus=e.status,l.startDate=e.startStr,l.endDate=e.endStr,l.amount=e.amount,l.uId=e.uId,l.service=e.service,l.doctorName=e.doctorName},p=function(e){h();var t=l.allDay?moment(l.startDate).format("Do MMM, YYYY"):moment(l.startDate).format("Do MMM, YYYY - h:mm a"),a=l.allDay?moment(l.endDate).format("Do MMM, YYYY"):moment(l.endDate).format("Do MMM, YYYY - h:mm a");l.doctorName},h=function(){d&&(undefined.dispose(),d=!1)},g=function(){var d,c;$(".fc-popover").addClass("hide"),i.show(),d=moment(l.startDate).utc().format("Do MMM, YYYY - h:mm A"),c=moment(l.endDate).utc().format("Do MMM, YYYY - h:mm A"),n.innerText=": "+c,a.innerText=": "+d,e.innerText="Doctor: "+l.doctorName,$(t).val(l.eventStatus),o.innerText=addCommas(l.amount),s.innerText=l.uId,r.innerText=l.service}},2228:()=>{listenClick("#createCity",(function(){$("#createCityModal").modal("show").appendTo("body")})),listen("hidden.bs.modal","#createCityModal",(function(){resetModalForm("#createCityForm","#createCityValidationErrorsBox"),$("#stateCity").val(null).trigger("change")})),listen("hidden.bs.modal","#editCityModal",(function(){resetModalForm("#editCityForm","#editCityValidationErrorsBox")})),listenClick(".city-edit-btn",(function(e){var t,a=$(e.currentTarget).data("id");t=a,$.ajax({url:route("cities.edit",t),type:"GET",success:function(e){$("#cityID").val(e.data.id),$("#editCityName").val(e.data.name),$("#editCityStateId").val(e.data.state_id).trigger("change"),$("#editCityModal").modal("show")}})})),listenSubmit("#createCityForm",(function(e){e.preventDefault(),$.ajax({url:route("cities.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#createCityModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editCityForm",(function(e){e.preventDefault();var t=$("#cityID").val();$.ajax({url:route("cities.update",t),type:"PUT",data:$(this).serialize(),success:function(e){$("#editCityModal").modal("hide"),displaySuccessMessage(e.message),livewire.emit("refresh")},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".city-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("cities.destroy",t),Lang.get("messages.common.city"))}))},7534:()=>{function e(e){$.ajax({url:route("clinic-schedules.store"),type:"POST",data:e,processData:!1,contentType:!1,success:function(e){e.success&&(displaySuccessMessage(e.message),setTimeout((function(){location.reload()}),1500))},error:function(e){displayErrorMessage(e.responseJSON.message)},complete:function(){}})}listenSubmit("#clinicScheduleSaveForm",(function(t){t.preventDefault();var a=new FormData($(this)[0]);$.ajax({url:route("checkRecord"),type:"POST",data:$(this).serialize(),success:function(t){e(a)},error:function(t){swal({title:Lang.get("messages.common.deleted"),text:t.responseJSON.message,type:"warning",icon:"warning",showCancelButton:!0,closeOnConfirm:!0,confirmButtonColor:"#266CB0",showLoaderOnConfirm:!0,cancelButtonText:Lang.get("messages.common.no"),confirmButtonText:Lang.get("messages.common.yes_update")}).then((function(t){t&&e(a)}))}})})),listenChange('select[name^="clinicStartTimes"]',(function(e){var t=$(this)[0].selectedIndex,a=$(this).closest(".weekly-row").find('select[name^="clinicEndTimes"] option');a.eq(t+1).prop("selected",!0).trigger("change"),a.each((function(e){e<=t?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))}))},3853:()=>{listenClick(".country-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("countries.destroy",t),Lang.get("messages.common.country"))})),listenClick("#addCountry",(function(){$("#addCountryModal").modal("show").appendTo("body")})),listenSubmit("#addCountryForm",(function(e){e.preventDefault(),$.ajax({url:route("countries.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#addCountryModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".country-edit-btn",(function(e){$("#editCountryModal").modal("show").appendTo("body");var t=$(e.currentTarget).data("id");$("#editCountryId").val(t),$.ajax({url:route("countries.edit",t),type:"GET",success:function(e){e.success&&($("#editCountryName").val(e.data.name),$("#editShortCodeName").val(e.data.short_code))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editCountryForm",(function(e){e.preventDefault();var t=$("#editCountryId").val();$.ajax({url:route("countries.update",t),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#editCountryModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listen("hidden.bs.modal","#addCountryModal",(function(e){$("#addCountryForm")[0].reset()}))},1710:()=>{listenClick("#createCurrency",(function(){$("#createCurrencyModal").modal("show").appendTo("body")})),listen("hidden.bs.modal","#createCurrencyModal",(function(){resetModalForm("#createCurrencyForm","#createCurrencyValidationErrorsBox")})),listen("hidden.bs.modal","#editCurrencyModal",(function(){resetModalForm("#editCurrencyForm","#editCurrencyValidationErrorsBox")})),listenClick(".currency-edit-btn",(function(e){var t,a=$(e.currentTarget).data("id");t=a,$.ajax({url:route("currencies.edit",t),type:"GET",success:function(e){$("#currencyID").val(e.data.id),$("#editCurrency_Name").val(e.data.currency_name),$("#editCurrency_Icon").val(e.data.currency_icon),$("#editCurrency_Code").val(e.data.currency_code),$("#editCurrencyModal").modal("show")}})})),listenSubmit("#createCurrencyForm",(function(e){e.preventDefault(),$.ajax({url:route("currencies.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#createCurrencyModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editCurrencyForm",(function(e){e.preventDefault();var t=$("#currencyID").val();$.ajax({url:route("currencies.update",t),type:"PUT",data:$(this).serialize(),success:function(e){$("#editCurrencyModal").modal("hide"),displaySuccessMessage(e.message),livewire.emit("refresh")},error:function(e){displayErrorMessage(e.responseJSON.message)},complete:function(){}})})),listenClick(".currency-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("currencies.destroy",t),Lang.get("messages.setting.currency"))}))},48:function(){function e(t){return(e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(t)}document.addEventListener("DOMContentLoaded",(function(){if(!$("#expiryMonth").length||!$("#expiryYear").length)return;$("#expiryMonth").select2(),$("#expiryYear").select2()})),listenClick("#submitBtn",(function(e){$(".demoInputBox").css("background-color","");var t="",a=$("#cardHolderName").val(),n=$("#cardNumber").val(),i=$("#expiryMonth").val(),r=$("#expiryYear").val(),s=$("#cvv").val();return""==a?(t+="Card holder name fields are required.",$(".error").html(t),$("#errorCard").addClass("show"),!1):""==a||/^[a-z ,.'-]+$/i.test(a)?""==n?(t="Card number fields are required.",$(".error").html(t),$("#errorCard").addClass("show"),!1):""===i?(t="Expiration month fields are required.",$(".error").html(t),$("#errorCard").addClass("show"),!1):""===r?(t+="Expiration year fields are required.",$(".error").html(t),$("#errorCard").addClass("show"),!1):(i=parseInt(i)+1,new Date(r+"-"+i+"-01")<new Date?(t+="Enter valid expiration date.",$(".error").html(t),$("#errorCard").addClass("show"),!1):""==s?(t+="CVV number fields are required.",$(".error").html(t),$("#errorCard").addClass("show"),!1):""==s||/^[0-9]{3,3}$/.test(s)?(""!=n&&$("#cardNumber").validateCreditCard((function(e){if(!e.valid)return t="Card number is invalid.",$(".error").html(t),$("#errorCard").addClass("show"),!1})),""==t&&void 0):(t+="CVV is invalid.",$(".error").html(t),$("#errorCard").addClass("show"),!1)):(t="Card holder name is Invalid.",$(".error").html(t),$("#errorCard").addClass("show"),!1)})),function(){var t,a,n,i=[].indexOf||function(e){for(var t=0,a=this.length;t<a;t++)if(t in this&&this[t]===e)return t;return-1};n=function(){function e(){this.trie={}}return e.prototype.push=function(e){var t,a,n,i,r,s,o;for(e=e.toString(),r=this.trie,o=[],a=n=0,i=(s=e.split("")).length;n<i;a=++n)null==r[t=s[a]]&&(a===e.length-1?r[t]=null:r[t]={}),o.push(r=r[t]);return o},e.prototype.find=function(e){var t,a,n,i,r,s;for(e=e.toString(),r=this.trie,a=n=0,i=(s=e.split("")).length;n<i;a=++n){if(t=s[a],!r.hasOwnProperty(t))return!1;if(null===r[t])return!0;r=r[t]}},e}(),a=function(){function e(e){if(this.trie=e,this.trie.constructor!==n)throw Error("Range constructor requires a Trie parameter")}return e.rangeWithString=function(t){var a,i,r,s,o,d,l,c,u;if("string"!=typeof t)throw Error("rangeWithString requires a string parameter");for(t=(t=t.replace(/ /g,"")).split(","),u=new n,a=0,r=t.length;a<r;a++)if(o=(d=t[a]).match(/^(\d+)-(\d+)$/))for(s=i=l=o[1],c=o[2];l<=c?i<=c:i>=c;s=l<=c?++i:--i)u.push(s);else{if(!d.match(/^\d+$/))throw Error("Invalid range '"+o+"'");u.push(d)}return new e(u)},e.prototype.match=function(e){return this.trie.find(e)},e}(),(t=jQuery).fn.validateCreditCard=function(n,r){var s,o,d,l,c,u,m,p,h,g,f,v,w,y;for(l=[{name:"amex",range:"34,37",valid_length:[15]},{name:"diners_club_carte_blanche",range:"300-305",valid_length:[14]},{name:"diners_club_international",range:"36",valid_length:[14]},{name:"jcb",range:"3528-3589",valid_length:[16]},{name:"laser",range:"6304, 6706, 6709, 6771",valid_length:[16,17,18,19]},{name:"visa_electron",range:"4026, 417500, 4508, 4844, 4913, 4917",valid_length:[16]},{name:"visa",range:"4",valid_length:[13,14,15,16,17,18,19]},{name:"mastercard",range:"51-55,2221-2720",valid_length:[16]},{name:"discover",range:"6011, 622126-622925, 644-649, 65",valid_length:[16]},{name:"dankort",range:"5019",valid_length:[16]},{name:"maestro",range:"50, 56-69",valid_length:[12,13,14,15,16,17,18,19]},{name:"uatp",range:"1",valid_length:[15]}],s=!1,n&&("object"===e(n)?(r=n,s=!1,n=null):"function"==typeof n&&(s=!0)),null==r&&(r={}),null==r.accept&&(r.accept=function(){var e,t,a;for(a=[],e=0,t=l.length;e<t;e++)o=l[e],a.push(o.name);return a}()),p=0,h=(f=r.accept).length;p<h;p++)if(d=f[p],i.call(function(){var e,t,a;for(a=[],e=0,t=l.length;e<t;e++)o=l[e],a.push(o.name);return a}(),d)<0)throw Error("Credit card type '"+d+"' is not supported");return c=function(e){var t,n,s;for(s=function(){var e,t,a,n;for(n=[],e=0,t=l.length;e<t;e++)a=(o=l[e]).name,i.call(r.accept,a)>=0&&n.push(o);return n}(),t=0,n=s.length;t<n;t++)if(d=s[t],a.rangeWithString(d.range).match(e))return d;return null},m=function(e){var t,a,n,i,r,s;for(s=0,i=a=0,n=(r=e.split("").reverse()).length;a<n;i=++a)t=+(t=r[i]),s+=i%2?(t*=2)<10?t:t-9:t;return s%10==0},u=function(e,t){var a;return a=e.length,i.call(t.valid_length,a)>=0},w=function(e){var t,a;return a=!1,t=!1,null!=(d=c(e))&&(a=m(e),t=u(e,d)),{card_type:d,valid:a&&t,luhn_valid:a,length_valid:t}},y=this,v=function(){var e;return e=g(t(y).val()),w(e)},g=function(e){return e.replace(/[ -]/g,"")},s?(this.on("input.jccv",function(e){return function(){return t(e).off("keyup.jccv"),n.call(e,v())}}(this)),this.on("keyup.jccv",function(e){return function(){return n.call(e,v())}}(this)),n.call(this,v()),this):v()}}.call(this)},4532:(__unused_webpack_module,__unused_webpack_exports,__webpack_require__)=>{document.addEventListener("turbo:load",loadCustomData);var source=null,jsrender=__webpack_require__(2743),csrfToken=$('meta[name="csrf-token"]').attr("content");function initAllComponents(){select2initialize(),refreshCsrfToken(),alertInitialize(),modalInputFocus(),inputFocus(),IOInitImageComponent(),IOInitSidebar(),tooltip(),togglePassword(),setLoginUserLanguage()}function tooltip(){[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map((function(e){return new bootstrap.Tooltip(e)}))}function alertInitialize(){$(".alert").delay(5e3).slideUp(300)}function refreshCsrfToken(){csrfToken=$('meta[name="csrf-token"]').attr("content"),$.ajaxSetup({headers:{"X-CSRF-TOKEN":csrfToken}})}function select2initialize(){$('[data-control="select2"]').each((function(){$(this).select2()}))}$.ajaxSetup({headers:{"X-CSRF-TOKEN":csrfToken}}),document.addEventListener("turbo:load",initAllComponents),document.addEventListener("click",(function(e){var t=$(e.target).closest('.show[data-ic-dropdown-btn="true"]'),a=$(e.target).closest('.show[data-ic-dropdown="true"]');t.length>0||a.length>0||($('[data-ic-dropdown-btn="true"]').removeClass("show"),$('[data-ic-dropdown="true"]').removeClass("show"))})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$('[data-control="select2"]').each((function(){$(this).select2()}))}))}));var inputFocus=function(){$('input:text:not([readonly="readonly"]):not([name="search"]):not(.front-input)').first().focus()},modalInputFocus=function(){$((function(){$(".modal").on("shown.bs.modal",(function(){$(this).find("input:text")[0]&&$(this).find("input:text")[0].focus()}))}))};function loadCustomData(){$(document).find(".nav-item.dropdown ul li").hasClass("active")&&($(document).find(".nav-item.dropdown ul li.active").parent("ul").css("display","block"),$(document).find(".nav-item.dropdown ul li.active").parent("ul").parent("li").addClass("active")),$(window).width()>992&&$(".no-hover").on("click",(function(){$(this).toggleClass("open")}))}function deleteItemAjax(url,header){var callFunction=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;$.ajax({url,type:"DELETE",dataType:"json",success:function success(obj){obj.success&&window.livewire.emit("refresh"),swal({icon:"success",title:Lang.get("messages.common.deleted"),text:header+" "+Lang.get("messages.common.has_been"),timer:2e3}),callFunction&&eval(callFunction)},error:function(e){swal({title:Lang.get("messages.common.error"),icon:"error",text:e.responseJSON.message,type:"error",timer:4e3})}})}function togglePassword(){$('[data-toggle="password"]').each((function(){var e=$(this),t=$(this).parent().find(".input-icon");t.css("cursor","pointer").addClass("input-password-hide"),t.on("click",(function(){t.hasClass("input-password-hide")?(t.removeClass("input-password-hide").addClass("input-password-show"),t.find(".bi").removeClass("bi-eye-slash-fill").addClass("bi-eye-fill"),e.attr("type","text")):(t.removeClass("input-password-show").addClass("input-password-hide"),t.find(".bi").removeClass("bi-eye-fill").addClass("bi-eye-slash-fill"),e.attr("type","password"))}))}))}function setLoginUserLanguage(){var e=$(".currentLanguage").val();Lang.setLocale(e)}$(document).ajaxComplete((function(){$('[data-toggle="tooltip"]').tooltip({html:!0,offset:10})})),listen("select2:open",(function(){var e=document.querySelectorAll(".select2-container--open .select2-search__field");e[e.length-1].focus()})),listen("focus",".select2.select2-container",(function(e){var t=e.originalEvent,a=$(this).find(".select2-selection--single").length>0;t&&a&&$(this).siblings("select:enabled").select2("open")})),$((function(){$(".modal").on("shown.bs.modal",(function(){"modal fade event-modal show"!=$(this).attr("class")&&$(this).find("input:text,input:password").first().focus()}))})),toastr.options={closeButton:!0,debug:!1,newestOnTop:!1,progressBar:!0,positionClass:"toast-top-right",preventDuplicates:!1,onclick:null,showDuration:"300",hideDuration:"1000",timeOut:"5000",extendedTimeOut:"1000",showEasing:"swing",hideEasing:"linear",showMethod:"fadeIn",hideMethod:"fadeOut"},window.resetModalForm=function(e,t){$(e)[0].reset(),$("select.select2Selector").each((function(e,t){var a="#"+$(this).attr("id");$(a).val(""),$(a).trigger("change")})),$(t).hide()},window.printErrorMessage=function(e,t){$(e).show().html(""),$(e).text(t.responseJSON.message)},window.manageAjaxErrors=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"editValidationErrorsBox";404==e.status||422==e.status?toastr.error(e.responseJSON.message):printErrorMessage("#"+t,e)},window.displaySuccessMessage=function(e){toastr.success(e)},window.displayErrorMessage=function(e){toastr.error(e)},window.deleteItem=function(e,t){var a=arguments.length>3&&void 0!==arguments[3]?arguments[3]:null;swal({title:Lang.get("messages.common.delete")+" !",text:Lang.get("messages.common.are_you_sure")+' "'+t+'" ?',buttons:{confirm:Lang.get("messages.common.yes"),cancel:Lang.get("messages.common.no")},reverseButtons:!0,icon:"warning"}).then((function(n){n&&deleteItemAjax(e,t,a)}))},window.format=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"DD-MMM-YYYY";return moment(e).format(t)},window.processingBtn=function(e,t){var a=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null,n=$(e).find(t);"loading"===a?n.button("loading"):n.button("reset")},window.prepareTemplateRender=function(e,t){return jsrender.templates(e).render(t)},window.isValidFile=function(e,t){var a=$(e).val().split(".").pop().toLowerCase();return-1==$.inArray(a,["gif","png","jpg","jpeg"])?($(e).val(""),$(t).removeClass("d-none"),$(t).html("The image must be a file of type: jpeg, jpg, png.").show(),$(t).delay(5e3).slideUp(300),!1):($(t).hide(),!0)},window.displayPhoto=function(e,t){var a=!0;if(e.files&&e.files[0]){var n=new FileReader;if(n.onload=function(e){var n=new Image;n.src=e.target.result,n.onload=function(){$(t).attr("src",e.target.result),a=!0}},e.files[0].size>2097152)return displayErrorMessage("Icon size should be less than 2 MB"),!1;a&&(n.readAsDataURL(e.files[0]),$(t).show())}},window.removeCommas=function(e){return e.replace(/,/g,"")},window.DatetimepickerDefaults=function(e){return $.extend({},{sideBySide:!0,ignoreReadonly:!0,icons:{close:"fa fa-times",time:"fa fa-clock-o",date:"fa fa-calendar",up:"fa fa-arrow-up",down:"fa fa-arrow-down",previous:"fa fa-chevron-left",next:"fa fa-chevron-right",today:"fa fa-clock-o",clear:"fa fa-trash-o"}},e)},window.isEmpty=function(e){return null==e||""===e},window.screenLock=function(){$("#overlay-screen-lock").show(),$("body").css({"pointer-events":"none",opacity:"0.6"})},window.screenUnLock=function(){$("body").css({"pointer-events":"auto",opacity:"1"}),$("#overlay-screen-lock").hide()},window.onload=function(){window.startLoader=function(){$(".infy-loader").show()},window.stopLoader=function(){$(".infy-loader").hide()},stopLoader()},window.setBtnLoader=function(e){if(e.attr("data-old-text"))return e.html(e.attr("data-old-text")).prop("disabled",!1),void e.removeAttr("data-old-text");e.attr("data-old-text",e.text()),e.html('<i class="icon-line-loader icon-spin m-0"></i>').prop("disabled",!0)},window.setAdminBtnLoader=function(e){if(e.attr("data-old-text"))return e.html(e.attr("data-old-text")).prop("disabled",!1),void e.removeAttr("data-old-text");e.attr("data-old-text",e.text()),e.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop("disabled",!0)},window.urlValidation=function(e,t){return!(""!=e&&!e.match(t))},listenClick(".languageSelection",(function(){var e=$(this).data("prefix-value");$.ajax({type:"POST",url:"/change-language",data:{languageName:e},success:function(){location.reload()}})})),listenClick("#register",(function(e){e.preventDefault(),$(".open #dropdownLanguage").trigger("click"),$(".open #dropdownLogin").trigger("click")})),listenClick("#language",(function(e){e.preventDefault(),$(".open #dropdownRegister").trigger("click"),$(".open #dropdownLogin").trigger("click")})),listenClick("#login",(function(e){e.preventDefault(),$(".open #dropdownRegister").trigger("click"),$(".open #dropdownLanguage").trigger("click")})),window.checkSummerNoteEmpty=function(e,t){var a=arguments.length>2&&void 0!==arguments[2]?arguments[2]:0;return $(e).summernote("isEmpty")&&1===a?(displayErrorMessage(t),$(document).find(".note-editable").html("<p><br></p>"),!1):!(!$(e).summernote("isEmpty")&&($(document).find(".note-editable").contents().each((function(){3===this.nodeType&&(this.textContent=this.textContent.replace(/\u00A0/g,""))})),0==$(document).find(".note-editable").text().trim().length&&($(document).find(".note-editable").html("<p><br></p>"),$(e).val(null),1===a)))||(displayErrorMessage(t),!1)},window.preparedTemplate=function(){source=$("#actionTemplate").html(),window.preparedTemplate=Handlebars.compile(source)},window.ajaxCallInProgress=function(){ajaxCallIsRunning=!0},window.ajaxCallCompleted=function(){ajaxCallIsRunning=!1},window.avoidSpace=function(e){if(32==(e?e.which:window.event.keyCode))return!1},listenClick("#readNotification",(function(e){e.preventDefault(),e.stopPropagation();var t=$(this).data("id"),a=$(this);$.ajax({type:"POST",url:route("notifications.read",t),data:{notificationId:t},success:function(){var e=parseInt($("#header-notification-counter").text());$("#header-notification-counter").text(e-1),a.remove();var t=document.getElementsByClassName("readNotification").length;$("#counter").text(t),0==t&&($(".notification-counter").addClass("d-none"),$("#readAllNotification").addClass("d-none"),$(".empty-state").removeClass("d-none"),$(".notification-toggle").removeClass("beep")),displaySuccessMessage(Lang.get("messages.flash.notification_read"))},error:function(e){manageAjaxErrors(e)}})})),listenClick("#readAllNotification",(function(e){e.preventDefault(),e.stopPropagation(),$.ajax({type:"POST",url:route("notifications.read.all"),success:function(){$("#header-notification-counter").text(0),$("#header-notification-counter").addClass("d-none"),$(".readNotification").remove(),$("#readAllNotification").addClass("d-none"),$(".empty-state").removeClass("d-none"),$(".notification-toggle").removeClass("beep"),displaySuccessMessage(Lang.get("messages.flash.notification_read"))},error:function(e){manageAjaxErrors(e)}})})),window.getAvgReviewHtmlData=function(e){var t=e.length,a=0;$(e).each((function(e,t){a+=t.rating}));for(var n=a/t,i='<div class="avg-review-star-div d-flex align-self-center mb-1">',r=0;r<5;r++)i+=n>0?n>.5?'<i class="fas fa-star review-star"></i>':'<i class="fas fa-star-half-alt review-star"></i>':'<i class="far fa-star review-star"></i>',n--;return i+="</div>"},listenClick(".apply-dark-mode",(function(e){e.preventDefault(),$.ajax({url:route("update-dark-mode"),type:"get",success:function(e){e.success&&(displaySuccessMessage(e.message),setTimeout((function(){location.reload()}),500))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),window.openDropdownManually=function(e,t){e.hasClass("show")?(e.removeClass("show"),t.removeClass("show")):(e.addClass("show"),t.addClass("show"))},window.hideDropdownManually=function(e,t){e.removeClass("show"),t.removeClass("show")},document.addEventListener("turbo:before-cache",(function(){var e=".select2-hidden-accessible";$(e).each((function(){$(this).select2("destroy")})),$(e).each((function(){$(this).select2()})),$(".toast").addClass("d-none")}))},1848:()=>{window.listen=function(e,t,a){$(document).on(e,t,a)},window.listenClick=function(e,t){$(document).on("click",e,t)},window.listenSubmit=function(e,t){$(document).on("submit",e,t)},window.listenChange=function(e,t){$(document).on("change",e,t)},window.listenKeyup=function(e,t){$(document).on("keyup",e,t)}},7957:()=>{"use strict";window.setPrice=function(e,t){if(""!=t||t>0){"number"!=typeof t&&(t=t.replace(/,/g,""));var a=addCommas(t);$(e).val(a)}},window.addCommas=function(e){for(var t=(e+="").split("."),a=t[0],n=t.length>1?"."+t[1]:"",i=/(\d+)(\d{3})/;i.test(a);)a=a.replace(i,"$1,$2");return a+n},window.getFormattedPrice=function(e){if(""!=e||e>0)return"number"!=typeof e&&(e=e.replace(/,/g,"")),addCommas(e)},window.priceFormatSelector=function(e){$(document).on("input keyup keydown keypress",e,(function(e){var t=$(this).val();if(""===t)$(this).val("");else{if(/[0-9]+(,[0-9]+)*$/.test(t))return $(this).val(getFormattedPrice(t)),!0;$(this).val(t.replace(/[^0-9 \,]/,""))}}))},window.removeCommas=function(e){return e.replace(/,/g,"")},priceFormatSelector(".price-input")},6619:()=>{},1112:()=>{listenKeyup("#menuSearch",(function(){var e=$(this).val().toLowerCase();$(".nav-item").filter((function(){$(".no-record").addClass("d-none"),$(this).toggle($(this).text().toLowerCase().indexOf(e)>-1),0==$(".nav-item:visible").last().length&&$(".no-record").removeClass("d-none")}))})),listenClick(".sidebar-aside-toggle",(function(){!0===$(this).hasClass("active")?$(".sidebar-search-box").addClass("d-none"):$(".sidebar-search-box").removeClass("d-none")}))},9434:()=>{document.addEventListener("turbo:load",(function(){if(!$("#adminChartData").length)return;var n=JSON.parse($("#adminChartData").val());t=[],e=[],a=0,$.each(n,(function(n,i){t.push(n),e.push(i),a+=i})),i()}));var e=[],t=[],a=0,n="area";function i(){if($("#appointmentChartId").length){$(".totalEarning").text(a),$("#appointmentChartId").remove(),$(".appointmentChart").append('<div id="appointmentChartId" style="height: 350px" class="card-rounded-bottom"></div>');var i=document.getElementById("appointmentChartId");i&&new ApexCharts(i,{series:[{name:Lang.get("messages.doctor_appointment.amount"),type:n,stacked:!0,data:e}],chart:{fontFamily:"inherit",stacked:!0,type:n,height:350,toolbar:{show:!1},background:dashboardChartBGColor},plotOptions:{bar:{stacked:!0,horizontal:!1,borderRadius:4,columnWidth:["12%"]}},legend:{show:!1},dataLabels:{enabled:!1},stroke:{curve:"smooth",show:!0,width:2,colors:["transparent"]},xaxis:{categories:t,axisBorder:{show:!1},axisTicks:{show:!1},labels:{style:{colors:dashboardChartFontColor,fontSize:"12px"}}},yaxis:{labels:{style:{colors:dashboardChartFontColor,fontSize:"12px"}}},fill:{opacity:1},states:{normal:{filter:{type:"none",value:0}},hover:{filter:{type:"none",value:0}},active:{allowMultipleDataPointsSelection:!1,filter:{type:"none",value:0}}},tooltip:{style:{fontSize:"12px"},y:{formatter:function(e){return currencyIcon+" "+e}}},grid:{borderColor:"--bs-gray-200",strokeDashArray:4,yaxis:{lines:{show:!0}},padding:{top:0,right:0,bottom:0,left:0}},theme:{mode:"dark",palette:"palette1",monochrome:{enabled:!1,color:"#13151f",shadeTo:"dark",shadeIntensity:0}}}).render()}}listenClick("#changeChart",(function(){"area"==n?(n="bar",$(".chart").addClass("fa-chart-area"),$(".chart").removeClass("fa-chart-bar"),i()):(n="area",$(".chart").removeClass("fa-chart-area"),$(".chart").addClass("fa-chart-bar"),i())})),listenClick("#monthData",(function(e){e.preventDefault(),$.ajax({url:route("patientData.dashboard"),type:"GET",data:{month:"month"},success:function(e){e.success&&($("#monthlyReport").empty(),$(document).find("#week").removeClass("show active"),$(document).find("#day").removeClass("show active"),$(document).find("#month").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.profile,name:t.user.full_name,email:t.user.email,registered:moment.parseZone(t.user.created_at).format("Do MMM Y hh:mm A"),appointment_count:t.appointments_count,route:route("patients.show",t.id)}];$(document).find("#monthlyReport").append(prepareTemplateRender("#adminDashboardTemplate",a))})):$(document).find("#monthlyReport").append('<tr class="text-center">\n                                                    <td colspan="5" class="text-muted fw-bold">'.concat(noData,"</td>\n                                                </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenChange("#serviceId",(function(n){n.preventDefault();var r=$("#serviceId").val(),s=$("#dashboardDoctorId").val(),o=$("#serviceCategoryId").val();$(".totalEarning").text(""),$.ajax({url:route("admin.dashboard"),type:"GET",data:{serviceId:r,dashboardDoctorId:s,serviceCategoryId:o},success:function(n){n.success&&(t=[],e=[],a=0,$.each(n.data,(function(n,i){t.push(n),e.push(i),a+=i})),$(".totalEarning").text(a),i())},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenChange("#dashboardDoctorId",(function(n){n.preventDefault();var r=$("#serviceId").val(),s=$("#dashboardDoctorId").val(),o=$("#serviceCategoryId").val();$(".totalEarning").text(""),$.ajax({url:route("admin.dashboard"),type:"GET",data:{serviceId:r,dashboardDoctorId:s,serviceCategoryId:o},success:function(n){n.success&&(t=[],e=[],a=0,$.each(n.data,(function(n,i){t.push(n),e.push(i),a+=i})),$(".totalEarning").text(a),i())},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenChange("#serviceCategoryId",(function(n){n.preventDefault();var r=$("#serviceId").val(),s=$("#dashboardDoctorId").val(),o=$("#serviceCategoryId").val();$(".totalEarning").text(""),$.ajax({url:route("admin.dashboard"),type:"GET",data:{serviceId:r,dashboardDoctorId:s,serviceCategoryId:o},success:function(n){n.success&&(t=[],e=[],a=0,$.each(n.data,(function(n,i){t.push(n),e.push(i),a+=i})),$(".totalEarning").text(a),i())},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#dashboardResetBtn",(function(){$("#serviceId").val("").trigger("change"),$("#dashboardDoctorId").val("").trigger("change"),$("#serviceCategoryId").val("").trigger("change"),hideDropdownManually($("#dashboardFilterBtn"),$(".dropdown-menu"))})),listenClick("#weekData",(function(e){e.preventDefault(),$.ajax({url:route("patientData.dashboard"),type:"GET",data:{week:"week"},success:function(e){e.success&&($("#weeklyReport").empty(),$(document).find("#month").removeClass("show active"),$(document).find("#day").removeClass("show active"),$(document).find("#week").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.profile,name:t.user.full_name,email:t.user.email,patientId:t.patient_unique_id,registered:moment.parseZone(t.user.created_at).format("Do MMM Y hh:mm A"),appointment_count:t.appointments_count,route:route("patients.show",t.id)}];$(document).find("#weeklyReport").append(prepareTemplateRender("#adminDashboardTemplate",a))})):$(document).find("#weeklyReport").append('<tr class="text-center">\n                                                    <td colspan="5" class="text-muted fw-bold">'.concat(noData,"</td>\n                                                </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#dayData",(function(e){e.preventDefault(),$.ajax({url:route("patientData.dashboard"),type:"GET",data:{day:"day"},success:function(e){e.success&&($("#dailyReport").empty(),$(document).find("#month").removeClass("show active"),$(document).find("#week").removeClass("show active"),$(document).find("#day").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.profile,name:t.user.full_name,email:t.user.email,patientId:t.patient_unique_id,registered:moment.parseZone(t.user.created_at).format("Do MMM Y hh:mm A"),appointment_count:t.appointments_count,route:route("patients.show",t.id)}];$(document).find("#dailyReport").append(prepareTemplateRender("#adminDashboardTemplate",a))})):$(document).find("#dailyReport").append('\n                    <tr class="text-center">\n                        <td colspan="5" class="text-muted fw-bold"> '.concat(noData,"</td>\n                    </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".dayData",(function(){$(this).addClass("text-primary"),$(".weekData ,.monthData").removeClass("text-primary")})),listenClick(".weekData",(function(){$(this).addClass("text-primary"),$(".dayData ,.monthData").removeClass("text-primary")})),listenClick(".monthData",(function(){$(this).addClass("text-primary"),$(".weekData ,.dayData").removeClass("text-primary")}))},7225:()=>{listenClick("#doctorMonthData",(function(e){e.preventDefault(),$.ajax({url:route("doctors.appointment.dashboard"),type:"GET",data:{month:"month"},success:function(e){e.success&&($("#doctorMonthlyReport").empty(),$(document).find("#week").removeClass("show active"),$(document).find("#day").removeClass("show active"),$(document).find("#month").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.patient.profile,name:t.patient.user.full_name,email:t.patient.user.email,patientId:t.patient.patient_unique_id,date:moment(t.date).format("Do MMM, Y"),from_time:t.from_time,from_time_type:t.from_time_type,to_time:t.to_time,to_time_type:t.to_time_type,route:route("doctors.patient.detail",t.patient_id)}];$(document).find("#doctorMonthlyReport").append(prepareTemplateRender("#doctorDashboardTemplate",a))})):$(document).find("#doctorMonthlyReport").append('\n                                                <tr>\n                                                    <td colspan="4" class="text-center fw-bold text-muted">'.concat(noData,"</td>\n                                                </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#doctorWeekData",(function(e){e.preventDefault(),$.ajax({url:route("doctors.appointment.dashboard"),type:"GET",data:{week:"week"},success:function(e){e.success&&($("#doctorWeeklyReport").empty(),$(document).find("#month").removeClass("show active"),$(document).find("#day").removeClass("show active"),$(document).find("#week").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.patient.profile,name:t.patient.user.full_name,email:t.patient.user.email,patientId:t.patient.patient_unique_id,date:moment(t.date).format("Do MMM, Y"),from_time:t.from_time,from_time_type:t.from_time_type,to_time:t.to_time,to_time_type:t.to_time_type,route:route("doctors.patient.detail",t.patient_id)}];$(document).find("#doctorWeeklyReport").append(prepareTemplateRender("#doctorDashboardTemplate",a))})):$(document).find("#doctorWeeklyReport").append('\n                                                <tr>\n                                                    <td colspan="4" class="text-center fw-bold text-muted">'.concat(noData,"</td>\n                                                </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#doctorDayData",(function(e){e.preventDefault(),$.ajax({url:route("doctors.appointment.dashboard"),type:"GET",data:{day:"day"},success:function(e){e.success&&($("#doctorDailyReport").empty(),$(document).find("#month").removeClass("show active"),$(document).find("#week").removeClass("show active"),$(document).find("#day").addClass("show active"),""!=e.data.patients.data?$.each(e.data.patients.data,(function(e,t){var a=[{image:t.patient.profile,name:t.patient.user.full_name,email:t.patient.user.email,patientId:t.patient.patient_unique_id,date:moment(t.date).format("Do MMM, Y"),from_time:t.from_time,from_time_type:t.from_time_type,to_time:t.to_time,to_time_type:t.to_time_type,route:route("doctors.patient.detail",t.patient_id)}];$(document).find("#doctorDailyReport").append(prepareTemplateRender("#doctorDashboardTemplate",a))})):$(document).find("#doctorDailyReport").append('\n                                                <tr>\n                                                    <td colspan="4" class="text-center fw-bold text-muted">'.concat(noData,"</td>\n                                                </tr>")))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#doctorDayData",(function(){$(this).addClass("text-primary"),$("#doctorWeekData ,#doctorMonthData").removeClass("text-primary")})),listenClick("#doctorWeekData",(function(){$(this).addClass("text-primary"),$("#doctorDayData ,#doctorMonthData").removeClass("text-primary")})),listenClick("#doctorMonthData",(function(){$(this).addClass("text-primary"),$("#doctorWeekData ,#doctorDayData").removeClass("text-primary")}))},3751:()=>{document.addEventListener("turbo:load",(function(){m(),p()}));var e,t,a,n,i,r,s,o,d,l=!1,c=null,u={id:"",uId:"",eventName:"",eventDescription:"",eventStatus:"",startDate:"",endDate:"",amount:0,service:"",patientName:""};var m=function(){if("doctor"==usersRole){var t=document.getElementById("doctorAppointmentCalendar");if($(t).length){var a=$(".currentLanguage").val();(e=new FullCalendar.Calendar(t,{locale:a,themeSystem:"bootstrap5",height:750,buttonText:{today:Lang.get("messages.datepicker.today"),month:Lang.get("messages.admin_dashboard.month")},headerToolbar:{left:"title",center:"prev,next today",right:"dayGridMonth"},initialDate:new Date,timeZone:"UTC",dayMaxEvents:!0,events:function(e,t,a){$.ajax({url:route("doctors.appointments.calendar"),type:"GET",data:e,success:function(e){e.success&&t(e.data)},error:function(e){displayErrorMessage(e.responseJSON.message),a()}})},eventMouseEnter:function(e){h({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,description:e.event.extendedProps.description,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,patientName:e.event.extendedProps.patientName}),g(e.el)},eventMouseLeave:function(){f()},eventClick:function(e){f(),c=e.event.id,h({id:e.event.id,title:e.event.title,startStr:e.event.startStr,endStr:e.event.endStr,description:e.event.extendedProps.description,status:e.event.extendedProps.status,amount:e.event.extendedProps.amount,uId:e.event.extendedProps.uId,service:e.event.extendedProps.service,patientName:e.event.extendedProps.patientName}),v()}})).render()}}},p=function(){if($("#doctorAppointmentCalendarModal").length){var e=document.getElementById("doctorAppointmentCalendarModal");r=new bootstrap.Modal(e),t=e.querySelector('[data-calendar="event_name"]'),e.querySelector('[data-calendar="event_description"]'),a=e.querySelector('[data-calendar="event_status"]'),d=e.querySelector('[data-calendar="event_amount"]'),o=e.querySelector('[data-calendar="event_uId"]'),s=e.querySelector('[data-calendar="event_service"]'),n=e.querySelector('[data-calendar="event_start_date"]'),i=e.querySelector('[data-calendar="event_end_date"]')}},h=function(e){u.id=e.id,u.eventName=e.title,u.eventStatus=e.status,u.startDate=e.startStr,u.endDate=e.endStr,u.amount=e.amount,u.uId=e.uId,u.service=e.service,u.patientName=e.patientName},g=function(e){f();var t=u.allDay?moment(u.startDate).format("Do MMM, YYYY"):moment(u.startDate).format("Do MMM, YYYY - h:mm a"),a=u.allDay?moment(u.endDate).format("Do MMM, YYYY"):moment(u.endDate).format("Do MMM, YYYY - h:mm a");u.patientName},f=function(){l&&(undefined.dispose(),l=!1)},v=function(){var e,l;$(".fc-popover").addClass("hide"),r.show();var c=$("#bookCalenderConst").val(),m=$("#checkInCalenderConst").val(),p=$("#checkOutCalenderConst").val(),h=$("#cancelCalenderConst").val();e=moment(u.startDate).utc().format("Do MMM, YYYY - h:mm A"),l=moment(u.endDate).utc().format("Do MMM, YYYY - h:mm A"),i.innerText=": "+l,n.innerText=": "+e,t.innerText="Patient: "+u.patientName,$(a).empty(),$(a).append('\n<option class="booked" disabled value="'.concat(c,'" ').concat(u.eventStatus==c?"selected":"",">").concat(Lang.get("messages.appointment.booked"),'</option>\n<option value="').concat(m,'" ').concat(u.eventStatus==m?"selected":""," ").concat(u.eventStatus==m?"selected":"","\n    ").concat(u.eventStatus==h||u.eventStatus==p?"disabled":"",">").concat(Lang.get("messages.appointment.check_in"),'</option>\n<option value="').concat(p,'" ').concat(u.eventStatus==p?"selected":"","\n    ").concat(u.eventStatus==h||u.eventStatus==c?"disabled":"",">").concat(Lang.get("messages.appointment.check_out"),'</option>\n<option value="').concat(h,'" ').concat(u.eventStatus==h?"selected":""," ").concat(u.eventStatus==m?"disabled":"","\n   ").concat(u.eventStatus==p?"disabled":"",">").concat(Lang.get("messages.appointment.cancelled"),"</option>\n")),$(a).val(u.eventStatus).trigger("change"),d.innerText=addCommas(u.amount),o.innerText=u.uId,s.innerText=u.service};listenChange(".doctor-apptnt-calendar-status-change",(function(){if(!$(this).val())return!1;var t=$(this).val(),a=c;if(parseInt(t)===u.eventStatus)return!1;$.ajax({url:route("doctors.change-status",a),type:"POST",data:{appointmentId:a,appointmentStatus:t},success:function(t){displaySuccessMessage(t.message),$("#doctorAppointmentCalendarModal").modal("hide"),e.refetchEvents()}})}))},2425:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}document.addEventListener("turbo:load",(function(){var a;if(!$(t).length)return;var n=$("#doctorPanelAppointmentDate"),i=moment().startOf("week"),r=moment().endOf("week");function s(e,t){$("#doctorPanelAppointmentDate").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}n.daterangepicker({startDate:i,endDate:r,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(a={},e(a,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(a,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(a,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(a,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(a,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(a,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),a)},s),s(i,r)}));var t="#doctorPanelAppointmentDate";listenChange(".doctor-appointment-status-change",(function(){var e=$(this).val(),t=$(this).data("id"),a=$(this);$.ajax({url:route("doctors.change-status",t),type:"POST",data:{appointmentId:t,appointmentStatus:e},success:function(e){$(a).children("option.booked").addClass("hide"),livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenChange(".doctor-apptment-change-payment-status",(function(){var e=$(this).val(),t=$(this).data("id");$("#doctorAppointmentPaymentStatusModal").modal("show").appendTo("body"),$("#doctorAppointmentPaymentStatus").val(e),$("#doctorAppointmentId").val(t)})),listenSubmit("#doctorAppointmentPaymentStatusForm",(function(e){e.preventDefault();var t=$("#doctorAppointmentPaymentStatus").val(),a=$("#doctorAppointmentId").val(),n=$("#doctorPaymentType").val();$.ajax({url:route("doctors.change-payment-status",a),type:"POST",data:{appointmentId:a,paymentStatus:t,paymentMethod:n,loginUserId:currentLoginUserId},success:function(e){e.success&&(displaySuccessMessage(e.message),$("#doctorAppointmentPaymentStatusModal").modal("hide"),location.reload())},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenChange("#doctorPanelAppointmentDate",(function(){window.livewire.emit("changeDateFilter",$(this).val())})),listenChange("#doctorPanelPaymentType",(function(){window.livewire.emit("changeDateFilter",$("#doctorPanelAppointmentDate").val()),window.livewire.emit("changePaymentTypeFilter",$(this).val())})),listenChange("#doctorPanelAppointmentStatus",(function(){window.livewire.emit("changeDateFilter",$("#doctorPanelAppointmentDate").val()),window.livewire.emit("changeStatusFilter",$(this).val())})),listenClick("#doctorPanelApptmentResetFilter",(function(){$("#doctorPanelPaymentType").val(0).trigger("change"),$("#doctorPanelAppointmentStatus").val(1).trigger("change"),t.data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),t.data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#doctorPanelApptFilterBtn"),$(".dropdown-menu"))})),listenClick("#doctorPanelApptResetFilter",(function(){$("#doctorPanelPaymentType").val(0).trigger("change"),$("#doctorPanelAppointmentStatus").val(1).trigger("change"),$("#doctorPanelAppointmentDate").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#doctorPanelAppointmentDate").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#doctorPanelApptFilterBtn"),$(".dropdown-menu"))})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$("#doctorPanelPaymentType").length&&$("#doctorPanelPaymentType").select2(),$("#doctorPanelAppointmentStatus").length&&$("#doctorPanelAppointmentStatus").select2(),$(".appointment-status").length&&$(".appointment-status").select2(),$(".payment-status").length&&$(".payment-status").select2()}))}))},6345:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}document.addEventListener("turbo:load",(function(){var t;!function(){var t;if(!$("#holidayDateFilter").length)return;var a=moment().startOf("week"),n=moment().endOf("week");function i(e,t){$("#holidayDateFilter").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#holidayDateFilter").daterangepicker({startDate:a,endDate:n,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},i),i(a,n)}();var a=$(".currentLanguage").val();if($("#doctorHolidayDate").flatpickr({locale:a,minDate:(new Date).fp_incr(1),disableMobile:!0}),listenClick(".doctor-holiday-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("holidays.destroy",t),Lang.get("messages.holiday.holiday"))})),!$("#doctorHolidayDateFilter").length)return;var n=moment().startOf("week"),i=moment().endOf("week");function r(e,t){$("#doctorHolidayDateFilter").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#doctorHolidayDateFilter").daterangepicker({startDate:n,endDate:i,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},r),r(n,i)})),listenChange("#doctorHolidayStatus",(function(){$("#doctorHolidayStatus").val($(this).val()),window.livewire.emit("changeStatusFilter",$(this).val())})),listenChange("#holidayDateFilter,#doctorHolidayDateFilter",(function(){window.livewire.emit("changeDateFilter",$(this).val())})),listenClick(".holiday-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("doctors.holiday-destroy",t),Lang.get("messages.holiday.holiday"))})),listenClick("#holidayDateResetFilter",(function(){$("#holidayDateFilter").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#holidayDateFilter").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#holidayFilterBtn"),$(".dropdown-menu"))})),listenClick("#doctorHolidayResetFilter",(function(){$("#doctorHolidayDateFilter").data("daterangepicker").setStartDate(moment().startOf("week").format("MM/DD/YYYY")),$("#doctorHolidayDateFilter").data("daterangepicker").setEndDate(moment().endOf("week").format("MM/DD/YYYY")),hideDropdownManually($("#doctorHolidayFilterBtn"),$(".dropdown-menu"))}))},8847:()=>{document.addEventListener("turbo:load",(function(){1==!$("#doctorSessionIsEdit").val()&&($(".startTimeSlot").prop("disabled",!0),$(".endTimeSlot").prop("disabled",!0));var e=$(".currentLanguage").val();$("#addHolidayBtn").flatpickr({locale:e,disableMobile:!0,minDate:new Date}),$('select[name^="startTimes"]').each((function(){var e=$(this)[0].selectedIndex,t=$(this).closest(".add-slot").find('select[name^="endTimes"] option:selected')[0].index,a=$(this).closest(".add-slot").find('select[name^="endTimes"] option');e>=t&&a.eq(e+1).prop("selected",!0).trigger("change"),a.each((function(t){t<=e?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))})),$('select[name^="endTimes"]').each((function(){var e=$(this)[0].selectedIndex;$(this).closest(".timeSlot").next().find('select[name^="startTimes"] option').each((function(t){t<=e?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))}))})),listenChange("#selGap",(function(){$(".startTimeSlot").prop("disabled",!1),$(".endTimeSlot").prop("disabled",!1)})),listenClick(".add-session-time",(function(){if(1==!$("#doctorSessionIsEdit").val()&&""==$("#selGap").val())return!1;var e=0;$(this).parent().prev().children(".session-times").find(".timeSlot:last-child").length>0&&(e=$(this).parent().prev().children(".session-times").find(".timeSlot:last-child").children(".add-slot").find('select[name^="endTimes"] option:selected')[0].index);var t=$(this).closest(".weekly-content").attr("data-day"),a=$(this),n=$(this).closest(".weekly-content"),i=$("#selGap").val(),r=$("#getSlotByGapUrl").val();$.ajax({url:r,data:{gap:i,day:t},success:function(t){n.find(".unavailable-time").html(""),n.find('input[name="checked_week_days[]"').prop("checked",!0).prop("disabled",!1),a.closest(".weekly-content").find(".session-times").append(t.data),n.find('select[data-control="select2"]').select2(),$(".add-session-time").parent().prev().children(".session-times").find(".timeSlot:last-child").children(".add-slot").find('select[name^="startTimes"] option').each((function(t){t<=e?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))}})})),listenClick(".copy-btn",(function(){$(this).closest(".copy-card").removeClass("show"),$(".copy-dropdown").removeClass("show");var e=$(this).closest(".weekly-content").find(".session-times").find("select");if(0==e.length)$(this).closest(".menu-content").find(".copy-label .form-check-input:checked").each((function(){var e=$('.weekly-content[data-day="'.concat($(this).val(),'"]'));$(e).find(".session-times").html(""),e.find(".weekly-row").find(".unavailable-time").remove(),e.find(".weekly-row").append('<div class="unavailable-time">Unavailable</div>'),$(e).find(".weekly-row").find('input[name="checked_week_days[]"').prop("checked",!1).prop("disabled",!0)}));else{e.each((function(){$(this).select2("destroy")}));var t=$(this).closest(".weekly-content").find(".session-times").find("select"),a=$(this).closest(".weekly-content").find(".session-times").clone();$(this).closest(".menu-content").find(".copy-label .form-check-input:checked").each((function(){var e=a,n=$(this).val(),i='.weekly-content[data-day="'.concat(n,'"]');e.find('select[name^="startTimes"]').attr("name","startTimes[".concat(n,"][]")),e.find('select[name^="endTimes"]').attr("name","endTimes[".concat(n,"][]")),$(i).find(".unavailable-time").html(""),e.find(".error-msg").html(""),$(i).find(".session-times").html(e.html()),$(i).find(".session-times select").select2(),$(i).find('input[name="checked_week_days[]"').prop("disabled",!1).prop("checked",!0),$(t).each((function(e){$(i).find(".session-times").find("select").eq(e).val($(this).val()).trigger("change")}))})),$(this).closest(".weekly-content").find(".session-times").find("select").each((function(){$(this).select2()})),$(".copy-check-input").prop("checked",!1)}})),listenClick(".deleteBtn",(function(){var e=0;($(this).closest(".timeSlot").prev().length>0&&(e=$(this).closest(".timeSlot").prev().children(".add-slot").find('select[name^="endTimes"] option:selected')[0].index),2==$(this).closest(".weekly-row").find(".session-times").find("select").length)&&($(this).closest(".weekly-row").find('input[name="checked_week_days[]"').prop("checked",!1).prop("disabled",!0),$(this).closest(".weekly-row").append('<div class="unavailable-time">Unavailable</div>'));$(this).closest(".timeSlot").next().children(".add-slot").find('select[name^="startTimes"] option').each((function(t){t<=e?$(this).attr("disabled",!0):$(this).attr("disabled",!1)})),$(this).parent().siblings(".error-msg").remove(),$(this).parent().closest(".timeSlot").remove(),$(this).parent().remove()})),listenSubmit("#saveFormDoctor",(function(e){if(e.preventDefault(),!$('input[name="checked_week_days[]"]:checked').length)return displayErrorMessage("Please select any one day"),!1;$(".weekly-content").find(".error-msg").text(""),$.ajax({url:$(this).attr("action"),type:"POST",data:new FormData($(this)[0]),processData:!1,contentType:!1,success:function(e){e.success&&(displaySuccessMessage(e.message),setTimeout((function(){location.href=$("#btnBack").attr("href")}),2e3))},error:function(e){var t=e.responseJSON.message,a=t.day,n=t.key;$('.weekly-content[data-day="'.concat(a,'"]')).find(".error-msg").text(""),$('.weekly-content[data-day="'.concat(a,'"]')).find(".error-msg").eq(n).text("Slot timing is overlap with other slot timing")},complete:function(){}})})),listenChange('select[name^="startTimes"]',(function(e){var t=$(this)[0].selectedIndex,a=$(this).closest(".add-slot").find('select[name^="endTimes"] option'),n=$(this).closest(".add-slot").find('select[name^="endTimes"] option:selected')[0].index;t>=n&&a.eq(t+1).prop("selected",!0).trigger("change"),a.each((function(e){e<=t?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))})),listenChange('select[name^="endTimes"]',(function(e){var t=$(this)[0].selectedIndex;$(this).closest(".timeSlot").next().find('select[name^="startTimes"] option').each((function(e){e<=t?$(this).attr("disabled",!0):$(this).attr("disabled",!1)}))})),listenClick("#addHolidayBtn",(function(){$("#doctorSessionIsEdit").val()}))},4381:()=>{listenClick(".doctor-session-delete-btn",(function(e){var t=$(e.currentTarget).data("id"),a=$("#doctorSessionUrl").val();deleteItem(a+"/"+t,Lang.get("messages.doctor_session.doctor_session"))}))},3949:(e,t,a)=>{"use strict";a(7908);document.addEventListener("turbo:load",(function(){!function(){var e=".doctor-dob",t=$(".currentLanguage").val();if($(".showQualification").slideUp(),!$(e).length)return;if($(e).flatpickr({locale:t,maxDate:new Date,disableMobile:!0}),!$("#doctorCountryId").val())return;$("#editDoctorCountryId").val($("#doctorCountryId").val()).trigger("change"),setTimeout((function(){$("#editDoctorStateId").val($("#doctorStateId").val()).trigger("change")}),400),setTimeout((function(){$("#editDoctorCityId").val($("#doctorCityId").val()).trigger("change")}),7e3)}()}));var n,i,r,s,o,d=!1,l=[],c=[],u=1;$(".showQualification").hide(),listenClick("#addQualification",(function(){d=!1,$(".degree").val(""),$(".university").val(""),$(".year").val("").trigger("change"),$(".showQualification").slideToggle(500)})),listenClick("#cancelQualification",(function(){$(".showQualification").slideUp(500)})),listenClick("#ResetForm",(function(){window.location.href=route("doctors.index")})),listenClick("#saveQualification",(function(e){e.preventDefault(),n=$(".degree").val(),i=$(".university").val(),r=$(".year").val();var t=$("#doctorQualificationTbl tr:last-child td:first-child").data("value");++t&&(u=t);var a={id:o,degree:n,year:r,university:i},l={id:u,degree:n,year:r,university:i},m=""===$(".degree").val().trim().replace(/ \r\n\t/g,""),p=""===$(".university").val().trim().replace(/ \r\n\t/g,""),h=""===$(".year").val().trim().replace(/ \r\n\t/g,"");if(m)return displayErrorMessage(Lang.get("messages.flash.degree_required")),!1;if(p)return displayErrorMessage(Lang.get("messages.flash.university_required")),!1;if(h)return displayErrorMessage(Lang.get("messages.flash.year_required")),!1;null==s?c.push(a):c[s-1]=a;var g=prepareTemplateRender("#qualificationTemplateData",l);if(0==d)$("tbody").append(g),u++;else if(1==d){var f=prepareTemplateRender("#qualificationTemplateData",{id:s,degree:n,year:r,university:i}),v=$("table tbody");$(v).find("tr").each((function(e,t){(e+=1)==s&&$("tbody").find(t).replaceWith(f)}))}$(".showQualification").slideUp(500),$(".degree").val(""),$(".university").val(""),$(".year").val("")})),listenClick(".delete-btn-qualification",(function(e){$(".degree").val(""),$(".university").val(""),$(".year").val("").trigger("change"),c.pop([0]),$(".showQualification").slideUp(500);var t=$(this),a=$(this).data("id"),n=Lang.get("messages.doctor.qualification");swal({title:Lang.get("messages.common.delete")+" !",text:Lang.get("messages.common.are_you_sure")+' "'+n+'" ?',buttons:{confirm:Lang.get("messages.common.yes"),cancel:Lang.get("messages.common.no")},reverseButtons:!0,icon:"warning"}).then((function(e){1==e&&(l.push(a),$("#deletedQualifications").val(l),t.closest("tr")[0].remove(),swal({icon:"success",title:Lang.get("messages.common.deleted"),text:n+Lang.get("messages.common.has_been"),timer:2e3}))}))})),listenClick(".edit-btn-qualification",(function(){$(".degree").val(""),$(".university").val(""),$(".year").val(""),s=$(this).data("id"),o=$(this).data("primary-id");var e=$(this).closest("tr"),t=e.find("td:eq(1)").text(),a=e.find("td:eq(2)").text(),n=e.find("td:eq(3)").text();$(".degree").val(t),$(".university").val(a),$(".year").val(n).trigger("change"),d=!0,$(".showQualification").slideToggle(500)})),listenSubmit("#editDoctorForm",(function(e){var t=$("#twitterUrl").val(),a=$("#linkedinUrl").val(),n=$("#instagramUrl").val(),i=new RegExp(/^(https?:\/\/)?((m{1}\.)?)?((w{2,3}\.)?)twitter.[a-z]{2,3}\/?.*/i),r=new RegExp(/^(https?:\/\/)?((w{2,3}\.)?)linkedin\.[a-z]{2,3}\/?.*/i),s=new RegExp(/^(https?:\/\/)?((m{1}\.)?)?((w{2,3}\.)?)instagram.[a-z]{2,3}\/?.*/i);if(!(""==t||!!t.match(i)))return displayErrorMessage(Lang.get("messages.flash.valid_twitter")),!1;if(!(""==a||!!a.match(r)))return displayErrorMessage(Lang.get("messages.flash.valid_linkedin")),!1;if(!(""==n||!!n.match(s)))return displayErrorMessage(Lang.get("messages.flash.valid_instagram")),!1;if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1;e.preventDefault();var o=new FormData($(this)[0]),d=$("#editDoctorId").val();o.append("qualifications",JSON.stringify(c)),$.ajax({url:route("doctors.update",d),type:"POST",data:o,contentType:!1,processData:!1,success:function(e){e.success&&(window.location.href=route("doctors.index"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenChange("input[type=radio][name=gender]",(function(){var e=$("#profilePicture").val();isEmpty(e)&&(1==this.value?$(".image-input-wrapper").attr("style","background-image:url("+manAvatar+")"):2==this.value&&$(".image-input-wrapper").attr("style","background-image:url("+womanAvatar+")"))})),listenChange("#editDoctorCountryId",(function(){var e=$("#doctorIsEdit").val();$.ajax({url:route("get-state"),type:"get",dataType:"json",data:{data:$(this).val()},success:function(t){$("#editDoctorStateId").empty(),$("#editDoctorCityId").empty(),$("#editDoctorStateId").append($('<option value=""></option>').text(Lang.get("messages.common.select_state"))),$("#editDoctorCityId").append($('<option value=""></option>').text(Lang.get("messages.common.select_city"))),$.each(t.data,(function(e,t){$("#editDoctorStateId").append($("<option></option>").attr("value",e).text(t))})),e&&$("#doctorStateId").val()&&$("#stateId").val($("#doctorStateId").val()).trigger("change")}})})),listenChange("#editDoctorStateId",(function(){var e=$("#doctorIsEdit").val();$.ajax({url:route("get-city"),type:"get",dataType:"json",data:{state:$(this).val(),country:$("#editDoctorCountryId").val()},success:function(t){$("#editDoctorCityId").empty(),$("#editDoctorCityId").append($('<option value=""></option>').text(Lang.get("messages.common.select_city"))),$.each(t.data,(function(e,t){$("#editDoctorCityId").append($("<option ></option>").attr("value",e).text(t))})),e&&$("#doctorCityId").val()&&$("#cityId").val($("#doctorCityId").val()).trigger("change")}})})),$("#doctorIsEdit").val()&&$("#doctorCountryId").val()&&$("#editDoctorCountryId").val($("#doctorCountryId").val()).trigger("change"),listenKeyup("#twitterUrl",(function(){this.value=this.value.toLowerCase()})),listenKeyup("#linkedinUrl",(function(){this.value=this.value.toLowerCase()})),listenKeyup("#instagramUrl",(function(){this.value=this.value.toLowerCase()})),listenSubmit("#createDoctorForm",(function(){var e=$("#twitterUrl").val(),t=$("#linkedinUrl").val(),a=$("#instagramUrl").val(),n=new RegExp(/^(https?:\/\/)?((m{1}\.)?)?((w{2,3}\.)?)twitter.[a-z]{2,3}\/?.*/i),i=new RegExp(/^(https?:\/\/)?((w{2,3}\.)?)linkedin\.[a-z]{2,3}\/?.*/i),r=new RegExp(/^(https?:\/\/)?((m{1}\.)?)?((w{2,3}\.)?)instagram.[a-z]{2,3}\/?.*/i);return""!=e&&!e.match(n)?(displayErrorMessage(Lang.get("messages.flash.valid_twitter")),!1):""!=t&&!t.match(i)?(displayErrorMessage(Lang.get("messages.flash.valid_linkedin")),!1):""==a||!!a.match(r)?""!==$("#error-msg").text()?($("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1):void 0:(displayErrorMessage(Lang.get("messages.flash.valid_instagram")),!1)})),listenClick(".removeAvatarIcon",(function(){$("#bgImage").css("background-image",""),$("#bgImage").css("background-image","url("+backgroundImg+")"),$("#removeAvatar").remove()})),document.addEventListener("turbo:load",(function(){$(".amenities-select").select2({escapeMarkup:function(e){return e}})}))},1832:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}document.addEventListener("turbo:load",(function(){var t;if(!$("#doctorShowAppointmentDateFilter").length)return;var a=moment().startOf("week"),n=moment().endOf("week");function i(e,t){$("#doctorShowAppointmentDateFilter").html(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#doctorShowAppointmentDateFilter").daterangepicker({startDate:a,endDate:n,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},i),i(a,n)}));$("#doctorShowAppointmentDateFilter");listenClick(".doctor-show-apptment-delete-btn",(function(e){var t=$(e.currentTarget).data("id"),a=isEmpty($("#patientRoleDoctorDetail").val())?route("appointments.destroy",t):route("patients.appointments.destroy",t);deleteItem(a,"Appointment")})),listenChange(".doctor-show-apptment-status",(function(){var e=$(this).val(),t=$(this).data("id"),a=$(this);$.ajax({url:route("change-status",t),type:"POST",data:{appointmentId:t,appointmentStatus:e},success:function(e){$(a).children("option.booked").addClass("hide"),livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenChange("#doctorShowAppointmentDateFilter",(function(){window.livewire.emit("changeDateFilter",$(this).val())})),listenChange("#doctorShowAppointmentStatus",(function(){window.livewire.emit("changeDateFilter",$("#doctorShowAppointmentDateFilter").val()),window.livewire.emit("changeStatusFilter",$(this).val())})),listenClick("#doctorShowApptmentResetFilter",(function(){$("#doctorShowAppointmentStatus").val(1).trigger("change"),$("#doctorShowAppointmentDateFilter").val(moment().startOf("week").format("MM/DD/YYYY")+" - "+moment().endOf("week").format("MM/DD/YYYY")).trigger("change"),livewire.emit("refresh")})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$("#doctorShowAppointmentStatus").length&&$("#doctorShowAppointmentStatus").select2(),$(".doctor-show-apptment-status").length&&$(".doctor-show-apptment-status").select2()}))}))},3737:()=>{listenClick("#doctorResetFilter",(function(){var e=moment(moment().startOf("week"),"MM/DD/YYYY").day(0).format("MM/DD/YYYY"),t=moment(moment().endOf("week"),"MM/DD/YYYY").day(6).format("MM/DD/YYYY");$("#doctorPanelAppointmentDate").val(e+" - "+t).trigger("change"),$("#doctorPanelPaymentType").val(0).trigger("change"),$("#doctorPanelAppointmentStatus").val(3).trigger("change"),$("#doctorStatus").val(2).trigger("change"),hideDropdownManually($("#doctorFilterBtn"),$(".dropdown-menu"))})),listenChange("#doctorStatus",(function(){$("#doctorStatus").val($(this).val()),window.livewire.emit("changeStatusFilter",$(this).val())})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$("#doctorStatus").length&&$("#doctorStatus").select2()}))})),listenClick(".doctor-delete-btn",(function(){var e=$(this).attr("data-id"),t=route("doctors.destroy",e);deleteItem(t,Lang.get("messages.doctor_session.doctor"))})),listenClick(".add-qualification",(function(){var e=$(this).attr("data-id");$("#qualificationID").val(e),$("#qualificationModal").modal("show")})),listenSubmit("#qualificationForm",(function(e){e.preventDefault(),$.ajax({url:route("add.qualification"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#year").val(null).trigger("change"),$("#qualificationModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listen("hidden.bs.modal","#qualificationModal",(function(){resetModalForm("#qualificationForm"),$("#year").val(null).trigger("change")})),listenClick(".doctor-status",(function(e){var t=$(e.currentTarget).data("id");$.ajax({type:"PUT",url:route("doctor.status"),data:{id:t},success:function(e){livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenClick(".doctor-email-verification",(function(e){var t=$(e.currentTarget).data("id");$.ajax({type:"POST",url:route("resend.email.verification",t),success:function(e){displaySuccessMessage(e.message),setTimeout((function(){Turbo.visit(window.location.href)}),5e3)},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick("#qualificationSaveBtn",(function(){$("#qualificationForm").trigger("submit")})),listenChange(".doctor-email-verified",(function(e){var t=$(e.currentTarget).data("id"),a=$(this).is(":checked")?1:0;$.ajax({type:"POST",url:route("emailVerified"),data:{id:t,value:a},success:function(e){livewire.emit("refresh"),displaySuccessMessage(e.message)}})}))},9411:()=>{document.addEventListener("turbo:load",(function(){if(!$("#templateAppointmentDate").length)return;!function(){if(!$("#templateAppointmentDate").length)return;$("#templateAppointmentDate").datepicker({language:"es-es",format:"yyyy-mm-dd",minDate:new Date,startDate:new Date,todayHighlight:!0})}();var e=$("#templateAppointmentDate").val();""!=$("#appointmentDoctorId").val()&&($(a).removeAttr("disabled"),$.ajax({url:route("get-service"),type:"GET",data:{appointmentDoctorId:$("#appointmentDoctorId").val()},success:function(e){e.success&&($(a).removeAttr("disabled"),$("#FrontAppointmentServiceId").empty(),$("#FrontAppointmentServiceId").append($('<option value=""></option>').text("Select Service")),$.each(e.data,(function(e,t){$("#FrontAppointmentServiceId").append($("<option></option>").attr("value",t.id).text(t.name))})))}}));""!=$("#FrontAppointmentServiceId").val()&&$("#FrontAppointmentServiceId").length&&$.ajax({url:route("get-charge"),type:"GET",data:{chargeId:$("#FrontAppointmentServiceId").val()},success:function(e){e.success&&($("#payableAmountText").removeClass("d-none"),$("#payableAmount").text(currencyIcon+" "+getFormattedPrice(e.data.charges)),e.data.charges,e.data.charges)}});if(!e)return!1;$.ajax({url:route("doctor-session-time"),type:"GET",data:{adminAppointmentDoctorId:$("#appointmentDoctorId").val(),date:e,timezone_offset_minutes:t},success:function(e){e.success&&($(".appointment-slot-data").html(""),$.each(e.data.slots,(function(t,a){$(".no-time-slot").addClass("d-none"),null==e.data.bookedSlot?$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="'+a+'">'+a+"</span>"):-1!==$.inArray(a,e.data.bookedSlot)?$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot bookedSlot" data-id="'+a+'">'+a+"</span>"):$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="'+a+'">'+a+"</span>")})))},error:function(e){$(".appointment-slot-data").html(""),$(".book-appointment-message").css("display","block");var t='<div class="gen alert alert-danger">'+e.responseJSON.message+"</div>";$(".book-appointment-message").html(t).delay(5e3).hide("slow")}})}));var e,t=(new Date).getTimezoneOffset();t=0===t?0:-t;var a="#templateAppointmentDate";listenChange("#isPatientAccount",(function(){this.checked?($(".name-details").addClass("d-none"),$(".registered-patient").removeClass("d-none"),$("#template-medical-email").keyup((function(){$("#patientName").val("");var e=$("#template-medical-email").val();$.ajax({url:route("get-patient-name"),type:"GET",data:{email:e},success:function(e){e.data&&$("#patientName").val(e.data)}})}))):($(".name-details").removeClass("d-none"),$(".registered-patient").addClass("d-none"))})),$(".no-time-slot").removeClass("d-none"),listenChange(a,(function(){e=$(this).val(),$.ajax({url:route("doctor-session-time"),type:"GET",data:{adminAppointmentDoctorId:$("#appointmentDoctorId").val(),date:e,timezone_offset_minutes:t},success:function(e){e.success&&(null!=e.data.slots&&e.data.slots.length>0&&$(".appointment-slot-data").html(""),$.each(e.data.slots,(function(t,a){$(".no-time-slot").addClass("d-none"),null==e.data.bookedSlot?$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="'+a+'">'+a+"</span>"):-1!==$.inArray(a,e.data.bookedSlot)?$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot bookedSlot" data-id="'+a+'">'+a+"</span>"):$(".appointment-slot-data").append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="'+a+'">'+a+"</span>")})))},error:function(e){$(".appointment-slot-data").html(""),$(".book-appointment-message").css("display","block");var t='<div class="gen alert alert-danger">'+e.responseJSON.message+"</div>";$(".book-appointment-message").html(t).delay(5e3).hide("slow"),$(".no-time-slot").hasClass("d-none")&&$(".no-time-slot").removeClass("d-none")}})})),listenClick(".time-slot",(function(){$(".time-slot").hasClass("activeSlot")?($(".time-slot").removeClass("activeSlot"),$(this).addClass("activeSlot")):$(this).addClass("activeSlot");var e=$(this).attr("data-id").split("-"),t=e[0],a=e[1];$("#timeSlot").val(""),$("#toTime").val(""),$("#timeSlot").val(t),$("#toTime").val(a)}));var n=$("#FrontAppointmentServiceId").val();function i(e){$.ajax({type:"POST",url:route("razorpay.failed"),data:{data:e},success:function(e){e.success&&displaySuccessMessage(e.message)},error:function(){}})}listenChange("#appointmentDoctorId",(function(e){e.preventDefault(),$("#payableAmountText").addClass("d-none"),$("#chargeId").val(""),$("#payableAmount").val(""),$("#templateAppointmentDate").val(""),$("#addFees").val(""),$(".appointment-slot-data").html(""),$(".no-time-slot").removeClass("d-none"),$(a).removeAttr("disabled"),$.ajax({url:route("get-service"),type:"GET",data:{appointmentDoctorId:$(this).val()},success:function(e){e.success&&($(a).removeAttr("disabled"),$("#FrontAppointmentServiceId").empty(),$("#FrontAppointmentServiceId").append($('<option value=""></option>').text("Select Service")),$.each(e.data,(function(e,t){$("#FrontAppointmentServiceId").append($("<option></option>").attr("value",t.id).attr("selected",t.id==n).text(t.name))})),n&&$("#FrontAppointmentServiceId").val()&&$("#payableAmountText").removeClass("d-none"))}})})),listenChange("#FrontAppointmentServiceId",(function(){""!=$(this).val()?$.ajax({url:route("get-charge"),type:"GET",data:{chargeId:$(this).val()},success:function(e){e.success&&($("#payableAmountText").removeClass("d-none"),$("#payableAmount").text(currencyIcon+" "+getFormattedPrice(e.data.charges)),e.data.charges,e.data.charges)}}):$("#payableAmountText").addClass("d-none")})),listenSubmit("#frontAppointmentBook",(function(e){e.preventDefault();var t=$("#template-medical-first_name").val(),a=$("#template-medical-last_name").val(),n=$("#template-medical-email").val(),r=$("#appointmentDoctorId").val(),s=$("#FrontAppointmentServiceId").val(),o=$("#templateAppointmentDate").val(),d=$("#paymentMethod").val();if($(".book-appointment-message").css("display","block"),!$("#isPatientAccount").is(":checked")){if(""==t)return u='<div class="gen alert alert-danger">First name field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;if(""==a)return u='<div class="gen alert alert-danger">Last name field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1}if(""==n)return u='<div class="gen alert alert-danger">Email field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;if(""==r)return u='<div class="gen alert alert-danger">Outlet field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;if(""==s)return u='<div class="gen alert alert-danger">Booking Space field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;if(""==o)return u='<div class="gen alert alert-danger">Appointment date field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;if(""==d)return u='<div class="gen alert alert-danger">Payment Method field is required. </div>',$(".book-appointment-message").html(u).delay(5e3).hide("slow"),!1;var l=$(this).find("#saveBtn");setFrontBtnLoader(l);var c=new FormData($(this)[0]),u='<div class="alert alert-warning alert-dismissable"> Processing.. </div>';jQuery(this).find(".book-appointment-message").html(u).show("slow"),$.ajax({url:$(this).attr("action"),type:"POST",data:c,processData:!1,contentType:!1,success:function(e){if(e.success){console.log("wwwwwwwwwwwwwwww",e);var t=e.data.appointmentId;if("Booking already exists"==e.message?$(".book-appointment-message").html('<div class="gen alert alert-danger">'+e.message+" </div>").delay(5e3).hide("slow"):(u='<div class="gen alert alert-success">'+e.message+"</div>",$(".book-appointment-message").html(u).delay(5e3).hide("slow"),$("#frontAppointmentBook")[0].reset()),e.data.payment_type==manually&&Turbo.visit(route("manually-payment",{appointmentId:t})),e.data.payment_type==paystack)return location.href=e.data.redirect_url;if(e.data.payment_type==authorizeMethod&&window.location.replace(route("authorize.init",{appointmentId:t})),e.data.payment_type==paytmMethod&&window.location.replace(route("paytm.init",{appointmentId:t})),e.data.payment_type==paypal&&$.ajax({type:"GET",url:route("paypal.init"),data:{appointmentId:t},success:function(e){if(200==e.status){var t="";location.href=e.link,$.each(e.result.links,(function(e,a){"approve"==a.rel&&(t=a.href)})),location.href=t}},error:function(e){},complete:function(){}}),e.data.payment_type==razorpayMethod&&$.ajax({type:"POST",url:route("razorpay.init"),data:{_token:csrfToken,appointmentId:t},success:function(e){if(e.success){var a=e.data,n=a.id,r=a.amount,s=a.name,o=a.email,d=a.contact;options.amount=r,options.order_id=n,options.prefill.name=s,options.prefill.email=o,options.prefill.contact=d,options.prefill.appointmentID=t;var l=new Razorpay(options);l.open(),l.on("payment.failed",i)}},error:function(e){},complete:function(){}}),e.data.payment_type==stripeMethod){var a=e.data[0].sessionId;stripe.redirectToCheckout({sessionId:a}).then((function(e){manageAjaxErrors(e)}))}e.data===manually&&setTimeout((function(){location.reload()}),1200)}},error:function(e){$(".book-appointment-message").css("display","block"),u='<div class="gen alert alert-danger">'+e.responseJSON.message+"</div>",$(window).scrollTop($(".appointment-form").offset().top),$(".book-appointment-message").html(u).delay(5e3).hide("slow")},complete:function(){setFrontBtnLoader(l)}})})),listenClick(".show-more-btn",(function(){$(".question").hasClass("d-none")?($(".question").removeClass("d-none"),$(".show-more-btn").html("show less")):($(".show-content").addClass("d-none"),$(".show-more-btn").html("show more"))})),window.setFrontBtnLoader=function(e){if(e.attr("data-old-text"))return e.html(e.attr("data-old-text")).prop("disabled",!1),void e.removeAttr("data-old-text");e.attr("data-old-text",e.text()),e.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop("disabled",!0)}},7447:()=>{document.addEventListener("turbo:load",(function(){if($("#cmsShortDescription").on("keyup",(function(){$("#cmsShortDescription").attr("maxlength",800)})),$("#cmsShortDescription").attr("maxlength",800),!$("#cmsPrivacyPolicyId").length)return;new Quill("#cmsPrivacyPolicyId",{modules:{toolbar:[[{header:[1,2,!1]}],["bold","italic","underline"],["image","code-block"]]},placeholder:Lang.get("messages.cms.privacy_policy"),theme:"snow"}).on("text-change",(function(e,t,a){0===quill2.getText().trim().length&&quill2.setContents([{insert:""}])}));var e=document.createElement("textarea");e.innerHTML=$("#cmsTermConditionData").val(),quill1.root.innerHTML=e.value,e.innerHTML=$("#cmsPrivacyPolicyData").val(),quill2.root.innerHTML=e.value,listenSubmit("#addCMSForm",(function(){var e=""===$("#aboutTitleId").val().trim().replace(/ \r\n\t/g,""),t=""===$("#cmsShortDescription").val().trim().replace(/ \r\n\t/g,"");if(e)return displayErrorMessage("About Title field is not contain only white space"),!1;if(t)return displayErrorMessage("About Short Description field is not contain only white space"),!1;if(""===$("#aboutExperience").val())return displayErrorMessage("About Experience field is required."),!1;var a=document.createElement("textarea"),n=quill1.root.innerHTML;a.innerHTML=n;var i=quill2.root.innerHTML;return 0===quill1.getText().trim().length?(displayErrorMessage("The Terms & Conditions is required."),!1):0===quill2.getText().trim().length?(displayErrorMessage("The Privacy Policy is required."),!1):($("#termData").val(JSON.stringify(n)),void $("#privacyData").val(JSON.stringify(i)))}))}))},5954:()=>{listenClick("#enquiryResetFilter",(function(){var e=$("#allEnquiry").val();$("#enquiriesStatus").val(e).trigger("change"),hideDropdownManually($("#enquiryFilterBtn"),$(".dropdown-menu"))})),listenChange("#enquiriesStatus",(function(){window.livewire.emit("changeStatusFilter",$(this).val())})),listenClick(".enquiry-delete-btn",(function(){var e=$(this).attr("data-id");deleteItem(route("enquiries.destroy",e),Lang.get("messages.web.enquiry"))}))},3980:()=>{listenClick(".faq-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("faqs.destroy",t),Lang.get("messages.faqs"))}))},6095:()=>{document.addEventListener("turbo:load",(function(){var e="#frontAppointmentDate";if(!$(e).length)return;$(e).datepicker({format:"yyyy-mm-dd",startDate:new Date,todayHighlight:!0})}))},5595:()=>{document.addEventListener("turbo:load",(function(){if(!$("#shortDescription").length)return;$("#shortDescription").on("keyup",(function(){$("#shortDescription").attr("maxlength",111)}))}))},8421:()=>{listenClick(".front-testimonial-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("front-patient-testimonials.destroy",t),Lang.get("messages.front_patient_testimonials"))}))},3305:()=>{},9044:()=>{document.addEventListener("turbo:load",(function(){if(!$("#shortDescription").length)return;if(listenKeyup("#shortDescription",(function(){$("#sliderShortDescription").attr("maxlength",55)})),!$("#sliderShortDescription").length)return;$("#sliderShortDescription").attr("maxlength",55)}))},4212:()=>{},3713:()=>{listenSubmit("#subscribeForm",(function(e){e.preventDefault(),$.ajax({url:route("subscribe.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&($(".subscribeForm-message").append('<div class="gen alert alert-success">'+e.message+"</div>").delay(5e3),setTimeout((function(){$(".subscribeForm-message").empty(),$("#subscribeForm")[0].reset()}),3e3))},error:function(e){$(".subscribeForm-message").append('<div class="err alert alert-danger">'+e.responseJSON.message+"</div>").delay(5e3),setTimeout((function(){$(".subscribeForm-message").empty(),$("#subscribeForm")[0].reset()}),3e3)},complete:function(){}})}))},3273:()=>{listenClick(".subscriber-delete-btn",(function(){var e=$(this).attr("data-id");deleteItem(route("subscribers.destroy",e),Lang.get("messages.subscribers"))}))},9704:()=>{listenClick("#syncGoogleCalendar",(function(){var e=$(this);setAdminBtnLoader(e),$.ajax({url:route("syncGoogleCalendarList"),type:"GET",success:function(e){e.success&&(displaySuccessMessage(e.message),setTimeout((function(){location.reload()}),1200))},complete:function(){setAdminBtnLoader(e)}})})),listenSubmit("#googleCalendarForm",(function(e){if(e.preventDefault(),$(".google-calendar").is(":checked")){var t="";isEmpty($("#googleCalendarDoctorRole").val())?isEmpty($("#googleCalendarPatientRole").val())||(t=route("patients.appointmentGoogleCalendar.store")):t=route("doctors.appointmentGoogleCalendar.store"),$.ajax({url:t,type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),setTimeout((function(){location.reload()}),1200))},error:function(e){displayErrorMessage(e.responseJSON.message)}})}else displayErrorMessage("Please select a calendar.")}))},8283:()=>{document.addEventListener("turbo:load",(function(){if(!$("#consultationDate").length)return;var e=$(".currentLanguage").val();if($("#consultationDate").flatpickr({locale:e,enableTime:!0,minDate:new Date,dateFormat:"Y-m-d H:i"}),!$(".edit-consultation-date").length)return;$(".edit-consultation-date").flatpickr({locale:e,enableTime:!0,minDate:new Date,dateFormat:"Y-m-d H:i"})}));listenClick("#addLiveConsultationBtn",(function(){resetModalForm("#addNewForm"),$("#addDoctorID").trigger("change");var e=$(".currentLanguage").val();$("#patientName").trigger("change"),$("#consultationDate").flatpickr({locale:e,enableTime:!0,minDate:new Date,dateFormat:"Y-m-d H:i",disableMobile:"true"}),$("#addModal").modal("show").appendTo("body")})),listenSubmit("#addNewForm",(function(e){e.preventDefault();var t=jQuery(this).find("#btnSave");t.button("loading"),setAdminBtnLoader(t),$.ajax({url:route("doctors.live-consultations.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#addModal").modal("hide"),livewire.emit("refresh"),setTimeout((function(){t.button("reset")}),2500))},error:function(e){displayErrorMessage(e.responseJSON.message),setTimeout((function(){t.button("reset")}),2e3)},complete:function(){setAdminBtnLoader(t)}})})),listenClick("#liveConsultationResetFilter",(function(){$("#statusArr").val(3).trigger("change")})),listenChange("#statusArr",(function(){window.livewire.emit("changeStatusFilter",$(this).val())})),listenSubmit("#editForm",(function(e){e.preventDefault();var t=jQuery(this).find("#btnEditSave");t.button("loading"),setAdminBtnLoader(t);var a=$("#liveConsultationId").val();$.ajax({url:route("doctors.live-consultations.destroy",a),type:"PUT",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#editModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)},complete:function(){setAdminBtnLoader(t),t.button("reset")}})})),listenChange(".consultation-change-status",(function(e){e.preventDefault();var t=$(this).val();$.ajax({url:route("doctors.live.consultation.change.status"),type:"POST",data:{statusId:t,id:$(this).data("id")},success:function(e){e.success&&(displaySuccessMessage(e.message),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".start-btn",(function(e){var t=$(e.currentTarget).data("id");startRenderData(t)})),listenClick(".live-consultation-edit-btn",(function(e){var t=$(e.currentTarget).data("id");editRenderData(t)})),window.editRenderData=function(e){$.ajax({url:route("doctors.live-consultations.edit",e),type:"GET",success:function(e){if(e.success){var t=e.data;$("#liveConsultationId").val(t.id),$(".edit-consultation-title").val(t.consultation_title),$(".edit-consultation-date").val(moment(t.consultation_date).format("YYYY-MM-DD H:mm")),$(".edit-consultation-duration-minutes").val(t.consultation_duration_minutes),$(".edit-patient-name").val(t.patient_id).trigger("change"),$(".edit-doctor-name").val(t.doctor_id).trigger("change"),$(".host-enable,.host-disabled").prop("checked",!1),t.host_video,$('input[name="host_video"][value='.concat(t.host_video,"]")).prop("checked",!0),$(".client-enable,.client-disabled").prop("checked",!1),t.participant_video,$('input[name="participant_video"][value='.concat(t.participant_video,"]")).prop("checked",!0),$(".edit-consultation-type").val(t.type).trigger("change"),$(".edit-consultation-type-number").val(t.type_number).trigger("change"),$(".edit-description").val(t.description),$("#editModal").appendTo("body").modal("show")}},error:function(e){manageAjaxErrors(e)}})},window.startRenderData=function(e){$.ajax({url:$("#doctorRole").val()?route("doctors.live.consultation.get.live.status",e):route("patients.live.consultation.get.live.status",e),type:"GET",success:function(e){if(e.success){var t=e.data;$("#startLiveConsultationId").val(t.liveConsultation.id),$(".start-modal-title").text(t.liveConsultation.consultation_title),$(".host-name").text(t.liveConsultation.user.full_name),$(".date").text(moment(t.liveConsultation.consultation_date).format("LT")+", "+moment(t.liveConsultation.consultation_date).format("Do MMM, Y")),$(".minutes").text(t.liveConsultation.consultation_duration_minutes),$("#startModal").find(".status").append("started"===t.zoomLiveData.data.status?$(".status").text("Started"):$(".status").text("Awaited")),$(".start").attr("href",$("#patientRole").val()?t.liveConsultation.meta.join_url:"started"===t.zoomLiveData.data.status?$(".start").addClass("disabled"):t.liveConsultation.meta.start_url),$("#startModal").appendTo("body").modal("show")}},error:function(e){manageAjaxErrors(e)}})},listenClick(".live-consultation-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("doctors.live-consultations.destroy",t),Lang.get("messages.live_consultations"))})),listenClick(".consultation-show-data",(function(e){var t=$(e.currentTarget).data("id");$.ajax({url:$("#doctorRole").val()?route("doctors.live-consultations.show",t):route("patients.live-consultations.show",t),type:"GET",success:function(e){if(e.success){var t=e.data.liveConsultation,a=$("#showModal");$("#startLiveConsultationId").val(t.id),$("#consultationTitle").text(t.consultation_title),$("#consultationDates").text(moment(t.consultation_date).format("LT")+", "+moment(t.consultation_date).format("Do MMM, Y")),$("#consultationDurationMinutes").text(t.consultation_duration_minutes),$("#consultationPatient").text(t.patient.user.full_name),$("#consultationDoctor").text(t.doctor.user.full_name),0===t.host_video?$("#consultationHostVideo").text("Disable"):$("#consultationHostVideo").text("Enable"),0===t.participant_video?$("#consultationParticipantVideo").text("Disable"):$("#consultationParticipantVideo").text("Enable"),isEmpty(t.description)?$("#consultationDescription").text("N/A"):$("#consultationDescription").text(t.description),a.modal("show").appendTo("body")}},error:function(e){manageAjaxErrors(e)}})})),listenClick("#doctorLiveConsultantResetFilter",(function(){$("#doctorLiveConsultantStatus").val(3).trigger("change"),hideDropdownManually($("#doctorLiveConsultantFilterBtn"),$(".dropdown-menu"))}))},1381:()=>{},7138:(e,t,a)=>{"use strict";a(7908);document.addEventListener("turbo:load",(function(){(function(){var e=".patient-dob",t=$(".currentLanguage").val();if(!$(e).length)return;$(e).flatpickr({locale:t,maxDate:new Date,disableMobile:!0})})(),function(){if(!$("#editPatientCountryId").length)return;$("#patientCountryId").val($("#editPatientCountryId").val()).trigger("change"),setTimeout((function(){$("#patientStateId").val($("#editPatientStateId").val()).trigger("change")}),400),setTimeout((function(){$("#patientCityId").val($("#editPatientCityId").val()).trigger("change")}),700)}()})),listenChange("input[type=radio][name=gender]",(function(){var e=$("#profilePicture").val();isEmpty(e)&&(1==this.value?$(".image-input-wrapper").attr("style","background-image:url("+manAvatar+")"):2==this.value&&$(".image-input-wrapper").attr("style","background-image:url("+womanAvatar+")"))})),listenChange("#patientCountryId",(function(){$("#patientStateId").empty(),$("#patientCityId").empty(),$.ajax({url:route("get-state"),type:"get",dataType:"json",data:{data:$(this).val()},success:function(e){$("#patientStateId").empty(),$("#patientCityId").empty(),$("#patientStateId").append($('<option value=""></option>').text("Select State")),$("#patientCityId").append($('<option value=""></option>').text("Select City")),$.each(e.data,(function(e,t){$("#patientStateId").append($("<option></option>").attr("value",e).text(t))}))}})})),listenChange("#patientStateId",(function(){$("#patientCityId").empty(),$.ajax({url:route("get-city"),type:"get",dataType:"json",data:{state:$(this).val()},success:function(e){$("#patientCityId").empty(),$("#patientCityId").append($('<option value=""></option>').text("Select City")),$.each(e.data,(function(e,t){$("#patientCityId").append($("<option></option>").attr("value",e).text(t))})),$("#patientIsEdit").val()&&$("#editPatientCityId").val()&&$("#patientCityId").val($("#editPatientCityId").val()).trigger("change")}})})),listenSubmit("#createPatientForm",(function(){if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1})),listenSubmit("#editPatientForm",(function(){if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1})),listenClick(".removeAvatarIcon",(function(){var e=$("#patientBackgroundImg").val();$("#bgImage").css("background-image",""),$("#bgImage").css("background-image","url("+e+")"),$("#removeAvatar").addClass("hide"),$("#tooltip287851").addClass("hide")}))},3747:()=>{function e(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e}document.addEventListener("turbo:load",(function(){var t;if(!$("#patientShowPageAppointmentDate").length)return;var a=moment().startOf("week"),n=moment().endOf("week");function i(e,t){$("#patientShowPageAppointmentDate").val(e.format("YYYY-MM-DD")+" - "+t.format("YYYY-MM-DD"))}$("#patientShowPageAppointmentDate").daterangepicker({startDate:a,endDate:n,opens:"left",showDropdowns:!0,locale:{customRangeLabel:Lang.get("messages.common.custom"),applyLabel:Lang.get("messages.common.apply"),cancelLabel:Lang.get("messages.common.cancel"),fromLabel:Lang.get("messages.common.from"),toLabel:Lang.get("messages.common.to"),monthNames:[Lang.get("messages.months.jan"),Lang.get("messages.months.feb"),Lang.get("messages.months.mar"),Lang.get("messages.months.apr"),Lang.get("messages.months.may"),Lang.get("messages.months.jun"),Lang.get("messages.months.jul"),Lang.get("messages.months.aug"),Lang.get("messages.months.sep"),Lang.get("messages.months.oct"),Lang.get("messages.months.nov"),Lang.get("messages.months.dec")],daysOfWeek:[Lang.get("messages.weekdays.sun"),Lang.get("messages.weekdays.mon"),Lang.get("messages.weekdays.tue"),Lang.get("messages.weekdays.wed"),Lang.get("messages.weekdays.thu"),Lang.get("messages.weekdays.fri"),Lang.get("messages.weekdays.sat")]},ranges:(t={},e(t,Lang.get("messages.datepicker.today"),[moment(),moment()]),e(t,Lang.get("messages.datepicker.yesterday"),[moment().subtract(1,"days"),moment().subtract(1,"days")]),e(t,Lang.get("messages.datepicker.this_week"),[moment().startOf("week"),moment().endOf("week")]),e(t,Lang.get("messages.datepicker.last_30_days"),[moment().subtract(29,"days"),moment()]),e(t,Lang.get("messages.datepicker.this_month"),[moment().startOf("month"),moment().endOf("month")]),e(t,Lang.get("messages.datepicker.last_month"),[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]),t)},i),i(a,n)}));$("#patientShowPageAppointmentDate");listenClick(".patient-show-apptment-delete-btn",(function(e){var t=$(e.currentTarget).data("id"),a=isEmpty($("#patientRolePatientDetail").val())?route("appointments.destroy",t):route("patients.appointments.destroy",t);deleteItem(a,"Appointment")})),listenChange(".patient-show-apptment-status-change",(function(){var e=$(this).val(),t=$(this).data("id"),a=$(this);$.ajax({url:route("change-status",t),type:"POST",data:{appointmentId:t,appointmentStatus:e},success:function(e){$(a).children("option.booked").addClass("hide"),livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenClick("#patientAppointmentResetFilter",(function(){$("#patientShowPageAppointmentStatus").val(1).trigger("change"),$("#patientShowPageAppointmentDate").val(moment().startOf("week").format("MM/DD/YYYY")+" - "+moment().endOf("week").format("MM/DD/YYYY")).trigger("change")})),listenChange("#patientShowPageAppointmentDate",(function(){window.livewire.emit("changeDateFilter",$(this).val())})),listenChange("#patientShowPageAppointmentStatus",(function(){window.livewire.emit("changeDateFilter",$("#patientShowPageAppointmentDate").val()),window.livewire.emit("changeStatusFilter",$(this).val())})),document.addEventListener("livewire:load",(function(){window.livewire.hook("message.processed",(function(){$("#patientShowPageAppointmentStatus").length&&$("#patientShowPageAppointmentStatus").select2(),$(".patient-show-apptment-status-change").length&&$(".patient-show-apptment-status-change").select2()}))}))},3021:()=>{document.addEventListener("turbo:load",(function(){if(!e.length)return;var t=moment().startOf("week"),a=moment().endOf("week");function n(t,a){e.html(t.format("YYYY-MM-DD")+" - "+a.format("YYYY-MM-DD"))}e.daterangepicker({startDate:t,endDate:a,ranges:{Today:[moment(),moment()],Yesterday:[moment().subtract(1,"days"),moment().subtract(1,"days")],"This Week":[moment().startOf("week"),moment().endOf("week")],"Last 30 Days":[moment().subtract(29,"days"),moment()],"This Month":[moment().startOf("month"),moment().endOf("month")],"Last Month":[moment().subtract(1,"month").startOf("month"),moment().subtract(1,"month").endOf("month")]}},n),n(t,a)}));var e=$("#doctorAppointmentDateFilter");listenClick(".doctor-panel-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("patients.appointments.destroy",t),"Appointment")})),listenChange(".doctor-panel-status-change",(function(){var e=$(this).val(),t=$(this).data("id"),a=$(this);$.ajax({url:route("doctors.change-status",t),type:"POST",data:{appointmentId:t,appointmentStatus:e},success:function(e){$(a).children("option.booked").addClass("hide"),livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenClick("#doctorPanelResetFilter",(function(){$("#appointmentStatus").val(book).trigger("change"),$("#doctorAppointmentDateFilter").val(moment().format("MM/DD/YYYY")+" - "+moment().format("MM/DD/YYYY")).trigger("change")}))},6117:()=>{listenClick(".patient-delete-btn",(function(){var e=$(this).attr("data-id");deleteItem(route("patients.destroy",e),Lang.get("messages.appointment.patient"))})),listenChange(".patient-email-verified",(function(e){var t=$(e.currentTarget).data("id"),a=$(this).is(":checked")?1:0;$.ajax({type:"POST",url:route("emailVerified"),data:{id:t,value:a},success:function(e){livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenClick(".patient-email-verification",(function(e){var t=$(e.currentTarget).data("id");$.ajax({type:"POST",url:route("resend.email.verification",t),success:function(e){displaySuccessMessage(e.message),setTimeout((function(){Turbo.visit(window.location.href)}),5e3)},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".patient-statusbar",(function(e){var t=$(e.currentTarget).data("id"),a=$(e.currentTarget).data("status"),n=1==a?"Inactive":"Active",i=1==a?0:1;$.ajax({type:"PUT",url:route("patient.status"),data:{id:t},success:function(a){displaySuccessMessage(a.message),$(e.currentTarget).data("status",i),$("#patient-statusbar-text-"+t).text(n)}})}))},8174:()=>{listenSubmit("#profileForm",(function(){if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1})),listenClick(".removeAvatarIcon",(function(){$("#bgImage").css("background-image",""),$("#bgImage").css("background-image","url("+backgroundImg+")"),$("#removeAvatar").addClass("hide"),$("#tooltip287851").addClass("hide")}))},397:()=>{document.addEventListener("turbo:load",(function(){var e=$(".fill-ratings span").width();$(".star-ratings").width(e)})),listenClick(".addReviewBtn",(function(){var e=$(this).data("id");$("#reviewDoctorId").val(e)})),listenSubmit("#addReviewForm",(function(e){e.preventDefault(),$.ajax({url:route("patients.reviews.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#addReviewModal").modal("hide"),setTimeout((function(){location.reload()}),1200))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".editReviewBtn",(function(){var e=$(this).data("id");$.ajax({url:route("patients.reviews.edit",e),type:"GET",success:function(e){$("#editReviewModal").modal("show").appendTo("body"),$("#editDoctorId").val(e.data.doctor_id),$("#editReviewId").val(e.data.id),$("#editReview").val(e.data.review),$("#editRating-"+e.data.rating).attr("checked",!0)},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editReviewForm",(function(e){e.preventDefault();var t=$("#editReviewId").val();$.ajax({url:route("patients.reviews.update",t),type:"PUT",data:$(this).serialize(),success:function(e){displaySuccessMessage(e.message),$("#editReviewModal").modal("hide"),setTimeout((function(){location.reload()}),1200)},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".addReviewBtn",(function(){$("#addReviewModal").modal("show").appendTo("body")})),listen("hidden.bs.modal","#addReviewModal",(function(){$("#reviewDoctorId").val(""),resetModalForm("#addReviewForm")})),listen("hidden.bs.modal","#editReviewModal",(function(){$("#editDoctorId").val(""),resetModalForm("#editReviewForm")}))},8089:()=>{document.addEventListener("turbo:load",(function(){var e=parseInt($("#totalPermissions").val()-1),t=$(".permission:checked").length;1==$("#roleIsEdit").val()&&(t===e?$("#checkAllPermission").prop("checked",!0):$("#checkAllPermission").prop("checked",!1))})),listenClick("#checkAllPermission",(function(){$("#checkAllPermission").is(":checked")?$(".permission").each((function(){$(this).prop("checked",!0)})):$(".permission").each((function(){$(this).prop("checked",!1)}))})),listenClick(".permission",(function(){$(".permission:checked").length===parseInt($("#totalPermissions").val()-1)?$("#checkAllPermission").prop("checked",!0):$("#checkAllPermission").prop("checked",!1)}))},2708:()=>{listenClick(".role-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("roles.destroy",t),Lang.get("messages.role.role"))}))},2642:()=>{listenClick("#createServiceCategory",(function(){$("#createServiceCategoryPageModal").modal("show").appendTo("body")})),listen("hidden.bs.modal","#createServiceCategoryPageModal",(function(){resetModalForm("#createServiceCategoryForm","#createServiceCategoryValidationErrorsBox")})),listen("hidden.bs.modal","#editServiceCategoryModal",(function(){resetModalForm("#editServiceCategoryForm","#editServiceCategoryValidationErrorsBox")})),listenClick(".service-category-edit-btn",(function(e){var t,a=$(e.currentTarget).data("id");t=a,$.ajax({url:route("service-categories.edit",t),type:"GET",success:function(e){$("#serviceCategoryID").val(e.data.id),$("#editServiceCategoryName").val(e.data.name),$("#editServiceCategoryModal").modal("show")}})})),listenSubmit("#createServiceCategoryForm",(function(e){e.preventDefault(),$.ajax({url:route("service-categories.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),livewire.emit("refresh"),$("#createServiceCategoryPageModal").modal("hide"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editServiceCategoryForm",(function(e){e.preventDefault();var t=$("#serviceCategoryID").val();$.ajax({url:route("service-categories.update",t),type:"PUT",data:$(this).serialize(),success:function(e){$("#editServiceCategoryModal").modal("hide"),displaySuccessMessage(e.message),livewire.emit("refresh")},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".service-category-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("service-categories.destroy",t),Lang.get("messages.service_category.service_category"))}))},3950:()=>{document.addEventListener("turbo:load",(function(){if(!$(".price-input").length)return;var e=$(".price-input").val();if(""===e)$(".price-input").val("");else{if(/[0-9]+(,[0-9]+)*$/.test(e))return $(".price-input").val(getFormattedPrice(e)),!0;$(".price-input").val(e.replace(/[^0-9 \,]/,""))}if(!$(".charges_daily").length)return;var t=$(".charges_daily").val();if(""===t)$(".charges_daily").val("");else{if(/[0-9]+(,[0-9]+)*$/.test(t))return $(".charges_daily").val(getFormattedPrice(t)),!0;$(".charges_daily").val(t.replace(/[^0-9 \,]/,""))}})),listenClick("#createServiceCategory",(function(){$("#serviceCreateServiceCategoryModal").modal("show").appendTo("body")})),listenSubmit("#serviceCreateServiceCategoryForm",(function(e){e.preventDefault(),$.ajax({url:route("service-categories.store"),type:"POST",data:$(this).serialize(),success:function(e){if(e.success){displaySuccessMessage(e.message),$("#serviceCreateServiceCategoryModal").modal("hide");var t={id:e.data.id,name:e.data.name},a=new Option(t.name,t.id,!1,!0);$("#serviceCategory").append(a).trigger("change")}},error:function(e){displayErrorMessage(e.responseJSON.message)},complete:function(){processingBtn("#serviceCreateServiceCategoryForm","#btnSave")}})})),listen("hidden.bs.modal","#serviceCreateServiceCategoryModal",(function(){resetModalForm("#serviceCreateServiceCategoryForm","#createServiceCategoryValidationErrorsBox")}))},9946:()=>{listenClick("#serviceResetFilter",(function(){$("#servicesStatus").val($("#allServices").val()).trigger("change")})),listenChange("#servicesStatus",(function(){window.livewire.emit("changeStatusFilter",$(this).val())})),listenClick(".service-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("services.destroy",t),Lang.get("messages.common.service"))})),listenClick(".service-statusbar",(function(e){var t=$(e.currentTarget).data("id"),a=$(e.currentTarget).data("status"),n=1==a?"Inactive":"Active",i=1==a?0:1;$.ajax({type:"PUT",url:route("service.status"),data:{id:t},success:function(a){displaySuccessMessage(a.message),$(e.currentTarget).data("status",i),$("#service-statusbar-text-"+t).text(n)}})}))},6610:()=>{document.addEventListener("turbo:load",(function(){var t=$("#settingCountryId").val(),a=$("#settingStateId").val(),n=$("#settingCityId").val();""!=t&&($("#settingCountryId").val(t).trigger("change"),setTimeout((function(){$("#settingStateId").val(a).trigger("change")}),800),setTimeout((function(){$("#settingCityId").val(n).trigger("change")}),400),e=!0);if(!$("#generalSettingForm").length)return;document.getElementById("generalSettingForm"),document.getElementById("phoneNumber").value,document.getElementById("prefix_code").value,$("#defaultCountryData").val("")}));var e=!1;listenKeyup("#defaultCountryData",(function(){var e=$(this).val().slice(0,-1)+"";return $(this).val(e)})),listenClick(".iti__standard",(function(){var e=$(this).parent().parent().parent().next();$(this).attr("data-country-code"),e.has("#defaultCountryCode")&&$("#defaultCountryCode").val($(this).attr("data-country-code"));var t=$(this).children(".iti__country-name").text()+" "+$(this).children(".iti__dial-code").text();$("#defaultCountryData").val(t)})),listenChange("#settingCountryId",(function(){$.ajax({url:route("states-list"),type:"get",dataType:"json",data:{settingCountryId:$(this).val()},success:function(t){$("#settingStateId").empty(),$("#settingCityId").empty(),$("#settingStateId").append($('<option value=""></option>').text("Select State")),$("#settingCityId").append($('<option value=""></option>').text("Select City")),$.each(t.data.states,(function(a,n){$("#settingStateId").append($("<option ".concat(e||a!=t.data.state_id?"":"selected","></option>")).attr("value",a).text(n))}))}})})),listenChange("#settingStateId",(function(){$("#settingCityId").empty(),$.ajax({url:route("cities-list"),type:"get",dataType:"json",data:{stateId:$(this).val()},success:function(t){$("#settingCityId").empty(),$("#settingCityId").append($('<option value=""></option>').text("Select City")),$.each(t.data.cities,(function(a,n){$("#settingCityId").append($("<option ".concat(e&&a==t.data.city_id?"selected":"","></option>")).attr("value",a).text(n))}))}})})),listenClick("#settingSubmitBtn",(function(){return $('input[name="payment_gateway[]"]:checked').length?""!==$("#error-msg").text()?($("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1):void $("#generalSettingForm")[0].submit():(displayErrorMessage(Lang.get("messages.flash.select_payment")),!1)}))},4898:()=>{listenClick("#createSpecialization",(function(){$("#createSpecializationModal").modal("show").appendTo("body")})),listen("hidden.bs.modal","#createSpecializationModal",(function(){resetModalForm("#createSpecializationForm","#createSpecializationValidationErrorsBox")})),listen("hidden.bs.modal","#editSpecializationModal",(function(){resetModalForm("#editSpecializationForm","#editSpecializationValidationErrorsBox")})),listenClick(".specialization-edit-btn",(function(e){var t,a=$(e.currentTarget).data("id");t=a,$.ajax({url:route("specializations.edit",t),type:"GET",success:function(e){$("#specializationID").val(e.data.id),$("#editName").val(e.data.name),$("#editSpecializationModal").modal("show")}})})),listenSubmit("#createSpecializationForm",(function(e){e.preventDefault(),$.ajax({url:route("specializations.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#createSpecializationModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editSpecializationForm",(function(e){e.preventDefault();var t=$("#specializationID").val();$.ajax({url:route("specializations.update",t),type:"PUT",data:$(this).serialize(),success:function(e){$("#editSpecializationModal").modal("hide"),displaySuccessMessage(e.message),livewire.emit("refresh")},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".specialization-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("specializations.destroy",t),Lang.get("messages.specializations"))})),listenClick(".specialization-statusbar",(function(e){var t=$(e.currentTarget).data("id"),a=$(e.currentTarget).data("status"),n=1==a?"Inactive":"Active",i=1==a?0:1;$.ajax({type:"PUT",url:route("specializations.status"),data:{id:t},success:function(a){displaySuccessMessage(a.message),$(e.currentTarget).data("status",i),$("#specialization-statusbar-text-"+t).text(n)}})}))},9474:()=>{listenChange("input[type=radio][name=gender]",(function(){var e=$("#profilePicture").val();isEmpty(e)&&(1==this.value?$(".image-input-wrapper").attr("style","background-image:url("+manAvatar+")"):2==this.value&&$(".image-input-wrapper").attr("style","background-image:url("+womanAvatar+")"))})),listenSubmit("#createStaffForm",(function(){if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1})),listenSubmit("#editStaffForm",(function(){if(""!==$("#error-msg").text())return $("#phoneNumber").focus(),displayErrorMessage("Contact number is "+$("#error-msg").text()),!1})),listenClick(".removeAvatarIcon",(function(){$("#bgImage").css("background-image",""),$("#bgImage").css("background-image","url("+backgroundImg+")"),$("#removeAvatar").addClass("hide"),$("#tooltip287851").addClass("hide")}))},350:()=>{listenClick(".staff-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("staffs.destroy",t),Lang.get("messages.staff.staff"))})),listenChange(".staff-email-verified",(function(e){var t=$(e.currentTarget).data("id"),a=$(this).is(":checked")?1:0;$.ajax({type:"POST",url:route("emailVerified"),data:{id:t,value:a},success:function(e){livewire.emit("refresh"),displaySuccessMessage(e.message)}})})),listenClick(".staff-email-verification",(function(e){var t=$(e.currentTarget).data("id");$.ajax({type:"POST",url:route("resend.email.verification",t),success:function(e){livewire.emit("refresh"),displaySuccessMessage(e.message)},error:function(e){displayErrorMessage(e.responseJSON.message)}})}))},2509:()=>{listenClick("#addState",(function(){$("#addStateModal").modal("show").appendTo("body")})),listenSubmit("#addStateForm",(function(e){e.preventDefault(),$.ajax({url:route("states.store"),type:"POST",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#addStateModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenClick(".state-edit-btn",(function(e){$("#editStateModal").modal("show").appendTo("body");var t=$(e.currentTarget).data("id");$("#editStateId").val(t),$.ajax({url:route("states.edit",t),type:"GET",success:function(e){e.success&&($("#editStateName").val(e.data.name),$("#selectCountry").val(e.data.country_id).trigger("change"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listenSubmit("#editStateForm",(function(e){e.preventDefault();var t=$("#editStateId").val();$.ajax({url:route("states.update",t),type:"PUT",data:$(this).serialize(),success:function(e){e.success&&(displaySuccessMessage(e.message),$("#editStateModal").modal("hide"),livewire.emit("refresh"))},error:function(e){displayErrorMessage(e.responseJSON.message)}})})),listen("hidden.bs.modal","#addStateModal",(function(e){$("#addStateForm")[0].reset(),$("#countryState").val(null).trigger("change")})),listenClick(".state-delete-btn",(function(e){var t=$(e.currentTarget).data("id");deleteItem(route("states.destroy",t),Lang.get("messages.common.state"))}))},4304:()=>{document.addEventListener("turbo:load",(function(){if(!$(e).length)return;var t=$(e).DataTable({processing:!0,serverSide:!0,searchDelay:500,language:{lengthMenu:"Show _MENU_"},order:[[0,"desc"]],ajax:{url:route("patients.transactions")},columnDefs:[{targets:[0],width:"50%"},{targets:[1],width:"18%"},{targets:[3],orderable:!1,searchable:!1,className:"text-center",width:"8%"}],columns:[{data:function(e){return'<span class="badge badge-light-info">'.concat(moment.parseZone(e.created_at).format("Do MMM, Y h:mm A"),"</span>")},name:"created_at"},{data:function(e){return e.type==manuallyMethod?manually:e.type==stripeMethod?stripe:e.type==paystckMethod?paystck:e.type==paypalMethod?paypal:e.type==razorpayMethod?razorpay:e.type==authorizeMethod?authorize:e.type==paytmMethod?paytm:""},name:"type"},{data:function(e){return currencyIcon+" "+getFormattedPrice(e.amount)},name:"amount"},{data:function(e){var t=[{id:e.id,showUrl:route("patients.transactions.show",e.id)}];return prepareTemplateRender("#transactionsTemplate",t)},name:"id"}]});handleSearchDatatable(t)}));var e="#patientTransactionsTable";listenClick(".transaction-statusbar",(function(e){var t=$(e.currentTarget).data("id"),a=currentLoginUserId;$.ajax({type:"PUT",url:route("transaction.status"),data:{id:t,acceptPaymentUserId:a},success:function(e){e.success&&(livewire.emit("refresh"),displaySuccessMessage(e.message))},error:function(e){livewire.emit("refresh"),displayErrorMessage(e.responseJSON.message)}})}))},874:()=>{},3878:(e,t,a)=>{"use strict";var n={};a.r(n),a.d(n,{PageRenderer:()=>ce,PageSnapshot:()=>W,clearCache:()=>ke,connectStreamSource:()=>be,disconnectStreamSource:()=>$e,navigator:()=>fe,registerAdapter:()=>we,renderStreamMessage:()=>_e,session:()=>ge,setConfirmMethod:()=>Ce,setProgressBarDelay:()=>Se,start:()=>ve,visit:()=>ye}),function(){if(void 0===window.Reflect||void 0===window.customElements||window.customElements.polyfillWrapFlushCallback)return;const e=HTMLElement,t=function(){return Reflect.construct(e,[],this.constructor)};window.HTMLElement=t,HTMLElement.prototype=e.prototype,HTMLElement.prototype.constructor=HTMLElement,Object.setPrototypeOf(HTMLElement,e)}(),function(e){function t(e,t,a){throw new e("Failed to execute 'requestSubmit' on 'HTMLFormElement': "+t+".",a)}"function"!=typeof e.requestSubmit&&(e.requestSubmit=function(e){e?(!function(e,a){e instanceof HTMLElement||t(TypeError,"parameter 1 is not of type 'HTMLElement'"),"submit"==e.type||t(TypeError,"The specified element is not a submit button"),e.form==a||t(DOMException,"The specified element is not owned by this form element","NotFoundError")}(e,this),e.click()):((e=document.createElement("input")).type="submit",e.hidden=!0,this.appendChild(e),e.click(),this.removeChild(e))})}(HTMLFormElement.prototype);const i=new WeakMap;function r(e){const t=function(e){const t=e instanceof Element?e:e instanceof Node?e.parentElement:null,a=t?t.closest("input, button"):null;return"submit"==(null==a?void 0:a.type)?a:null}(e.target);t&&t.form&&i.set(t.form,t)}var s,o,d,l,c,u;!function(){if("submitter"in Event.prototype)return;let e;if("SubmitEvent"in window&&/Apple Computer/.test(navigator.vendor))e=window.SubmitEvent.prototype;else{if("SubmitEvent"in window)return;e=window.Event.prototype}addEventListener("click",r,!0),Object.defineProperty(e,"submitter",{get(){if("submit"==this.type&&this.target instanceof HTMLFormElement)return i.get(this.target)}})}(),function(e){e.eager="eager",e.lazy="lazy"}(s||(s={}));class m extends HTMLElement{constructor(){super(),this.loaded=Promise.resolve(),this.delegate=new m.delegateConstructor(this)}static get observedAttributes(){return["disabled","loading","src"]}connectedCallback(){this.delegate.connect()}disconnectedCallback(){this.delegate.disconnect()}reload(){const{src:e}=this;this.src=null,this.src=e}attributeChangedCallback(e){"loading"==e?this.delegate.loadingStyleChanged():"src"==e?this.delegate.sourceURLChanged():this.delegate.disabledChanged()}get src(){return this.getAttribute("src")}set src(e){e?this.setAttribute("src",e):this.removeAttribute("src")}get loading(){return function(e){switch(e.toLowerCase()){case"lazy":return s.lazy;default:return s.eager}}(this.getAttribute("loading")||"")}set loading(e){e?this.setAttribute("loading",e):this.removeAttribute("loading")}get disabled(){return this.hasAttribute("disabled")}set disabled(e){e?this.setAttribute("disabled",""):this.removeAttribute("disabled")}get autoscroll(){return this.hasAttribute("autoscroll")}set autoscroll(e){e?this.setAttribute("autoscroll",""):this.removeAttribute("autoscroll")}get complete(){return!this.delegate.isLoading}get isActive(){return this.ownerDocument===document&&!this.isPreview}get isPreview(){var e,t;return null===(t=null===(e=this.ownerDocument)||void 0===e?void 0:e.documentElement)||void 0===t?void 0:t.hasAttribute("data-turbo-preview")}}function p(e){return new URL(e.toString(),document.baseURI)}function h(e){let t;return e.hash?e.hash.slice(1):(t=e.href.match(/#(.*)$/))?t[1]:void 0}function g(e,t){return p((null==t?void 0:t.getAttribute("formaction"))||e.getAttribute("action")||e.action)}function f(e){return(function(e){return function(e){return e.pathname.split("/").slice(1)}(e).slice(-1)[0]}(e).match(/\.[^.]*$/)||[])[0]||""}function v(e,t){const a=function(e){return t=e.origin+e.pathname,t.endsWith("/")?t:t+"/";var t}(t);return e.href===p(a).href||e.href.startsWith(a)}function w(e,t){return v(e,t)&&!!f(e).match(/^(?:|\.(?:htm|html|xhtml))$/)}function y(e){const t=h(e);return null!=t?e.href.slice(0,-(t.length+1)):e.href}function b(e){return y(e)}class ${constructor(e){this.response=e}get succeeded(){return this.response.ok}get failed(){return!this.succeeded}get clientError(){return this.statusCode>=400&&this.statusCode<=499}get serverError(){return this.statusCode>=500&&this.statusCode<=599}get redirected(){return this.response.redirected}get location(){return p(this.response.url)}get isHTML(){return this.contentType&&this.contentType.match(/^(?:text\/([^\s;,]+\b)?html|application\/xhtml\+xml)\b/)}get statusCode(){return this.response.status}get contentType(){return this.header("Content-Type")}get responseText(){return this.response.clone().text()}get responseHTML(){return this.isHTML?this.response.clone().text():Promise.resolve(void 0)}header(e){return this.response.headers.get(e)}}function _(e,{target:t,cancelable:a,detail:n}={}){const i=new CustomEvent(e,{cancelable:a,bubbles:!0,detail:n});return t&&t.isConnected?t.dispatchEvent(i):document.documentElement.dispatchEvent(i),i}function k(){return new Promise((e=>requestAnimationFrame((()=>e()))))}function S(e=""){return(new DOMParser).parseFromString(e,"text/html")}function C(e,...t){const a=function(e,t){return e.reduce(((e,a,n)=>e+a+(null==t[n]?"":t[n])),"")}(e,t).replace(/^\n/,"").split("\n"),n=a[0].match(/^\s+/),i=n?n[0].length:0;return a.map((e=>e.slice(i))).join("\n")}function M(){return Array.apply(null,{length:36}).map(((e,t)=>8==t||13==t||18==t||23==t?"-":14==t?"4":19==t?(Math.floor(4*Math.random())+8).toString(16):Math.floor(15*Math.random()).toString(16))).join("")}function L(e,...t){for(const a of t.map((t=>null==t?void 0:t.getAttribute(e))))if("string"==typeof a)return a;return null}function D(...e){for(const t of e)"turbo-frame"==t.localName&&t.setAttribute("busy",""),t.setAttribute("aria-busy","true")}function T(...e){for(const t of e)"turbo-frame"==t.localName&&t.removeAttribute("busy"),t.removeAttribute("aria-busy")}!function(e){e[e.get=0]="get",e[e.post=1]="post",e[e.put=2]="put",e[e.patch=3]="patch",e[e.delete=4]="delete"}(o||(o={}));class E{constructor(e,t,a,n=new URLSearchParams,i=null){this.abortController=new AbortController,this.resolveRequestPromise=e=>{},this.delegate=e,this.method=t,this.headers=this.defaultHeaders,this.body=n,this.url=a,this.target=i}get location(){return this.url}get params(){return this.url.searchParams}get entries(){return this.body?Array.from(this.body.entries()):[]}cancel(){this.abortController.abort()}async perform(){var e,t;const{fetchOptions:a}=this;null===(t=(e=this.delegate).prepareHeadersForRequest)||void 0===t||t.call(e,this.headers,this),await this.allowRequestToBeIntercepted(a);try{this.delegate.requestStarted(this);const e=await fetch(this.url.href,a);return await this.receive(e)}catch(e){if("AbortError"!==e.name)throw this.delegate.requestErrored(this,e),e}finally{this.delegate.requestFinished(this)}}async receive(e){const t=new $(e);return _("turbo:before-fetch-response",{cancelable:!0,detail:{fetchResponse:t},target:this.target}).defaultPrevented?this.delegate.requestPreventedHandlingResponse(this,t):t.succeeded?this.delegate.requestSucceededWithResponse(this,t):this.delegate.requestFailedWithResponse(this,t),t}get fetchOptions(){var e;return{method:o[this.method].toUpperCase(),credentials:"same-origin",headers:this.headers,redirect:"follow",body:this.isIdempotent?null:this.body,signal:this.abortSignal,referrer:null===(e=this.delegate.referrer)||void 0===e?void 0:e.href}}get defaultHeaders(){return{Accept:"text/html, application/xhtml+xml"}}get isIdempotent(){return this.method==o.get}get abortSignal(){return this.abortController.signal}async allowRequestToBeIntercepted(e){const t=new Promise((e=>this.resolveRequestPromise=e));_("turbo:before-fetch-request",{cancelable:!0,detail:{fetchOptions:e,url:this.url,resume:this.resolveRequestPromise},target:this.target}).defaultPrevented&&await t}}class x{constructor(e,t){this.started=!1,this.intersect=e=>{const t=e.slice(-1)[0];(null==t?void 0:t.isIntersecting)&&this.delegate.elementAppearedInViewport(this.element)},this.delegate=e,this.element=t,this.intersectionObserver=new IntersectionObserver(this.intersect)}start(){this.started||(this.started=!0,this.intersectionObserver.observe(this.element))}stop(){this.started&&(this.started=!1,this.intersectionObserver.unobserve(this.element))}}class A{constructor(e){this.templateElement=document.createElement("template"),this.templateElement.innerHTML=e}static wrap(e){return"string"==typeof e?new this(e):e}get fragment(){const e=document.createDocumentFragment();for(const t of this.foreignElements)e.appendChild(document.importNode(t,!0));return e}get foreignElements(){return this.templateChildren.reduce(((e,t)=>"turbo-stream"==t.tagName.toLowerCase()?[...e,t]:e),[])}get templateChildren(){return Array.from(this.templateElement.content.children)}}A.contentType="text/vnd.turbo-stream.html",function(e){e[e.initialized=0]="initialized",e[e.requesting=1]="requesting",e[e.waiting=2]="waiting",e[e.receiving=3]="receiving",e[e.stopping=4]="stopping",e[e.stopped=5]="stopped"}(d||(d={})),function(e){e.urlEncoded="application/x-www-form-urlencoded",e.multipart="multipart/form-data",e.plain="text/plain"}(l||(l={}));class P{constructor(e,t,a,n=!1){this.state=d.initialized,this.delegate=e,this.formElement=t,this.submitter=a,this.formData=function(e,t){const a=new FormData(e),n=null==t?void 0:t.getAttribute("name"),i=null==t?void 0:t.getAttribute("value");n&&null!=i&&a.get(n)!=i&&a.append(n,i);return a}(t,a),this.location=p(this.action),this.method==o.get&&function(e,t){const a=new URLSearchParams;for(const[e,n]of t)n instanceof File||a.append(e,n);e.search=a.toString()}(this.location,[...this.body.entries()]),this.fetchRequest=new E(this,this.method,this.location,this.body,this.formElement),this.mustRedirect=n}static confirmMethod(e,t){return confirm(e)}get method(){var e;return function(e){switch(e.toLowerCase()){case"get":return o.get;case"post":return o.post;case"put":return o.put;case"patch":return o.patch;case"delete":return o.delete}}(((null===(e=this.submitter)||void 0===e?void 0:e.getAttribute("formmethod"))||this.formElement.getAttribute("method")||"").toLowerCase())||o.get}get action(){var e;const t="string"==typeof this.formElement.action?this.formElement.action:null;return(null===(e=this.submitter)||void 0===e?void 0:e.getAttribute("formaction"))||this.formElement.getAttribute("action")||t||""}get body(){return this.enctype==l.urlEncoded||this.method==o.get?new URLSearchParams(this.stringFormData):this.formData}get enctype(){var e;return function(e){switch(e.toLowerCase()){case l.multipart:return l.multipart;case l.plain:return l.plain;default:return l.urlEncoded}}((null===(e=this.submitter)||void 0===e?void 0:e.getAttribute("formenctype"))||this.formElement.enctype)}get isIdempotent(){return this.fetchRequest.isIdempotent}get stringFormData(){return[...this.formData].reduce(((e,[t,a])=>e.concat("string"==typeof a?[[t,a]]:[])),[])}get confirmationMessage(){return this.formElement.getAttribute("data-turbo-confirm")}get needsConfirmation(){return null!==this.confirmationMessage}async start(){const{initialized:e,requesting:t}=d;if(this.needsConfirmation){if(!P.confirmMethod(this.confirmationMessage,this.formElement))return}if(this.state==e)return this.state=t,this.fetchRequest.perform()}stop(){const{stopping:e,stopped:t}=d;if(this.state!=e&&this.state!=t)return this.state=e,this.fetchRequest.cancel(),!0}prepareHeadersForRequest(e,t){if(!t.isIdempotent){const t=function(e){if(null!=e){const t=(document.cookie?document.cookie.split("; "):[]).find((t=>t.startsWith(e)));if(t){const e=t.split("=").slice(1).join("=");return e?decodeURIComponent(e):void 0}}}(O("csrf-param"))||O("csrf-token");t&&(e["X-CSRF-Token"]=t),e.Accept=[A.contentType,e.Accept].join(", ")}}requestStarted(e){var t;this.state=d.waiting,null===(t=this.submitter)||void 0===t||t.setAttribute("disabled",""),_("turbo:submit-start",{target:this.formElement,detail:{formSubmission:this}}),this.delegate.formSubmissionStarted(this)}requestPreventedHandlingResponse(e,t){this.result={success:t.succeeded,fetchResponse:t}}requestSucceededWithResponse(e,t){if(t.clientError||t.serverError)this.delegate.formSubmissionFailedWithResponse(this,t);else if(this.requestMustRedirect(e)&&function(e){return 200==e.statusCode&&!e.redirected}(t)){const e=new Error("Form responses must redirect to another location");this.delegate.formSubmissionErrored(this,e)}else this.state=d.receiving,this.result={success:!0,fetchResponse:t},this.delegate.formSubmissionSucceededWithResponse(this,t)}requestFailedWithResponse(e,t){this.result={success:!1,fetchResponse:t},this.delegate.formSubmissionFailedWithResponse(this,t)}requestErrored(e,t){this.result={success:!1,error:t},this.delegate.formSubmissionErrored(this,t)}requestFinished(e){var t;this.state=d.stopped,null===(t=this.submitter)||void 0===t||t.removeAttribute("disabled"),_("turbo:submit-end",{target:this.formElement,detail:Object.assign({formSubmission:this},this.result)}),this.delegate.formSubmissionFinished(this)}requestMustRedirect(e){return!e.isIdempotent&&this.mustRedirect}}function O(e){const t=document.querySelector(`meta[name="${e}"]`);return t&&t.content}class I{constructor(e){this.element=e}get children(){return[...this.element.children]}hasAnchor(e){return null!=this.getElementForAnchor(e)}getElementForAnchor(e){return e?this.element.querySelector(`[id='${e}'], a[name='${e}']`):null}get isConnected(){return this.element.isConnected}get firstAutofocusableElement(){return this.element.querySelector("[autofocus]")}get permanentElements(){return[...this.element.querySelectorAll("[id][data-turbo-permanent]")]}getPermanentElementById(e){return this.element.querySelector(`#${e}[data-turbo-permanent]`)}getPermanentElementMapForSnapshot(e){const t={};for(const a of this.permanentElements){const{id:n}=a,i=e.getPermanentElementById(n);i&&(t[n]=[a,i])}return t}}class F{constructor(e,t){this.submitBubbled=e=>{const t=e.target;if(!e.defaultPrevented&&t instanceof HTMLFormElement&&t.closest("turbo-frame, html")==this.element){const a=e.submitter||void 0;"dialog"!=((null==a?void 0:a.getAttribute("formmethod"))||t.method)&&this.delegate.shouldInterceptFormSubmission(t,a)&&(e.preventDefault(),e.stopImmediatePropagation(),this.delegate.formSubmissionIntercepted(t,a))}},this.delegate=e,this.element=t}start(){this.element.addEventListener("submit",this.submitBubbled)}stop(){this.element.removeEventListener("submit",this.submitBubbled)}}class q{constructor(e,t){this.resolveRenderPromise=e=>{},this.resolveInterceptionPromise=e=>{},this.delegate=e,this.element=t}scrollToAnchor(e){const t=this.snapshot.getElementForAnchor(e);t?(this.scrollToElement(t),this.focusElement(t)):this.scrollToPosition({x:0,y:0})}scrollToAnchorFromLocation(e){this.scrollToAnchor(h(e))}scrollToElement(e){e.scrollIntoView()}focusElement(e){e instanceof HTMLElement&&(e.hasAttribute("tabindex")?e.focus():(e.setAttribute("tabindex","-1"),e.focus(),e.removeAttribute("tabindex")))}scrollToPosition({x:e,y:t}){this.scrollRoot.scrollTo(e,t)}scrollToTop(){this.scrollToPosition({x:0,y:0})}get scrollRoot(){return window}async render(e){const{isPreview:t,shouldRender:a,newSnapshot:n}=e;if(a)try{this.renderPromise=new Promise((e=>this.resolveRenderPromise=e)),this.renderer=e,this.prepareToRenderSnapshot(e);const a=new Promise((e=>this.resolveInterceptionPromise=e));this.delegate.allowsImmediateRender(n,this.resolveInterceptionPromise)||await a,await this.renderSnapshot(e),this.delegate.viewRenderedSnapshot(n,t),this.finishRenderingSnapshot(e)}finally{delete this.renderer,this.resolveRenderPromise(void 0),delete this.renderPromise}else this.invalidate()}invalidate(){this.delegate.viewInvalidated()}prepareToRenderSnapshot(e){this.markAsPreview(e.isPreview),e.prepareToRender()}markAsPreview(e){e?this.element.setAttribute("data-turbo-preview",""):this.element.removeAttribute("data-turbo-preview")}async renderSnapshot(e){await e.render()}finishRenderingSnapshot(e){e.finishRendering()}}class R extends q{invalidate(){this.element.innerHTML=""}get snapshot(){return new I(this.element)}}class j{constructor(e,t){this.clickBubbled=e=>{this.respondsToEventTarget(e.target)?this.clickEvent=e:delete this.clickEvent},this.linkClicked=e=>{this.clickEvent&&this.respondsToEventTarget(e.target)&&e.target instanceof Element&&this.delegate.shouldInterceptLinkClick(e.target,e.detail.url)&&(this.clickEvent.preventDefault(),e.preventDefault(),this.delegate.linkClickIntercepted(e.target,e.detail.url)),delete this.clickEvent},this.willVisit=()=>{delete this.clickEvent},this.delegate=e,this.element=t}start(){this.element.addEventListener("click",this.clickBubbled),document.addEventListener("turbo:click",this.linkClicked),document.addEventListener("turbo:before-visit",this.willVisit)}stop(){this.element.removeEventListener("click",this.clickBubbled),document.removeEventListener("turbo:click",this.linkClicked),document.removeEventListener("turbo:before-visit",this.willVisit)}respondsToEventTarget(e){const t=e instanceof Element?e:e instanceof Node?e.parentElement:null;return t&&t.closest("turbo-frame, html")==this.element}}class N{constructor(e,t,a,n=!0){this.currentSnapshot=e,this.newSnapshot=t,this.isPreview=a,this.willRender=n,this.promise=new Promise(((e,t)=>this.resolvingFunctions={resolve:e,reject:t}))}get shouldRender(){return!0}prepareToRender(){}finishRendering(){this.resolvingFunctions&&(this.resolvingFunctions.resolve(),delete this.resolvingFunctions)}createScriptElement(e){if("false"==e.getAttribute("data-turbo-eval"))return e;{const t=document.createElement("script");return this.cspNonce&&(t.nonce=this.cspNonce),t.textContent=e.textContent,t.async=!1,function(e,t){for(const{name:a,value:n}of[...t.attributes])e.setAttribute(a,n)}(t,e),t}}preservingPermanentElements(e){(class{constructor(e){this.permanentElementMap=e}static preservingPermanentElements(e,t){const a=new this(e);a.enter(),t(),a.leave()}enter(){for(const e in this.permanentElementMap){const[,t]=this.permanentElementMap[e];this.replaceNewPermanentElementWithPlaceholder(t)}}leave(){for(const e in this.permanentElementMap){const[t]=this.permanentElementMap[e];this.replaceCurrentPermanentElementWithClone(t),this.replacePlaceholderWithPermanentElement(t)}}replaceNewPermanentElementWithPlaceholder(e){const t=function(e){const t=document.createElement("meta");return t.setAttribute("name","turbo-permanent-placeholder"),t.setAttribute("content",e.id),t}(e);e.replaceWith(t)}replaceCurrentPermanentElementWithClone(e){const t=e.cloneNode(!0);e.replaceWith(t)}replacePlaceholderWithPermanentElement(e){const t=this.getPlaceholderById(e.id);null==t||t.replaceWith(e)}getPlaceholderById(e){return this.placeholders.find((t=>t.content==e))}get placeholders(){return[...document.querySelectorAll("meta[name=turbo-permanent-placeholder][content]")]}}).preservingPermanentElements(this.permanentElementMap,e)}focusFirstAutofocusableElement(){const e=this.connectedSnapshot.firstAutofocusableElement;(function(e){return e&&"function"==typeof e.focus})(e)&&e.focus()}get connectedSnapshot(){return this.newSnapshot.isConnected?this.newSnapshot:this.currentSnapshot}get currentElement(){return this.currentSnapshot.element}get newElement(){return this.newSnapshot.element}get permanentElementMap(){return this.currentSnapshot.getPermanentElementMapForSnapshot(this.newSnapshot)}get cspNonce(){var e;return null===(e=document.head.querySelector('meta[name="csp-nonce"]'))||void 0===e?void 0:e.getAttribute("content")}}class Y extends N{get shouldRender(){return!0}async render(){await k(),this.preservingPermanentElements((()=>{this.loadFrameElement()})),this.scrollFrameIntoView(),await k(),this.focusFirstAutofocusableElement(),await k(),this.activateScriptElements()}loadFrameElement(){var e;const t=document.createRange();t.selectNodeContents(this.currentElement),t.deleteContents();const a=this.newElement,n=null===(e=a.ownerDocument)||void 0===e?void 0:e.createRange();n&&(n.selectNodeContents(a),this.currentElement.appendChild(n.extractContents()))}scrollFrameIntoView(){if(this.currentElement.autoscroll||this.newElement.autoscroll){const a=this.currentElement.firstElementChild,n=(e=this.currentElement.getAttribute("data-autoscroll-block"),t="end","end"==e||"start"==e||"center"==e||"nearest"==e?e:t);if(a)return a.scrollIntoView({block:n}),!0}var e,t;return!1}activateScriptElements(){for(const e of this.newScriptElements){const t=this.createScriptElement(e);e.replaceWith(t)}}get newScriptElements(){return this.currentElement.querySelectorAll("script")}}class B{constructor(){this.hiding=!1,this.value=0,this.visible=!1,this.trickle=()=>{this.setValue(this.value+Math.random()/100)},this.stylesheetElement=this.createStylesheetElement(),this.progressElement=this.createProgressElement(),this.installStylesheetElement(),this.setValue(0)}static get defaultCSS(){return C`
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/@hotwired/turbo/dist/turbo.es2017-esm.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@hotwired/turbo/dist/turbo.es2017-esm.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageRenderer": () => (/* binding */ PageRenderer),
+/* harmony export */   "PageSnapshot": () => (/* binding */ PageSnapshot),
+/* harmony export */   "clearCache": () => (/* binding */ clearCache),
+/* harmony export */   "connectStreamSource": () => (/* binding */ connectStreamSource),
+/* harmony export */   "disconnectStreamSource": () => (/* binding */ disconnectStreamSource),
+/* harmony export */   "navigator": () => (/* binding */ navigator$1),
+/* harmony export */   "registerAdapter": () => (/* binding */ registerAdapter),
+/* harmony export */   "renderStreamMessage": () => (/* binding */ renderStreamMessage),
+/* harmony export */   "session": () => (/* binding */ session),
+/* harmony export */   "setConfirmMethod": () => (/* binding */ setConfirmMethod),
+/* harmony export */   "setProgressBarDelay": () => (/* binding */ setProgressBarDelay),
+/* harmony export */   "start": () => (/* binding */ start),
+/* harmony export */   "visit": () => (/* binding */ visit)
+/* harmony export */ });
+/*
+Turbo 7.1.0
+Copyright © 2021 Basecamp, LLC
+ */
+(function () {
+    if (window.Reflect === undefined || window.customElements === undefined ||
+        window.customElements.polyfillWrapFlushCallback) {
+        return;
+    }
+    const BuiltInHTMLElement = HTMLElement;
+    const wrapperForTheName = {
+        'HTMLElement': function HTMLElement() {
+            return Reflect.construct(BuiltInHTMLElement, [], this.constructor);
+        }
+    };
+    window.HTMLElement =
+        wrapperForTheName['HTMLElement'];
+    HTMLElement.prototype = BuiltInHTMLElement.prototype;
+    HTMLElement.prototype.constructor = HTMLElement;
+    Object.setPrototypeOf(HTMLElement, BuiltInHTMLElement);
+})();
+
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2019 Javan Makhmali
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+(function(prototype) {
+  if (typeof prototype.requestSubmit == "function") return
+
+  prototype.requestSubmit = function(submitter) {
+    if (submitter) {
+      validateSubmitter(submitter, this);
+      submitter.click();
+    } else {
+      submitter = document.createElement("input");
+      submitter.type = "submit";
+      submitter.hidden = true;
+      this.appendChild(submitter);
+      submitter.click();
+      this.removeChild(submitter);
+    }
+  };
+
+  function validateSubmitter(submitter, form) {
+    submitter instanceof HTMLElement || raise(TypeError, "parameter 1 is not of type 'HTMLElement'");
+    submitter.type == "submit" || raise(TypeError, "The specified element is not a submit button");
+    submitter.form == form || raise(DOMException, "The specified element is not owned by this form element", "NotFoundError");
+  }
+
+  function raise(errorConstructor, message, name) {
+    throw new errorConstructor("Failed to execute 'requestSubmit' on 'HTMLFormElement': " + message + ".", name)
+  }
+})(HTMLFormElement.prototype);
+
+const submittersByForm = new WeakMap;
+function findSubmitterFromClickTarget(target) {
+    const element = target instanceof Element ? target : target instanceof Node ? target.parentElement : null;
+    const candidate = element ? element.closest("input, button") : null;
+    return (candidate === null || candidate === void 0 ? void 0 : candidate.type) == "submit" ? candidate : null;
+}
+function clickCaptured(event) {
+    const submitter = findSubmitterFromClickTarget(event.target);
+    if (submitter && submitter.form) {
+        submittersByForm.set(submitter.form, submitter);
+    }
+}
+(function () {
+    if ("submitter" in Event.prototype)
+        return;
+    let prototype;
+    if ("SubmitEvent" in window && /Apple Computer/.test(navigator.vendor)) {
+        prototype = window.SubmitEvent.prototype;
+    }
+    else if ("SubmitEvent" in window) {
+        return;
+    }
+    else {
+        prototype = window.Event.prototype;
+    }
+    addEventListener("click", clickCaptured, true);
+    Object.defineProperty(prototype, "submitter", {
+        get() {
+            if (this.type == "submit" && this.target instanceof HTMLFormElement) {
+                return submittersByForm.get(this.target);
+            }
+        }
+    });
+})();
+
+var FrameLoadingStyle;
+(function (FrameLoadingStyle) {
+    FrameLoadingStyle["eager"] = "eager";
+    FrameLoadingStyle["lazy"] = "lazy";
+})(FrameLoadingStyle || (FrameLoadingStyle = {}));
+class FrameElement extends HTMLElement {
+    constructor() {
+        super();
+        this.loaded = Promise.resolve();
+        this.delegate = new FrameElement.delegateConstructor(this);
+    }
+    static get observedAttributes() {
+        return ["disabled", "loading", "src"];
+    }
+    connectedCallback() {
+        this.delegate.connect();
+    }
+    disconnectedCallback() {
+        this.delegate.disconnect();
+    }
+    reload() {
+        const { src } = this;
+        this.src = null;
+        this.src = src;
+    }
+    attributeChangedCallback(name) {
+        if (name == "loading") {
+            this.delegate.loadingStyleChanged();
+        }
+        else if (name == "src") {
+            this.delegate.sourceURLChanged();
+        }
+        else {
+            this.delegate.disabledChanged();
+        }
+    }
+    get src() {
+        return this.getAttribute("src");
+    }
+    set src(value) {
+        if (value) {
+            this.setAttribute("src", value);
+        }
+        else {
+            this.removeAttribute("src");
+        }
+    }
+    get loading() {
+        return frameLoadingStyleFromString(this.getAttribute("loading") || "");
+    }
+    set loading(value) {
+        if (value) {
+            this.setAttribute("loading", value);
+        }
+        else {
+            this.removeAttribute("loading");
+        }
+    }
+    get disabled() {
+        return this.hasAttribute("disabled");
+    }
+    set disabled(value) {
+        if (value) {
+            this.setAttribute("disabled", "");
+        }
+        else {
+            this.removeAttribute("disabled");
+        }
+    }
+    get autoscroll() {
+        return this.hasAttribute("autoscroll");
+    }
+    set autoscroll(value) {
+        if (value) {
+            this.setAttribute("autoscroll", "");
+        }
+        else {
+            this.removeAttribute("autoscroll");
+        }
+    }
+    get complete() {
+        return !this.delegate.isLoading;
+    }
+    get isActive() {
+        return this.ownerDocument === document && !this.isPreview;
+    }
+    get isPreview() {
+        var _a, _b;
+        return (_b = (_a = this.ownerDocument) === null || _a === void 0 ? void 0 : _a.documentElement) === null || _b === void 0 ? void 0 : _b.hasAttribute("data-turbo-preview");
+    }
+}
+function frameLoadingStyleFromString(style) {
+    switch (style.toLowerCase()) {
+        case "lazy": return FrameLoadingStyle.lazy;
+        default: return FrameLoadingStyle.eager;
+    }
+}
+
+function expandURL(locatable) {
+    return new URL(locatable.toString(), document.baseURI);
+}
+function getAnchor(url) {
+    let anchorMatch;
+    if (url.hash) {
+        return url.hash.slice(1);
+    }
+    else if (anchorMatch = url.href.match(/#(.*)$/)) {
+        return anchorMatch[1];
+    }
+}
+function getAction(form, submitter) {
+    const action = (submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("formaction")) || form.getAttribute("action") || form.action;
+    return expandURL(action);
+}
+function getExtension(url) {
+    return (getLastPathComponent(url).match(/\.[^.]*$/) || [])[0] || "";
+}
+function isHTML(url) {
+    return !!getExtension(url).match(/^(?:|\.(?:htm|html|xhtml))$/);
+}
+function isPrefixedBy(baseURL, url) {
+    const prefix = getPrefix(url);
+    return baseURL.href === expandURL(prefix).href || baseURL.href.startsWith(prefix);
+}
+function locationIsVisitable(location, rootLocation) {
+    return isPrefixedBy(location, rootLocation) && isHTML(location);
+}
+function getRequestURL(url) {
+    const anchor = getAnchor(url);
+    return anchor != null
+        ? url.href.slice(0, -(anchor.length + 1))
+        : url.href;
+}
+function toCacheKey(url) {
+    return getRequestURL(url);
+}
+function urlsAreEqual(left, right) {
+    return expandURL(left).href == expandURL(right).href;
+}
+function getPathComponents(url) {
+    return url.pathname.split("/").slice(1);
+}
+function getLastPathComponent(url) {
+    return getPathComponents(url).slice(-1)[0];
+}
+function getPrefix(url) {
+    return addTrailingSlash(url.origin + url.pathname);
+}
+function addTrailingSlash(value) {
+    return value.endsWith("/") ? value : value + "/";
+}
+
+class FetchResponse {
+    constructor(response) {
+        this.response = response;
+    }
+    get succeeded() {
+        return this.response.ok;
+    }
+    get failed() {
+        return !this.succeeded;
+    }
+    get clientError() {
+        return this.statusCode >= 400 && this.statusCode <= 499;
+    }
+    get serverError() {
+        return this.statusCode >= 500 && this.statusCode <= 599;
+    }
+    get redirected() {
+        return this.response.redirected;
+    }
+    get location() {
+        return expandURL(this.response.url);
+    }
+    get isHTML() {
+        return this.contentType && this.contentType.match(/^(?:text\/([^\s;,]+\b)?html|application\/xhtml\+xml)\b/);
+    }
+    get statusCode() {
+        return this.response.status;
+    }
+    get contentType() {
+        return this.header("Content-Type");
+    }
+    get responseText() {
+        return this.response.clone().text();
+    }
+    get responseHTML() {
+        if (this.isHTML) {
+            return this.response.clone().text();
+        }
+        else {
+            return Promise.resolve(undefined);
+        }
+    }
+    header(name) {
+        return this.response.headers.get(name);
+    }
+}
+
+function dispatch(eventName, { target, cancelable, detail } = {}) {
+    const event = new CustomEvent(eventName, { cancelable, bubbles: true, detail });
+    if (target && target.isConnected) {
+        target.dispatchEvent(event);
+    }
+    else {
+        document.documentElement.dispatchEvent(event);
+    }
+    return event;
+}
+function nextAnimationFrame() {
+    return new Promise(resolve => requestAnimationFrame(() => resolve()));
+}
+function nextEventLoopTick() {
+    return new Promise(resolve => setTimeout(() => resolve(), 0));
+}
+function nextMicrotask() {
+    return Promise.resolve();
+}
+function parseHTMLDocument(html = "") {
+    return new DOMParser().parseFromString(html, "text/html");
+}
+function unindent(strings, ...values) {
+    const lines = interpolate(strings, values).replace(/^\n/, "").split("\n");
+    const match = lines[0].match(/^\s+/);
+    const indent = match ? match[0].length : 0;
+    return lines.map(line => line.slice(indent)).join("\n");
+}
+function interpolate(strings, values) {
+    return strings.reduce((result, string, i) => {
+        const value = values[i] == undefined ? "" : values[i];
+        return result + string + value;
+    }, "");
+}
+function uuid() {
+    return Array.apply(null, { length: 36 }).map((_, i) => {
+        if (i == 8 || i == 13 || i == 18 || i == 23) {
+            return "-";
+        }
+        else if (i == 14) {
+            return "4";
+        }
+        else if (i == 19) {
+            return (Math.floor(Math.random() * 4) + 8).toString(16);
+        }
+        else {
+            return Math.floor(Math.random() * 15).toString(16);
+        }
+    }).join("");
+}
+function getAttribute(attributeName, ...elements) {
+    for (const value of elements.map(element => element === null || element === void 0 ? void 0 : element.getAttribute(attributeName))) {
+        if (typeof value == "string")
+            return value;
+    }
+    return null;
+}
+function markAsBusy(...elements) {
+    for (const element of elements) {
+        if (element.localName == "turbo-frame") {
+            element.setAttribute("busy", "");
+        }
+        element.setAttribute("aria-busy", "true");
+    }
+}
+function clearBusyState(...elements) {
+    for (const element of elements) {
+        if (element.localName == "turbo-frame") {
+            element.removeAttribute("busy");
+        }
+        element.removeAttribute("aria-busy");
+    }
+}
+
+var FetchMethod;
+(function (FetchMethod) {
+    FetchMethod[FetchMethod["get"] = 0] = "get";
+    FetchMethod[FetchMethod["post"] = 1] = "post";
+    FetchMethod[FetchMethod["put"] = 2] = "put";
+    FetchMethod[FetchMethod["patch"] = 3] = "patch";
+    FetchMethod[FetchMethod["delete"] = 4] = "delete";
+})(FetchMethod || (FetchMethod = {}));
+function fetchMethodFromString(method) {
+    switch (method.toLowerCase()) {
+        case "get": return FetchMethod.get;
+        case "post": return FetchMethod.post;
+        case "put": return FetchMethod.put;
+        case "patch": return FetchMethod.patch;
+        case "delete": return FetchMethod.delete;
+    }
+}
+class FetchRequest {
+    constructor(delegate, method, location, body = new URLSearchParams, target = null) {
+        this.abortController = new AbortController;
+        this.resolveRequestPromise = (value) => { };
+        this.delegate = delegate;
+        this.method = method;
+        this.headers = this.defaultHeaders;
+        this.body = body;
+        this.url = location;
+        this.target = target;
+    }
+    get location() {
+        return this.url;
+    }
+    get params() {
+        return this.url.searchParams;
+    }
+    get entries() {
+        return this.body ? Array.from(this.body.entries()) : [];
+    }
+    cancel() {
+        this.abortController.abort();
+    }
+    async perform() {
+        var _a, _b;
+        const { fetchOptions } = this;
+        (_b = (_a = this.delegate).prepareHeadersForRequest) === null || _b === void 0 ? void 0 : _b.call(_a, this.headers, this);
+        await this.allowRequestToBeIntercepted(fetchOptions);
+        try {
+            this.delegate.requestStarted(this);
+            const response = await fetch(this.url.href, fetchOptions);
+            return await this.receive(response);
+        }
+        catch (error) {
+            if (error.name !== 'AbortError') {
+                this.delegate.requestErrored(this, error);
+                throw error;
+            }
+        }
+        finally {
+            this.delegate.requestFinished(this);
+        }
+    }
+    async receive(response) {
+        const fetchResponse = new FetchResponse(response);
+        const event = dispatch("turbo:before-fetch-response", { cancelable: true, detail: { fetchResponse }, target: this.target });
+        if (event.defaultPrevented) {
+            this.delegate.requestPreventedHandlingResponse(this, fetchResponse);
+        }
+        else if (fetchResponse.succeeded) {
+            this.delegate.requestSucceededWithResponse(this, fetchResponse);
+        }
+        else {
+            this.delegate.requestFailedWithResponse(this, fetchResponse);
+        }
+        return fetchResponse;
+    }
+    get fetchOptions() {
+        var _a;
+        return {
+            method: FetchMethod[this.method].toUpperCase(),
+            credentials: "same-origin",
+            headers: this.headers,
+            redirect: "follow",
+            body: this.isIdempotent ? null : this.body,
+            signal: this.abortSignal,
+            referrer: (_a = this.delegate.referrer) === null || _a === void 0 ? void 0 : _a.href
+        };
+    }
+    get defaultHeaders() {
+        return {
+            "Accept": "text/html, application/xhtml+xml"
+        };
+    }
+    get isIdempotent() {
+        return this.method == FetchMethod.get;
+    }
+    get abortSignal() {
+        return this.abortController.signal;
+    }
+    async allowRequestToBeIntercepted(fetchOptions) {
+        const requestInterception = new Promise(resolve => this.resolveRequestPromise = resolve);
+        const event = dispatch("turbo:before-fetch-request", {
+            cancelable: true,
+            detail: {
+                fetchOptions,
+                url: this.url,
+                resume: this.resolveRequestPromise
+            },
+            target: this.target
+        });
+        if (event.defaultPrevented)
+            await requestInterception;
+    }
+}
+
+class AppearanceObserver {
+    constructor(delegate, element) {
+        this.started = false;
+        this.intersect = entries => {
+            const lastEntry = entries.slice(-1)[0];
+            if (lastEntry === null || lastEntry === void 0 ? void 0 : lastEntry.isIntersecting) {
+                this.delegate.elementAppearedInViewport(this.element);
+            }
+        };
+        this.delegate = delegate;
+        this.element = element;
+        this.intersectionObserver = new IntersectionObserver(this.intersect);
+    }
+    start() {
+        if (!this.started) {
+            this.started = true;
+            this.intersectionObserver.observe(this.element);
+        }
+    }
+    stop() {
+        if (this.started) {
+            this.started = false;
+            this.intersectionObserver.unobserve(this.element);
+        }
+    }
+}
+
+class StreamMessage {
+    constructor(html) {
+        this.templateElement = document.createElement("template");
+        this.templateElement.innerHTML = html;
+    }
+    static wrap(message) {
+        if (typeof message == "string") {
+            return new this(message);
+        }
+        else {
+            return message;
+        }
+    }
+    get fragment() {
+        const fragment = document.createDocumentFragment();
+        for (const element of this.foreignElements) {
+            fragment.appendChild(document.importNode(element, true));
+        }
+        return fragment;
+    }
+    get foreignElements() {
+        return this.templateChildren.reduce((streamElements, child) => {
+            if (child.tagName.toLowerCase() == "turbo-stream") {
+                return [...streamElements, child];
+            }
+            else {
+                return streamElements;
+            }
+        }, []);
+    }
+    get templateChildren() {
+        return Array.from(this.templateElement.content.children);
+    }
+}
+StreamMessage.contentType = "text/vnd.turbo-stream.html";
+
+var FormSubmissionState;
+(function (FormSubmissionState) {
+    FormSubmissionState[FormSubmissionState["initialized"] = 0] = "initialized";
+    FormSubmissionState[FormSubmissionState["requesting"] = 1] = "requesting";
+    FormSubmissionState[FormSubmissionState["waiting"] = 2] = "waiting";
+    FormSubmissionState[FormSubmissionState["receiving"] = 3] = "receiving";
+    FormSubmissionState[FormSubmissionState["stopping"] = 4] = "stopping";
+    FormSubmissionState[FormSubmissionState["stopped"] = 5] = "stopped";
+})(FormSubmissionState || (FormSubmissionState = {}));
+var FormEnctype;
+(function (FormEnctype) {
+    FormEnctype["urlEncoded"] = "application/x-www-form-urlencoded";
+    FormEnctype["multipart"] = "multipart/form-data";
+    FormEnctype["plain"] = "text/plain";
+})(FormEnctype || (FormEnctype = {}));
+function formEnctypeFromString(encoding) {
+    switch (encoding.toLowerCase()) {
+        case FormEnctype.multipart: return FormEnctype.multipart;
+        case FormEnctype.plain: return FormEnctype.plain;
+        default: return FormEnctype.urlEncoded;
+    }
+}
+class FormSubmission {
+    constructor(delegate, formElement, submitter, mustRedirect = false) {
+        this.state = FormSubmissionState.initialized;
+        this.delegate = delegate;
+        this.formElement = formElement;
+        this.submitter = submitter;
+        this.formData = buildFormData(formElement, submitter);
+        this.location = expandURL(this.action);
+        if (this.method == FetchMethod.get) {
+            mergeFormDataEntries(this.location, [...this.body.entries()]);
+        }
+        this.fetchRequest = new FetchRequest(this, this.method, this.location, this.body, this.formElement);
+        this.mustRedirect = mustRedirect;
+    }
+    static confirmMethod(message, element) {
+        return confirm(message);
+    }
+    get method() {
+        var _a;
+        const method = ((_a = this.submitter) === null || _a === void 0 ? void 0 : _a.getAttribute("formmethod")) || this.formElement.getAttribute("method") || "";
+        return fetchMethodFromString(method.toLowerCase()) || FetchMethod.get;
+    }
+    get action() {
+        var _a;
+        const formElementAction = typeof this.formElement.action === 'string' ? this.formElement.action : null;
+        return ((_a = this.submitter) === null || _a === void 0 ? void 0 : _a.getAttribute("formaction")) || this.formElement.getAttribute("action") || formElementAction || "";
+    }
+    get body() {
+        if (this.enctype == FormEnctype.urlEncoded || this.method == FetchMethod.get) {
+            return new URLSearchParams(this.stringFormData);
+        }
+        else {
+            return this.formData;
+        }
+    }
+    get enctype() {
+        var _a;
+        return formEnctypeFromString(((_a = this.submitter) === null || _a === void 0 ? void 0 : _a.getAttribute("formenctype")) || this.formElement.enctype);
+    }
+    get isIdempotent() {
+        return this.fetchRequest.isIdempotent;
+    }
+    get stringFormData() {
+        return [...this.formData].reduce((entries, [name, value]) => {
+            return entries.concat(typeof value == "string" ? [[name, value]] : []);
+        }, []);
+    }
+    get confirmationMessage() {
+        return this.formElement.getAttribute("data-turbo-confirm");
+    }
+    get needsConfirmation() {
+        return this.confirmationMessage !== null;
+    }
+    async start() {
+        const { initialized, requesting } = FormSubmissionState;
+        if (this.needsConfirmation) {
+            const answer = FormSubmission.confirmMethod(this.confirmationMessage, this.formElement);
+            if (!answer) {
+                return;
+            }
+        }
+        if (this.state == initialized) {
+            this.state = requesting;
+            return this.fetchRequest.perform();
+        }
+    }
+    stop() {
+        const { stopping, stopped } = FormSubmissionState;
+        if (this.state != stopping && this.state != stopped) {
+            this.state = stopping;
+            this.fetchRequest.cancel();
+            return true;
+        }
+    }
+    prepareHeadersForRequest(headers, request) {
+        if (!request.isIdempotent) {
+            const token = getCookieValue(getMetaContent("csrf-param")) || getMetaContent("csrf-token");
+            if (token) {
+                headers["X-CSRF-Token"] = token;
+            }
+            headers["Accept"] = [StreamMessage.contentType, headers["Accept"]].join(", ");
+        }
+    }
+    requestStarted(request) {
+        var _a;
+        this.state = FormSubmissionState.waiting;
+        (_a = this.submitter) === null || _a === void 0 ? void 0 : _a.setAttribute("disabled", "");
+        dispatch("turbo:submit-start", { target: this.formElement, detail: { formSubmission: this } });
+        this.delegate.formSubmissionStarted(this);
+    }
+    requestPreventedHandlingResponse(request, response) {
+        this.result = { success: response.succeeded, fetchResponse: response };
+    }
+    requestSucceededWithResponse(request, response) {
+        if (response.clientError || response.serverError) {
+            this.delegate.formSubmissionFailedWithResponse(this, response);
+        }
+        else if (this.requestMustRedirect(request) && responseSucceededWithoutRedirect(response)) {
+            const error = new Error("Form responses must redirect to another location");
+            this.delegate.formSubmissionErrored(this, error);
+        }
+        else {
+            this.state = FormSubmissionState.receiving;
+            this.result = { success: true, fetchResponse: response };
+            this.delegate.formSubmissionSucceededWithResponse(this, response);
+        }
+    }
+    requestFailedWithResponse(request, response) {
+        this.result = { success: false, fetchResponse: response };
+        this.delegate.formSubmissionFailedWithResponse(this, response);
+    }
+    requestErrored(request, error) {
+        this.result = { success: false, error };
+        this.delegate.formSubmissionErrored(this, error);
+    }
+    requestFinished(request) {
+        var _a;
+        this.state = FormSubmissionState.stopped;
+        (_a = this.submitter) === null || _a === void 0 ? void 0 : _a.removeAttribute("disabled");
+        dispatch("turbo:submit-end", { target: this.formElement, detail: Object.assign({ formSubmission: this }, this.result) });
+        this.delegate.formSubmissionFinished(this);
+    }
+    requestMustRedirect(request) {
+        return !request.isIdempotent && this.mustRedirect;
+    }
+}
+function buildFormData(formElement, submitter) {
+    const formData = new FormData(formElement);
+    const name = submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("name");
+    const value = submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("value");
+    if (name && value != null && formData.get(name) != value) {
+        formData.append(name, value);
+    }
+    return formData;
+}
+function getCookieValue(cookieName) {
+    if (cookieName != null) {
+        const cookies = document.cookie ? document.cookie.split("; ") : [];
+        const cookie = cookies.find((cookie) => cookie.startsWith(cookieName));
+        if (cookie) {
+            const value = cookie.split("=").slice(1).join("=");
+            return value ? decodeURIComponent(value) : undefined;
+        }
+    }
+}
+function getMetaContent(name) {
+    const element = document.querySelector(`meta[name="${name}"]`);
+    return element && element.content;
+}
+function responseSucceededWithoutRedirect(response) {
+    return response.statusCode == 200 && !response.redirected;
+}
+function mergeFormDataEntries(url, entries) {
+    const searchParams = new URLSearchParams;
+    for (const [name, value] of entries) {
+        if (value instanceof File)
+            continue;
+        searchParams.append(name, value);
+    }
+    url.search = searchParams.toString();
+    return url;
+}
+
+class Snapshot {
+    constructor(element) {
+        this.element = element;
+    }
+    get children() {
+        return [...this.element.children];
+    }
+    hasAnchor(anchor) {
+        return this.getElementForAnchor(anchor) != null;
+    }
+    getElementForAnchor(anchor) {
+        return anchor ? this.element.querySelector(`[id='${anchor}'], a[name='${anchor}']`) : null;
+    }
+    get isConnected() {
+        return this.element.isConnected;
+    }
+    get firstAutofocusableElement() {
+        return this.element.querySelector("[autofocus]");
+    }
+    get permanentElements() {
+        return [...this.element.querySelectorAll("[id][data-turbo-permanent]")];
+    }
+    getPermanentElementById(id) {
+        return this.element.querySelector(`#${id}[data-turbo-permanent]`);
+    }
+    getPermanentElementMapForSnapshot(snapshot) {
+        const permanentElementMap = {};
+        for (const currentPermanentElement of this.permanentElements) {
+            const { id } = currentPermanentElement;
+            const newPermanentElement = snapshot.getPermanentElementById(id);
+            if (newPermanentElement) {
+                permanentElementMap[id] = [currentPermanentElement, newPermanentElement];
+            }
+        }
+        return permanentElementMap;
+    }
+}
+
+class FormInterceptor {
+    constructor(delegate, element) {
+        this.submitBubbled = ((event) => {
+            const form = event.target;
+            if (!event.defaultPrevented && form instanceof HTMLFormElement && form.closest("turbo-frame, html") == this.element) {
+                const submitter = event.submitter || undefined;
+                const method = (submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("formmethod")) || form.method;
+                if (method != "dialog" && this.delegate.shouldInterceptFormSubmission(form, submitter)) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    this.delegate.formSubmissionIntercepted(form, submitter);
+                }
+            }
+        });
+        this.delegate = delegate;
+        this.element = element;
+    }
+    start() {
+        this.element.addEventListener("submit", this.submitBubbled);
+    }
+    stop() {
+        this.element.removeEventListener("submit", this.submitBubbled);
+    }
+}
+
+class View {
+    constructor(delegate, element) {
+        this.resolveRenderPromise = (value) => { };
+        this.resolveInterceptionPromise = (value) => { };
+        this.delegate = delegate;
+        this.element = element;
+    }
+    scrollToAnchor(anchor) {
+        const element = this.snapshot.getElementForAnchor(anchor);
+        if (element) {
+            this.scrollToElement(element);
+            this.focusElement(element);
+        }
+        else {
+            this.scrollToPosition({ x: 0, y: 0 });
+        }
+    }
+    scrollToAnchorFromLocation(location) {
+        this.scrollToAnchor(getAnchor(location));
+    }
+    scrollToElement(element) {
+        element.scrollIntoView();
+    }
+    focusElement(element) {
+        if (element instanceof HTMLElement) {
+            if (element.hasAttribute("tabindex")) {
+                element.focus();
+            }
+            else {
+                element.setAttribute("tabindex", "-1");
+                element.focus();
+                element.removeAttribute("tabindex");
+            }
+        }
+    }
+    scrollToPosition({ x, y }) {
+        this.scrollRoot.scrollTo(x, y);
+    }
+    scrollToTop() {
+        this.scrollToPosition({ x: 0, y: 0 });
+    }
+    get scrollRoot() {
+        return window;
+    }
+    async render(renderer) {
+        const { isPreview, shouldRender, newSnapshot: snapshot } = renderer;
+        if (shouldRender) {
+            try {
+                this.renderPromise = new Promise(resolve => this.resolveRenderPromise = resolve);
+                this.renderer = renderer;
+                this.prepareToRenderSnapshot(renderer);
+                const renderInterception = new Promise(resolve => this.resolveInterceptionPromise = resolve);
+                const immediateRender = this.delegate.allowsImmediateRender(snapshot, this.resolveInterceptionPromise);
+                if (!immediateRender)
+                    await renderInterception;
+                await this.renderSnapshot(renderer);
+                this.delegate.viewRenderedSnapshot(snapshot, isPreview);
+                this.finishRenderingSnapshot(renderer);
+            }
+            finally {
+                delete this.renderer;
+                this.resolveRenderPromise(undefined);
+                delete this.renderPromise;
+            }
+        }
+        else {
+            this.invalidate();
+        }
+    }
+    invalidate() {
+        this.delegate.viewInvalidated();
+    }
+    prepareToRenderSnapshot(renderer) {
+        this.markAsPreview(renderer.isPreview);
+        renderer.prepareToRender();
+    }
+    markAsPreview(isPreview) {
+        if (isPreview) {
+            this.element.setAttribute("data-turbo-preview", "");
+        }
+        else {
+            this.element.removeAttribute("data-turbo-preview");
+        }
+    }
+    async renderSnapshot(renderer) {
+        await renderer.render();
+    }
+    finishRenderingSnapshot(renderer) {
+        renderer.finishRendering();
+    }
+}
+
+class FrameView extends View {
+    invalidate() {
+        this.element.innerHTML = "";
+    }
+    get snapshot() {
+        return new Snapshot(this.element);
+    }
+}
+
+class LinkInterceptor {
+    constructor(delegate, element) {
+        this.clickBubbled = (event) => {
+            if (this.respondsToEventTarget(event.target)) {
+                this.clickEvent = event;
+            }
+            else {
+                delete this.clickEvent;
+            }
+        };
+        this.linkClicked = ((event) => {
+            if (this.clickEvent && this.respondsToEventTarget(event.target) && event.target instanceof Element) {
+                if (this.delegate.shouldInterceptLinkClick(event.target, event.detail.url)) {
+                    this.clickEvent.preventDefault();
+                    event.preventDefault();
+                    this.delegate.linkClickIntercepted(event.target, event.detail.url);
+                }
+            }
+            delete this.clickEvent;
+        });
+        this.willVisit = () => {
+            delete this.clickEvent;
+        };
+        this.delegate = delegate;
+        this.element = element;
+    }
+    start() {
+        this.element.addEventListener("click", this.clickBubbled);
+        document.addEventListener("turbo:click", this.linkClicked);
+        document.addEventListener("turbo:before-visit", this.willVisit);
+    }
+    stop() {
+        this.element.removeEventListener("click", this.clickBubbled);
+        document.removeEventListener("turbo:click", this.linkClicked);
+        document.removeEventListener("turbo:before-visit", this.willVisit);
+    }
+    respondsToEventTarget(target) {
+        const element = target instanceof Element
+            ? target
+            : target instanceof Node
+                ? target.parentElement
+                : null;
+        return element && element.closest("turbo-frame, html") == this.element;
+    }
+}
+
+class Bardo {
+    constructor(permanentElementMap) {
+        this.permanentElementMap = permanentElementMap;
+    }
+    static preservingPermanentElements(permanentElementMap, callback) {
+        const bardo = new this(permanentElementMap);
+        bardo.enter();
+        callback();
+        bardo.leave();
+    }
+    enter() {
+        for (const id in this.permanentElementMap) {
+            const [, newPermanentElement] = this.permanentElementMap[id];
+            this.replaceNewPermanentElementWithPlaceholder(newPermanentElement);
+        }
+    }
+    leave() {
+        for (const id in this.permanentElementMap) {
+            const [currentPermanentElement] = this.permanentElementMap[id];
+            this.replaceCurrentPermanentElementWithClone(currentPermanentElement);
+            this.replacePlaceholderWithPermanentElement(currentPermanentElement);
+        }
+    }
+    replaceNewPermanentElementWithPlaceholder(permanentElement) {
+        const placeholder = createPlaceholderForPermanentElement(permanentElement);
+        permanentElement.replaceWith(placeholder);
+    }
+    replaceCurrentPermanentElementWithClone(permanentElement) {
+        const clone = permanentElement.cloneNode(true);
+        permanentElement.replaceWith(clone);
+    }
+    replacePlaceholderWithPermanentElement(permanentElement) {
+        const placeholder = this.getPlaceholderById(permanentElement.id);
+        placeholder === null || placeholder === void 0 ? void 0 : placeholder.replaceWith(permanentElement);
+    }
+    getPlaceholderById(id) {
+        return this.placeholders.find(element => element.content == id);
+    }
+    get placeholders() {
+        return [...document.querySelectorAll("meta[name=turbo-permanent-placeholder][content]")];
+    }
+}
+function createPlaceholderForPermanentElement(permanentElement) {
+    const element = document.createElement("meta");
+    element.setAttribute("name", "turbo-permanent-placeholder");
+    element.setAttribute("content", permanentElement.id);
+    return element;
+}
+
+class Renderer {
+    constructor(currentSnapshot, newSnapshot, isPreview, willRender = true) {
+        this.currentSnapshot = currentSnapshot;
+        this.newSnapshot = newSnapshot;
+        this.isPreview = isPreview;
+        this.willRender = willRender;
+        this.promise = new Promise((resolve, reject) => this.resolvingFunctions = { resolve, reject });
+    }
+    get shouldRender() {
+        return true;
+    }
+    prepareToRender() {
+        return;
+    }
+    finishRendering() {
+        if (this.resolvingFunctions) {
+            this.resolvingFunctions.resolve();
+            delete this.resolvingFunctions;
+        }
+    }
+    createScriptElement(element) {
+        if (element.getAttribute("data-turbo-eval") == "false") {
+            return element;
+        }
+        else {
+            const createdScriptElement = document.createElement("script");
+            if (this.cspNonce) {
+                createdScriptElement.nonce = this.cspNonce;
+            }
+            createdScriptElement.textContent = element.textContent;
+            createdScriptElement.async = false;
+            copyElementAttributes(createdScriptElement, element);
+            return createdScriptElement;
+        }
+    }
+    preservingPermanentElements(callback) {
+        Bardo.preservingPermanentElements(this.permanentElementMap, callback);
+    }
+    focusFirstAutofocusableElement() {
+        const element = this.connectedSnapshot.firstAutofocusableElement;
+        if (elementIsFocusable(element)) {
+            element.focus();
+        }
+    }
+    get connectedSnapshot() {
+        return this.newSnapshot.isConnected ? this.newSnapshot : this.currentSnapshot;
+    }
+    get currentElement() {
+        return this.currentSnapshot.element;
+    }
+    get newElement() {
+        return this.newSnapshot.element;
+    }
+    get permanentElementMap() {
+        return this.currentSnapshot.getPermanentElementMapForSnapshot(this.newSnapshot);
+    }
+    get cspNonce() {
+        var _a;
+        return (_a = document.head.querySelector('meta[name="csp-nonce"]')) === null || _a === void 0 ? void 0 : _a.getAttribute("content");
+    }
+}
+function copyElementAttributes(destinationElement, sourceElement) {
+    for (const { name, value } of [...sourceElement.attributes]) {
+        destinationElement.setAttribute(name, value);
+    }
+}
+function elementIsFocusable(element) {
+    return element && typeof element.focus == "function";
+}
+
+class FrameRenderer extends Renderer {
+    get shouldRender() {
+        return true;
+    }
+    async render() {
+        await nextAnimationFrame();
+        this.preservingPermanentElements(() => {
+            this.loadFrameElement();
+        });
+        this.scrollFrameIntoView();
+        await nextAnimationFrame();
+        this.focusFirstAutofocusableElement();
+        await nextAnimationFrame();
+        this.activateScriptElements();
+    }
+    loadFrameElement() {
+        var _a;
+        const destinationRange = document.createRange();
+        destinationRange.selectNodeContents(this.currentElement);
+        destinationRange.deleteContents();
+        const frameElement = this.newElement;
+        const sourceRange = (_a = frameElement.ownerDocument) === null || _a === void 0 ? void 0 : _a.createRange();
+        if (sourceRange) {
+            sourceRange.selectNodeContents(frameElement);
+            this.currentElement.appendChild(sourceRange.extractContents());
+        }
+    }
+    scrollFrameIntoView() {
+        if (this.currentElement.autoscroll || this.newElement.autoscroll) {
+            const element = this.currentElement.firstElementChild;
+            const block = readScrollLogicalPosition(this.currentElement.getAttribute("data-autoscroll-block"), "end");
+            if (element) {
+                element.scrollIntoView({ block });
+                return true;
+            }
+        }
+        return false;
+    }
+    activateScriptElements() {
+        for (const inertScriptElement of this.newScriptElements) {
+            const activatedScriptElement = this.createScriptElement(inertScriptElement);
+            inertScriptElement.replaceWith(activatedScriptElement);
+        }
+    }
+    get newScriptElements() {
+        return this.currentElement.querySelectorAll("script");
+    }
+}
+function readScrollLogicalPosition(value, defaultValue) {
+    if (value == "end" || value == "start" || value == "center" || value == "nearest") {
+        return value;
+    }
+    else {
+        return defaultValue;
+    }
+}
+
+class ProgressBar {
+    constructor() {
+        this.hiding = false;
+        this.value = 0;
+        this.visible = false;
+        this.trickle = () => {
+            this.setValue(this.value + Math.random() / 100);
+        };
+        this.stylesheetElement = this.createStylesheetElement();
+        this.progressElement = this.createProgressElement();
+        this.installStylesheetElement();
+        this.setValue(0);
+    }
+    static get defaultCSS() {
+        return unindent `
       .turbo-progress-bar {
         position: fixed;
         display: block;
@@ -9,11 +1177,2176 @@
         background: #0076ff;
         z-index: 9999;
         transition:
-          width ${B.animationDuration}ms ease-out,
-          opacity ${B.animationDuration/2}ms ${B.animationDuration/2}ms ease-in;
+          width ${ProgressBar.animationDuration}ms ease-out,
+          opacity ${ProgressBar.animationDuration / 2}ms ${ProgressBar.animationDuration / 2}ms ease-in;
         transform: translate3d(0, 0, 0);
       }
-    `}show(){this.visible||(this.visible=!0,this.installProgressElement(),this.startTrickling())}hide(){this.visible&&!this.hiding&&(this.hiding=!0,this.fadeProgressElement((()=>{this.uninstallProgressElement(),this.stopTrickling(),this.visible=!1,this.hiding=!1})))}setValue(e){this.value=e,this.refresh()}installStylesheetElement(){document.head.insertBefore(this.stylesheetElement,document.head.firstChild)}installProgressElement(){this.progressElement.style.width="0",this.progressElement.style.opacity="1",document.documentElement.insertBefore(this.progressElement,document.body),this.refresh()}fadeProgressElement(e){this.progressElement.style.opacity="0",setTimeout(e,1.5*B.animationDuration)}uninstallProgressElement(){this.progressElement.parentNode&&document.documentElement.removeChild(this.progressElement)}startTrickling(){this.trickleInterval||(this.trickleInterval=window.setInterval(this.trickle,B.animationDuration))}stopTrickling(){window.clearInterval(this.trickleInterval),delete this.trickleInterval}refresh(){requestAnimationFrame((()=>{this.progressElement.style.width=10+90*this.value+"%"}))}createStylesheetElement(){const e=document.createElement("style");return e.type="text/css",e.textContent=B.defaultCSS,e}createProgressElement(){const e=document.createElement("div");return e.className="turbo-progress-bar",e}}B.animationDuration=300;class J extends I{constructor(){super(...arguments),this.detailsByOuterHTML=this.children.filter((e=>!function(e){return"noscript"==e.tagName.toLowerCase()}(e))).map((e=>function(e){e.hasAttribute("nonce")&&e.setAttribute("nonce","");return e}(e))).reduce(((e,t)=>{const{outerHTML:a}=t,n=a in e?e[a]:{type:z(t),tracked:H(t),elements:[]};return Object.assign(Object.assign({},e),{[a]:Object.assign(Object.assign({},n),{elements:[...n.elements,t]})})}),{})}get trackedElementSignature(){return Object.keys(this.detailsByOuterHTML).filter((e=>this.detailsByOuterHTML[e].tracked)).join("")}getScriptElementsNotInSnapshot(e){return this.getElementsMatchingTypeNotInSnapshot("script",e)}getStylesheetElementsNotInSnapshot(e){return this.getElementsMatchingTypeNotInSnapshot("stylesheet",e)}getElementsMatchingTypeNotInSnapshot(e,t){return Object.keys(this.detailsByOuterHTML).filter((e=>!(e in t.detailsByOuterHTML))).map((e=>this.detailsByOuterHTML[e])).filter((({type:t})=>t==e)).map((({elements:[e]})=>e))}get provisionalElements(){return Object.keys(this.detailsByOuterHTML).reduce(((e,t)=>{const{type:a,tracked:n,elements:i}=this.detailsByOuterHTML[t];return null!=a||n?i.length>1?[...e,...i.slice(1)]:e:[...e,...i]}),[])}getMetaValue(e){const t=this.findMetaElementByName(e);return t?t.getAttribute("content"):null}findMetaElementByName(e){return Object.keys(this.detailsByOuterHTML).reduce(((t,a)=>{const{elements:[n]}=this.detailsByOuterHTML[a];return function(e,t){return"meta"==e.tagName.toLowerCase()&&e.getAttribute("name")==t}(n,e)?n:t}),void 0)}}function z(e){return function(e){return"script"==e.tagName.toLowerCase()}(e)?"script":function(e){const t=e.tagName.toLowerCase();return"style"==t||"link"==t&&"stylesheet"==e.getAttribute("rel")}(e)?"stylesheet":void 0}function H(e){return"reload"==e.getAttribute("data-turbo-track")}class W extends I{constructor(e,t){super(e),this.headSnapshot=t}static fromHTMLString(e=""){return this.fromDocument(S(e))}static fromElement(e){return this.fromDocument(e.ownerDocument)}static fromDocument({head:e,body:t}){return new this(t,new J(e))}clone(){return new W(this.element.cloneNode(!0),this.headSnapshot)}get headElement(){return this.headSnapshot.element}get rootLocation(){var e;return p(null!==(e=this.getSetting("root"))&&void 0!==e?e:"/")}get cacheControlValue(){return this.getSetting("cache-control")}get isPreviewable(){return"no-preview"!=this.cacheControlValue}get isCacheable(){return"no-cache"!=this.cacheControlValue}get isVisitable(){return"reload"!=this.getSetting("visit-control")}getSetting(e){return this.headSnapshot.getMetaValue(`turbo-${e}`)}}!function(e){e.visitStart="visitStart",e.requestStart="requestStart",e.requestEnd="requestEnd",e.visitEnd="visitEnd"}(c||(c={})),function(e){e.initialized="initialized",e.started="started",e.canceled="canceled",e.failed="failed",e.completed="completed"}(u||(u={}));const V={action:"advance",historyChanged:!1,visitCachedSnapshot:()=>{},willRender:!0};var U,G;!function(e){e[e.networkFailure=0]="networkFailure",e[e.timeoutFailure=-1]="timeoutFailure",e[e.contentTypeMismatch=-2]="contentTypeMismatch"}(U||(U={}));class K{constructor(e,t,a,n={}){this.identifier=M(),this.timingMetrics={},this.followedRedirect=!1,this.historyChanged=!1,this.scrolled=!1,this.snapshotCached=!1,this.state=u.initialized,this.delegate=e,this.location=t,this.restorationIdentifier=a||M();const{action:i,historyChanged:r,referrer:s,snapshotHTML:o,response:d,visitCachedSnapshot:l,willRender:c}=Object.assign(Object.assign({},V),n);this.action=i,this.historyChanged=r,this.referrer=s,this.snapshotHTML=o,this.response=d,this.isSamePage=this.delegate.locationWithActionIsSamePage(this.location,this.action),this.visitCachedSnapshot=l,this.willRender=c,this.scrolled=!c}get adapter(){return this.delegate.adapter}get view(){return this.delegate.view}get history(){return this.delegate.history}get restorationData(){return this.history.getRestorationDataForIdentifier(this.restorationIdentifier)}get silent(){return this.isSamePage}start(){this.state==u.initialized&&(this.recordTimingMetric(c.visitStart),this.state=u.started,this.adapter.visitStarted(this),this.delegate.visitStarted(this))}cancel(){this.state==u.started&&(this.request&&this.request.cancel(),this.cancelRender(),this.state=u.canceled)}complete(){this.state==u.started&&(this.recordTimingMetric(c.visitEnd),this.state=u.completed,this.adapter.visitCompleted(this),this.delegate.visitCompleted(this),this.followRedirect())}fail(){this.state==u.started&&(this.state=u.failed,this.adapter.visitFailed(this))}changeHistory(){var e;if(!this.historyChanged){const t=this.location.href===(null===(e=this.referrer)||void 0===e?void 0:e.href)?"replace":this.action,a=this.getHistoryMethodForAction(t);this.history.update(a,this.location,this.restorationIdentifier),this.historyChanged=!0}}issueRequest(){this.hasPreloadedResponse()?this.simulateRequest():this.shouldIssueRequest()&&!this.request&&(this.request=new E(this,o.get,this.location),this.request.perform())}simulateRequest(){this.response&&(this.startRequest(),this.recordResponse(),this.finishRequest())}startRequest(){this.recordTimingMetric(c.requestStart),this.adapter.visitRequestStarted(this)}recordResponse(e=this.response){if(this.response=e,e){const{statusCode:t}=e;Q(t)?this.adapter.visitRequestCompleted(this):this.adapter.visitRequestFailedWithStatusCode(this,t)}}finishRequest(){this.recordTimingMetric(c.requestEnd),this.adapter.visitRequestFinished(this)}loadResponse(){if(this.response){const{statusCode:e,responseHTML:t}=this.response;this.render((async()=>{this.cacheSnapshot(),this.view.renderPromise&&await this.view.renderPromise,Q(e)&&null!=t?(await this.view.renderPage(W.fromHTMLString(t),!1,this.willRender),this.adapter.visitRendered(this),this.complete()):(await this.view.renderError(W.fromHTMLString(t)),this.adapter.visitRendered(this),this.fail())}))}}getCachedSnapshot(){const e=this.view.getCachedSnapshotForLocation(this.location)||this.getPreloadedSnapshot();if(e&&(!h(this.location)||e.hasAnchor(h(this.location)))&&("restore"==this.action||e.isPreviewable))return e}getPreloadedSnapshot(){if(this.snapshotHTML)return W.fromHTMLString(this.snapshotHTML)}hasCachedSnapshot(){return null!=this.getCachedSnapshot()}loadCachedSnapshot(){const e=this.getCachedSnapshot();if(e){const t=this.shouldIssueRequest();this.render((async()=>{this.cacheSnapshot(),this.isSamePage?this.adapter.visitRendered(this):(this.view.renderPromise&&await this.view.renderPromise,await this.view.renderPage(e,t,this.willRender),this.adapter.visitRendered(this),t||this.complete())}))}}followRedirect(){var e;this.redirectedToLocation&&!this.followedRedirect&&(null===(e=this.response)||void 0===e?void 0:e.redirected)&&(this.adapter.visitProposedToLocation(this.redirectedToLocation,{action:"replace",response:this.response}),this.followedRedirect=!0)}goToSamePageAnchor(){this.isSamePage&&this.render((async()=>{this.cacheSnapshot(),this.adapter.visitRendered(this)}))}requestStarted(){this.startRequest()}requestPreventedHandlingResponse(e,t){}async requestSucceededWithResponse(e,t){const a=await t.responseHTML,{redirected:n,statusCode:i}=t;null==a?this.recordResponse({statusCode:U.contentTypeMismatch,redirected:n}):(this.redirectedToLocation=t.redirected?t.location:void 0,this.recordResponse({statusCode:i,responseHTML:a,redirected:n}))}async requestFailedWithResponse(e,t){const a=await t.responseHTML,{redirected:n,statusCode:i}=t;null==a?this.recordResponse({statusCode:U.contentTypeMismatch,redirected:n}):this.recordResponse({statusCode:i,responseHTML:a,redirected:n})}requestErrored(e,t){this.recordResponse({statusCode:U.networkFailure,redirected:!1})}requestFinished(){this.finishRequest()}performScroll(){this.scrolled||("restore"==this.action?this.scrollToRestoredPosition()||this.scrollToAnchor()||this.view.scrollToTop():this.scrollToAnchor()||this.view.scrollToTop(),this.isSamePage&&this.delegate.visitScrolledToSamePageLocation(this.view.lastRenderedLocation,this.location),this.scrolled=!0)}scrollToRestoredPosition(){const{scrollPosition:e}=this.restorationData;if(e)return this.view.scrollToPosition(e),!0}scrollToAnchor(){const e=h(this.location);if(null!=e)return this.view.scrollToAnchor(e),!0}recordTimingMetric(e){this.timingMetrics[e]=(new Date).getTime()}getTimingMetrics(){return Object.assign({},this.timingMetrics)}getHistoryMethodForAction(e){switch(e){case"replace":return history.replaceState;case"advance":case"restore":return history.pushState}}hasPreloadedResponse(){return"object"==typeof this.response}shouldIssueRequest(){return!this.isSamePage&&("restore"==this.action?!this.hasCachedSnapshot():this.willRender)}cacheSnapshot(){this.snapshotCached||(this.view.cacheSnapshot().then((e=>e&&this.visitCachedSnapshot(e))),this.snapshotCached=!0)}async render(e){this.cancelRender(),await new Promise((e=>{this.frame=requestAnimationFrame((()=>e()))})),await e(),delete this.frame,this.performScroll()}cancelRender(){this.frame&&(cancelAnimationFrame(this.frame),delete this.frame)}}function Q(e){return e>=200&&e<300}class Z{constructor(e){this.progressBar=new B,this.showProgressBar=()=>{this.progressBar.show()},this.session=e}visitProposedToLocation(e,t){this.navigator.startVisit(e,M(),t)}visitStarted(e){e.loadCachedSnapshot(),e.issueRequest(),e.changeHistory(),e.goToSamePageAnchor()}visitRequestStarted(e){this.progressBar.setValue(0),e.hasCachedSnapshot()||"restore"!=e.action?this.showVisitProgressBarAfterDelay():this.showProgressBar()}visitRequestCompleted(e){e.loadResponse()}visitRequestFailedWithStatusCode(e,t){switch(t){case U.networkFailure:case U.timeoutFailure:case U.contentTypeMismatch:return this.reload();default:return e.loadResponse()}}visitRequestFinished(e){this.progressBar.setValue(1),this.hideVisitProgressBar()}visitCompleted(e){}pageInvalidated(){this.reload()}visitFailed(e){}visitRendered(e){}formSubmissionStarted(e){this.progressBar.setValue(0),this.showFormProgressBarAfterDelay()}formSubmissionFinished(e){this.progressBar.setValue(1),this.hideFormProgressBar()}showVisitProgressBarAfterDelay(){this.visitProgressBarTimeout=window.setTimeout(this.showProgressBar,this.session.progressBarDelay)}hideVisitProgressBar(){this.progressBar.hide(),null!=this.visitProgressBarTimeout&&(window.clearTimeout(this.visitProgressBarTimeout),delete this.visitProgressBarTimeout)}showFormProgressBarAfterDelay(){null==this.formProgressBarTimeout&&(this.formProgressBarTimeout=window.setTimeout(this.showProgressBar,this.session.progressBarDelay))}hideFormProgressBar(){this.progressBar.hide(),null!=this.formProgressBarTimeout&&(window.clearTimeout(this.formProgressBarTimeout),delete this.formProgressBarTimeout)}reload(){window.location.reload()}get navigator(){return this.session.navigator}}class X{constructor(){this.started=!1}start(){this.started||(this.started=!0,addEventListener("turbo:before-cache",this.removeStaleElements,!1))}stop(){this.started&&(this.started=!1,removeEventListener("turbo:before-cache",this.removeStaleElements,!1))}removeStaleElements(){const e=[...document.querySelectorAll('[data-turbo-cache="false"]')];for(const t of e)t.remove()}}class ee{constructor(e){this.started=!1,this.submitCaptured=()=>{removeEventListener("submit",this.submitBubbled,!1),addEventListener("submit",this.submitBubbled,!1)},this.submitBubbled=e=>{if(!e.defaultPrevented){const t=e.target instanceof HTMLFormElement?e.target:void 0,a=e.submitter||void 0;if(t){"dialog"!=((null==a?void 0:a.getAttribute("formmethod"))||t.getAttribute("method"))&&this.delegate.willSubmitForm(t,a)&&(e.preventDefault(),this.delegate.formSubmitted(t,a))}}},this.delegate=e}start(){this.started||(addEventListener("submit",this.submitCaptured,!0),this.started=!0)}stop(){this.started&&(removeEventListener("submit",this.submitCaptured,!0),this.started=!1)}}class te{constructor(e){this.element=e,this.linkInterceptor=new j(this,e),this.formInterceptor=new F(this,e)}start(){this.linkInterceptor.start(),this.formInterceptor.start()}stop(){this.linkInterceptor.stop(),this.formInterceptor.stop()}shouldInterceptLinkClick(e,t){return this.shouldRedirect(e)}linkClickIntercepted(e,t){const a=this.findFrameElement(e);a&&a.delegate.linkClickIntercepted(e,t)}shouldInterceptFormSubmission(e,t){return this.shouldSubmit(e,t)}formSubmissionIntercepted(e,t){const a=this.findFrameElement(e,t);a&&(a.removeAttribute("reloadable"),a.delegate.formSubmissionIntercepted(e,t))}shouldSubmit(e,t){var a;const n=g(e,t),i=this.element.ownerDocument.querySelector('meta[name="turbo-root"]'),r=p(null!==(a=null==i?void 0:i.content)&&void 0!==a?a:"/");return this.shouldRedirect(e,t)&&w(n,r)}shouldRedirect(e,t){const a=this.findFrameElement(e,t);return!!a&&a!=e.closest("turbo-frame")}findFrameElement(e,t){const a=(null==t?void 0:t.getAttribute("data-turbo-frame"))||e.getAttribute("data-turbo-frame");if(a&&"_top"!=a){const e=this.element.querySelector(`#${a}:not([disabled])`);if(e instanceof m)return e}}}class ae{constructor(e){this.restorationIdentifier=M(),this.restorationData={},this.started=!1,this.pageLoaded=!1,this.onPopState=e=>{if(this.shouldHandlePopState()){const{turbo:t}=e.state||{};if(t){this.location=new URL(window.location.href);const{restorationIdentifier:e}=t;this.restorationIdentifier=e,this.delegate.historyPoppedToLocationWithRestorationIdentifier(this.location,e)}}},this.onPageLoad=async e=>{await Promise.resolve(),this.pageLoaded=!0},this.delegate=e}start(){this.started||(addEventListener("popstate",this.onPopState,!1),addEventListener("load",this.onPageLoad,!1),this.started=!0,this.replace(new URL(window.location.href)))}stop(){this.started&&(removeEventListener("popstate",this.onPopState,!1),removeEventListener("load",this.onPageLoad,!1),this.started=!1)}push(e,t){this.update(history.pushState,e,t)}replace(e,t){this.update(history.replaceState,e,t)}update(e,t,a=M()){const n={turbo:{restorationIdentifier:a}};e.call(history,n,"",t.href),this.location=t,this.restorationIdentifier=a}getRestorationDataForIdentifier(e){return this.restorationData[e]||{}}updateRestorationData(e){const{restorationIdentifier:t}=this,a=this.restorationData[t];this.restorationData[t]=Object.assign(Object.assign({},a),e)}assumeControlOfScrollRestoration(){var e;this.previousScrollRestoration||(this.previousScrollRestoration=null!==(e=history.scrollRestoration)&&void 0!==e?e:"auto",history.scrollRestoration="manual")}relinquishControlOfScrollRestoration(){this.previousScrollRestoration&&(history.scrollRestoration=this.previousScrollRestoration,delete this.previousScrollRestoration)}shouldHandlePopState(){return this.pageIsLoaded()}pageIsLoaded(){return this.pageLoaded||"complete"==document.readyState}}class ne{constructor(e){this.started=!1,this.clickCaptured=()=>{removeEventListener("click",this.clickBubbled,!1),addEventListener("click",this.clickBubbled,!1)},this.clickBubbled=e=>{if(this.clickEventIsSignificant(e)){const t=e.composedPath&&e.composedPath()[0]||e.target,a=this.findLinkFromClickTarget(t);if(a){const t=this.getLocationForLink(a);this.delegate.willFollowLinkToLocation(a,t)&&(e.preventDefault(),this.delegate.followedLinkToLocation(a,t))}}},this.delegate=e}start(){this.started||(addEventListener("click",this.clickCaptured,!0),this.started=!0)}stop(){this.started&&(removeEventListener("click",this.clickCaptured,!0),this.started=!1)}clickEventIsSignificant(e){return!(e.target&&e.target.isContentEditable||e.defaultPrevented||e.which>1||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)}findLinkFromClickTarget(e){if(e instanceof Element)return e.closest("a[href]:not([target^=_]):not([download])")}getLocationForLink(e){return p(e.getAttribute("href")||"")}}function ie(e){return"advance"==e||"replace"==e||"restore"==e}class re{constructor(e){this.delegate=e}proposeVisit(e,t={}){this.delegate.allowsVisitingLocationWithAction(e,t.action)&&(w(e,this.view.snapshot.rootLocation)?this.delegate.visitProposedToLocation(e,t):window.location.href=e.toString())}startVisit(e,t,a={}){this.stop(),this.currentVisit=new K(this,p(e),t,Object.assign({referrer:this.location},a)),this.currentVisit.start()}submitForm(e,t){this.stop(),this.formSubmission=new P(this,e,t,!0),this.formSubmission.start()}stop(){this.formSubmission&&(this.formSubmission.stop(),delete this.formSubmission),this.currentVisit&&(this.currentVisit.cancel(),delete this.currentVisit)}get adapter(){return this.delegate.adapter}get view(){return this.delegate.view}get history(){return this.delegate.history}formSubmissionStarted(e){"function"==typeof this.adapter.formSubmissionStarted&&this.adapter.formSubmissionStarted(e)}async formSubmissionSucceededWithResponse(e,t){if(e==this.formSubmission){const a=await t.responseHTML;if(a){e.method!=o.get&&this.view.clearSnapshotCache();const{statusCode:n,redirected:i}=t,r={action:this.getActionForFormSubmission(e),response:{statusCode:n,responseHTML:a,redirected:i}};this.proposeVisit(t.location,r)}}}async formSubmissionFailedWithResponse(e,t){const a=await t.responseHTML;if(a){const e=W.fromHTMLString(a);t.serverError?await this.view.renderError(e):await this.view.renderPage(e),this.view.scrollToTop(),this.view.clearSnapshotCache()}}formSubmissionErrored(e,t){console.error(t)}formSubmissionFinished(e){"function"==typeof this.adapter.formSubmissionFinished&&this.adapter.formSubmissionFinished(e)}visitStarted(e){this.delegate.visitStarted(e)}visitCompleted(e){this.delegate.visitCompleted(e)}locationWithActionIsSamePage(e,t){const a=h(e),n=h(this.view.lastRenderedLocation),i="restore"===t&&void 0===a;return"replace"!==t&&y(e)===y(this.view.lastRenderedLocation)&&(i||null!=a&&a!==n)}visitScrolledToSamePageLocation(e,t){this.delegate.visitScrolledToSamePageLocation(e,t)}get location(){return this.history.location}get restorationIdentifier(){return this.history.restorationIdentifier}getActionForFormSubmission(e){const{formElement:t,submitter:a}=e,n=L("data-turbo-action",a,t);return ie(n)?n:"advance"}}!function(e){e[e.initial=0]="initial",e[e.loading=1]="loading",e[e.interactive=2]="interactive",e[e.complete=3]="complete"}(G||(G={}));class se{constructor(e){this.stage=G.initial,this.started=!1,this.interpretReadyState=()=>{const{readyState:e}=this;"interactive"==e?this.pageIsInteractive():"complete"==e&&this.pageIsComplete()},this.pageWillUnload=()=>{this.delegate.pageWillUnload()},this.delegate=e}start(){this.started||(this.stage==G.initial&&(this.stage=G.loading),document.addEventListener("readystatechange",this.interpretReadyState,!1),addEventListener("pagehide",this.pageWillUnload,!1),this.started=!0)}stop(){this.started&&(document.removeEventListener("readystatechange",this.interpretReadyState,!1),removeEventListener("pagehide",this.pageWillUnload,!1),this.started=!1)}pageIsInteractive(){this.stage==G.loading&&(this.stage=G.interactive,this.delegate.pageBecameInteractive())}pageIsComplete(){this.pageIsInteractive(),this.stage==G.interactive&&(this.stage=G.complete,this.delegate.pageLoaded())}get readyState(){return document.readyState}}class oe{constructor(e){this.started=!1,this.onScroll=()=>{this.updatePosition({x:window.pageXOffset,y:window.pageYOffset})},this.delegate=e}start(){this.started||(addEventListener("scroll",this.onScroll,!1),this.onScroll(),this.started=!0)}stop(){this.started&&(removeEventListener("scroll",this.onScroll,!1),this.started=!1)}updatePosition(e){this.delegate.scrollPositionChanged(e)}}class de{constructor(e){this.sources=new Set,this.started=!1,this.inspectFetchResponse=e=>{const t=function(e){var t;const a=null===(t=e.detail)||void 0===t?void 0:t.fetchResponse;if(a instanceof $)return a}(e);t&&function(e){var t;return(null!==(t=e.contentType)&&void 0!==t?t:"").startsWith(A.contentType)}(t)&&(e.preventDefault(),this.receiveMessageResponse(t))},this.receiveMessageEvent=e=>{this.started&&"string"==typeof e.data&&this.receiveMessageHTML(e.data)},this.delegate=e}start(){this.started||(this.started=!0,addEventListener("turbo:before-fetch-response",this.inspectFetchResponse,!1))}stop(){this.started&&(this.started=!1,removeEventListener("turbo:before-fetch-response",this.inspectFetchResponse,!1))}connectStreamSource(e){this.streamSourceIsConnected(e)||(this.sources.add(e),e.addEventListener("message",this.receiveMessageEvent,!1))}disconnectStreamSource(e){this.streamSourceIsConnected(e)&&(this.sources.delete(e),e.removeEventListener("message",this.receiveMessageEvent,!1))}streamSourceIsConnected(e){return this.sources.has(e)}async receiveMessageResponse(e){const t=await e.responseHTML;t&&this.receiveMessageHTML(t)}receiveMessageHTML(e){this.delegate.receivedMessageFromStream(new A(e))}}class le extends N{async render(){this.replaceHeadAndBody(),this.activateScriptElements()}replaceHeadAndBody(){const{documentElement:e,head:t,body:a}=document;e.replaceChild(this.newHead,t),e.replaceChild(this.newElement,a)}activateScriptElements(){for(const e of this.scriptElements){const t=e.parentNode;if(t){const a=this.createScriptElement(e);t.replaceChild(a,e)}}}get newHead(){return this.newSnapshot.headSnapshot.element}get scriptElements(){return[...document.documentElement.querySelectorAll("script")]}}class ce extends N{get shouldRender(){return this.newSnapshot.isVisitable&&this.trackedElementsAreIdentical}prepareToRender(){this.mergeHead()}async render(){this.willRender&&this.replaceBody()}finishRendering(){super.finishRendering(),this.isPreview||this.focusFirstAutofocusableElement()}get currentHeadSnapshot(){return this.currentSnapshot.headSnapshot}get newHeadSnapshot(){return this.newSnapshot.headSnapshot}get newElement(){return this.newSnapshot.element}mergeHead(){this.copyNewHeadStylesheetElements(),this.copyNewHeadScriptElements(),this.removeCurrentHeadProvisionalElements(),this.copyNewHeadProvisionalElements()}replaceBody(){this.preservingPermanentElements((()=>{this.activateNewBody(),this.assignNewBody()}))}get trackedElementsAreIdentical(){return this.currentHeadSnapshot.trackedElementSignature==this.newHeadSnapshot.trackedElementSignature}copyNewHeadStylesheetElements(){for(const e of this.newHeadStylesheetElements)document.head.appendChild(e)}copyNewHeadScriptElements(){for(const e of this.newHeadScriptElements)document.head.appendChild(this.createScriptElement(e))}removeCurrentHeadProvisionalElements(){for(const e of this.currentHeadProvisionalElements)document.head.removeChild(e)}copyNewHeadProvisionalElements(){for(const e of this.newHeadProvisionalElements)document.head.appendChild(e)}activateNewBody(){document.adoptNode(this.newElement),this.activateNewBodyScriptElements()}activateNewBodyScriptElements(){for(const e of this.newBodyScriptElements){const t=this.createScriptElement(e);e.replaceWith(t)}}assignNewBody(){document.body&&this.newElement instanceof HTMLBodyElement?document.body.replaceWith(this.newElement):document.documentElement.appendChild(this.newElement)}get newHeadStylesheetElements(){return this.newHeadSnapshot.getStylesheetElementsNotInSnapshot(this.currentHeadSnapshot)}get newHeadScriptElements(){return this.newHeadSnapshot.getScriptElementsNotInSnapshot(this.currentHeadSnapshot)}get currentHeadProvisionalElements(){return this.currentHeadSnapshot.provisionalElements}get newHeadProvisionalElements(){return this.newHeadSnapshot.provisionalElements}get newBodyScriptElements(){return this.newElement.querySelectorAll("script")}}class ue{constructor(e){this.keys=[],this.snapshots={},this.size=e}has(e){return b(e)in this.snapshots}get(e){if(this.has(e)){const t=this.read(e);return this.touch(e),t}}put(e,t){return this.write(e,t),this.touch(e),t}clear(){this.snapshots={}}read(e){return this.snapshots[b(e)]}write(e,t){this.snapshots[b(e)]=t}touch(e){const t=b(e),a=this.keys.indexOf(t);a>-1&&this.keys.splice(a,1),this.keys.unshift(t),this.trim()}trim(){for(const e of this.keys.splice(this.size))delete this.snapshots[e]}}class me extends q{constructor(){super(...arguments),this.snapshotCache=new ue(10),this.lastRenderedLocation=new URL(location.href)}renderPage(e,t=!1,a=!0){const n=new ce(this.snapshot,e,t,a);return this.render(n)}renderError(e){const t=new le(this.snapshot,e,!1);return this.render(t)}clearSnapshotCache(){this.snapshotCache.clear()}async cacheSnapshot(){if(this.shouldCacheSnapshot){this.delegate.viewWillCacheSnapshot();const{snapshot:e,lastRenderedLocation:t}=this;await new Promise((e=>setTimeout((()=>e()),0)));const a=e.clone();return this.snapshotCache.put(t,a),a}}getCachedSnapshotForLocation(e){return this.snapshotCache.get(e)}get snapshot(){return W.fromElement(this.element)}get shouldCacheSnapshot(){return this.snapshot.isCacheable}}function pe(e){Object.defineProperties(e,he)}const he={absoluteURL:{get(){return this.toString()}}},ge=new class{constructor(){this.navigator=new re(this),this.history=new ae(this),this.view=new me(this,document.documentElement),this.adapter=new Z(this),this.pageObserver=new se(this),this.cacheObserver=new X,this.linkClickObserver=new ne(this),this.formSubmitObserver=new ee(this),this.scrollObserver=new oe(this),this.streamObserver=new de(this),this.frameRedirector=new te(document.documentElement),this.drive=!0,this.enabled=!0,this.progressBarDelay=500,this.started=!1}start(){this.started||(this.pageObserver.start(),this.cacheObserver.start(),this.linkClickObserver.start(),this.formSubmitObserver.start(),this.scrollObserver.start(),this.streamObserver.start(),this.frameRedirector.start(),this.history.start(),this.started=!0,this.enabled=!0)}disable(){this.enabled=!1}stop(){this.started&&(this.pageObserver.stop(),this.cacheObserver.stop(),this.linkClickObserver.stop(),this.formSubmitObserver.stop(),this.scrollObserver.stop(),this.streamObserver.stop(),this.frameRedirector.stop(),this.history.stop(),this.started=!1)}registerAdapter(e){this.adapter=e}visit(e,t={}){this.navigator.proposeVisit(p(e),t)}connectStreamSource(e){this.streamObserver.connectStreamSource(e)}disconnectStreamSource(e){this.streamObserver.disconnectStreamSource(e)}renderStreamMessage(e){document.documentElement.appendChild(A.wrap(e).fragment)}clearCache(){this.view.clearSnapshotCache()}setProgressBarDelay(e){this.progressBarDelay=e}get location(){return this.history.location}get restorationIdentifier(){return this.history.restorationIdentifier}historyPoppedToLocationWithRestorationIdentifier(e,t){this.enabled?this.navigator.startVisit(e,t,{action:"restore",historyChanged:!0}):this.adapter.pageInvalidated()}scrollPositionChanged(e){this.history.updateRestorationData({scrollPosition:e})}willFollowLinkToLocation(e,t){return this.elementDriveEnabled(e)&&w(t,this.snapshot.rootLocation)&&this.applicationAllowsFollowingLinkToLocation(e,t)}followedLinkToLocation(e,t){const a=this.getActionForLink(e);this.convertLinkWithMethodClickToFormSubmission(e)||this.visit(t.href,{action:a})}convertLinkWithMethodClickToFormSubmission(e){const t=e.getAttribute("data-turbo-method");if(t){const a=document.createElement("form");a.method=t,a.action=e.getAttribute("href")||"undefined",a.hidden=!0,e.hasAttribute("data-turbo-confirm")&&a.setAttribute("data-turbo-confirm",e.getAttribute("data-turbo-confirm"));const n=this.getTargetFrameForLink(e);return n?(a.setAttribute("data-turbo-frame",n),a.addEventListener("turbo:submit-start",(()=>a.remove()))):a.addEventListener("submit",(()=>a.remove())),document.body.appendChild(a),_("submit",{cancelable:!0,target:a})}return!1}allowsVisitingLocationWithAction(e,t){return this.locationWithActionIsSamePage(e,t)||this.applicationAllowsVisitingLocation(e)}visitProposedToLocation(e,t){pe(e),this.adapter.visitProposedToLocation(e,t)}visitStarted(e){pe(e.location),e.silent||this.notifyApplicationAfterVisitingLocation(e.location,e.action)}visitCompleted(e){this.notifyApplicationAfterPageLoad(e.getTimingMetrics())}locationWithActionIsSamePage(e,t){return this.navigator.locationWithActionIsSamePage(e,t)}visitScrolledToSamePageLocation(e,t){this.notifyApplicationAfterVisitingSamePageLocation(e,t)}willSubmitForm(e,t){const a=g(e,t);return this.elementDriveEnabled(e)&&(!t||this.elementDriveEnabled(t))&&w(p(a),this.snapshot.rootLocation)}formSubmitted(e,t){this.navigator.submitForm(e,t)}pageBecameInteractive(){this.view.lastRenderedLocation=this.location,this.notifyApplicationAfterPageLoad()}pageLoaded(){this.history.assumeControlOfScrollRestoration()}pageWillUnload(){this.history.relinquishControlOfScrollRestoration()}receivedMessageFromStream(e){this.renderStreamMessage(e)}viewWillCacheSnapshot(){var e;(null===(e=this.navigator.currentVisit)||void 0===e?void 0:e.silent)||this.notifyApplicationBeforeCachingSnapshot()}allowsImmediateRender({element:e},t){return!this.notifyApplicationBeforeRender(e,t).defaultPrevented}viewRenderedSnapshot(e,t){this.view.lastRenderedLocation=this.history.location,this.notifyApplicationAfterRender()}viewInvalidated(){this.adapter.pageInvalidated()}frameLoaded(e){this.notifyApplicationAfterFrameLoad(e)}frameRendered(e,t){this.notifyApplicationAfterFrameRender(e,t)}applicationAllowsFollowingLinkToLocation(e,t){return!this.notifyApplicationAfterClickingLinkToLocation(e,t).defaultPrevented}applicationAllowsVisitingLocation(e){return!this.notifyApplicationBeforeVisitingLocation(e).defaultPrevented}notifyApplicationAfterClickingLinkToLocation(e,t){return _("turbo:click",{target:e,detail:{url:t.href},cancelable:!0})}notifyApplicationBeforeVisitingLocation(e){return _("turbo:before-visit",{detail:{url:e.href},cancelable:!0})}notifyApplicationAfterVisitingLocation(e,t){return D(document.documentElement),_("turbo:visit",{detail:{url:e.href,action:t}})}notifyApplicationBeforeCachingSnapshot(){return _("turbo:before-cache")}notifyApplicationBeforeRender(e,t){return _("turbo:before-render",{detail:{newBody:e,resume:t},cancelable:!0})}notifyApplicationAfterRender(){return _("turbo:render")}notifyApplicationAfterPageLoad(e={}){return T(document.documentElement),_("turbo:load",{detail:{url:this.location.href,timing:e}})}notifyApplicationAfterVisitingSamePageLocation(e,t){dispatchEvent(new HashChangeEvent("hashchange",{oldURL:e.toString(),newURL:t.toString()}))}notifyApplicationAfterFrameLoad(e){return _("turbo:frame-load",{target:e})}notifyApplicationAfterFrameRender(e,t){return _("turbo:frame-render",{detail:{fetchResponse:e},target:t,cancelable:!0})}elementDriveEnabled(e){const t=null==e?void 0:e.closest("[data-turbo]");return this.drive?!t||"false"!=t.getAttribute("data-turbo"):!!t&&"true"==t.getAttribute("data-turbo")}getActionForLink(e){const t=e.getAttribute("data-turbo-action");return ie(t)?t:"advance"}getTargetFrameForLink(e){const t=e.getAttribute("data-turbo-frame");if(t)return t;{const t=e.closest("turbo-frame");if(t)return t.id}}get snapshot(){return this.view.snapshot}},{navigator:fe}=ge;function ve(){ge.start()}function we(e){ge.registerAdapter(e)}function ye(e,t){ge.visit(e,t)}function be(e){ge.connectStreamSource(e)}function $e(e){ge.disconnectStreamSource(e)}function _e(e){ge.renderStreamMessage(e)}function ke(){ge.clearCache()}function Se(e){ge.setProgressBarDelay(e)}function Ce(e){P.confirmMethod=e}var Me=Object.freeze({__proto__:null,navigator:fe,session:ge,PageRenderer:ce,PageSnapshot:W,start:ve,registerAdapter:we,visit:ye,connectStreamSource:be,disconnectStreamSource:$e,renderStreamMessage:_e,clearCache:ke,setProgressBarDelay:Se,setConfirmMethod:Ce});class Le{constructor(e){this.visitCachedSnapshot=({element:e})=>{var t;const{id:a,clone:n}=this;null===(t=e.querySelector("#"+a))||void 0===t||t.replaceWith(n)},this.clone=e.cloneNode(!0),this.id=e.id}}function De(e){if(null!=e){const t=document.getElementById(e);if(t instanceof m)return t}}function Te(e,t){if(e){const n=e.getAttribute("src");if(null!=n&&null!=t&&(a=t,p(n).href==p(a).href))throw new Error(`Matching <turbo-frame id="${e.id}"> element has a source URL which references itself`);if(e.ownerDocument!==document&&(e=document.importNode(e,!0)),e instanceof m)return e.connectedCallback(),e.disconnectedCallback(),e}var a}const Ee={after(){this.targetElements.forEach((e=>{var t;return null===(t=e.parentElement)||void 0===t?void 0:t.insertBefore(this.templateContent,e.nextSibling)}))},append(){this.removeDuplicateTargetChildren(),this.targetElements.forEach((e=>e.append(this.templateContent)))},before(){this.targetElements.forEach((e=>{var t;return null===(t=e.parentElement)||void 0===t?void 0:t.insertBefore(this.templateContent,e)}))},prepend(){this.removeDuplicateTargetChildren(),this.targetElements.forEach((e=>e.prepend(this.templateContent)))},remove(){this.targetElements.forEach((e=>e.remove()))},replace(){this.targetElements.forEach((e=>e.replaceWith(this.templateContent)))},update(){this.targetElements.forEach((e=>{e.innerHTML="",e.append(this.templateContent)}))}};class xe extends HTMLElement{async connectedCallback(){try{await this.render()}catch(e){console.error(e)}finally{this.disconnect()}}async render(){var e;return null!==(e=this.renderPromise)&&void 0!==e?e:this.renderPromise=(async()=>{this.dispatchEvent(this.beforeRenderEvent)&&(await k(),this.performAction())})()}disconnect(){try{this.remove()}catch(e){}}removeDuplicateTargetChildren(){this.duplicateChildren.forEach((e=>e.remove()))}get duplicateChildren(){var e;const t=this.targetElements.flatMap((e=>[...e.children])).filter((e=>!!e.id)),a=[...null===(e=this.templateContent)||void 0===e?void 0:e.children].filter((e=>!!e.id)).map((e=>e.id));return t.filter((e=>a.includes(e.id)))}get performAction(){if(this.action){const e=Ee[this.action];if(e)return e;this.raise("unknown action")}this.raise("action attribute is missing")}get targetElements(){return this.target?this.targetElementsById:this.targets?this.targetElementsByQuery:void this.raise("target or targets attribute is missing")}get templateContent(){return this.templateElement.content.cloneNode(!0)}get templateElement(){if(this.firstElementChild instanceof HTMLTemplateElement)return this.firstElementChild;this.raise("first child element must be a <template> element")}get action(){return this.getAttribute("action")}get target(){return this.getAttribute("target")}get targets(){return this.getAttribute("targets")}raise(e){throw new Error(`${this.description}: ${e}`)}get description(){var e,t;return null!==(t=(null!==(e=this.outerHTML.match(/<[^>]+>/))&&void 0!==e?e:[])[0])&&void 0!==t?t:"<turbo-stream>"}get beforeRenderEvent(){return new CustomEvent("turbo:before-stream-render",{bubbles:!0,cancelable:!0})}get targetElementsById(){var e;const t=null===(e=this.ownerDocument)||void 0===e?void 0:e.getElementById(this.target);return null!==t?[t]:[]}get targetElementsByQuery(){var e;const t=null===(e=this.ownerDocument)||void 0===e?void 0:e.querySelectorAll(this.targets);return 0!==t.length?Array.prototype.slice.call(t):[]}}m.delegateConstructor=class{constructor(e){this.fetchResponseLoaded=e=>{},this.currentFetchRequest=null,this.resolveVisitPromise=()=>{},this.connected=!1,this.hasBeenLoaded=!1,this.settingSourceURL=!1,this.element=e,this.view=new R(this,this.element),this.appearanceObserver=new x(this,this.element),this.linkInterceptor=new j(this,this.element),this.formInterceptor=new F(this,this.element)}connect(){this.connected||(this.connected=!0,this.reloadable=!1,this.loadingStyle==s.lazy&&this.appearanceObserver.start(),this.linkInterceptor.start(),this.formInterceptor.start(),this.sourceURLChanged())}disconnect(){this.connected&&(this.connected=!1,this.appearanceObserver.stop(),this.linkInterceptor.stop(),this.formInterceptor.stop())}disabledChanged(){this.loadingStyle==s.eager&&this.loadSourceURL()}sourceURLChanged(){(this.loadingStyle==s.eager||this.hasBeenLoaded)&&this.loadSourceURL()}loadingStyleChanged(){this.loadingStyle==s.lazy?this.appearanceObserver.start():(this.appearanceObserver.stop(),this.loadSourceURL())}async loadSourceURL(){if(!this.settingSourceURL&&this.enabled&&this.isActive&&(this.reloadable||this.sourceURL!=this.currentURL)){const e=this.currentURL;if(this.currentURL=this.sourceURL,this.sourceURL)try{this.element.loaded=this.visit(p(this.sourceURL)),this.appearanceObserver.stop(),await this.element.loaded,this.hasBeenLoaded=!0}catch(t){throw this.currentURL=e,t}}}async loadResponse(e){(e.redirected||e.succeeded&&e.isHTML)&&(this.sourceURL=e.response.url);try{const t=await e.responseHTML;if(t){const{body:a}=S(t),n=new I(await this.extractForeignFrameElement(a)),i=new Y(this.view.snapshot,n,!1,!1);this.view.renderPromise&&await this.view.renderPromise,await this.view.render(i),ge.frameRendered(e,this.element),ge.frameLoaded(this.element),this.fetchResponseLoaded(e)}}catch(e){console.error(e),this.view.invalidate()}finally{this.fetchResponseLoaded=()=>{}}}elementAppearedInViewport(e){this.loadSourceURL()}shouldInterceptLinkClick(e,t){return!e.hasAttribute("data-turbo-method")&&this.shouldInterceptNavigation(e)}linkClickIntercepted(e,t){this.reloadable=!0,this.navigateFrame(e,t)}shouldInterceptFormSubmission(e,t){return this.shouldInterceptNavigation(e,t)}formSubmissionIntercepted(e,t){this.formSubmission&&this.formSubmission.stop(),this.reloadable=!1,this.formSubmission=new P(this,e,t);const{fetchRequest:a}=this.formSubmission;this.prepareHeadersForRequest(a.headers,a),this.formSubmission.start()}prepareHeadersForRequest(e,t){e["Turbo-Frame"]=this.id}requestStarted(e){D(this.element)}requestPreventedHandlingResponse(e,t){this.resolveVisitPromise()}async requestSucceededWithResponse(e,t){await this.loadResponse(t),this.resolveVisitPromise()}requestFailedWithResponse(e,t){console.error(t),this.resolveVisitPromise()}requestErrored(e,t){console.error(t),this.resolveVisitPromise()}requestFinished(e){T(this.element)}formSubmissionStarted({formElement:e}){D(e,this.findFrameElement(e))}formSubmissionSucceededWithResponse(e,t){const a=this.findFrameElement(e.formElement,e.submitter);this.proposeVisitIfNavigatedWithAction(a,e.formElement,e.submitter),a.delegate.loadResponse(t)}formSubmissionFailedWithResponse(e,t){this.element.delegate.loadResponse(t)}formSubmissionErrored(e,t){console.error(t)}formSubmissionFinished({formElement:e}){T(e,this.findFrameElement(e))}allowsImmediateRender(e,t){return!0}viewRenderedSnapshot(e,t){}viewInvalidated(){}async visit(e){var t;const a=new E(this,o.get,e,new URLSearchParams,this.element);return null===(t=this.currentFetchRequest)||void 0===t||t.cancel(),this.currentFetchRequest=a,new Promise((e=>{this.resolveVisitPromise=()=>{this.resolveVisitPromise=()=>{},this.currentFetchRequest=null,e()},a.perform()}))}navigateFrame(e,t,a){const n=this.findFrameElement(e,a);this.proposeVisitIfNavigatedWithAction(n,e,a),n.setAttribute("reloadable",""),n.src=t}proposeVisitIfNavigatedWithAction(e,t,a){const n=L("data-turbo-action",a,t,e);if(ie(n)){const{visitCachedSnapshot:t}=new Le(e);e.delegate.fetchResponseLoaded=a=>{if(e.src){const{statusCode:i,redirected:r}=a,s={statusCode:i,redirected:r,responseHTML:e.ownerDocument.documentElement.outerHTML};ge.visit(e.src,{action:n,response:s,visitCachedSnapshot:t,willRender:!1})}}}}findFrameElement(e,t){var a;return null!==(a=De(L("data-turbo-frame",t,e)||this.element.getAttribute("target")))&&void 0!==a?a:this.element}async extractForeignFrameElement(e){let t;const a=CSS.escape(this.id);try{if(t=Te(e.querySelector(`turbo-frame#${a}`),this.currentURL))return t;if(t=Te(e.querySelector(`turbo-frame[src][recurse~=${a}]`),this.currentURL))return await t.loaded,await this.extractForeignFrameElement(t);console.error(`Response has no matching <turbo-frame id="${a}"> element`)}catch(e){console.error(e)}return new m}formActionIsVisitable(e,t){return w(p(g(e,t)),this.rootLocation)}shouldInterceptNavigation(e,t){const a=L("data-turbo-frame",t,e)||this.element.getAttribute("target");if(e instanceof HTMLFormElement&&!this.formActionIsVisitable(e,t))return!1;if(!this.enabled||"_top"==a)return!1;if(a){const e=De(a);if(e)return!e.disabled}return!!ge.elementDriveEnabled(e)&&!(t&&!ge.elementDriveEnabled(t))}get id(){return this.element.id}get enabled(){return!this.element.disabled}get sourceURL(){if(this.element.src)return this.element.src}get reloadable(){return this.findFrameElement(this.element).hasAttribute("reloadable")}set reloadable(e){const t=this.findFrameElement(this.element);e?t.setAttribute("reloadable",""):t.removeAttribute("reloadable")}set sourceURL(e){this.settingSourceURL=!0,this.element.src=null!=e?e:null,this.currentURL=this.element.src,this.settingSourceURL=!1}get loadingStyle(){return this.element.loading}get isLoading(){return void 0!==this.formSubmission||void 0!==this.resolveVisitPromise()}get isActive(){return this.element.isActive&&this.connected}get rootLocation(){var e;const t=this.element.ownerDocument.querySelector('meta[name="turbo-root"]');return p(null!==(e=null==t?void 0:t.content)&&void 0!==e?e:"/")}},customElements.define("turbo-frame",m),customElements.define("turbo-stream",xe),(()=>{let e=document.currentScript;if(e&&!e.hasAttribute("data-turbo-suppress-warning"))for(;e=e.parentElement;)if(e==document.body)return console.warn(C`
+    `;
+    }
+    show() {
+        if (!this.visible) {
+            this.visible = true;
+            this.installProgressElement();
+            this.startTrickling();
+        }
+    }
+    hide() {
+        if (this.visible && !this.hiding) {
+            this.hiding = true;
+            this.fadeProgressElement(() => {
+                this.uninstallProgressElement();
+                this.stopTrickling();
+                this.visible = false;
+                this.hiding = false;
+            });
+        }
+    }
+    setValue(value) {
+        this.value = value;
+        this.refresh();
+    }
+    installStylesheetElement() {
+        document.head.insertBefore(this.stylesheetElement, document.head.firstChild);
+    }
+    installProgressElement() {
+        this.progressElement.style.width = "0";
+        this.progressElement.style.opacity = "1";
+        document.documentElement.insertBefore(this.progressElement, document.body);
+        this.refresh();
+    }
+    fadeProgressElement(callback) {
+        this.progressElement.style.opacity = "0";
+        setTimeout(callback, ProgressBar.animationDuration * 1.5);
+    }
+    uninstallProgressElement() {
+        if (this.progressElement.parentNode) {
+            document.documentElement.removeChild(this.progressElement);
+        }
+    }
+    startTrickling() {
+        if (!this.trickleInterval) {
+            this.trickleInterval = window.setInterval(this.trickle, ProgressBar.animationDuration);
+        }
+    }
+    stopTrickling() {
+        window.clearInterval(this.trickleInterval);
+        delete this.trickleInterval;
+    }
+    refresh() {
+        requestAnimationFrame(() => {
+            this.progressElement.style.width = `${10 + (this.value * 90)}%`;
+        });
+    }
+    createStylesheetElement() {
+        const element = document.createElement("style");
+        element.type = "text/css";
+        element.textContent = ProgressBar.defaultCSS;
+        return element;
+    }
+    createProgressElement() {
+        const element = document.createElement("div");
+        element.className = "turbo-progress-bar";
+        return element;
+    }
+}
+ProgressBar.animationDuration = 300;
+
+class HeadSnapshot extends Snapshot {
+    constructor() {
+        super(...arguments);
+        this.detailsByOuterHTML = this.children
+            .filter((element) => !elementIsNoscript(element))
+            .map((element) => elementWithoutNonce(element))
+            .reduce((result, element) => {
+            const { outerHTML } = element;
+            const details = outerHTML in result
+                ? result[outerHTML]
+                : {
+                    type: elementType(element),
+                    tracked: elementIsTracked(element),
+                    elements: []
+                };
+            return Object.assign(Object.assign({}, result), { [outerHTML]: Object.assign(Object.assign({}, details), { elements: [...details.elements, element] }) });
+        }, {});
+    }
+    get trackedElementSignature() {
+        return Object.keys(this.detailsByOuterHTML)
+            .filter(outerHTML => this.detailsByOuterHTML[outerHTML].tracked)
+            .join("");
+    }
+    getScriptElementsNotInSnapshot(snapshot) {
+        return this.getElementsMatchingTypeNotInSnapshot("script", snapshot);
+    }
+    getStylesheetElementsNotInSnapshot(snapshot) {
+        return this.getElementsMatchingTypeNotInSnapshot("stylesheet", snapshot);
+    }
+    getElementsMatchingTypeNotInSnapshot(matchedType, snapshot) {
+        return Object.keys(this.detailsByOuterHTML)
+            .filter(outerHTML => !(outerHTML in snapshot.detailsByOuterHTML))
+            .map(outerHTML => this.detailsByOuterHTML[outerHTML])
+            .filter(({ type }) => type == matchedType)
+            .map(({ elements: [element] }) => element);
+    }
+    get provisionalElements() {
+        return Object.keys(this.detailsByOuterHTML).reduce((result, outerHTML) => {
+            const { type, tracked, elements } = this.detailsByOuterHTML[outerHTML];
+            if (type == null && !tracked) {
+                return [...result, ...elements];
+            }
+            else if (elements.length > 1) {
+                return [...result, ...elements.slice(1)];
+            }
+            else {
+                return result;
+            }
+        }, []);
+    }
+    getMetaValue(name) {
+        const element = this.findMetaElementByName(name);
+        return element
+            ? element.getAttribute("content")
+            : null;
+    }
+    findMetaElementByName(name) {
+        return Object.keys(this.detailsByOuterHTML).reduce((result, outerHTML) => {
+            const { elements: [element] } = this.detailsByOuterHTML[outerHTML];
+            return elementIsMetaElementWithName(element, name) ? element : result;
+        }, undefined);
+    }
+}
+function elementType(element) {
+    if (elementIsScript(element)) {
+        return "script";
+    }
+    else if (elementIsStylesheet(element)) {
+        return "stylesheet";
+    }
+}
+function elementIsTracked(element) {
+    return element.getAttribute("data-turbo-track") == "reload";
+}
+function elementIsScript(element) {
+    const tagName = element.tagName.toLowerCase();
+    return tagName == "script";
+}
+function elementIsNoscript(element) {
+    const tagName = element.tagName.toLowerCase();
+    return tagName == "noscript";
+}
+function elementIsStylesheet(element) {
+    const tagName = element.tagName.toLowerCase();
+    return tagName == "style" || (tagName == "link" && element.getAttribute("rel") == "stylesheet");
+}
+function elementIsMetaElementWithName(element, name) {
+    const tagName = element.tagName.toLowerCase();
+    return tagName == "meta" && element.getAttribute("name") == name;
+}
+function elementWithoutNonce(element) {
+    if (element.hasAttribute("nonce")) {
+        element.setAttribute("nonce", "");
+    }
+    return element;
+}
+
+class PageSnapshot extends Snapshot {
+    constructor(element, headSnapshot) {
+        super(element);
+        this.headSnapshot = headSnapshot;
+    }
+    static fromHTMLString(html = "") {
+        return this.fromDocument(parseHTMLDocument(html));
+    }
+    static fromElement(element) {
+        return this.fromDocument(element.ownerDocument);
+    }
+    static fromDocument({ head, body }) {
+        return new this(body, new HeadSnapshot(head));
+    }
+    clone() {
+        return new PageSnapshot(this.element.cloneNode(true), this.headSnapshot);
+    }
+    get headElement() {
+        return this.headSnapshot.element;
+    }
+    get rootLocation() {
+        var _a;
+        const root = (_a = this.getSetting("root")) !== null && _a !== void 0 ? _a : "/";
+        return expandURL(root);
+    }
+    get cacheControlValue() {
+        return this.getSetting("cache-control");
+    }
+    get isPreviewable() {
+        return this.cacheControlValue != "no-preview";
+    }
+    get isCacheable() {
+        return this.cacheControlValue != "no-cache";
+    }
+    get isVisitable() {
+        return this.getSetting("visit-control") != "reload";
+    }
+    getSetting(name) {
+        return this.headSnapshot.getMetaValue(`turbo-${name}`);
+    }
+}
+
+var TimingMetric;
+(function (TimingMetric) {
+    TimingMetric["visitStart"] = "visitStart";
+    TimingMetric["requestStart"] = "requestStart";
+    TimingMetric["requestEnd"] = "requestEnd";
+    TimingMetric["visitEnd"] = "visitEnd";
+})(TimingMetric || (TimingMetric = {}));
+var VisitState;
+(function (VisitState) {
+    VisitState["initialized"] = "initialized";
+    VisitState["started"] = "started";
+    VisitState["canceled"] = "canceled";
+    VisitState["failed"] = "failed";
+    VisitState["completed"] = "completed";
+})(VisitState || (VisitState = {}));
+const defaultOptions = {
+    action: "advance",
+    historyChanged: false,
+    visitCachedSnapshot: () => { },
+    willRender: true,
+};
+var SystemStatusCode;
+(function (SystemStatusCode) {
+    SystemStatusCode[SystemStatusCode["networkFailure"] = 0] = "networkFailure";
+    SystemStatusCode[SystemStatusCode["timeoutFailure"] = -1] = "timeoutFailure";
+    SystemStatusCode[SystemStatusCode["contentTypeMismatch"] = -2] = "contentTypeMismatch";
+})(SystemStatusCode || (SystemStatusCode = {}));
+class Visit {
+    constructor(delegate, location, restorationIdentifier, options = {}) {
+        this.identifier = uuid();
+        this.timingMetrics = {};
+        this.followedRedirect = false;
+        this.historyChanged = false;
+        this.scrolled = false;
+        this.snapshotCached = false;
+        this.state = VisitState.initialized;
+        this.delegate = delegate;
+        this.location = location;
+        this.restorationIdentifier = restorationIdentifier || uuid();
+        const { action, historyChanged, referrer, snapshotHTML, response, visitCachedSnapshot, willRender } = Object.assign(Object.assign({}, defaultOptions), options);
+        this.action = action;
+        this.historyChanged = historyChanged;
+        this.referrer = referrer;
+        this.snapshotHTML = snapshotHTML;
+        this.response = response;
+        this.isSamePage = this.delegate.locationWithActionIsSamePage(this.location, this.action);
+        this.visitCachedSnapshot = visitCachedSnapshot;
+        this.willRender = willRender;
+        this.scrolled = !willRender;
+    }
+    get adapter() {
+        return this.delegate.adapter;
+    }
+    get view() {
+        return this.delegate.view;
+    }
+    get history() {
+        return this.delegate.history;
+    }
+    get restorationData() {
+        return this.history.getRestorationDataForIdentifier(this.restorationIdentifier);
+    }
+    get silent() {
+        return this.isSamePage;
+    }
+    start() {
+        if (this.state == VisitState.initialized) {
+            this.recordTimingMetric(TimingMetric.visitStart);
+            this.state = VisitState.started;
+            this.adapter.visitStarted(this);
+            this.delegate.visitStarted(this);
+        }
+    }
+    cancel() {
+        if (this.state == VisitState.started) {
+            if (this.request) {
+                this.request.cancel();
+            }
+            this.cancelRender();
+            this.state = VisitState.canceled;
+        }
+    }
+    complete() {
+        if (this.state == VisitState.started) {
+            this.recordTimingMetric(TimingMetric.visitEnd);
+            this.state = VisitState.completed;
+            this.adapter.visitCompleted(this);
+            this.delegate.visitCompleted(this);
+            this.followRedirect();
+        }
+    }
+    fail() {
+        if (this.state == VisitState.started) {
+            this.state = VisitState.failed;
+            this.adapter.visitFailed(this);
+        }
+    }
+    changeHistory() {
+        var _a;
+        if (!this.historyChanged) {
+            const actionForHistory = this.location.href === ((_a = this.referrer) === null || _a === void 0 ? void 0 : _a.href) ? "replace" : this.action;
+            const method = this.getHistoryMethodForAction(actionForHistory);
+            this.history.update(method, this.location, this.restorationIdentifier);
+            this.historyChanged = true;
+        }
+    }
+    issueRequest() {
+        if (this.hasPreloadedResponse()) {
+            this.simulateRequest();
+        }
+        else if (this.shouldIssueRequest() && !this.request) {
+            this.request = new FetchRequest(this, FetchMethod.get, this.location);
+            this.request.perform();
+        }
+    }
+    simulateRequest() {
+        if (this.response) {
+            this.startRequest();
+            this.recordResponse();
+            this.finishRequest();
+        }
+    }
+    startRequest() {
+        this.recordTimingMetric(TimingMetric.requestStart);
+        this.adapter.visitRequestStarted(this);
+    }
+    recordResponse(response = this.response) {
+        this.response = response;
+        if (response) {
+            const { statusCode } = response;
+            if (isSuccessful(statusCode)) {
+                this.adapter.visitRequestCompleted(this);
+            }
+            else {
+                this.adapter.visitRequestFailedWithStatusCode(this, statusCode);
+            }
+        }
+    }
+    finishRequest() {
+        this.recordTimingMetric(TimingMetric.requestEnd);
+        this.adapter.visitRequestFinished(this);
+    }
+    loadResponse() {
+        if (this.response) {
+            const { statusCode, responseHTML } = this.response;
+            this.render(async () => {
+                this.cacheSnapshot();
+                if (this.view.renderPromise)
+                    await this.view.renderPromise;
+                if (isSuccessful(statusCode) && responseHTML != null) {
+                    await this.view.renderPage(PageSnapshot.fromHTMLString(responseHTML), false, this.willRender);
+                    this.adapter.visitRendered(this);
+                    this.complete();
+                }
+                else {
+                    await this.view.renderError(PageSnapshot.fromHTMLString(responseHTML));
+                    this.adapter.visitRendered(this);
+                    this.fail();
+                }
+            });
+        }
+    }
+    getCachedSnapshot() {
+        const snapshot = this.view.getCachedSnapshotForLocation(this.location) || this.getPreloadedSnapshot();
+        if (snapshot && (!getAnchor(this.location) || snapshot.hasAnchor(getAnchor(this.location)))) {
+            if (this.action == "restore" || snapshot.isPreviewable) {
+                return snapshot;
+            }
+        }
+    }
+    getPreloadedSnapshot() {
+        if (this.snapshotHTML) {
+            return PageSnapshot.fromHTMLString(this.snapshotHTML);
+        }
+    }
+    hasCachedSnapshot() {
+        return this.getCachedSnapshot() != null;
+    }
+    loadCachedSnapshot() {
+        const snapshot = this.getCachedSnapshot();
+        if (snapshot) {
+            const isPreview = this.shouldIssueRequest();
+            this.render(async () => {
+                this.cacheSnapshot();
+                if (this.isSamePage) {
+                    this.adapter.visitRendered(this);
+                }
+                else {
+                    if (this.view.renderPromise)
+                        await this.view.renderPromise;
+                    await this.view.renderPage(snapshot, isPreview, this.willRender);
+                    this.adapter.visitRendered(this);
+                    if (!isPreview) {
+                        this.complete();
+                    }
+                }
+            });
+        }
+    }
+    followRedirect() {
+        var _a;
+        if (this.redirectedToLocation && !this.followedRedirect && ((_a = this.response) === null || _a === void 0 ? void 0 : _a.redirected)) {
+            this.adapter.visitProposedToLocation(this.redirectedToLocation, {
+                action: 'replace',
+                response: this.response
+            });
+            this.followedRedirect = true;
+        }
+    }
+    goToSamePageAnchor() {
+        if (this.isSamePage) {
+            this.render(async () => {
+                this.cacheSnapshot();
+                this.adapter.visitRendered(this);
+            });
+        }
+    }
+    requestStarted() {
+        this.startRequest();
+    }
+    requestPreventedHandlingResponse(request, response) {
+    }
+    async requestSucceededWithResponse(request, response) {
+        const responseHTML = await response.responseHTML;
+        const { redirected, statusCode } = response;
+        if (responseHTML == undefined) {
+            this.recordResponse({ statusCode: SystemStatusCode.contentTypeMismatch, redirected });
+        }
+        else {
+            this.redirectedToLocation = response.redirected ? response.location : undefined;
+            this.recordResponse({ statusCode: statusCode, responseHTML, redirected });
+        }
+    }
+    async requestFailedWithResponse(request, response) {
+        const responseHTML = await response.responseHTML;
+        const { redirected, statusCode } = response;
+        if (responseHTML == undefined) {
+            this.recordResponse({ statusCode: SystemStatusCode.contentTypeMismatch, redirected });
+        }
+        else {
+            this.recordResponse({ statusCode: statusCode, responseHTML, redirected });
+        }
+    }
+    requestErrored(request, error) {
+        this.recordResponse({ statusCode: SystemStatusCode.networkFailure, redirected: false });
+    }
+    requestFinished() {
+        this.finishRequest();
+    }
+    performScroll() {
+        if (!this.scrolled) {
+            if (this.action == "restore") {
+                this.scrollToRestoredPosition() || this.scrollToAnchor() || this.view.scrollToTop();
+            }
+            else {
+                this.scrollToAnchor() || this.view.scrollToTop();
+            }
+            if (this.isSamePage) {
+                this.delegate.visitScrolledToSamePageLocation(this.view.lastRenderedLocation, this.location);
+            }
+            this.scrolled = true;
+        }
+    }
+    scrollToRestoredPosition() {
+        const { scrollPosition } = this.restorationData;
+        if (scrollPosition) {
+            this.view.scrollToPosition(scrollPosition);
+            return true;
+        }
+    }
+    scrollToAnchor() {
+        const anchor = getAnchor(this.location);
+        if (anchor != null) {
+            this.view.scrollToAnchor(anchor);
+            return true;
+        }
+    }
+    recordTimingMetric(metric) {
+        this.timingMetrics[metric] = new Date().getTime();
+    }
+    getTimingMetrics() {
+        return Object.assign({}, this.timingMetrics);
+    }
+    getHistoryMethodForAction(action) {
+        switch (action) {
+            case "replace": return history.replaceState;
+            case "advance":
+            case "restore": return history.pushState;
+        }
+    }
+    hasPreloadedResponse() {
+        return typeof this.response == "object";
+    }
+    shouldIssueRequest() {
+        if (this.isSamePage) {
+            return false;
+        }
+        else if (this.action == "restore") {
+            return !this.hasCachedSnapshot();
+        }
+        else {
+            return this.willRender;
+        }
+    }
+    cacheSnapshot() {
+        if (!this.snapshotCached) {
+            this.view.cacheSnapshot().then(snapshot => snapshot && this.visitCachedSnapshot(snapshot));
+            this.snapshotCached = true;
+        }
+    }
+    async render(callback) {
+        this.cancelRender();
+        await new Promise(resolve => {
+            this.frame = requestAnimationFrame(() => resolve());
+        });
+        await callback();
+        delete this.frame;
+        this.performScroll();
+    }
+    cancelRender() {
+        if (this.frame) {
+            cancelAnimationFrame(this.frame);
+            delete this.frame;
+        }
+    }
+}
+function isSuccessful(statusCode) {
+    return statusCode >= 200 && statusCode < 300;
+}
+
+class BrowserAdapter {
+    constructor(session) {
+        this.progressBar = new ProgressBar;
+        this.showProgressBar = () => {
+            this.progressBar.show();
+        };
+        this.session = session;
+    }
+    visitProposedToLocation(location, options) {
+        this.navigator.startVisit(location, uuid(), options);
+    }
+    visitStarted(visit) {
+        visit.loadCachedSnapshot();
+        visit.issueRequest();
+        visit.changeHistory();
+        visit.goToSamePageAnchor();
+    }
+    visitRequestStarted(visit) {
+        this.progressBar.setValue(0);
+        if (visit.hasCachedSnapshot() || visit.action != "restore") {
+            this.showVisitProgressBarAfterDelay();
+        }
+        else {
+            this.showProgressBar();
+        }
+    }
+    visitRequestCompleted(visit) {
+        visit.loadResponse();
+    }
+    visitRequestFailedWithStatusCode(visit, statusCode) {
+        switch (statusCode) {
+            case SystemStatusCode.networkFailure:
+            case SystemStatusCode.timeoutFailure:
+            case SystemStatusCode.contentTypeMismatch:
+                return this.reload();
+            default:
+                return visit.loadResponse();
+        }
+    }
+    visitRequestFinished(visit) {
+        this.progressBar.setValue(1);
+        this.hideVisitProgressBar();
+    }
+    visitCompleted(visit) {
+    }
+    pageInvalidated() {
+        this.reload();
+    }
+    visitFailed(visit) {
+    }
+    visitRendered(visit) {
+    }
+    formSubmissionStarted(formSubmission) {
+        this.progressBar.setValue(0);
+        this.showFormProgressBarAfterDelay();
+    }
+    formSubmissionFinished(formSubmission) {
+        this.progressBar.setValue(1);
+        this.hideFormProgressBar();
+    }
+    showVisitProgressBarAfterDelay() {
+        this.visitProgressBarTimeout = window.setTimeout(this.showProgressBar, this.session.progressBarDelay);
+    }
+    hideVisitProgressBar() {
+        this.progressBar.hide();
+        if (this.visitProgressBarTimeout != null) {
+            window.clearTimeout(this.visitProgressBarTimeout);
+            delete this.visitProgressBarTimeout;
+        }
+    }
+    showFormProgressBarAfterDelay() {
+        if (this.formProgressBarTimeout == null) {
+            this.formProgressBarTimeout = window.setTimeout(this.showProgressBar, this.session.progressBarDelay);
+        }
+    }
+    hideFormProgressBar() {
+        this.progressBar.hide();
+        if (this.formProgressBarTimeout != null) {
+            window.clearTimeout(this.formProgressBarTimeout);
+            delete this.formProgressBarTimeout;
+        }
+    }
+    reload() {
+        window.location.reload();
+    }
+    get navigator() {
+        return this.session.navigator;
+    }
+}
+
+class CacheObserver {
+    constructor() {
+        this.started = false;
+    }
+    start() {
+        if (!this.started) {
+            this.started = true;
+            addEventListener("turbo:before-cache", this.removeStaleElements, false);
+        }
+    }
+    stop() {
+        if (this.started) {
+            this.started = false;
+            removeEventListener("turbo:before-cache", this.removeStaleElements, false);
+        }
+    }
+    removeStaleElements() {
+        const staleElements = [...document.querySelectorAll('[data-turbo-cache="false"]')];
+        for (const element of staleElements) {
+            element.remove();
+        }
+    }
+}
+
+class FormSubmitObserver {
+    constructor(delegate) {
+        this.started = false;
+        this.submitCaptured = () => {
+            removeEventListener("submit", this.submitBubbled, false);
+            addEventListener("submit", this.submitBubbled, false);
+        };
+        this.submitBubbled = ((event) => {
+            if (!event.defaultPrevented) {
+                const form = event.target instanceof HTMLFormElement ? event.target : undefined;
+                const submitter = event.submitter || undefined;
+                if (form) {
+                    const method = (submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("formmethod")) || form.getAttribute("method");
+                    if (method != "dialog" && this.delegate.willSubmitForm(form, submitter)) {
+                        event.preventDefault();
+                        this.delegate.formSubmitted(form, submitter);
+                    }
+                }
+            }
+        });
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            addEventListener("submit", this.submitCaptured, true);
+            this.started = true;
+        }
+    }
+    stop() {
+        if (this.started) {
+            removeEventListener("submit", this.submitCaptured, true);
+            this.started = false;
+        }
+    }
+}
+
+class FrameRedirector {
+    constructor(element) {
+        this.element = element;
+        this.linkInterceptor = new LinkInterceptor(this, element);
+        this.formInterceptor = new FormInterceptor(this, element);
+    }
+    start() {
+        this.linkInterceptor.start();
+        this.formInterceptor.start();
+    }
+    stop() {
+        this.linkInterceptor.stop();
+        this.formInterceptor.stop();
+    }
+    shouldInterceptLinkClick(element, url) {
+        return this.shouldRedirect(element);
+    }
+    linkClickIntercepted(element, url) {
+        const frame = this.findFrameElement(element);
+        if (frame) {
+            frame.delegate.linkClickIntercepted(element, url);
+        }
+    }
+    shouldInterceptFormSubmission(element, submitter) {
+        return this.shouldSubmit(element, submitter);
+    }
+    formSubmissionIntercepted(element, submitter) {
+        const frame = this.findFrameElement(element, submitter);
+        if (frame) {
+            frame.removeAttribute("reloadable");
+            frame.delegate.formSubmissionIntercepted(element, submitter);
+        }
+    }
+    shouldSubmit(form, submitter) {
+        var _a;
+        const action = getAction(form, submitter);
+        const meta = this.element.ownerDocument.querySelector(`meta[name="turbo-root"]`);
+        const rootLocation = expandURL((_a = meta === null || meta === void 0 ? void 0 : meta.content) !== null && _a !== void 0 ? _a : "/");
+        return this.shouldRedirect(form, submitter) && locationIsVisitable(action, rootLocation);
+    }
+    shouldRedirect(element, submitter) {
+        const frame = this.findFrameElement(element, submitter);
+        return frame ? frame != element.closest("turbo-frame") : false;
+    }
+    findFrameElement(element, submitter) {
+        const id = (submitter === null || submitter === void 0 ? void 0 : submitter.getAttribute("data-turbo-frame")) || element.getAttribute("data-turbo-frame");
+        if (id && id != "_top") {
+            const frame = this.element.querySelector(`#${id}:not([disabled])`);
+            if (frame instanceof FrameElement) {
+                return frame;
+            }
+        }
+    }
+}
+
+class History {
+    constructor(delegate) {
+        this.restorationIdentifier = uuid();
+        this.restorationData = {};
+        this.started = false;
+        this.pageLoaded = false;
+        this.onPopState = (event) => {
+            if (this.shouldHandlePopState()) {
+                const { turbo } = event.state || {};
+                if (turbo) {
+                    this.location = new URL(window.location.href);
+                    const { restorationIdentifier } = turbo;
+                    this.restorationIdentifier = restorationIdentifier;
+                    this.delegate.historyPoppedToLocationWithRestorationIdentifier(this.location, restorationIdentifier);
+                }
+            }
+        };
+        this.onPageLoad = async (event) => {
+            await nextMicrotask();
+            this.pageLoaded = true;
+        };
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            addEventListener("popstate", this.onPopState, false);
+            addEventListener("load", this.onPageLoad, false);
+            this.started = true;
+            this.replace(new URL(window.location.href));
+        }
+    }
+    stop() {
+        if (this.started) {
+            removeEventListener("popstate", this.onPopState, false);
+            removeEventListener("load", this.onPageLoad, false);
+            this.started = false;
+        }
+    }
+    push(location, restorationIdentifier) {
+        this.update(history.pushState, location, restorationIdentifier);
+    }
+    replace(location, restorationIdentifier) {
+        this.update(history.replaceState, location, restorationIdentifier);
+    }
+    update(method, location, restorationIdentifier = uuid()) {
+        const state = { turbo: { restorationIdentifier } };
+        method.call(history, state, "", location.href);
+        this.location = location;
+        this.restorationIdentifier = restorationIdentifier;
+    }
+    getRestorationDataForIdentifier(restorationIdentifier) {
+        return this.restorationData[restorationIdentifier] || {};
+    }
+    updateRestorationData(additionalData) {
+        const { restorationIdentifier } = this;
+        const restorationData = this.restorationData[restorationIdentifier];
+        this.restorationData[restorationIdentifier] = Object.assign(Object.assign({}, restorationData), additionalData);
+    }
+    assumeControlOfScrollRestoration() {
+        var _a;
+        if (!this.previousScrollRestoration) {
+            this.previousScrollRestoration = (_a = history.scrollRestoration) !== null && _a !== void 0 ? _a : "auto";
+            history.scrollRestoration = "manual";
+        }
+    }
+    relinquishControlOfScrollRestoration() {
+        if (this.previousScrollRestoration) {
+            history.scrollRestoration = this.previousScrollRestoration;
+            delete this.previousScrollRestoration;
+        }
+    }
+    shouldHandlePopState() {
+        return this.pageIsLoaded();
+    }
+    pageIsLoaded() {
+        return this.pageLoaded || document.readyState == "complete";
+    }
+}
+
+class LinkClickObserver {
+    constructor(delegate) {
+        this.started = false;
+        this.clickCaptured = () => {
+            removeEventListener("click", this.clickBubbled, false);
+            addEventListener("click", this.clickBubbled, false);
+        };
+        this.clickBubbled = (event) => {
+            if (this.clickEventIsSignificant(event)) {
+                const target = (event.composedPath && event.composedPath()[0]) || event.target;
+                const link = this.findLinkFromClickTarget(target);
+                if (link) {
+                    const location = this.getLocationForLink(link);
+                    if (this.delegate.willFollowLinkToLocation(link, location)) {
+                        event.preventDefault();
+                        this.delegate.followedLinkToLocation(link, location);
+                    }
+                }
+            }
+        };
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            addEventListener("click", this.clickCaptured, true);
+            this.started = true;
+        }
+    }
+    stop() {
+        if (this.started) {
+            removeEventListener("click", this.clickCaptured, true);
+            this.started = false;
+        }
+    }
+    clickEventIsSignificant(event) {
+        return !((event.target && event.target.isContentEditable)
+            || event.defaultPrevented
+            || event.which > 1
+            || event.altKey
+            || event.ctrlKey
+            || event.metaKey
+            || event.shiftKey);
+    }
+    findLinkFromClickTarget(target) {
+        if (target instanceof Element) {
+            return target.closest("a[href]:not([target^=_]):not([download])");
+        }
+    }
+    getLocationForLink(link) {
+        return expandURL(link.getAttribute("href") || "");
+    }
+}
+
+function isAction(action) {
+    return action == "advance" || action == "replace" || action == "restore";
+}
+
+class Navigator {
+    constructor(delegate) {
+        this.delegate = delegate;
+    }
+    proposeVisit(location, options = {}) {
+        if (this.delegate.allowsVisitingLocationWithAction(location, options.action)) {
+            if (locationIsVisitable(location, this.view.snapshot.rootLocation)) {
+                this.delegate.visitProposedToLocation(location, options);
+            }
+            else {
+                window.location.href = location.toString();
+            }
+        }
+    }
+    startVisit(locatable, restorationIdentifier, options = {}) {
+        this.stop();
+        this.currentVisit = new Visit(this, expandURL(locatable), restorationIdentifier, Object.assign({ referrer: this.location }, options));
+        this.currentVisit.start();
+    }
+    submitForm(form, submitter) {
+        this.stop();
+        this.formSubmission = new FormSubmission(this, form, submitter, true);
+        this.formSubmission.start();
+    }
+    stop() {
+        if (this.formSubmission) {
+            this.formSubmission.stop();
+            delete this.formSubmission;
+        }
+        if (this.currentVisit) {
+            this.currentVisit.cancel();
+            delete this.currentVisit;
+        }
+    }
+    get adapter() {
+        return this.delegate.adapter;
+    }
+    get view() {
+        return this.delegate.view;
+    }
+    get history() {
+        return this.delegate.history;
+    }
+    formSubmissionStarted(formSubmission) {
+        if (typeof this.adapter.formSubmissionStarted === 'function') {
+            this.adapter.formSubmissionStarted(formSubmission);
+        }
+    }
+    async formSubmissionSucceededWithResponse(formSubmission, fetchResponse) {
+        if (formSubmission == this.formSubmission) {
+            const responseHTML = await fetchResponse.responseHTML;
+            if (responseHTML) {
+                if (formSubmission.method != FetchMethod.get) {
+                    this.view.clearSnapshotCache();
+                }
+                const { statusCode, redirected } = fetchResponse;
+                const action = this.getActionForFormSubmission(formSubmission);
+                const visitOptions = { action, response: { statusCode, responseHTML, redirected } };
+                this.proposeVisit(fetchResponse.location, visitOptions);
+            }
+        }
+    }
+    async formSubmissionFailedWithResponse(formSubmission, fetchResponse) {
+        const responseHTML = await fetchResponse.responseHTML;
+        if (responseHTML) {
+            const snapshot = PageSnapshot.fromHTMLString(responseHTML);
+            if (fetchResponse.serverError) {
+                await this.view.renderError(snapshot);
+            }
+            else {
+                await this.view.renderPage(snapshot);
+            }
+            this.view.scrollToTop();
+            this.view.clearSnapshotCache();
+        }
+    }
+    formSubmissionErrored(formSubmission, error) {
+        console.error(error);
+    }
+    formSubmissionFinished(formSubmission) {
+        if (typeof this.adapter.formSubmissionFinished === 'function') {
+            this.adapter.formSubmissionFinished(formSubmission);
+        }
+    }
+    visitStarted(visit) {
+        this.delegate.visitStarted(visit);
+    }
+    visitCompleted(visit) {
+        this.delegate.visitCompleted(visit);
+    }
+    locationWithActionIsSamePage(location, action) {
+        const anchor = getAnchor(location);
+        const currentAnchor = getAnchor(this.view.lastRenderedLocation);
+        const isRestorationToTop = action === 'restore' && typeof anchor === 'undefined';
+        return action !== "replace" &&
+            getRequestURL(location) === getRequestURL(this.view.lastRenderedLocation) &&
+            (isRestorationToTop || (anchor != null && anchor !== currentAnchor));
+    }
+    visitScrolledToSamePageLocation(oldURL, newURL) {
+        this.delegate.visitScrolledToSamePageLocation(oldURL, newURL);
+    }
+    get location() {
+        return this.history.location;
+    }
+    get restorationIdentifier() {
+        return this.history.restorationIdentifier;
+    }
+    getActionForFormSubmission(formSubmission) {
+        const { formElement, submitter } = formSubmission;
+        const action = getAttribute("data-turbo-action", submitter, formElement);
+        return isAction(action) ? action : "advance";
+    }
+}
+
+var PageStage;
+(function (PageStage) {
+    PageStage[PageStage["initial"] = 0] = "initial";
+    PageStage[PageStage["loading"] = 1] = "loading";
+    PageStage[PageStage["interactive"] = 2] = "interactive";
+    PageStage[PageStage["complete"] = 3] = "complete";
+})(PageStage || (PageStage = {}));
+class PageObserver {
+    constructor(delegate) {
+        this.stage = PageStage.initial;
+        this.started = false;
+        this.interpretReadyState = () => {
+            const { readyState } = this;
+            if (readyState == "interactive") {
+                this.pageIsInteractive();
+            }
+            else if (readyState == "complete") {
+                this.pageIsComplete();
+            }
+        };
+        this.pageWillUnload = () => {
+            this.delegate.pageWillUnload();
+        };
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            if (this.stage == PageStage.initial) {
+                this.stage = PageStage.loading;
+            }
+            document.addEventListener("readystatechange", this.interpretReadyState, false);
+            addEventListener("pagehide", this.pageWillUnload, false);
+            this.started = true;
+        }
+    }
+    stop() {
+        if (this.started) {
+            document.removeEventListener("readystatechange", this.interpretReadyState, false);
+            removeEventListener("pagehide", this.pageWillUnload, false);
+            this.started = false;
+        }
+    }
+    pageIsInteractive() {
+        if (this.stage == PageStage.loading) {
+            this.stage = PageStage.interactive;
+            this.delegate.pageBecameInteractive();
+        }
+    }
+    pageIsComplete() {
+        this.pageIsInteractive();
+        if (this.stage == PageStage.interactive) {
+            this.stage = PageStage.complete;
+            this.delegate.pageLoaded();
+        }
+    }
+    get readyState() {
+        return document.readyState;
+    }
+}
+
+class ScrollObserver {
+    constructor(delegate) {
+        this.started = false;
+        this.onScroll = () => {
+            this.updatePosition({ x: window.pageXOffset, y: window.pageYOffset });
+        };
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            addEventListener("scroll", this.onScroll, false);
+            this.onScroll();
+            this.started = true;
+        }
+    }
+    stop() {
+        if (this.started) {
+            removeEventListener("scroll", this.onScroll, false);
+            this.started = false;
+        }
+    }
+    updatePosition(position) {
+        this.delegate.scrollPositionChanged(position);
+    }
+}
+
+class StreamObserver {
+    constructor(delegate) {
+        this.sources = new Set;
+        this.started = false;
+        this.inspectFetchResponse = ((event) => {
+            const response = fetchResponseFromEvent(event);
+            if (response && fetchResponseIsStream(response)) {
+                event.preventDefault();
+                this.receiveMessageResponse(response);
+            }
+        });
+        this.receiveMessageEvent = (event) => {
+            if (this.started && typeof event.data == "string") {
+                this.receiveMessageHTML(event.data);
+            }
+        };
+        this.delegate = delegate;
+    }
+    start() {
+        if (!this.started) {
+            this.started = true;
+            addEventListener("turbo:before-fetch-response", this.inspectFetchResponse, false);
+        }
+    }
+    stop() {
+        if (this.started) {
+            this.started = false;
+            removeEventListener("turbo:before-fetch-response", this.inspectFetchResponse, false);
+        }
+    }
+    connectStreamSource(source) {
+        if (!this.streamSourceIsConnected(source)) {
+            this.sources.add(source);
+            source.addEventListener("message", this.receiveMessageEvent, false);
+        }
+    }
+    disconnectStreamSource(source) {
+        if (this.streamSourceIsConnected(source)) {
+            this.sources.delete(source);
+            source.removeEventListener("message", this.receiveMessageEvent, false);
+        }
+    }
+    streamSourceIsConnected(source) {
+        return this.sources.has(source);
+    }
+    async receiveMessageResponse(response) {
+        const html = await response.responseHTML;
+        if (html) {
+            this.receiveMessageHTML(html);
+        }
+    }
+    receiveMessageHTML(html) {
+        this.delegate.receivedMessageFromStream(new StreamMessage(html));
+    }
+}
+function fetchResponseFromEvent(event) {
+    var _a;
+    const fetchResponse = (_a = event.detail) === null || _a === void 0 ? void 0 : _a.fetchResponse;
+    if (fetchResponse instanceof FetchResponse) {
+        return fetchResponse;
+    }
+}
+function fetchResponseIsStream(response) {
+    var _a;
+    const contentType = (_a = response.contentType) !== null && _a !== void 0 ? _a : "";
+    return contentType.startsWith(StreamMessage.contentType);
+}
+
+class ErrorRenderer extends Renderer {
+    async render() {
+        this.replaceHeadAndBody();
+        this.activateScriptElements();
+    }
+    replaceHeadAndBody() {
+        const { documentElement, head, body } = document;
+        documentElement.replaceChild(this.newHead, head);
+        documentElement.replaceChild(this.newElement, body);
+    }
+    activateScriptElements() {
+        for (const replaceableElement of this.scriptElements) {
+            const parentNode = replaceableElement.parentNode;
+            if (parentNode) {
+                const element = this.createScriptElement(replaceableElement);
+                parentNode.replaceChild(element, replaceableElement);
+            }
+        }
+    }
+    get newHead() {
+        return this.newSnapshot.headSnapshot.element;
+    }
+    get scriptElements() {
+        return [...document.documentElement.querySelectorAll("script")];
+    }
+}
+
+class PageRenderer extends Renderer {
+    get shouldRender() {
+        return this.newSnapshot.isVisitable && this.trackedElementsAreIdentical;
+    }
+    prepareToRender() {
+        this.mergeHead();
+    }
+    async render() {
+        if (this.willRender) {
+            this.replaceBody();
+        }
+    }
+    finishRendering() {
+        super.finishRendering();
+        if (!this.isPreview) {
+            this.focusFirstAutofocusableElement();
+        }
+    }
+    get currentHeadSnapshot() {
+        return this.currentSnapshot.headSnapshot;
+    }
+    get newHeadSnapshot() {
+        return this.newSnapshot.headSnapshot;
+    }
+    get newElement() {
+        return this.newSnapshot.element;
+    }
+    mergeHead() {
+        this.copyNewHeadStylesheetElements();
+        this.copyNewHeadScriptElements();
+        this.removeCurrentHeadProvisionalElements();
+        this.copyNewHeadProvisionalElements();
+    }
+    replaceBody() {
+        this.preservingPermanentElements(() => {
+            this.activateNewBody();
+            this.assignNewBody();
+        });
+    }
+    get trackedElementsAreIdentical() {
+        return this.currentHeadSnapshot.trackedElementSignature == this.newHeadSnapshot.trackedElementSignature;
+    }
+    copyNewHeadStylesheetElements() {
+        for (const element of this.newHeadStylesheetElements) {
+            document.head.appendChild(element);
+        }
+    }
+    copyNewHeadScriptElements() {
+        for (const element of this.newHeadScriptElements) {
+            document.head.appendChild(this.createScriptElement(element));
+        }
+    }
+    removeCurrentHeadProvisionalElements() {
+        for (const element of this.currentHeadProvisionalElements) {
+            document.head.removeChild(element);
+        }
+    }
+    copyNewHeadProvisionalElements() {
+        for (const element of this.newHeadProvisionalElements) {
+            document.head.appendChild(element);
+        }
+    }
+    activateNewBody() {
+        document.adoptNode(this.newElement);
+        this.activateNewBodyScriptElements();
+    }
+    activateNewBodyScriptElements() {
+        for (const inertScriptElement of this.newBodyScriptElements) {
+            const activatedScriptElement = this.createScriptElement(inertScriptElement);
+            inertScriptElement.replaceWith(activatedScriptElement);
+        }
+    }
+    assignNewBody() {
+        if (document.body && this.newElement instanceof HTMLBodyElement) {
+            document.body.replaceWith(this.newElement);
+        }
+        else {
+            document.documentElement.appendChild(this.newElement);
+        }
+    }
+    get newHeadStylesheetElements() {
+        return this.newHeadSnapshot.getStylesheetElementsNotInSnapshot(this.currentHeadSnapshot);
+    }
+    get newHeadScriptElements() {
+        return this.newHeadSnapshot.getScriptElementsNotInSnapshot(this.currentHeadSnapshot);
+    }
+    get currentHeadProvisionalElements() {
+        return this.currentHeadSnapshot.provisionalElements;
+    }
+    get newHeadProvisionalElements() {
+        return this.newHeadSnapshot.provisionalElements;
+    }
+    get newBodyScriptElements() {
+        return this.newElement.querySelectorAll("script");
+    }
+}
+
+class SnapshotCache {
+    constructor(size) {
+        this.keys = [];
+        this.snapshots = {};
+        this.size = size;
+    }
+    has(location) {
+        return toCacheKey(location) in this.snapshots;
+    }
+    get(location) {
+        if (this.has(location)) {
+            const snapshot = this.read(location);
+            this.touch(location);
+            return snapshot;
+        }
+    }
+    put(location, snapshot) {
+        this.write(location, snapshot);
+        this.touch(location);
+        return snapshot;
+    }
+    clear() {
+        this.snapshots = {};
+    }
+    read(location) {
+        return this.snapshots[toCacheKey(location)];
+    }
+    write(location, snapshot) {
+        this.snapshots[toCacheKey(location)] = snapshot;
+    }
+    touch(location) {
+        const key = toCacheKey(location);
+        const index = this.keys.indexOf(key);
+        if (index > -1)
+            this.keys.splice(index, 1);
+        this.keys.unshift(key);
+        this.trim();
+    }
+    trim() {
+        for (const key of this.keys.splice(this.size)) {
+            delete this.snapshots[key];
+        }
+    }
+}
+
+class PageView extends View {
+    constructor() {
+        super(...arguments);
+        this.snapshotCache = new SnapshotCache(10);
+        this.lastRenderedLocation = new URL(location.href);
+    }
+    renderPage(snapshot, isPreview = false, willRender = true) {
+        const renderer = new PageRenderer(this.snapshot, snapshot, isPreview, willRender);
+        return this.render(renderer);
+    }
+    renderError(snapshot) {
+        const renderer = new ErrorRenderer(this.snapshot, snapshot, false);
+        return this.render(renderer);
+    }
+    clearSnapshotCache() {
+        this.snapshotCache.clear();
+    }
+    async cacheSnapshot() {
+        if (this.shouldCacheSnapshot) {
+            this.delegate.viewWillCacheSnapshot();
+            const { snapshot, lastRenderedLocation: location } = this;
+            await nextEventLoopTick();
+            const cachedSnapshot = snapshot.clone();
+            this.snapshotCache.put(location, cachedSnapshot);
+            return cachedSnapshot;
+        }
+    }
+    getCachedSnapshotForLocation(location) {
+        return this.snapshotCache.get(location);
+    }
+    get snapshot() {
+        return PageSnapshot.fromElement(this.element);
+    }
+    get shouldCacheSnapshot() {
+        return this.snapshot.isCacheable;
+    }
+}
+
+class Session {
+    constructor() {
+        this.navigator = new Navigator(this);
+        this.history = new History(this);
+        this.view = new PageView(this, document.documentElement);
+        this.adapter = new BrowserAdapter(this);
+        this.pageObserver = new PageObserver(this);
+        this.cacheObserver = new CacheObserver();
+        this.linkClickObserver = new LinkClickObserver(this);
+        this.formSubmitObserver = new FormSubmitObserver(this);
+        this.scrollObserver = new ScrollObserver(this);
+        this.streamObserver = new StreamObserver(this);
+        this.frameRedirector = new FrameRedirector(document.documentElement);
+        this.drive = true;
+        this.enabled = true;
+        this.progressBarDelay = 500;
+        this.started = false;
+    }
+    start() {
+        if (!this.started) {
+            this.pageObserver.start();
+            this.cacheObserver.start();
+            this.linkClickObserver.start();
+            this.formSubmitObserver.start();
+            this.scrollObserver.start();
+            this.streamObserver.start();
+            this.frameRedirector.start();
+            this.history.start();
+            this.started = true;
+            this.enabled = true;
+        }
+    }
+    disable() {
+        this.enabled = false;
+    }
+    stop() {
+        if (this.started) {
+            this.pageObserver.stop();
+            this.cacheObserver.stop();
+            this.linkClickObserver.stop();
+            this.formSubmitObserver.stop();
+            this.scrollObserver.stop();
+            this.streamObserver.stop();
+            this.frameRedirector.stop();
+            this.history.stop();
+            this.started = false;
+        }
+    }
+    registerAdapter(adapter) {
+        this.adapter = adapter;
+    }
+    visit(location, options = {}) {
+        this.navigator.proposeVisit(expandURL(location), options);
+    }
+    connectStreamSource(source) {
+        this.streamObserver.connectStreamSource(source);
+    }
+    disconnectStreamSource(source) {
+        this.streamObserver.disconnectStreamSource(source);
+    }
+    renderStreamMessage(message) {
+        document.documentElement.appendChild(StreamMessage.wrap(message).fragment);
+    }
+    clearCache() {
+        this.view.clearSnapshotCache();
+    }
+    setProgressBarDelay(delay) {
+        this.progressBarDelay = delay;
+    }
+    get location() {
+        return this.history.location;
+    }
+    get restorationIdentifier() {
+        return this.history.restorationIdentifier;
+    }
+    historyPoppedToLocationWithRestorationIdentifier(location, restorationIdentifier) {
+        if (this.enabled) {
+            this.navigator.startVisit(location, restorationIdentifier, { action: "restore", historyChanged: true });
+        }
+        else {
+            this.adapter.pageInvalidated();
+        }
+    }
+    scrollPositionChanged(position) {
+        this.history.updateRestorationData({ scrollPosition: position });
+    }
+    willFollowLinkToLocation(link, location) {
+        return this.elementDriveEnabled(link)
+            && locationIsVisitable(location, this.snapshot.rootLocation)
+            && this.applicationAllowsFollowingLinkToLocation(link, location);
+    }
+    followedLinkToLocation(link, location) {
+        const action = this.getActionForLink(link);
+        this.convertLinkWithMethodClickToFormSubmission(link) || this.visit(location.href, { action });
+    }
+    convertLinkWithMethodClickToFormSubmission(link) {
+        const linkMethod = link.getAttribute("data-turbo-method");
+        if (linkMethod) {
+            const form = document.createElement("form");
+            form.method = linkMethod;
+            form.action = link.getAttribute("href") || "undefined";
+            form.hidden = true;
+            if (link.hasAttribute("data-turbo-confirm")) {
+                form.setAttribute("data-turbo-confirm", link.getAttribute("data-turbo-confirm"));
+            }
+            const frame = this.getTargetFrameForLink(link);
+            if (frame) {
+                form.setAttribute("data-turbo-frame", frame);
+                form.addEventListener("turbo:submit-start", () => form.remove());
+            }
+            else {
+                form.addEventListener("submit", () => form.remove());
+            }
+            document.body.appendChild(form);
+            return dispatch("submit", { cancelable: true, target: form });
+        }
+        else {
+            return false;
+        }
+    }
+    allowsVisitingLocationWithAction(location, action) {
+        return this.locationWithActionIsSamePage(location, action) || this.applicationAllowsVisitingLocation(location);
+    }
+    visitProposedToLocation(location, options) {
+        extendURLWithDeprecatedProperties(location);
+        this.adapter.visitProposedToLocation(location, options);
+    }
+    visitStarted(visit) {
+        extendURLWithDeprecatedProperties(visit.location);
+        if (!visit.silent) {
+            this.notifyApplicationAfterVisitingLocation(visit.location, visit.action);
+        }
+    }
+    visitCompleted(visit) {
+        this.notifyApplicationAfterPageLoad(visit.getTimingMetrics());
+    }
+    locationWithActionIsSamePage(location, action) {
+        return this.navigator.locationWithActionIsSamePage(location, action);
+    }
+    visitScrolledToSamePageLocation(oldURL, newURL) {
+        this.notifyApplicationAfterVisitingSamePageLocation(oldURL, newURL);
+    }
+    willSubmitForm(form, submitter) {
+        const action = getAction(form, submitter);
+        return this.elementDriveEnabled(form)
+            && (!submitter || this.elementDriveEnabled(submitter))
+            && locationIsVisitable(expandURL(action), this.snapshot.rootLocation);
+    }
+    formSubmitted(form, submitter) {
+        this.navigator.submitForm(form, submitter);
+    }
+    pageBecameInteractive() {
+        this.view.lastRenderedLocation = this.location;
+        this.notifyApplicationAfterPageLoad();
+    }
+    pageLoaded() {
+        this.history.assumeControlOfScrollRestoration();
+    }
+    pageWillUnload() {
+        this.history.relinquishControlOfScrollRestoration();
+    }
+    receivedMessageFromStream(message) {
+        this.renderStreamMessage(message);
+    }
+    viewWillCacheSnapshot() {
+        var _a;
+        if (!((_a = this.navigator.currentVisit) === null || _a === void 0 ? void 0 : _a.silent)) {
+            this.notifyApplicationBeforeCachingSnapshot();
+        }
+    }
+    allowsImmediateRender({ element }, resume) {
+        const event = this.notifyApplicationBeforeRender(element, resume);
+        return !event.defaultPrevented;
+    }
+    viewRenderedSnapshot(snapshot, isPreview) {
+        this.view.lastRenderedLocation = this.history.location;
+        this.notifyApplicationAfterRender();
+    }
+    viewInvalidated() {
+        this.adapter.pageInvalidated();
+    }
+    frameLoaded(frame) {
+        this.notifyApplicationAfterFrameLoad(frame);
+    }
+    frameRendered(fetchResponse, frame) {
+        this.notifyApplicationAfterFrameRender(fetchResponse, frame);
+    }
+    applicationAllowsFollowingLinkToLocation(link, location) {
+        const event = this.notifyApplicationAfterClickingLinkToLocation(link, location);
+        return !event.defaultPrevented;
+    }
+    applicationAllowsVisitingLocation(location) {
+        const event = this.notifyApplicationBeforeVisitingLocation(location);
+        return !event.defaultPrevented;
+    }
+    notifyApplicationAfterClickingLinkToLocation(link, location) {
+        return dispatch("turbo:click", { target: link, detail: { url: location.href }, cancelable: true });
+    }
+    notifyApplicationBeforeVisitingLocation(location) {
+        return dispatch("turbo:before-visit", { detail: { url: location.href }, cancelable: true });
+    }
+    notifyApplicationAfterVisitingLocation(location, action) {
+        markAsBusy(document.documentElement);
+        return dispatch("turbo:visit", { detail: { url: location.href, action } });
+    }
+    notifyApplicationBeforeCachingSnapshot() {
+        return dispatch("turbo:before-cache");
+    }
+    notifyApplicationBeforeRender(newBody, resume) {
+        return dispatch("turbo:before-render", { detail: { newBody, resume }, cancelable: true });
+    }
+    notifyApplicationAfterRender() {
+        return dispatch("turbo:render");
+    }
+    notifyApplicationAfterPageLoad(timing = {}) {
+        clearBusyState(document.documentElement);
+        return dispatch("turbo:load", { detail: { url: this.location.href, timing } });
+    }
+    notifyApplicationAfterVisitingSamePageLocation(oldURL, newURL) {
+        dispatchEvent(new HashChangeEvent("hashchange", { oldURL: oldURL.toString(), newURL: newURL.toString() }));
+    }
+    notifyApplicationAfterFrameLoad(frame) {
+        return dispatch("turbo:frame-load", { target: frame });
+    }
+    notifyApplicationAfterFrameRender(fetchResponse, frame) {
+        return dispatch("turbo:frame-render", { detail: { fetchResponse }, target: frame, cancelable: true });
+    }
+    elementDriveEnabled(element) {
+        const container = element === null || element === void 0 ? void 0 : element.closest("[data-turbo]");
+        if (this.drive) {
+            if (container) {
+                return container.getAttribute("data-turbo") != "false";
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            if (container) {
+                return container.getAttribute("data-turbo") == "true";
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    getActionForLink(link) {
+        const action = link.getAttribute("data-turbo-action");
+        return isAction(action) ? action : "advance";
+    }
+    getTargetFrameForLink(link) {
+        const frame = link.getAttribute("data-turbo-frame");
+        if (frame) {
+            return frame;
+        }
+        else {
+            const container = link.closest("turbo-frame");
+            if (container) {
+                return container.id;
+            }
+        }
+    }
+    get snapshot() {
+        return this.view.snapshot;
+    }
+}
+function extendURLWithDeprecatedProperties(url) {
+    Object.defineProperties(url, deprecatedLocationPropertyDescriptors);
+}
+const deprecatedLocationPropertyDescriptors = {
+    absoluteURL: {
+        get() {
+            return this.toString();
+        }
+    }
+};
+
+const session = new Session;
+const { navigator: navigator$1 } = session;
+function start() {
+    session.start();
+}
+function registerAdapter(adapter) {
+    session.registerAdapter(adapter);
+}
+function visit(location, options) {
+    session.visit(location, options);
+}
+function connectStreamSource(source) {
+    session.connectStreamSource(source);
+}
+function disconnectStreamSource(source) {
+    session.disconnectStreamSource(source);
+}
+function renderStreamMessage(message) {
+    session.renderStreamMessage(message);
+}
+function clearCache() {
+    session.clearCache();
+}
+function setProgressBarDelay(delay) {
+    session.setProgressBarDelay(delay);
+}
+function setConfirmMethod(confirmMethod) {
+    FormSubmission.confirmMethod = confirmMethod;
+}
+
+var Turbo = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    navigator: navigator$1,
+    session: session,
+    PageRenderer: PageRenderer,
+    PageSnapshot: PageSnapshot,
+    start: start,
+    registerAdapter: registerAdapter,
+    visit: visit,
+    connectStreamSource: connectStreamSource,
+    disconnectStreamSource: disconnectStreamSource,
+    renderStreamMessage: renderStreamMessage,
+    clearCache: clearCache,
+    setProgressBarDelay: setProgressBarDelay,
+    setConfirmMethod: setConfirmMethod
+});
+
+class FrameController {
+    constructor(element) {
+        this.fetchResponseLoaded = (fetchResponse) => { };
+        this.currentFetchRequest = null;
+        this.resolveVisitPromise = () => { };
+        this.connected = false;
+        this.hasBeenLoaded = false;
+        this.settingSourceURL = false;
+        this.element = element;
+        this.view = new FrameView(this, this.element);
+        this.appearanceObserver = new AppearanceObserver(this, this.element);
+        this.linkInterceptor = new LinkInterceptor(this, this.element);
+        this.formInterceptor = new FormInterceptor(this, this.element);
+    }
+    connect() {
+        if (!this.connected) {
+            this.connected = true;
+            this.reloadable = false;
+            if (this.loadingStyle == FrameLoadingStyle.lazy) {
+                this.appearanceObserver.start();
+            }
+            this.linkInterceptor.start();
+            this.formInterceptor.start();
+            this.sourceURLChanged();
+        }
+    }
+    disconnect() {
+        if (this.connected) {
+            this.connected = false;
+            this.appearanceObserver.stop();
+            this.linkInterceptor.stop();
+            this.formInterceptor.stop();
+        }
+    }
+    disabledChanged() {
+        if (this.loadingStyle == FrameLoadingStyle.eager) {
+            this.loadSourceURL();
+        }
+    }
+    sourceURLChanged() {
+        if (this.loadingStyle == FrameLoadingStyle.eager || this.hasBeenLoaded) {
+            this.loadSourceURL();
+        }
+    }
+    loadingStyleChanged() {
+        if (this.loadingStyle == FrameLoadingStyle.lazy) {
+            this.appearanceObserver.start();
+        }
+        else {
+            this.appearanceObserver.stop();
+            this.loadSourceURL();
+        }
+    }
+    async loadSourceURL() {
+        if (!this.settingSourceURL && this.enabled && this.isActive && (this.reloadable || this.sourceURL != this.currentURL)) {
+            const previousURL = this.currentURL;
+            this.currentURL = this.sourceURL;
+            if (this.sourceURL) {
+                try {
+                    this.element.loaded = this.visit(expandURL(this.sourceURL));
+                    this.appearanceObserver.stop();
+                    await this.element.loaded;
+                    this.hasBeenLoaded = true;
+                }
+                catch (error) {
+                    this.currentURL = previousURL;
+                    throw error;
+                }
+            }
+        }
+    }
+    async loadResponse(fetchResponse) {
+        if (fetchResponse.redirected || (fetchResponse.succeeded && fetchResponse.isHTML)) {
+            this.sourceURL = fetchResponse.response.url;
+        }
+        try {
+            const html = await fetchResponse.responseHTML;
+            if (html) {
+                const { body } = parseHTMLDocument(html);
+                const snapshot = new Snapshot(await this.extractForeignFrameElement(body));
+                const renderer = new FrameRenderer(this.view.snapshot, snapshot, false, false);
+                if (this.view.renderPromise)
+                    await this.view.renderPromise;
+                await this.view.render(renderer);
+                session.frameRendered(fetchResponse, this.element);
+                session.frameLoaded(this.element);
+                this.fetchResponseLoaded(fetchResponse);
+            }
+        }
+        catch (error) {
+            console.error(error);
+            this.view.invalidate();
+        }
+        finally {
+            this.fetchResponseLoaded = () => { };
+        }
+    }
+    elementAppearedInViewport(element) {
+        this.loadSourceURL();
+    }
+    shouldInterceptLinkClick(element, url) {
+        if (element.hasAttribute("data-turbo-method")) {
+            return false;
+        }
+        else {
+            return this.shouldInterceptNavigation(element);
+        }
+    }
+    linkClickIntercepted(element, url) {
+        this.reloadable = true;
+        this.navigateFrame(element, url);
+    }
+    shouldInterceptFormSubmission(element, submitter) {
+        return this.shouldInterceptNavigation(element, submitter);
+    }
+    formSubmissionIntercepted(element, submitter) {
+        if (this.formSubmission) {
+            this.formSubmission.stop();
+        }
+        this.reloadable = false;
+        this.formSubmission = new FormSubmission(this, element, submitter);
+        const { fetchRequest } = this.formSubmission;
+        this.prepareHeadersForRequest(fetchRequest.headers, fetchRequest);
+        this.formSubmission.start();
+    }
+    prepareHeadersForRequest(headers, request) {
+        headers["Turbo-Frame"] = this.id;
+    }
+    requestStarted(request) {
+        markAsBusy(this.element);
+    }
+    requestPreventedHandlingResponse(request, response) {
+        this.resolveVisitPromise();
+    }
+    async requestSucceededWithResponse(request, response) {
+        await this.loadResponse(response);
+        this.resolveVisitPromise();
+    }
+    requestFailedWithResponse(request, response) {
+        console.error(response);
+        this.resolveVisitPromise();
+    }
+    requestErrored(request, error) {
+        console.error(error);
+        this.resolveVisitPromise();
+    }
+    requestFinished(request) {
+        clearBusyState(this.element);
+    }
+    formSubmissionStarted({ formElement }) {
+        markAsBusy(formElement, this.findFrameElement(formElement));
+    }
+    formSubmissionSucceededWithResponse(formSubmission, response) {
+        const frame = this.findFrameElement(formSubmission.formElement, formSubmission.submitter);
+        this.proposeVisitIfNavigatedWithAction(frame, formSubmission.formElement, formSubmission.submitter);
+        frame.delegate.loadResponse(response);
+    }
+    formSubmissionFailedWithResponse(formSubmission, fetchResponse) {
+        this.element.delegate.loadResponse(fetchResponse);
+    }
+    formSubmissionErrored(formSubmission, error) {
+        console.error(error);
+    }
+    formSubmissionFinished({ formElement }) {
+        clearBusyState(formElement, this.findFrameElement(formElement));
+    }
+    allowsImmediateRender(snapshot, resume) {
+        return true;
+    }
+    viewRenderedSnapshot(snapshot, isPreview) {
+    }
+    viewInvalidated() {
+    }
+    async visit(url) {
+        var _a;
+        const request = new FetchRequest(this, FetchMethod.get, url, new URLSearchParams, this.element);
+        (_a = this.currentFetchRequest) === null || _a === void 0 ? void 0 : _a.cancel();
+        this.currentFetchRequest = request;
+        return new Promise(resolve => {
+            this.resolveVisitPromise = () => {
+                this.resolveVisitPromise = () => { };
+                this.currentFetchRequest = null;
+                resolve();
+            };
+            request.perform();
+        });
+    }
+    navigateFrame(element, url, submitter) {
+        const frame = this.findFrameElement(element, submitter);
+        this.proposeVisitIfNavigatedWithAction(frame, element, submitter);
+        frame.setAttribute("reloadable", "");
+        frame.src = url;
+    }
+    proposeVisitIfNavigatedWithAction(frame, element, submitter) {
+        const action = getAttribute("data-turbo-action", submitter, element, frame);
+        if (isAction(action)) {
+            const { visitCachedSnapshot } = new SnapshotSubstitution(frame);
+            frame.delegate.fetchResponseLoaded = (fetchResponse) => {
+                if (frame.src) {
+                    const { statusCode, redirected } = fetchResponse;
+                    const responseHTML = frame.ownerDocument.documentElement.outerHTML;
+                    const response = { statusCode, redirected, responseHTML };
+                    session.visit(frame.src, { action, response, visitCachedSnapshot, willRender: false });
+                }
+            };
+        }
+    }
+    findFrameElement(element, submitter) {
+        var _a;
+        const id = getAttribute("data-turbo-frame", submitter, element) || this.element.getAttribute("target");
+        return (_a = getFrameElementById(id)) !== null && _a !== void 0 ? _a : this.element;
+    }
+    async extractForeignFrameElement(container) {
+        let element;
+        const id = CSS.escape(this.id);
+        try {
+            if (element = activateElement(container.querySelector(`turbo-frame#${id}`), this.currentURL)) {
+                return element;
+            }
+            if (element = activateElement(container.querySelector(`turbo-frame[src][recurse~=${id}]`), this.currentURL)) {
+                await element.loaded;
+                return await this.extractForeignFrameElement(element);
+            }
+            console.error(`Response has no matching <turbo-frame id="${id}"> element`);
+        }
+        catch (error) {
+            console.error(error);
+        }
+        return new FrameElement();
+    }
+    formActionIsVisitable(form, submitter) {
+        const action = getAction(form, submitter);
+        return locationIsVisitable(expandURL(action), this.rootLocation);
+    }
+    shouldInterceptNavigation(element, submitter) {
+        const id = getAttribute("data-turbo-frame", submitter, element) || this.element.getAttribute("target");
+        if (element instanceof HTMLFormElement && !this.formActionIsVisitable(element, submitter)) {
+            return false;
+        }
+        if (!this.enabled || id == "_top") {
+            return false;
+        }
+        if (id) {
+            const frameElement = getFrameElementById(id);
+            if (frameElement) {
+                return !frameElement.disabled;
+            }
+        }
+        if (!session.elementDriveEnabled(element)) {
+            return false;
+        }
+        if (submitter && !session.elementDriveEnabled(submitter)) {
+            return false;
+        }
+        return true;
+    }
+    get id() {
+        return this.element.id;
+    }
+    get enabled() {
+        return !this.element.disabled;
+    }
+    get sourceURL() {
+        if (this.element.src) {
+            return this.element.src;
+        }
+    }
+    get reloadable() {
+        const frame = this.findFrameElement(this.element);
+        return frame.hasAttribute("reloadable");
+    }
+    set reloadable(value) {
+        const frame = this.findFrameElement(this.element);
+        if (value) {
+            frame.setAttribute("reloadable", "");
+        }
+        else {
+            frame.removeAttribute("reloadable");
+        }
+    }
+    set sourceURL(sourceURL) {
+        this.settingSourceURL = true;
+        this.element.src = sourceURL !== null && sourceURL !== void 0 ? sourceURL : null;
+        this.currentURL = this.element.src;
+        this.settingSourceURL = false;
+    }
+    get loadingStyle() {
+        return this.element.loading;
+    }
+    get isLoading() {
+        return this.formSubmission !== undefined || this.resolveVisitPromise() !== undefined;
+    }
+    get isActive() {
+        return this.element.isActive && this.connected;
+    }
+    get rootLocation() {
+        var _a;
+        const meta = this.element.ownerDocument.querySelector(`meta[name="turbo-root"]`);
+        const root = (_a = meta === null || meta === void 0 ? void 0 : meta.content) !== null && _a !== void 0 ? _a : "/";
+        return expandURL(root);
+    }
+}
+class SnapshotSubstitution {
+    constructor(element) {
+        this.visitCachedSnapshot = ({ element }) => {
+            var _a;
+            const { id, clone } = this;
+            (_a = element.querySelector("#" + id)) === null || _a === void 0 ? void 0 : _a.replaceWith(clone);
+        };
+        this.clone = element.cloneNode(true);
+        this.id = element.id;
+    }
+}
+function getFrameElementById(id) {
+    if (id != null) {
+        const element = document.getElementById(id);
+        if (element instanceof FrameElement) {
+            return element;
+        }
+    }
+}
+function activateElement(element, currentURL) {
+    if (element) {
+        const src = element.getAttribute("src");
+        if (src != null && currentURL != null && urlsAreEqual(src, currentURL)) {
+            throw new Error(`Matching <turbo-frame id="${element.id}"> element has a source URL which references itself`);
+        }
+        if (element.ownerDocument !== document) {
+            element = document.importNode(element, true);
+        }
+        if (element instanceof FrameElement) {
+            element.connectedCallback();
+            element.disconnectedCallback();
+            return element;
+        }
+    }
+}
+
+const StreamActions = {
+    after() {
+        this.targetElements.forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.insertBefore(this.templateContent, e.nextSibling); });
+    },
+    append() {
+        this.removeDuplicateTargetChildren();
+        this.targetElements.forEach(e => e.append(this.templateContent));
+    },
+    before() {
+        this.targetElements.forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.insertBefore(this.templateContent, e); });
+    },
+    prepend() {
+        this.removeDuplicateTargetChildren();
+        this.targetElements.forEach(e => e.prepend(this.templateContent));
+    },
+    remove() {
+        this.targetElements.forEach(e => e.remove());
+    },
+    replace() {
+        this.targetElements.forEach(e => e.replaceWith(this.templateContent));
+    },
+    update() {
+        this.targetElements.forEach(e => {
+            e.innerHTML = "";
+            e.append(this.templateContent);
+        });
+    }
+};
+
+class StreamElement extends HTMLElement {
+    async connectedCallback() {
+        try {
+            await this.render();
+        }
+        catch (error) {
+            console.error(error);
+        }
+        finally {
+            this.disconnect();
+        }
+    }
+    async render() {
+        var _a;
+        return (_a = this.renderPromise) !== null && _a !== void 0 ? _a : (this.renderPromise = (async () => {
+            if (this.dispatchEvent(this.beforeRenderEvent)) {
+                await nextAnimationFrame();
+                this.performAction();
+            }
+        })());
+    }
+    disconnect() {
+        try {
+            this.remove();
+        }
+        catch (_a) { }
+    }
+    removeDuplicateTargetChildren() {
+        this.duplicateChildren.forEach(c => c.remove());
+    }
+    get duplicateChildren() {
+        var _a;
+        const existingChildren = this.targetElements.flatMap(e => [...e.children]).filter(c => !!c.id);
+        const newChildrenIds = [...(_a = this.templateContent) === null || _a === void 0 ? void 0 : _a.children].filter(c => !!c.id).map(c => c.id);
+        return existingChildren.filter(c => newChildrenIds.includes(c.id));
+    }
+    get performAction() {
+        if (this.action) {
+            const actionFunction = StreamActions[this.action];
+            if (actionFunction) {
+                return actionFunction;
+            }
+            this.raise("unknown action");
+        }
+        this.raise("action attribute is missing");
+    }
+    get targetElements() {
+        if (this.target) {
+            return this.targetElementsById;
+        }
+        else if (this.targets) {
+            return this.targetElementsByQuery;
+        }
+        else {
+            this.raise("target or targets attribute is missing");
+        }
+    }
+    get templateContent() {
+        return this.templateElement.content.cloneNode(true);
+    }
+    get templateElement() {
+        if (this.firstElementChild instanceof HTMLTemplateElement) {
+            return this.firstElementChild;
+        }
+        this.raise("first child element must be a <template> element");
+    }
+    get action() {
+        return this.getAttribute("action");
+    }
+    get target() {
+        return this.getAttribute("target");
+    }
+    get targets() {
+        return this.getAttribute("targets");
+    }
+    raise(message) {
+        throw new Error(`${this.description}: ${message}`);
+    }
+    get description() {
+        var _a, _b;
+        return (_b = ((_a = this.outerHTML.match(/<[^>]+>/)) !== null && _a !== void 0 ? _a : [])[0]) !== null && _b !== void 0 ? _b : "<turbo-stream>";
+    }
+    get beforeRenderEvent() {
+        return new CustomEvent("turbo:before-stream-render", { bubbles: true, cancelable: true });
+    }
+    get targetElementsById() {
+        var _a;
+        const element = (_a = this.ownerDocument) === null || _a === void 0 ? void 0 : _a.getElementById(this.target);
+        if (element !== null) {
+            return [element];
+        }
+        else {
+            return [];
+        }
+    }
+    get targetElementsByQuery() {
+        var _a;
+        const elements = (_a = this.ownerDocument) === null || _a === void 0 ? void 0 : _a.querySelectorAll(this.targets);
+        if (elements.length !== 0) {
+            return Array.prototype.slice.call(elements);
+        }
+        else {
+            return [];
+        }
+    }
+}
+
+FrameElement.delegateConstructor = FrameController;
+customElements.define("turbo-frame", FrameElement);
+customElements.define("turbo-stream", StreamElement);
+
+(() => {
+    let element = document.currentScript;
+    if (!element)
+        return;
+    if (element.hasAttribute("data-turbo-suppress-warning"))
+        return;
+    while (element = element.parentElement) {
+        if (element == document.body) {
+            return console.warn(unindent `
         You are loading Turbo from a <script> element inside the <body> element. This is probably not what you meant to do!
 
         Load your application’s JavaScript bundle inside the <head> element instead. <script> elements in <body> are evaluated with each page change.

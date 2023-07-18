@@ -152,7 +152,7 @@ mix.scripts(' resources/assets/js/auto_fill/auto_fill.js', 'public/assets/js/aut
 
 //front page js
 mix.js([
-    'resources/assets/js/turbo.js',
+    // 'resources/assets/js/turbo.js',
     'resources/assets/js/custom/helper.js',
     'resources/assets/js/custom/input_price_format.js',
     'resources/assets/js/fronts/sliders/slider.js',

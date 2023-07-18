@@ -108,7 +108,7 @@
     padding-top: 15px !important;
     padding-bottom: 15px !important;
     padding-left:55px;
-    padding-left:55px;
+    padding-right:55px;
     transition: all 0.5s ease-in-out;
     z-index: 2 !important;
     background-color: #EEDFD0;
@@ -166,7 +166,7 @@ a#nav-flex {
 }
 
 h3#logos-h {
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 10px;
 }
 
