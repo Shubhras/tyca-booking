@@ -56,7 +56,7 @@
                         <li class="nav-item hide-hamer">
                             <a href="http://127.0.0.1:8000/patients/dashboard"
                                 class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger"
-                                data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:34px;height:29px;"></span>
+                                data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:23px;height:18px;"></span>
                             </a>
                             </li>
 
@@ -98,6 +98,22 @@
         body {
     font-family: "Noto Serif" !important;
 }
+.header {
+    position: fixed !important;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    padding-left:55px;
+    padding-left:55px;
+    transition: all 0.5s ease-in-out;
+    z-index: 2 !important;
+    background-color: #EEDFD0;
+}
+
 .navbar-toggler-icon1 {
     background-image: url(/assets/images/rrrr.png);
 }
@@ -107,7 +123,8 @@
     height: 5px;
     color: #273451;
     margin: 0px 0px 0px 15px;
-    padding: 0 15px 0px 5px;
+    padding:12px 22px;
+    /* padding: 0 15px 0px 5px; */
 }
 header .navbar .navbar-nav .nav-item .nav-link {
     color: #000000 !important;
@@ -218,6 +235,10 @@ footer {
     }
 }
 @media (min-width:320px) and (max-width:991px) {
+    .header {
+        padding-left:20px !important;
+        padding-right:20px !important;
+    }
     .btn1 {
         font-size: 15px !important;
     }
