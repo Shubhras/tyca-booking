@@ -9,6 +9,17 @@
 body {
     font-family: "Noto Serif" !important;
 }
+.ami-padding
+{
+    padding-left: 20px!important;
+}
+.ami-margin{
+    margin: 20px;
+}
+.list-margin
+    {
+        margin:30px;
+    }
 .list-mobile{
     width:211px;
     height:211px;
@@ -323,7 +334,7 @@ body {
 }
 
 .sec2 {
-    padding: 0px 20px;
+    padding: 20px 20px 20px 20px;
     width: 66%;
 }
 
@@ -714,6 +725,7 @@ figure.effect-chico {
 }
 
 @media (min-width:1300px) and (max-width:1440px) {
+    
     .btn11 {
         width: 155px !important;
     }
@@ -721,6 +733,20 @@ figure.effect-chico {
     .btn1 {
         width: 150px !important;
     }
+}
+@media (min-width:1441px) and (max-width:2560px) {
+    .list-margin
+    {
+        margin:5px;
+    }
+    .sec2 {
+    padding: 0px 20px 0px 5px;
+    width: 66%;
+}
+.ami-padding
+{
+    padding-left: 5px!important;
+}
 }
 
 .location {
@@ -798,7 +824,7 @@ h1 {
     <section class="main-block sec-set name-slot">
         <div class="container">
             <div class="row" style="display:flex;">
-                <div class="col-md-8 responsive-wrap sec2 top-set">
+                <div class="col-md-8  responsive-wrap sec2 top-set">
                     <div class="full-blog">
                         <div class="blog-content">
                             <div class="blog-text">
@@ -982,10 +1008,10 @@ h1 {
     <section>
         <div class="container">
             <div class="row col-12 list-box">
-                <h3 class="amities1" style="margin-left:15px;">Listings</h3>
+                <h3 class="amities1 ami-padding">Listings</h3>
                 @foreach($services as $service)
-                <div class="col-5 row list-box" style="margin:30px;">
-                    <div class="row col-12 set-border" style="">
+                <div class="col-5 row list-box list-margin" >
+                    <div class="row col-12 set-border">
                         <div class="col-md-5 col-sm-5 col-xs-12 list-set" style="padding:0px;">
                             <img src="{{ $service->icon }}" alt="Digital" class="list-mobile">
                         </div>

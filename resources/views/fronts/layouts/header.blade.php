@@ -124,11 +124,13 @@ function toggleMenu() {
 }
 header .navbar .navbar-nav .nav-item .nav-link {
     color: #000000 !important;
-    font-weight: 400;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 25px;
+    font-weight: 500;
+    padding-left:  15px;
+    padding-right: 15px;
+    letter-spacing: .6px;
+    font-size: 16px;
     line-height:34.05px;
+    font-family: noto serif;
 }
 .nav-logos{
     width: 288.56px;
@@ -180,17 +182,17 @@ img.img-fluid-logos {
 .btn3 {
     font-weight: 400;
     color: #fff;
-    width: 172px;
+    /* width: 172px; */
     line-height: 34.05px;
-    height: 56px;
+    /* height: 56px; */
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
     cursor: pointer;
     background-color: #273432;
     border: 1px solid #273432;
-    padding: 10px 50px;
-    font-size: 25px;
+    padding: 12px 22px;
+    font-size: 16px;
     border-radius: 0;
 }
 

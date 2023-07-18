@@ -2,6 +2,12 @@
         body {
     font-family: "Noto Serif" !important;
 }
+.footer-font{
+    font-size: 16px;
+    font-family: "Poppins", Sans-serif;
+    font-weight: 400;
+    text-align: center;
+}
 @media (max-width:1024px) {
 
 .max-font {
@@ -27,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3 order-1 order-lg-0">
-                <h5 class="text-white mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font"> © {{ date('Y') }} TYCA Pte Ltd</h5>
+                <p class="text-white  footer-font mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font"> © {{ date('Y') }} TYCA Pte Ltd</p>
              {{--    <div class="footer-info">
                     <div class="d-flex align-items-center footer-info__block mb-3 pb-1 pb-xxl-4">
                         <div class="footer-info__footer-icon fs-5 d-flex align-items-center justify-content-center">
@@ -50,7 +56,7 @@
                 </div>--}}
             </div>
             <div class="col-lg-3 col-md-3 order-2 order-lg-2">
-                <h5 class="text-white mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font">All Rights Reserved</h5>
+                <p class="text-white footer-font mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font">All Rights Reserved</a>
              {{--    <ul>
                     <li>
                         <a href="{{ route('medicalAboutUs') }}"
@@ -76,7 +82,7 @@
                 </ul>--}}
             </div>
             <div class="col-lg-3 order-0 order-lg-3 mb-1 mb-lg-0 col-md-3">
-                <h5 class="text-white mb-1 pb-1 pb-xxl-4 pb-xl-4 max-font pb-xl-4 pb-xs-4 pb-sm-4">Terms and Conditions</h5>
+                <p class="text-white  footer-font mb-1 pb-1 pb-xxl-4 pb-xl-4 max-font pb-xl-4 pb-xs-4 pb-sm-4">Terms and Conditions</p>
             {{--     <div class="footer-subcribe">
                     {{ Form::open(['id'=>'subscribeForm' , 'class' => 'subscribe-form subscription-form']) }}
                     <div class="subscribeForm-message"></div>
@@ -90,9 +96,9 @@
                 </div>--}}
             </div>
             <div class="col-lg-3 order-0 order-lg-3 mb-1 mb-lg-0 col-md-3"> 
-                <h5 class="text-white mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font">
+                <p class="text-white  footer-font mb-1 pb-1 pb-xxl-4 pb-xl-4 pb-xl-4 pb-xs-4 pb-sm-4 max-font">
                 Privacy Policy
-                </h5>
+            </p>
             </div>
          {{--    <div class="col-12 order-4 border-top-primary text-center mt-lg-5 mt-4">
                 <p class="text-white fw-light py-4 mb-0">{{__('messages.web.all_rights_reserved')}} © {{ date('Y') }} {{ getAppName() }}</p>

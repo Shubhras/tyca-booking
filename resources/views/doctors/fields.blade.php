@@ -1,6 +1,6 @@
 <style>
     .select2-container--bootstrap-5 .select2-selection--single {
-        width:160px;
+        width:145px;
     }
 @media(max-width:600px) {
     .monday-form {

@@ -66,7 +66,7 @@
                                 this.value =
                                 this.value.replace(/\D/g,"")']) }}
                                 <div class="input-group-append">
-                                    <span class="input-group-text bg-white border-0 text-dark">Per Days</span>
+                                    <span class="input-group-text bg-white border-0 text-dark">Per day</span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
     <div class="col-lg-12 mb-7 mt-5">
         <div class="row">
             <div class="col-6 text-dark">
-                <label class="form-label required">{{__('messages.common.discount_rate')}}
+                <label class="form-label">{{__('messages.common.discount_rate')}}
                     ({{__('messages.common.hourly')}})</label>
 
                 <div class="row hourly_records mb-5">
@@ -99,7 +99,7 @@
                             />
                             <div class="input-group-append">
                                 <span class="input-group-text bg-white border-0 text-dark hourAdd">
-                                    {{__('messages.common.hours')}}
+                                    hours
                                 </span>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)" class="hourAdd">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white border-0 text-dark">
-                                        Hours
+                                        hours
                                     </span>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
 
             </div>
             <div class="col-6 text-dark">
-                <label class="form-label required">{{__('messages.common.discount_rate')}}
+                <label class="form-label">{{__('messages.common.discount_rate')}}
                     ({{__('messages.common.daily')}})</label>
 
                 <div class="row daily_records mb-5">
@@ -203,7 +203,7 @@
                             />
                             <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
-                    Days
+                    days
                     </span>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                             />
                             <div class="input-group-append">
                     <span class="input-group-text bg-white border-0 text-dark">
-                       per Days
+                       per day
                     </span>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
 
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white border-0 text-dark">
-                                    Hours
+                                    hours
                                     </span>
                                 </div>
                             </div>

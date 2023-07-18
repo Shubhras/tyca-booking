@@ -1,7 +1,7 @@
 <div class="d-flex">
     @if(empty($row->user->email_verified_at))
         <a href="javascript:void(0)" data-id="{{ $row->user->id }}"
-           class="btn px-2 text-primary fs-2 patient-email-verification"  data-bs-toggle="tooltip"
+           class="btn ps-0 pe-2 text-primary fs-2 patient-email-verification"  data-bs-toggle="tooltip"
            data-bs-original-title="{{__('messages.resend_email_verification')}}">
             <span class="svg-icon svg-icon-3">
                     <i class="fas fa-envelope"></i>
