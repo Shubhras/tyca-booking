@@ -350,8 +350,8 @@
         <div class="col-lg-8">
             <div class="form-check form-check-solid form-switch">
                 <input tabindex="12" name="status" value="0" class="form-check1 form-check-input input-switch"
-                    type="checkbox" id="allowmarketing" checked="checked">
-                <label class="form-check-label" for="allowmarketing"></label>
+                    type="checkbox" id="allowmarketing" checked="checked"> 
+                <label class="form-check-label" for="allowmarketing" id="lbl_change">Active</label>
             </div>
         </div>
     </div>
@@ -448,4 +448,15 @@
             $('#descriptionData').val($(".ql-editor").html());
         });
     });
+
+    $('#allowmarketing').change(function () {
+
+        if (!$(this).is(':checked')) {
+         $("#lbl_change").empty().text("In Active");
+    }else{
+        $("#lbl_change").empty().text("Active");
+    }
+     
+ });
+
     </script>
