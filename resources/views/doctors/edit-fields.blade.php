@@ -1,7 +1,8 @@
 <style>
-    .set-witdh-day{
-        width: 145px !important;
-    }
+.set-witdh-day {
+    width: 145px !important;
+}
+
 @media(max-width:600px) {
     .monday-form {
         display: grid !important;
@@ -75,10 +76,11 @@
         <div class="mb-5">
             {{ Form::label('Specialization','Operating Hours:' ,['class' => 'form-label required']) }}
             <div class="row">
-            <?php $days = json_decode($doctor->days);
+                <?php $days = json_decode($doctor->days);
                     if(empty($days)) {$days = [];}
 
                     $dayArray = array();
+                   
                     foreach($days as $day)
                     {
                         $dayArray[$day->day_of_week] = array(
@@ -98,14 +100,17 @@
                                 value="1" name="days[]" />MONDAY
                         </label>
                     </div>
-                    <div class="col-xl-8 col-lg-3 col-sm-12 col-xs-12 col-sm-12 col-xs-12 d-flex align-items-center buisness_end monday-form">
+
+                    <div
+                        class="col-xl-8 col-lg-3 col-sm-12 col-xs-12 col-sm-12 col-xs-12 d-flex align-items-center buisness_end monday-form">
                         <div class="d-inline-block set-witdh-day">
                             <select class="form-control" data-control="select2" name="startTime[1]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
+
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[1]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[1]['start_time'])) { if($slot === ($dayArray[1]['start_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -117,7 +122,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[1]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[1]['end_time'])) { if($slot === ($dayArray[1]['end_time'])) { echo 'selected'; } } ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -140,7 +145,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[2]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[2]['start_time'])) { if($slot === ($dayArray[2]['start_time'])) { echo 'selected'; } }?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -152,7 +157,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[2]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[2]['end_time'])) { if($slot === ($dayArray[2]['end_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -175,7 +180,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[3]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[3]['start_time'])) { if($slot === ($dayArray[3]['start_time'])) { echo 'selected'; } }?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -187,7 +192,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[3]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[3]['end_time'])) { if($slot === ($dayArray[3]['end_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -210,7 +215,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[4]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[4]['start_time'])) { if($slot === ($dayArray[4]['start_time'])) { echo 'selected'; } }?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -222,7 +227,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[4]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[4]['end_time'])) { if($slot === ($dayArray[4]['end_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -246,7 +251,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[5]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[5]['start_time'])) { if($slot === ($dayArray[5]['start_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -260,7 +265,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[5]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[5]['end_time'])) { if($slot === ($dayArray[5]['end_time'])) { echo 'selected'; } }?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -282,7 +287,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[6]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[6]['start_time'])) { if($slot === ($dayArray[6]['start_time'])) { echo 'selected'; } } ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -294,7 +299,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[6]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[6]['end_time'])) { if($slot === ($dayArray[6]['end_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -317,7 +322,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[7]['start_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[7]['startTime'])) { if($slot === ($dayArray[7]['start_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -329,7 +334,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if($slot == isset($dayArray[7]['end_time'])) { echo 'selected'; } ?>>
+                                    <?php if(isset($dayArray[7]['end_time'])) { if($slot === ($dayArray[7]['end_time'])) { echo 'selected'; } } ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>
@@ -398,11 +403,11 @@
             <div class="form-check form-check-solid form-switch">
                 <input name="status" class="form-check-input checkBoxClass" id="allowmarketing" type="checkbox"
                     {{$user->status == 1 ? 'checked' : ''}}>
-                    @if($user->status == 1)
-                    <span id="lbl_change">Active</span>
-                    @else
-                    <span id="lbl_change">Inactive</span>
-                    @endif
+                @if($user->status == 1)
+                <span id="lbl_change">Active</span>
+                @else
+                <span id="lbl_change">Inactive</span>
+                @endif
                 <label class="form-check-label" for="allowmarketing"></label>
             </div>
         </div>
@@ -535,15 +540,13 @@
         });
     });
 
-    $('#allowmarketing').change(function () {
+    $('#allowmarketing').change(function() {
 
-if (!$(this).is(':checked')) {
- $("#lbl_change").empty().text("In Active");
-}else{
-$("#lbl_change").empty().text("Active");
-}
+        if (!$(this).is(':checked')) {
+            $("#lbl_change").empty().text("In Active");
+        } else {
+            $("#lbl_change").empty().text("Active");
+        }
 
-});
-
-
+    });
     </script>

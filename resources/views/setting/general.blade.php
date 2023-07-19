@@ -155,7 +155,8 @@
                                                     {{ Form::input('password', 'payment_gateway_'.$key.'_secret_key',
                                                         isset($paymentGateWayKeys[$paymentGateway]['client_secret']) ? $paymentGateWayKeys[$paymentGateway]['client_secret'] : '', 
                                                         ['class' => 'form-control', 'placeholder' => __('messages.setting.payment_gateway_secret_key'), 'required','id' => 'logpassword'.$key]) }}
-                                                    <i style="font-size:25px; cursor:pointer;margin-left: -35px;color: black;" class="bi bi-eye-slash-fill" onclick="togglePasswordVisibility(<?php echo $key; ?>)"></i>
+                                                    <i id="eyeIcon<?php echo $key; ?>" style="font-size: 25px; cursor: pointer; margin-left: -35px; color: black;" class="  bi bi-eye-slash-fill" onclick="togglePasswordVisibility(<?php echo $key; ?>)"></i>
+                                                    <i id="slashIcon<?php echo $key; ?>" style="font-size: 25px; cursor: pointer; margin-left: -35px; color: black; display: none;" class="bi bi-eye-fill" onclick="togglePasswordVisibility(<?php echo $key; ?>)"></i>
 
 
                                                 </div>
@@ -182,15 +183,21 @@
     </div>
 </div>
 @endsection
+
 <script>
   function togglePasswordVisibility(id) {
     var passwordInput = document.getElementById("logpassword"+id);
+    var eyeIcon = document.getElementById("eyeIcon"+id);
+    var slashIcon = document.getElementById("slashIcon"+id);
     
     if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+      passwordInput.type = "text";
+      eyeIcon.style.display = "none";
+      slashIcon.style.display = "inline";
     } else {
-        passwordInput.type = "password";
+      passwordInput.type = "password";
+      eyeIcon.style.display = "inline";
+      slashIcon.style.display = "none";
     }
-    
   }
 </script>
