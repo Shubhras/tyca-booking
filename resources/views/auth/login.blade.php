@@ -128,6 +128,26 @@ header {
         width: 30% !important;
     }
 }
+@media (min-width:320px) and (max-width:1023px) {
+    .m-top-login{
+margin-bottom: 10% !important;
+    }
+}
+@media (min-width:1024px) and (max-width:1200px) {
+    .m-top-login{
+margin-bottom: 19% !important;
+    }
+}
+@media (min-width:1201px) and (max-width:1440px) {
+    .m-top-login{
+margin-bottom: 16% !important;
+    }
+}
+@media (min-width:1440px) {
+    .m-top-login{
+margin-bottom: 14% !important;
+    }
+}
 
 .sign-set {
     font-Weight: 700;
@@ -166,8 +186,8 @@ header {
                 <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
             </div>
 
-            <div class="bg-white rounded-15 shadow-md width-540 px-sm-7 mx-auto col-3 login-response"
-                style="height: 50%;margin: auto; margin-bottom:10%;">
+            <div class="bg-white rounded-15 shadow-md width-540 px-3 px-sm-7 mx-auto col-3 login-response m-top-login"
+                style="height: 50%;margin: auto;">
                 <div class="col-12 text-center">
                     <a href="{{ route('medical') }}" class="image py-10">
                         <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid pt-4" style="padding: 20px;">

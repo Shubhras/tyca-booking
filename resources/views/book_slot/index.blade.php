@@ -842,7 +842,7 @@ h1 {
                                             <p class="location">
                                                 <img src="/assets/image/material-symbols_location-on.png" alt="#"
                                                     style="height: 34px; width:34px; margin-left:-5px;">
-                                                {{$addressData->address1}} , #{{$addressData->address2}} , {{$addressData->country_name}}  {{$addressData->postal_code}}
+                                                {{$addressData->address1}} , {{$addressData->address2}} , {{$addressData->country_name}}  {{$addressData->postal_code}}
                                             </p>
                                         </div>
                                         <p class="desc-sort">{!! $doctor->description !!}</p>
@@ -869,141 +869,81 @@ h1 {
                                         </div>
                                         @endforeach
                                     </div>
-                                    {{--   <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 17.png" alt="#"
-                                                style="padding-right:10px;">air
-                                            conditioning</p>
-                                    </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/Frame 4546.png" alt="#"
-                                                style="padding-right:10px;">refrigerator</p>
-                                    </div>
-                                </div>
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 18.png" alt="#"
-                                                style="padding-right:10px;">shower facilities</p>
-                                    </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/Frame 4552.png" alt="#"
-                                                style="padding-right:10px;">electric kettle</p>
-                                    </div>
-                                </div>
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 33.png" alt="#"
-                                                style="padding-right:10px;">toilets</p>
-                                    </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/image 26.png" alt="#"
-                                                style="padding-right:10px;">sofa</p>
-                                    </div>
-                                </div>
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 21.png" alt="#"
-                                                style="padding-right:10px;">telephone</p>
-                                    </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/image 16.png" alt="#"
-                                                style="padding-right:10px;">toiltries</p>
-                                    </div>
-                                </div>
-                                <div class="row mt-10 mb-1" style="display:flex;">
-                                    <div class="col icon-set">
-                                        <p class="heading-id"><img src="/assets/image/image 22.png" alt="#"
-                                                style="padding-right:10px;">wardrobe</p>
-                                    </div>
-                                    <div class="col icon-set">
-                                        <p class="sub-name1"><img src="/assets/image/image 20.png" alt="#"
-                                                style="padding-right:10px;">Telivision</p>
-                                    </div>
-                                </div>
-                                --}}
                                 </div>
                             </div>
                         </div>
                         <?php
                     $var_dump = json_decode($doctor->days);
+                    $blankarray = array(
+                        "1" => 'MONDAY', 
+                        "2" => 'TUESDAY', 
+                        "3" => 'WEDNESDAY', 
+                        "4" => 'THURSDAY', 
+                        "5" => 'FRIDAY', 
+                        "6" => 'SATURDAY', 
+                        "7" => 'SUNDAY', 
+                    );
+
+
+
                     ?>
+                    
+                    
                         <div class="widget-box">
                             <h1 class="amities1">Operating Hours</h1>
-                            @if(!empty($var_dump))
-                            @foreach($var_dump as $day)
-                            @if($day->day_of_week == 1)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Monday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 2)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Tuesday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 3)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Wednesday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 4)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Thursday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 5)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Friday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 6)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Saturday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($day->day_of_week == 7)
-                            <div class="row mt-10 mb-2" style="display:flex;">
-                                <div class="col">
-                                    <b class="heading-id2">Sunday</b>
-                                </div>
-                                <div class="col">
-                                    <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                </div>
-                            </div>
-                            @endif
-                            @endforeach
-                            @endif
 
+  
+                            
+<?php foreach($blankarray as $index => $dataDay)
+{ ?>
+
+
+<div class="row mt-10 mb-2" style="display:flex;">
+                                <div class="col">
+                                    <b class="heading-id2"><?php echo $dataDay; ?></b>
+                                </div>
+                                <div class="col">
+                                    <span class="sub-name">
+
+    <?php  if(isset($var_dump)) { foreach($var_dump as $index1 => $dump)
+    {    
+       if(isset($dump->day_of_week) && $dump->day_of_week == $index)
+       {
+        echo $dump->start_time . ' - ' . $dump->end_time;
+       }else{
+      
+       }
+               
+        ?>  
+    
+    <?php   }   
+    
+    if(!array_key_exists($index, $var_dump)){
+        if($index != 7)
+        {
+            echo 'Closed';
+        }
+        
+    }
+    
+}else{
+
+    echo 'Closed';
+}
+    
+    ?>
+    
+
+                                    </span>
+                                </div>
+                            </div>
+
+<?php } ?>
+
+                       
+                            
+                            
+                     
                         </div>
                     </div>
                 </div>
@@ -1030,7 +970,7 @@ h1 {
                             </div>
                         </div>
                     </div>
-                    <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -10px;">
+                    <div class="text-xl-start header-btn-grp set-padding" style="margin-left: -11px;">
                         @if(getLogInUser())
                         <button class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 active hour-view"
                             data-bs-toggle="modal" data-bs-target="#hour_plan_modal"
