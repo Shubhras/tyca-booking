@@ -79,10 +79,10 @@
                             <label class="col-lg-4 form-label required">{{ __('messages.user.contact_number').':' }}</label> 
                         </div>
                         <div class="col-lg-8">
-                            {{ Form::tel('contact', $user->contact ? '+'.$user->region_code.$user->contact : null, ['id'=>'phoneNumber','class' => 'form-control', 'placeholder' =>  __('messages.user.contact_number'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }} 
+                            {{ Form::tel('contact', $user->contact ? $user->region_code.$user->contact : null, ['id'=>'phoneNumber','class' => 'form-control', 'placeholder' =>  __('messages.user.contact_number'), 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")']) }} 
                             {{ Form::hidden('region_code',!empty($user->user) ? $user->region_code : null,['id'=>'prefix_code']) }} 
                             <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span> 
-                            <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2">{{ __('messages.invalid_number') }}</span> 
+                            <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2"></span> 
                         </div>
                         <div class="d-flex py-6">
                             {{ Form::submit(__('messages.common.save'),['class' => 'btn btn-primary me-2']) }}

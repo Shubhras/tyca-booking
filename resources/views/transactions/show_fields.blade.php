@@ -20,12 +20,12 @@
     
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">{{ __('messages.appointment.appointment_at') }}:</label>
-        <span class="fs-4 text-gray-800">
+        <span class="fs-4 text-gray-800">   
             @if(!empty($transaction['data']->appointment))
                 <span class="badge bg-info">
                                     {{ \Carbon\Carbon::parse($transaction['data']->appointment->date)->isoFormat('DD MMM YYYY')}} {{$transaction['data']->appointment->from_time}} {{$transaction['data']->appointment->from_time_type}} - {{$transaction['data']->appointment->to_time}} {{$transaction['data']->appointment->to_time_type}}
                                 </span>
-            @else
+            @else   
                 {{ __('messages.common.n/a') }}
             @endif
         </span>

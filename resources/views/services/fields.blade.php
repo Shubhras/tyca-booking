@@ -66,7 +66,7 @@
                                 this.value =
                                 this.value.replace(/\D/g,"")']) }}
                                 <div class="input-group-append">
-                                    <span class="input-group-text bg-white border-0 text-dark">Per day</span>
+                                    <span class="input-group-text bg-white border-0 text-dark">per day</span>
                                 </div>
                             </div>
                         </div>
