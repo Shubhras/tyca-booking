@@ -593,6 +593,25 @@ function displayMessage(id, price,service_id) {
 }
 </script>
 <script>
+    $(document).ready(function() {
+    $('#templateAppointmentDate').datepicker({
+        language: 'es-es',
+        format: 'yyyy-mm-dd',
+        minDate:new Date(),
+        startDate: new Date(),
+        todayHighlight: true,
+    });
+
+    // Event handler for input click
+    $('#templateAppointmentDate').on('click', function() {
+        $(this).datepicker('show');
+    });
+
+    // Event handler for date icon click
+    $('.date-icon').on('click', function() {
+        $('#templateAppointmentDate').datepicker('show');
+    });
+});
 $(document).ready(function() {
     $('#appointmentDate1').change(function() {
 

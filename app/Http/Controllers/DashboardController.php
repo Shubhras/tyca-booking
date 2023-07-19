@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use App\Models\Setting;
 class DashboardController extends AppBaseController
 {
     /* @var DashboardRepository */
@@ -80,10 +80,11 @@ class DashboardController extends AppBaseController
     public function patientDashboard()
     {
         $data = $this->dashboardRepository->getPatientData();
+        $bodyimage1 = Setting::where('key', 'body_image')->first();
         //echo '<pre>';
         //print_r($data['upcomingAppointment']);
         //echo '<next>';
         //die('dddd');
-        return view('member.portal', compact('data'));
+        return view('member.portal', compact('data','bodyimage1'));
     }
 }

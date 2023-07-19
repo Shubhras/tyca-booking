@@ -182,7 +182,7 @@ header {
         <div class="col-lg-6 login-response" style="padding: 0;">
             <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
         </div>
-        <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7  mx-auto col-xl-3 col-sm-5 login-response"
+        <div class="bg-white rounded-15 shadow-md width-540 px-sm-7  mx-auto col-xl-3 col-sm-5 login-response"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
                 <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10">
@@ -245,7 +245,7 @@ header {
                         </div>
                     </div>
 
-                    <div class="mb-sm-7 mb-4 pt-4 pb-3 form-check terms" style="font-size:19px; color:#535353">
+                    <div class="mb-sm-7 mb-2 pt-2 pb-2 form-check terms" style="font-size:19px; color:#535353">
                         <input type="checkbox" class="form-check-input label-box" name="toc" value="1" required />
                         <span class="me-2 ml-1 register-forgot">I agree to the Terms & Conditions
                             {{--<span class="ms-1 register-forgot"
@@ -257,7 +257,7 @@ header {
                     <div class="d-grid" style="justify-content:center;">
                         <button type="submit" class="btn2 btn-primary2">Register</button>
                     </div>
-                    <div class="d-flex align-items-center mt-4 mb-3 pb-2 down-sign" style="justify-content:center;">
+                    <div class="d-flex align-items-center mt-3 mb-3 down-sign" style="justify-content:center;">
                         <span class="text-gray-700 me-2 already-has">{{__('messages.web.already_have_an_account').'?'}}</span>
                         <a href="{{ route('login') }}"
                             class="form-check-label already-has">

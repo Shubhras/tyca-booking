@@ -166,7 +166,7 @@ header {
                 <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
             </div>
 
-            <div class="bg-white rounded-15 shadow-md width-540 px-5 px-sm-7 mx-auto col-3 login-response"
+            <div class="bg-white rounded-15 shadow-md width-540 px-sm-7 mx-auto col-3 login-response"
                 style="height: 50%;margin: auto; margin-bottom:10%;">
                 <div class="col-12 text-center">
                     <a href="{{ route('medical') }}" class="image py-10">
@@ -193,14 +193,14 @@ header {
                         <input name="password" type="password" class="form-control" id="password" required
                             placeholder="Password">
                     </div>
-                    <div class="d-flex justify-content-between pt-4 pb-4">
+                    <div class="d-flex justify-content-between pt-2 pb-2">
                         @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="form-check-label forgot-password">
                             {{ __('messages.common.forgot_your_password').'?' }}
                         </a>
                         @endif
                     </div>
-                    <div class="mb-sm-7 mb-4 pb-4 form-check">
+                    <div class="mb-sm-7 mb-3 pb-3 form-check">
                         <input type="checkbox" class="form-check-input " id="remember_me"
                             style="width:20px; height:20px;">
                         <label class="form-check-label forgot-password1" style="margin-left:10px; margin-top:5px;"
@@ -210,7 +210,7 @@ header {
                         <button type="submit" class="btn2 btn-primary2">{{ __('messages.login') }}</button>
                     </div>
 
-                    <div class="d-flex align-items-center mb-10 mt-3 down-log down-log1"
+                    <div class="d-flex align-items-center mb-3 mt-3 down-log down-log1"
                         style="justify-content: center;margin-bottom: 1.5rem;">
                         <span class="me-2 forgot-password1">New Customer?</span>
                         <a href="{{ route('register') }}" class="form-check-label fs-7 forgot-password1">

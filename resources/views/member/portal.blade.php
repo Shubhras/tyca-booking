@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
-<div class="transition-none">
+<div class="transition-none" style="background-image: url('{{$bodyimage1->value}}');">
 
     <section class="title-hero-bg parallax-effect"
         style="background-image: url({{asset('assets/images/Frame_3.png')}})">
@@ -493,20 +493,45 @@
 
 
 <style>
+    table.dataTable tbody th, table.dataTable tbody td {
+    padding: 16px !important;
+}
+    label {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 15px;
+    color: #414141;
+    text-transform: capitalize;
+}
+    .dataTables_wrapper .dataTables_info {
+    clear: both;
+    float: left;
+    padding-top: 0.755em;
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 400;
+    color: #414141 !important;
+    text-transform: capitalize;
+}
     table.dataTable.no-footer {
     border-bottom: 0px !important;
 }
     .table-striped>tbody>tr:nth-of-type(odd)>* {
-    color: #111827 !important;
+        color: #111827 !important;
     --bs-table-accent-bg: #ffffff;
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 400;
 }
     .dataTables_wrapper .dataTables_length select {
     border: none !important;
     border-radius: 0px !important;
-    padding: 5px;
-    background-color: transparent;
-    color: inherit;
-    padding: 4px;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 15px;
+    color: #414141;
 }
 div.dataTables_wrapper div.dataTables_filter {
     text-align: right;
@@ -845,7 +870,7 @@ a#upcomings-tab-2 {
 }
 
 th.col-portal {
-    padding: 20px !important;
+    padding: 16px !important;
     font-size: 12px;
     font-weight: 500 !important; 
     color: #6B7280;
@@ -1147,7 +1172,7 @@ div#customer-review_wrap {
         align-self: center;
         margin-top: 30px;
         margin-bottom: 40px;
-        color: 535353;
+        color: #535353;
         font-size: 10px;
     }
 
@@ -1218,11 +1243,6 @@ div#customer-review_wrap {
     div#customer-review_wrap {
         justify-content: space-evenly;
     }
-
-    /* .col-md-4.update-btn {
-    margin-bottom: 30px;
-} */
-
     h5.text-white.mb-4.pb-1 {
         font-size: 18px !important;
     }
@@ -1381,7 +1401,6 @@ function cancelAppoint() {
             if (data.success == true) {
                 $("#cancel_booking_modal").modal('hide');
                 $("#cancel_confirm_modal").modal('show');
-                // window.location.reload();
             } else {
                 //var url = "{{ route('login') }}";
                 //location.href = url;
@@ -1397,10 +1416,10 @@ function cancelAppoint1() {
     window.location.reload();
 }
 
-var d = document.getElementById("booked_info_modal");
-d.className += " back-imgs";
-var e = document.getElementById("cancel_booking_modal");
-e.className += " back-imgs";
+// var d = document.getElementById("booked_info_modal");
+// d.className += " back-imgs";
+// var e = document.getElementById("cancel_booking_modal");
+// e.className += " back-imgs";
 </script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>

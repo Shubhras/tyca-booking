@@ -533,7 +533,11 @@ figure.effect-chico {
     font-weight: 700;
     line-height: 30px;
 }
-
+@media (min-width: 992px){
+    .padding-less{
+        padding-left: 0px!important;
+    }
+}
 @media (min-width:1024px) and (max-width:1200px) {
     .list-mobile {
     width: 185px !important;
@@ -838,7 +842,7 @@ h1 {
                                             <p class="location">
                                                 <img src="/assets/image/material-symbols_location-on.png" alt="#"
                                                     style="height: 34px; width:34px; margin-left:-5px;">
-                                                {{$addressData->address1}}
+                                                {{$addressData->address1}} , #{{$addressData->address2}} , {{$addressData->country_name}}  {{$addressData->postal_code}}
                                             </p>
                                         </div>
                                         <p class="desc-sort">{!! $doctor->description !!}</p>
@@ -848,7 +852,7 @@ h1 {
                 </div>
                {{--<p onload="myFunction()">{{ Session::get('message') }}</p>--}}
 
-                <div class="col-md-4 responsive-wrap set-amities">
+                <div class="col-md-4 responsive-wrap set-amities padding-less">
                     <div class="sidebar">
                         <div class="widget-box mb-40 amities">
                             <h1 class="mb-20 amities1">Amenities</h1>
@@ -1410,7 +1414,11 @@ $(document).ready(function() {
 }
 $(document).ready(function() {
     $('#templateAppointmentDate').datepicker({
-        // Add any additional datepicker options you need
+        language: 'es-es',
+        format: 'yyyy-mm-dd',
+        minDate:new Date(),
+        startDate: new Date(),
+        todayHighlight: true,
     });
 
     // Event handler for input click
