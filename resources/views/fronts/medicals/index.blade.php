@@ -42,7 +42,7 @@
                             <img src="{{$outletData['profile_image']}}" alt="" class="medical-img">
                         </div>
                     </div>
-                    <div class="row outlets-des">
+                    <div class="row outlets-des" style="margin-top: -18px;">
                         <div class="centerize-col text-center">
                             <div class="again-flex col-12">
                                 <h4 class="again-heading come-set col-lg-6 thank-name">{{$outletData['first_name']}}
@@ -146,7 +146,7 @@ section.title-hero-bg.parallax-effect img {
     text-align: center;
     margin: auto;
     float: none;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 
 .centerize-col {
@@ -259,6 +259,9 @@ section.title-hero-bg.parallax-effect img {
         width: 350px !important;
         height: 350px !important;
 
+    }
+    .again-heading {
+    text-align: right !important;
     }
 }
 

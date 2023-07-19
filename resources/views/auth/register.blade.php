@@ -73,7 +73,21 @@ header {
         width: 300px;
     }
 }
-
+@media (min-width:1024px) and (max-width:1200px) {
+    .m-top{
+margin-bottom: 19% !important;
+    }
+}
+@media (min-width:1201px) and (max-width:1440px) {
+    .m-top{
+margin-bottom: 16% !important;
+    }
+}
+@media (min-width:1440px) {
+    .m-top{
+margin-bottom: 14% !important;
+    }
+}
 @media (max-width: 575px) {
 
     h5,
@@ -182,7 +196,7 @@ header {
         <div class="col-lg-6 login-response" style="padding: 0;">
             <img src="assets/image/sing-up.png" class="css-class" alt="alt text" style="width: 100%;">
         </div>
-        <div class="bg-white rounded-15 shadow-md width-540 px-sm-7  mx-auto col-xl-3 col-sm-5 login-response"
+        <div class="bg-white rounded-15 shadow-md width-540 px-3 px-sm-7  mx-auto col-xl-3 col-sm-5 login-response m-top"
             style="height: 50%;margin: auto;">
             <div class="col-12 text-center">
                 <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10">

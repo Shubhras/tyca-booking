@@ -105,10 +105,10 @@
     right: 0;
     top: 0;
     margin: auto;
-    padding-top: 15px !important;
-    padding-bottom: 15px !important;
-    padding-left:55px;
-    padding-right:55px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left:62px;
+    padding-right:62px;
     transition: all 0.5s ease-in-out;
     z-index: 2 !important;
     background-color: #EEDFD0;
@@ -137,8 +137,8 @@ header .navbar .navbar-nav .nav-item .nav-link {
     font-family: noto serif;
 }
 .nav-logos{
-    width: 288.56px;
-    height: 20.93px;
+    width: 216px;
+    height: 17px;
 }
 
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
