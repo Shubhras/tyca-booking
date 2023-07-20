@@ -73,7 +73,7 @@ header {
         width: 300px;
     }
 }
-@media (min-width:1024px) and (max-width:1200px) {
+/* @media (min-width:1024px) and (max-width:1200px) {
     .m-top{
 margin-bottom: 19% !important;
     }
@@ -87,7 +87,7 @@ margin-bottom: 16% !important;
     .m-top{
 margin-bottom: 14% !important;
     }
-}
+} */
 @media (max-width: 575px) {
 
     h5,
@@ -123,6 +123,51 @@ margin-bottom: 14% !important;
     }
 }
 
+@media (min-width:320px) and (max-width:1023px) {
+    .m-top-reg{
+margin-bottom: 10% !important;
+    }
+}
+@media (min-width:1024px)  {
+    .section-h{
+        height: 100vh!important;
+    }
+}
+@media (min-width:1024px) and (max-width:1100px) {
+    .m-top-reg{
+margin-top: 4% !important;
+    }
+}
+@media (min-width:1101px) and (max-width:1200px) {
+    .m-top-reg{
+margin-top: 3.5% !important;
+    }
+}
+@media (min-width:1201px) and (max-width:1300px) {
+    .m-top-reg{
+margin-top: 3.5% !important;
+    }
+}
+@media (min-width:1301px) and (max-width:1460px) {
+    .m-top-reg{
+margin-top: 3% !important;
+    }
+}
+@media (min-width:1461px)and (max-width:1600px) {
+    .m-top-reg{
+margin-top: 3% !important;
+    }
+}
+@media (min-width:1601px)and (max-width:1800px) {
+    .m-top-reg{
+margin-top: 3.5% !important;
+    }
+}
+@media (min-width:1801px) {
+    .m-top-reg{
+margin-top: 11% !important;
+    }
+}
 @media(min-width:769px) and (max-width:1440px) {
 
     h5,
@@ -186,7 +231,120 @@ margin-bottom: 14% !important;
 }
 </style>
 
-<div class="d-flex flex-column flex-column-fluid align-items-center justify-content-center">
+
+
+<div>
+
+    <div class="flex-column flex-column-fluid align-items-center justify-content-center">
+
+        <div class="width-540">
+            @include('flash::message')
+            @include('layouts.errors')
+        </div>
+        <section class="section-h">
+  <div class="container-fluid">
+    <div class="row">
+      
+      <div class="col-6 login-response px-0 d-sm-block ">
+        <img src="assets/image/sing-up.png"
+          alt="Login image" class="w-100 section-h" style="object-fit: cover;">
+      </div>
+      <div class="col-6 login-response p-0">
+      <div class="bg-white rounded-15 shadow-md width-540 px-3 py-1 px-sm-7 mx-auto col-7 login-response m-top-reg"
+                >
+                <div class="bg-white">
+                <div class="col-12 text-center">
+                <a href="{{ route('medical') }}" class="image mb-7 mb-sm-10">
+                    <img alt="Logo" src="{{ asset(getAppLogo()) }}" class="img-fluid p-4 register-font">
+                </a>
+            </div>
+            <h3 class="text-center mb-7 pt-3 pb-3 register-heading">{{__('messages.web.patient_registration')}}</h3>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12 mb-sm-7 mb-4">
+                        {{--  <label for="formInputFirstName" class="form-label">
+                            {{ __('messages.patient.first_name').':' }}<span class="required"></span>
+                        </label>--}}
+                        <input name="first_name" type="text" class="form-control" id="name" aria-describedby="firstName"
+                            placeholder="{{ __('messages.patient.first_name') }}" value="{{ old('first_name') }}"
+                            required>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-sm-7 mb-4">
+                        {{--   <label for="last_name" class="form-label">
+                            {{ __('messages.patient.last_name') .':' }}<span class="required"></span>
+                        </label>--}}
+                        <input name="last_name" type="text" class="form-control" id="last_name"
+                            aria-describedby="lastName" placeholder="{{ __('messages.patient.last_name') }}" required
+                            value="{{ old('last_name') }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-sm-7 mb-4">
+                        {{--   <label for="email" class="form-label">
+                            {{ __('messages.patient.email').':' }}<span class="required"></span>
+                        </label>--}}
+                        <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
+                            placeholder="{{ __('messages.patient.email') }}" value="{{ old('email') }}" required>
+                    </div>
+                </div>
+                <div class="mb-4 fv-row">
+                    <div class="row">
+                        <div class="col-md-12 mb-sm-7 mb-4">
+                            {{-- <label for="password" class="form-label">
+                                {{ __('messages.patient.password').':' }}<span class="required"></span>
+                            </label> --}}
+                            <input type="password" name="password" class="form-control" id="password"
+                                placeholder="{{ __('messages.patient.password') }}" aria-describedby="password"
+                                required>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-sm-7 mb-4">
+                            {{--  <label for="password_confirmation" class="form-label">
+                                {{ __('messages.patient.confirm_password') .':' }}<span class="required"></span>
+                            </label>--}}
+                            <input name="password_confirmation" type="password" class="form-control"
+                                placeholder="{{ __('messages.patient.confirm_password') }}" id="password_confirmation"
+                                aria-describedby="confirmPassword" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-sm-7 mb-2 pt-2 pb-2 form-check terms" style="font-size:19px; color:#535353">
+                        <input type="checkbox" class="form-check-input label-box" name="toc" value="1" required />
+                        <span class="me-2 ml-1 register-forgot">I agree to the Terms & Conditions
+                            {{--<span class="ms-1 register-forgot"
+                                style="text-transform: capitalize; text-decoration:none;">Terms
+                                & Conditions</span>.--}}
+                        </span>
+                    </div>
+
+                    <div class="d-grid" style="justify-content:center;">
+                        <button type="submit" class="btn2 btn-primary2">Register</button>
+                    </div>
+                    <div class="d-flex align-items-center mt-3 mb-3 down-sign" style="justify-content:center;">
+                        <span class="text-gray-700 me-2 already-has">{{__('messages.web.already_have_an_account').'?'}}</span>
+                        <a href="{{ route('login') }}"
+                            class="form-check-label already-has">
+                            {{__('messages.web.sign_in_here')}}
+                        </a>
+                    </div>
+                </div>
+            </form>
+            </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+    </div>
+</div>
+<!-- <div class="d-flex flex-column flex-column-fluid align-items-center justify-content-center">
 
     <div class="width-540">
         @include('flash::message')
@@ -282,5 +440,5 @@ margin-bottom: 14% !important;
             </form>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

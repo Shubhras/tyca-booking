@@ -55,7 +55,6 @@ $styleCss = 'style';
                 </div>
             </div>
             <div class="col-md-6">
-                <!-- <h2 class="h2-day">$40/Day</h2> -->
                 <div class="row">
                     <div class="col-md-6">
 
@@ -111,63 +110,6 @@ $styleCss = 'style';
 
     </div>
 </section>
-
-
-{{--<section class="main-block gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="grid">
-                    <div class="hot-desk">
-                        <h2>HOT DESK</h2>
-                        <p>at Thank You Come Again @ Balestier</p>
-                    </div>
-                    <figure class="effect-chico">
-                        <img src="/assets/images/image 9.png" alt="">
-                    </figure>
-                </div>
-            </div>
-      
-            <div class="col-md-6">
-                <h2 class="h2-day">${{$servicesData->charges_daily}}/Day</h2>
-<div class="row">
-    <div class="col-md-6">
-
-        <div class="grid">
-            <figure class="effect-chico">
-                <img src="/assets/images/image 10.png" alt="">
-            </figure>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="grid">
-            <figure class="effect-chico">
-                <img src="/assets/images/image 12.png" alt="">
-            </figure>
-        </div>
-    </div>
-</div>
-<div class="row grid-space">
-    <div class="col-md-6">
-        <div class="grid">
-            <figure class="effect-chico">
-                <img src="/assets/images/image 11.png" alt="">
-            </figure>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="grid">
-            <figure class="effect-chico">
-                <img src="/assets/images/image 13.png" alt="">
-            </figure>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</section>--}}
-
 <section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container" style="padding: 0px 5px;">
         <div class="row">
@@ -194,89 +136,48 @@ $styleCss = 'style';
                         </div>
                     </div>
 
-                    <div class="Operating padding-tb">
+
+                    <?php
+                                $var_dump = json_decode($doctor->days);
+                            ?>
+                    <div class="Operating padding-tb" style="margin-bottom:60px;">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
-                            <?php
-                             $var_dump = json_decode($doctor->days);
-                             ?>
+                            @php
+                            $dayLabels = [1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday', 4 => 'Thursday', 5 =>
+                            'Friday', 6 => 'Saturday', 7 => 'Sunday'];
+                            @endphp
+
                             @if(!empty($var_dump))
-                            @foreach($var_dump as $day)
-                            <div class="operating-right" style="display:grid;">
-                                @if($day->day_of_week == 1)
+                            @for($day = 1; $day <= 7; $day++) @php $found=false; @endphp @foreach($var_dump as $data)
+                                @if($data->day_of_week == $day)
                                 <div class="row mt-10 mb-2 col-lg-12">
                                     <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Monday</span>
+                                        <span class="heading-id2">{{ $dayLabels[$day] }}</span>
                                     </div>
                                     <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        <span class="sub-name">{{$data->start_time}} - {{$data->end_time}}</span>
                                     </div>
                                 </div>
+                                @php
+                                $found = true;
+                                @endphp
+
+                                @endif
+                                @endforeach
+                                @if(!$found)
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">{{ $dayLabels[$day] }}</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">Closed</span>
+                                    </div>
+                                </div>
+                                @endif
+                                @endfor
                                 @endif
 
-                                @if($day->day_of_week == 2)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Tuesday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 3)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Wednesday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 4)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Thursday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 5)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Friday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 6)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Saturday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 7)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Sunday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                            </div>
-                            @endforeach
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -590,7 +491,26 @@ function displayMessage(id, price, service_id) {
         var abc = 'Day Plan';
         $('#slot_option').hide();
     }
-
+    var conceptName = $('#appointmentDoctorId').find(":selected").val();
+    $.ajax({
+        url: route('get-service'),
+        type: 'GET',
+        data: {
+            'appointmentDoctorId': conceptName,
+        },
+        success: function(result) {
+            if (result.success) {
+                $('#FrontAppointmentServiceId').empty();
+                $('#FrontAppointmentServiceId').append($('<option value=""></option>').text(
+                    'select booking space'));
+                $.each(result.data, function(i, v) {
+                    var new_service = (v.id == service_id) ? "selected" : "";
+                    $('#FrontAppointmentServiceId').append($('<option ' + new_service +
+                        '></option>').attr('value', v.id).text(v.name));
+                });
+            }
+        },
+    });
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);

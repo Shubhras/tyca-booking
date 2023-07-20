@@ -114,7 +114,7 @@
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
                                             <td>{{ $appointment->plan_type }}</td>
-                                            <td>{{ $appointment->date }}</td>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y h:ia') }}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
 
 
@@ -190,7 +190,7 @@
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
                                             <td>{{ $appointment->plan_type }}</td>
-                                            <td>{{ $appointment->date }}</td>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y h:ia') }}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
                                             @if($appointment->payment_method == 2)
                                             <td>
@@ -226,8 +226,8 @@
 
                                             <td><a onclick="bookedInfoData({{$appointment}});"><i
                                                         class="fa-solid fa-eye"></i></a>
-                                                <a onclick="cancelConfirm({{$appointment}})"> <i
-                                                        class="fa-solid fa-xmark"></i></a>
+                                                {{--<a onclick="cancelConfirm({{$appointment}})"> <i
+                                                        class="fa-solid fa-xmark"></i></a>--}}
                                             </td>
                                         </tr>
                                         <?php }?>
@@ -306,7 +306,6 @@
                 <div class="books-spaces">CANCEL BOOKING</div>
                 <p class="follow-booking">Do you want to cancel the following booking?</p>
                 <div class="book-p-cancel">
-                    <!-- <p>Outlet: <b id="coutinfo"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Outlet:
                         <p>&nbsp;
@@ -317,14 +316,11 @@
                         <p>&nbsp;
                         <p id="cbookSpaceInfo" class="book-ps"></p>
                     </div>
-                    <!-- <p>Booking Space: <b id="cbookSpaceInfo"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Plan Type:
                         <p>&nbsp;
                         <p id="cplanTypeInfo" class="book-ps"></p>
                     </div>
-                    <!-- <p>Plan Type: <b id="cplanTypeInfo"></b></p> -->
-                    <!-- <p>Appointment At: <b id="cappointAtIfo"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Appointment At:
                         <p>&nbsp;
@@ -335,25 +331,21 @@
                         <p>&nbsp;
                         <p id="cpayableInfo" class="book-ps"></p>
                     </div>
-                    <!-- <p>Payable Amount: <b id="cpayableInfo"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Payment Method:
                         <p>&nbsp;
                         <p id="cpaymentMethod" class="book-ps"></p>
                     </div>
-                    <!-- <p>Payment Method: <b id="cpaymentMethod"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Payment Status:
                         <p>&nbsp;
                         <p id="cstatusInfo" class="book-ps"></p>
                     </div>
-                    <!-- <p>Payment Status: <b id="cstatusInfo"></b></p> -->
                     <div class="book-infos">
                         <p class="book-val">Booking Status:
                         <p>&nbsp;
                         <p id="cbookedInfo" class="book-ps"></p>
                     </div>
-                    <!-- <p>Booking Status: <b id="cbookedInfo"></b></p> -->
                 </div>
                 <div class="btn-cancel-booking">
                     <div class="cancel-yes-btn">

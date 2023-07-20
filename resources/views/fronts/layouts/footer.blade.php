@@ -56,7 +56,7 @@ a.social-icon.aaa :hover {
     <div class="container footer-width">
         <div class="row">
             <div class="col-lg-6 col-md-6 order-1 order-lg-0">
-                <p class="text-white  footer-font  max-font"> © {{ date('Y') }} TYCA Pte Ltd</p>
+            <p class="text-white  footer-font  max-font"> © {{ date('Y') }} Cover Projects Pte Ltd</p>
              {{--    <div class="footer-info">
                     <div class="d-flex align-items-center footer-info__block mb-3 pb-1 pb-xxl-4">
                         <div class="footer-info__footer-icon fs-5 d-flex align-items-center justify-content-center">

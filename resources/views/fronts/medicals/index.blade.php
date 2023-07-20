@@ -44,15 +44,28 @@
                     </div>
                     <div class="row outlets-des" style="margin-top: -18px;">
                         <div class="centerize-col text-center">
-                            <div class="again-flex col-12">
+                            <!-- <div class="again-flex col-12">
                                 <h4 class="again-heading come-set col-lg-6 thank-name">{{$outletData['first_name']}}
                                     {{$outletData['last_name']}}</h4>
-                                <div class="from-flex come-set1 col-lg-6">
+                                <div class="from-flex come-set1 col-lg-6 line-same">
                                     <p class="again-p">From</p>
                                     <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
                                         {{$outletData['charges_daily']}}/day</h5>
                                     <p class="again-ps">${{$outletData['charges']}} /hour</p>
                                 </div>
+                            </div> -->
+                            <div class="detail-box again-flex">
+                                <h4 class="again-heading come-set thank-name">
+                                    {{$outletData['first_name']}}
+                                    {{$outletData['last_name']}}
+                                </h4>
+                                <div class="from-flex come-set1">
+                                <p class="again-p" style="text-align: left;">From</p>
+                                <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
+                                        {{$outletData['charges_daily']}}/day</h5>
+                                    
+                                    <p class="again-ps" style="text-align: left;">${{$outletData['charges']}} /hour</p>
+</div>
                             </div>
                         </div>
                         <div class="onloads-button">
@@ -72,20 +85,36 @@
 
 
 <style>
+.detail-box {
+
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.line-same {
+    position: relative;
+    left: 15px;
+}
+
 body {
     font-family: "Noto Serif" !important;
 }
-.outlets-des{
+
+.outlets-des {
     padding-left: 30px;
     padding-right: 30px;
 }
+
 .medical-img {
     width: 400px;
-    height:400px;
-    padding:30px;
+    height: 400px;
+    padding: 30px;
     /* height: 240px; */
 }
-.top-outlets{
+
+.top-outlets {
     font-size: 50px;
     font-weight: 700;
     line-height: 68.1px;
@@ -94,6 +123,7 @@ body {
     padding: 30px;
     margin-bottom: 40px;
 }
+
 .page-title {
     position: absolute;
     top: 60%;
@@ -164,7 +194,7 @@ section.title-hero-bg.parallax-effect img {
 .again-flex {
     display: flex;
     font-size: 30px;
-    height:115px;
+    height: 115px;
 }
 
 .again-headings {
@@ -216,12 +246,11 @@ section.title-hero-bg.parallax-effect img {
     line-height: 50px;
     text-align: left;
     padding: 20px;
-    margin-left: 20px;
 }
 
 .onloads-button {
     text-align: center;
-    padding-top: 60px;
+    padding-top: 40px;
     margin-bottom: 30px;
 }
 
@@ -254,14 +283,16 @@ section.title-hero-bg.parallax-effect img {
 
     }
 }
+
 @media (min-width: 768px) and (max-width: 1024px) {
     .medical-img {
         width: 350px !important;
         height: 350px !important;
 
     }
+
     .again-heading {
-    text-align: right !important;
+        text-align: right !important;
     }
 }
 
@@ -274,22 +305,24 @@ section.title-hero-bg.parallax-effect img {
 @media (min-width: 1301px) and (max-width: 1400px) {
     .medical-img {
         width: 300px !important;
-        height:300px !important;
+        height: 300px !important;
     }
 }
 
-@media(min-width:768px){
-    .padding-elips{
-        padding-left:150px;
-        padding-right:150px;
+@media(min-width:768px) {
+    .padding-elips {
+        padding-left: 150px;
+        padding-right: 150px;
     }
 }
-@media(min-width:320px) and (max-width:767px){
-    .padding-elips{
-        padding-left:30px;
-        padding-right:30px;
+
+@media(min-width:320px) and (max-width:767px) {
+    .padding-elips {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
+
 @media (min-width: 768px) and (max-width: 992px) {
 
     h5,

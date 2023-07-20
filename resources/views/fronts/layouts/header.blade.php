@@ -3,7 +3,7 @@
     <div class="row align-items-center header-height">
         <div class="col-lg-3 col-4">
             <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
-                <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid nav-logos" />
+                <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid head-logos" />
             </a>
         </div>
         <div class="col-lg-9 col-8">
@@ -18,22 +18,26 @@
                     <span style="padding: 0px 10px;">Menu</span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav align-items-center py-2 py-lg-0">
+                <ul class="navbar-nav align-items-center py-2 py-lg-0">
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
                                 href="{{ url('/') }}">{{ __('messages.web.home') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
-                                href="{{ url('/') }}">News</a>
+                                href="{{ url('/') }}">About Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color {{ Request::is('medical-services*') ? 'active' : '' }}"
-                                href="{{ url('/') }}">Store</a>
+                                href="{{ url('/') }}">Menu</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov  nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
-                                href="{{ url('/') }}">Membership</a>
+                                href="{{ url('/') }}">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-hov  nav-color {{ Request::is('medical-about-us*') ? 'active' : '' }}"
+                                href="{{ url('/') }}">Community</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
@@ -129,16 +133,15 @@
 header .navbar .navbar-nav .nav-item .nav-link {
     color: #000000 !important;
     font-weight: 500;
-    padding-left:  15px;
-    padding-right: 15px;
-    letter-spacing: .6px;
-    font-size: 16px;
-    line-height:34.05px;
-    font-family: noto serif;
+    padding-left:  10px;
+    padding-right: 10px;
+    letter-spacing: .8px;
+    font-size: 18px;
+    line-height:34.05px;    
 }
-.nav-logos{
-    width: 216px;
-    height: 17px;
+.head-logos{
+    width: 216px !important;
+    height: 17px !important;
 }
 
 header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
@@ -245,7 +248,7 @@ footer {
     .btn11 {
         font-size: 15px !important;
     }
-    .nav-logos {
+    .head-logos {
     width: auto !important;
     height: auto !important;
 }
