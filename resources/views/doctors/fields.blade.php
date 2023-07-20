@@ -452,7 +452,7 @@
     $('#allowmarketing').change(function () {
 
         if (!$(this).is(':checked')) {
-         $("#lbl_change").empty().text("In Active");
+         $("#lbl_change").empty().text("Inactive");
     }else{
         $("#lbl_change").empty().text("Active");
     }

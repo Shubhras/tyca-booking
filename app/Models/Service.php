@@ -109,17 +109,17 @@ class Service extends Model implements HasMedia
         'short_description' => 'required',
         'icon' => 'required|mimes:svg,jpeg,png,jpg',
 
-        "above_count_hourly" => "required|array|min:1",
-        "above_count_hourly.*" => "required|string|distinct",
+        // "above_count_hourly" => "required|array|min:1",
+        // "above_count_hourly.*" => "required|string|distinct",
 
-        "rate_hourly" => "required|array|min:1",
-        "rate_hourly.*" => "required|string|distinct",
+        // "rate_hourly" => "required|array|min:1",
+        // "rate_hourly.*" => "required|string|distinct",
 
-        "above_count_daily" => "required|array|min:1",
-        "above_count_daily.*" => "required|string|distinct",
+        // "above_count_daily" => "required|array|min:1",
+        // "above_count_daily.*" => "required|string|distinct",
 
-        "rate_daily" => "required|array|min:1",
-        "rate_daily.*" => "required|string|distinct",
+        // "rate_daily" => "required|array|min:1",
+        // "rate_daily.*" => "required|string|distinct",
     ];
 
     /**
