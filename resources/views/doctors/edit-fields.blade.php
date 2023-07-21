@@ -446,7 +446,6 @@
         <button type="submit" class="btn btn-primary">{{__('messages.common.save')}}</button>&nbsp;&nbsp;&nbsp;
 
     </div>
-    In
     <style>
     .item-photo__preview {
         width: 100px;

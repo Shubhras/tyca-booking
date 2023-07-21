@@ -1,5 +1,5 @@
 <style>
-    .select2-container--bootstrap-5 .select2-selection--single {
+   .box-width {
         width:145px;
     }
 @media(max-width:600px) {
@@ -85,7 +85,7 @@
                     </div>
                     <div
                         class="col-xl-8 col-lg-3 col-sm-12 col-xs-12 col-sm-12 col-xs-12 d-flex align-items-center buisness_end monday-form">
-                        <div class="d-inline-block">
+                        <div class="d-inline-block box-width">
                             <select class="form-control" data-control="select2" name="startTime[1]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
@@ -97,7 +97,7 @@
                             </select>
                         </div>
                         <span class="px-3">To</span>
-                        <div class="d-inline-block">
+                        <div class="d-inline-block box-width">
                             <select class="form-control " data-control="select2" name="endTime[1]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
@@ -118,7 +118,7 @@
                         </label>
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
-                        <div class="d-inline-block">
+                        <div class="d-inline-block box-width">
                             <select class="form-control " data-control="select2" name="startTime[2]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
@@ -130,7 +130,7 @@
                             </select>
                         </div>
                         <span class="px-3">To</span>
-                        <div class="d-inline-block">
+                        <div class="d-inline-block box-width">
                             <select class="form-control " data-control="select2" name="endTime[2]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
@@ -152,7 +152,7 @@
                         </label>
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
-                        <div class="d-inline-block">
+                        <div class="d-inline-block box-width">
                             <select class="form-control " data-control="select2" name="startTime[3]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
@@ -165,7 +165,7 @@
                         </div>
                         <span class="px-3">To</span>
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="endTime[3]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="endTime[3]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="startTime[4]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="startTime[4]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -198,7 +198,7 @@
                         </div>
                         <span class="px-3">To</span>
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="endTime[4]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="endTime[4]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -220,7 +220,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="startTime[5]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="startTime[5]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -232,7 +232,7 @@
                         </div>
                         <span class="px-3">To</span>
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="endTime[5]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="endTime[5]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -253,7 +253,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="startTime[6]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="startTime[6]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -265,7 +265,7 @@
                         </div>
                         <span class="px-3">To</span>
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="endTime[6]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="endTime[6]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -287,7 +287,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-3  d-flex align-items-center buisness_end monday-form">
                         <div class="d-inline-block">
-                            <select class="form-control" data-control="select2" name="startTime[7]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="startTime[7]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
@@ -299,7 +299,7 @@
                         </div>
                         <span class="px-3">To</span>
                         <div class="d-inline-block">
-                            <select class="form-control " data-control="select2" name="endTime[7]" tabindex="-1"
+                            <select class="form-control box-width" data-control="select2" name="endTime[7]" tabindex="-1"
                                 aria-hidden="true">
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>

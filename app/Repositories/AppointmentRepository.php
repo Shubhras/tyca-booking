@@ -170,12 +170,12 @@ class AppointmentRepository extends BaseRepository
                 $toTime = explode(' ', $blank);
 
                 $asd =  explode(" - ",$input['date1']);
-                $input['from_date'] = $asd[0];
-                $input['to_date'] = $asd[1];
+                $input['from_date'] = Carbon::parse($asd[0])->format('Y-m-d');
+                $input['to_date'] = Carbon::parse($asd[1])->format('Y-m-d');
                 $earlier = new DateTime($input['from_date']);
                 $later = new DateTime($input['to_date']);
                 $abs_diff = $later->diff($earlier)->format("%a");
-                $input['date'] = $asd[0];
+                $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
                 if($abs_diff == 0){
                     $input['total_counts'] = $input['charge'] * 1;
                 }
@@ -288,21 +288,18 @@ class AppointmentRepository extends BaseRepository
                 $input['patient_id'] = $patientId;
             }
 
-            if($input['plan_type'] == 'hourly')
+            if($input['plan_type'] == 'Hour Plan')
             {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
             }else
             {
-                // $blank = '12:00 AM';
-                // $fromTime = explode(' ', date('H:i A'));
-                // $toTime = explode(' ', $blank);
-                // $input['from_time'] = date('H:i A');
-                // $input['to_time'] = $blank;
-                $fromTime = explode(' ', $input['from_time']);
-                $toTime = explode(' ', $input['to_time']);
+                $blank = '12:00 AM';
+                $fromTime = explode(' ', date('H:i A'));
+                $toTime = explode(' ', $blank);
+                $input['from_time'] = date('H:i A');
+                $input['to_time'] = $blank;
             }
-
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
             $input['original_from_time'] = $input['from_time'];
             $input['original_to_time'] = $input['to_time'];
