@@ -61,8 +61,7 @@ window.addCommas = function (nStr) {
 
 window.getFormattedPrice = function (price) {
   if (price != '' || price > 0) {
-    if (typeof price !== 'number') {
-      price = price.replace(/,/g, '');
+    if (typeof price !== 'number') {// price = price.replace(/,/g, '');
     }
 
     return addCommas(price);

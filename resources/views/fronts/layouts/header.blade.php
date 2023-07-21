@@ -3,7 +3,7 @@
     <div class="row align-items-center header-height">
         <div class="col-lg-3 col-4">
             <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
-                <img src="{{ getAppLogo() }}" alt="Infy Care" class="img-fluid head-logos" />
+                <img src="{{ getAppLogo() }}" alt="Infy Care" class="head-logos" />
             </a>
         </div>
         <div class="col-lg-9 col-8">
@@ -13,15 +13,16 @@
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>--}}
-                <button style="color:#273431; font-size: 15px;" class="navbar-toggler border-0 p-0" type="button" id="navbar-toggler" onClick="toggleMenu()">
+                <button style="color:#273431; font-size: 15px;" class="navbar-toggler border-0 p-0" type="button"
+                    id="navbar-toggler" onClick="toggleMenu()">
                     <span class="navbar-toggler-icon"></span>
                     <span style="padding: 0px 10px;">Menu</span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center py-2 py-lg-0">
+                    <ul class="navbar-nav align-items-center py-2 py-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link nav-hov nav-color {{ Request::is('/*') ? 'active' : '' }}" aria-current="page"
-                                href="{{ url('/') }}">{{ __('messages.web.home') }}</a>
+                            <a class="nav-link nav-hov nav-color {{ Request::is('/*') ? 'active' : '' }}"
+                                aria-current="page" href="{{ url('/') }}">{{ __('messages.web.home') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color {{ Request::is('medical-doctors*') ? 'active' : '' }}"
@@ -41,28 +42,29 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-hov nav-color  {{ Request::is('medical-contact*') ? 'active' : '' }}"
-                                href="{{ url('/') }}"
-                                data-turbo="false">{{ __('messages.web.contact_us') }}</a>
+                                href="{{ url('/') }}" data-turbo="false">{{ __('messages.web.contact_us') }}</a>
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="http://127.0.0.1:8000/patients/dashboard" class="nav-link nav-hov nav-color" id="nav-flex"><img
-                                    class="img-fluid-logos" alt="img-fluid" src="{{ getLogInUser()->profile_image }}" />
+                            <a href="http://127.0.0.1:8000/patients/dashboard" class="nav-link nav-hov nav-color"
+                                id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
+                                    src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
                             </a>
                             @else
                             <div class="" id="menu-item-43">
-                            <a href="{{ route('login') }}"
-                                class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head "
-                                data-turbo="false">{{ __('messages.login') }}</a></div>
+                                <a href="{{ route('login') }}"
+                                    class="btn3 btn-outline-primary3 me-xxl-3 me-2 mb-3 mb-lg-0 login-head "
+                                    data-turbo="false">{{ __('messages.login') }}</a>
+                            </div>
                             @endif
                         </li>
                         <li class="nav-item hide-hamer">
                             <a href="http://127.0.0.1:8000/patients/dashboard"
-                                class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger"
-                                data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:23px;height:18px;"></span>
+                                class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger" data-turbo="false"><span><img
+                                        src="/assets/images/rrrr.png" style="width:23px;height:18px;"></span>
                             </a>
-                            </li>
+                        </li>
 
 
                         {{--     <li class="nav-item dropdown">
@@ -99,9 +101,10 @@
 
 
 <style>
-        body {
+body {
     font-family: "Noto Serif" !important;
 }
+
 .header {
     position: fixed !important;
     width: 100%;
@@ -111,8 +114,8 @@
     margin: auto;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
-    padding-left:62px;
-    padding-right:62px;
+    padding-left: 62px;
+    padding-right: 62px;
     transition: all 0.5s ease-in-out;
     z-index: 2 !important;
     background-color: #EEDFD0;
@@ -121,41 +124,48 @@
 .navbar-toggler-icon1 {
     background-image: url(/assets/images/rrrr.png);
 }
-.hamburger{
+
+.hamburger {
     background: none;
     width: 34px;
     height: 5px;
     color: #273451;
     margin: 0px 0px 0px 15px;
-    padding:12px 22px;
+    padding: 12px 22px;
     /* padding: 0 15px 0px 5px; */
 }
+
 header .navbar .navbar-nav .nav-item .nav-link {
     color: #000000 !important;
     font-weight: 500;
-    padding-left:  10px;
+    padding-left: 10px;
     padding-right: 10px;
     letter-spacing: .8px;
     font-size: 18px;
-    line-height:34.05px;    
+    line-height: 34.05px;
 }
-.head-logos{
+
+.head-logos {
     width: 216px !important;
     height: 17px !important;
 }
 
-header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
+header .navbar .navbar-nav .nav-item .nav-link:hover,
+header .navbar .navbar-nav .nav-item .nav-link .nav-color.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
     /* border-bottom: 1px solid #273432 !important; */
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
-header .navbar .navbar-nav .nav-item .nav-link:hover, header .navbar .navbar-nav .nav-item .nav-link.active {
+
+header .navbar .navbar-nav .nav-item .nav-link:hover,
+header .navbar .navbar-nav .nav-item .nav-link.active {
     background: -webkit-linear-gradient(#000000, #000000) !important;
     /* border-bottom: 1px solid #273432 !important; */
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: #00000000 !important
 }
+
 .header-logo:hover {
     color: none !important;
 }
@@ -208,84 +218,109 @@ img.img-fluid-logos {
     color: #fff !important;
     border: 1px solid #273432 !important;
 }
+
 footer {
     padding-top: 40px !important;
 }
+
 @media(max-width:768px) {
     .login-head {
         margin: 0px 0px 0px 20px !important;
     }
 }
+
 @media (min-width:992px) and (max-width:1023px) {
     header .navbar .navbar-nav .nav-item .nav-link {
-    font-size: 18px !important;
+        font-size: 18px !important;
+    }
 }
-}
+
 @media (min-width:1024px) and (max-width:1200px) {
     header .navbar .navbar-nav .nav-item .nav-link {
-    font-size: 17px !important;
+        font-size: 17px !important;
+    }
 }
-}
+
 @media (min-width: 992px) and (max-width: 1200px) {
     .btn1 {
         font-size: 15px !important;
     }
+
     .btn11 {
         font-size: 15px !important;
     }
+
     .host-desk {
         font-size: 20px !important;
     }
 }
+
 @media (min-width:320px) and (max-width:991px) {
     .header {
-        padding-left:20px !important;
-        padding-right:20px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
     }
+
     .btn1 {
         font-size: 15px !important;
     }
+
     .btn11 {
         font-size: 15px !important;
     }
+
     .head-logos {
-    width: auto !important;
-    height: auto !important;
-}
-.hide-hamer{
-    display:none !important;
-}
-.header-height{
-    height:50px;
-}
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .hide-hamer {
+        display: none !important;
+    }
+
+    .header-height {
+        height: 50px;
+    }
 }
 
 
-.nav-hov { color: #323232!important;display:inline-block; margin:0; }
+.nav-hov {
+    color: #323232 !important;
+    display: inline-block;
+    margin: 0;
+}
+
 .nav-hov:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px #323232;  
-  transform: scaleX(0);  
-  transition: transform 250ms ease-in-out;
+    display: block;
+    content: '';
+    border-bottom: solid 3px #323232;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
 }
-.nav-hov:hover:after { transform: scaleX(1); }
-.nav-hov:after{  transform-origin:  0% 50%; }
+
+.nav-hov:hover:after {
+    transform: scaleX(1);
+}
+
+.nav-hov:after {
+    transform-origin: 0% 50%;
+}
 
 .heart:hover {
-  animation: beat .3s 2 alternate !important;
+    animation: beat .3s 2 alternate !important;
 }
 
-@keyframes beat{
-	to { transform: scale(1.06); }
+@keyframes beat {
+    to {
+        transform: scale(1.06);
+    }
 }
 
 #menu-item-43:hover {
-    transform: perspective(1px) translate3d(0,0,0) scale3d(1.08,1.08, 1);
+    transform: perspective(1px) translate3d(0, 0, 0) scale3d(1.08, 1.08, 1);
 }
 
 #menu-item-43 {
     transition: .2s ease-in-out 0s;
 }
-
 </style>
