@@ -112,7 +112,7 @@ class PaypalController extends Controller
             }
 
             if (getLogInUser()->hasRole('patient')) {
-                return redirect('https://tyca-book.sftechnologiesstage.co/patients/dashboard');
+                return redirect('https://tyca-book.sftechnologiesstage.co/booking-detail');
             }
 
             return redirect(route('appointments.index'));

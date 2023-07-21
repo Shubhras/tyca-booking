@@ -150,7 +150,7 @@
                                             <td>Cancelled</td>
                                             @endif
                                             <td><a onclick="bookedInfoData({{$appointment}});"><i
-                                                        class="fa-solid fa-eye"></i></a>
+                                                        class="fa-solid fa-eye pe-3"></i></a>
                                                 <a onclick="cancelConfirm({{$appointment}})"> <i
                                                         class="fa-solid fa-xmark"></i></a>
                                             </td>
@@ -1301,10 +1301,39 @@ div#customer-review_wrap {
 </style>
 <script type="text/javascript">
 function bookedInfoData(data) {
+
+
+
+    var formatDate = function(date) {
+    var months = new Array(12);
+months[1] = "January";
+months[2] = "February";
+months[3] = "March";
+months[4] = "April";
+months[5] = "May";
+months[6] = "June";
+months[7] = "July";
+months[8] = "August";
+months[9] = "September";
+months[10] = "October";
+months[11] = "November";
+months[12] = "December";
+    
+    
+  return date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear() + " " +  ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2) + ":" + ('0' + date.getSeconds()).slice(-2) + ' ' + (date.getHours() < 12 ? 'AM' : 'PM');
+}
+
+var timestamp = data.date;
+console.log(timestamp);
+var date = new Date(timestamp);
+console.log("formatDate(date)",formatDate(date))
+
+
+
     document.getElementById('outinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('bookSpaceInfo').innerHTML = data.services.name;
     document.getElementById('planTypeInfo').innerHTML = data.plan_type;
-    document.getElementById('appointAtIfo').innerHTML = data.date;
+    document.getElementById('appointAtIfo').innerHTML = formatDate(date);
     document.getElementById('payableInfo').innerHTML = "$" + data.payable_amount + ".00";
     var payment_method = '';
     if (data.payment_method == 2) {

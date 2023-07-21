@@ -27,7 +27,7 @@
 </div>
 <!-- style="background-image: url('{{$bodyimage1->value}}');" -->
 
-<section class="white-bg" style="background-image: url('{{$bodyimage1->value}}');">
+<section class="white-bg" style="background-image: url('{{$bodyimage1->value}}'); padding-bottom:130px;">
     <div class="container">
         <div class="top-outlets">
             OUTLETS
@@ -61,10 +61,9 @@
                                 </h4>
                                 <div class="from-flex come-set1">
                                 <p class="again-p" style="text-align: left;">From</p>
-                                <h5 class="again-headings" style=" font-weight: 700; color: #000000;">$
-                                        {{$outletData['charges_daily']}}/day</h5>
+                                <h5 class="again-headings" style=" font-weight: 700; color: #000000;">${{$outletData['charges_daily']}}/day</h5>
                                     
-                                    <p class="again-ps" style="text-align: left;">${{$outletData['charges']}} /hour</p>
+                                    <p class="again-ps" style="text-align: left;">${{$outletData['charges']}}/hour</p>
 </div>
                             </div>
                         </div>
@@ -221,7 +220,7 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .again-ps {
-    font-size: 12px;
+    font-size: 18px;
     color: #000000;
     font-weight: 500;
     line-height: 16.34px;
@@ -229,7 +228,7 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .again-p {
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
     line-height: 20.43px;
     font-weight: 500;
@@ -250,7 +249,7 @@ section.title-hero-bg.parallax-effect img {
 
 .onloads-button {
     text-align: center;
-    padding-top: 40px;
+    padding-top: 20px;
     margin-bottom: 30px;
 }
 
@@ -272,7 +271,7 @@ section.title-hero-bg.parallax-effect img {
     }
 
     .come-set1 {
-        width: 30% !important;
+        width: 40% !important;
     }
 }
 
@@ -284,18 +283,37 @@ section.title-hero-bg.parallax-effect img {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .medical-img {
         width: 350px !important;
         height: 350px !important;
 
     }
-
-    .again-heading {
-        text-align: right !important;
-    }
 }
 
+@media (min-width: 320px) and (max-width: 992px)
+{
+.again-p {
+    font-size: 15px;
+    color: #000000;
+    line-height: 20.43px;
+    font-weight: 500;
+}
+.again-headings {
+    font-weight: 700;
+    color: #000000;
+    font-size: 16px !important;
+    line-height: 40.86px;
+    margin-top: -15px;
+}
+.again-ps {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 500;
+    line-height: 16.34px;
+    margin-top: -5px;
+}
+}
 @media (min-width: 1025px) and (max-width: 1300px) {
     .medical-img {
         width: 300px !important;

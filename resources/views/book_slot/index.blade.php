@@ -4,7 +4,7 @@
 @endsection
 
 @section('front-content')
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap">
 <style>
 body {
     font-family: "Noto Serif" !important;
@@ -24,7 +24,7 @@ body {
 
 .list-mobile {
     width: 211px;
-    height: 211px;
+    height: 195px;
 }
 
 .btn-close:hover {
@@ -365,7 +365,7 @@ body {
 
 .hosts {
     width: 200px;
-    margin-left: 30px;
+    margin-left: 20px;
     font-size: 20px;
     line-height: 30px;
     font-weight: 400;
@@ -373,13 +373,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 
 .host-desk {
-    padding: 10px 0px 0px 0px;
-    margin-left: 30px;
+    padding: 20px 0px 0px 0px;
+    margin-left: 20px;
     width: 200px;
     line-height: 34.05px;
     font-size: 25px;
@@ -912,7 +912,14 @@ h1 {
                                         <b class="heading-id2">{{ $dayLabels[$day] }}</b>
                                     </div>
                                     <div class="col">
-                                        <span class="sub-name">{{ $data->start_time }} - {{ $data->end_time }}</span>
+                                        <span class="sub-name">@if(!empty($data->start_time))
+                                            {{ $data->start_time }} -
+                                            @else  00:00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -
+                                            @endif
+                                            @if(!empty($data->end_time))
+                                            {{ $data->end_time }}
+                                            @else  00:00
+                                            @endif</span>
                                     </div>
                                 </div>
                                 @php
@@ -926,7 +933,7 @@ h1 {
                                         <b class="heading-id2">{{ $dayLabels[$day] }}</b>
                                     </div>
                                     <div class="col">
-                                        <span class="sub-name">Closed</span>
+                                        <span class="sub-name" style="text-transform:capitalize;">Closed</span>
                                     </div>
                                 </div>
                                 @endif
@@ -961,8 +968,12 @@ h1 {
                                     {{ $service->name }}
                                 </div>
                                 <div class="col-3 hosts">
-                                    {!! $service->short_description !!}
+                                <span style="background-color: transparent;color: #5c5c5c !important;">
+                                {!! $service->short_description !!}</span>
                                 </div>
+                                <!-- <div class="col-3 hosts">
+                                    {!! $service->short_description !!}
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1108,7 +1119,7 @@ h1 {
                                 <input type="text" id="templateAppointmentDate" name="date"
                                     class="form-control bg-white" data-uk-datepicker-locale="fr"
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
-                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
+                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true"
                                     readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
                                     id="templateAppointmentDate">

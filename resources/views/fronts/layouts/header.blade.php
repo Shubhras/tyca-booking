@@ -57,9 +57,9 @@
                                 data-turbo="false">{{ __('messages.login') }}</a></div>
                             @endif
                         </li>
-                        <li class="nav-item hide-hamer">
+                        <li class="nav-item hide-hamer" id="logo-animate">
                             <a href="http://127.0.0.1:8000/patients/dashboard"
-                                class=" me-xxl-3 me-2 mb-3 mb-lg-0 hamburger"
+                                class=" me-xxl-3 mr-2 mb-3 mb-lg-0 hamburger"
                                 data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:23px;height:18px;"></span>
                             </a>
                             </li>
@@ -97,7 +97,7 @@
     <!-- </div> -->
 </header>
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap">
 <style>
         body {
     font-family: "Noto Serif" !important;
@@ -111,8 +111,8 @@
     margin: auto;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
-    padding-left:62px;
-    padding-right:62px;
+    padding-left:72px;
+    padding-right:86px;
     transition: all 0.5s ease-in-out;
     z-index: 2 !important;
     background-color: #EEDFD0;
@@ -126,7 +126,7 @@
     width: 34px;
     height: 5px;
     color: #273451;
-    margin: 0px 0px 0px 15px;
+    /* margin: 0px 0px 0px 15px; */
     padding:12px 22px;
     /* padding: 0 15px 0px 5px; */
 }
@@ -135,9 +135,9 @@ header .navbar .navbar-nav .nav-item .nav-link {
     font-weight: 500;
     padding-left:  10px;
     padding-right: 10px;
-    letter-spacing: .8px;
-    font-size: 18px;
-    line-height:34.05px;    
+    letter-spacing: .7px;
+    font-size: 16px;
+    line-height:34px;    
 }
 .head-logos{
     width: 216px !important;
@@ -287,5 +287,8 @@ footer {
 #menu-item-43 {
     transition: .2s ease-in-out 0s;
 }
-
+#logo-animate:hover {
+    transform: scale(1.02);
+    transition: .01s ease-in-out;
+}
 </style>

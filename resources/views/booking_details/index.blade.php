@@ -33,8 +33,11 @@ body {
                 <span class="extra-light">THANK YOU AND</span>
                 <span class="extra-light">SEE YOU THERE!</span>
             </div>
-
-            <img src="assets/images/image_9.png" alt="" class="w-img">
+            @if(!empty($outletName->profile_image))
+                <img src="{{$outletName->profile_image}}" alt="" class="w-img">
+                    @else
+                    <img src="assets/images/image_9.png" alt="" class="w-img">
+            @endif
         </div>
         <div class=" col-md-4 booking-details-left">
             <h2>Booking Details</h2>
@@ -54,7 +57,7 @@ body {
                 <span class="heading">Plan Type:</span> <span class="sub-head">{{$AppointData->plan_type}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Appointment Date:</span> <span class="sub-head">{{$AppointData->date}}</span>
+                <span class="heading">Appointment Date:</span> <span class="sub-head">{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->date))))->format('d F Y h:ia') }}</span>
             </div>
             <div class="mb-1">
                 <span class="heading">Time Slot:</span> <span class="sub-head">{{$AppointData->from_time}} {{$AppointData->from_time_type}} - {{$AppointData->to_time}} {{$AppointData->to_time_type }}</span>
