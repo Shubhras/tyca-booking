@@ -1,3 +1,26 @@
+<style>
+    .item-photo__preview {
+    width: 100px;
+    height: 100px;
+    }
+    .item-images > div
+    {
+        float: left;
+        margin-right: 30px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .delete
+    {
+        position: absolute;
+        background: transparent;
+        border: 1px solid;
+        border-radius: 100%
+    }
+    .new-gap{
+        margin: 5px 0px 12px 0px;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <div class="mb-5">
@@ -42,7 +65,7 @@
                         <div class="col-6 mb-5">
                             {{ Form::label('charges',
                             __('messages.common.base_rate').'('.__('messages.common.hourly').')', ['class' =>
-                            'form-label required']) }}
+                            'form-label new-gap required']) }}
                             <div class="input-group">
                                 {{ Form::text('charges', null, ['class' => 'form-control price-input', 'placeholder' =>
                                 __('messages.service.amount'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value))
@@ -57,7 +80,7 @@
                     <div class="col-lg-6">
                         <div class="col-6 mb-5">
                             {{ Form::label('charges_daily',
-                            __('messages.common.base_rate').'('.__('messages.common.daily').')', ['class' => 'form-label
+                            __('messages.common.base_rate').'('.__('messages.common.daily').')', ['class' => 'new-gap form-label
                             required']) }}
                             <div class="input-group">
                                 {{ Form::text('charges_daily', null, ['class' => 'form-control charges_daily',
@@ -79,7 +102,7 @@
     <div class="col-lg-12 mb-7 mt-5">
         <div class="row">
             <div class="col-6 text-dark">
-                <label class="form-label">{{__('messages.common.discount_rate')}}
+                <label class="form-label new-gap">{{__('messages.common.discount_rate')}}
                     ({{__('messages.common.hourly')}})</label>
 
                 <div class="row hourly_records mb-5">
@@ -92,7 +115,7 @@
                             </div>
                             <input
                                 type="text"
-                                class="form-control "
+                                class="form-control count_hour"
                                 placeholder="{{__('messages.common.no_of')}}"
                                 name="above_count_hourly[]"
                                 onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
@@ -109,7 +132,7 @@
                         <div class="input-group">
                             <input
                                 type="text"
-                                class="form-control"
+                                class="form-control count_rate"
                                 placeholder="{{__('messages.common.discount_percent')}}"
                                 name="rate_hourly[]"
                             />
@@ -125,7 +148,7 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
-                    <div class="diss" style="margin-top: 10px;">Discounted Rate(pre Hour) : </div>
+                    <div class="diss" style="margin: 15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div>
 
                 </div>
                 <div class="hourly_records_dynamic">
@@ -174,7 +197,7 @@
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
-                        <div class="">Discounted Rate(pre Hour) : </div>
+                        <div class="" style="margin:15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div>
 
                     </div>
                     @endforeach
@@ -183,7 +206,7 @@
 
             </div>
             <div class="col-6 text-dark">
-                <label class="form-label">{{__('messages.common.discount_rate')}}
+                <label class="form-label new-gap">{{__('messages.common.discount_rate')}}
                     ({{__('messages.common.daily')}})</label>
 
                 <div class="row daily_records mb-5">
@@ -196,7 +219,7 @@
                             </div>
                             <input
                                 type="text"
-                                class="form-control "
+                                class="form-control count_day"
                                 placeholder="{{__('messages.common.no_of')}}"
                                 name="above_count_daily[]"
                                 onkeyup='if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,"")'
@@ -213,7 +236,7 @@
                         <div class="input-group">
                             <input
                                 type="text"
-                                class="form-control"
+                                class="form-control count_d_rate"
                                 placeholder="{{__('messages.common.discount_percent')}}"
                                 name="rate_daily[]"
                             />
@@ -229,6 +252,8 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
+                    <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD"></span> </div>
+
                 </div>
                 <div class="daily_records_dynamic">
                     @if(isset($dailyDiscounts) && !empty($dailyDiscounts))
@@ -281,6 +306,7 @@
                                     <span class=" fa fa-minus"></span>
                                 </button>
                             </div>
+                            <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD"></span> </div>
                         </div>
 
 
@@ -371,47 +397,84 @@ $('#short_description').val($(".ql-editor").html());
 
 
   </script>
-<style>
-.item-photo__preview {
-  width: 100px;
-  height: 100px;
-}
-.item-images > div
-{
-    float: left;
-    margin-right: 30px;
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-.delete
-{
-    position: absolute;
-    background: transparent;
-    border: 1px solid;
-    border-radius: 100%
-}
-</style>
 
-    <script type="text/javascript">
-        listenClick('#addHourlyCharge', function (event) {
-            //console.log(event, $('.hourly_records').clone())
-            $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
-            $('.hourly_records_dynamic .hourly_records').addClass('single remove');
-            $('.single > .action-btn > .extra-fields-hourly').remove();
-            $('.single > .action-btn > .diss').remove();
-            $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
-            $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
+<script type="text/javascript">
+        // listenClick('#addHourlyCharge', function (event) {
+        //     //console.log(event, $('.hourly_records').clone())
+        //     $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
+        //     $('.hourly_records_dynamic .hourly_records').addClass('single remove');
+        //     $('.single > .action-btn > .extra-fields-hourly').remove();
+        //     $('.single > .action-btn > .diss').remove();
+        //     $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
+        //     $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
+        // });
+
+        // listenClick('#addDailyCharge', function (event) {
+        //     //console.log(event, $('.hourly_records').clone())
+        //     $('.daily_records').clone().appendTo('.daily_records_dynamic');
+        //     $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
+        //     $('.d_single > .action-btn > .extra-fields-daily').remove();
+        //     $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
+        //     $('.daily_records_dynamic > .d_single').attr("class", "d_remove row mb-5");
+        // });
+
+    $(document).ready(function() {
+        $(document).on('keyup', '.hourly_records_dynamic input', function() {
+            const $container = $(this).closest('.get-value');
+            const input1Value = parseFloat($container.find('.count_hour').val()) || 0;
+            const input2Value = parseFloat($container.find('.count_rate').val()) || 0;
+            const sum = (input2Value * 100) / input1Value;
+            $container.find('.discountRate').html(sum.toFixed(1));
         });
-
-        listenClick('#addDailyCharge', function (event) {
-            //console.log(event, $('.hourly_records').clone())
-            $('.daily_records').clone().appendTo('.daily_records_dynamic');
-            $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
-            $('.d_single > .action-btn > .extra-fields-daily').remove();
-            $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
-            $('.daily_records_dynamic > .d_single').attr("class", "d_remove row mb-5");
+        $('.hourly_records input').on('keyup', function() {
+            var input1Value = parseFloat($('.hourly_records .count_hour').val()) || 0;
+            var input2Value = parseFloat($('.hourly_records .count_rate').val()) || 0;
+            var sum = (input2Value * 100)/ input1Value;
+            $('.discountRate').html(sum.toFixed(1));
         });
+    });
 
+    $(document).ready(function() {
+        $(document).on('keyup', '.daily_records_dynamic input', function() {
+            const $container = $(this).closest('.get-value-day');
+            const input1Value = parseFloat($container.find('.count_day').val()) || 0;
+            const input2Value = parseFloat($container.find('.count_d_rate').val()) || 0;
+            const sum = (input2Value * 100) / input1Value;
+            $container.find('.discountRateD').html(sum.toFixed(1));
+        });
+        $('.daily_records input').on('keyup', function() {
+            var input1Value = parseFloat($('.daily_records .count_day').val()) || 0;
+            var input2Value = parseFloat($('.daily_records .count_d_rate').val()) || 0;
+            var sum = (input2Value * 100)/ input1Value;
+            $('.discountRateD').html(sum.toFixed(1));
+        });
+    });
+
+    $('#addHourlyCharge').click(function() {
+        var clonedElement = $('.hourly_records').clone();
+        clonedElement.find('input').val('');
+        clonedElement.find('.discountRate').html(0);
+        clonedElement.appendTo('.hourly_records_dynamic');
+        $('.hourly_records_dynamic .hourly_records').addClass('single remove');
+        $('.single > .action-btn > .extra-fields-hourly').remove();
+        $('.single > .action-btn > .diss').remove();
+        $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
+        $('.hourly_records_dynamic > .single').attr("class", "get-value remove row mb-5");
+    });
+    
+    // listenClick('#addDailyCharge', function (event) {
+        $('#addDailyCharge').click(function() {
+        //console.log(event, $('.hourly_records').clone())
+        var clonedElement = $('.daily_records').clone();
+        clonedElement.find('input').val('');
+        clonedElement.find('.discountRateD').html(0);
+        clonedElement.appendTo('.daily_records_dynamic');
+        // $('.daily_records').clone().appendTo('.daily_records_dynamic');
+        $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
+        $('.d_single > .action-btn > .extra-fields-daily').remove();
+        $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
+        $('.daily_records_dynamic > .d_single').attr("class", "get-value-day d_remove row mb-5");
+    });
 
         listenClick('.remove-field', function (event) {
             $(event.target).parents('div').parent('.d_remove').remove()
