@@ -70,7 +70,10 @@ class FrontController extends AppBaseController
             $dataoutlet = DB::table('users')
             ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
             ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
-            ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
+            ->leftjoin('services', function($join) {
+                $join->on('services.id', '=', 'service_doctor.service_id')
+                     ->where('services.status', '=', 1);
+            })
             ->select('users.id', 'users.first_name', 'users.last_name', 'users.status', 
                 DB::raw('MIN(services.charges) AS min_charges'), 
                 DB::raw('MIN(services.charges_daily) AS min_charges_daily')
@@ -87,9 +90,9 @@ class FrontController extends AppBaseController
                     "id" => $datainformation->id,
                     "first_name" => $datainformation->first_name,
                     "last_name" => $datainformation->last_name,
-                    "charges" => $datainformation->min_charges, // Use the calculated minimum charges here
+                    "charges" => $datainformation->min_charges,
                     "status" => $datainformation->status,
-                    "charges_daily" => $datainformation->min_charges_daily, // Use the calculated minimum charges_daily here
+                    "charges_daily" => $datainformation->min_charges_daily,
                     "profile_image" => $userData->profile_image
                 );
             
