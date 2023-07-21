@@ -41,31 +41,62 @@ class FrontController extends AppBaseController
         $appointmentDoctors = Doctor::with('user')->get()->where('user.status', User::ACTIVE)->pluck('user.full_name',
             'id');
         
-        $dataoutlet = DB::table('users')
-        ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
-        ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
-        ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
-        ->select('users.id','users.first_name', 'users.last_name','users.status', 'services.charges', 'services.charges_daily')
-        ->where('users.type', '2')
-        ->groupBy('users.id')
-        ->get();
-        $outletUser = array();
-        foreach($dataoutlet as $datainformation){
-            $userData = User::where('id', $datainformation->id)->first();
-            //$dataObj = new \stdClass();
-            $outletUse = array (
-            "id" => $datainformation->id,
-            "first_name" => $datainformation->first_name,
-            "last_name" => $datainformation->last_name,
-            "charges" => $datainformation->charges,
-            "status" => $datainformation->status,
-            "charges_daily" => $datainformation->charges_daily,
-            "profile_image" => $userData->profile_image
-        );
-        array_push($outletUser, $outletUse);
-        // echo "<pre>"; print_r($outletUser); die;
+        // $dataoutlet = DB::table('users')
+        // ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
+        // ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
+        // ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
+        // ->select('users.id','users.first_name', 'users.last_name','users.status', 'services.charges', 'services.charges_daily')
+        // ->where('users.type', '2')
+        // ->groupBy('users.id')
+        // ->get();
 
-        }
+        
+        // $outletUser = array();
+        // foreach($dataoutlet as $datainformation){
+        //     $userData = User::where('id', $datainformation->id)->first();
+        //     //$dataObj = new \stdClass();
+        //     $outletUse = array (
+        //     "id" => $datainformation->id,
+        //     "first_name" => $datainformation->first_name,
+        //     "last_name" => $datainformation->last_name,
+        //     "charges" => $datainformation->charges,
+        //     "status" => $datainformation->status,
+        //     "charges_daily" => $datainformation->charges_daily,
+        //     "profile_image" => $userData->profile_image
+        // );
+        // array_push($outletUser, $outletUse);
+
+
+            $dataoutlet = DB::table('users')
+            ->leftjoin('doctors', 'doctors.user_id', '=', 'users.id')
+            ->leftjoin('service_doctor', 'service_doctor.doctor_id', '=', 'doctors.id')
+            ->leftjoin('services', 'services.id', '=', 'service_doctor.service_id')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.status', 
+                DB::raw('MIN(services.charges) AS min_charges'), 
+                DB::raw('MIN(services.charges_daily) AS min_charges_daily')
+            )
+            ->where('users.type', '2')
+            ->groupBy('users.id', 'users.first_name', 'users.last_name', 'users.status')
+            ->get();
+
+            $outletUser = array();
+            foreach($dataoutlet as $datainformation){
+                $userData = User::where('id', $datainformation->id)->first();
+            
+                $outletUse = array (
+                    "id" => $datainformation->id,
+                    "first_name" => $datainformation->first_name,
+                    "last_name" => $datainformation->last_name,
+                    "charges" => $datainformation->min_charges, // Use the calculated minimum charges here
+                    "status" => $datainformation->status,
+                    "charges_daily" => $datainformation->min_charges_daily, // Use the calculated minimum charges_daily here
+                    "profile_image" => $userData->profile_image
+                );
+            
+                array_push($outletUser, $outletUse);
+            }
+
+        // echo "<pre>"; print_r($outletUser); die;
         $aboutExperience = Setting::where('key', 'about_experience')->first();
         $aboutTitle = Setting::where('key', 'about_title')->first();
         $aboutShortDescription = Setting::where('key', 'about_short_description')->first();

@@ -260,11 +260,11 @@ class AppointmentRepository extends BaseRepository
      */
     public function frontSideStore($input)
     {
+        
         try {
             DB::beginTransaction();
             $oldUser = User::whereEmail($input['email'])->first();
             $patientId = getLogInUser()->patient->id;
-            // echo "<pre>"; print_r($patientId);
             if (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) {
                 // if (! $oldUser) {
                 //     throw new UnprocessableEntityHttpException('Email is not registered');
@@ -294,11 +294,13 @@ class AppointmentRepository extends BaseRepository
                 $toTime = explode(' ', $input['to_time']);
             }else
             {
-                $blank = '12:00 AM';
-                $fromTime = explode(' ', date('H:i A'));
-                $toTime = explode(' ', $blank);
-                $input['from_time'] = date('H:i A');
-                $input['to_time'] = $blank;
+                // $blank = '12:00 AM';
+                // $fromTime = explode(' ', date('H:i A'));
+                // $toTime = explode(' ', $blank);
+                // $input['from_time'] = date('H:i A');
+                // $input['to_time'] = $blank;
+                $fromTime = explode(' ', $input['from_time']);
+                $toTime = explode(' ', $input['to_time']);
             }
 
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
@@ -312,7 +314,7 @@ class AppointmentRepository extends BaseRepository
             $input['to_time_type'] = $toTime[1];
             $input['status'] = Appointment::BOOKED;
             $input['payment_type'] = Appointment::MANUALLY;
-
+            // echo "<pre>"; print_r($input); die;
 
             if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
                 return false;        

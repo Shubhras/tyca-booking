@@ -34,9 +34,7 @@
     <div class="col-md-6 mb-5">
         <div class="mb-1">
             {{ Form::label('password',__('messages.staff.password').':' ,['class' => 'form-label required']) }}
-            <span class="text-danger">{{isset($staff) ? null : '*' }}</span>
 <!--            <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">-->
-<!--                <i class="fa fa-question-circle"></i></span>-->
             <div class="mb-3 position-relative">
                 {{Form::password('password',['class' => 'form-control','placeholder' => __('messages.patient.password'),'autocomplete' => 'off','aria-label'=>"Password",'data-toggle'=>"password"])}}
                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>
@@ -48,10 +46,8 @@
         <div class="fv-row">
             <div class="mb-1">
                 {{ Form::label('confirmPassword',__('messages.staff.confirm_password').':' ,['class' => 'form-label required']) }}
-                <span class="text-danger">{{isset($staff) ? null : '*' }}</span>
 <!--                <span data-bs-toggle="tooltip"-->
 <!--                      title="{{ __('messages.flash.user_8_or') }}">-->
-<!--                    <i class="fa fa-question-circle"></i></span>-->
                 <div class="mb-3 position-relative">
                     {{Form::password('password_confirmation',['class' => 'form-control','placeholder' => __('messages.user.confirm_password'),'autocomplete' => 'off','aria-label'=>"Password",'data-toggle'=>"password"])}}
                     <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>

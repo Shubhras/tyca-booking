@@ -9,37 +9,32 @@
 body {
     font-family: "Noto Serif" !important;
 }
-
-.ami-padding {
-    padding-left: 20px !important;
+.ami-padding
+{
+    padding-left: 20px!important;
 }
-
-.ami-margin {
+.ami-margin{
     margin: 20px;
 }
-
-.list-margin {
-    margin: 30px;
+.list-margin
+    {
+        margin:30px;
+    }
+.list-mobile{
+    width:211px;
+    height:211px;
 }
-
-.list-mobile {
-    width: 211px;
-    height: 211px;
-}
-
 .btn-close:hover {
     color: #323232 !important;
     text-decoration: none !important;
-    opacity: .75 !important;
+    opacity: .75 !important; 
 }
-
-.label-font {
+.label-font{
     font-size: 15.85px;
     font-weight: 400;
     line-height: 23.78px;
 }
-
-.pay-amnt {
+.pay-amnt{
     display: flex;
     justify-content: center;
     font-size: 24.96px;
@@ -47,14 +42,12 @@ body {
     line-height: 34px;
     margin-top: 10px;
 }
-
-.btn-close {
+.btn-close{
     width: 22.66px;
     height: 22.66px;
     color: #323232;
     opacity: .5;
 }
-
 .desc-sort {
     font-size: 20px;
     line-height: 30px;
@@ -262,7 +255,6 @@ body {
     line-height: 27.24px;
 
 }
-
 .row-gap {
     margin-bottom: 10px;
 }
@@ -366,20 +358,20 @@ body {
 .hosts {
     width: 200px;
     margin-left: 30px;
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: 400;
-    color: #000000
+    font-size:20px;
+    line-height:30px;
+    font-weight:400;
+    color:#000000
 }
 
 .host-desk {
     padding: 10px 0px 0px 0px;
     margin-left: 30px;
     width: 200px;
-    line-height: 38.14px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #000000
+    line-height:38.14px;
+    font-size:28px;
+    font-weight:700;
+    color:#000000
 }
 
 .amities1 {
@@ -541,20 +533,17 @@ figure.effect-chico {
     font-weight: 700;
     line-height: 30px;
 }
-
-@media (min-width: 992px) {
-    .padding-less {
-        padding-left: 0px !important;
+@media (min-width: 992px){
+    .padding-less{
+        padding-left: 0px!important;
     }
 }
-
 @media (min-width:1024px) and (max-width:1200px) {
     .list-mobile {
-        width: 185px !important;
-        height: 185px !important;
-    }
+    width: 185px !important;
+    height: 185px !important;
 }
-
+}
 @media (min-width:320px) and (max-width:1440px) {
     .slot-margin {
         margin: 0;
@@ -589,51 +578,42 @@ figure.effect-chico {
     }
 }
 
-@media(min-width:801px) and (max-width:992px) {
-    .list-box {
-        width: inherit !important;
-    }
+@media(min-width:801px) and (max-width:992px){
+.list-box{
+    width:inherit !important;
 }
-
-@media(min-width:320px) and (max-width:595px) {
-    .list-mobile {
-        height: 211px !important;
-    }
-
-    .hosts {
-        text-align: center;
-    }
-
-    .host-desk {
-        text-align: center;
-    }
 }
-
-@media(min-width:600px) and (max-width:767px) {
-    .list-box {
-        width: inherit !important;
-    }
-
-    .list-mobile {
-        height: 211px !important;
-    }
+@media(min-width:320px) and (max-width:595px){
+    .list-mobile{
+    height:211px !important;
 }
-
-@media (min-width: 992px) and (max-width: 1200px) {
-    .btn1 {
-        font-size: 14px !important;
-    }
+.hosts {
+    text-align:center;
 }
-
+.host-desk {
+    text-align:center;
+}
+}
+@media(min-width:600px) and (max-width:767px){
+    .list-box{
+        width:inherit !important;
+    }
+    .list-mobile{
+    height:211px !important;
+}
+}
+@media (min-width: 992px) and (max-width: 1200px){
+.btn1 {
+    font-size: 14px !important;
+}
+}
 @media (min-width:320px) and (max-width:600px) {
     .hour-view {
         padding-top: 15px !important;
     }
-
     .btn11 {
-        font-size: 10px !important;
-    }
-
+    font-size: 10px !important;
+}
     .sub-name {
         font-size: 13px !important;
     }
@@ -749,7 +729,7 @@ figure.effect-chico {
 }
 
 @media (min-width:1300px) and (max-width:1440px) {
-
+    
     .btn11 {
         width: 155px !important;
     }
@@ -758,20 +738,19 @@ figure.effect-chico {
         width: 150px !important;
     }
 }
-
 @media (min-width:1441px) and (max-width:2560px) {
-    .list-margin {
-        margin: 5px;
+    .list-margin
+    {
+        margin:5px;
     }
-
     .sec2 {
-        padding: 0px 20px 0px 5px;
-        width: 66%;
-    }
-
-    .ami-padding {
-        padding-left: 5px !important;
-    }
+    padding: 0px 20px 0px 5px;
+    width: 66%;
+}
+.ami-padding
+{
+    padding-left: 5px!important;
+}
 }
 
 .location {
@@ -858,13 +837,12 @@ h1 {
                                         {{$user->first_name}}
                                         {{$user->last_name}}<h1>
                                         </h1>
-
+                                        
                                         <div>
                                             <p class="location">
                                                 <img src="/assets/image/material-symbols_location-on.png" alt="#"
                                                     style="height: 34px; width:34px; margin-left:-5px;">
-                                                {{$addressData->address1}} , #{{$addressData->address2}} ,
-                                                {{$addressData->country_name}} {{$addressData->postal_code}}
+                                                {{$addressData->address1}} , #{{$addressData->address2}} , {{$addressData->country_name}}  {{$addressData->postal_code}}
                                             </p>
                                         </div>
                                         <p class="desc-sort">{!! $doctor->description !!}</p>
@@ -872,7 +850,7 @@ h1 {
                         </div>
                     </div>
                 </div>
-                {{--<p onload="myFunction()">{{ Session::get('message') }}</p>--}}
+               {{--<p onload="myFunction()">{{ Session::get('message') }}</p>--}}
 
                 <div class="col-md-4 responsive-wrap set-amities padding-less">
                     <div class="sidebar">
@@ -1036,7 +1014,7 @@ h1 {
             <div class="row col-12 list-box">
                 <h3 class="amities1 ami-padding">Listings</h3>
                 @foreach($services as $service)
-                <div class="col-5 row list-box list-margin">
+                <div class="col-5 row list-box list-margin" >
                     <div class="row col-12 set-border">
                         <div class="col-md-5 col-sm-5 col-xs-12 list-set" style="padding:0px;">
                             <img src="{{ $service->icon }}" alt="Digital" class="list-mobile">
@@ -1061,8 +1039,8 @@ h1 {
                         </button>
                         @else
                         <a href="{{ route('login') }}"
-                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view" data-turbo="false"> $
-                            {{ $service->charges }} / Hour</a>
+                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
+                            data-turbo="false"> $ {{ $service->charges }} / Hour</a>
                         @endif
                         @if(getLogInUser())
                         <button class="btn1 btn1-primary1 btn-sm me-xxl-3 me-3 me-xxl-4 rounded-2 mb-xl-0 hour-view"
@@ -1072,8 +1050,8 @@ h1 {
                         </button>
                         @else
                         <a href="{{ route('login') }}"
-                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view" data-turbo="false">$
-                            {{ $service->charges_daily }} / Day</a>
+                            class="btn1 btn1-primary1 btn-sm me-3 me-xxl-4 rounded-2 hour-view"
+                            data-turbo="false">$ {{ $service->charges_daily }} / Day</a>
                         @endif
                         <?php
                     $idGet =  Request::segment(2);
@@ -1196,8 +1174,7 @@ h1 {
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
-                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
-                                    id="templateAppointmentDate">
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
@@ -1305,12 +1282,10 @@ setTimeout(function() {
 }, 5000);
 </script>
 <script>
-
-
 document.addEventListener('DOMContentLoaded', function() {
     var appointmentDateInput = document.getElementById('appointment-date');
     console.log('appointmentDateInput', appointmentDateInput)
-    if (appointmentDateInput) {
+    if(appointmentDateInput) {
         appointmentDateInput.addEventListener('change', function() {
             var selectedDate = appointmentDateInput.value;
             var additionalInfoDiv = document.getElementById('additional-info');
@@ -1324,7 +1299,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function displayMessage(id, price, service_id) {
+function displayMessage(id, price,service_id) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -1332,25 +1307,7 @@ function displayMessage(id, price, service_id) {
         var abc = 'Day Plan';
         $('#slot_option').hide();
     }
-    var conceptName = $('#appointmentDoctorId').find(":selected").val();
-    $.ajax({
-        url: route('get-service'),
-        type: 'GET',
-        data: {
-            'appointmentDoctorId': conceptName,
-        },
-        success: function (result) {
-            console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',result);
-            if (result.success) {
-                $('#FrontAppointmentServiceId').empty();
-                $('#FrontAppointmentServiceId').append($('<option value=""></option>').text( 'select booking space'));
-                $.each(result.data, function (i, v) {
-                    var new_service = (v.id == service_id)  ? "selected" : "";
-                    $('#FrontAppointmentServiceId').append($('<option '+new_service+'></option>').attr('value', v.id).text(v.name));
-                });
-            }
-        },
-    });
+
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
@@ -1451,15 +1408,15 @@ $(document).ready(function() {
 </script>
 
 <script>
-function myFunction() {
-    alert("Page is loaded");
-    console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
+    function myFunction() {
+  alert("Page is loaded");
+  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
 }
 $(document).ready(function() {
     $('#templateAppointmentDate').datepicker({
         language: 'es-es',
         format: 'yyyy-mm-dd',
-        minDate: new Date(),
+        minDate:new Date(),
         startDate: new Date(),
         todayHighlight: true,
     });
