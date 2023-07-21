@@ -20,13 +20,13 @@ body {
                     <br> Book a slot for our space now!
                 </h4>
                 <div class="book-now">
-                    <button class="book-btn">Book Now</button>
+                    <a href="http://127.0.0.1:8000/patients/dashboard"><button class="book-btn">Book Now</button></a>
                 </div>
             </div>
         </div>
     </section>
 </div>
-<section class="booking-detailss">
+<section class="booking-detailss" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="row booking-details">
         <div class="  col-md-6 booking-details-right">
             <div class="column" style="display:grid;">
@@ -57,7 +57,7 @@ body {
                 <span class="heading">Appointment Date:</span> <span class="sub-head">{{$AppointData->date}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Time Slot:</span> <span class="sub-head">3.00 pm</span>
+                <span class="heading">Time Slot:</span> <span class="sub-head">{{$AppointData->from_time}} {{$AppointData->from_time_type}} - {{$AppointData->to_time}} {{$AppointData->to_time_type }}</span>
             </div>
             <div class="mb-1">
                 <span class="heading">Payable Amount:</span> <span
@@ -173,8 +173,8 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .book-btn {
-    width: 250px;
-    height: 40px;
+    width: 260px;
+    height: 60px;
     font-size: 25px;
     font-weight: 600;
     background: #273432;
@@ -182,6 +182,7 @@ section.title-hero-bg.parallax-effect img {
     line-height: 34.05px;
     color: #FFFFFF;
     text-align: center;
+    padding:10px 5px 10px 5px;
 }
 
 .books-now {
@@ -190,11 +191,14 @@ section.title-hero-bg.parallax-effect img {
 
 .books-btn {
     width: 200px;
-    height: 40px;
-    font-size: 15px;
+    height: 42px;
+    font-size: 16px;
     background: #273432;
     border: #273432;
     color: #FFFFFF;
+    line-height: 21.79px;
+    font-weight: 600;
+    padding: 10px 5px 10px 5px;
 }
 
 .booking-details {

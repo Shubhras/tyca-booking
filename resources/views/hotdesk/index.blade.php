@@ -46,25 +46,36 @@ $styleCss = 'style';
             <div class="col-md-6">
                 <div class="grid">
                     <figure class="effect-chico">
+                        @if(!empty($servicesData->gallery[0]))
+                        <img src="{{$servicesData->gallery[0]}}" alt="">
+                        @else
                         <img src="/assets/images/image 9.png" alt="">
+                        @endif
                     </figure>
                 </div>
             </div>
             <div class="col-md-6">
-                <!-- <h2 class="h2-day">$40/Day</h2> -->
                 <div class="row">
                     <div class="col-md-6">
 
                         <div class="grid">
                             <figure class="effect-chico">
+                                @if(!empty($servicesData->gallery[1]))
+                                <img src="{{$servicesData->gallery[1]}}" alt="">
+                                @else
                                 <img src="/assets/images/image 10.png" alt="">
+                                @endif
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
+                                @if(!empty($servicesData->gallery[2]))
+                                <img src="{{$servicesData->gallery[2]}}" alt="">
+                                @else
                                 <img src="/assets/images/image 12.png" alt="">
+                                @endif
                             </figure>
                         </div>
                     </div>
@@ -73,84 +84,36 @@ $styleCss = 'style';
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
+                                @if(!empty($servicesData->gallery[3]))
+                                <img src="{{$servicesData->gallery[3]}}" alt="">
+                                @else
                                 <img src="/assets/images/image 11.png" alt="">
+                                @endif
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="grid">
                             <figure class="effect-chico">
+                                @if(!empty($servicesData->gallery[4]))
+                                <img src="{{$servicesData->gallery[4]}}" alt="">
+                                @else
                                 <img src="/assets/images/image 13.png" alt="">
+                                @endif
+
                             </figure>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
+
     </div>
 </section>
-
-
-{{--<section class="main-block gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="grid">
-                    <div class="hot-desk">
-                        <h2>HOT DESK</h2>
-                        <p>at Thank You Come Again @ Balestier</p>
-                    </div>
-                    <figure class="effect-chico">
-                        <img src="/assets/images/image 9.png" alt="">
-                    </figure>
-                </div>
-            </div>
-      
-            <div class="col-md-6">
-                <h2 class="h2-day">${{$servicesData->charges_daily}}/Day</h2>
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                <img src="/assets/images/image 10.png" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                <img src="/assets/images/image 12.png" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="row grid-space">
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                <img src="/assets/images/image 11.png" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                <img src="/assets/images/image 13.png" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>--}}
-
 <section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
-    <div class="container">
+    <div class="container" style="padding: 0px 5px;">
         <div class="row">
-        <div class="col-md-8">
+            <div class="col-md-8">
                 <div class="grid">
                     <div class="hot-desks padding-b">
                         <h2>DESCRIPTION</h2>
@@ -173,89 +136,48 @@ $styleCss = 'style';
                         </div>
                     </div>
 
-                    <div class="Operating padding-tb">
+
+                    <?php
+                                $var_dump = json_decode($doctor->days);
+                            ?>
+                    <div class="Operating padding-tb" style="margin-bottom:60px;">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
-                            <?php
-                             $var_dump = json_decode($doctor->days);
-                             ?>
+                            @php
+                            $dayLabels = [1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday', 4 => 'Thursday', 5 =>
+                            'Friday', 6 => 'Saturday', 7 => 'Sunday'];
+                            @endphp
+
                             @if(!empty($var_dump))
-                            @foreach($var_dump as $day)
-                            <div class="operating-right" style="display:grid;">
-                                @if($day->day_of_week == 1)
+                            @for($day = 1; $day <= 7; $day++) @php $found=false; @endphp @foreach($var_dump as $data)
+                                @if($data->day_of_week == $day)
                                 <div class="row mt-10 mb-2 col-lg-12">
                                     <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Monday</span>
+                                        <span class="heading-id2">{{ $dayLabels[$day] }}</span>
                                     </div>
                                     <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
+                                        <span class="sub-name">{{$data->start_time}} - {{$data->end_time}}</span>
                                     </div>
                                 </div>
+                                @php
+                                $found = true;
+                                @endphp
+
+                                @endif
+                                @endforeach
+                                @if(!$found)
+                                <div class="row mt-10 mb-2 col-lg-12">
+                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
+                                        <span class="heading-id2">{{ $dayLabels[$day] }}</span>
+                                    </div>
+                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
+                                        <span class="sub-name">Closed</span>
+                                    </div>
+                                </div>
+                                @endif
+                                @endfor
                                 @endif
 
-                                @if($day->day_of_week == 2)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Tuesday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 3)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Wednesday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 4)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Thursday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 5)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Friday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 6)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Saturday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($day->day_of_week == 7)
-                                <div class="row mt-10 mb-2 col-lg-12">
-                                    <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
-                                        <span class="heading-id2">Sunday</span>
-                                    </div>
-                                    <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$day->start_time}} - {{$day->end_time}}</span>
-                                    </div>
-                                </div>
-                                @endif
-                            </div>
-                            @endforeach
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -433,7 +355,8 @@ $styleCss = 'style';
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
                                     placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
                                     readonly>
-                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
+                                    id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
@@ -450,14 +373,16 @@ $styleCss = 'style';
                                     <div class="form-check d-flex align-items-center mb-2">
                                         <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small"
+                                            for="defaultCheck1">
                                             {{__('messages.appointment.booked')}}
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center mb-2 ms-3">
                                         <input class="form-check-input form-check-success me-2 mt-0" type="checkbox"
                                             value="" id="defaultCheck1">
-                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small"
+                                            for="defaultCheck1">
                                             {{__('messages.appointment.available')}}
                                         </label>
                                     </div>
@@ -518,7 +443,7 @@ $styleCss = 'style';
                         </div>
 
                     </div>
-                    <div class="pay-amnt mb-4"> 
+                    <div class="pay-amnt mb-4">
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
                     </div>
@@ -558,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function displayMessage(id, price,service_id) {
+function displayMessage(id, price, service_id) {
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -566,7 +491,26 @@ function displayMessage(id, price,service_id) {
         var abc = 'Day Plan';
         $('#slot_option').hide();
     }
-
+    var conceptName = $('#appointmentDoctorId').find(":selected").val();
+    $.ajax({
+        url: route('get-service'),
+        type: 'GET',
+        data: {
+            'appointmentDoctorId': conceptName,
+        },
+        success: function(result) {
+            if (result.success) {
+                $('#FrontAppointmentServiceId').empty();
+                $('#FrontAppointmentServiceId').append($('<option value=""></option>').text(
+                    'select booking space'));
+                $.each(result.data, function(i, v) {
+                    var new_service = (v.id == service_id) ? "selected" : "";
+                    $('#FrontAppointmentServiceId').append($('<option ' + new_service +
+                        '></option>').attr('value', v.id).text(v.name));
+                });
+            }
+        },
+    });
     $('#adminAppointmentPlanId').val(abc);
     $('#payable_amount').val(price);
     $('#payable_amount_Show').text(price);
@@ -593,11 +537,11 @@ function displayMessage(id, price,service_id) {
 }
 </script>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $('#templateAppointmentDate').datepicker({
         language: 'es-es',
         format: 'yyyy-mm-dd',
-        minDate:new Date(),
+        minDate: new Date(),
         startDate: new Date(),
         todayHighlight: true,
     });
@@ -695,18 +639,20 @@ $('input[type="date"]').change(function() {
 body {
     font-family: "Noto Serif" !important;
 }
-.left-plan{
-    margin-left:-5px;
+
+.left-plan {
+    margin-left: -5px;
 }
-.padding-tb
-{
+
+.padding-tb {
     padding-bottom: 7.5px;
     padding-top: 7.5px;
 }
-.padding-b
-{
+
+.padding-b {
     padding-bottom: 7.5px;
 }
+
 .ellipsis {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -737,6 +683,7 @@ a:hover {
     line-height: 30px;
     color: #000000;
 }
+
 .pay-amnt {
     display: flex;
     justify-content: center;
@@ -745,6 +692,7 @@ a:hover {
     line-height: 34px;
     margin-top: 10px;
 }
+
 @media (max-width: 767px) {
 
     .form-control,
@@ -762,10 +710,11 @@ a:hover {
 }
 
 @media (min-width:320px) and (max-width:767px) {
-.grid-hours{
-    margin-left:-15px !important;
+    .grid-hours {
+        margin-left: -15px !important;
+    }
 }
-}
+
 @media (min-width:768px) and (max-width:800px) {
     .radio-btn {
         font-size: 14px !important;
@@ -781,22 +730,26 @@ a:hover {
         display: grid !important;
     }
 }
-@media(min-width:768px){
-    .padding-elips{
-        padding-left:150px;
-        padding-right:150px;
+
+@media(min-width:768px) {
+    .padding-elips {
+        padding-left: 150px;
+        padding-right: 150px;
     }
 }
+
 @media (min-width:320px) and (max-width:767px) {
-    .padding-elips{
-        padding-left:30px;
-        padding-right:30px;
-    }    
+    .padding-elips {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
     .page-title h1 {
-    font-size: 70px;
-    line-height: 40.34px !important;
+        font-size: 70px;
+        line-height: 40.34px !important;
     }
 }
+
 @media (min-width:768px) and (max-width:1024px) {
     .icon-set {
         width: 100% !important;
@@ -811,9 +764,11 @@ a:hover {
         font-size: 15px !important;
         color: #000000;
     }
+
     p.hou-p {
-    font-size: 15px !important;
+        font-size: 15px !important;
     }
+
     h5,
     .fs-5 {
         font-size: 15px !important;
@@ -833,11 +788,13 @@ a:hover {
         margin: 2px -8px 3px !important;
     }
 }
+
 @media (min-width:1025px) and (max-width:1290px) {
-.dayplan-btn {
-    width: 130px !important;
+    .dayplan-btn {
+        width: 130px !important;
+    }
 }
-}
+
 @media (min-width:320px) and (max-width:600px) {
     .amenities-block {
         width: inherit !important;
@@ -929,17 +886,20 @@ a:hover {
 .modal-header {
     border-bottom: none !important;
 }
+
 .label-font {
     font-size: 15.85px;
     font-weight: 400;
     line-height: 23.78px;
 }
+
 .btn-close {
     width: 22.66px;
     height: 22.66px;
     color: #000000;
     opacity: .5;
 }
+
 .book-space {
     text-align: center;
     font-size: 39.64px;

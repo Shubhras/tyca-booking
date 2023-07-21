@@ -8,6 +8,7 @@ use App\Models\Patient;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Service;
+use App\Models\Setting;
 use Auth;
 class BookingdetailsController extends Controller
 {
@@ -21,7 +22,8 @@ class BookingdetailsController extends Controller
         $ServiceData = Service::where('id', $AppointData->service_id)->first();
         $doctorData = Doctor::where('id', $AppointData->doctor_id)->first();
         $outletName = User::where('id',$doctorData->user_id)->first();
-        return view('booking_details.index',compact('UserData','AppointData','ServiceData','outletName'));
+        $bodyimage1 = Setting::where('key', 'body_image')->first();
+        return view('booking_details.index',compact('UserData','AppointData','ServiceData','outletName','bodyimage1'));
     }
 
 }
