@@ -156,7 +156,14 @@ $styleCss = 'style';
                                         <span class="heading-id2">{{ $dayLabels[$day] }}</span>
                                     </div>
                                     <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">{{$data->start_time}} - {{$data->end_time}}</span>
+                                        <span class="sub-name">@if(!empty($data->start_time))
+                                            {{ $data->start_time }} -
+                                            @else  00:00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -
+                                            @endif
+                                            @if(!empty($data->end_time))
+                                            {{ $data->end_time }}
+                                            @else  00:00
+                                            @endif</span>
                                     </div>
                                 </div>
                                 @php
@@ -171,7 +178,7 @@ $styleCss = 'style';
                                         <span class="heading-id2">{{ $dayLabels[$day] }}</span>
                                     </div>
                                     <div class="col-lg-5 col-xl-4 col-sm-6 col-xs-4 day-small1">
-                                        <span class="sub-name">Closed</span>
+                                        <span class="sub-name" style="text-transform:capitalize;">Closed</span>
                                     </div>
                                 </div>
                                 @endif
@@ -353,7 +360,7 @@ $styleCss = 'style';
                                 <input type="text" id="templateAppointmentDate" name="date"
                                     class="form-control bg-white" data-uk-datepicker-locale="fr"
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
-                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" disabled
+                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true"
                                     readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
                                     id="templateAppointmentDate">
