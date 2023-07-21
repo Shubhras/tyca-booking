@@ -32,7 +32,19 @@
 @endsection
 
 <style>
-        .select2-container--bootstrap-5 .select2-selection--single {
-        width:145px;
+ .checkBoxClass {
+    width: 1.563em;
+    height: 1.563em;
+    margin-top: -0.0315em;
+    vertical-align: top;
+    background-color: #ced4da !important;
+    border-color:  transparent !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 2px solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     }
 </style>

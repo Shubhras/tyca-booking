@@ -47,13 +47,13 @@ class AppointmentTable extends LivewireTableComponent
         $query = Appointment::with([
             'doctor.user', 'patient.user', 'services', 'transaction', 'doctor.reviews', 'doctor.user.media',
         ]);
-
         $query->when($this->statusFilter != '' && $this->statusFilter != Appointment::ALL_STATUS,
-            function (Builder $q) {
-                if ($this->statusFilter != Appointment::ALL) {
-                    $q->where('appointments.status', '=', $this->statusFilter);
-                }
-            });
+        function (Builder $q) {
+            if ($this->statusFilter != Appointment::ALL) {
+
+                $q->where('appointments.status', '=', $this->statusFilter);
+            }
+        });
 
         $query->when($this->paymentTypeFilter != '' && $this->paymentTypeFilter != Appointment::ALL_PAYMENT,
             function (Builder $q) {
@@ -72,15 +72,17 @@ class AppointmentTable extends LivewireTableComponent
             });
 
         if ($this->dateFilter != '' && $this->dateFilter != getWeekDate()) {
+            
             $timeEntryDate = explode(' - ', $this->dateFilter);
             $startDate = Carbon::parse($timeEntryDate[0])->format('Y-m-d');
             $endDate = Carbon::parse($timeEntryDate[1])->format('Y-m-d');
             $query->whereBetween('date', [$startDate, $endDate]);
         } else {
-            $timeEntryDate = explode(' - ', getWeekDate());
-            $startDate = Carbon::parse($timeEntryDate[0])->format('Y-m-d');
-            $endDate = Carbon::parse($timeEntryDate[1])->format('Y-m-d');
-            $query->whereBetween('date', [$startDate, $endDate]);
+            // $timeEntryDate = explode(' - ', getWeekDate());
+            // print_r($timeEntryDate);
+            // $startDate = Carbon::parse($timeEntryDate[0])->format('Y-m-d');
+            // $endDate = Carbon::parse($timeEntryDate[1])->format('Y-m-d');
+            // $query->whereBetween('date', [$startDate, $endDate]);
         }
 
         if (getLoginUser()->hasRole('patient')) {
