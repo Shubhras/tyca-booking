@@ -175,15 +175,15 @@ class DashboardRepository
             $query->where('status', Appointment::BOOKED)
                   ->orWhere('status', Appointment::CANCELLED);
         })
-        ->where('date', '>=', $todayDate)
-        ->orderBy('created_at', 'DESC')
+        ->where('date', '>', $todayDate)
+        ->orderBy('date', 'ASC')
         ->paginate(10);
 
         $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
             ->wherePatientId($patientId)
             ->whereStatus(Appointment::BOOKED)
-            ->where('date', '<', $todayDate)
-            ->orderBy('date', 'ASC')
+            ->where('date', '<=', $todayDate)
+            ->orderBy('date', 'DESC')
             ->paginate(10);
 
         return $data;
