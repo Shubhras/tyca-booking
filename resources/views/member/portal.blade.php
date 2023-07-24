@@ -113,8 +113,14 @@
                                         <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;">
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
-                                            <td>{{ $appointment->plan_type }}</td>
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y h:ia') }}</td>
+                                            @if($appointment->plan_type == "Day Plan")
+                                            <td>Daily Plan</td>
+                                            @elseif($appointment->plan_type == "Hour Plan")
+                                            <td>Hourly Plan</td>
+                                            @else
+                                            <td>N/A</td>
+                                            @endif
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }} {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
 
 
@@ -127,9 +133,9 @@
                                             @endif
 
                                             @if($appointment->transaction->status == 0)
-                                            <td>All</td>
+                                            <td>Pending</td>
                                             @elseif($appointment->transaction->status == 1)
-                                            <td> Panding</td>
+                                            <td>Success</td>
                                             @else
                                             <td> Paid</td>
                                             @endif
@@ -189,8 +195,14 @@
                                         <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400;">
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
-                                            <td>{{ $appointment->plan_type }}</td>
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y h:ia') }}</td>
+                                            @if($appointment->plan_type == "Day Plan")
+                                            <td>Daily Plan</td>
+                                            @elseif($appointment->plan_type == "Hour Plan")
+                                            <td>Hourly Plan</td>
+                                            @else
+                                            <td>N/A</td>
+                                            @endif
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }} {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
                                             @if($appointment->payment_method == 2)
                                             <td>
@@ -201,9 +213,9 @@
                                             @endif
 
                                             @if($appointment->transaction->status == false)
-                                            <td>All</td>
+                                            <td>Pending</td>
                                             @elseif($appointment->transaction->status == true)
-                                            <td> Panding</td>
+                                            <td>Success</td>
                                             @else
                                             <td> Paid</td>
                                             @endif
@@ -268,7 +280,8 @@
                         </div>
                         <div class="book-infos">
                             <p class="book-val">Appointment At:</p>&nbsp;
-                            <p id="appointAtIfo" class="book-ps"></p>
+                            <p id="appointAtIfo" class="book-ps"></p>&nbsp;
+                            <p id="getTime" class="book-ps"></p>&nbsp; <p id="getType" class="book-ps"></p>
                         </div>
                         <div class="book-infos">
                             <p class="book-val">Payable Amount:</p>&nbsp;
@@ -324,7 +337,8 @@
                     <div class="book-infos">
                         <p class="book-val">Appointment At:
                         <p>&nbsp;
-                        <p id="cappointAtIfo" class="book-ps"></p>
+                        <p id="cappointAtIfo" class="book-ps"></p>&nbsp;
+                        <p id="cgetTime" class="book-ps"></p>&nbsp; <p id="cgetType" class="book-ps"></p>
                     </div>
                     <div class="book-infos">
                         <p class="book-val">Payable Amount:
@@ -1302,37 +1316,34 @@ div#customer-review_wrap {
 <script type="text/javascript">
 function bookedInfoData(data) {
 
-
+console.log(data);
 
     var formatDate = function(date) {
     var months = new Array(12);
-months[1] = "January";
-months[2] = "February";
-months[3] = "March";
-months[4] = "April";
-months[5] = "May";
-months[6] = "June";
-months[7] = "July";
-months[8] = "August";
-months[9] = "September";
-months[10] = "October";
-months[11] = "November";
-months[12] = "December";
+months[0] = "January";
+months[1] = "February";
+months[2] = "March";
+months[3] = "April";
+months[4] = "May";
+months[5] = "June";
+months[6] = "July";
+months[7] = "August";
+months[8] = "September";
+months[9] = "October";
+months[10] = "November";
+months[11] = "December";
     
     
-  return date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear() + " " +  ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2) + ":" + ('0' + date.getSeconds()).slice(-2) + ' ' + (date.getHours() < 12 ? 'AM' : 'PM');
+  return date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear() + " ";
 }
 
 var timestamp = data.date;
-console.log(timestamp);
 var date = new Date(timestamp);
-console.log("formatDate(date)",formatDate(date))
-
-
-
     document.getElementById('outinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('bookSpaceInfo').innerHTML = data.services.name;
     document.getElementById('planTypeInfo').innerHTML = data.plan_type;
+    document.getElementById('getTime').innerHTML = data.from_time;
+    document.getElementById('getType').innerHTML = data.from_time_type;
     document.getElementById('appointAtIfo').innerHTML = formatDate(date);
     document.getElementById('payableInfo').innerHTML = "$" + data.payable_amount + ".00";
     var payment_method = '';
@@ -1344,9 +1355,9 @@ console.log("formatDate(date)",formatDate(date))
     document.getElementById('paymentMethod').innerHTML = payment_method;
     var transaction = '';
     if (data.transaction.status == 0) {
-        transaction = "All";
+        transaction = "Pending";
     } else if (data.transaction.status == 1) {
-        transaction = "Panding";
+        transaction = "Success";
     } else {
         transaction = "Paid";
     }
@@ -1372,11 +1383,35 @@ console.log("formatDate(date)",formatDate(date))
 var id = 0;
 
 function cancelConfirm(data) {
+
+    var formatDateC = function(date) {
+    var months = new Array(12);
+months[0] = "January";
+months[1] = "February";
+months[2] = "March";
+months[3] = "April";
+months[4] = "May";
+months[5] = "June";
+months[6] = "July";
+months[7] = "August";
+months[8] = "September";
+months[9] = "October";
+months[10] = "November";
+months[11] = "December";
+    
+    
+  return date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear() + " ";
+}
+
+var timestampC = data.date;
+var date = new Date(timestampC);
     id = data.id;
     document.getElementById('coutinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('cbookSpaceInfo').innerHTML = data.services.name;
     document.getElementById('cplanTypeInfo').innerHTML = data.plan_type;
-    document.getElementById('cappointAtIfo').innerHTML = data.date;
+    document.getElementById('cappointAtIfo').innerHTML = formatDateC(date);
+    document.getElementById('cgetTime').innerHTML = data.from_time;
+    document.getElementById('cgetType').innerHTML = data.from_time_type;
     document.getElementById('cpayableInfo').innerHTML = "$" + data.payable_amount + ".00";
     var cpaymentMethod = '';
     if (data.payment_method == 2) {
@@ -1387,9 +1422,9 @@ function cancelConfirm(data) {
     document.getElementById('cpaymentMethod').innerHTML = cpaymentMethod;
     var cstatusInfo = '';
     if (data.transaction.status == 0) {
-        cstatusInfo = "All";
+        cstatusInfo = "Pending";
     } else if (data.transaction.status == 1) {
-        cstatusInfo = "Panding";
+        cstatusInfo = "Success";
     } else {
         cstatusInfo = "Paid";
     }

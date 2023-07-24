@@ -786,7 +786,6 @@ figure.effect-chico {
 h1 {
     font-size: 25px !important;
 }
-
 </style>
 <section class="main-block1 gray">
     <div class="container">
@@ -914,11 +913,11 @@ h1 {
                                     <div class="col">
                                         <span class="sub-name">@if(!empty($data->start_time))
                                             {{ $data->start_time }} -
-                                            @else  00:00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -
+                                            @else 00:00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -
                                             @endif
                                             @if(!empty($data->end_time))
                                             {{ $data->end_time }}
-                                            @else  00:00
+                                            @else 00:00
                                             @endif</span>
                                     </div>
                                 </div>
@@ -968,8 +967,8 @@ h1 {
                                     {{ $service->name }}
                                 </div>
                                 <div class="col-3 hosts">
-                                <span style="background-color: transparent;color: #5c5c5c !important;">
-                                {!! $service->short_description !!}</span>
+                                    <span style="background-color: transparent;color: #5c5c5c !important;">
+                                        {!! $service->short_description !!}</span>
                                 </div>
                                 <!-- <div class="col-3 hosts">
                                     {!! $service->short_description !!}
@@ -1022,11 +1021,6 @@ h1 {
             </div>
             <div class="book-space">BOOK A SPACE</div>
             <div class="modal-body">
-                <div class="alert alert-danger d-none hide"></div>
-                <div class="book-appointment-message"></div>
-                <div class="container">
-                    @include('flash::message')
-                </div>
                 <?php $emptyData = array(); ?>
                 <form class="book-appointment-form bg-white" id="frontAppointmentBook"
                     action="{{ route('front.appointment.book') }}" method="post">
@@ -1119,8 +1113,7 @@ h1 {
                                 <input type="text" id="templateAppointmentDate" name="date"
                                     class="form-control bg-white" data-uk-datepicker-locale="fr"
                                     value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
-                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true"
-                                    readonly>
+                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
                                     id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
@@ -1206,6 +1199,11 @@ h1 {
                             </ul>
                         </div>
 
+                    </div>
+                    <div class="alert alert-danger d-none hide"></div>
+                    <div class="book-appointment-message"></div>
+                    <div class="container">
+                        @include('flash::message')
                     </div>
                     <div class="pay-amnt mb-4">
                         <div>Payable Amount : $</div>

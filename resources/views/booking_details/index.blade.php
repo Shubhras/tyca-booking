@@ -2,13 +2,6 @@
 @section('front-title')
 {{ __('booking_details') }}
 @endsection
-
-<style>
-body {
-    font-family: "Noto Serif" !important;
-}
-</style>
-
 @section('front-content')
 
 <div class="transition-none">
@@ -27,21 +20,22 @@ body {
     </section>
 </div>
 <section class="booking-detailss" style="background-image: url('{{$bodyimage1->value}}');">
+<div class="container">
     <div class="row booking-details">
-        <div class="  col-md-6 booking-details-right">
+        <div class="col-md-6 booking-details-right">
             <div class="column" style="display:grid;">
                 <span class="extra-light">THANK YOU AND</span>
-                <span class="extra-light">SEE YOU THERE!</span>
+                <span class="extra-light" style="padding-bottom:35px;">SEE YOU THERE!</span>
             </div>
             @if(!empty($outletName->profile_image))
-                <img src="{{$outletName->profile_image}}" alt="" class="w-img">
+                <img src="{{$outletName->profile_image}}" alt="" class="img-height">
                     @else
-                    <img src="assets/images/image_9.png" alt="" class="w-img">
+                    <img src="assets/images/image_9.png" alt="" class="img-height">
             @endif
         </div>
         <div class=" col-md-4 booking-details-left">
-            <h2>Booking Details</h2>
-            <div class="mb-1">
+            <h2 class="pb-4">Booking Details</h2>
+            <div class="mb-1 pt-4">
                 <span class="heading">Name:</span> <span class="sub-head">{{$UserData->full_name}}</span>
             </div>
             <div class="mb-1">
@@ -54,17 +48,23 @@ body {
                 <span class="heading">Booking Space:</span> <span class="sub-head">{{$ServiceData->name}}</span>
             </div>
             <div class="mb-1">
-                <span class="heading">Plan Type:</span> <span class="sub-head">{{$AppointData->plan_type}}</span>
+                @if($AppointData->plan_type == "Day Plan")
+                <span class="heading">Plan Type:</span> <span class="sub-head">Daily Plan</span>
+                @elseif($AppointData->plan_type == "Hour Plan")
+                <span class="heading">Plan Type:</span> <span class="sub-head">Hourly Plan</span>
+                @else
+                <span class="heading">Plan Type:</span> <span class="sub-head">N/A</span>
+                @endif
             </div>
             <div class="mb-1">
-                <span class="heading">Appointment Date:</span> <span class="sub-head">{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->date))))->format('d F Y h:ia') }}</span>
+                <span class="heading">Appointment Date:</span> <span class="sub-head">{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->date))))->format('d F Y') }}</span>
             </div>
             <div class="mb-1">
                 <span class="heading">Time Slot:</span> <span class="sub-head">{{$AppointData->from_time}} {{$AppointData->from_time_type}} - {{$AppointData->to_time}} {{$AppointData->to_time_type }}</span>
             </div>
             <div class="mb-1">
                 <span class="heading">Payable Amount:</span> <span
-                    class="sub-head">$ {{$AppointData->payable_amount}}</span>
+                    class="sub-head">${{$AppointData->payable_amount}}</span>
             </div>
 
 
@@ -96,7 +96,7 @@ body {
         </div>
 
     </div>
-
+    </div>
 </section>
 
 
