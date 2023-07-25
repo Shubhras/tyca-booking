@@ -26,8 +26,8 @@
     <div class="col-lg-6 mb-5 col-sm-12" id="dateHide">
 
         {{ Form::label('Date',__('messages.appointment.appointment_date').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('date', date('Y-d-m'),['class' => 'form-control date','placeholder' => __('messages.appointment.appointment_date'), 'id'=>'appointmentDate', 'required','autocomplete'=>'off','disabled' => true]) }}
-    </div>
+        {{ Form::text('date', now()->format('d-m-Y'),['class' => 'form-control date','placeholder' => __('messages.appointment.appointment_date'), 'id'=>'appointmentDate', 'required','autocomplete'=>'off','disabled' => true]) }}
+    </div>  
 
     <div class="col-lg-6 mb-5 col-sm-12" id="dateShow">
         <div id="iii"></div>
@@ -113,7 +113,8 @@
         {{ Form::select('service_id', [], null,['class' => 'io-select2 form-select', 'data-control'=>"select2", 'id'=> 'appointmentServiceId','placeholder' => __('messages.common.select_service'),'required']) }}
     </div>
     @endrole
-    <div class="col-lg-12 col-sm-12 mb-3">
+    <input type="hidden" name="payment_type" value="4"> 
+   {{--  <div class="col-lg-12 col-sm-12 mb-3">
 
         <?php $payments = getAllPaymentStatus(); ?>
 
@@ -145,7 +146,7 @@
         </div>
         <?php }  ?>
 
-    </div>
+    </div>--}}
 
     <div class="col-lg-6 col-sm-12 mb-5">
         {{ Form::label('Charge',__('messages.appointment.charge_amount').':' ,['class' => 'form-label']) }}

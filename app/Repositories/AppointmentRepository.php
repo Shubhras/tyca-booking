@@ -185,7 +185,7 @@ class AppointmentRepository extends BaseRepository
                 $input['payable_amount'] = $input['total_counts'];
 
             }
-
+            // echo "<pre>"; print_r($input); die;
             $input['from_time'] = $fromTime[0];
             $input['from_time_type'] = $fromTime[1];
             $input['to_time'] = $toTime[0];

@@ -64,7 +64,7 @@
                     <div class="col-lg-6">
                         <div class="col-6 mb-5">
                             {{ Form::label('charges',
-                            __('messages.common.base_rate').'('.__('messages.common.hourly').')', ['class' =>
+                            __('messages.common.base_rate').' ('.__('messages.common.hourly').')', ['class' =>
                             'form-label new-gap required']) }}
                             <div class="input-group">
                                 {{ Form::text('charges', null, ['class' => 'form-control price-input', 'placeholder' =>
@@ -80,7 +80,7 @@
                     <div class="col-lg-6">
                         <div class="col-6 mb-5">
                             {{ Form::label('charges_daily',
-                            __('messages.common.base_rate').'('.__('messages.common.daily').')', ['class' => 'new-gap form-label
+                            __('messages.common.base_rate'). ' ('.__('messages.common.daily').')', ['class' => 'new-gap form-label
                             required']) }}
                             <div class="input-group">
                                 {{ Form::text('charges_daily', null, ['class' => 'form-control charges_daily',
@@ -148,7 +148,7 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
-                    <div class="diss" style="margin: 15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div>
+                    <div class="diss" style="margin: 15px 0px;">Discounted Rate (pre Hour): $<span class="discountRate"></span> </div>
 
                 </div>
                 <div class="hourly_records_dynamic">
@@ -197,7 +197,7 @@
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
-                        <div class="" style="margin:15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div>
+                        <div class="" style="margin:15px 0px;">Discounted Rate (pre Hour): $<span class="discountRate"></span> </div>
 
                     </div>
                     @endforeach
@@ -252,7 +252,7 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
-                    <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD"></span> </div>
+                    <div class="" style="margin:15px 0px;">Discounted Rate (pre Day): $<span class="discountRateD"></span> </div>
 
                 </div>
                 <div class="daily_records_dynamic">
@@ -306,7 +306,7 @@
                                     <span class=" fa fa-minus"></span>
                                 </button>
                             </div>
-                            <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD"></span> </div>
+                            <div class="" style="margin:15px 0px;">Discounted Rate (pre Day): $<span class="discountRateD"></span> </div>
                         </div>
 
 
