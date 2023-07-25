@@ -172,19 +172,24 @@ class DashboardRepository
         $data['todayAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
         ->where('patient_id', $patientId)
         ->where(function ($query) {
-            $query->where('status', Appointment::BOOKED)
-                  ->orWhere('status', Appointment::CANCELLED);
+            $query->where('status', Appointment::BOOKED);
         })
         ->where('date', '>', $todayDate)
         ->orderBy('date', 'ASC')
         ->paginate(10);
 
         $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
-            ->wherePatientId($patientId)
-            ->whereStatus(Appointment::BOOKED)
-            ->where('date', '<=', $todayDate)
-            ->orderBy('date', 'DESC')
-            ->paginate(10);
+        ->wherePatientId($patientId)
+        ->where(function ($query) {
+            $query->whereIn('status', [Appointment::BOOKED, Appointment::CANCELLED])
+                  ->where(function ($query) {
+                      $query->where('status', Appointment::CANCELLED);
+                  })
+                  ->orWhere('status', Appointment::BOOKED)
+                  ->where('date', '<=', now()->format('Y-m-d'));
+        })
+        ->orderBy('date', 'DESC')
+        ->paginate(10);
 
         return $data;
     }

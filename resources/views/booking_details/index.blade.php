@@ -33,7 +33,7 @@
                     <img src="assets/images/image_9.png" alt="" class="img-height">
             @endif
         </div>
-        <div class=" col-md-4 booking-details-left">
+        <div class=" col-md-6 booking-details-left">
             <h2 class="pb-4">Booking Details</h2>
             <div class="mb-1 pt-4">
                 <span class="heading">Name:</span> <span class="sub-head">{{$UserData->full_name}}</span>
@@ -108,6 +108,9 @@
 
 
 <style>
+    body {
+    font-family: "Noto Serif" !important;
+}
 .heading {
     font-size: 24px;
     color: #000000;
