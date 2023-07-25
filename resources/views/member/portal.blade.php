@@ -120,7 +120,7 @@
                                             @else
                                             <td>N/A</td>
                                             @endif
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }} {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }}, {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
 
 
@@ -202,7 +202,7 @@
                                             @else
                                             <td>N/A</td>
                                             @endif
-                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }} {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $appointment->date))))->format('d F Y') }}, {{$appointment->from_time}} {{$appointment->from_time_type}}</td>
                                             <td>${{ $appointment->payable_amount }}.00</td>
                                             @if($appointment->payment_method == 2)
                                             <td>
@@ -255,7 +255,7 @@
 
 
 
-        <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+        <div id="booked_info_modal" class="modal fade" role="dialog" aria-hidden="true" style="background-color:#000000d1">
             <div class="modal-dialog modal-lg">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -280,7 +280,7 @@
                         </div>
                         <div class="book-infos">
                             <p class="book-val">Appointment At:</p>&nbsp;
-                            <p id="appointAtIfo" class="book-ps"></p>&nbsp;
+                            <p id="appointAtIfo" class="book-ps"></p><p class="book-ps">,</p>&nbsp;
                             <p id="getTime" class="book-ps"></p>&nbsp; <p id="getType" class="book-ps"></p>
                         </div>
                         <div class="book-infos">
@@ -308,7 +308,7 @@
 
 
 
-    <div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div id="cancel_booking_modal" class="modal fade" role="dialog" aria-hidden="true"  style="background-color:#000000d1">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
@@ -337,7 +337,7 @@
                     <div class="book-infos">
                         <p class="book-val">Appointment At:
                         <p>&nbsp;
-                        <p id="cappointAtIfo" class="book-ps"></p>&nbsp;
+                        <p id="cappointAtIfo" class="book-ps"></p><p class="book-ps">,</p>&nbsp;
                         <p id="cgetTime" class="book-ps"></p>&nbsp; <p id="cgetType" class="book-ps"></p>
                     </div>
                     <div class="book-infos">
@@ -499,6 +499,15 @@
 
 
 <style>
+    .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000 !important;
+}
     table.dataTable tbody th, table.dataTable tbody td {
     padding: 16px !important;
 }
@@ -743,10 +752,6 @@ button.log-btn {
     line-height: 21.79px;
     font-weight: 600;
 }
-
-/* .your-rating-wrap {
-    margin-left: 30px;
-} */
 
 .your-rating-wrap span {
     color: #535353;
@@ -1007,7 +1012,9 @@ button.no-btn {
 .modal-backdrop.show {
     opacity: 0 !important;
 }
-
+.modal .fade .show{
+    opacity: 0.5 !important;
+}
 .form-control,
 .form-select {
     height: unset !important;
@@ -1315,9 +1322,6 @@ div#customer-review_wrap {
 </style>
 <script type="text/javascript">
 function bookedInfoData(data) {
-
-console.log(data);
-
     var formatDate = function(date) {
     var months = new Array(12);
 months[0] = "January";

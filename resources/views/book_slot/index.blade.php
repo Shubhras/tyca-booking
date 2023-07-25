@@ -967,7 +967,7 @@ h1 {
                                     {{ $service->name }}
                                 </div>
                                 <div class="col-3 hosts">
-                                    <span style="background-color: transparent;color: #5c5c5c !important;">
+                                    <span style="background-color: transparent;color: #5c5c5c !important; font-family:Poppins;">
                                         {!! $service->short_description !!}</span>
                                 </div>
                                 <!-- <div class="col-3 hosts">
