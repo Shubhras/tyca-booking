@@ -322,7 +322,7 @@
                                 <option value="" data-select2-id="select2-data-6-zpds">Select Time</option>
                                 <?php foreach($slots as $slot){   ?>
                                 <option value="<?php echo $slot; ?>"
-                                    <?php if(isset($dayArray[7]['startTime'])) { if($slot === ($dayArray[7]['start_time'])) { echo 'selected'; }} ?>>
+                                    <?php if(isset($dayArray[7]['start_time'])) { if($slot === ($dayArray[7]['start_time'])) { echo 'selected'; }} ?>>
                                     <?php echo $slot; ?></option>
                                 <?php } ?>
                             </select>

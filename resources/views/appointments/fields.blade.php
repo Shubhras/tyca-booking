@@ -89,13 +89,13 @@
             <div class="mb-0 d-inline-flex align-items-center ms-2">
                 <span class="badge bg-danger badge-circle slot-color-dot"></span>
                 <span class="ms-2">{{__('messages.appointment.booked')}}</span>
-                <span class="badge bg-success ms-2 badge-circle slot-color-dot"></span>
+                <span class="badge bg-success ms-2 badge-circle slot-color-dot" style="background-color: #B0DFCA !important"></span>
                 <span class="ms-2">{{__('messages.appointment.available')}}</span>
             </div>
-            <div class="fc-timegrid-slot ps-5 pe-5 form-control form-control-solid h-300px overflow-auto">
+            <div class="fc-timegrid-slot pe-5 form-control form-control-solid h-300px overflow-auto">
                 {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
                 {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
-                <div class="text-center d-flex flex-wrap justify-content-center px-3 appointment-slot-data"
+                <div class="text-center d-flex flex-wrap appointment-slot-data"
                     id="slotData">
                 </div>
                 <span

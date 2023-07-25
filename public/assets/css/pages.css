@@ -1,18 +1,21 @@
 .time-slot {
-  border-radius: 30px;
-  margin-bottom: 10px;
-  margin-right: 1rem;
+  border-radius: 0px;
+  margin-left: 4.5px !important;
+  margin-bottom: 9px;
+  margin-right: 4.5px !important;
   height: 39px;
-  width: 170px;
+  width: 16% !important;
   box-shadow: 0 2px 4px -2px #79e79d;
-  background: #47cf73;
-  color: #fff;
+  background: #B0DFCA;
+  color: #025C34;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 0.81px solid #025C34;
 }
 .time-slot:hover {
-  background-color: #3596E8 !important;
+  background-color: #273432 !important;
+  border: 0.81px solid #273432;
   cursor: pointer;
   color: #fff;
 }
@@ -29,7 +32,8 @@
 }
 
 .activeSlot {
-  background-color: #3596E8 !important;
+  background-color: #273432 !important;
+  border: 0.81px solid #273432;
   cursor: pointer;
   color: #fff;
 }
@@ -123,16 +127,19 @@ label.rating-label {
   cursor: pointer;
 }
 
-div.rating-label.checked > i, label.rating-label > i {
+div.rating-label.checked > i,
+label.rating-label > i {
   color: #b5b5c3;
 }
 
-div.rating-label.checked > .svg-icon svg [fill]:not(.permanent):not(g), label.rating-label > .svg-icon svg [fill]:not(.permanent):not(g) {
+div.rating-label.checked > .svg-icon svg [fill]:not(.permanent):not(g),
+label.rating-label > .svg-icon svg [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
   fill: #FFC107FF;
 }
 
-div.rating-label.checked > .svg-icon svg:hover [fill]:not(.permanent):not(g), label.rating-label > .svg-icon svg:hover [fill]:not(.permanent):not(g) {
+div.rating-label.checked > .svg-icon svg:hover [fill]:not(.permanent):not(g),
+label.rating-label > .svg-icon svg:hover [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
 }
 
