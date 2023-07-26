@@ -223,6 +223,7 @@ class AppointmentRepository extends BaseRepository
                 'transaction_id' =>  $input['appointment_unique_id']. '_'.rand(0,99999),
                 'appointment_id' => $input['appointment_unique_id'],
                 'amount' => $input['payable_amount'],
+                'status' => 0,
                 'type' => $input['payment_type'],
                 'meta' => json_encode($input),
             ];
@@ -293,7 +294,7 @@ class AppointmentRepository extends BaseRepository
             {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
-            $input['payment_type'] = 'hourly';
+                $input['plan_type'] = 'hourly';
 
             }else
             {
@@ -302,7 +303,7 @@ class AppointmentRepository extends BaseRepository
                 $toTime = explode(' ', $blank);
                 $input['from_time'] = date('H:i A');
                 $input['to_time'] = $blank;
-            $input['payment_type'] = 'daily';
+                $input['plan_type'] = 'daily';
 
             }
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
@@ -317,7 +318,7 @@ class AppointmentRepository extends BaseRepository
             $input['status'] = Appointment::BOOKED;
             $input['payment_method'] = $input['payment_type'];
             // echo "<pre>"; print_r($input); die;
-
+            $input['input_json'] = json_encode($input);
             // if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
             //     return false;        
             // }
@@ -327,7 +328,6 @@ class AppointmentRepository extends BaseRepository
             }
             $appointment = Appointment::create($input);
 
-            Mail::to($input['email'])->send(new AppointmentBookedMail($input));
             $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
             $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $patientId : $patientId;
             $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.\Carbon\Carbon::parse($input['date'])->format('jS M, Y');

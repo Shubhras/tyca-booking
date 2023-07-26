@@ -34,6 +34,8 @@ use Illuminate\Support\Str;
 use Stripe\Exception\ApiErrorException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentBookedMail;
 
 class AppointmentController extends AppBaseController
 {
@@ -536,6 +538,10 @@ class AppointmentController extends AppBaseController
         $appointment = Appointment::whereAppointmentUniqueId($sessionData->client_reference_id)->first();
         $patientId = User::whereEmail($sessionData->customer_details->email)->pluck('id')->first();
 
+        $allData = json_decode($appointment['input_json']);
+        $email = $allData->email;
+        Mail::to($email)->send(new AppointmentBookedMail($allData));
+
         $transaction = [
             'user_id' => $patientId,
             'transaction_id' => $sessionData->id,
@@ -546,7 +552,7 @@ class AppointmentController extends AppBaseController
         ];
 
         Transaction::create($transaction);
-
+       
         $appointment->update([
             'payment_method' => Appointment::STRIPE,
             'payment_type' => Appointment::PAID,

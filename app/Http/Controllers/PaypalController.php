@@ -10,6 +10,8 @@ use Flash;
 use Illuminate\Http\Request;
 use PayPalHttp\HttpException;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentBookedMail;
 
 class PaypalController extends Controller
 {
@@ -47,7 +49,7 @@ class PaypalController extends Controller
     {
         Flash::error(__('messages.flash.appointment_created_payment_not_complete'));
 
-        if (! getLogInUser()) {
+        if (!getLogInUser()) {
             return redirect(route('medicalAppointment'));
         }
 
@@ -79,9 +81,13 @@ class PaypalController extends Controller
 
             $appointmentID = $response['purchase_units'][0]['reference_id'];
 
-//            $transactionID = $response->result->id;
+            //            $transactionID = $response->result->id;
             $appointment = Appointment::whereId($appointmentID)->first();
             $patient = Patient::with('user')->whereId($appointment->patient_id)->first();
+
+            $allData = json_decode($appointment['input_json']);
+            $email = $allData->email;
+            Mail::to($email)->send(new AppointmentBookedMail($allData));
 
             $transaction = [
                 'user_id' => $patient->user->id,
@@ -107,7 +113,7 @@ class PaypalController extends Controller
                 'user_id' => $patient->user->id,
             ]);
 
-            if (! getLogInUser()) {
+            if (!getLogInUser()) {
                 return redirect(route('medicalAppointment'));
             }
 

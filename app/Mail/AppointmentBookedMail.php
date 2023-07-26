@@ -34,24 +34,24 @@ class AppointmentBookedMail extends Mailable
      */
     public function build()
     {
-        $email = $this->data['email'];
-        $payableAmount = $this->data['payable_amount'];
-        $paymentType = $this->data['payment_type'];
-        $DoctorId = $this->data['doctor_id'];
-        $doctorData = Doctor::where('id', $this->data['doctor_id'])->first();
+        $email = $this->data->email;
+        $payableAmount = $this->data->payable_amount;
+        $paymentType =$this->data->payment_method;
+        $DoctorId = $this->data->doctor_id;
+        $doctorData = Doctor::where('id', $this->data->doctor_id)->first();
         $outletNameGet = User::where('id',$doctorData->user_id)->first();
         $outletName = $outletNameGet->full_name;
-        $planType = $this->data['plan_type'];
-        $serviceId = $this->data['service_id'];
-        $addressDataGET = Service::where('id', $this->data['service_id'])->first();
+        $planType = $this->data->plan_type;
+        $serviceId = $this->data->service_id;
+        $addressDataGET = Service::where('id', $this->data->service_id)->first();
         $serviceData = $addressDataGET->name;
-        $password = $this->data['original_password'] ?? null;
-        $patientId = $this->data['patient_id'];
-        $appointmentUniqueId = Crypt::encryptString($this->data['appointment_unique_id']);
-        $name = $this->data['first_name'].' '.$this->data['last_name'];
-        $time = $this->data['original_from_time'].' - '.$this->data['original_to_time'];
+        $password = $this->data->original_password ?? null;
+        $patientId = $this->data->patient_id;
+        $appointmentUniqueId = Crypt::encryptString($this->data->appointment_unique_id);
+        $name = $this->data->first_name.' '.$this->data->last_name;
+        $time = $this->data->original_from_time.' - '.$this->data->original_to_time;
         // $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
-        $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('j M Y');
+        $date = Carbon::createFromFormat('Y-m-d', $this->data->date)->format('j M Y');
         $subject = 'Appointment Booked SuccessFully';
 
         return $this->view('emails.booking_confirm_mail',

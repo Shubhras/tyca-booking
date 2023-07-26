@@ -1,3 +1,60 @@
+<style>
+.paypal {
+    border: 1px solid #8080804f;
+    padding: 10px;
+    border-radius: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.visa {
+    border: 1px solid #8080804f;
+    padding: 5px;
+    border-radius: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.credit {
+    height: 32px;
+}
+
+.pay {
+    height: 28px;
+}
+
+.plantype_id {
+    text-transform: capitalize;
+}
+
+select option {
+    text-transform: capitalize
+}
+
+select {
+    text-transform: capitalize
+}
+
+#slot_option {
+    display: none;
+}
+
+.badge.badge-circle {
+    border-radius: 0% !important;
+}
+
+#dateShow {
+    display: none;
+}
+
+#customerHide {
+    display: none;
+}
+
+#customershow {
+    display: none;
+}
+</style>
 <?php $emptyData = array(); ?>
 <div class="row">
     <div class="col-sm-12 col-lg-6 mb-5">
@@ -202,63 +259,7 @@
         <a href="{{ url()->previous() }}" type="reset" class="btn btn-secondary">{{__('messages.common.discard')}}</a>
     </div>
 </div>
-<style>
-.paypal {
-    border: 1px solid #8080804f;
-    padding: 10px;
-    border-radius: 6px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
 
-.visa {
-    border: 1px solid #8080804f;
-    padding: 5px;
-    border-radius: 6px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.credit {
-    height: 32px;
-}
-
-.pay {
-    height: 28px;
-}
-
-.plantype_id {
-    text-transform: capitalize;
-}
-
-select option {
-    text-transform: capitalize
-}
-
-select {
-    text-transform: capitalize
-}
-
-#slot_option {
-    display: none;
-}
-
-.badge.badge-circle {
-    border-radius: 0% !important;
-}
-
-#dateShow {
-    display: none;
-}
-
-#customerHide {
-    display: none;
-}
-
-#customershow {
-    display: none;
-}
-</style>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
 <!-- Include Date Range Picker -->

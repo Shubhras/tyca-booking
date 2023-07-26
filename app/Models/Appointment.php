@@ -81,6 +81,7 @@ class Appointment extends Model
         'from_time_type',
         'to_time_type',
         'payment_type',
+        'input_json',
         'payment_method',
     ];
 
