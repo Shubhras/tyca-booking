@@ -52,7 +52,7 @@
                         <div class="col-md-6" id="customer-content-wrap" style="margin-left:30px;">
                             <div class="your-rating-wrap">
                                 <span>{{$data['user']->first_name}} {{$data['user']->last_name}}</span>
-                                <p>{{$data['user']->email}}</p>
+                                <p style="font-family:Poppins;">{{$data['user']->email}}</p>
                             </div>
 
                             <div class="row btn-portal col-lg-12">
@@ -94,7 +94,7 @@
                             <div class="table-container">
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
-                                        <tr style="background: #F7F7F7;">
+                                        <tr style="background: #F7F7F7;font-family: Poppins;">
                                             <th class="col-portal">Outlet</th>
                                             <th class="col-portal">Booking Space</th>
                                             <th class="col-portal">Plan Type </th>
@@ -110,12 +110,12 @@
 
                                         @foreach($data['todayAppointment'] as $appointment)
                                         <?php if(isset($appointment->transaction)){ ?>
-                                        <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;">
+                                        <tr style="color: #111827; font-size: 10px;line-height: 15px;font-weight: 400;font-family: Poppins;">
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
-                                            @if($appointment->plan_type == "Day Plan")
+                                            @if($appointment->plan_type == "hourly")
                                             <td>Daily Plan</td>
-                                            @elseif($appointment->plan_type == "Hour Plan")
+                                            @elseif($appointment->plan_type == "daily")
                                             <td>Hourly Plan</td>
                                             @else
                                             <td>N/A</td>
@@ -177,7 +177,7 @@
                             <div class="table-container">
                                 <table class="table table table-striped" id="example1" style="width:100%">
                                     <thead class="thead-portal">
-                                        <tr style="background: #F7F7F7;">
+                                        <tr style="background: #F7F7F7; font-family: Poppins;">
                                             <th class="col-portal">Outlet </th>
                                             <th class="col-portal">Booking Space </i></th>
                                             <th class="col-portal">Plan Type </th>
@@ -192,12 +192,12 @@
                                     <tbody>
                                         @foreach($data['upcomingAppointment'] as $appointment)
                                         <?php if(isset($appointment->transaction)){ ?>
-                                        <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400;">
+                                        <tr style="color: #111827;font-size: 10px;line-height: 15px;font-weight: 400; font-family: Poppins;">
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
-                                            @if($appointment->plan_type == "Day Plan")
+                                            @if($appointment->plan_type == "daily")
                                             <td>Daily Plan</td>
-                                            @elseif($appointment->plan_type == "Hour Plan")
+                                            @elseif($appointment->plan_type == "hourly")
                                             <td>Hourly Plan</td>
                                             @else
                                             <td>N/A</td>
@@ -374,7 +374,7 @@
     </div>
 </div>
 
-<div id="cancel_confirm_modal" class="modal fade" role="dialog" aria-hidden="true">
+<div id="cancel_confirm_modal" class="modal fade" role="dialog" aria-hidden="true" style="background-color:#000000d1">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
@@ -400,7 +400,7 @@
 
 
 
-<div id="update_info_modal" class="modal fade" role="dialog" aria-hidden="true">
+<div id="update_info_modal" class="modal fade" role="dialog" aria-hidden="true" style="background-color:#000000d1">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
@@ -458,7 +458,7 @@
 
                     <div class="row">
                         @php $styleCss = 'style' @endphp
-                        <p>Icon</p>
+                        <p style="font-family: 'poppins';">Icon</p>
                         <div class="mb-3" io-image-input="true">
                             <div class="d-block">
                                 <div class="image-picker">
@@ -499,6 +499,39 @@
 
 
 <style>
+    .form-control::placeholder {
+        color:#989898 !important;
+        font-size:20px !important;
+        font-weight:400 !important;
+        line-height:30px;
+    }
+    .form-control, .form-select {
+    height: unset !important;
+    border-radius: 0px !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    line-height: 30px;
+    padding: 8px !important;
+    border: 2px solid#273432 !important;
+    color: #000000;
+    font-family: 'Poppins';
+}
+    .form-label {
+    color: #000000 !important;
+    font-size: 20px !important;
+    line-height: 30px;
+    font-weight: 400 !important;
+    font-family: 'poppins';
+}
+    table.dataTable tbody th, table.dataTable tbody td {
+    padding: 16px !important;
+    font-family: 'Poppins';
+}
+table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins';
+}
     .modal-backdrop {
     position: fixed;
     top: 0;
@@ -901,13 +934,15 @@ th.col-portal {
     font-weight: 700;
     line-height: 68.1px;
     color: #000000;
+    font-family: 'Noto Serif';
 }
 
 .book-p {
     align-self: center;
     margin-top: 30px;
     margin-bottom: 40px;
-    color: 535353;
+    color: #535353;
+    font-family: 'Poppins';
 }
 
 .modal-header-1 {
@@ -931,8 +966,9 @@ p.follow-booking {
     align-self: center;
     margin-top: 20px;
     margin-bottom: 40px;
-    color: 535353;
+    color: #535353;
     text-align: left;
+    font-family: 'Poppins';
 }
 
 .btn-cancel-booking {
@@ -1187,16 +1223,19 @@ div#customer-review_wrap {
         margin-bottom: 40px;
         color: #535353;
         font-size: 10px;
+        font-family: 'Poppins';
     }
 
     .books-spaces {
         text-align: center;
         font-size: 18px;
         color: #000000;
+        font-family: 'Noto Serif';
     }
 
     .book-p-cancel {
         font-size: 10px;
+        font-family: 'Poppins';
     }
 
     p.follow-booking {

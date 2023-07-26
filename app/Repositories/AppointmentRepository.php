@@ -194,10 +194,11 @@ class AppointmentRepository extends BaseRepository
             $input['payment_type'] = $input['payment_type'];
             $input['payment_method'] = $input['payment_type'];
 
-            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
-                return false;        
-            }
-            else if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'hourly')->exists()){
+            // if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
+            //     return false;        
+            // }
+            // else 
+            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()){
                 return false;  
             }
             $appointment = Appointment::create($input);
@@ -292,6 +293,8 @@ class AppointmentRepository extends BaseRepository
             {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
+            $input['payment_type'] = 'hourly';
+
             }else
             {
                 $blank = '12:00 AM';
@@ -299,6 +302,8 @@ class AppointmentRepository extends BaseRepository
                 $toTime = explode(' ', $blank);
                 $input['from_time'] = date('H:i A');
                 $input['to_time'] = $blank;
+            $input['payment_type'] = 'daily';
+
             }
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
             $input['original_from_time'] = $input['from_time'];
@@ -310,13 +315,14 @@ class AppointmentRepository extends BaseRepository
             $input['to_time'] = $toTime[0];
             $input['to_time_type'] = $toTime[1];
             $input['status'] = Appointment::BOOKED;
-            $input['payment_type'] = Appointment::MANUALLY;
+            $input['payment_method'] = $input['payment_type'];
             // echo "<pre>"; print_r($input); die;
 
-            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
-                return false;        
-            }
-            else if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'hourly')->exists()){
+            // if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
+            //     return false;        
+            // }
+            // else 
+            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()){
                 return false;  
             }
             $appointment = Appointment::create($input);

@@ -108,8 +108,30 @@
 
 
 <style>
-    body {
+body {
     font-family: "Noto Serif" !important;
+}
+.img-height{
+    width:500px;
+    height:500px;
+}
+@media(min-width:320px) and (max-width:767px){
+.img-height {
+    width: 250px !important;
+    height: 250px !important;
+}
+}
+@media(min-width:768px) and (max-width:991px){
+.img-height {
+    width: 300px !important;
+    height: 300px !important;
+}
+}
+@media(min-width:991px) and (max-width:1192px){
+.img-height {
+    width: 350px !important;
+    height: 350px !important;
+}
 }
 .heading {
     font-size: 24px;
@@ -360,5 +382,28 @@ span.extra-light {
     .fs-5 {
         font-size: 14px !important;
     }
+}
+
+.img-height{
+    width:500px;
+    height:500px;
+}
+@media(min-width:320px) and (max-width:767px){
+.img-height {
+    width: 250px !important;
+    height: 250px !important;
+}
+}
+@media(min-width:768px) and (max-width:991px){
+.img-height {
+    width: 250px !important;
+    height: 250px !important;
+}
+}
+@media(min-width:991px) and (max-width:1192px){
+.img-height {
+    width: 350px !important;
+    height: 350px !important;
+}
 }
 </style>

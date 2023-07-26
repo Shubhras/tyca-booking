@@ -50,7 +50,8 @@ class AppointmentBookedMail extends Mailable
         $appointmentUniqueId = Crypt::encryptString($this->data['appointment_unique_id']);
         $name = $this->data['first_name'].' '.$this->data['last_name'];
         $time = $this->data['original_from_time'].' - '.$this->data['original_to_time'];
-        $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
+        // $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
+        $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('j M Y');
         $subject = 'Appointment Booked SuccessFully';
 
         return $this->view('emails.booking_confirm_mail',

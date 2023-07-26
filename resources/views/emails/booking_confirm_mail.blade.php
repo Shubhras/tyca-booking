@@ -63,11 +63,11 @@ body {
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000; margin-bottom: 5px;">
                     <span style="font-weight: 600;">Payment Method: </span>
                     @if($paymentType == 1)
-                    <span style="font-weight: 400;">MANUALLY</span>
+                    <span style="font-weight: 400;">Manually</span>
                     @elseif($paymentType == 2)
-                    <span style="font-weight: 400;">STRIPE</span>
+                    <span style="font-weight: 400;">Stripe</span>
                     @elseif($paymentType == 4)
-                    <span style="font-weight: 400;">PAYPAL</span>
+                    <span style="font-weight: 400;">PayPAL</span>
                     @else
                     <span style="font-weight: 400;">N/A</span>
                     @endif
