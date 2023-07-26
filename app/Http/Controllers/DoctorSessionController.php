@@ -173,6 +173,7 @@ class DoctorSessionController extends AppBaseController
     public function getDoctorSession(Request $request)
     {
         $holidaydate = $request->get('date');
+
         $doctorId = $request->get('adminAppointmentDoctorId');
         $timezone_offset_minutes = $request->get('timezone_offset_minutes');
         $doctor_holiday = DoctorHoliday::where('doctor_id', $doctorId)->where('date', $holidaydate)->get();
@@ -184,6 +185,7 @@ class DoctorSessionController extends AppBaseController
         // Convert minutes to seconds
         $timezone_name = timezone_name_from_abbr('', $timezone_offset_minutes * 60, false);
         $date = Carbon::createFromFormat('Y-m-d', $request->date);
+
         $doctorWeekDaySessions = WeekDay::whereDayOfWeek($date->dayOfWeek)->whereDoctorId($doctorId)->with('doctorSession')->get();
 
 
@@ -215,7 +217,8 @@ class DoctorSessionController extends AppBaseController
             $startTime = date('H:i', strtotime($doctorWeekDaySession->full_start_time));
             $endTime = date('H:i', strtotime($doctorWeekDaySession->full_end_time));
             $slots = $this->getTimeSlot($doctorSession->session_meeting_time, $startTime, $endTime);
-            $gap = $doctorSession->session_gap;
+            // $gap = $doctorSession->session_gap;
+            $gap = 0;
             $isSameWeekDay = (Carbon::now()->dayOfWeek == $date->dayOfWeek) && (Carbon::now()->isSameDay($date));
             foreach ($slots as $key => $slot) {
                 $key--;
@@ -243,6 +246,8 @@ class DoctorSessionController extends AppBaseController
                         }
                     }
                 } else {
+
+
                     if (($isSameWeekDay && strtotime($slot[0]) > strtotime(date('h:i A'))) || ! $isSameWeekDay) {
                         if (in_array((date('h:i A', strtotime($slot[0])).' - '.date('h:i A', strtotime($slot[1]))),
                             $bookingSlot)) {
