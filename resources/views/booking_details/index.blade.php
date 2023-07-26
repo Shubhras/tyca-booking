@@ -48,9 +48,9 @@
                 <span class="heading">Booking Space:</span> <span class="sub-head">{{$ServiceData->name}}</span>
             </div>
             <div class="mb-1">
-                @if($AppointData->plan_type == "Day Plan")
+                @if($AppointData->plan_type == "daily")
                 <span class="heading">Plan Type:</span> <span class="sub-head">Daily Plan</span>
-                @elseif($AppointData->plan_type == "Hour Plan")
+                @elseif($AppointData->plan_type == "hourly")
                 <span class="heading">Plan Type:</span> <span class="sub-head">Hourly Plan</span>
                 @else
                 <span class="heading">Plan Type:</span> <span class="sub-head">N/A</span>

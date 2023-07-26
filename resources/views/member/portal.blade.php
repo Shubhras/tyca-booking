@@ -433,7 +433,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            {{ Form::label('Email', __('Email Name').(''), ['class' => 'form-label  ']) }}
+                            {{ Form::label('Email', __('Email').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
                                 placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}"
@@ -916,7 +916,8 @@ a#upcomings-tab-2 {
 th.col-portal {
     padding: 16px !important;
     font-size: 12px;
-    font-weight: 500 !important; 
+    line-height:18px;
+    font-weight: 600 !important; 
     color: #6B7280;
 }
 
@@ -1346,7 +1347,12 @@ div#customer-review_wrap {
         margin-left: 0px !important;
     }
 }
-
+@media (max-width: 992px){
+    .form-label {
+    color: #000000 !important;
+    font-size: 18px !important;
+    }
+}
 @media (min-width: 768px) and (max-width: 800px) {
 
     h5,

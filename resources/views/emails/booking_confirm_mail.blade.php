@@ -44,15 +44,22 @@ body {
                     <span style="font-weight: 600;">Booking Space: </span><span
                         style="font-weight: 400;">{{$serviceData}}</span></p>
                 <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000;"><span
-                        style="font-weight: 600;">Plan Type: </span><span style="font-weight: 400;">{{$planType}}</span>
+                        style="font-weight: 600;">Plan Type: </span>
+                        @if($planType == "hourly")
+                        <span style="font-weight: 400;">Hourly Plan</span>
+                        @elseif($planType == "daily")
+                        <span style="font-weight: 400;">Daily Plan</span>
+                        @else
+                        <span style="font-weight: 400;">N/A</span>
+                        @endif
                 </p>
                 <p
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000; margin-bottom: 5px;">
-                    <span style="font-weight: 600;">Appointment Date: </span><span
+                    <span style="font-weight: 600;">Appointment Date(s): </span><span
                         style="font-weight: 400;">{{$date}}</span></p>
                 <p
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000; margin-bottom: 5px;">
-                    <span style="font-weight: 600;">Time Slot: </span><span style="font-weight: 400;">{{$time}}</span>
+                    <span style="font-weight: 600;">Time Slot(s): </span><span style="font-weight: 400;">{{$time}}</span>
                 </p>
                 <br>
                 <p
@@ -67,7 +74,7 @@ body {
                     @elseif($paymentType == 2)
                     <span style="font-weight: 400;">Stripe</span>
                     @elseif($paymentType == 4)
-                    <span style="font-weight: 400;">PayPAL</span>
+                    <span style="font-weight: 400;">PayPal</span>
                     @else
                     <span style="font-weight: 400;">N/A</span>
                     @endif

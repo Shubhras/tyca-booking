@@ -9,7 +9,24 @@
 body {
     font-family: "Noto Serif" !important;
 }
-
+.form-label {
+    color: #000000;
+    font-size: 15.85px !important;
+    font-weight: 400 !important;
+    line-height: 23.78px;
+    font-family: 'Poppins' !important;
+}
+.form-control, .form-select {
+    height: 49.37px !important;
+    border-radius: 1.59px !important;
+    font-size: 15.85px !important;
+    font-weight: 400 !important;
+    padding: 13px 16px 13px 16px !important;
+    border-color: #000000 !important;
+    border: 2px solid #273432 !important;
+    line-height: 23.78px !important;
+    font-family: 'Poppins' !important;
+}
 .ami-padding {
     padding-left: 20px !important;
 }
@@ -37,6 +54,8 @@ body {
     font-size: 15.85px;
     font-weight: 400;
     line-height: 23.78px;
+    font-family: 'Poppins' !important;
+
 }
 
 .pay-amnt {
@@ -71,6 +90,10 @@ body {
 .no-slot-color {
     background: #F5F5F5;
     padding: 30px;
+    font-family: 'Poppins';
+    font-size: 15.85px;
+    line-height: 23.78px;
+    font-weight: 400;
 }
 
 .location1 {
@@ -459,6 +482,7 @@ figure.effect-chico11 {
     font-weight: 400;
     color: #000000;
     line-height: 21.41px;
+    font-family: 'Poppins';
 }
 
 .radio-btn {
@@ -467,6 +491,7 @@ figure.effect-chico11 {
     font-weight: 400;
     color: #000000;
     line-height: 21.41px;
+    font-family: 'Poppins';
 }
 
 .set-back {
@@ -1226,7 +1251,13 @@ h1 {
 setTimeout(function() {
     $('#hour_plan_modal').modal();
 }, 5000);
+
+$('#hour_plan_modal').on('hidden.bs.modal', function () {
+    $(this).find("input,textarea,select").val('').end();
+    window.location.reload();
+});
 </script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var appointmentDateInput = document.getElementById('appointment-date');

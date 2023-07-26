@@ -471,6 +471,11 @@ $styleCss = 'style';
 setTimeout(function() {
     $('#hour_plan_modal').modal();
 }, 5000);
+
+$('#hour_plan_modal').on('hidden.bs.modal', function () {
+    $(this).find("input,textarea,select").val('').end();
+    window.location.reload();
+});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
