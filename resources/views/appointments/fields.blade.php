@@ -88,6 +88,29 @@ select {
 
     <div class="col-lg-6 mb-5 col-sm-12" id="dateShow">
         <div id="iii"></div>
+    </div> 
+    <input type="hidden" name="type_of_payment" id="type_of_payment" value="">
+    <div id="slot_option">
+        <div class="col-12 mb-3 form-group">
+            {{ Form::label('Available Slots',__('messages.appointment.available_slot').':' ,['class' => 'form-label required']) }}
+            <div class="mb-0 d-inline-flex align-items-center ms-2">
+                <span class="badge bg-danger badge-circle slot-color-dot"></span>
+                <span class="ms-2">{{__('messages.appointment.booked')}}</span>
+                <span class="badge bg-success ms-2 badge-circle slot-color-dot" style="background-color: #B0DFCA !important"></span>
+                <span class="ms-2">{{__('messages.appointment.available')}}</span>
+            </div>
+            <div class="fc-timegrid-slot pe-5 form-control form-control-solid h-300px overflow-auto">
+                {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
+                {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
+                <div class="text-center d-flex flex-wrap appointment-slot-data"
+                    id="slotData">
+                </div>
+                <span
+                    class="justify-content-center d-flex p-20 text-primary no-time-slot">{{__('messages.appointment.no_slot_found')}}</span>
+                <span
+                    class="justify-content-center d-flex p-20 text-primary d-none doctor-time-over">{{__('messages.doctors_scheduled_time_ended_for_today__')}}</span>
+            </div>
+        </div>
     </div>
     <div class="col-sm-12 col-lg-12 mb-5">
         <!-- <label class="form-label">Existing customer</label> -->
@@ -137,29 +160,6 @@ select {
             <span style="font-size: 16px;">
                 Register as new logged in customer
             </span>
-        </div>
-    </div>
-    <input type="hidden" name="type_of_payment" id="type_of_payment" value="">
-    <div id="slot_option">
-        <div class="col-12 mb-3 form-group">
-            {{ Form::label('Available Slots',__('messages.appointment.available_slot').':' ,['class' => 'form-label required']) }}
-            <div class="mb-0 d-inline-flex align-items-center ms-2">
-                <span class="badge bg-danger badge-circle slot-color-dot"></span>
-                <span class="ms-2">{{__('messages.appointment.booked')}}</span>
-                <span class="badge bg-success ms-2 badge-circle slot-color-dot" style="background-color: #B0DFCA !important"></span>
-                <span class="ms-2">{{__('messages.appointment.available')}}</span>
-            </div>
-            <div class="fc-timegrid-slot pe-5 form-control form-control-solid h-300px overflow-auto">
-                {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
-                {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
-                <div class="text-center d-flex flex-wrap appointment-slot-data"
-                    id="slotData">
-                </div>
-                <span
-                    class="justify-content-center d-flex p-20 text-primary no-time-slot">{{__('messages.appointment.no_slot_found')}}</span>
-                <span
-                    class="justify-content-center d-flex p-20 text-primary d-none doctor-time-over">{{__('messages.doctors_scheduled_time_ended_for_today__')}}</span>
-            </div>
         </div>
     </div>
     <input type="hidden" name="typeof" value="backend">
