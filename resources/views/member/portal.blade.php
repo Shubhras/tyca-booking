@@ -1387,7 +1387,13 @@ var timestamp = data.date;
 var date = new Date(timestamp);
     document.getElementById('outinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('bookSpaceInfo').innerHTML = data.services.name;
-    document.getElementById('planTypeInfo').innerHTML = data.plan_type;
+    var planTypeInfo = '';
+    if (data.plan_type == 'hourly') {
+        planTypeInfo = 'Hourly Plan';
+    } else if(data.plan_type == 'daily') {
+        planTypeInfo = 'Daily Plan';
+    }
+    document.getElementById('planTypeInfo').innerHTML = planTypeInfo;
     document.getElementById('getTime').innerHTML = data.from_time;
     document.getElementById('getType').innerHTML = data.from_time_type;
     document.getElementById('appointAtIfo').innerHTML = formatDate(date);
@@ -1452,7 +1458,13 @@ var date = new Date(timestampC);
     id = data.id;
     document.getElementById('coutinfo').innerHTML = data.doctor.user.first_name;
     document.getElementById('cbookSpaceInfo').innerHTML = data.services.name;
-    document.getElementById('cplanTypeInfo').innerHTML = data.plan_type;
+    var cplanTypeInfo = '';
+    if (data.plan_type == 'hourly') {
+        cplanTypeInfo = 'Hourly Plan';
+    } else if(data.plan_type == 'daily') {
+        cplanTypeInfo = 'Daily Plan';
+    }
+    document.getElementById('cplanTypeInfo').innerHTML = cplanTypeInfo;
     document.getElementById('cappointAtIfo').innerHTML = formatDateC(date);
     document.getElementById('cgetTime').innerHTML = data.from_time;
     document.getElementById('cgetType').innerHTML = data.from_time_type;
