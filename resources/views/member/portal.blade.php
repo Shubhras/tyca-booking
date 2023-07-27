@@ -114,9 +114,9 @@
                                             <td>{{ $appointment->doctor->user->first_name}}</td>
                                             <td>{{ $appointment->services->name}}</td>
                                             @if($appointment->plan_type == "hourly")
-                                            <td>Daily Plan</td>
-                                            @elseif($appointment->plan_type == "daily")
                                             <td>Hourly Plan</td>
+                                            @elseif($appointment->plan_type == "daily")
+                                            <td>Daily Plan</td>
                                             @else
                                             <td>N/A</td>
                                             @endif
@@ -135,7 +135,7 @@
                                             @if($appointment->transaction->status == 0)
                                             <td>Pending</td>
                                             @elseif($appointment->transaction->status == 1)
-                                            <td>Success</td>
+                                            <td>Paid</td>
                                             @else
                                             <td> Paid</td>
                                             @endif
@@ -215,7 +215,7 @@
                                             @if($appointment->transaction->status == false)
                                             <td>Pending</td>
                                             @elseif($appointment->transaction->status == true)
-                                            <td>Success</td>
+                                            <td>Paid</td>
                                             @else
                                             <td> Paid</td>
                                             @endif
@@ -487,9 +487,6 @@
             </form>
         </div>
     </div>
-</div>
-
-
 </div>
 
 
@@ -1404,10 +1401,9 @@ var date = new Date(timestamp);
     document.getElementById('paymentMethod').innerHTML = payment_method;
     var transaction = '';
     if (data.transaction.status == 0) {
-        console.log(data.transaction.status,'data.transaction.status');
         transaction = "Pending";
     } else if (data.transaction.status == 1) {
-        transaction = "Success";
+        transaction = "Paid";
     } else {
         transaction = "Paid";
     }
@@ -1415,7 +1411,6 @@ var date = new Date(timestamp);
     var bookedInfos = '';
 
     if (data.status == 1) {
-console.log(data.status,'data.status');
         bookedInfos = "Booked";
     } else if (data.status == 2) {
         bookedInfos = "Checking";
@@ -1427,7 +1422,6 @@ console.log(data.status,'data.status');
         bookedInfos = "Cancelled";
     }
     document.getElementById('bookedInfoses').innerHTML = bookedInfos;
-console.log('bookedInfos',bookedInfos);
     $("#booked_info_modal").modal('show');
 }
 var id = 0;
@@ -1474,7 +1468,7 @@ var date = new Date(timestampC);
     if (data.transaction.status == 0) {
         cstatusInfo = "Pending";
     } else if (data.transaction.status == 1) {
-        cstatusInfo = "Success";
+        cstatusInfo = "Paid";
     } else {
         cstatusInfo = "Paid";
     }
