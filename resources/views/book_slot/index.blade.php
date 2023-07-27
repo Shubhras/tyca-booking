@@ -1257,7 +1257,7 @@ $('#hour_plan_modal').on('hidden.bs.modal', function () {
     window.location.reload();
 });
 </script>
-
+ 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var appointmentDateInput = document.getElementById('appointment-date');

@@ -650,6 +650,24 @@ $('input[type="date"]').change(function() {
 body {
     font-family: "Noto Serif" !important;
 }
+.form-label {
+    color: #000000;
+    font-size: 15.85px !important;
+    font-weight: 400 !important;
+    line-height: 23.78px;
+    font-family: 'Poppins' !important;
+}
+.form-control, .form-select {
+    height: 49.37px !important;
+    border-radius: 1.59px !important;
+    font-size: 15.85px !important;
+    font-weight: 400 !important;
+    padding: 13px 16px 13px 16px !important;
+    border-color: #000000 !important;
+    border: 2px solid #273432 !important;
+    line-height: 23.78px !important;
+    font-family: 'Poppins' !important;
+}
 
 .left-plan {
     margin-left: -5px;
