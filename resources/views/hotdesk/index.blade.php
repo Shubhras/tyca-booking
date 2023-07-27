@@ -7,6 +7,686 @@
 $styleCss = 'style';
 @endphp
 
+<style>
+    body {
+        font-family: "Noto Serif" !important;
+    }
+
+    .form-label {
+        color: #000000;
+        font-size: 15.85px !important;
+        font-weight: 400 !important;
+        line-height: 23.78px;
+        font-family: 'Poppins' !important;
+    }
+
+    .form-control,
+    .form-select {
+        height: 49.37px !important;
+        border-radius: 1.59px !important;
+        font-size: 15.85px !important;
+        font-weight: 400 !important;
+        padding: 13px 16px 13px 16px !important;
+        border-color: #000000 !important;
+        border: 2px solid #273432 !important;
+        line-height: 23.78px !important;
+        font-family: 'Poppins' !important;
+    }
+
+    .left-plan {
+        margin-left: -5px;
+    }
+
+    .padding-tb {
+        padding-bottom: 7.5px;
+        padding-top: 7.5px;
+    }
+
+    .padding-b {
+        padding-bottom: 7.5px;
+    }
+
+    .ellipsis {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 54.48px;
+    }
+
+    .ellipsis1 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        /* Number of lines to show */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    a:hover {
+        color: #273432 !important;
+    }
+
+    .amies-font {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        color: #000000;
+    }
+
+    .pay-amnt {
+        display: flex;
+        justify-content: center;
+        font-size: 24.96px;
+        font-weight: 700;
+        line-height: 34px;
+        margin-top: 10px;
+    }
+
+    @media (max-width: 767px) {
+
+        .form-control,
+        .form-select {
+            height: 50px;
+            font-size: 16px;
+            padding: 10px !important;
+        }
+    }
+
+    @media (min-width:1024px) and (max-width:1200px) {
+        .set-day {
+            width: 25% !important;
+        }
+    }
+
+    @media (min-width:320px) and (max-width:767px) {
+        .grid-hours {
+            margin-left: -15px !important;
+        }
+    }
+
+    @media (min-width:768px) and (max-width:800px) {
+        .radio-btn {
+            font-size: 14px !important;
+        }
+    }
+
+    @media (min-width:320px) and (max-width:375px) {
+        .stripes {
+            width: 100% !important;
+        }
+
+        .pay-pal {
+            display: grid !important;
+        }
+    }
+
+    @media(min-width:768px) {
+        .padding-elips {
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+    }
+
+    @media (min-width:320px) and (max-width:767px) {
+        .padding-elips {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 70px;
+            line-height: 40.34px !important;
+        }
+    }
+
+    @media (min-width:768px) and (max-width:1024px) {
+        .icon-set {
+            width: 100% !important;
+        }
+
+        .dayplan-btn {
+            padding: 10px;
+            width: auto !important;
+        }
+
+        .h2-hourplan {
+            font-size: 15px !important;
+            color: #000000;
+        }
+
+        p.hou-p {
+            font-size: 15px !important;
+        }
+
+        h5,
+        .fs-5 {
+            font-size: 15px !important;
+        }
+
+        .row.hours-plan {
+            width: 240px;
+        }
+
+        .row.grid-space.days-plan {
+            width: 240px;
+        }
+    }
+
+    @media (min-width:768px) and (max-width:1440px) {
+        .grid figure {
+            margin: 2px -8px 3px !important;
+        }
+    }
+
+    @media (min-width:1025px) and (max-width:1290px) {
+        .dayplan-btn {
+            width: 130px !important;
+        }
+    }
+
+    @media (min-width:320px) and (max-width:600px) {
+        .amenities-block {
+            width: inherit !important;
+        }
+
+        .amies-font {
+            font-size: 13px !important;
+        }
+
+        .stripes {
+            width: 100% !important;
+        }
+
+        .set-box {
+            margin-left: 30px !important;
+        }
+
+        .set-space {
+            font-size: 35px !important;
+        }
+
+        .workspace {
+            font-size: 20px !important;
+        }
+
+        .main-block {
+            padding: 0px !important;
+        }
+
+        .hot-desk {
+            margin-top: 0px !important;
+        }
+
+        .h2-day {
+            text-align: start !important;
+        }
+
+        .day-plan {
+            display: flex;
+            border: 1px solid #D9D9D9;
+            margin-bottom: 20px;
+        }
+
+        .hot-desk {
+            text-align: start;
+            margin-bottom: 20px !important;
+        }
+
+        .h2-day {
+            font-size: 20px;
+            color: #000000;
+            margin-bottom: 10px !important;
+        }
+
+        .title-hero-bg {
+            min-height: 430px !important;
+        }
+
+        section.main-block.gray {
+            margin-top: 20px;
+        }
+
+        section.mains-blocks {
+            padding: 0px !important;
+            margin-top: 30px !important;
+            background: #fbfbfb;
+        }
+
+        .grid figure {
+            position: relative;
+            overflow: hidden;
+            min-width: 100%;
+            margin: 0px 0px 5px !important;
+        }
+
+        .icon-set {
+            width: auto !important;
+        }
+
+        .day-small {
+            width: 30% !important;
+        }
+
+        .day-small1 {
+            width: 50% !important;
+        }
+    }
+
+    .modal-header {
+        border-bottom: none !important;
+    }
+
+    .label-font {
+        font-size: 15.85px;
+        font-weight: 400;
+        line-height: 23.78px;
+    }
+
+    .btn-close {
+        width: 22.66px;
+        height: 22.66px;
+        color: #000000;
+        opacity: .5;
+    }
+
+    .book-space {
+        text-align: center;
+        font-size: 39.64px;
+        font-weight: 700;
+        margin-top: -15px;
+        line-height: 53.98px;
+    }
+
+    .popular-tags button {
+        display: inline-block;
+        padding: 10px 0px;
+        margin: 5px 5px 10px -9px;
+        border: 1px solid #B0DFCA;
+        background: #B0DFCA;
+        color: #025C34;
+        font-size: 14px;
+        width: 180px;
+    }
+
+    .modal-footer {
+        border-top: none !important;
+    }
+
+    .radio-btn1 {
+        padding: 0px 5px;
+    }
+
+    .radio-btn {
+        padding: 0px 10px;
+        font-size: 14.27px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21.41px;
+    }
+
+    .set-back {
+        background: #F5F5F5;
+    }
+
+    .ser-gap-time {
+        margin-right: 20px;
+    }
+
+    .set-box {
+        margin-left: 50px;
+    }
+
+    .one-line-set {
+        display: flex;
+    }
+
+    .badge:empty {
+        display: block !important;
+    }
+
+    .badge.badge-circle {
+        border-radius: 2px;
+        min-width: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .new-icon {
+        border: 2px solid;
+        background: #F62947;
+        border-color: #F62947;
+        border-radius: 0px;
+        margin-top: 10px;
+        width: 20px !important;
+        height: 26px;
+    }
+
+    .btns {
+        width: 158.55px;
+        height: 32.85px;
+        line-height: 17.28px;
+        font-weight: 600;
+        font-size: 12.68px;
+        padding: 8px 4px 8px 4px;
+    }
+
+    .btn-secondarys {
+        color: #ffffff !important;
+        background-color: #273432;
+        border: 1px solid #273432;
+    }
+
+    .page-title {
+        position: absolute;
+        top: 60%;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        -webkit-transform: translate(0%, -50%);
+        -moz-transform: translate(0%, -50%);
+        -ms-transform: translate(0%, -50%);
+        -o-transform: translate(0%, -50%);
+        transform: translate(0%, -50%);
+    }
+
+    .white-color {
+        color: #fff;
+    }
+
+    .page-title h1 {
+        font-size: 70px;
+        line-height: 95.34px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .workspace {
+        line-height: 40px;
+        font-size: 30px;
+        font-weight: 300;
+        margin-top: 20px;
+    }
+
+    section.title-hero-bg.parallax-effect img {
+        width: 100%;
+    }
+
+    .gray {
+        background: #fbfbfb;
+    }
+
+    .main-block {
+        padding: 100px;
+    }
+
+    .container-fluid {
+        max-width: 1500px;
+    }
+
+    .grid {
+        position: relative;
+        margin: 0 auto;
+        max-width: 100%;
+        list-style: none;
+        text-align: center;
+    }
+
+    figure.effect-chico {
+        margin: 0;
+    }
+
+    .grid figure {
+        position: relative;
+        overflow: hidden;
+        min-width: 100%;
+        margin: 3px 0px 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .detailed-item-mr {
+        margin-bottom: 25px;
+    }
+
+    .h2-day {
+        font-size: 20px;
+        text-align: end;
+        color: #000000;
+        margin-bottom: 40px;
+    }
+
+    .hot-desk {
+        text-align: start;
+        margin-top: -20px;
+        margin-bottom: 50px;
+    }
+
+    .hot-desk h2 {
+        color: #000000;
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 68.1px;
+    }
+
+    .hot-desk p {
+        color: #000000;
+        line-height: 30px;
+        font-size: 20px;
+        margin-top: -15px;
+        font-weight: 400;
+    }
+
+    .hot-desks {
+        text-align: start;
+    }
+
+    .hot-desks h2 {
+        font-size: 35px;
+        margin-bottom: -10px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 47.67px;
+    }
+
+    .hot-desks p {
+        font-size: 16px;
+        color: #000000;
+    }
+
+    .amenities-block {
+        display: flex;
+        justify-content: space-around;
+        text-align: start;
+        width: 50%;
+    }
+
+    .Amenities h2 {
+        font-size: 35px;
+        margin-bottom: 10px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 47.67px;
+        text-align: start;
+    }
+
+    .operating-block {
+        /* display: flex; */
+        justify-content: space-around;
+        text-align: start;
+        /* width: 50%; */
+    }
+
+    .Operating h2 {
+        font-size: 35px;
+        margin-bottom: 10px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 47.67px;
+        text-align: start;
+    }
+
+    .h2-plans {
+        font-size: 35px;
+        margin-bottom: 10px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 47.67px;
+        text-align: start;
+    }
+
+    .h2-hourplan {
+        font-size: 25px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 34.05px;
+    }
+
+    .h2-dayplan {
+        font-size: 25px;
+        color: #000000;
+        font-weight: 700;
+        line-height: 34.05px;
+    }
+
+    .hourplan-button {
+        text-align: center;
+        /* padding-top: 60px; */
+        margin-bottom: 30px;
+    }
+
+    .hourplan-btn {
+        padding: 10px;
+        width: 170px;
+        height: 40px;
+        font-size: 15px;
+        background: #273432;
+        border: #273432;
+        color: #FFFFFF;
+    }
+
+    .dayplan-button {
+        text-align: center;
+        /* padding-top: 60px; */
+        margin-bottom: 30px;
+    }
+
+    .dayplan-btn {
+        padding: 10px 5px 10px 5px;
+        width: 175px;
+        height: 42px;
+        font-size: 16px;
+        line-height: 21.79px;
+        font-weight: 600;
+        background: #273432;
+        border: #273432;
+        color: #FFFFFF;
+    }
+
+    .hour-plan {
+        display: flex;
+        border: 1px solid #D9D9D9;
+        margin-bottom: 15px;
+    }
+
+    .day-plan {
+        display: flex;
+        border: 1px solid #D9D9D9;
+    }
+
+    p.hou-p {
+        font-size: 20px;
+        color: #000000;
+        margin-top: 20px;
+        font-weight: 600;
+        line-height: 27.24px;
+    }
+
+    p.da-p {
+        font-size: 20px;
+        color: #000000;
+        margin-top: 20px;
+        font-weight: 600;
+        line-height: 27.24px;
+    }
+
+    section.mains-blocks {
+        padding: 100px;
+        margin-top: -75px;
+        background: #fbfbfb;
+    }
+
+    .grid figure {
+        position: relative;
+        overflow: hidden;
+        min-width: 100%;
+        margin: 3px 0px 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .title-hero-bg {
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: relative;
+        min-height: 550px;
+    }
+
+    #slot_option {
+        display: none;
+    }
+
+    .pay-pal {
+        display: flex;
+        place-content: start;
+    }
+
+    .badge-lg {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 10px;
+        height: 44px;
+        line-height: 26px;
+        margin: 5px 5px 0px 0px;
+        cursor: pointer;
+        width: 235px;
+    }
+
+    .btn1:hover {
+        background: #273432 !important;
+        border: #273432 !important;
+        color: #FFFFFF !important;
+    }
+
+    .no-slot-color {
+        background: #F5F5F5;
+        padding: 30px;
+    }
+
+    .heading-id2 {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+    }
+
+    .sub-name {
+        font-size: 20px;
+        color: #000000;
+        font-weight: 400;
+        line-height: 30px;
+        text-transform: lowercase;
+    }
+</style>
+
 <div class="transition-none">
     <section class="title-hero-bg parallax-effect">
         <section class="title-hero-bg parallax-effect" style="background-image: url('{{$abouTimage1->value}}');">
@@ -126,8 +806,7 @@ $styleCss = 'style';
                                 @foreach($specialization as $specializationData)
                                 <div class="col-6 icon-set" style="padding-left:0;">
                                     <p class="heading-id amies-font">
-                                        <img src="{{$specializationData->icon}}" alt="#"
-                                            style="height: 30px; padding-right:10px;">
+                                        <img src="{{$specializationData->icon}}" alt="#" style="height: 30px; padding-right:10px;">
                                         {{$specializationData->name}}
                                     </p>
                                 </div>
@@ -138,8 +817,8 @@ $styleCss = 'style';
 
 
                     <?php
-                                $var_dump = json_decode($doctor->days);
-                            ?>
+                    $var_dump = json_decode($doctor->days);
+                    ?>
                     <div class="Operating padding-tb" style="margin-bottom:60px;">
                         <h2>OPERATING HOURS</h2>
                         <div class="operating-block">
@@ -149,8 +828,7 @@ $styleCss = 'style';
                             @endphp
 
                             @if(!empty($var_dump))
-                            @for($day = 1; $day <= 7; $day++) @php $found=false; @endphp @foreach($var_dump as $data)
-                                @if($data->day_of_week == $day)
+                            @for($day = 1; $day <= 7; $day++) @php $found=false; @endphp @foreach($var_dump as $data) @if($data->day_of_week == $day)
                                 <div class="row mt-10 mb-2 col-lg-12">
                                     <div class="col-lg-2 col-xl-2 col-sm-4 col-xs-2 set-day day-small">
                                         <span class="heading-id2">{{ $dayLabels[$day] }}</span>
@@ -205,13 +883,10 @@ $styleCss = 'style';
                                 </p>
                                 <div class="hourplan-button" style="text-align:end;">
                                     @if(getLogInUser())
-                                    <button type="button" class="dayplan-btn"
-                                        onclick="displayMessage(1,'{{ $servicesData->charges }}','{{$servicesData->id}}');">Book
+                                    <button type="button" class="dayplan-btn" onclick="displayMessage(1,'{{ $servicesData->charges }}','{{$servicesData->id}}');">Book
                                         Now</button>
                                     @else
-                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
-                                        style="text-decoration: none; text-align: center; padding-top: 9px;"
-                                        data-turbo="false">
+                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
                                         Book Now
                                     </a>
                                     @endif
@@ -232,13 +907,10 @@ $styleCss = 'style';
                                 <p class="da-p">${{$servicesData->charges_daily}} /Day</p>
                                 <div class="dayplan-button" style="text-align:end;">
                                     @if(getLogInUser())
-                                    <button type="button" class="dayplan-btn"
-                                        onclick="displayMessage(2, '{{$servicesData->charges_daily}}','{{$servicesData->id}}');">Book
+                                    <button type="button" class="dayplan-btn" onclick="displayMessage(2, '{{$servicesData->charges_daily}}','{{$servicesData->id}}');">Book
                                         Now</button>
                                     @else
-                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn"
-                                        style="text-decoration: none; text-align: center; padding-top: 9px;"
-                                        data-turbo="false">
+                                    <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
                                         Book Now
                                     </a>
                                     @endif
@@ -262,32 +934,23 @@ $styleCss = 'style';
             <div class="book-space">BOOK A SPACE</div>
             <div class="modal-body">
                 <?php $emptyData = array(); ?>
-                <form class="book-appointment-form bg-white" id="frontAppointmentBook"
-                    action="{{ route('front.appointment.book') }}" method="post">
+                <form class="book-appointment-form bg-white" id="frontAppointmentBook" action="{{ route('front.appointment.book') }}" method="post">
                     @csrf
 
                     <div class="row">
                         @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
-                                <label class="form-label"
-                                    for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span
-                                        class="required"></span></label>
-                                <input type="text" class="form-control" id="template-medical-first_name"
-                                    placeholder="{{ __('messages.doctor.first_name') }}" name="first_name"
-                                    value="{{ getLogInUser()->first_name }}" readonly>
+                                <label class="form-label" for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span class="required"></span></label>
+                                <input type="text" class="form-control" id="template-medical-first_name" placeholder="{{ __('messages.doctor.first_name') }}" name="first_name" value="{{ getLogInUser()->first_name }}" readonly>
                             </div>
                         </div>
                         @endif
                         @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
-                                <label class="form-label"
-                                    for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span
-                                        class="required"></span></label>
-                                <input type="text" id="template-medical-last_name" name="last_name" class="form-control"
-                                    value="{{ getLogInUser()->last_name }}"
-                                    placeholder="{{ __('messages.doctor.last_name') }}" readonly>
+                                <label class="form-label" for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span class="required"></span></label>
+                                <input type="text" id="template-medical-last_name" name="last_name" class="form-control" value="{{ getLogInUser()->last_name }}" placeholder="{{ __('messages.doctor.last_name') }}" readonly>
                             </div>
                         </div>
                         @endif
@@ -296,19 +959,14 @@ $styleCss = 'style';
                         @if(getLogInUser())
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label"
-                                    for="template-medical-email">{{ __('messages.patient.email') }}:<span
-                                        class="required"></span></label>
-                                <input type="email" id="template-medical-email" name="email" class="form-control"
-                                    value="{{ getLogInUser()->email }}" placeholder="{{ __('messages.web.email') }}"
-                                    readonly>
+                                <label class="form-label" for="template-medical-email">{{ __('messages.patient.email') }}:<span class="required"></span></label>
+                                <input type="email" id="template-medical-email" name="email" class="form-control" value="{{ getLogInUser()->email }}" placeholder="{{ __('messages.web.email') }}" readonly>
                             </div>
                         </div>
                         @endif
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span
-                                        class="required"></span></label>
+                                <label class="form-label" for="Doctor">{{ __('messages.doctor.doctor')}}: <span class="required"></span></label>
                                 {{ Form::select('doctor_id', $appointmentDoctors, isset(session()->get('data')['doctor_id']) ? session()->get('data')['doctor_id'] : $doctor->id,['class' => 'form-select', 'id' => 'appointmentDoctorId', 'data-control'=>"select2",'placeholder' =>  __('messages.common.select_doctor')]) }}
                             </div>
                         </div>
@@ -316,8 +974,7 @@ $styleCss = 'style';
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label" for="Service">Booking Space: <span
-                                        class="required"></span></label>
+                                <label class="form-label" for="Service">Booking Space: <span class="required"></span></label>
                                 {{ Form::select('service_id', isset(session()->get('data')['service']) ? session()->get('data')['service'] : [] , isset(session()->get('data')['service_id']) ? session()->get('data')['service_id'] : '',['class' => 'form-select', 'data-control'=>"select2", 'id'=> 'FrontAppointmentServiceId','placeholder' => __('messages.common.select_service') ]) }}
                             </div>
 
@@ -335,34 +992,31 @@ $styleCss = 'style';
                     </div>
                     <div class="col-lg-6 d-none registered-patient">
                         <div class="form-group">
-                            <label class="form-label "
-                                for="template-medical-first_name">{{ __('messages.web.patient_name') }}:</label>
-                            <input type="text" id="patientName" readonly class="form-control" value=""
-                                placeholder="{{ __('messages.web.patient_name') }}">
+                            <label class="form-label " for="template-medical-first_name">{{ __('messages.web.patient_name') }}:</label>
+                            <input type="text" id="patientName" readonly class="form-control" value="" placeholder="{{ __('messages.web.patient_name') }}">
                         </div>
                     </div>
 
                     <div class="col icon-set" style="text-align:center;">
-                        <span class="heading-id"><img src="/assets/image/image 12.png" alt="#"
-                                style="width:100%;  margin-bottom: 20px;"></span>
+                        <span class="heading-id"><img src="/assets/image/image 12.png" alt="#" style="width:100%;  margin-bottom: 20px;"></span>
                     </div>
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" id="dateHide">
                         <div class="form-group">
-                            <label class="form-label" for="templateAppointmentDate">Appointment Date:<span
-                                    class="required"></span></label>
+                            <label class="form-label" for="templateAppointmentDate">Appointment Date:<span class="required"></span></label>
                             <div class="position-relative">
-                                <input type="text" id="templateAppointmentDate" name="date"
-                                    class="form-control bg-white" data-uk-datepicker-locale="fr"
-                                    value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] : '' }}"
-                                    placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" readonly>
-                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4"
-                                    id="templateAppointmentDate">
+                                <input type="text" id="templateAppointmentDate" name="date" class="form-control bg-white" data-uk-datepicker-locale="fr" value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] :  now()->format('d-m-Y') }} }}" placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" readonly>
+                                <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-12" id="dateShow">
+                        <div id="iii"></div>
+                    </div>
+
                     @php
                     $styleCss = 'style';
                     @endphp
@@ -372,18 +1026,14 @@ $styleCss = 'style';
                                 {{ Form::label('Available Slots',__('messages.appointment.available_slot').':' ,['class' => 'form-label me-3 required']) }}
                                 <div class="d-flex align-items-center">
                                     <div class="form-check d-flex align-items-center mb-2">
-                                        <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox"
-                                            value="" id="defaultCheck1">
-                                        <label class="form-check-label label-font  fw-light fs-small"
-                                            for="defaultCheck1">
+                                        <input class="form-check-input form-check-danger me-2 mt-0" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
                                             {{__('messages.appointment.booked')}}
                                         </label>
                                     </div>
                                     <div class="form-check d-flex align-items-center mb-2 ms-3">
-                                        <input class="form-check-input form-check-success me-2 mt-0" type="checkbox"
-                                            value="" id="defaultCheck1">
-                                        <label class="form-check-label label-font  fw-light fs-small"
-                                            for="defaultCheck1">
+                                        <input class="form-check-input form-check-success me-2 mt-0" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label label-font  fw-light fs-small" for="defaultCheck1">
                                             {{__('messages.appointment.available')}}
                                         </label>
                                     </div>
@@ -392,8 +1042,7 @@ $styleCss = 'style';
                             <div class="slots-box">
                                 {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
                                 {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
-                                <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data"
-                                    id="slotData">
+                                <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data" id="slotData">
                                     <p class="mb-0 text-center  no-time-slot  no-slot-color">
                                         {{__('messages.appointment.no_slot_found')}}
                                     </p>
@@ -410,8 +1059,7 @@ $styleCss = 'style';
                     </div>
                     <div class="row col-md-12 mb-3">
                         <div class="col-3">
-                            <div><input id="payment_type" type="radio" name="payment_type" value="4"><span
-                                    class="radio-btn">PayPal</span>
+                            <div><input id="payment_type" type="radio" name="payment_type" value="4"><span class="radio-btn">PayPal</span>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-10 col-xs-10 centerize-col text-center social-icons-style-09">
@@ -464,863 +1112,189 @@ $styleCss = 'style';
     </div>
 </div>
 
-</div>
-</div>
-
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <script>
-setTimeout(function() {
-    $('#hour_plan_modal').modal();
-}, 5000);
+    setTimeout(function() {
+        $('#hour_plan_modal').modal();
+    }, 5000);
 
-$('#hour_plan_modal').on('hidden.bs.modal', function () {
-    $(this).find("input,textarea,select").val('').end();
-    window.location.reload();
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var appointmentDateInput = document.getElementById('appointment-date');
-
-    appointmentDateInput.addEventListener('change', function() {
-        var selectedDate = appointmentDateInput.value;
-        var additionalInfoDiv = document.getElementById('additional-info');
-
-        if (selectedDate !== '') {
-            console.log('fffffffffffffffff');
-            additionalInfoDiv.style.display = 'block';
-        } else {
-            additionalInfoDiv.style.display = 'none';
-        }
+    $('#hour_plan_modal').on('hidden.bs.modal', function() {
+        $(this).find("input,textarea,select").val('').end();
+        window.location.reload();
     });
-});
 
-function displayMessage(id, price, service_id) {
-    if (id == 1) {
-        var abc = 'Hour Plan';
-        $('#slot_option').show();
-    } else {
-        var abc = 'Day Plan';
-        $('#slot_option').hide();
-    }
-    var conceptName = $('#appointmentDoctorId').find(":selected").val();
-    $.ajax({
-        url: route('get-service'),
-        type: 'GET',
-        data: {
-            'appointmentDoctorId': conceptName,
-        },
-        success: function(result) {
-            if (result.success) {
-                $('#FrontAppointmentServiceId').empty();
-                $('#FrontAppointmentServiceId').append($('<option value=""></option>').text(
-                    'select booking space'));
-                $.each(result.data, function(i, v) {
-                    var new_service = (v.id == service_id) ? "selected" : "";
-                    $('#FrontAppointmentServiceId').append($('<option ' + new_service +
-                        '></option>').attr('value', v.id).text(v.name));
-                });
-            }
-        },
-    });
-    $('#adminAppointmentPlanId').val(abc);
-    $('#payable_amount').val(price);
-    $('#payable_amount_Show').text(price);
-    $('#FrontAppointmentServiceId').val(service_id);
+    document.addEventListener('DOMContentLoaded', function() {
+        var appointmentDateInput = document.getElementById('appointment-date');
 
+        appointmentDateInput.addEventListener('change', function() {
+            var selectedDate = appointmentDateInput.value;
+            var additionalInfoDiv = document.getElementById('additional-info');
 
-    $.ajax({
-        type: 'POST',
-        url: "{{ route('authorize-check') }}",
-        data: {
-            "_token": "{{ csrf_token() }}",
-            "name": "name"
-        },
-        success: function(data) {
-            if (data.success == true) {
-                $("#hour_plan_modal").modal('show');
+            if (selectedDate !== '') {
+                additionalInfoDiv.style.display = 'block';
             } else {
-                var url = "{{ route('login') }}";
-                location.href = url;
+                additionalInfoDiv.style.display = 'none';
             }
+        });
+    });
+
+    function displayMessage(id, price, service_id) {
+        if (id == 1) {
+            var abc = 'Hour Plan';
+            $('#slot_option').show();
+            $("#dateHide").show();
+            $("#dateShow").hide();
+            $("#iii").append('')
+
+        } else {
+            var abc = 'Day Plan';
+            $('#slot_option').hide();
+            $("#dateHide").hide();
+            $("#dateShow").show();
+            $("#iii").empty().append(
+                '<label for="Date" class="form-label required">Booking Status:</label><input class="form-control " placeholder="Booking Status" id="appointmentDate1" required="" autocomplete="off" name="date1" type="text">'
+            )
+            $('#appointmentDate1').daterangepicker();
+
         }
-    });
 
-}
-</script>
-<script>
-$(document).ready(function() {
-    $('#templateAppointmentDate').datepicker({
-        language: 'es-es',
-        format: 'yyyy-mm-dd',
-        minDate: new Date(),
-        startDate: new Date(),
-        todayHighlight: true,
-    });
+        $(function() {
+            $('#appointmentDate1').daterangepicker();
+        });
 
-    // Event handler for input click
-    $('#templateAppointmentDate').on('click', function() {
-        $(this).datepicker('show');
-    });
-
-    // Event handler for date icon click
-    $('.date-icon').on('click', function() {
-        $('#templateAppointmentDate').datepicker('show');
-    });
-});
-$(document).ready(function() {
-    $('#appointmentDate1').change(function() {
-
-        selectedDate = $(this).val();
-        let userRole = $('#patientRole').val();
-        var timezoneOffsetMinutes = 330;
-        let appointmentIsEdit = $('#appointmentIsEdit').val();
-        $('.appointment-slot-data').html('');
-        let url = route('doctor-session-time');
+        var conceptName = $('#appointmentDoctorId').find(":selected").val();
         $.ajax({
-            url: url,
+            url: route('get-service'),
             type: 'GET',
             data: {
-                'adminAppointmentDoctorId': $('#adminAppointmentDoctorId').val(),
-                'date': selectedDate,
-                'timezone_offset_minutes': timezoneOffsetMinutes,
+                'appointmentDoctorId': conceptName,
             },
             success: function(result) {
                 if (result.success) {
-                    if (result.data['bookedSlot'] != null && result.data['bookedSlot']
-                        .length > 0) {
-                        if (result.data['slots'].length == 0) {
-                            $('.no-time-slot').addClass('d-none');
-                            $('.doctor-time-over').removeClass('d-none');
-                        }
-                    }
-                    $.each(result.data['slots'], function(index, value) {
-                        if (appointmentIsEdit && fromTime == value) {
-                            $('.no-time-slot').addClass('d-none');
-                            $('.doctor-time-over').addClass('d-none');
-                            $('.appointment-slot-data').append(
-                                '<span class="time-slot col-2  activeSlot" data-id="' +
-                                value + '">' + value + '</span>');
-                        } else {
-                            $('.no-time-slot').addClass('d-none');
-                            $('.doctor-time-over').addClass('d-none');
-                            if (result.data['bookedSlot'] == null) {
-                                $('.appointment-slot-data').append(
-                                    '<span class="time-slot col-2" data-id="' +
-                                    value + '">' + value + '</span>');
-                            } else {
-                                if ($.inArray(value,
-                                        result.data['bookedSlot']) !== -1) {
-                                    $('.appointment-slot-data').Morin
-                                    append(
-                                        '<span class="time-slot col-2 bookedSlot " data-id="' +
-                                        value + '">' + value + '</span>');
-                                } else {
-                                    $('.appointment-slot-data').
-                                    append(
-                                        '<span class="time-slot col-2" data-id="' +
-                                        value + '">' + value + '</span>');
-                                }
-
-                            }
-                        }
+                    $('#FrontAppointmentServiceId').empty();
+                    $('#FrontAppointmentServiceId').append($('<option value=""></option>').text(
+                        'select booking space'));
+                    $.each(result.data, function(i, v) {
+                        var new_service = (v.id == service_id) ? "selected" : "";
+                        $('#FrontAppointmentServiceId').append($('<option ' + new_service +
+                            '></option>').attr('value', v.id).text(v.name));
                     });
                 }
             },
-            error: function(result) {
-                $('.no-time-slot').removeClass('d-none');
-                $('.doctor-time-over').addClass('d-none');
-                displayErrorMessage(result.responseJSON.message);
+        });
+        $('#adminAppointmentPlanId').val(abc);
+        $('#payable_amount').val(price);
+        $('#payable_amount_Show').text(price);
+        $('#FrontAppointmentServiceId').val(service_id);
+
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('authorize-check') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "name": "name"
             },
+            success: function(data) {
+                if (data.success == true) {
+                    $("#hour_plan_modal").modal('show');
+                } else {
+                    var url = "{{ route('login') }}";
+                    location.href = url;
+                }
+            }
         });
 
+    }
 
+    $(document).ready(function() {
+        $('#templateAppointmentDate').datepicker({
+            language: 'es-es',
+            format: 'yyyy-mm-dd',
+            minDate: new Date(),
+            startDate: new Date(),
+            todayHighlight: true,
+        });
 
+        // Event handler for input click
+        $('#templateAppointmentDate').on('click', function() {
+            $(this).datepicker('show');
+        });
 
+        // Event handler for date icon click
+        $('.date-icon').on('click', function() {
+            $('#templateAppointmentDate').datepicker('show');
+        });
     });
-});
 
-$('input[type="date"]').change(function() {
-    // $('#appointmentDate1').change(function() {
+    $(document).ready(function() {
+        $('#appointmentDate1').change(function() {
 
-    alert('sss');
+            selectedDate = $(this).val();
+            let userRole = $('#patientRole').val();
+            var timezoneOffsetMinutes = 330;
+            let appointmentIsEdit = $('#appointmentIsEdit').val();
+            $('.appointment-slot-data').html('');
+            let url = route('doctor-session-time');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    'adminAppointmentDoctorId': $('#adminAppointmentDoctorId').val(),
+                    'date': selectedDate,
+                    'timezone_offset_minutes': timezoneOffsetMinutes,
+                },
+                success: function(result) {
+                    if (result.success) {
+                        if (result.data['bookedSlot'] != null && result.data['bookedSlot']
+                            .length > 0) {
+                            if (result.data['slots'].length == 0) {
+                                $('.no-time-slot').addClass('d-none');
+                                $('.doctor-time-over').removeClass('d-none');
+                            }
+                        }
+                        $.each(result.data['slots'], function(index, value) {
+                            if (appointmentIsEdit && fromTime == value) {
+                                $('.no-time-slot').addClass('d-none');
+                                $('.doctor-time-over').addClass('d-none');
+                                $('.appointment-slot-data').append(
+                                    '<span class="time-slot col-2  activeSlot" data-id="' +
+                                    value + '">' + value + '</span>');
+                            } else {
+                                $('.no-time-slot').addClass('d-none');
+                                $('.doctor-time-over').addClass('d-none');
+                                if (result.data['bookedSlot'] == null) {
+                                    $('.appointment-slot-data').append(
+                                        '<span class="time-slot col-2" data-id="' +
+                                        value + '">' + value + '</span>');
+                                } else {
+                                    if ($.inArray(value,
+                                            result.data['bookedSlot']) !== -1) {
+                                        $('.appointment-slot-data').Morin
+                                        append(
+                                            '<span class="time-slot col-2 bookedSlot " data-id="' +
+                                            value + '">' + value + '</span>');
+                                    } else {
+                                        $('.appointment-slot-data').
+                                        append(
+                                            '<span class="time-slot col-2" data-id="' +
+                                            value + '">' + value + '</span>');
+                                    }
 
-});
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function(result) {
+                    $('.no-time-slot').removeClass('d-none');
+                    $('.doctor-time-over').addClass('d-none');
+                    displayErrorMessage(result.responseJSON.message);
+                },
+            });
+        });
+    });
 </script>
-<style>
-body {
-    font-family: "Noto Serif" !important;
-}
-.form-label {
-    color: #000000;
-    font-size: 15.85px !important;
-    font-weight: 400 !important;
-    line-height: 23.78px;
-    font-family: 'Poppins' !important;
-}
-.form-control, .form-select {
-    height: 49.37px !important;
-    border-radius: 1.59px !important;
-    font-size: 15.85px !important;
-    font-weight: 400 !important;
-    padding: 13px 16px 13px 16px !important;
-    border-color: #000000 !important;
-    border: 2px solid #273432 !important;
-    line-height: 23.78px !important;
-    font-family: 'Poppins' !important;
-}
-
-.left-plan {
-    margin-left: -5px;
-}
-
-.padding-tb {
-    padding-bottom: 7.5px;
-    padding-top: 7.5px;
-}
-
-.padding-b {
-    padding-bottom: 7.5px;
-}
-
-.ellipsis {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 40px;
-    font-weight: 400;
-    line-height: 54.48px;
-}
-
-.ellipsis1 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    /* Number of lines to show */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-a:hover {
-    color: #273432 !important;
-}
-
-.amies-font {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    color: #000000;
-}
-
-.pay-amnt {
-    display: flex;
-    justify-content: center;
-    font-size: 24.96px;
-    font-weight: 700;
-    line-height: 34px;
-    margin-top: 10px;
-}
-
-@media (max-width: 767px) {
-
-    .form-control,
-    .form-select {
-        height: 50px;
-        font-size: 16px;
-        padding: 10px !important;
-    }
-}
-
-@media (min-width:1024px) and (max-width:1200px) {
-    .set-day {
-        width: 25% !important;
-    }
-}
-
-@media (min-width:320px) and (max-width:767px) {
-    .grid-hours {
-        margin-left: -15px !important;
-    }
-}
-
-@media (min-width:768px) and (max-width:800px) {
-    .radio-btn {
-        font-size: 14px !important;
-    }
-}
-
-@media (min-width:320px) and (max-width:375px) {
-    .stripes {
-        width: 100% !important;
-    }
-
-    .pay-pal {
-        display: grid !important;
-    }
-}
-
-@media(min-width:768px) {
-    .padding-elips {
-        padding-left: 150px;
-        padding-right: 150px;
-    }
-}
-
-@media (min-width:320px) and (max-width:767px) {
-    .padding-elips {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .page-title h1 {
-        font-size: 70px;
-        line-height: 40.34px !important;
-    }
-}
-
-@media (min-width:768px) and (max-width:1024px) {
-    .icon-set {
-        width: 100% !important;
-    }
-
-    .dayplan-btn {
-        padding: 10px;
-        width: auto !important;
-    }
-
-    .h2-hourplan {
-        font-size: 15px !important;
-        color: #000000;
-    }
-
-    p.hou-p {
-        font-size: 15px !important;
-    }
-
-    h5,
-    .fs-5 {
-        font-size: 15px !important;
-    }
-
-    .row.hours-plan {
-        width: 240px;
-    }
-
-    .row.grid-space.days-plan {
-        width: 240px;
-    }
-}
-
-@media (min-width:768px) and (max-width:1440px) {
-    .grid figure {
-        margin: 2px -8px 3px !important;
-    }
-}
-
-@media (min-width:1025px) and (max-width:1290px) {
-    .dayplan-btn {
-        width: 130px !important;
-    }
-}
-
-@media (min-width:320px) and (max-width:600px) {
-    .amenities-block {
-        width: inherit !important;
-    }
-
-    .amies-font {
-        font-size: 13px !important;
-    }
-
-    .stripes {
-        width: 100% !important;
-    }
-
-    .set-box {
-        margin-left: 30px !important;
-    }
-
-    .set-space {
-        font-size: 35px !important;
-    }
-
-    .workspace {
-        font-size: 20px !important;
-    }
-
-    .main-block {
-        padding: 0px !important;
-    }
-
-    .hot-desk {
-        margin-top: 0px !important;
-    }
-
-    .h2-day {
-        text-align: start !important;
-    }
-
-    .day-plan {
-        display: flex;
-        border: 1px solid #D9D9D9;
-        margin-bottom: 20px;
-    }
-
-    .hot-desk {
-        text-align: start;
-        margin-bottom: 20px !important;
-    }
-
-    .h2-day {
-        font-size: 20px;
-        color: #000000;
-        margin-bottom: 10px !important;
-    }
-
-    .title-hero-bg {
-        min-height: 430px !important;
-    }
-
-    section.main-block.gray {
-        margin-top: 20px;
-    }
-
-    section.mains-blocks {
-        padding: 0px !important;
-        margin-top: 30px !important;
-        background: #fbfbfb;
-    }
-
-    .grid figure {
-        position: relative;
-        overflow: hidden;
-        min-width: 100%;
-        margin: 0px 0px 5px !important;
-    }
-
-    .icon-set {
-        width: auto !important;
-    }
-
-    .day-small {
-        width: 30% !important;
-    }
-
-    .day-small1 {
-        width: 50% !important;
-    }
-}
-
-.modal-header {
-    border-bottom: none !important;
-}
-
-.label-font {
-    font-size: 15.85px;
-    font-weight: 400;
-    line-height: 23.78px;
-}
-
-.btn-close {
-    width: 22.66px;
-    height: 22.66px;
-    color: #000000;
-    opacity: .5;
-}
-
-.book-space {
-    text-align: center;
-    font-size: 39.64px;
-    font-weight: 700;
-    margin-top: -15px;
-    line-height: 53.98px;
-}
-
-.popular-tags button {
-    display: inline-block;
-    padding: 10px 0px;
-    margin: 5px 5px 10px -9px;
-    border: 1px solid #B0DFCA;
-    background: #B0DFCA;
-    color: #025C34;
-    font-size: 14px;
-    width: 180px;
-}
-
-.modal-footer {
-    border-top: none !important;
-}
-
-.radio-btn1 {
-    padding: 0px 5px;
-}
-
-.radio-btn {
-    padding: 0px 10px;
-    font-size: 14.27px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 21.41px;
-}
-
-.set-back {
-    background: #F5F5F5;
-}
-
-.ser-gap-time {
-    margin-right: 20px;
-}
-
-.set-box {
-    margin-left: 50px;
-}
-
-.one-line-set {
-    display: flex;
-}
-
-.badge:empty {
-    display: block !important;
-}
-
-.badge.badge-circle {
-    border-radius: 2px;
-    min-width: 20px;
-    width: 20px;
-    height: 20px;
-}
-
-
-.new-icon {
-    border: 2px solid;
-    background: #F62947;
-    border-color: #F62947;
-    border-radius: 0px;
-    margin-top: 10px;
-    width: 20px !important;
-    height: 26px;
-}
-
-.btns {
-    width: 158.55px;
-    height: 32.85px;
-    line-height: 17.28px;
-    font-weight: 600;
-    font-size: 12.68px;
-    padding: 8px 4px 8px 4px;
-}
-
-.btn-secondarys {
-    color: #ffffff !important;
-    background-color: #273432;
-    border: 1px solid #273432;
-}
-
-.page-title {
-    position: absolute;
-    top: 60%;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    -webkit-transform: translate(0%, -50%);
-    -moz-transform: translate(0%, -50%);
-    -ms-transform: translate(0%, -50%);
-    -o-transform: translate(0%, -50%);
-    transform: translate(0%, -50%);
-}
-
-.white-color {
-    color: #fff;
-}
-
-.page-title h1 {
-    font-size: 70px;
-    line-height: 95.34px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.workspace {
-    line-height: 40px;
-    font-size: 30px;
-    font-weight: 300;
-    margin-top: 20px;
-}
-
-section.title-hero-bg.parallax-effect img {
-    width: 100%;
-}
-
-.gray {
-    background: #fbfbfb;
-}
-
-.main-block {
-    padding: 100px;
-}
-
-.container-fluid {
-    max-width: 1500px;
-}
-
-.grid {
-    position: relative;
-    margin: 0 auto;
-    max-width: 100%;
-    list-style: none;
-    text-align: center;
-}
-
-figure.effect-chico {
-    margin: 0;
-}
-
-.grid figure {
-    position: relative;
-    overflow: hidden;
-    min-width: 100%;
-    margin: 3px 0px 5px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.detailed-item-mr {
-    margin-bottom: 25px;
-}
-
-.h2-day {
-    font-size: 20px;
-    text-align: end;
-    color: #000000;
-    margin-bottom: 40px;
-}
-
-.hot-desk {
-    text-align: start;
-    margin-top: -20px;
-    margin-bottom: 50px;
-}
-
-.hot-desk h2 {
-    color: #000000;
-    font-size: 50px;
-    font-weight: 700;
-    line-height: 68.1px;
-}
-
-.hot-desk p {
-    color: #000000;
-    line-height: 30px;
-    font-size: 20px;
-    margin-top: -15px;
-    font-weight: 400;
-}
-
-.hot-desks {
-    text-align: start;
-}
-
-.hot-desks h2 {
-    font-size: 35px;
-    margin-bottom: -10px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 47.67px;
-}
-
-.hot-desks p {
-    font-size: 16px;
-    color: #000000;
-}
-
-.amenities-block {
-    display: flex;
-    justify-content: space-around;
-    text-align: start;
-    width: 50%;
-}
-
-.Amenities h2 {
-    font-size: 35px;
-    margin-bottom: 10px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 47.67px;
-    text-align: start;
-}
-
-.operating-block {
-    /* display: flex; */
-    justify-content: space-around;
-    text-align: start;
-    /* width: 50%; */
-}
-
-.Operating h2 {
-    font-size: 35px;
-    margin-bottom: 10px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 47.67px;
-    text-align: start;
-}
-
-.h2-plans {
-    font-size: 35px;
-    margin-bottom: 10px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 47.67px;
-    text-align: start;
-}
-
-.h2-hourplan {
-    font-size: 25px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 34.05px;
-}
-
-.h2-dayplan {
-    font-size: 25px;
-    color: #000000;
-    font-weight: 700;
-    line-height: 34.05px;
-}
-
-.hourplan-button {
-    text-align: center;
-    /* padding-top: 60px; */
-    margin-bottom: 30px;
-}
-
-.hourplan-btn {
-    padding: 10px;
-    width: 170px;
-    height: 40px;
-    font-size: 15px;
-    background: #273432;
-    border: #273432;
-    color: #FFFFFF;
-}
-
-.dayplan-button {
-    text-align: center;
-    /* padding-top: 60px; */
-    margin-bottom: 30px;
-}
-
-.dayplan-btn {
-    padding: 10px 5px 10px 5px;
-    width: 175px;
-    height: 42px;
-    font-size: 16px;
-    line-height: 21.79px;
-    font-weight: 600;
-    background: #273432;
-    border: #273432;
-    color: #FFFFFF;
-}
-
-.hour-plan {
-    display: flex;
-    border: 1px solid #D9D9D9;
-    margin-bottom: 15px;
-}
-
-.day-plan {
-    display: flex;
-    border: 1px solid #D9D9D9;
-}
-
-p.hou-p {
-    font-size: 20px;
-    color: #000000;
-    margin-top: 20px;
-    font-weight: 600;
-    line-height: 27.24px;
-}
-
-p.da-p {
-    font-size: 20px;
-    color: #000000;
-    margin-top: 20px;
-    font-weight: 600;
-    line-height: 27.24px;
-}
-
-section.mains-blocks {
-    padding: 100px;
-    margin-top: -75px;
-    background: #fbfbfb;
-}
-
-.grid figure {
-    position: relative;
-    overflow: hidden;
-    min-width: 100%;
-    margin: 3px 0px 5px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.title-hero-bg {
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    min-height: 550px;
-}
-
-#slot_option {
-    display: none;
-}
-
-.pay-pal {
-    display: flex;
-    place-content: start;
-}
-
-.badge-lg {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 10px;
-    height: 44px;
-    line-height: 26px;
-    margin: 5px 5px 0px 0px;
-    cursor: pointer;
-    width: 235px;
-}
-
-.btn1:hover {
-    background: #273432 !important;
-    border: #273432 !important;
-    color: #FFFFFF !important;
-}
-
-.no-slot-color {
-    background: #F5F5F5;
-    padding: 30px;
-}
-
-.heading-id2 {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 30px;
-}
-
-.sub-name {
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
-    line-height: 30px;
-    text-transform: lowercase;
-}
-</style>
 
 @endsection
