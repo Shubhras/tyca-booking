@@ -1163,6 +1163,21 @@ $styleCss = 'style';
             $('#appointmentDate1').daterangepicker();
         });
 
+        $('body').on('click', '.applyBtn', function() {
+            var dateGet = $('#appointmentDate1').val();
+            var dateRange = dateGet;
+            var [startDateStr, endDateStr] = dateRange.split(" - ");
+            var startDate = new Date(startDateStr);
+            var endDate = new Date(endDateStr);
+            var timeDiff = endDate.getTime() - startDate.getTime();
+            var daysDiff = timeDiff / (1000 * 3600 * 24);
+            if (daysDiff == 0) {
+                $('#payable_amount_Show').text(price * 1);
+            } else {
+                $('#payable_amount_Show').text(price * daysDiff);
+            }
+        });
+
         var conceptName = $('#appointmentDoctorId').find(":selected").val();
         $.ajax({
             url: route('get-service'),
