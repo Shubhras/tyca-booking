@@ -160,6 +160,7 @@ listenChange('#appointmentServiceId', function () {
             'chargeId': $(this).val(),
         },
         success: function (result) {
+            console.log('11111111111',result);
             if (result.success) {
                 $('#chargeId').val('');
                 $('#addFees').val('');
@@ -169,6 +170,9 @@ listenChange('#appointmentServiceId', function () {
                     $('#payableAmount').val(result.data[0].charges);
                     $("#price_total").empty().text(result.data[0].charges)
                     $("#price_total1").empty().text(result.data[0].charges)
+                    $("#price_total2").empty().text(result.data[0].charges_daily)
+                    $("#getprice_days").empty().text(result.data[0].charges_daily)
+                    $("#getprice_value").empty().text(result.data[0].charges)
                     charge = result.data[0].charges;
                 }
 
