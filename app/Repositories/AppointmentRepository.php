@@ -27,6 +27,7 @@ use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use DateTime;
+
 /**
  * Class AppointmentRepository
  *
@@ -45,9 +46,7 @@ class AppointmentRepository extends BaseRepository
     /**
      * @var array
      */
-    protected $fieldSearchable = [
-
-    ];
+    protected $fieldSearchable = [];
 
     /**
      * Return searchable fields
@@ -75,18 +74,16 @@ class AppointmentRepository extends BaseRepository
     {
         try {
             DB::beginTransaction();
-            
-            if($input['plan_type'] == 'hourly')
-            {
+
+            if ($input['plan_type'] == 'hourly') {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
-            }else
-            {
+            } else {
                 $blank = '12:00 AM';
                 $fromTime = explode(' ', date('H:i A'));
                 $toTime = explode(' ', $blank);
             }
-            
+
 
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
             // $fromTime = explode(' ', $input['from_time']);
@@ -101,8 +98,8 @@ class AppointmentRepository extends BaseRepository
             $appointment = Appointment::create($input);
             $patient = Patient::whereId($input['patient_id'])->with('user')->first();
             $input['patient_name'] = $patient->user->full_name;
-            $input['original_from_time'] = $fromTime[0].' '.$fromTime[1];
-            $input['original_to_time'] = $toTime[0].' '.$toTime[1];
+            $input['original_from_time'] = $fromTime[0] . ' ' . $fromTime[1];
+            $input['original_to_time'] = $toTime[0] . ' ' . $toTime[1];
             $service = Service::whereId($input['service_id'])->first();
             $input['service'] = $service->name;
 
@@ -110,10 +107,10 @@ class AppointmentRepository extends BaseRepository
                 Mail::to($patient->user->email)->send(new PatientAppointmentBookMail($input));
             }
 
-            $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.Carbon::parse($input['date'])->format('jS M, Y');
-            if (! getLogInUser()->hasRole('patient')) {
+            $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . Carbon::parse($input['date'])->format('jS M, Y');
+            if (!getLogInUser()->hasRole('patient')) {
                 $patientNotification = Notification::create([
-                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG.' '.$input['full_time'],
+                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG . ' ' . $input['full_time'],
                     'type' => Notification::BOOKED,
                     'user_id' => $patient->user->id,
                 ]);
@@ -126,7 +123,7 @@ class AppointmentRepository extends BaseRepository
             }
 
             $doctorNotification = Notification::create([
-                'title' => $patient->user->full_name.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
+                'title' => $patient->user->full_name . ' ' . Notification::APPOINTMENT_CREATE_DOCTOR_MSG . ' ' . $input['full_time'],
                 'type' => Notification::BOOKED,
                 'user_id' => $doctor->user->id,
             ]);
@@ -147,7 +144,7 @@ class AppointmentRepository extends BaseRepository
         }
     }
 
-     /**
+    /**
      * @param $input
      * @return mixed
      */
@@ -158,34 +155,31 @@ class AppointmentRepository extends BaseRepository
 
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
 
-            if($input['type_of_payment'] == 'hourly')
-            {
+            if ($input['type_of_payment'] == 'hourly') {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
-                $input['payable_amount'] =  $input['payable_amount'];
-            }else
-            {
+                $input['payable_amount'] =  $input['backend_account'];
+            } else {
                 $blank = '12:00 AM';
-                $fromTime = explode(' ', date('H:i A'));
-                $toTime = explode(' ', $blank);
+                $blank1 = '12:00 PM';
+                $fromTime = explode(' ', $blank);
+                $toTime = explode(' ', $blank1);
 
-                $asd =  explode(" - ",$input['date1']);
+                $asd =  explode(" - ", $input['date1']);
                 $input['from_date'] = Carbon::parse($asd[0])->format('Y-m-d');
                 $input['to_date'] = Carbon::parse($asd[1])->format('Y-m-d');
                 $earlier = new DateTime($input['from_date']);
                 $later = new DateTime($input['to_date']);
-                $abs_diff = $later->diff($earlier)->format("%a");
-                $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
-                if($abs_diff == 0){
-                    $input['total_counts'] = $input['charge'] * 1;
-                }
-                else{
-                $input['total_counts'] = $input['charge'] * $abs_diff;
-                }
-                $input['payable_amount'] = $input['total_counts'];
-
+                // $abs_diff = $later->diff($earlier)->format("%a");
+                // $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
+                // if ($abs_diff == 0) {
+                //     $input['total_counts'] = $input['charge'] * 1;
+                // } else {
+                //     $input['total_counts'] = $input['charge'] * $abs_diff;
+                // }
+                $input['total_counts'] = $input['backend_account'];
+                $input['payable_amount'] = $input['backend_account'];
             }
-            // echo "<pre>"; print_r($input); die;
             $input['from_time'] = $fromTime[0];
             $input['from_time_type'] = $fromTime[1];
             $input['to_time'] = $toTime[0];
@@ -198,21 +192,21 @@ class AppointmentRepository extends BaseRepository
             //     return false;        
             // }
             // else 
-            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()){
-                return false;  
+            if ($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()) {
+                return false;
             }
             $appointment = Appointment::create($input);
             $patient = Patient::whereId($input['patient_id'])->with('user')->first();
             $input['patient_name'] = $patient->user->full_name;
-            $input['original_from_time'] = $fromTime[0].' '.$fromTime[1];
-            $input['original_to_time'] = $toTime[0].' '.$toTime[1];
+            $input['original_from_time'] = $fromTime[0] . ' ' . $fromTime[1];
+            $input['original_to_time'] = $toTime[0] . ' ' . $toTime[1];
             $service = Service::whereId($input['service_id'])->first();
             $input['service'] = $service->name;
 
-            $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.Carbon::parse($input['date'])->format('jS M, Y');
-            if (! getLogInUser()->hasRole('patient')) {
+            $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . Carbon::parse($input['date'])->format('jS M, Y');
+            if (!getLogInUser()->hasRole('patient')) {
                 $patientNotification = Notification::create([
-                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG.' '.$input['full_time'],
+                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG . ' ' . $input['full_time'],
                     'type' => Notification::BOOKED,
                     'user_id' => $patient->user->id,
                 ]);
@@ -220,7 +214,7 @@ class AppointmentRepository extends BaseRepository
 
             $transaction = [
                 'user_id' => $patient->user->id,
-                'transaction_id' =>  $input['appointment_unique_id']. '_'.rand(0,99999),
+                'transaction_id' =>  $input['appointment_unique_id'] . '_' . rand(0, 99999),
                 'appointment_id' => $input['appointment_unique_id'],
                 'amount' => $input['payable_amount'],
                 'status' => 0,
@@ -235,7 +229,7 @@ class AppointmentRepository extends BaseRepository
             $input['doctor_name'] = $doctor->user->full_name;
 
             $doctorNotification = Notification::create([
-                'title' => $patient->user->full_name.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
+                'title' => $patient->user->full_name . ' ' . Notification::APPOINTMENT_CREATE_DOCTOR_MSG . ' ' . $input['full_time'],
                 'type' => Notification::BOOKED,
                 'user_id' => $doctor->user->id,
             ]);
@@ -262,7 +256,6 @@ class AppointmentRepository extends BaseRepository
      */
     public function frontSideStore($input)
     {
-
         try {
             DB::beginTransaction();
             $oldUser = User::whereEmail($input['email'])->first();
@@ -290,32 +283,29 @@ class AppointmentRepository extends BaseRepository
                 $input['patient_id'] = $patientId;
             }
 
-            if($input['plan_type'] == 'Hour Plan')
-            {
+            if ($input['plan_type'] == 'Hour Plan') {
                 $fromTime = explode(' ', $input['from_time']);
                 $toTime = explode(' ', $input['to_time']);
                 $input['plan_type'] = 'hourly';
-
-            }else
-            {
+            } else {
                 $blank = '12:00 AM';
-                $fromTime = explode(' ', date('H:i A'));
-                $toTime = explode(' ', $blank);
+                $blank1 = '12:00 PM';
+                $fromTime = explode(' ', $blank);
+                $toTime = explode(' ', $blank1);
                 $input['from_time'] = date('H:i A');
                 $input['to_time'] = $blank;
                 $input['plan_type'] = 'daily';
-                $asd =  explode(" - ",$input['date1']);
+                $asd =  explode(" - ", $input['date1']);
                 $input['from_date'] = Carbon::parse($asd[0])->format('Y-m-d');
                 $input['to_date'] = Carbon::parse($asd[1])->format('Y-m-d');
                 $earlier = new DateTime($input['from_date']);
                 $later = new DateTime($input['to_date']);
                 $abs_diff = $later->diff($earlier)->format("%a");
                 $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
-                if($abs_diff == 0){
+                if ($abs_diff == 0) {
                     $input['total_counts'] = $input['payable_amount'] * 1;
-                }
-                else{
-                $input['total_counts'] = $input['payable_amount'] * $abs_diff;
+                } else {
+                    $input['total_counts'] = $input['payable_amount'] * $abs_diff;
                 }
                 $input['payable_amount'] = $input['total_counts'];
             }
@@ -335,18 +325,17 @@ class AppointmentRepository extends BaseRepository
             //     return false;        
             // }
             // else 
-
-            if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()){
-                return false;  
+            if ($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()) {
+                return false;
             }
             $appointment = Appointment::create($input);
 
             $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
             $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $patientId : $patientId;
-            $input['full_time'] = $input['original_from_time'].'-'.$input['original_to_time'].' '.\Carbon\Carbon::parse($input['date'])->format('jS M, Y');
-            if (getLogInUser() && ! getLogInUser()->hasRole('patient')) {
+            $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . \Carbon\Carbon::parse($input['date'])->format('jS M, Y');
+            if (getLogInUser() && !getLogInUser()->hasRole('patient')) {
                 $patientNotification = Notification::create([
-                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG.' '.$input['full_time'],
+                    'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG . ' ' . $input['full_time'],
                     'type' => Notification::BOOKED,
                     'user_id' => $patientId,
                 ]);
@@ -361,7 +350,7 @@ class AppointmentRepository extends BaseRepository
                 Mail::to($doctor->user->email)->send(new DoctorAppointmentBookMail($input));
             }
             $doctorNotification = Notification::create([
-                'title' => $patientFullName.' '.Notification::APPOINTMENT_CREATE_DOCTOR_MSG.' '.$input['full_time'],
+                'title' => $patientFullName . ' ' . Notification::APPOINTMENT_CREATE_DOCTOR_MSG . ' ' . $input['full_time'],
                 'type' => Notification::BOOKED,
                 'user_id' => $doctor->user->id,
             ]);
@@ -380,8 +369,10 @@ class AppointmentRepository extends BaseRepository
      */
     public function getData()
     {
-        $data['doctors'] = Doctor::with('user')->get()->where('user.status', User::ACTIVE)->pluck('user.full_name',
-            'id');
+        $data['doctors'] = Doctor::with('user')->get()->where('user.status', User::ACTIVE)->pluck(
+            'user.full_name',
+            'id'
+        );
         $data['patients'] = Patient::with('user')->get()->pluck('user.full_name', 'id');
         $data['patientStatus'] = Appointment::PATIENT_STATUS;
         $data['services'] = Service::whereStatus(Service::ACTIVE)->pluck('name', 'id');
@@ -395,8 +386,10 @@ class AppointmentRepository extends BaseRepository
      */
     public function getDetail($input)
     {
-        $input = Appointment::with(['patient.user', 'patient.address', 'doctor.user', 'services'])->where('id',
-            $input->id)->first();
+        $input = Appointment::with(['patient.user', 'patient.address', 'doctor.user', 'services'])->where(
+            'id',
+            $input->id
+        )->first();
 
         $data['name'] = $input->patient->user->full_name;
         $data['profile'] = $input->patient->profile;
@@ -430,12 +423,12 @@ class AppointmentRepository extends BaseRepository
         $data = [];
         $count = 0;
         foreach ($appointments as $key => $appointment) {
-            $startTime = $appointment->from_time.' '.$appointment->from_time_type;
-            $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $startTime = $appointment->from_time . ' ' . $appointment->from_time_type;
+            $endTime = $appointment->to_time . ' ' . $appointment->to_time_type;
+            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $startTime);
+            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $endTime);
             $data[$key]['id'] = $appointment->id;
-            $data[$key]['title'] = $startTime.'-'.$endTime;
+            $data[$key]['title'] = $startTime . '-' . $endTime;
             $data[$key]['patientName'] = $appointment->patient->user->full_name;
             $data[$key]['start'] = $start->toDateTimeString();
             $data[$key]['description'] = $appointment->description;
@@ -462,12 +455,12 @@ class AppointmentRepository extends BaseRepository
         $data = [];
         $count = 0;
         foreach ($appointments as $key => $appointment) {
-            $startTime = $appointment->from_time.' '.$appointment->from_time_type;
-            $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $startTime = $appointment->from_time . ' ' . $appointment->from_time_type;
+            $endTime = $appointment->to_time . ' ' . $appointment->to_time_type;
+            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $startTime);
+            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $endTime);
             $data[$key]['id'] = $appointment->id;
-            $data[$key]['title'] = $startTime.'-'.$endTime;
+            $data[$key]['title'] = $startTime . '-' . $endTime;
             $data[$key]['doctorName'] = $appointment->doctor->user->full_name;
             $data[$key]['start'] = $start->toDateTimeString();
             $data[$key]['description'] = $appointment->description;
@@ -494,14 +487,14 @@ class AppointmentRepository extends BaseRepository
         $count = 0;
 
         foreach ($appointments as $key => $appointment) {
-            $startTime = $appointment->from_time.' '.$appointment->from_time_type;
-            $endTime = $appointment->to_time.' '.$appointment->to_time_type;
-            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$startTime);
-            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date.' '.$endTime);
+            $startTime = $appointment->from_time . ' ' . $appointment->from_time_type;
+            $endTime = $appointment->to_time . ' ' . $appointment->to_time_type;
+            $start = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $startTime);
+            $end = Carbon::createFromFormat('Y-m-d h:i A', $appointment->date . ' ' . $endTime);
 
 
             $data[$key]['id'] = $appointment->id;
-            $data[$key]['title'] = $startTime.'-'.$endTime;
+            $data[$key]['title'] = $startTime . '-' . $endTime;
             $data[$key]['doctorName'] = $appointment->doctor->user->full_name;
             $data[$key]['patient'] = $appointment->patient->user->full_name;
             $data[$key]['start'] = $start->toDateTimeString();
@@ -568,18 +561,18 @@ class AppointmentRepository extends BaseRepository
                         'product_data' => [
                             'name' => 'Payment for appointment booking',
                         ],
-                        'unit_amount' =>  in_array(getCurrencyCode(),zeroDecimalCurrencies()) ? $input['payable_amount'] : $input['payable_amount'] * 100,
+                        'unit_amount' =>  in_array(getCurrencyCode(), zeroDecimalCurrencies()) ? $input['payable_amount'] : $input['payable_amount'] * 100,
                         'currency' => getCurrencyCode(),
                     ],
                     'quantity' => 1,
                     'description' => 'Payment for booking appointment with doctor :
-                     '.$doctorName->user->full_name.' at '.Carbon::parse($input->date)->format('d/m/Y').' '.$input->from_time.' '.$input->from_time_type.' to '.$input->to_time.' '.$input->to_time_type,
+                     ' . $doctorName->user->full_name . ' at ' . Carbon::parse($input->date)->format('d/m/Y') . ' ' . $input->from_time . ' ' . $input->from_time_type . ' to ' . $input->to_time . ' ' . $input->to_time_type,
                 ],
             ],
             'client_reference_id' => $appointmentId,
             'mode' => 'payment',
-            'success_url' => url($successUrl).'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => url($cancelUrl.'?error=payment_cancelled'),
+            'success_url' => url($successUrl) . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => url($cancelUrl . '?error=payment_cancelled'),
         ]);
 
         $result = [
