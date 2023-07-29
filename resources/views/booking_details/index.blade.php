@@ -109,9 +109,188 @@
 
 
 <style>
-    body {
-        font-family: "Noto Serif" !important;
-    }
+body {
+    font-family: "Noto Serif" !important;
+}
+.img-height{
+    width:500px;
+    height:500px;
+}
+@media(min-width:320px) and (max-width:767px){
+.img-height {
+    width: 250px !important;
+    height: 250px !important;
+}
+.sub-head {
+    font-size: 15px !important;
+}
+.heading {
+    font-size: 15px !important;
+}
+}
+@media(min-width:768px) and (max-width:991px){
+.img-height {
+    width: 250px !important;
+    height: 250px !important;
+}
+.sub-head {
+    font-size: 18px !important;
+}
+.heading {
+    font-size: 18px !important;
+}
+.booking-details-left h2 {
+    font-size: 25px !important;
+}
+}
+@media(min-width:991px) and (max-width:1192px){
+.img-height {
+    width: 350px !important;
+    height: 350px !important;
+}
+}
+.heading {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 400;
+    line-height: 24px;
+    font-family:'Poppins';
+}
+
+.sub-head {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 700;
+    line-height: 36px;
+    font-family:'Poppins';
+}
+
+.title-hero-bg {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 550px;
+}
+
+.page-title {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+}
+
+.white-color {
+    color: #fff;
+}
+
+.page-title h1 {
+    font-size: 70px;
+    line-height: 95.34px;
+    font-weight: 700;
+    margin: 0;
+    color:#ffffff;
+}
+
+.workspace {
+    line-height: 40px;
+    font-size: 40px;
+    font-weight: 400;
+    margin-top: 20px;
+    line-height:54.48px;
+    color:#ffffff;
+}
+
+section.title-hero-bg.parallax-effect img {
+    width: 100%;
+}
+
+.book-now {
+    margin-top: 50px;
+}
+
+.book-btn {
+    width: 260px;
+    height: 60px;
+    font-size: 25px;
+    font-weight: 600;
+    background: #273432;
+    border: #273432;
+    line-height: 34.05px;
+    color: #FFFFFF;
+    text-align: center;
+    padding:10px 5px 10px 5px;
+}
+
+.books-now {
+    margin-top: 50px;
+}
+
+.books-btn {
+    width: 200px;
+    height: 42px;
+    font-size: 16px;
+    background: #273432;
+    border: #273432;
+    color: #FFFFFF;
+    line-height: 21.79px;
+    font-weight: 600;
+    padding: 10px 5px 10px 5px;
+}
+
+.booking-details {
+    display: flex;
+    padding: 80px;
+}
+
+.booking-details-right h2 {
+    font-size: 22px;
+    color: #000000;
+}
+
+.booking-details-left h2 {
+    font-size: 40px;
+    line-height: 54.48px;
+    font-weight: 700;
+    color: #000000;
+    border-bottom: 1px solid#969696;
+}
+
+.booking-details-left p {
+    /* line-height: 2px; */
+    margin-top: 20px;
+}
+
+img.w-img {
+    width: 80%;
+}
+
+span.extra-light {
+    font-size: 60px;
+    color: #000000;
+    font-weight: 200;
+    line-height: 81.72px;
+}
+
+.row.booking-details {
+    margin-top: 0;
+    margin-right: 0;
+}
+
+
+/* media */
+
+
+@media (min-width: 320px) and (max-width: 600px) {
 
     .img-height {
         width: 500px;
@@ -409,10 +588,24 @@
         }
     }
 
-    @media(min-width:991px) and (max-width:1192px) {
-        .img-height {
-            width: 350px !important;
-            height: 350px !important;
-        }
+    h5.text-white.mb-4.pb-1 {
+        font-size: 18px !important;
     }
+
+}
+
+@media (min-width: 1192px) and (max-width: 1399px) {
+
+.img-height {
+    width: 350px !important;
+    height: 350px !important;
+}
+}
+@media (min-width: 768px) and (max-width: 800px) {
+
+    h5,
+    .fs-5 {
+        font-size: 14px !important;
+    }
+}
 </style>
