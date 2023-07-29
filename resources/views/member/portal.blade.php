@@ -436,8 +436,7 @@
                             {{ Form::label('Email', __('Email').(''), ['class' => 'form-label  ']) }}
                             <span class=""></span>
                             <input name="email" type="email" class="form-control" id="email" aria-describedby="email"
-                                placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}"
-                                disabled>
+                                placeholder="{{ __('messages.patient.email') }}" value="{{$data['user']->email }}">
                         </div>
                     </div>
                     <div class="row">

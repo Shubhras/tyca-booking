@@ -93,11 +93,11 @@ class HomeController extends Controller
         if(!empty($request->password)){
             DB::table('users')
             ->where('id', $id)
-            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'password' => Hash::make($request->password)]);
+            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => $request->email, 'password' => Hash::make($request->password)]);
         }else{
             DB::table('users')
             ->where('id', $id)
-            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name]);
+            ->update(['first_name' => $request->first_name, 'last_name' => $request->last_name,'email' => $request->email]);
         }
 
         Flash::success(__('messages.flash.your_reg_success'));
