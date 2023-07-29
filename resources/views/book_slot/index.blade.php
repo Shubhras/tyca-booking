@@ -147,6 +147,7 @@
         font-weight: 400;
         line-height: 30px;
         text-transform: lowercase;
+        font-family:'Poppins';
     }
 
     .badge.badge-circle {
@@ -568,12 +569,14 @@
         line-height: 30px;
         color: #000000;
         font-weight: 400;
+        font-family:'Poppins';
     }
 
     .heading-id2 {
         font-size: 20px;
         font-weight: 700;
         line-height: 30px;
+        font-family:'Poppins';
     }
 
     @media (min-width: 992px) {
@@ -810,6 +813,7 @@
         color: #000000 !important;
         font-weight: 400;
         line-height: 36px;
+        font-family:'Poppins';
     }
 
     h1 {
@@ -896,7 +900,7 @@
                                                 <span> {{$addressData->postal_code}}</span>
                                             </p>
                                         </div>
-                                        <p class="desc-sort">{!! $doctor->description !!}</p>
+                                        <p class="desc-sort" style="font-family:'Poppins';">{!! $doctor->description !!}</p>
                             </div>
                         </div>
                     </div>

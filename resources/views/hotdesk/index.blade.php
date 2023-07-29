@@ -75,6 +75,7 @@ $styleCss = 'style';
         font-weight: 400;
         line-height: 30px;
         color: #000000;
+        font-family: 'Poppins';
     }
 
     .pay-amnt {
@@ -479,6 +480,7 @@ $styleCss = 'style';
         font-size: 20px;
         margin-top: -15px;
         font-weight: 400;
+        font-family:'Poppins';
     }
 
     .hot-desks {
@@ -496,6 +498,7 @@ $styleCss = 'style';
     .hot-desks p {
         font-size: 16px;
         color: #000000;
+        font-family:'Poppins';
     }
 
     .amenities-block {
@@ -676,6 +679,7 @@ $styleCss = 'style';
         font-size: 20px;
         font-weight: 600;
         line-height: 30px;
+        font-family: 'Poppins';
     }
 
     .sub-name {
@@ -684,6 +688,7 @@ $styleCss = 'style';
         font-weight: 400;
         line-height: 30px;
         text-transform: lowercase;
+        font-family: 'Poppins';
     }
 </style>
 
@@ -714,7 +719,7 @@ $styleCss = 'style';
                 <div class="grid">
                     <div class="hot-desk">
                         <h2>{{$servicesData->name}}</h2>
-                        <p>{!! $servicesData->short_description !!}</p>
+                        <p style="font-family:'Poppins';">{!! $servicesData->short_description !!}</p>
                     </div>
                 </div>
             </div>
@@ -797,7 +802,7 @@ $styleCss = 'style';
                 <div class="grid">
                     <div class="hot-desks padding-b">
                         <h2>DESCRIPTION</h2>
-                        <p>{!! $servicesData->short_description !!}</p>
+                        <p style="font-family:'Poppins';">{!! $servicesData->short_description !!}</p>
                     </div>
                     <div class="Amenities padding-tb">
                         <h2>AMENITIES</h2>
