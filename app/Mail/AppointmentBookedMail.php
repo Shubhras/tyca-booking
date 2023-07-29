@@ -49,7 +49,7 @@ class AppointmentBookedMail extends Mailable
         $patientId = $this->data->patient_id;
         $appointmentUniqueId = Crypt::encryptString($this->data->appointment_unique_id);
         $name = $this->data->first_name.' '.$this->data->last_name;
-        $time = $this->data->original_from_time.' - '.$this->data->original_to_time;
+        $time = $this->data->from_time .$this->data->from_time_type  .' - '.$this->data->to_time .$this->data->to_time_type;
         // $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
         $date = Carbon::createFromFormat('Y-m-d', $this->data->date)->format('j M Y');
         $subject = 'Appointment Booked Successfully';

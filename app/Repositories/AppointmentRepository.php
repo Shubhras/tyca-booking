@@ -303,10 +303,11 @@ class AppointmentRepository extends BaseRepository
                 $abs_diff = $later->diff($earlier)->format("%a");
                 $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
                 if ($abs_diff == 0) {
-                    $input['total_counts'] = $input['payable_amount'] * 1;
+                    $input['total_counts1'] = $input['payable_amount'] * 1;
                 } else {
-                    $input['total_counts'] = $input['payable_amount'] * $abs_diff;
+                    $input['total_counts1'] = $input['payable_amount'] * $abs_diff;
                 }
+                $input['total_counts'] = $input['payable_amount'];
                 $input['payable_amount'] = $input['total_counts'];
             }
             $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());

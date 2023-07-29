@@ -1,4 +1,7 @@
 <style>
+    .daterangepicker.show-calendar .ranges {
+    margin-top: -7px !important;
+}
     .paypal {
         border: 1px solid #8080804f;
         padding: 10px;
@@ -83,7 +86,7 @@
     <div class="col-lg-6 mb-5 col-sm-12" id="dateHide">
 
         {{ Form::label('Date',__('messages.appointment.appointment_date').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('date', now()->format('d-m-Y'),['class' => 'form-control date','placeholder' => __('messages.appointment.appointment_date'), 'id'=>'appointmentDate', 'required','autocomplete'=>'off','disabled' => true]) }}
+        {{ Form::text('date', now()->format('d/m/Y'),['class' => 'form-control date','placeholder' => __('messages.appointment.appointment_date'), 'id'=>'appointmentDate', 'required','autocomplete'=>'off','disabled' => true]) }}
     </div>
 
     <div class="col-lg-6 mb-5 col-sm-12" id="dateShow">
@@ -297,7 +300,7 @@
                     var startDate = new Date(startDateStr);
                     var endDate = new Date(endDateStr);
                     var timeDiff = endDate.getTime() - startDate.getTime();
-                    var daysDiff = timeDiff / (1000 * 3600 * 24);
+                    var daysDiff = timeDiff / (1000 * 3600 * 24) + 1;
                     if (daysDiff == 0) {
                         $('#price_total1').text(priceTotalNumber * 1);
                         var cc = (priceTotalNumber * 1);
@@ -315,11 +318,6 @@
         }
 
     });
-
-
-
-
-
     $(function() {
         $('#appointmentDate1').daterangepicker();
     });

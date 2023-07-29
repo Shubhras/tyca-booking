@@ -1277,11 +1277,15 @@
             var startDate = new Date(startDateStr);
             var endDate = new Date(endDateStr);
             var timeDiff = endDate.getTime() - startDate.getTime();
-            var daysDiff = timeDiff / (1000 * 3600 * 24);
+            var daysDiff = timeDiff / (1000 * 3600 * 24) + 1;
             if (daysDiff == 0) {
                 $('#payable_amount_Show').text(price * 1);
+                var cc = (price * 1);
+                $("#payable_amount").empty().val(cc);
             } else {
                 $('#payable_amount_Show').text(price * daysDiff);
+                var cc = (price * daysDiff);
+                $("#payable_amount").empty().val(cc);
             }
         });
         

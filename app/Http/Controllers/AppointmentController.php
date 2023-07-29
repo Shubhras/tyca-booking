@@ -169,7 +169,7 @@ class AppointmentController extends AppBaseController
         $url = route('appointments.index');
 
         if (getLogInUser()->hasRole('patient')) {
-            $url = route('patients.patient-appointments-index');
+            $url = route('https://tyca-book.sftechnologiesstage.co/');
         }
 
         $data = [
