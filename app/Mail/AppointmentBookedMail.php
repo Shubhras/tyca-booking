@@ -35,6 +35,8 @@ class AppointmentBookedMail extends Mailable
     public function build()
     {
         $email = $this->data->email;
+        // $toDate = $this->data->date1;
+
         $payableAmount = $this->data->payable_amount;
         $paymentType =$this->data->payment_method;
         $DoctorId = $this->data->doctor_id;
@@ -42,6 +44,20 @@ class AppointmentBookedMail extends Mailable
         $outletNameGet = User::where('id',$doctorData->user_id)->first();
         $outletName = $outletNameGet->full_name;
         $planType = $this->data->plan_type;
+        $fromDate = null;
+        $toDate = null;
+        $date = null;
+        if($planType == 'daily'){
+            $fromDate = Carbon::createFromFormat('Y-m-d', $this->data->from_date)->format('j M Y');
+            $toDate = Carbon::createFromFormat('Y-m-d', $this->data->to_date)->format('j M Y');
+            }
+            else if($planType == 'hourly'){
+            $date = Carbon::createFromFormat('Y-m-d', $this->data->date)->format('j M Y');
+                
+            }
+            else {
+
+            }
         $serviceId = $this->data->service_id;
         $addressDataGET = Service::where('id', $this->data->service_id)->first();
         $serviceData = $addressDataGET->name;
@@ -51,11 +67,10 @@ class AppointmentBookedMail extends Mailable
         $name = $this->data->first_name.' '.$this->data->last_name;
         $time = $this->data->original_from_time.' - '.$this->data->original_to_time;
         // $date = Carbon::createFromFormat('Y-m-d', $this->data['date'])->format('dS,M Y');
-        $date = Carbon::createFromFormat('Y-m-d', $this->data->date)->format('j M Y');
         $subject = 'Appointment Booked Successfully';
 
         return $this->view('emails.booking_confirm_mail',
-            compact('email', 'password', 'name', 'time', 'date', 'patientId', 'appointmentUniqueId','payableAmount','paymentType','DoctorId','serviceId','planType','serviceData','outletName'))
+            compact('email', 'password', 'name', 'time', 'date', 'fromDate','toDate', 'patientId', 'appointmentUniqueId','payableAmount','paymentType','DoctorId','serviceId','planType','serviceData','outletName'))
             ->markdown('emails.booking_confirm_mail')
             ->subject($subject);
     }

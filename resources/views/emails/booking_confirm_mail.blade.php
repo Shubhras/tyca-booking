@@ -55,8 +55,18 @@ body {
                 </p>
                 <p
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
-                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Appointment Date(s): </span><span
-                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$date}}</span></p>
+                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Appointment Date(s): </span>
+                    @if($planType == "hourly")
+                    <span
+                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$date}}
+                    </span>
+                    @elseif($planType == "daily")
+                    <span
+                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$fromDate}} - {{$toDate}}
+                    </span>
+                    @endif
+
+                    </p>
                 <p
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
                     <span style="font-weight: 600; font-family: poppins;color: #000000;">Time Slot(s): </span><span style="font-weight: 400; font-family: poppins;">{{$time}}</span>
@@ -89,7 +99,7 @@ body {
     <br>
     <a href="{{ route('login') }}" style="text-decoration-line: none;">
         <p
-            style="width: 298px; height: 42px; margin: auto;text-align: center; background-color: #000000; line-height: 40px; color: #ffffff; font-family: poppins;">
+            style="width: 298px; height: 42px; margin: auto;text-align: center; background-color: #000000; line-height: 40px; color: #ffffff; font-family: poppins; font-weight: 600;padding: 10px 5px 10px 5px;line-height: 24px;letter-spacing: 0em;">
             Click Here To Login</p>
     </a>
     <div style="width: 758px; margin : auto;">

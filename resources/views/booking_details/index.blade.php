@@ -57,7 +57,11 @@
                 @endif
             </div>
             <div class="mb-1">
-                <span class="heading">Appointment Date:</span> <span class="sub-head">{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->date))))->format('d F Y') }}</span>
+                <span class="heading">Appointment Date:</span> <span class="sub-head">{{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->date))))->format('d F Y') }} 
+                    @if(!$AppointData->to_date == NULL)
+                    To {{ \Carbon\Carbon::createFromFormat('Y-m-d h.ia', date('Y-m-d h.ia', strtotime(str_replace('.', '', $AppointData->to_date))))->format('d F Y') }}
+                    @endif
+                </span>
             </div>
             <div class="mb-1">
                 <span class="heading">Time Slot:</span> <span class="sub-head">{{$AppointData->from_time}} {{$AppointData->from_time_type}} - {{$AppointData->to_time}} {{$AppointData->to_time_type }}</span>
@@ -120,11 +124,26 @@ body {
     width: 250px !important;
     height: 250px !important;
 }
+.sub-head {
+    font-size: 15px !important;
+}
+.heading {
+    font-size: 15px !important;
+}
 }
 @media(min-width:768px) and (max-width:991px){
 .img-height {
-    width: 300px !important;
-    height: 300px !important;
+    width: 250px !important;
+    height: 250px !important;
+}
+.sub-head {
+    font-size: 18px !important;
+}
+.heading {
+    font-size: 18px !important;
+}
+.booking-details-left h2 {
+    font-size: 25px !important;
 }
 }
 @media(min-width:991px) and (max-width:1192px){
@@ -138,6 +157,7 @@ body {
     color: #000000;
     font-weight: 400;
     line-height: 24px;
+    font-family:'Poppins';
 }
 
 .sub-head {
@@ -145,6 +165,7 @@ body {
     color: #000000;
     font-weight: 700;
     line-height: 36px;
+    font-family:'Poppins';
 }
 
 .title-hero-bg {
@@ -376,34 +397,18 @@ span.extra-light {
 
 }
 
+@media (min-width: 1192px) and (max-width: 1399px) {
+
+.img-height {
+    width: 350px !important;
+    height: 350px !important;
+}
+}
 @media (min-width: 768px) and (max-width: 800px) {
 
     h5,
     .fs-5 {
         font-size: 14px !important;
     }
-}
-
-.img-height{
-    width:500px;
-    height:500px;
-}
-@media(min-width:320px) and (max-width:767px){
-.img-height {
-    width: 250px !important;
-    height: 250px !important;
-}
-}
-@media(min-width:768px) and (max-width:991px){
-.img-height {
-    width: 250px !important;
-    height: 250px !important;
-}
-}
-@media(min-width:991px) and (max-width:1192px){
-.img-height {
-    width: 350px !important;
-    height: 350px !important;
-}
 }
 </style>
