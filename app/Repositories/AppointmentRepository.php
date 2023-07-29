@@ -321,6 +321,7 @@ class AppointmentRepository extends BaseRepository
             $input['to_time_type'] = $toTime[1];
             $input['status'] = Appointment::BOOKED;
             $input['payment_method'] = $input['payment_type'];
+            $input['payment_type'] = Appointment::PENDING;
             $input['input_json'] = json_encode($input);
             // if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
             //     return false;        
