@@ -98,7 +98,19 @@
     </div>
     <!-- </div> -->
 </header>
+<script>
+            let _isMenuOpenedCustom1 = false;
 
+function toggleMenu() {
+    const navbarToggler = document.getElementById('navbar-toggler');
+    const navbarNav = document.querySelector('#navbarNav');
+    navbarNav.classList.toggle('show', !_isMenuOpenedCustom1);
+    navbarNav.classList.toggle('hide', _isMenuOpenedCustom1);
+
+    _isMenuOpenedCustom1 = !_isMenuOpenedCustom1;
+
+}
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap">
 <style>
 body {
@@ -269,10 +281,10 @@ footer {
         font-size: 15px !important;
     }
 
-    .head-logos {
+    /* .head-logos {
         width: auto !important;
         height: auto !important;
-    }
+    } */
 
     .hide-hamer {
         display: none !important;
@@ -326,5 +338,20 @@ footer {
 #logo-animate:hover {
     transform: scale(1.02);
     transition: .01s ease-in-out;
+}
+@media(max-width:767px){
+    .head-logos {
+    width: 160px !important;
+    height: 17px !important;
+}
+}
+@media(min-width:1024px) and (max-width:1200px){
+header .navbar .navbar-nav .nav-item .nav-link {
+    font-size: 12px !important;
+}
+.head-logos {
+    width: 180px !important;
+    height: 17px !important;
+}
 }
 </style>

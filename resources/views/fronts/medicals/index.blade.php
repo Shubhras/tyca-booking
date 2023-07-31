@@ -220,7 +220,7 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .again-ps {
-    font-size: 12px;
+    font-size: 18px;
     color: #000000;
     font-weight: 500;
     line-height: 16.34px;
@@ -228,7 +228,7 @@ section.title-hero-bg.parallax-effect img {
 }
 
 .again-p {
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
     line-height: 20.43px;
     font-weight: 500;

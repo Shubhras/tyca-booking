@@ -176,7 +176,7 @@ class DashboardRepository
         })
         ->where('date', '>', $todayDate)
         ->orderBy('date', 'ASC')
-        ->paginate(10);
+        ->get();
 
         $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
         ->wherePatientId($patientId)

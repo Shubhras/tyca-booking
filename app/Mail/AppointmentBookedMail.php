@@ -48,8 +48,8 @@ class AppointmentBookedMail extends Mailable
         $toDate = null;
         $date = null;
         if($planType == 'daily'){
-            $fromDate = Carbon::createFromFormat('Y-m-d', $this->data->from_date)->format('j M Y');
-            $toDate = Carbon::createFromFormat('Y-m-d', $this->data->to_date)->format('j M Y');
+            $fromDate = Carbon::createFromFormat('Y-m-d', $this->data->from_date)->formatLocalized('%e %B %Y');
+            $toDate = Carbon::createFromFormat('Y-m-d', $this->data->to_date)->formatLocalized('%e %B %Y');
             }
             else if($planType == 'hourly'){
             $date = Carbon::createFromFormat('Y-m-d', $this->data->date)->format('j M Y');

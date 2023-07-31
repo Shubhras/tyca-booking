@@ -1,9 +1,4 @@
-<style type="text/css">
-    body {
-        margin: 0px !important;
-        font-family: "Noto Serif" !important;
-    }
-</style>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 <div style="text-align: center;margin-top: 60px;margin-bottom: 30px;">
     <img src="http://tyca-book.sftechnologiesstage.co/uploads/161/logo-head.png" style="width: 400px;height: 30px;">

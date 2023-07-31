@@ -101,18 +101,6 @@
                 },
             },
         }
-
-        let _isMenuOpenedCustom = false;
-
-function toggleMenu() {
-    const navbarToggler = document.getElementById('navbar-toggler');
-    const navbarNav = document.querySelector('#navbarNav');
-    navbarNav.classList.toggle('show', !_isMenuOpenedCustom);
-    navbarNav.classList.toggle('hide', _isMenuOpenedCustom);
-
-    _isMenuOpenedCustom = !_isMenuOpenedCustom;
-
-}
     </script>
     
 

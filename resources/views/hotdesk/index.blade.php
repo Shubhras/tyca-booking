@@ -285,6 +285,7 @@ $styleCss = 'style';
         font-size: 15.85px;
         font-weight: 400;
         line-height: 23.78px;
+        font-family: 'Poppins' !important;
     }
 
     .btn-close {
@@ -319,14 +320,20 @@ $styleCss = 'style';
 
     .radio-btn1 {
         padding: 0px 5px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21.41px;
+        font-family: 'Poppins';
     }
 
     .radio-btn {
         padding: 0px 10px;
-        font-size: 14.27px;
+        font-size: 16px;
         font-weight: 400;
         color: #000000;
         line-height: 21.41px;
+        font-family: 'Poppins';
     }
 
     .set-back {
@@ -673,6 +680,7 @@ $styleCss = 'style';
     .no-slot-color {
         background: #F5F5F5;
         padding: 30px;
+        font-family: 'Poppins';
     }
 
     .heading-id2 {
@@ -727,6 +735,143 @@ $styleCss = 'style';
                 <h2 class="h2-day">$40/Day</h2>
             </div>
         </div>
+
+
+
+
+
+            {{--<div class="row">
+                    <?php if(count($servicesData->gallery) == '1'){ 
+                        print_r(count($servicesData->gallery));
+                        ?>
+                    <div class="col-md-12 img-book">
+                        <figure class="effect-chico">
+                          <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:100%;">
+                        </figure>
+                    </div>
+
+                    <?php  } 
+                    if(count($servicesData->gallery) == '2')
+                    { ?>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="grid">
+                                <figure class="effect-chico">
+                                <img src="{{$servicesData->gallery[0]}}" alt="">
+                                </figure>
+                            </div>
+                            <div class="grid">
+                                <figure class="effect-chico">
+                                <img src="{{$servicesData->gallery[1]}}" alt="">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php  } 
+                    if(count($servicesData->gallery) == '3')
+                    { ?>
+                    <div class="col-md-12">
+                        <div class="col-md-8 img-book">
+                            <div class="grid">
+                                <figure class="effect-chico">
+                                <img src="{{$servicesData->gallery[0]}}" alt="">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-md-4 img-book">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                        <img src="{{$servicesData->gallery[1]}}" alt="">
+                                        </figure>
+                                        <div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <figure class="effect-chico">
+                                                <img src="{{$servicesData->gallery[2]}}" alt="">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <?php  } 
+                            if(count($servicesData->gallery) == '4')
+                            { ?>
+
+                            <figure class="effect-chico">
+                            <img src="{{$servicesData->gallery[0]}}" alt="">
+                            </figure>
+                            <figure class="effect-chico">
+                            <img src="{{$servicesData->gallery[1]}}" alt="">
+                            </figure>
+                            <figure class="effect-chico">
+                            <img src="{{$servicesData->gallery[2]}}" alt="">
+                            </figure>
+                            <figure class="effect-chico">
+                            <img src="{{$servicesData->gallery[3]}}" alt="">
+                            </figure>
+
+                            <?php  } 
+                            if(count($servicesData->gallery) == '5')
+                            { ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="grid">
+                                    <figure class="effect-chico">
+                                        <img src="{{$servicesData->gallery[0]}}" alt="">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                
+                                        <div class="grid">
+                                            <figure class="effect-chico">
+                                                <img src="{{$servicesData->gallery[1]}}" alt="">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="grid">
+                                            <figure class="effect-chico">
+                                                <img src="{{$servicesData->gallery[2]}}" alt="">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="row grid-space">
+                                <div class="col-md-6">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[3]}}" alt="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[4]}}" alt="">
+            
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                          <?php  }  ?>
+                    </div>
+              </div>--}}
+
+
+
+
         <div class="row">
             <div class="col-md-6">
                 <div class="grid">
@@ -1010,7 +1155,7 @@ $styleCss = 'style';
                         <div class="form-group">
                             <label class="form-label" for="templateAppointmentDate">Appointment Date:<span class="required"></span></label>
                             <div class="position-relative">
-                                <input type="text" id="templateAppointmentDate" name="date" class="form-control bg-white" data-uk-datepicker-locale="fr" value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] :  now()->format('d-m-Y') }} }}" placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" readonly>
+                                <input type="text" id="templateAppointmentDate" name="date" class="form-control bg-white" data-uk-datepicker-locale="fr" value="{{  isset(session()->get('data')['date']) ? session()->get('data')['date'] :  now()->format('d-m-Y') }}" placeholder="{{ __('messages.doctor.select_date') }}" autocomplete="true" readonly>
                                 <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4" id="templateAppointmentDate">
                                     <i class="fa-solid fa-calendar-days text-gray-200 date-icon"></i>
                                 </span>

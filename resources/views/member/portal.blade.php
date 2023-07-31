@@ -568,34 +568,34 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
     line-height: 15px;
     font-weight: 400;
 }
-    .dataTables_wrapper .dataTables_length select {
-    border: none !important;
-    border-radius: 0px !important;
-    padding: 10px;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 15px;
-    color: #414141;
-}
+
 div.dataTables_wrapper div.dataTables_filter {
     text-align: right;
     display: none;
 }
-
-.dataTables_wrapper .dataTables_paginate {
-    float: right;
-    text-align: right;
-    padding-top: 0.25em;
+.dataTables_wrapper .dataTables_length {
+    float: left;
     display: none;
 }
-
-.dataTables_wrapper .dataTables_length {
-    float: right !important;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #5c5c5c !important;
+    border-radius: 15px;
+    background-color: #5c5c5c !important;
+    background: #817676 !important;
 }
-
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    cursor: default;
+    color: #fff;
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: inherit !important;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px !important;
+}
 .image {
     display: inline-block;
     flex-shrink: 0;
