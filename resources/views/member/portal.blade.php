@@ -552,9 +552,10 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
     clear: both;
     float: left;
     padding-top: 0.755em;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 15px;
     font-weight: 400;
+    font-family: 'Poppins';
     color: #414141 !important;
     text-transform: capitalize;
 }
@@ -590,11 +591,25 @@ div.dataTables_wrapper div.dataTables_filter {
     border: 1px solid transparent;
     background: transparent;
     box-shadow: none;
+    font-size: 12px;
+    font-family: 'Poppins';
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: inherit !important;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 15px !important;
+    font-size: 12px !important;
+    font-family: 'Poppins' !important;
+    width: 30px;
+    height: 30px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    font-size: 12px !important;
+    padding: 0.5em 1em;
+    font-family: 'Poppins' !important;
 }
 .image {
     display: inline-block;

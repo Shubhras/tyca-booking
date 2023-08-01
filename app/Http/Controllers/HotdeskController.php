@@ -30,6 +30,7 @@ class HotdeskController extends Controller
         $user = User::where('id',$slot)->first();
         $doctor = Doctor::where('user_id', $slot)->first();
         $servicesData = Service::where('id', $id)->first();
+    //    echo"<pre>"; print_r($servicesData) ; die;
         $serviceSpecializations = DB::table('service_specialization')->where('service_id', $id)->get();
         $aa = [];
         foreach($serviceSpecializations as $getData){

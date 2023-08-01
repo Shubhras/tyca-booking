@@ -188,7 +188,7 @@ class DashboardRepository
                   ->orWhere('status', Appointment::BOOKED)
                   ->where('date', '<=', now()->format('Y-m-d'));
         })
-        ->orderBy('date', 'DESC')
+        ->orderBy('id', 'DESC')
         ->paginate(10);
 
         return $data;

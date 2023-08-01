@@ -1,4 +1,9 @@
-
+<style type="text/css">
+body {
+    margin: 0px !important;
+    font-family: "Noto Serif" !important;
+}
+</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 <div style="text-align: center;margin-top: 60px;margin-bottom: 30px;">
     <img src="http://tyca-book.sftechnologiesstage.co/uploads/161/logo-head.png" style="width: 400px;height: 30px;">
@@ -10,7 +15,8 @@
         <p>Hi Hoe Wei,</p>
         <p>Thank you for your booking.</p>
         <p>Your booking confirmation details are as follows:</p> -->
-        <p style="text-align : center;font-size: 38px;font-weight: 500;line-height: 57px; font-family: poppins; color:#000000; margin-top:45px; margin-bottom: 5px;">
+        <p
+            style="text-align : center;font-size: 38px;font-weight: 500;line-height: 57px; font-family: poppins; color:#000000; margin-top:45px; margin-bottom: 5px;">
             Booking Confirmation</p>
         <p style="text-align : center;font-size: 25px;font-weight: 500;line-height: 37.5px; font-family: poppins;
         color:#000000; margin-bottom:35px;">Dear {{$name}}, we’ve received your booking!</p>
@@ -20,14 +26,32 @@
             <!-- <h1 style="text-align : center; line-height: 0px;"><b><strong>Booking Confirmation</strong></b></h1>
             <hr> -->
             <div>
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
-                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Name: </span><span style="font-weight: 400; font-family: poppins;color: #000000;">{{$name}}</span>
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Name: </span><span style="font-weight: 400; font-family: poppins;color: #000000;">{{$name}}</span></p>
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Email: </span><span
+                        style="font-weight: mailto:400; font-family: poppins;color: #000000;">{{$email}}</span>
                 </p>
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
-                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Email: </span><span style="font-weight: mailto:400; font-family: poppins;color: #000000;">{{$email}}</span>
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Outlet: </span><span
+                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$outletName}}</span>
                 </p>
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
-                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Outlet: </span><span style="font-weight: 400; font-family: poppins;color: #000000;">{{$outletName}}</span>
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                    <span style="font-weight: 600; font-family: poppins;color: #000000;">Booking Space: </span><span
+                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$serviceData}}</span></p>
+                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000;"><span
+                        style="font-weight: 600; font-family: poppins;color: #000000;">Plan Type: </span>
+                        @if($planType == "hourly")
+                        <span style="font-weight: 400; font-family: poppins;color: #000000;">Hourly Plan</span>
+                        @elseif($planType == "daily")
+                        <span style="font-weight: 400; font-family: poppins;color: #000000;">Daily Plan</span>
+                        @else
+                        <span style="font-weight: 400; font-family: poppins;">N/A</span>
+                        @endif
                 </p>
                 <p
                     style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
@@ -38,21 +62,24 @@
                     </span>
                     @elseif($planType == "daily")
                     <span
-                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$fromDate}} - {{$toDate}}
+                        style="font-weight: 400; font-family: poppins;color: #000000;">{{$fromDate}} To {{$toDate}}
                     </span>
                     @endif
 
                     </p>
                     @if($planType == "hourly")
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
                     <span style="font-weight: 600; font-family: poppins;color: #000000;">Time Slot(s): </span><span style="font-weight: 400; font-family: poppins;">{{$time}}</span>
                 </p>
                 @endif
                 <br>
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
-                    <span style="font-weight: 600;font-family: poppins;color: #000000;">Payable Amount: </span><span style="font-weight: 400;font-family: poppins;color: #000000;">${{$payableAmount}}</span>
-                </p>
-                <p style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
+                    <span style="font-weight: 600;font-family: poppins;color: #000000;">Payable Amount: </span><span
+                        style="font-weight: 400;font-family: poppins;color: #000000;">${{$payableAmount}}</span></p>
+                <p
+                    style="font-size: 22.07px;line-height: 33.01px;font-family: poppins; color:#000000; margin-bottom: 5px;">
                     <span style="font-weight: 600;font-family: poppins;color: #000000;">Payment Method: </span>
                     @if($paymentType == 1)
                     <span style="font-weight: 400;font-family: poppins;color: #000000;">Manually</span>

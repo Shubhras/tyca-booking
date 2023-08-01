@@ -570,6 +570,7 @@ figure.effect-chico {
     color: #000000;
     font-weight: 400;
     font-family: 'Poppins';
+    white-space: nowrap;
 }
 
 .heading-id2 {
