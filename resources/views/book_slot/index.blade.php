@@ -808,8 +808,10 @@ figure.effect-chico {
     }
 
     .btn1 {
-        width: 150px !important;
+        width: 145px !important;
+        font-size: 18px !important;
     }
+
 }
 
 @media (min-width:1441px) and (max-width:2560px) {
@@ -843,7 +845,7 @@ h1 {
     font-family: 'Poppins' !important;
 }
 
-@media(min-width:1024px) and (max-width:1200px) {
+/* @media(min-width:1024px) and (max-width:1200px) {
     .daterangepicker.dropdown-menu.ltr.show-calendar.opensright {
         top: 2000px !important;
     }
@@ -851,7 +853,7 @@ h1 {
 
 .daterangepicker.dropdown-menu.ltr.show-calendar.opensright {
     top: 1700px !important;
-}
+} */
 </style>
 <section class="main-block1 gray">
     <div class="container">

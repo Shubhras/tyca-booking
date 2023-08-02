@@ -175,7 +175,8 @@ class DashboardRepository
             $query->where('status', Appointment::BOOKED);
         })
         ->where('date', '>', $todayDate)
-        ->orderBy('date', 'ASC')
+        ->orderByDesc('created_at')
+        ->orderBy('date', 'desc')
         ->get();
 
         $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
@@ -188,7 +189,7 @@ class DashboardRepository
                   ->orWhere('status', Appointment::BOOKED)
                   ->where('date', '<=', now()->format('Y-m-d'));
         })
-        ->orderBy('id', 'DESC')
+        ->orderBy('id', 'ASC')
         ->paginate(10);
 
         return $data;
