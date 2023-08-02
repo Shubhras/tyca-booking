@@ -73,9 +73,7 @@
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">{{ __('messages.admin_dashboard.earnings_from_appointments') }}
-                                    ({{ getCurrencyIcon() }} <span
-                                        class="card-label fw-bolder fs-3 mb-1 me-0 totalEarning"></span>)
+                                <span class="card-label fw-bolder fs-3 mb-1">{{ __('messages.admin_dashboard.earnings_from_appointments') }}({{getCurrencyIcon()}}<span class="card-label fw-bolder fs-3 mb-1 me-0 totalEarning"></span>)
                                 </span>
                             </h3>
                             <!--begin::Toolbar-->

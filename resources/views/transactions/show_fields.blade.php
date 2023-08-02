@@ -70,7 +70,10 @@
     </div>
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">Payment Status:</label>
-        <span class="fs-4 text-gray-800">{{ !empty($transaction['data']->status) ? \App\Models\Appointment::PAYMENT_TYPE[$transaction['data']->status] : __('messages.common.n/a') }}</span>
+        <span class="fs-4 text-gray-800">
+            {{ !empty($transaction['data']->status) ? 'Paid' : __('messages.common.n/a') }}
+
+        </span>
     </div>
     <div class="col-md-6 d-flex flex-column mb-md-10 mb-5">
         <label for="name" class="pb-2 fs-4 text-gray-600">Payment Accepted By:</label>
