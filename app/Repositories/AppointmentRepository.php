@@ -259,28 +259,107 @@ class AppointmentRepository extends BaseRepository
         try {
             DB::beginTransaction();
             $oldUser = User::whereEmail($input['email'])->first();
-            $patientId = getLogInUser()->patient->id;
             if (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) {
-                // if (! $oldUser) {
-                //     throw new UnprocessableEntityHttpException('Email is not registered');
-                // }
-                $input['patient_id'] = $patientId;
+                if (!$oldUser) {
+                    throw new UnprocessableEntityHttpException('Email is not registered');
+                }
+                $input['patient_id'] = $oldUser->patient->id;
             } else {
-                // if ($oldUser) {
-                //     throw new UnprocessableEntityHttpException('Email already taken');
-                // }
+                if ($oldUser) {
+                    $input['patient_id'] = $oldUser->patient->id;
+                    // throw new UnprocessableEntityHttpException('Email already taken');
+
+                    if ($input['plan_type'] == 'Hour Plan') {
+                        $fromTime = explode(' ', $input['from_time']);
+                        $toTime = explode(' ', $input['to_time']);
+                        $input['plan_type'] = 'hourly';
+                    } else {
+                        $blank = '12:00 AM';
+                        $blank1 = '12:00 PM';
+                        $fromTime = explode(' ', $blank);
+                        $toTime = explode(' ', $blank1);
+                        $input['from_time'] = date('H:i A');
+                        $input['to_time'] = $blank;
+                        $input['plan_type'] = 'daily';
+                        $asd =  explode(" - ", $input['date1']);
+                        $input['from_date'] = Carbon::parse($asd[0])->format('Y-m-d');
+                        $input['to_date'] = Carbon::parse($asd[1])->format('Y-m-d');
+                        $earlier = new DateTime($input['from_date']);
+                        $later = new DateTime($input['to_date']);
+                        $abs_diff = $later->diff($earlier)->format("%a");
+                        $input['date'] = Carbon::parse($asd[0])->format('Y-m-d');
+                        if ($abs_diff == 0) {
+                            $input['total_counts1'] = $input['payable_amount'] * 1;
+                        } else {
+                            $input['total_counts1'] = $input['payable_amount'] * $abs_diff;
+                        }
+                        $input['total_counts'] = $input['payable_amount'];
+                        $input['payable_amount'] = $input['total_counts'];
+                    }
+                    $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
+                    $input['original_from_time'] = $input['from_time'];
+                    $input['original_to_time'] = $input['to_time'];
+
+                    $input['from_time'] = $fromTime[0];
+                    $input['from_time_type'] = $fromTime[1];
+                    $input['to_time'] = $toTime[0];
+                    $input['to_time_type'] = $toTime[1];
+                    $input['status'] = Appointment::BOOKED;
+                    $input['payment_method'] = $input['payment_type'];
+                    $input['payment_type'] = Appointment::PENDING;
+                    $input['input_json'] = json_encode($input);
+
+                    if ($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->where('plan_type', 'daily')->exists()) {
+                        return false;
+                    }
+                    $appointment = Appointment::create($input);
+
+
+                    // $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $user->full_name;
+                    // $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->id : $user->id;
+                    // $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . \Carbon\Carbon::parse($input['date'])->format('jS M, Y');
+
+                    $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
+                    $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->patient->id : $oldUser->patient->id;
+                    $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . \Carbon\Carbon::parse($input['date'])->format('jS M, Y');
+                    if (getLogInUser() && !getLogInUser()->hasRole('patient')) {
+                        $patientNotification = Notification::create([
+                            'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG . ' ' . $input['full_time'],
+                            'type' => Notification::BOOKED,
+                            'user_id' => $oldUser->patient->id,
+                        ]);
+                    }
+
+                    $doctor = Doctor::whereId($input['doctor_id'])->with('user')->first();
+                    $input['doctor_name'] = $doctor->user->full_name;
+                    $input['patient_name'] = $patientFullName;
+                    $service = Service::whereId($input['service_id'])->first();
+                    $input['service'] = $service->name;
+                    if ($doctor->user->email_notification) {
+                        Mail::to($doctor->user->email)->send(new DoctorAppointmentBookMail($input));
+                    }
+                    $doctorNotification = Notification::create([
+                        'title' => $patientFullName . ' ' . Notification::APPOINTMENT_CREATE_DOCTOR_MSG . ' ' . $input['full_time'],
+                        'type' => Notification::BOOKED,
+                        'user_id' => $doctor->user->id,
+                    ]);
+
+                    DB::commit();
+
+                    return $appointment;
+                }
                 $input['original_password'] = Str::random(8);
                 $input['type'] = User::PATIENT;
                 $userFields = ['first_name', 'last_name', 'email', 'password', 'type'];
                 $input['password'] = Hash::make($input['original_password']);
                 /** @var User $user */
-                // $user = User::create(Arr::only($input, $userFields));
+                $user = User::create(Arr::only($input, $userFields));
                 $patientArray['patient_unique_id'] = strtoupper(Patient::generatePatientUniqueId());
 
                 /** @var Patient $patient */
-                // $patient = $user->patient()->create($patientArray);
-                // $user->assignRole('patient');
-                $input['patient_id'] = $patientId;
+                $patient = $user->patient()->create($patientArray);
+                $user->assignRole('patient');
+                $input['patient_id'] = $patient->id;
             }
 
             if ($input['plan_type'] == 'Hour Plan') {
@@ -332,9 +411,14 @@ class AppointmentRepository extends BaseRepository
             }
             $appointment = Appointment::create($input);
 
-            $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
-            $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $patientId : $patientId;
+
+            $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $user->full_name;
+            $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->id : $user->id;
             $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . \Carbon\Carbon::parse($input['date'])->format('jS M, Y');
+
+            // $patientFullName = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $oldUser->full_name : $oldUser->full_name;
+            // $patientId = (isset($input['is_patient_account']) && $input['is_patient_account'] == 1) ? $patientId : $patientId;
+            // $input['full_time'] = $input['original_from_time'] . '-' . $input['original_to_time'] . ' ' . \Carbon\Carbon::parse($input['date'])->format('jS M, Y');
             if (getLogInUser() && !getLogInUser()->hasRole('patient')) {
                 $patientNotification = Notification::create([
                     'title' => Notification::APPOINTMENT_CREATE_PATIENT_MSG . ' ' . $input['full_time'],

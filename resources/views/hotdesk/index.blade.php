@@ -1032,14 +1032,14 @@ $styleCss = 'style';
                                 <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour
                                 </p>
                                 <div class="hourplan-button" style="text-align:end;">
-                                    @if(getLogInUser())
+                                  {{--   @if(getLogInUser()) --}}
                                     <button type="button" class="dayplan-btn" onclick="displayMessage(1,'{{ $servicesData->charges }}','{{$servicesData->id}}');">Book
                                         Now</button>
-                                    @else
+                                 {{--    @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
                                         Book Now
                                     </a>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>
@@ -1056,14 +1056,14 @@ $styleCss = 'style';
                             <div class="grid" style="text-align:end;">
                                 <p class="da-p">${{$servicesData->charges_daily}}/Day</p>
                                 <div class="dayplan-button" style="text-align:end;">
-                                    @if(getLogInUser())
+                                  {{--   @if(getLogInUser()) --}}
                                     <button type="button" class="dayplan-btn" onclick="displayMessage(2, '{{$servicesData->charges_daily}}','{{$servicesData->id}}');">Book
                                         Now</button>
-                                    @else
+                                 {{--    @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
                                         Book Now
                                     </a>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>
@@ -1095,12 +1095,26 @@ $styleCss = 'style';
                                 <input type="text" class="form-control" id="template-medical-first_name" placeholder="{{ __('messages.doctor.first_name') }}" name="first_name" value="{{ getLogInUser()->first_name }}" readonly>
                             </div>
                         </div>
+                        @else
+                        <div class="col-lg-6 name-details">
+                            <div class="form-group">
+                                <label class="form-label" for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span class="required"></span></label>
+                                <input type="text" class="form-control" id="template-medical-first_name" placeholder="{{ __('messages.doctor.first_name') }}" name="first_name" value="">
+                            </div>
+                        </div>
                         @endif
                         @if(getLogInUser())
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label" for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span class="required"></span></label>
                                 <input type="text" id="template-medical-last_name" name="last_name" class="form-control" value="{{ getLogInUser()->last_name }}" placeholder="{{ __('messages.doctor.last_name') }}" readonly>
+                            </div>
+                        </div>
+                        @else
+                        <div class="col-lg-6 name-details">
+                            <div class="form-group">
+                                <label class="form-label" for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span class="required"></span></label>
+                                <input type="text" id="template-medical-last_name" name="last_name" class="form-control" value="" placeholder="{{ __('messages.doctor.last_name') }}">
                             </div>
                         </div>
                         @endif
@@ -1111,6 +1125,13 @@ $styleCss = 'style';
                             <div class="form-group">
                                 <label class="form-label" for="template-medical-email">{{ __('messages.patient.email') }}:<span class="required"></span></label>
                                 <input type="email" id="template-medical-email" name="email" class="form-control" value="{{ getLogInUser()->email }}" placeholder="{{ __('messages.web.email') }}" readonly>
+                            </div>
+                        </div>
+                        @else
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="template-medical-email">{{ __('messages.patient.email') }}:<span class="required"></span></label>
+                                <input type="email" id="template-medical-email" name="email" class="form-control" value="" placeholder="{{ __('messages.web.email') }}">
                             </div>
                         </div>
                         @endif
@@ -1366,12 +1387,12 @@ $styleCss = 'style';
                 "name": "name"
             },
             success: function(data) {
-                if (data.success == true) {
+                // if (data.success == true) {
                     $("#hour_plan_modal").modal('show');
-                } else {
-                    var url = "{{ route('login') }}";
-                    location.href = url;
-                }
+                // } else {
+                //     var url = "{{ route('login') }}";
+                //     location.href = url;
+                // }
             }
         });
 
