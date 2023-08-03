@@ -14,7 +14,11 @@ class BookingdetailsController extends Controller
 {
     public function index()
     {
-        $id = Auth::user()->id;
+        if (Auth::check()) {
+            $id = Auth::user()->id;
+        } else {
+            return redirect('login');
+        }
         $UserData = user::where('id', $id)->first();
         // print_r($UserData);die;
         $patientID = getLogInUser()->patient->id;
@@ -22,9 +26,6 @@ class BookingdetailsController extends Controller
         $ServiceData = Service::where('id', $AppointData->service_id)->first();
         $doctorData = Doctor::where('id', $AppointData->doctor_id)->first();
         $outletName = User::where('id',$doctorData->user_id)->first();
-
-// echo "<pre>" ; print_r($outletName->profile_image); die;
-
         $bodyimage1 = Setting::where('key', 'body_image')->first();
         return view('booking_details.index',compact('UserData','AppointData','ServiceData','outletName','bodyimage1'));
     }
