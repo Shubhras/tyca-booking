@@ -745,9 +745,9 @@ $styleCss = 'style';
         <div class="row">
             <?php if (count($servicesData->gallery) == '1') {
             ?>
-                <div class="col-md-12 img-book">
+                <div class="col-md-12 img-book" style="height:31vw">
                     <figure class="effect-chico">
-                        <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:100%;">
+                        <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:30.5vw">
                     </figure>
                 </div>
 
@@ -757,12 +757,12 @@ $styleCss = 'style';
                     <div class="row">
                         <div class="col-md-8 grid">
                             <figure class="effect-chico">
-                                <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%; height:100%;">
+                                <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%; height:30.5vw;">
                             </figure>
                         </div>
                         <div class="col-md-4 grid">
                             <figure class="effect-chico">
-                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%; height:100%;">
+                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%; height:15vw;">
                             </figure>
                         </div>
                     </div>
@@ -775,7 +775,7 @@ $styleCss = 'style';
                         <div class="col-md-8 img-book">
                             <div class="grid">
                                 <figure class="effect-chico">
-                                    <img src="{{$servicesData->gallery[0]}}" alt="">
+                                    <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%; height:30.5vw;">
                                 </figure>
                             </div>
                         </div>
@@ -784,14 +784,14 @@ $styleCss = 'style';
                                 <div class="col-md-12">
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
+                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:15vw">
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col-md-12 ">
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
+                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:15vw">
                                         </figure>
                                     </div>
                                 </div>
@@ -805,7 +805,7 @@ $styleCss = 'style';
                         <div class="col-md-6">
                             <div class="grid">
                                 <figure class="effect-chico">
-                                    <img src="{{$servicesData->gallery[0]}}" alt="">
+                                    <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:30.5vw">
                                 </figure>
                             </div>
                         </div>
@@ -815,14 +815,14 @@ $styleCss = 'style';
 
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
+                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:15vw">
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
+                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:115vw">
                                         </figure>
                                     </div>
                                 </div>
@@ -831,7 +831,7 @@ $styleCss = 'style';
                                 <div class="col-md-6">
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:100%">
+                                            <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:15vw">
                                         </figure>
                                     </div>
                                 </div>
@@ -844,7 +844,7 @@ $styleCss = 'style';
                             <div class="col-md-6">
                                 <div class="grid">
                                     <figure class="effect-chico">
-                                        <img src="{{$servicesData->gallery[0]}}" alt="">
+                                        <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:30.5vw">
                                     </figure>
                                 </div>
                             </div>
@@ -854,14 +854,14 @@ $styleCss = 'style';
 
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
+                                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:15vw">
                                             </figure>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
+                                                <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:15vw">
                                             </figure>
                                         </div>
                                     </div>
@@ -870,14 +870,14 @@ $styleCss = 'style';
                                     <div class="col-md-6">
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:100%">
+                                                <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:15vw">
                                             </figure>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[4]}}" alt="" style="width:100%;height:100%">
+                                                <img src="{{$servicesData->gallery[4]}}" alt="" style="width:100%;height:15vw">
                                             </figure>
                                         </div>
                                     </div>
