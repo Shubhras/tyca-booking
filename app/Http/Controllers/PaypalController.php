@@ -54,7 +54,7 @@ class PaypalController extends Controller
         }
 
         if (getLogInUser()->hasRole('patient')) {
-            return redirect('https://tyca-book.sftechnologiesstage.co/patients/dashboard');
+            return redirect('http://tyca.digiprima.co/patients/dashboard');
         }
 
         return redirect(route('appointments.index'));
@@ -103,6 +103,8 @@ class PaypalController extends Controller
             $appointment->update([
                 'payment_method' => Appointment::PAYPAL,
                 'payment_type' => Appointment::PAID,
+                'show_appointment' => 'true',
+
             ]);
 
             Flash::success(__('messages.flash.appointment_created_payment_complete'));
@@ -118,7 +120,7 @@ class PaypalController extends Controller
             }
 
             if (getLogInUser()->hasRole('patient')) {
-                return redirect('https://tyca-book.sftechnologiesstage.co/booking-detail');
+                return redirect('http://tyca.digiprima.co/booking-detail');
             }
 
             return redirect(route('appointments.index'));

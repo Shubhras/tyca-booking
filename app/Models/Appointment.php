@@ -83,6 +83,7 @@ class Appointment extends Model
         'payment_type',
         'input_json',
         'payment_method',
+        'show_appointment',
     ];
 
     protected $casts = [

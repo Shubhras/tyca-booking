@@ -10,6 +10,12 @@
         font-family: "Noto Serif" !important;
     }
 
+    .slots-box {
+        font-family: 'Poppins';
+        letter-spacing: 0em;
+        text-transform: lowercase;
+    }
+
     .form-label {
         color: #000000;
         font-size: 15.85px !important;
@@ -1015,7 +1021,7 @@
                                     <div class="col col-lg-4">
                                         <b class="heading-id2">{{ $dayLabels[$day] }}</b>
                                     </div>
-                                    <div class="col col-lg-8">
+                                    <div class="col col-lg-8" style="text-align:start; padding:0;">
                                         <span class="sub-name" style="text-transform:capitalize;">Closed</span>
                                     </div>
                                 </div>
@@ -1114,7 +1120,7 @@
                             </div>
                         </div>
                         @else
-                        <input type="hidden" id="is_patient_account" value="1"> 
+                        <input type="hidden" id="is_patient_account" value="1">
                         <div class="col-lg-6 name-details">
                             <div class="form-group">
                                 <label class="form-label" for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span class="required"></span></label>
@@ -1353,12 +1359,12 @@
 
         // });
         $(function() {
-        $('#appointmentDate1').daterangepicker({
-            // locale: {
-            //     format: 'DD/MM/YYYY'
-            // }
+            $('#appointmentDate1').daterangepicker({
+                // locale: {
+                //     format: 'd-m-Y'
+                // }
+            });
         });
-    });
 
         $('body').on('click', '.applyBtn', function() {
             var dateGet = $('#appointmentDate1').val();
@@ -1367,6 +1373,7 @@
             var startDate = new Date(startDateStr);
             var endDate = new Date(endDateStr);
             var timeDiff = endDate.getTime() - startDate.getTime();
+            console.log('3333333333333333',timeDiff);
             var daysDiff = timeDiff / (1000 * 3600 * 24) + 1;
             if (daysDiff == 0) {
                 $('#payable_amount_Show').text(price * 1);
@@ -1425,7 +1432,7 @@
             },
             success: function(data) {
                 // if (data.success == true) {
-                    $("#hour_plan_modal").modal('show');
+                $("#hour_plan_modal").modal('show');
                 // } else {
                 //     var url = "{{ route('login') }}";
                 //     location.href = url;

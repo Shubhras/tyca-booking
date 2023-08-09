@@ -169,7 +169,7 @@ class AppointmentController extends AppBaseController
         $url = route('appointments.index');
 
         if (getLogInUser()->hasRole('patient')) {
-            $url = route('https://tyca-book.sftechnologiesstage.co/');
+            $url = route('/');
         }
 
         $data = [
@@ -556,6 +556,7 @@ class AppointmentController extends AppBaseController
         $appointment->update([
             'payment_method' => Appointment::STRIPE,
             'payment_type' => Appointment::PAID,
+            'show_appointment' => 'true',
         ]);
 
         Flash::success(__('messages.flash.appointment_created_payment_complete'));

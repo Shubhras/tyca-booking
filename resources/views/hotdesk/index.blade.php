@@ -12,6 +12,12 @@ $styleCss = 'style';
         font-family: "Noto Serif" !important;
     }
 
+    .slots-box {
+        font-family: 'Poppins';
+        letter-spacing: 0em;
+        text-transform: lowercase;
+    }
+
     .form-label {
         color: #000000;
         font-size: 15.85px !important;
@@ -487,7 +493,7 @@ $styleCss = 'style';
         font-size: 20px;
         margin-top: -15px;
         font-weight: 400;
-        font-family:'Poppins';
+        font-family: 'Poppins';
     }
 
     .hot-desks {
@@ -505,14 +511,14 @@ $styleCss = 'style';
     .hot-desks p {
         font-size: 16px;
         color: #000000;
-        font-family:'Poppins';
+        font-family: 'Poppins';
     }
 
     .amenities-block {
         display: flex;
         justify-content: space-around;
         text-align: start;
-        width: 50%;
+        width: 60%;
     }
 
     .Amenities h2 {
@@ -736,46 +742,40 @@ $styleCss = 'style';
             </div>
         </div>
 
+        <div class="row">
+            <?php if (count($servicesData->gallery) == '1') {
+            ?>
+                <div class="col-md-12 img-book">
+                    <figure class="effect-chico">
+                        <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:100%;">
+                    </figure>
+                </div>
 
-
-
-
-            {{--<div class="row">
-                    <?php if(count($servicesData->gallery) == '1'){ 
-                        print_r(count($servicesData->gallery));
-                        ?>
-                    <div class="col-md-12 img-book">
-                        <figure class="effect-chico">
-                          <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%;height:100%;">
-                        </figure>
-                    </div>
-
-                    <?php  } 
-                    if(count($servicesData->gallery) == '2')
-                    { ?>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="grid">
-                                <figure class="effect-chico">
-                                <img src="{{$servicesData->gallery[0]}}" alt="">
-                                </figure>
-                            </div>
-                            <div class="grid">
-                                <figure class="effect-chico">
-                                <img src="{{$servicesData->gallery[1]}}" alt="">
-                                </figure>
-                            </div>
+            <?php  }
+            if (count($servicesData->gallery) == '2') { ?>
+                <div class="col-md-12  img-book">
+                    <div class="row">
+                        <div class="col-md-8 grid">
+                            <figure class="effect-chico">
+                                <img src="{{$servicesData->gallery[0]}}" alt="" style="width:100%; height:100%;">
+                            </figure>
+                        </div>
+                        <div class="col-md-4 grid">
+                            <figure class="effect-chico">
+                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%; height:100%;">
+                            </figure>
                         </div>
                     </div>
+                </div>
+            <?php  }
+            if (count($servicesData->gallery) == '3') { ?>
+                <div class="col-md-12">
 
-                    <?php  } 
-                    if(count($servicesData->gallery) == '3')
-                    { ?>
-                    <div class="col-md-12">
+                    <div class="row col-12 slot-margin">
                         <div class="col-md-8 img-book">
                             <div class="grid">
                                 <figure class="effect-chico">
-                                <img src="{{$servicesData->gallery[0]}}" alt="">
+                                    <img src="{{$servicesData->gallery[0]}}" alt="">
                                 </figure>
                             </div>
                         </div>
@@ -784,43 +784,62 @@ $styleCss = 'style';
                                 <div class="col-md-12">
                                     <div class="grid">
                                         <figure class="effect-chico">
-                                        <img src="{{$servicesData->gallery[1]}}" alt="">
+                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
                                         </figure>
-                                        <div>
-                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[2]}}" alt="">
-                                                </figure>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
+                                        </figure>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            <?php  } 
-                            if(count($servicesData->gallery) == '4')
-                            { ?>
+                    </div>
+                <?php  }
+            if (count($servicesData->gallery) == '4') { ?>
 
-                            <figure class="effect-chico">
-                            <img src="{{$servicesData->gallery[0]}}" alt="">
-                            </figure>
-                            <figure class="effect-chico">
-                            <img src="{{$servicesData->gallery[1]}}" alt="">
-                            </figure>
-                            <figure class="effect-chico">
-                            <img src="{{$servicesData->gallery[2]}}" alt="">
-                            </figure>
-                            <figure class="effect-chico">
-                            <img src="{{$servicesData->gallery[3]}}" alt="">
-                            </figure>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="grid">
+                                <figure class="effect-chico">
+                                    <img src="{{$servicesData->gallery[0]}}" alt="">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
 
-                            <?php  } 
-                            if(count($servicesData->gallery) == '5')
-                            { ?>
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row grid-space">
+                                <div class="col-md-6">
+                                    <div class="grid">
+                                        <figure class="effect-chico">
+                                            <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:100%">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php  }
+                if (count($servicesData->gallery) == '5') { ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="grid">
@@ -832,113 +851,43 @@ $styleCss = 'style';
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                
+
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[1]}}" alt="">
+                                                <img src="{{$servicesData->gallery[1]}}" alt="" style="width:100%;height:100%">
                                             </figure>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="grid">
                                             <figure class="effect-chico">
-                                                <img src="{{$servicesData->gallery[2]}}" alt="">
+                                                <img src="{{$servicesData->gallery[2]}}" alt="" style="width:100%;height:100%">
                                             </figure>
                                         </div>
                                     </div>
                                 </div>
-                             <div class="row grid-space">
-                                <div class="col-md-6">
-                                    <div class="grid">
-                                        <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[3]}}" alt="">
-                                        </figure>
+                                <div class="row grid-space">
+                                    <div class="col-md-6">
+                                        <div class="grid">
+                                            <figure class="effect-chico">
+                                                <img src="{{$servicesData->gallery[3]}}" alt="" style="width:100%;height:100%">
+                                            </figure>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="grid">
-                                        <figure class="effect-chico">
-                                            <img src="{{$servicesData->gallery[4]}}" alt="">
-            
-                                        </figure>
+                                    <div class="col-md-6">
+                                        <div class="grid">
+                                            <figure class="effect-chico">
+                                                <img src="{{$servicesData->gallery[4]}}" alt="" style="width:100%;height:100%">
+                                            </figure>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                         </div>
-                          <?php  }  ?>
-                    </div>
-              </div>--}}
-
-
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="grid">
-                    <figure class="effect-chico">
-                        @if(!empty($servicesData->gallery[0]))
-                        <img src="{{$servicesData->gallery[0]}}" alt="">
-                        @else
-                        <img src="/assets/images/image 9.png" alt="">
-                        @endif
-                    </figure>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                @if(!empty($servicesData->gallery[1]))
-                                <img src="{{$servicesData->gallery[1]}}" alt="">
-                                @else
-                                <img src="/assets/images/image 10.png" alt="">
-                                @endif
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                @if(!empty($servicesData->gallery[2]))
-                                <img src="{{$servicesData->gallery[2]}}" alt="">
-                                @else
-                                <img src="/assets/images/image 12.png" alt="">
-                                @endif
-                            </figure>
+                        <?php
+                    } ?>
                         </div>
                     </div>
                 </div>
-                <div class="row grid-space">
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                @if(!empty($servicesData->gallery[3]))
-                                <img src="{{$servicesData->gallery[3]}}" alt="">
-                                @else
-                                <img src="/assets/images/image 11.png" alt="">
-                                @endif
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="grid">
-                            <figure class="effect-chico">
-                                @if(!empty($servicesData->gallery[4]))
-                                <img src="{{$servicesData->gallery[4]}}" alt="">
-                                @else
-                                <img src="/assets/images/image 13.png" alt="">
-                                @endif
-
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </section>
 <section class="mains-blocks" style="background-image: url('{{$bodyimage1->value}}');">
     <div class="container" style="padding: 0px 5px;">
@@ -1032,12 +981,12 @@ $styleCss = 'style';
                                 <p class="hou-p" id="price" style="text-align:end;">$ {{$servicesData->charges}}/Hour
                                 </p>
                                 <div class="hourplan-button" style="text-align:end;">
-                                  {{--   @if(getLogInUser()) --}}
+                                    {{-- @if(getLogInUser()) --}}
                                     <button type="button" class="dayplan-btn" onclick="displayMessage(1,'{{ $servicesData->charges }}','{{$servicesData->id}}');">Book
                                         Now</button>
-                                 {{--    @else
+                                    {{-- @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
-                                        Book Now
+                                    Book Now
                                     </a>
                                     @endif --}}
                                 </div>
@@ -1056,12 +1005,12 @@ $styleCss = 'style';
                             <div class="grid" style="text-align:end;">
                                 <p class="da-p">${{$servicesData->charges_daily}}/Day</p>
                                 <div class="dayplan-button" style="text-align:end;">
-                                  {{--   @if(getLogInUser()) --}}
+                                    {{-- @if(getLogInUser()) --}}
                                     <button type="button" class="dayplan-btn" onclick="displayMessage(2, '{{$servicesData->charges_daily}}','{{$servicesData->id}}');">Book
                                         Now</button>
-                                 {{--    @else
+                                    {{-- @else
                                     <a href="{{ route('login') }}" type="button" class="btn1 btn1-primary1 dayplan-btn" style="text-decoration: none; text-align: center; padding-top: 9px;" data-turbo="false">
-                                        Book Now
+                                    Book Now
                                     </a>
                                     @endif --}}
                                 </div>
@@ -1388,7 +1337,7 @@ $styleCss = 'style';
             },
             success: function(data) {
                 // if (data.success == true) {
-                    $("#hour_plan_modal").modal('show');
+                $("#hour_plan_modal").modal('show');
                 // } else {
                 //     var url = "{{ route('login') }}";
                 //     location.href = url;

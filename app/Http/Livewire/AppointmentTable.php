@@ -54,7 +54,6 @@ class AppointmentTable extends LivewireTableComponent
                 $q->where('appointments.status', '=', $this->statusFilter);
             }
         });
-
         $query->when($this->paymentTypeFilter != '' && $this->paymentTypeFilter != Appointment::ALL_PAYMENT,
             function (Builder $q) {
                 $q->where('payment_type', '=', $this->paymentTypeFilter);
@@ -89,7 +88,7 @@ class AppointmentTable extends LivewireTableComponent
             $query->where('patient_id', getLoginUser()->patient->id);
         }
 
-        return $query->select('appointments.*');
+        return $query->select('appointments.*')->where('show_appointment', 'true')->orWhereNull('show_appointment');
     }
 
     /**

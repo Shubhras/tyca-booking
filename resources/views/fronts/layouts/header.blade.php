@@ -2,7 +2,7 @@
     <!-- <div class="container"> -->
     <div class="row align-items-center header-height">
         <div class="col-lg-3 col-4">
-            <a href="https://tyca-book.sftechnologiesstage.co" class="header-logo" style="padding-left: 20px;">
+            <a href="{{ url('/') }}" class="header-logo" style="padding-left: 20px;">
                 <img src="{{ getAppLogo() }}" alt="Infy Care" class="head-logos" />
             </a>
         </div>
@@ -46,7 +46,7 @@
                         </li>
                         <li class="nav-item">
                             @if(getLogInUser())
-                            <a href="http://127.0.0.1:8000/patients/dashboard" class="nav-link nav-hov nav-color"
+                            <a href="{{ url('/patients/dashboard') }}" class="nav-link nav-hov nav-color"
                                 id="nav-flex"><img class="img-fluid-logos" alt="img-fluid"
                                     src="{{ getLogInUser()->profile_image }}" />
                                 <h3 class="text-gray-900" id="logos-h">{{ getLogInUser()->full_name }}</h3>
@@ -60,7 +60,7 @@
                             @endif
                         </li>
                         <li class="nav-item hide-hamer" id="logo-animate">
-                            <a href="http://127.0.0.1:8000/patients/dashboard"
+                            <a href="{{ url('/patients/dashboard') }}"
                                 class=" me-xxl-3 mr-2 mb-3 mb-lg-0 hamburger"
                                 data-turbo="false"><span><img src="/assets/images/rrrr.png" style="width:23px;height:18px;"></span>
                             </a>

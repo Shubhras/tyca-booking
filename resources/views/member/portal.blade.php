@@ -19,7 +19,7 @@
             <div class="page-title text-center white-color">
                 <h1 style="text-transform: uppercase;">Member’s Portal</h1>
                 <div class="por-tal">
-                    <a style="padding: 10px; text-decoration: none;" href="https://tyca-book.sftechnologiesstage.co"
+                    <a style="padding: 10px; text-decoration: none;" href="{{ url('/') }}"
                         class="portal-btn">Book Appointment</a>
                 </div>
             </div>

@@ -150,6 +150,7 @@ class AppointmentRepository extends BaseRepository
      */
     public function storeBackend($input)
     {
+        echo "<pre>"; print_r($input); die;
         try {
             DB::beginTransaction();
 
@@ -187,7 +188,7 @@ class AppointmentRepository extends BaseRepository
             $input['plan_type'] = $input['type_of_payment'];
             $input['payment_type'] = $input['payment_type'];
             $input['payment_method'] = $input['payment_type'];
-
+            $input['show_appointment'] = 'true';
             // if($name = DB::table('appointments')->where('date', $input['date'])->where('doctor_id', $input['doctor_id'])->where('service_id', $input['service_id'])->exists()){
             //     return false;        
             // }
@@ -299,7 +300,7 @@ class AppointmentRepository extends BaseRepository
                     $input['appointment_unique_id'] = strtoupper(Appointment::generateAppointmentUniqueId());
                     $input['original_from_time'] = $input['from_time'];
                     $input['original_to_time'] = $input['to_time'];
-
+                    $input['show_appointment'] = 'false';
                     $input['from_time'] = $fromTime[0];
                     $input['from_time_type'] = $fromTime[1];
                     $input['to_time'] = $toTime[0];
@@ -398,6 +399,7 @@ class AppointmentRepository extends BaseRepository
             $input['from_time_type'] = $fromTime[1];
             $input['to_time'] = $toTime[0];
             $input['to_time_type'] = $toTime[1];
+            $input['show_appointment'] = 'false';
             $input['status'] = Appointment::BOOKED;
             $input['payment_method'] = $input['payment_type'];
             $input['payment_type'] = Appointment::PENDING;
@@ -637,7 +639,11 @@ class AppointmentRepository extends BaseRepository
 
         $successUrl = '/medical-payment-success';
         $cancelUrl = '/medical-payment-failed';
-
+        if ($input->plan_type == 'hourly') {
+            $description = 'Payment for booking at '  . $doctorName->user->full_name . ' on ' . Carbon::parse($input->date)->format('d/m/Y') . ' at '  . $input->from_time . ' ' . $input->from_time_type .  ' - '  . $input->to_time .  ' '  . $input->to_time_type;
+        } elseif ($input->plan_type == 'daily') {
+            $description = 'Payment for booking at '  . $doctorName->user->full_name . ' on ' . Carbon::parse($input->date)->format('d/m/Y') . ' - '  . Carbon::parse($input->from_date)->format('d/m/Y');
+        }
         $session = Session::create([
             'payment_method_types' => ['card'],
             'customer_email' => $patientEmail->user->email,
@@ -647,12 +653,11 @@ class AppointmentRepository extends BaseRepository
                         'product_data' => [
                             'name' => 'Payment for appointment booking',
                         ],
-                        'unit_amount' =>  in_array(getCurrencyCode(), zeroDecimalCurrencies()) ? $input['payable_amount'] : $input['payable_amount'] * 100,
-                        'currency' => getCurrencyCode(),
+                        'unit_amount' =>  in_array('SGD', zeroDecimalCurrencies()) ? $input['payable_amount'] : $input['payable_amount'] * 100,
+                        'currency' => 'SGD',
                     ],
                     'quantity' => 1,
-                    'description' => 'Payment for booking appointment with doctor :
-                     ' . $doctorName->user->full_name . ' at ' . Carbon::parse($input->date)->format('d/m/Y') . ' ' . $input->from_time . ' ' . $input->from_time_type . ' to ' . $input->to_time . ' ' . $input->to_time_type,
+                    'description' => $description,
                 ],
             ],
             'client_reference_id' => $appointmentId,

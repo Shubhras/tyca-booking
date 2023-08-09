@@ -130,21 +130,21 @@
         <div class="row">
             <div class="col-lg-6 col-sm-12 mb-5">
                 <div class="form-group">
-                    <label class="form-label" for="template-medical-first_name">{{ __('messages.patient.first_name') }}:<span class="required"></span></label>
-                    <input type="text" class="form-control" id="template-medical-first_name" placeholder="{{ __('messages.doctor.first_name') }}" name="first_name" value="">
+                    <label class="form-label" for="first_name">{{ __('messages.patient.first_name') }}:<span class="required"></span></label>
+                    <input type="text" class="form-control" id="first_name" placeholder="{{ __('messages.doctor.first_name') }}" name="first_name" value="">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 mb-5">
                 <div class="form-group">
-                    <label class="form-label" for="template-medical-last_name">{{ __('messages.patient.last_name') }}:<span class="required"></span></label>
-                    <input type="text" id="template-medical-last_name" name="last_name" class="form-control" value="" placeholder="{{ __('messages.doctor.last_name') }}">
+                    <label class="form-label" for="last_name">{{ __('messages.patient.last_name') }}:<span class="required"></span></label>
+                    <input type="text" id="last_name" name="last_name" class="form-control" value="" placeholder="{{ __('messages.doctor.last_name') }}">
                 </div>
             </div>
         </div>
         <div class="col-sm-12 col-lg-12 mb-5">
             <div class="form-group">
-                <label class="form-label" for="template-medical-email">{{ __('messages.patient.email') }}:<span class="required"></span></label>
-                <input type="email" id="template-medical-email" name="email" class="form-control" value="" placeholder="{{ __('messages.web.email') }}">
+                <label class="form-label" for="email">{{ __('messages.patient.email') }}:<span class="required"></span></label>
+                <input type="email" id="email" name="email" class="form-control" value="" placeholder="{{ __('messages.web.email') }}">
             </div>
         </div>
         <div style="margin: 30px 30px 30px 0px; ">
