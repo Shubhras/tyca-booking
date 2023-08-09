@@ -175,9 +175,11 @@ class DashboardRepository
             $query->where('status', Appointment::BOOKED);
         })
         ->where('date', '>', $todayDate)
-        ->orderByDesc('created_at')
         ->orderBy('date', 'desc')
         ->get();
+        // ->orderByDesc('created_at')
+        // ->orderBy('date', 'desc')
+        // ->get();
 
         $data['upcomingAppointment'] = Appointment::with(['patient.user', 'doctor.user', 'services', 'transaction'])
         ->wherePatientId($patientId)
