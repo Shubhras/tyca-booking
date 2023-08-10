@@ -542,7 +542,7 @@ listenChange(dateEle, function () {
           $('.no-time-slot').addClass('d-none');
 
           if (result.data['bookedSlot'] == null) {
-            $('.appointment-slot-data').append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="' + value + '">' + value + '</span>');
+            $('.appointment-slot-data').append('<input type="checkbox" class="checkbox-add time-slot"><span class="badge badge-lg slots-item bg-success check-color" data-id="' + value + '">' + value + '</span>');
           } else {
             if ($.inArray(value, result.data['bookedSlot']) !== -1) {
               $('.appointment-slot-data').append('<span class="badge badge-lg slots-item bg-success time-slot bookedSlot" data-id="' + value + '">' + value + '</span>');
@@ -575,7 +575,9 @@ listenClick('.time-slot', function () {
 
   var fromToTime = $(this).attr('data-id').split('-');
   var fromTime = fromToTime[0];
+  console.log(fromTime, 'fromTime');
   var toTime = fromToTime[1];
+  console.log(toTime, 'toTime');
   $('#timeSlot').val('');
   $('#toTime').val('');
   $('#timeSlot').val(fromTime);

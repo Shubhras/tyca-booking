@@ -82,6 +82,7 @@ class ServicesRepository extends AppBaseController
                         'rate' => $input['rate_hourly'][$index],
                         'discount_type' => 'hourly',
                         'service_id' => $services->id,
+                        'discount_per' => $input['discount_h_per'][$index],
                     ];
                 }
                 ServiceDiscountRates::insert($rates);
@@ -96,6 +97,7 @@ class ServicesRepository extends AppBaseController
                         'rate' => $input['rate_daily'][$index],
                         'discount_type' => 'daily',
                         'service_id' => $services->id,
+                        'discount_per' => $input['discount_d_per'][$index],
                     ];
                 }
                 ServiceDiscountRates::insert($rates);

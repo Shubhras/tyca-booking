@@ -64,10 +64,10 @@
                     <div class="col-lg-6">
                         <div class="col-6 mb-5">
                             {{ Form::label('charges',
-                            __('messages.common.base_rate').' ('.__('messages.common.hourly').')', ['class' =>
+                            __('messages.common.base_rate').'('.__('messages.common.hourly').')', ['class' =>
                             'form-label new-gap required']) }}
                             <div class="input-group">
-                                {{ Form::text('charges', null, ['class' => 'form-control price-input', 'placeholder' =>
+                                {{ Form::text('charges', null, ['class' => 'form-control price-input','id'=>'priceHour', 'placeholder' =>
                                 __('messages.service.amount'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value))
                                 this.value =
                                 this.value.replace(/\D/g,"")']) }}
@@ -80,10 +80,10 @@
                     <div class="col-lg-6">
                         <div class="col-6 mb-5">
                             {{ Form::label('charges_daily',
-                            __('messages.common.base_rate'). ' ('.__('messages.common.daily').')', ['class' => 'new-gap form-label
+                            __('messages.common.base_rate').'('.__('messages.common.daily').')', ['class' => 'new-gap form-label
                             required']) }}
                             <div class="input-group">
-                                {{ Form::text('charges_daily', null, ['class' => 'form-control charges_daily',
+                                {{ Form::text('charges_daily', null, ['class' => 'form-control charges_daily charges_daily_base','id'=>'priceDay',
                                 'placeholder' =>
                                 __('messages.service.amount'),'step'=>'any','onkeyup' => 'if (/\D/g.test(this.value))
                                 this.value =
@@ -148,13 +148,14 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
-                    <div class="diss" style="margin: 15px 0px;">Discounted Rate (per hour): $<span class="discountRate"></span> </div>
+                    <input type="hidden" class="discount_h_val" name="discount_h_per[]" />
+                    <div class="diss" style="margin: 15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div>
 
                 </div>
                 <div class="hourly_records_dynamic">
                     @if(isset($hourlyDiscounts) && !empty($hourlyDiscounts))
                     @foreach($hourlyDiscounts as $discounts)
-                    <div class="remove row mb-5">
+                    <div class="remove row mb-5 get-value">
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -164,7 +165,7 @@
                                 </div>
                                 <input
                                     value="{{$discounts['above_count']}}"
-                                    type="text" class="form-control "
+                                    type="text" class="form-control count_hour"
                                     placeholder="No. of" name="above_count_hourly[]"
                                        onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)" class="hourAdd">
                                 <div class="input-group-append">
@@ -180,7 +181,7 @@
                                 <input
                                     value="{{$discounts['rate']}}"
                                     type="text"
-                                    class="form-control"
+                                    class="form-control count_rate"
                                     placeholder="Discount %"
                                     name="rate_hourly[]"
                                     class="hourAdd"
@@ -197,8 +198,9 @@
                             <button type="button" class="btn btn-sm btn-danger remove-hourly-field">
                                 <span class=" fa fa-minus"></span>
                         </div>
-                        <div class="" style="margin:15px 0px;">Discounted Rate (per hour): $<span class="discountRate"></span> </div>
-
+                        <!-- <div class="" style="margin:15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate"></span> </div> -->
+                        <input type="hidden" value="{{$discounts['discount_per']}}" class="discount_h_val" name="discount_h_per[]" />
+                    <div class="diss" style="margin: 15px 0px;">Discounted Rate(pre Hour) : <span class="discountRate">{{$discounts['discount_per']}}</span> </div>
                     </div>
                     @endforeach
                     @endif
@@ -252,14 +254,15 @@
                             <span class=" fa fa-plus"></span>
                         </button>
                     </div>
-                    <div class="" style="margin:15px 0px;">Discounted Rate (per Day): $<span class="discountRateD"></span> </div>
+                    <input type="hidden" class="discount_d_val" name="discount_d_per[]" />
+                    <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD"></span> </div>
 
                 </div>
                 <div class="daily_records_dynamic">
                     @if(isset($dailyDiscounts) && !empty($dailyDiscounts))
                     @foreach($dailyDiscounts as $discounts)
 
-                    <div class="d_remove row mb-5">
+                    <div class="d_remove row mb-5 get-value-day">
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -269,7 +272,7 @@
                                 </div>
                                 <input
                                     type="text"
-                                    class="form-control "
+                                    class="form-control count_day"
                                     placeholder="No. of"
                                     name="above_count_daily[]"
                                     onkeyup="if (/\D/g.test(this.value))this.value = this.value.replace(/\D/g,&quot;&quot;)"
@@ -288,7 +291,7 @@
                                 <div class="input-group">
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control count_d_rate"
                                         placeholder="Discount %"
                                         name="rate_daily[]"
                                         value="{{$discounts['rate']}}"
@@ -306,7 +309,8 @@
                                     <span class=" fa fa-minus"></span>
                                 </button>
                             </div>
-                            <div class="" style="margin:15px 0px;">Discounted Rate (per Day): $<span class="discountRateD"></span> </div>
+                            <input type="hidden" value="{{$discounts['discount_per']}}" class="discount_d_val" name="discount_d_per[]" />
+                            <div class="" style="margin:15px 0px;">Discounted Rate(pre Day) : <span class="discountRateD">{{$discounts['discount_per']}}</span> </div>
                         </div>
 
 
@@ -399,54 +403,181 @@ $('#short_description').val($(".ql-editor").html());
   </script>
 
 <script type="text/javascript">
-        // listenClick('#addHourlyCharge', function (event) {
-        //     //console.log(event, $('.hourly_records').clone())
-        //     $('.hourly_records').clone().appendTo('.hourly_records_dynamic');
-        //     $('.hourly_records_dynamic .hourly_records').addClass('single remove');
-        //     $('.single > .action-btn > .extra-fields-hourly').remove();
-        //     $('.single > .action-btn > .diss').remove();
-        //     $('.single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-hourly-field" ><span class=" fa fa-minus"></span></button>');
-        //     $('.hourly_records_dynamic > .single').attr("class", "remove row mb-5");
-        // });
-
-        // listenClick('#addDailyCharge', function (event) {
-        //     //console.log(event, $('.hourly_records').clone())
-        //     $('.daily_records').clone().appendTo('.daily_records_dynamic');
-        //     $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
-        //     $('.d_single > .action-btn > .extra-fields-daily').remove();
-        //     $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
-        //     $('.daily_records_dynamic > .d_single').attr("class", "d_remove row mb-5");
-        // });
-
+     
     $(document).ready(function() {
-        $(document).on('keyup', '.hourly_records_dynamic input', function() {
+        $(document).on('keyup', '.hourly_records_dynamic .count_rate', function() {
             const $container = $(this).closest('.get-value');
-            const input1Value = parseFloat($container.find('.count_hour').val()) || 0;
             const input2Value = parseFloat($container.find('.count_rate').val()) || 0;
-            const sum = (input2Value * 100) / input1Value;
-            $container.find('.discountRate').html(sum.toFixed(1));
+            const inputValue = parseFloat($container.find('.count_hour').val()) || 0;
+
+            const mainPrice = $('.price-input').val();
+            if (mainPrice == '') {
+                $container.find('.count_rate').val('');
+                alert('Please enter base price first!!');
+                return;
+            }
+            if (!inputValue) {
+                $container.find('.count_rate').val('');
+                alert('Please enter Above 0 hour!!');
+                return;
+            }
+            const prvalue = input2Value/100;
+            let calculate = 0;
+            if (prvalue) {
+                // calculate = (1 - prvalue) * mainPrice; 
+                calculate =(mainPrice- (1 - prvalue) * mainPrice);  
+            }
+            $container.find('.discountRate').html(calculate.toFixed(2));
+            $container.find('.discount_h_val').val(calculate.toFixed(2));
         });
-        $('.hourly_records input').on('keyup', function() {
-            var input1Value = parseFloat($('.hourly_records .count_hour').val()) || 0;
+        $('.hourly_records .count_rate').on('keyup', function() {
             var input2Value = parseFloat($('.hourly_records .count_rate').val()) || 0;
-            var sum = (input2Value * 100)/ input1Value;
-            $('.discountRate').html(sum.toFixed(1));
+            var inputValue = parseFloat($('.hourly_records .count_hour').val()) || 0;
+            const mainPrice = $('.price-input').val();
+            if (mainPrice == '') {
+                $('.hourly_records .count_rate').val('');
+                alert('Please enter base price first!!');
+                return;
+            }
+            if (inputValue == 0) {
+                $('.hourly_records .count_rate').val('');
+                alert('Please enter Above 0 hour!!');
+                return;
+            }
+            const prvalue = input2Value / 100
+            let calculate = 0;
+            if (prvalue) {
+                // calculate = (1 - prvalue) * mainPrice;   
+                calculate =(mainPrice- (1 - prvalue) * mainPrice);   
+
+            }
+            $(this).closest('.hourly_records').find('.discountRate').html(calculate.toFixed(2));
+            $(this).closest('.hourly_records').find('.discount_h_val').val(calculate.toFixed(2));
         });
     });
 
     $(document).ready(function() {
-        $(document).on('keyup', '.daily_records_dynamic input', function() {
-            const $container = $(this).closest('.get-value-day');
-            const input1Value = parseFloat($container.find('.count_day').val()) || 0;
-            const input2Value = parseFloat($container.find('.count_d_rate').val()) || 0;
-            const sum = (input2Value * 100) / input1Value;
-            $container.find('.discountRateD').html(sum.toFixed(1));
+        function updateDiscountCalculations() {
+            $('.hourly_records_dynamic .get-value').each(function() {
+                const $container = $(this);
+                const input2Value = parseFloat($container.find('.count_rate').val()) || 0;
+                const mainPrice = parseFloat($('#priceHour').val()) || 0;
+                const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;   
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice);
+                    }
+                $container.find('.discountRate').html(calculate.toFixed(2));
+                $container.find('.discount_h_val').val(calculate.toFixed(2));
+            });
+            $('.hourly_records').each(function() {
+                const $container = $(this);
+                const input2Value = parseFloat($container.find('.count_rate').val()) || 0;
+                const mainPrice = parseFloat($('#priceHour').val()) || 0;
+                const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;   
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice);
+                    }
+                $container.find('.discountRate').html(calculate.toFixed(2));
+                $container.find('.discount_h_val').val(calculate.toFixed(2));
+            });
+        }
+
+        function updateDiscountCalculationsDay() {
+            $('.daily_records_dynamic .get-value-day').each(function() {
+                const $container = $(this);
+                const input2Value = parseFloat($container.find('.count_d_rate').val()) || 0;
+                const mainPrice = parseFloat($('#priceDay').val()) || 0;
+                const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;   
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice);
+                    }
+                $container.find('.discountRateD').html(calculate.toFixed(2));
+                $container.find('.discount_d_val').val(calculate.toFixed(2));
+            });
+            $('.daily_records').each(function() {
+                const $container = $(this);
+                const input2Value = parseFloat($container.find('.count_d_rate').val()) || 0;
+                const mainPrice = parseFloat($('#priceDay').val()) || 0;
+                const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;   
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice);
+                    }
+                $container.find('.discountRateD').html(calculate.toFixed(2));
+                $container.find('.discount_d_val').val(calculate.toFixed(2));
+            });
+        }
+
+        $('#priceDay').on('keyup', function() {
+            updateDiscountCalculationsDay();
         });
-        $('.daily_records input').on('keyup', function() {
-            var input1Value = parseFloat($('.daily_records .count_day').val()) || 0;
+
+        $('#priceHour').on('keyup', function() {
+            updateDiscountCalculations();
+        });
+    });
+
+    $(document).ready(function() {
+        $(document).on('keyup', '.daily_records_dynamic .count_d_rate', function() {
+            const $container = $(this).closest('.get-value-day');
+            const input2Value = parseFloat($container.find('.count_d_rate').val()) || 0;
+            const inputValue = parseFloat($container.find('.count_day').val()) || 0;
+
+            const mainPrice = $('.charges_daily_base').val();
+            if (mainPrice == '') {
+                $container.find('.count_d_rate').val('');
+                alert('Please enter base price first!!');
+                return;
+            }
+            if (inputValue == 0) {
+                $container.find('.count_d_rate').val('');
+                alert('Please enter Above 0 day!!');
+                return;
+            }
+            // const prvalue = input2Value/100;
+            // const calculate = (1 - prvalue) * mainPrice;
+            const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;  
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice); 
+                    }
+            $container.find('.discountRateD').html(calculate.toFixed(2));
+            $container.find('.discount_d_val').val(calculate.toFixed(2));
+        });
+        $('.daily_records .count_d_rate').on('keyup', function() {
             var input2Value = parseFloat($('.daily_records .count_d_rate').val()) || 0;
-            var sum = (input2Value * 100)/ input1Value;
-            $('.discountRateD').html(sum.toFixed(1));
+            const inputValue = parseFloat($('.daily_records .count_day').val()) || 0;
+            const mainPrice = $('.charges_daily_base').val();
+            if (mainPrice == '') {
+                $('.daily_records .count_d_rate').val('');
+                alert('Please enter base price first!!');
+                return;
+            }
+            if (inputValue == 0) {
+                $('.daily_records .count_d_rate').val('');
+                alert('Please enter Above 0 day!!');
+                return;
+            }
+            // const prvalue = input2Value/100;
+            // const calculate = (1 - prvalue) * mainPrice;
+            const prvalue = input2Value / 100;
+                let calculate = 0;
+                    if (prvalue) {
+                        // calculate = (1 - prvalue) * mainPrice;   
+                        calculate =(mainPrice- (1 - prvalue) * mainPrice);
+                    }
+            // $('.discountRateD').html(calculate.toFixed(2));
+            // $('.discount_d_val').val(calculate.toFixed(2));
+            $(this).closest('.daily_records').find('.discountRateD').html(calculate.toFixed(2));
+            $(this).closest('.daily_records').find('.discount_d_val').val(calculate.toFixed(2));
         });
     });
 
@@ -462,14 +593,11 @@ $('#short_description').val($(".ql-editor").html());
         $('.hourly_records_dynamic > .single').attr("class", "get-value remove row mb-5");
     });
     
-    // listenClick('#addDailyCharge', function (event) {
         $('#addDailyCharge').click(function() {
-        //console.log(event, $('.hourly_records').clone())
         var clonedElement = $('.daily_records').clone();
         clonedElement.find('input').val('');
         clonedElement.find('.discountRateD').html(0);
         clonedElement.appendTo('.daily_records_dynamic');
-        // $('.daily_records').clone().appendTo('.daily_records_dynamic');
         $('.daily_records_dynamic .daily_records').addClass('d_single d_remove');
         $('.d_single > .action-btn > .extra-fields-daily').remove();
         $('.d_single > .action-btn').append('<button type="button" class="btn btn-sm btn-danger remove-field" ><span class=" fa fa-minus"></span></button>');
@@ -535,8 +663,4 @@ document.getElementById('photo-upload__preview').addEventListener('click', (e) =
   }
 })
 
-
-
-
-
-    </script>
+</script>

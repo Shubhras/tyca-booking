@@ -176,7 +176,7 @@ listenChange(dateEle, function () {
                     if (result.data['bookedSlot'] == null) {
                         $('.appointment-slot-data').
                             append(
-                                '<span class="badge badge-lg slots-item bg-success time-slot" data-id="' +
+                                '<input type="checkbox" class="checkbox-add time-slot"><span class="badge badge-lg slots-item bg-success check-color" data-id="' +
                                 value + '">' + value + '</span>')
                     } else {
                         if ($.inArray(value,
@@ -221,7 +221,9 @@ listenClick('.time-slot', function () {
     }
     let fromToTime = $(this).attr('data-id').split('-')
     let fromTime = fromToTime[0]
+    console.log(fromTime,'fromTime');
     let toTime = fromToTime[1]
+    console.log(toTime,'toTime');
     $('#timeSlot').val('')
     $('#toTime').val('')
     $('#timeSlot').val(fromTime)

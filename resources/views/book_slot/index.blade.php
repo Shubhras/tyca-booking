@@ -10,6 +10,10 @@ body {
     font-family: "Noto Serif" !important;
 }
 
+.checkbox-add {
+    width: 40px;
+    height: 20px;
+}
 .slots-box {
     font-family: 'Poppins';
     letter-spacing: 0em;
@@ -144,9 +148,11 @@ body {
     line-height: 26px;
     margin: 5px 5px 0px 0px;
     cursor: pointer;
-    width: 235px;
+    width: 195px;
 }
-
+.check-color{
+    background:red;
+}
 .sub-name {
     font-size: 20px;
     color: #000000;
@@ -1563,26 +1569,26 @@ $(document).ready(function() {
                             $('.no-time-slot').addClass('d-none');
                             $('.doctor-time-over').addClass('d-none');
                             $('.appointment-slot-data').append(
-                                '<span class="time-slot col-2  activeSlot" data-id="' +
+                                '<span class="time-slotee col-2  activeSlot" data-id="' +
                                 value + '">' + value + '</span>');
                         } else {
                             $('.no-time-slot').addClass('d-none');
                             $('.doctor-time-over').addClass('d-none');
                             if (result.data['bookedSlot'] == null) {
                                 $('.appointment-slot-data').append(
-                                    '<span class="time-slot col-2" data-id="' +
+                                    '<span class="time-slotss col-2" data-id="' +
                                     value + '">' + value + '</span>');
                             } else {
                                 if ($.inArray(value,
                                         result.data['bookedSlot']) !== -1) {
                                     $('.appointment-slot-data').Morin
                                     append(
-                                        '<span class="time-slot col-2 bookedSlot " data-id="' +
+                                        '<span class="time-slotdd col-2 bookedSlot " data-id="' +
                                         value + '">' + value + '</span>');
                                 } else {
                                     $('.appointment-slot-data').
                                     append(
-                                        '<span class="time-slot col-2" data-id="' +
+                                        '<span class="time-slotaaa col-2" data-id="' +
                                         value + '">' + value + '</span>');
                                 }
 

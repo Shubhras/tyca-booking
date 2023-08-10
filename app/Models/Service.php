@@ -61,6 +61,7 @@ class Service extends Model implements HasMedia
         'name',
         'charges',
         'charges_daily',
+        'discount_per',
         'status',
         'short_description',
     ];
