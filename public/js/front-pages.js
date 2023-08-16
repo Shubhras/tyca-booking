@@ -539,15 +539,50 @@ listenChange(dateEle, function () {
         }
 
         $.each(result.data['slots'], function (index, value) {
+          console.log('33334444', value);
           $('.no-time-slot').addClass('d-none');
+          var selectedValues = []; // Checkbox click event
+          // $('.time-slot').on('click', function () {
+
+          $(document).on("click", '.time-slot', function () {
+            console.log('11111111111111111111', selectedValues.length);
+            var value = $(this).data('id');
+
+            if ($(this).is(':checked')) {
+              selectedValues.push(value);
+              console.log('222222222222222222222222222', selectedValues.length);
+
+              for (var i = 0; i < selectedValues.length; i++) {
+                var firstTimeRange = selectedValues[0].split(' - ');
+                var lastTimeRange = selectedValues[selectedValues.length - 1].split(' - '); // var startTime = firstTimeRange[0];
+                // var endTime = lastTimeRange[1];
+
+                console.log('firstTimeRange', firstTimeRange);
+                console.log('lastTimeRange', lastTimeRange); // return;
+                // // let fromToTime = $(this).attr('data-id').split('-')
+                // // console.log('1111111111111111111111', fromToTime);
+
+                var fromTime = firstTimeRange[0];
+                console.log(fromTime, 'fromTime');
+                var toTime = lastTimeRange[1];
+                console.log(toTime, 'toTime');
+                $('#timeSlot').val('');
+                $('#toTime').val('');
+                $('#timeSlot').val(fromTime);
+                $('#toTime').val(toTime);
+              }
+            }
+          });
 
           if (result.data['bookedSlot'] == null) {
-            $('.appointment-slot-data').append('<input type="checkbox" class="checkbox-add time-slot"><span class="badge badge-lg slots-item bg-success check-color" data-id="' + value + '">' + value + '</span>');
+            $('.appointment-slot-data').append( // '<span class="badge badge-lg slots-item bg-success time-slot" data-id="' +
+            // value + '">' + value + ' <input type="checkbox" class="checkbox-add" style="margin-left:30px;"></span>'
+            '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot" data-id="' + value + '"><span class="badge badge-lg1 slots-item bg-success"> ' + value + '</span></div>');
           } else {
             if ($.inArray(value, result.data['bookedSlot']) !== -1) {
-              $('.appointment-slot-data').append('<span class="badge badge-lg slots-item bg-success time-slot bookedSlot" data-id="' + value + '">' + value + '</span>');
+              $('.appointment-slot-data').append('<div><input type="checkbox" class="time-alot slots-item bg-success time-slot bookedSlot" data-id="' + value + '"><span badge badge-lg slots-item bg-success time-slot bookedSlot>' + value + '</span></div>');
             } else {
-              $('.appointment-slot-data').append('<span class="badge badge-lg slots-item bg-success time-slot" data-id="' + value + '">' + value + '</span>');
+              $('.appointment-slot-data').append('<div><input type="checkbox" class="time-alot slots-item bg-success time-slot" data-id="' + value + '"> <span badge badge-lg slots-item bg-success time-slot">' + value + '</span></div>');
             }
           }
         });
@@ -565,23 +600,22 @@ listenChange(dateEle, function () {
     }
   });
 });
-listenClick('.time-slot', function () {
-  if ($('.time-slot').hasClass('activeSlot')) {
-    $('.time-slot').removeClass('activeSlot');
-    $(this).addClass('activeSlot');
-  } else {
-    $(this).addClass('activeSlot');
-  }
-
-  var fromToTime = $(this).attr('data-id').split('-');
-  var fromTime = fromToTime[0];
-  console.log(fromTime, 'fromTime');
-  var toTime = fromToTime[1];
-  console.log(toTime, 'toTime');
-  $('#timeSlot').val('');
-  $('#toTime').val('');
-  $('#timeSlot').val(fromTime);
-  $('#toTime').val(toTime);
+listenClick('.time-slot', function () {// if ($('.time-slot').hasClass('activeSlot')) {
+  //     $('.time-slot').removeClass('activeSlot')
+  //     $(this).addClass('activeSlot')
+  // } else {
+  //     $(this).addClass('activeSlot')
+  // }
+  // let fromToTime = $(this).attr('data-id').split('-')
+  // // console.log('1111111111111111111111', fromToTime);
+  // let fromTime = fromToTime[0]
+  // // console.log(fromTime, 'fromTime');
+  // let toTime = fromToTime[1]
+  // // console.log(toTime, 'toTime');
+  // $('#timeSlot').val('')
+  // $('#toTime').val('')
+  // $('#timeSlot').val(fromTime)
+  // $('#toTime').val(toTime)
 });
 var serviceIdExist = $('#FrontAppointmentServiceId').val();
 listenChange('#appointmentDoctorId', function (e) {
@@ -702,7 +736,8 @@ listenSubmit('#frontAppointmentBook', function (e) {
 
   var btnSaveEle = $(this).find('#saveBtn');
   setFrontBtnLoader(btnSaveEle);
-  var frontAppointmentFormData = new FormData($(this)[0]); // frontAppointmentFormData.append('payable_amount', frontPayableAmount)
+  var frontAppointmentFormData = new FormData($(this)[0]);
+  console.log('frontAppointmentFormData', frontAppointmentFormData); // frontAppointmentFormData.append('payable_amount', frontPayableAmount)
 
   var response = '<div class="alert alert-warning alert-dismissable"> Processing.. </div>';
   jQuery(this).find('.book-appointment-message').html(response).show('slow');

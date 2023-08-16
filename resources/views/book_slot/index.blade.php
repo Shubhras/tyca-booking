@@ -138,8 +138,7 @@ body {
     border: #273432 !important;
     color: #FFFFFF !important;
 }
-
-.badge-lg {
+.badge-lg1 {
     padding: 10px;
     font-size: 16px;
     font-weight: 500;
@@ -149,6 +148,20 @@ body {
     margin: 5px 5px 0px 0px;
     cursor: pointer;
     width: 195px;
+}
+.badge-lg {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 44px;
+    line-height: 26px;
+    margin: 5px 5px 0px 0px;
+    cursor: pointer;
+    width: 25px;
+}
+.red-text {
+    color: red;
 }
 .check-color{
     background:red;
@@ -591,7 +604,13 @@ figure.effect-chico {
     line-height: 30px;
     font-family: 'Poppins';
 }
-
+.time-box{
+    display:flex;
+}
+.time-alot{
+    width:25px;
+    height:22px;
+}
 @media (min-width: 992px) {
     .padding-less {
         padding-left: 0px !important;
@@ -1330,7 +1349,7 @@ h1 {
                             <div class="slots-box">
                                 {{ Form::hidden('from_time', null,['id'=>'timeSlot',]) }}
                                 {{ Form::hidden('to_time', null,['id'=>'toTime',]) }}
-                                <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data"
+                                <div class=" flex-wrap align-items-center front-slot-data appointment-slot-data time-box"
                                     id="slotData">
                                     <p class="mb-0 text-center  no-time-slot no-slot-color">
                                         {{__('messages.appointment.no_slot_found')}}

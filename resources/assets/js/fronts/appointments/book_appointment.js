@@ -9,7 +9,7 @@ let frontCharge = ''
 let frontPayableAmount = ''
 let dateEle = '#templateAppointmentDate'
 
-function loadFrontDateData () {
+function loadFrontDateData() {
     if (!$('#templateAppointmentDate').length) {
         return
     }
@@ -17,12 +17,12 @@ function loadFrontDateData () {
     $('#templateAppointmentDate').datepicker({
         language: 'es-es',
         format: 'yyyy-mm-dd',
-        minDate:new Date(),
+        minDate: new Date(),
         startDate: new Date(),
         todayHighlight: true,
     })
 }
-function loadFrontAppointmentData () {
+function loadFrontAppointmentData() {
     if (!$('#templateAppointmentDate').length) {
         return
     }
@@ -165,31 +165,72 @@ listenChange(dateEle, function () {
             if (result.success) {
                 //$('.appointment-slot-data').html('')
                 if (result.data['slots'] != null && result.data['slots']
-                        .length > 0) {
-                            
-                            $('.appointment-slot-data').html('');
-                    } 
+                    .length > 0) {
+
+                    $('.appointment-slot-data').html('');
+                }
 
                 $.each(result.data['slots'], function (index, value) {
+                    console.log('33334444',value);
                     $('.no-time-slot').addClass('d-none')
+
+                    var selectedValues = [];
+
+                    // Checkbox click event
+                    // $('.time-slot').on('click', function () {
+                        $(document).on("click",'.time-slot',function() {
+                        console.log('11111111111111111111',selectedValues.length);
+                        var value = $(this).data('id');
+                        
+                        if ($(this).is(':checked')) {
+                            selectedValues.push(value);
+                            console.log('222222222222222222222222222',selectedValues.length);
+                            for (var i = 0; i < selectedValues.length; i++) {
+                                var firstTimeRange = selectedValues[0].split(' - ');
+                                var lastTimeRange = selectedValues[selectedValues.length - 1].split(' - ');
+                                // var startTime = firstTimeRange[0];
+                                // var endTime = lastTimeRange[1];
+                                console.log('firstTimeRange', firstTimeRange);
+                                console.log('lastTimeRange', lastTimeRange);
+                                // return;
+
+
+
+                                // // let fromToTime = $(this).attr('data-id').split('-')
+                                // // console.log('1111111111111111111111', fromToTime);
+                                let fromTime = firstTimeRange[0]
+                                console.log(fromTime, 'fromTime');
+                                let toTime = lastTimeRange[1]
+                                console.log(toTime, 'toTime');
+                                $('#timeSlot').val('');
+                                $('#toTime').val('');
+                                $('#timeSlot').val(fromTime);
+                                $('#toTime').val(toTime);
+
+                            }
+                        }
+                    });
 
                     if (result.data['bookedSlot'] == null) {
                         $('.appointment-slot-data').
                             append(
-                                '<input type="checkbox" class="checkbox-add time-slot"><span class="badge badge-lg slots-item bg-success check-color" data-id="' +
-                                value + '">' + value + '</span>')
+                                // '<span class="badge badge-lg slots-item bg-success time-slot" data-id="' +
+                                // value + '">' + value + ' <input type="checkbox" class="checkbox-add" style="margin-left:30px;"></span>'
+                                '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot" data-id="' + value + '"><span class="badge badge-lg1 slots-item bg-success"> ' + value + '</span></div>'
+
+                            )
                     } else {
                         if ($.inArray(value,
                             result.data['bookedSlot']) !== -1) {
                             $('.appointment-slot-data').
                                 append(
-                                    '<span class="badge badge-lg slots-item bg-success time-slot bookedSlot" data-id="' +
-                                    value + '">' + value + '</span>')
+                                    '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot bookedSlot" data-id="' +
+                                    value + '"><span badge badge-lg slots-item bg-success time-slot bookedSlot>' + value + '</span></div>')
                         } else {
                             $('.appointment-slot-data').
                                 append(
-                                    '<span class="badge badge-lg slots-item bg-success time-slot" data-id="' +
-                                    value + '">' + value + '</span>')
+                                    '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot" data-id="' +
+                                    value + '"> <span badge badge-lg slots-item bg-success time-slot">' + value + '</span></div>')
                         }
 
                     }
@@ -205,7 +246,7 @@ listenChange(dateEle, function () {
                 html(response).
                 delay(5000).
                 hide('slow')
-            if ($('.no-time-slot').hasClass('d-none')){
+            if ($('.no-time-slot').hasClass('d-none')) {
                 $('.no-time-slot').removeClass('d-none')
             }
         },
@@ -213,21 +254,26 @@ listenChange(dateEle, function () {
 })
 
 listenClick('.time-slot', function () {
-    if ($('.time-slot').hasClass('activeSlot')) {
-        $('.time-slot').removeClass('activeSlot')
-        $(this).addClass('activeSlot')
-    } else {
-        $(this).addClass('activeSlot')
-    }
-    let fromToTime = $(this).attr('data-id').split('-')
-    let fromTime = fromToTime[0]
-    console.log(fromTime,'fromTime');
-    let toTime = fromToTime[1]
-    console.log(toTime,'toTime');
-    $('#timeSlot').val('')
-    $('#toTime').val('')
-    $('#timeSlot').val(fromTime)
-    $('#toTime').val(toTime)
+
+    // if ($('.time-slot').hasClass('activeSlot')) {
+    //     $('.time-slot').removeClass('activeSlot')
+    //     $(this).addClass('activeSlot')
+    // } else {
+    //     $(this).addClass('activeSlot')
+    // }
+
+
+
+    // let fromToTime = $(this).attr('data-id').split('-')
+    // // console.log('1111111111111111111111', fromToTime);
+    // let fromTime = fromToTime[0]
+    // // console.log(fromTime, 'fromTime');
+    // let toTime = fromToTime[1]
+    // // console.log(toTime, 'toTime');
+    // $('#timeSlot').val('')
+    // $('#toTime').val('')
+    // $('#timeSlot').val(fromTime)
+    // $('#toTime').val(toTime)
 })
 
 let serviceIdExist = $('#FrontAppointmentServiceId').val()
@@ -293,7 +339,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
 
     let firstName = $('#template-medical-first_name').val()
     let lastName = $('#template-medical-last_name').val()
-        let email = $('#template-medical-email').val()
+    let email = $('#template-medical-email').val()
     let doctor = $('#appointmentDoctorId').val()
     let services = $('#FrontAppointmentServiceId').val()
     let appointmentDate = $('#templateAppointmentDate').val()
@@ -361,6 +407,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
     setFrontBtnLoader(btnSaveEle)
 
     let frontAppointmentFormData = new FormData($(this)[0])
+    console.log('frontAppointmentFormData', frontAppointmentFormData);
     // frontAppointmentFormData.append('payable_amount', frontPayableAmount)
     let response = '<div class="alert alert-warning alert-dismissable"> Processing.. </div>'
     jQuery(this).
@@ -375,30 +422,30 @@ listenSubmit('#frontAppointmentBook', function (e) {
         contentType: false,
         success: function (result) {
             if (result.success) {
-                console.log('wwwwwwwwwwwwwwww',result);
+                console.log('wwwwwwwwwwwwwwww', result);
                 let appointmentID = result.data.appointmentId
-                if(result.message ==  "Booking already exists"){
+                if (result.message == "Booking already exists") {
                     $('.book-appointment-message').
-                    html('<div class="gen alert alert-danger">'+result.message +' </div>').
-                    delay(5000).
-                    hide('slow')
+                        html('<div class="gen alert alert-danger">' + result.message + ' </div>').
+                        delay(5000).
+                        hide('slow')
                     // setTimeout(() => {
                     //     // return location.href = mainResult.data.url;
                     // }, 5000)
                 }
-                else{
+                else {
                     response = '<div class="gen alert alert-success">' +
-                    result.message + '</div>'
+                        result.message + '</div>'
 
-                $('.book-appointment-message').html(response).delay(5000).hide('slow')
-                // $(window).scrollTop($('.appointment-form').offset().top)
-                $('#frontAppointmentBook')[0].reset()
+                    $('.book-appointment-message').html(response).delay(5000).hide('slow')
+                    // $(window).scrollTop($('.appointment-form').offset().top)
+                    $('#frontAppointmentBook')[0].reset()
                 }
-                
-              
+
+
 
                 if (result.data.payment_type == manually) {
-                    Turbo.visit(route('manually-payment', {'appointmentId': appointmentID}));
+                    Turbo.visit(route('manually-payment', { 'appointmentId': appointmentID }));
                 }
 
                 if (result.data.payment_type == paystack) {
@@ -408,7 +455,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
                 if (result.data.payment_type == authorizeMethod) {
 
                     window.location.replace(route('authorize.init',
-                        {'appointmentId': appointmentID}))
+                        { 'appointmentId': appointmentID }))
                 }
 
                 if (result.data.payment_type == paytmMethod) {
@@ -479,7 +526,7 @@ listenSubmit('#frontAppointmentBook', function (e) {
                         },
                     })
                 }
-               
+
 
                 if (result.data.payment_type == stripeMethod) {
                     let sessionId = result.data[0].sessionId
@@ -535,7 +582,7 @@ window.setFrontBtnLoader = function (btnLoader) {
         prop('disabled', true)
 }
 
-function storeFailedPayment (response) {
+function storeFailedPayment(response) {
     $.ajax({
         type: 'POST',
         url: route('razorpay.failed'),
