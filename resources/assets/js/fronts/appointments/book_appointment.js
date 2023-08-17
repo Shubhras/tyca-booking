@@ -171,43 +171,41 @@ listenChange(dateEle, function () {
                 }
 
                 $.each(result.data['slots'], function (index, value) {
-                    console.log('33334444',value);
                     $('.no-time-slot').addClass('d-none')
-
+                    var allSloat = value
+                    console.log(allSloat);
                     var selectedValues = [];
 
                     // Checkbox click event
                     // $('.time-slot').on('click', function () {
-                        $(document).on("click",'.time-slot',function() {
-                        console.log('11111111111111111111',selectedValues.length);
+                    $(document).on("click", '.time-slot', function () {
                         var value = $(this).data('id');
-                        
                         if ($(this).is(':checked')) {
+                            // for (var i = 0; i < allSloat.length; i++) {
+                            //     var slot = allSloat[i];
+                            //     if (allSloat >= value&& allSloat < value) {
+                            //       document.getElementById('checkbox' + i).checked = true;
+                            //       console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
+                            //     }
+                            //   }
                             selectedValues.push(value);
-                            console.log('222222222222222222222222222',selectedValues.length);
                             for (var i = 0; i < selectedValues.length; i++) {
                                 var firstTimeRange = selectedValues[0].split(' - ');
                                 var lastTimeRange = selectedValues[selectedValues.length - 1].split(' - ');
-                                // var startTime = firstTimeRange[0];
-                                // var endTime = lastTimeRange[1];
-                                console.log('firstTimeRange', firstTimeRange);
-                                console.log('lastTimeRange', lastTimeRange);
-                                // return;
-
-
-
-                                // // let fromToTime = $(this).attr('data-id').split('-')
-                                // // console.log('1111111111111111111111', fromToTime);
                                 let fromTime = firstTimeRange[0]
-                                console.log(fromTime, 'fromTime');
                                 let toTime = lastTimeRange[1]
-                                console.log(toTime, 'toTime');
                                 $('#timeSlot').val('');
                                 $('#toTime').val('');
                                 $('#timeSlot').val(fromTime);
                                 $('#toTime').val(toTime);
 
                             }
+                        }
+                        if ($('.time-slot').hasClass('activeSlot')) {
+                            $('.time-slot').removeClass('activeSlot')
+                            $(this).addClass('activeSlot')
+                        } else {
+                            $(this).addClass('activeSlot')
                         }
                     });
 
@@ -224,13 +222,13 @@ listenChange(dateEle, function () {
                             result.data['bookedSlot']) !== -1) {
                             $('.appointment-slot-data').
                                 append(
-                                    '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot bookedSlot" data-id="' +
-                                    value + '"><span badge badge-lg slots-item bg-success time-slot bookedSlot>' + value + '</span></div>')
+                                    '<div><input type="checkbox" checked disabled class="time-alot  slots-item bg-success time-slot bookedSlot" data-id="' +
+                                    value + '"><span class="badge badge-lg slots-item bg-success time-slot bookedSlot">' + value + '</span></div>')
                         } else {
                             $('.appointment-slot-data').
                                 append(
                                     '<div><input type="checkbox" class="time-alot slots-item bg-success time-slot" data-id="' +
-                                    value + '"> <span badge badge-lg slots-item bg-success time-slot">' + value + '</span></div>')
+                                    value + '"> <span class="badge badge-lg slots-item bg-success time-slot">' + value + '</span></div>')
                         }
 
                     }

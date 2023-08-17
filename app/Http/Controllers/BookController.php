@@ -12,6 +12,7 @@ use App\Models\Setting;
 use App\Models\Patient;
 use App\Models\Address;
 use App\Models\Specialization;
+use App\Models\ServiceDiscountRates;
 use DB;
 use Illuminate\Support\Facades\Session;
 
@@ -52,4 +53,10 @@ class BookController extends Controller
         return view('book_slot.index', compact('services','appointmentDoctors','user','user1','doctor','specialization','bodyimage1','addressData'));
 
     }
+
+    public function discountRate($id)
+    {
+        $servicesID = DB::table('service_discount_rates')->where('service_id',$id)->get();
+        return $servicesID;
+    }  
 }

@@ -5,11 +5,23 @@
 
 @section('front-content')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <style>
 body {
     font-family: "Noto Serif" !important;
 }
-
+.exist-color{
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 44px;
+    line-height: 26px;
+    margin: 5px 5px 0px 0px;
+    cursor: pointer;
+    width: 195px;
+    background:#f62947;
+}
 .checkbox-add {
     width: 40px;
     height: 20px;
@@ -158,7 +170,7 @@ body {
     line-height: 26px;
     margin: 5px 5px 0px 0px;
     cursor: pointer;
-    width: 25px;
+    width: 195px;
 }
 .red-text {
     color: red;
@@ -1406,6 +1418,17 @@ h1 {
                     <div class="container">
                         @include('flash::message')
                     </div>
+                    <div>
+                        <?php 
+                                $servicesID = DB::table('service_discount_rates')->where('service_id',$service->id)->get();
+                                // print_r($servicesID);
+                        ?>
+                        @foreach($servicesID as $rateDis)
+                        <div class="" style="font-size:18px; text-align:center; font-weight:500;">
+                        If you book more than {{$rateDis->above_count}} then you will get {{$rateDis->rate}}% discount
+                    </div>
+                        @endforeach
+                    </div>
                     <div class="pay-amnt mb-4">
                         <div>Payable Amount : $</div>
                         <div id="payable_amount_Show"></div>
@@ -1424,7 +1447,8 @@ h1 {
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-<script>
+
+<script type="text/javascript">
 setTimeout(function() {
     $('#hour_plan_modal').modal();
 }, 5000);
@@ -1451,6 +1475,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function displayMessage(id, price, service_id) {
+    console.log('wwwwwwwwwwwwwwwwww');
+
     if (id == 1) {
         var abc = 'Hour Plan';
         $('#slot_option').show();
@@ -1470,6 +1496,21 @@ function displayMessage(id, price, service_id) {
         $('#appointmentDate1').daterangepicker();
 
     }
+    
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+        url: '/service_dis/' + service_id,
+        type: 'POST',
+        success: function(response) {
+            // console.log('Response:', response);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log('Error:', textStatus);
+        }
+    });
+    
     // $(function() {
     //     $('#appointmentDate1').daterangepicker();
 
