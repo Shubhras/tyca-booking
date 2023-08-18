@@ -201,12 +201,12 @@ listenChange(dateEle, function () {
 
                             }
                         }
-                        if ($('.time-slot').hasClass('activeSlot')) {
-                            $('.time-slot').removeClass('activeSlot')
-                            $(this).addClass('activeSlot')
-                        } else {
-                            $(this).addClass('activeSlot')
-                        }
+                        // if ($('.time-slot').hasClass('activeSlot')) {
+                        //     $('.time-slot').removeClass('activeSlot')
+                        //     $(this).addClass('activeSlot')
+                        // } else {
+                        //     $(this).addClass('activeSlot')
+                        // }
                     });
 
                     if (result.data['bookedSlot'] == null) {
